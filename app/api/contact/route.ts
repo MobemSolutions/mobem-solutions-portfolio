@@ -6,6 +6,17 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 const MOBEM_EMAIL = "contact@mobem-solutions.com"
 const FROM_EMAIL = process.env.FROM_EMAIL ?? "Mobem Solutions <noreply@mobem-solutions.com>"
 
+const SERVICE_ROUTING: Record<string, string> = {
+  "Design UI/UX": "antoine.clavier@mobem-solutions.com",
+  "Création de site vitrine": "arnaud.clavier@mobem-solutions.com",
+  "Refonte de site existant": "arnaud.clavier@mobem-solutions.com",
+  "Application web (SaaS / backoffice)": "arnaud.clavier@mobem-solutions.com",
+  "Application mobile": "arnaud.clavier@mobem-solutions.com",
+  "E-commerce": "arnaud.clavier@mobem-solutions.com",
+  "SEO & Référencement naturel": "nathan.portier@mobem-solutions.com",
+  "Conseil & stratégie digitale": "nathan.portier@mobem-solutions.com",
+}
+
 export async function POST(req: NextRequest) {
   try {
     const { name, email, company, services, budget, message } = await req.json()
@@ -14,16 +25,21 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Champs requis manquants." }, { status: 400 })
     }
 
-    const servicesLine = services?.length
-      ? services.join(", ")
-      : "Non précisé"
-
+    const serviceLabel = Array.isArray(services) ? services[0] : services
+    const servicesLine = serviceLabel || "Non précisé"
     const budgetLine = budget || "Non précisé"
+
+    // Détermine les destinataires internes
+    const toAddresses = [MOBEM_EMAIL]
+    if (serviceLabel && SERVICE_ROUTING[serviceLabel]) {
+      const specialist = SERVICE_ROUTING[serviceLabel]
+      if (specialist !== MOBEM_EMAIL) toAddresses.push(specialist)
+    }
 
     // Email de notification interne
     await resend.emails.send({
       from: FROM_EMAIL,
-      to: MOBEM_EMAIL,
+      to: toAddresses,
       subject: `Nouveau contact — ${name}${company ? ` (${company})` : ""}`,
       html: `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#111">
@@ -32,7 +48,7 @@ export async function POST(req: NextRequest) {
             <tr><td style="padding:8px 0;color:#6b7280;width:140px">Nom</td><td style="padding:8px 0;font-weight:500">${name}</td></tr>
             <tr><td style="padding:8px 0;color:#6b7280">Email</td><td style="padding:8px 0"><a href="mailto:${email}" style="color:#f59e0b">${email}</a></td></tr>
             ${company ? `<tr><td style="padding:8px 0;color:#6b7280">Entreprise</td><td style="padding:8px 0;font-weight:500">${company}</td></tr>` : ""}
-            <tr><td style="padding:8px 0;color:#6b7280">Services</td><td style="padding:8px 0">${servicesLine}</td></tr>
+            <tr><td style="padding:8px 0;color:#6b7280">Prestation</td><td style="padding:8px 0">${servicesLine}</td></tr>
             <tr><td style="padding:8px 0;color:#6b7280">Budget</td><td style="padding:8px 0">${budgetLine}</td></tr>
           </table>
           <div style="background:#f9fafb;border-radius:8px;padding:16px;margin:16px 0">
@@ -65,7 +81,7 @@ export async function POST(req: NextRequest) {
 
             <p style="margin:0 0 8px;color:#6b7280;font-size:14px">Récapitulatif de votre demande :</p>
             <ul style="margin:0 0 24px;padding:0 0 0 20px;color:#374151;font-size:14px">
-              ${services?.length ? `<li>Services : ${servicesLine}</li>` : ""}
+              ${serviceLabel ? `<li>Prestation : ${servicesLine}</li>` : ""}
               ${budget ? `<li>Budget : ${budgetLine}</li>` : ""}
             </ul>
 

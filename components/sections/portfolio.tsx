@@ -80,7 +80,7 @@ export function PortfolioSection() {
         {/* Projects Grid */}
         <div
           role="tabpanel"
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6"
+          className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5 lg:gap-6"
         >
           {filteredProjects.map((project) => {
             const scheme = COLOR_SCHEMES[project.colorScheme as keyof typeof COLOR_SCHEMES]
@@ -89,7 +89,7 @@ export function PortfolioSection() {
                 key={project.id}
                 href={`/realisations/${project.slug}`}
                 className={cn(
-                  "group relative bg-card rounded-2xl border border-border overflow-hidden",
+                  "group relative bg-card rounded-xl md:rounded-2xl border border-border overflow-hidden",
                   "transition-all duration-300 hover:shadow-xl hover:-translate-y-1",
                   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
                 )}
@@ -101,80 +101,73 @@ export function PortfolioSection() {
                   scheme.cardGradient
                 )}>
                   {project.images?.home ? (
-                    /* Vraie image — pas de chrome navigateur */
-                    <div className="absolute inset-5 rounded-xl overflow-hidden shadow-lg">
+                    <div className="absolute inset-3 md:inset-5 rounded-lg md:rounded-xl overflow-hidden shadow-lg">
                       <Image
                         src={project.images.home}
                         alt={project.title}
                         fill
                         className="object-cover object-left-top transition-transform duration-500 group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        sizes="(max-width: 768px) 50vw, (max-width: 1200px) 50vw, 33vw"
                       />
                     </div>
                   ) : (
-                    /* Mockup skeleton pour les projets sans image */
-                    <div className="absolute inset-5 rounded-xl bg-card shadow-lg overflow-hidden border border-border/40">
-                      <div className="h-6 bg-muted/80 flex items-center px-2.5 gap-1 border-b border-border/30">
+                    <div className="absolute inset-3 md:inset-5 rounded-lg md:rounded-xl bg-card shadow-lg overflow-hidden border border-border/40">
+                      <div className="h-5 md:h-6 bg-muted/80 flex items-center px-2 gap-1 border-b border-border/30">
                         <span className="w-1.5 h-1.5 rounded-full bg-destructive/40" />
                         <span className="w-1.5 h-1.5 rounded-full bg-yellow-400/40" />
                         <span className="w-1.5 h-1.5 rounded-full bg-green-400/40" />
-                        <div className="flex-1 mx-2 h-2 rounded-full bg-muted" />
+                        <div className="flex-1 mx-2 h-1.5 rounded-full bg-muted" />
                       </div>
-                      <div className="p-3 space-y-2">
-                        <div className={cn("h-16 rounded-lg bg-gradient-to-br", scheme.mockupBg)} />
-                        <div className="h-2 rounded-full bg-muted w-3/4" />
-                        <div className="h-2 rounded-full bg-muted w-1/2" />
-                        <div className="grid grid-cols-3 gap-1.5 pt-1">
-                          <div className="h-8 rounded bg-muted/50" />
-                          <div className="h-8 rounded bg-muted/50" />
-                          <div className="h-8 rounded bg-muted/50" />
-                        </div>
+                      <div className="p-2 md:p-3 space-y-1.5 md:space-y-2">
+                        <div className={cn("h-10 md:h-16 rounded-lg bg-gradient-to-br", scheme.mockupBg)} />
+                        <div className="h-1.5 md:h-2 rounded-full bg-muted w-3/4" />
+                        <div className="h-1.5 md:h-2 rounded-full bg-muted w-1/2" />
                       </div>
                     </div>
                   )}
 
                   {/* Hover overlay */}
                   <div className="absolute inset-0 bg-foreground/70 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-                    <span className="text-background font-medium flex items-center gap-2 text-sm">
-                      Voir l'étude de cas
-                      <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
+                    <span className="text-background font-medium flex items-center gap-1.5 text-xs md:text-sm">
+                      Voir l'étude
+                      <ArrowUpRight className="w-3.5 h-3.5 md:w-4 md:h-4" aria-hidden="true" />
                     </span>
                   </div>
 
                   {/* Category badge */}
-                  <div className="absolute top-3 left-3">
-                    <span className={cn("text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-tighter", scheme.badge)}>
+                  <div className="absolute top-2 left-2 md:top-3 md:left-3">
+                    <span className={cn("text-[9px] md:text-[10px] font-bold px-1.5 md:px-2 py-0.5 rounded-full uppercase tracking-tighter", scheme.badge)}>
                       {project.categoryLabel}
                     </span>
                   </div>
 
                   {/* Metric badge */}
-                  <div className="absolute top-3 right-3">
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-foreground text-background">
+                  <div className="absolute top-2 right-2 md:top-3 md:right-3">
+                    <span className="text-[9px] md:text-[10px] font-bold px-1.5 md:px-2 py-0.5 rounded-full bg-foreground text-background">
                       {project.heroMetric}
                     </span>
                   </div>
                 </div>
 
                 {/* Card content */}
-                <div className="p-5">
-                  <div className="flex items-start justify-between gap-2 mb-1">
-                    <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-tight">{project.client.sector}</span>
-                    <span className="text-[10px] text-muted-foreground shrink-0">{project.year}</span>
+                <div className="p-3 md:p-5">
+                  <div className="flex items-start justify-between gap-1 mb-1">
+                    <span className="text-[9px] md:text-[10px] uppercase font-bold text-muted-foreground tracking-tight leading-tight">{project.client.sector}</span>
+                    <span className="text-[9px] md:text-[10px] text-muted-foreground shrink-0">{project.year}</span>
                   </div>
 
                   <h3 className={cn(
-                    "text-base font-bold text-foreground mb-2 transition-colors",
+                    "text-xs md:text-base font-bold text-foreground transition-colors leading-snug",
                     "group-hover:text-accent"
                   )}>
                     {project.title}
                   </h3>
 
-                  <p className="text-xs text-muted-foreground mb-4 line-clamp-2 leading-relaxed">
+                  {/* Description & tags — desktop only */}
+                  <p className="hidden md:block text-xs text-muted-foreground mt-2 mb-4 line-clamp-2 leading-relaxed">
                     {project.description}
                   </p>
-
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="hidden md:flex flex-wrap gap-1.5">
                     {project.tags.slice(0, 3).map((tag) => (
                       <span
                         key={tag}

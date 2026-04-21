@@ -8,16 +8,19 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { cn } from "@/lib/utils"
 import { InlineWidget } from "react-calendly"
+
 import { CopyEmail } from "@/components/ui/copy-email"
 
 const CALENDLY_URL = "https://calendly.com/contact-mobem-solutions/30min"
 
 const SERVICES = [
+  "Design UI/UX",
   "Création de site vitrine",
   "Refonte de site existant",
   "Application web (SaaS / backoffice)",
   "Application mobile",
   "E-commerce",
+  "SEO & Référencement naturel",
   "Conseil & stratégie digitale",
 ]
 
@@ -141,7 +144,7 @@ export function ContactSection() {
               }}
               variant="outline"
             >
-              Envoyer un autre message
+              Retour au site
             </Button>
           </div>
         </div>
@@ -169,31 +172,31 @@ export function ContactSection() {
         </div>
 
         {/* Formulaire pleine largeur */}
-        <div className="bg-card rounded-2xl border border-border p-8 mb-8">
-          <h3 className="text-xl font-semibold text-foreground mb-6">Envoyez-nous un message</h3>
+        <div className="bg-card rounded-2xl border border-border p-6 mb-8">
+          <h3 className="text-base font-semibold text-foreground mb-5">Décrivez votre projet</h3>
           <form onSubmit={handleSubmit} noValidate>
-            <div className="space-y-5">
+            <div className="space-y-4">
 
               {/* Row 1 : Nom | Email | Entreprise */}
-              <div className="grid md:grid-cols-3 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name" className="text-foreground font-medium">
-                    Votre nom <span className="text-destructive">*</span>
+              <div className="grid md:grid-cols-3 gap-3">
+                <div className="space-y-1.5">
+                  <Label htmlFor="name" className="text-sm text-foreground font-medium">
+                    Nom complet <span className="text-destructive">*</span>
                   </Label>
                   <Input
                     id="name"
                     type="text"
                     value={formData.name}
                     onChange={(e) => handleChange("name", e.target.value)}
-                    placeholder="Jean Dupont"
+                    placeholder="Prénom et nom de famille"
                     aria-invalid={!!errors.name}
-                    className={cn(errors.name && "border-destructive focus-visible:ring-destructive")}
+                    className={cn("text-sm", errors.name && "border-destructive focus-visible:ring-destructive")}
                   />
-                  {errors.name && <p className="text-sm text-destructive" role="alert">{errors.name}</p>}
+                  {errors.name && <p className="text-xs text-destructive" role="alert">{errors.name}</p>}
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="email" className="text-foreground font-medium">
+                <div className="space-y-1.5">
+                  <Label htmlFor="email" className="text-sm text-foreground font-medium">
                     Email professionnel <span className="text-destructive">*</span>
                   </Label>
                   <Input
@@ -201,32 +204,33 @@ export function ContactSection() {
                     type="email"
                     value={formData.email}
                     onChange={(e) => handleChange("email", e.target.value)}
-                    placeholder="jean@entreprise.fr"
+                    placeholder="vous@votre-entreprise.fr"
                     aria-invalid={!!errors.email}
-                    className={cn(errors.email && "border-destructive focus-visible:ring-destructive")}
+                    className={cn("text-sm", errors.email && "border-destructive focus-visible:ring-destructive")}
                   />
-                  {errors.email && <p className="text-sm text-destructive" role="alert">{errors.email}</p>}
+                  {errors.email && <p className="text-xs text-destructive" role="alert">{errors.email}</p>}
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="company" className="text-foreground font-medium">
-                    Entreprise <span className="text-muted-foreground text-sm font-normal">(optionnel)</span>
+                <div className="space-y-1.5">
+                  <Label htmlFor="company" className="text-sm text-foreground font-medium">
+                    Entreprise <span className="text-muted-foreground text-xs font-normal">(optionnel)</span>
                   </Label>
                   <Input
                     id="company"
                     type="text"
                     value={formData.company}
                     onChange={(e) => handleChange("company", e.target.value)}
-                    placeholder="Nom de votre entreprise"
+                    placeholder="Raison sociale"
+                    className="text-sm"
                   />
                 </div>
               </div>
 
               {/* Row 2 : Besoin | Budget */}
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="services" className="text-foreground font-medium">
-                    Type de projet <span className="text-muted-foreground text-sm font-normal">(optionnel)</span>
+              <div className="grid md:grid-cols-2 gap-3">
+                <div className="space-y-1.5">
+                  <Label htmlFor="services" className="text-sm text-foreground font-medium">
+                    Type de projet <span className="text-muted-foreground text-xs font-normal">(optionnel)</span>
                   </Label>
                   <select
                     id="services"
@@ -234,14 +238,14 @@ export function ContactSection() {
                     onChange={(e) => handleChange("services", e.target.value)}
                     className={selectClass}
                   >
-                    <option value="">Sélectionnez...</option>
+                    <option value="">Sélectionner un type de projet</option>
                     {SERVICES.map((s) => <option key={s} value={s}>{s}</option>)}
                   </select>
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="budget" className="text-foreground font-medium">
-                    Budget estimé <span className="text-muted-foreground text-sm font-normal">(optionnel)</span>
+                <div className="space-y-1.5">
+                  <Label htmlFor="budget" className="text-sm text-foreground font-medium">
+                    Budget estimé <span className="text-muted-foreground text-xs font-normal">(optionnel)</span>
                   </Label>
                   <select
                     id="budget"
@@ -249,27 +253,27 @@ export function ContactSection() {
                     onChange={(e) => handleChange("budget", e.target.value)}
                     className={selectClass}
                   >
-                    <option value="">Sélectionnez...</option>
+                    <option value="">Fourchette budgétaire</option>
                     {BUDGET_OPTIONS.map((b) => <option key={b} value={b}>{b}</option>)}
                   </select>
                 </div>
               </div>
 
               {/* Message */}
-              <div className="space-y-2">
-                <Label htmlFor="message" className="text-foreground font-medium">
-                  Décrivez votre projet <span className="text-destructive">*</span>
+              <div className="space-y-1.5">
+                <Label htmlFor="message" className="text-sm text-foreground font-medium">
+                  Description du projet <span className="text-destructive">*</span>
                 </Label>
                 <Textarea
                   id="message"
                   value={formData.message}
                   onChange={(e) => handleChange("message", e.target.value)}
-                  placeholder="Parlez-nous de votre projet, vos objectifs, vos délais..."
+                  placeholder="Décrivez votre besoin, vos contraintes et vos délais indicatifs."
                   rows={4}
                   aria-invalid={!!errors.message}
-                  className={cn("resize-none", errors.message && "border-destructive focus-visible:ring-destructive")}
+                  className={cn("resize-none text-sm", errors.message && "border-destructive focus-visible:ring-destructive")}
                 />
-                {errors.message && <p className="text-sm text-destructive" role="alert">{errors.message}</p>}
+                {errors.message && <p className="text-xs text-destructive" role="alert">{errors.message}</p>}
               </div>
 
               {errors.submit && (
@@ -277,7 +281,7 @@ export function ContactSection() {
               )}
 
               {/* Submit */}
-              <div className="flex items-center justify-between gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <p className="text-xs text-muted-foreground">
                   En soumettant ce formulaire, vous acceptez que vos données soient utilisées pour vous recontacter.
                 </p>
@@ -290,7 +294,7 @@ export function ContactSection() {
                   {isSubmitting ? (
                     <><span className="animate-spin mr-2">⏳</span>Envoi en cours...</>
                   ) : (
-                    <>Démarrer la conversation<ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" /></>
+                    <>Soumettre mon projet<ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" /></>
                   )}
                 </Button>
               </div>
@@ -311,24 +315,26 @@ export function ContactSection() {
           </div>
         </div>
 
-        {/* Calendly | Info cards — même hauteur, même largeur */}
-        <div className="grid lg:grid-cols-2 gap-8 items-stretch">
+        {/* Calendly | Info cards */}
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
 
-          {/* Calendly */}
-          <div className="rounded-2xl border border-border overflow-hidden">
-            <InlineWidget
-              url={CALENDLY_URL}
-              styles={{ width: "100%", height: "580px" }}
-              pageSettings={{
-                hideEventTypeDetails: true,
-                hideLandingPageDetails: true,
-              }}
-            />
+          {/* Calendly widget */}
+          <div className="rounded-2xl border border-border overflow-hidden" style={{ height: "460px" }}>
+            <div style={{ zoom: 0.85, height: "624px" }}>
+              <InlineWidget
+                url={CALENDLY_URL}
+                styles={{ width: "100%", height: "624px" }}
+                pageSettings={{
+                  hideEventTypeDetails: true,
+                  hideLandingPageDetails: true,
+                }}
+              />
+            </div>
           </div>
 
-          {/* Info cards empilées */}
+          {/* Info cards empilées, hauteur naturelle */}
           <div className="flex flex-col gap-6">
-            <div className="bg-card rounded-2xl border border-border p-6 flex-1">
+            <div className="bg-card rounded-2xl border border-border p-6">
               <h3 className="font-semibold text-foreground mb-4">Pourquoi nous contacter ?</h3>
               <div className="space-y-4">
                 {reassuranceItems.map((item) => (
@@ -345,7 +351,7 @@ export function ContactSection() {
               </div>
             </div>
 
-            <div className="bg-card rounded-2xl border border-border p-6 flex-1">
+            <div className="bg-card rounded-2xl border border-border p-6">
               <h3 className="font-semibold text-foreground mb-4">Nous retrouver</h3>
               <div className="space-y-4">
                 {contactInfo.map((info) => (

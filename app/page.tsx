@@ -4,6 +4,7 @@ import { ServicesSection } from "@/components/sections/services"
 import { PortfolioSection } from "@/components/sections/portfolio"
 import { TeamSection } from "@/components/sections/team"
 import { TestimonialsSection } from "@/components/sections/testimonials"
+import { PricingSection } from "@/components/sections/pricing"
 import { ContactSection } from "@/components/sections/contact"
 import { Footer } from "@/components/footer"
 
@@ -12,7 +13,7 @@ export default function HomePage() {
     <>
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-accent-foreground focus:rounded-lg"
+        className="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-4 focus-visible:left-4 focus-visible:z-50 focus-visible:px-4 focus-visible:py-2 focus-visible:bg-accent focus-visible:text-accent-foreground focus-visible:rounded-lg"
       >
         Aller au contenu principal
       </a>
@@ -20,6 +21,7 @@ export default function HomePage() {
       <main id="main-content">
         <HeroSection />
         <ServicesSection />
+        <PricingSection />
         <PortfolioSection />
         {/* <TestimonialsSection /> */}
         <TeamSection />

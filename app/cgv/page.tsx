@@ -444,7 +444,7 @@ export default function CGVPage() {
                 <div className="prose-legal">
                   <p>
                     Les présentes CGV sont soumises au <strong>droit français</strong>. En cas de litige, et après
-                    tentative de résolution amiable, le <strong>Tribunal de Commerce de Nantes</strong> sera seul
+                    tentative de résolution amiable, le <strong>Tribunal de Commerce d'Angers</strong> sera seul
                     compétent.
                   </p>
                 </div>
@@ -455,7 +455,7 @@ export default function CGVPage() {
                   Mobem Solutions — CGV en vigueur au 1er janvier 2025
                 </p>
                 <p className="text-xs text-muted-foreground mt-1">
-                  GME | Nathan Portier (Mandataire) & Arnaud Clavier (Co-Mandataire) — Tribunal de Commerce de Nantes
+                  GME | Nathan Portier (Mandataire) & Arnaud Clavier (Co-Mandataire) — Tribunal de Commerce d'Angers
                 </p>
               </div>
             </div>
