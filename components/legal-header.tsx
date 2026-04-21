@@ -33,11 +33,14 @@ export function LegalHeader() {
         <div className="flex h-16 items-center justify-between lg:h-20">
           <Link
             href="/"
-            className="flex items-center gap-2 font-semibold text-xl tracking-tight text-foreground transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+            className="flex items-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
             aria-label="Mobem Solutions - Retour à l'accueil"
           >
-            <span className="text-accent font-bold">M</span>
-            <span>Mobem Solutions</span>
+            <img
+              src="/mobem-logo-redimension-removebg-preview.png"
+              alt="Logo Mobem Solutions"
+              className="h-10 w-auto object-contain"
+            />
           </Link>
 
           <div className="flex items-center gap-3">

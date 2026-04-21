@@ -17,7 +17,7 @@ const navigation = [
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const { theme, setTheme } = useTheme()
+  const { resolvedTheme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export function Header() {
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled
           ? "bg-background/95 backdrop-blur-md border-b border-border shadow-sm"
-          : "bg-transparent"
+          : "bg-background/95 border-b border-border lg:bg-transparent lg:border-transparent"
       )}
       role="banner"
     >
@@ -87,11 +87,11 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              aria-label={mounted && theme === "dark" ? "Activer le mode clair" : "Activer le mode sombre"}
+              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+              aria-label={mounted && resolvedTheme === "dark" ? "Activer le mode clair" : "Activer le mode sombre"}
               className="text-muted-foreground hover:text-foreground"
             >
-              {mounted && theme === "dark" ? (
+              {mounted && resolvedTheme === "dark" ? (
                 <Sun className="h-5 w-5" aria-hidden="true" />
               ) : (
                 <Moon className="h-5 w-5" aria-hidden="true" />
@@ -110,11 +110,11 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              aria-label={mounted && theme === "dark" ? "Activer le mode clair" : "Activer le mode sombre"}
+              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+              aria-label={mounted && resolvedTheme === "dark" ? "Activer le mode clair" : "Activer le mode sombre"}
               className="text-muted-foreground hover:text-foreground"
             >
-              {mounted && theme === "dark" ? (
+              {mounted && resolvedTheme === "dark" ? (
                 <Sun className="h-5 w-5" aria-hidden="true" />
               ) : (
                 <Moon className="h-5 w-5" aria-hidden="true" />

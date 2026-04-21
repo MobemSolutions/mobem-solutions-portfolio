@@ -206,7 +206,7 @@ export default function MentionsLegalesPage() {
                 <div className="prose-legal space-y-4">
                   <p>
                     Tout litige en relation avec l'utilisation du site est soumis au droit français. Il est fait
-                    attribution exclusive de juridiction aux tribunaux compétents de <strong>Nantes</strong>.
+                    attribution exclusive de juridiction aux tribunaux compétents d'Angers.
                   </p>
                 </div>
               </section>

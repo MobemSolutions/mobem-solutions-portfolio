@@ -35,10 +35,10 @@ export function HeroSection() {
       </div>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          
+        <div className="grid xl:grid-cols-2 gap-12 xl:gap-16 items-center">
+
           {/* Content (Gauche) */}
-          <div className="text-center lg:text-left">
+          <div className="text-center xl:text-left">
             <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-sm font-medium text-muted-foreground mb-6 animate-fade-up">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
@@ -58,7 +58,7 @@ export function HeroSection() {
               Mobem Solutions accompagne les PME et ETI ambitieuses dans leur transformation digitale. Ingénierie, Design, Stratégie — trois expertises complémentaires pour des résultats concrets.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-up animation-delay-300">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center xl:justify-start animate-fade-up animation-delay-300">
               <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 font-medium text-base px-8">
                 <Link href="#contact" onClick={handleScrollToContact}>
                   Lancer mon projet
