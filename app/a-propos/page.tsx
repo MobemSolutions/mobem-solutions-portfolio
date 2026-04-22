@@ -43,7 +43,7 @@ const team = [
     role: "Responsable Design & Expérience Utilisateur (UX/UI)",
     bio: "Créateur d'interfaces intuitives, Antoine place l'utilisateur au centre de chaque décision. Il traduit les besoins fonctionnels en expériences visuelles marquantes — alliant esthétisme moderne et ergonomie fluide.",
     expertise: ["UX Research", "UI Design", "Design Systems", "Prototypage Figma"],
-    linkedin: "https://www.linkedin.com/in/antoine-clv/",
+    linkedin: "https://www.linkedin.com/in/antoine-clavier-561750204/",
     initials: "AC",
     pole: "Marketing",
     color: "chart-4" as const,

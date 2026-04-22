@@ -24,6 +24,11 @@ export const metadata: Metadata = {
   keywords: ['agence web', 'Nantes', 'création site web', 'design UX', 'stratégie digitale', 'PME', 'ETI', 'développement web', 'agence digitale'],
   authors: [{ name: 'Mobem Solutions' }],
   creator: 'Mobem Solutions',
+  // --- AJOUT DE LA VÉRIFICATION GOOGLE ---
+  verification: {
+    google: 'RTZLToXEiTRLwYiuu4xjBbzPgjSuJwhANVl5PODg7Zk',
+  },
+  // ---------------------------------------
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
@@ -33,7 +38,7 @@ export const metadata: Metadata = {
     description: 'Création de sites web, design UX/UI et stratégie digitale pour PME et ETI. Basée à Nantes.',
     images: [
       {
-        url: '/opengraph-image',
+        url: '/opengraph-image.jpg', // Vérifie bien l'extension de ton fichier
         width: 1200,
         height: 630,
         alt: 'Mobem Solutions – Agence Web, Design & Stratégie à Nantes',
