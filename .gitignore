@@ -15,6 +15,10 @@ node_modules
 .next/
 .DS_Store
 
+# Scripts one-shot / fichiers locaux
+scripts/import-posts.mjs
+maquettes-projets.html
+
 # Playwright
 /test-results/
 /playwright-report/

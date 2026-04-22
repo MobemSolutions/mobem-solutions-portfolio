@@ -9,9 +9,9 @@ import { cn } from "@/lib/utils"
 
 const navigation = [
   { name: "Accueil", href: "#hero" },
-  { name: "Services", href: "#services" },
-  { name: "Réalisations", href: "#realisations" },
-  { name: "Équipe", href: "#equipe" },
+  { name: "Méthodes", href: "/methode", external: true },
+  { name: "Réalisations", href: "/realisations", external: true },
+  { name: "Blog", href: "/blog", external: true },
 ]
 
 export function Header() {
@@ -34,6 +34,8 @@ export function Header() {
     const element = document.querySelector(href)
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
+    } else {
+      window.location.href = `/${href}`
     }
     setIsMobileMenuOpen(false)
   }
@@ -61,10 +63,18 @@ export function Header() {
     className="group relative flex items-center transition-all focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
     aria-label="Mobem Solutions - Retour à l'accueil"
   >
-    <img 
-      src="/mobem-logo-redimension-removebg-preview.png" 
-      alt="Logo Mobem Solutions" 
-      className="h-12 w-auto sm:h-14 lg:h-16 object-contain transition-transform duration-300 group-hover:scale-105 group-active:scale-95"
+    {/* Logo light mode */}
+    <img
+      src="/mobem-logo-redimension-removebg-preview.png"
+      alt="Logo Mobem Solutions"
+      className="h-12 w-auto sm:h-14 lg:h-16 object-contain transition-transform duration-300 group-hover:scale-105 group-active:scale-95 dark:hidden"
+    />
+    {/* Logo dark mode — inversion CSS pour texte blanc, orange préservé */}
+    <img
+      src="/mobem-logo-redimension-removebg-preview.png"
+      alt="Logo Mobem Solutions"
+      className="h-12 w-auto sm:h-14 lg:h-16 object-contain transition-transform duration-300 group-hover:scale-105 group-active:scale-95 hidden dark:block"
+      style={{ filter: "invert(1) hue-rotate(180deg)" }}
     />
   </Link>
 
@@ -74,7 +84,7 @@ export function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
+                onClick={item.external ? undefined : (e) => handleNavClick(e, item.href)}
                 className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
               >
                 {item.name}
@@ -152,7 +162,7 @@ export function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
+                onClick={item.external ? () => setIsMobileMenuOpen(false) : (e) => handleNavClick(e, item.href)}
                 className="block rounded-lg px-3 py-2 text-base font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
                 tabIndex={isMobileMenuOpen ? 0 : -1}
               >

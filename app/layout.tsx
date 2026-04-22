@@ -18,6 +18,7 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://mobem-solutions.com'),
   title: 'Mobem Solutions – Agence Web, Design & Stratégie à Nantes',
   description: 'Mobem Solutions accompagne les PME et ETI dans leur transformation digitale. Création de sites web, design UX/UI et stratégie digitale — une agence à taille humaine basée à Nantes.',
   keywords: ['agence web', 'Nantes', 'création site web', 'design UX', 'stratégie digitale', 'PME', 'ETI', 'développement web', 'agence digitale'],
@@ -65,7 +66,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="fr" suppressHydrationWarning className="bg-background">
+    <html lang="fr" suppressHydrationWarning className="bg-background" data-scroll-behavior="smooth">
       <body className={`${inter.variable} ${playfair.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"

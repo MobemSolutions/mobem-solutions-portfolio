@@ -9,6 +9,7 @@ const steps = [
     number: "01",
     icon: Search,
     title: "Découverte",
+    tagline: "Brief stratégique, zéro template.",
     description:
       "On commence par comprendre votre métier, vos utilisateurs et vos objectifs. Pas de template préfabriqué — chaque projet démarre par un audit et un brief stratégique.",
     duration: "Jour 1–2",
@@ -17,6 +18,7 @@ const steps = [
     number: "02",
     icon: PenTool,
     title: "Design",
+    tagline: "Maquettes validées avant de coder.",
     description:
       "Nos maquettes sont validées avec vous avant de coder une seule ligne. UX d'abord, esthétique ensuite — des interfaces qui convertissent, pas juste qui plaisent.",
     duration: "Jour 3–5",
@@ -25,6 +27,7 @@ const steps = [
     number: "03",
     icon: Code2,
     title: "Développement",
+    tagline: "Next.js, propre, audité Lighthouse.",
     description:
       "Stack moderne (Next.js, Tailwind), code propre, performances au cœur. Chaque livraison est testée sur mobile, desktop et auditée Lighthouse avant d'être présentée.",
     duration: "Jour 5–9",
@@ -33,6 +36,7 @@ const steps = [
     number: "04",
     icon: Rocket,
     title: "Lancement",
+    tagline: "Live en J10 — domaine, SSL, rapport.",
     description:
       "Mise en ligne sur Vercel avec domaine, SSL et redirections configurés. Vous repartez avec un site live, un rapport de performance et un associé joignable.",
     duration: "Jour 10",
@@ -78,32 +82,28 @@ export function ServicesSection() {
         {/* Steps — mobile: vertical stack / desktop: grid */}
         <div className="relative">
 
-          {/* Mobile vertical stack */}
-          <div className="lg:hidden flex flex-col gap-3" role="list">
+          {/* Mobile: 2×2 grid */}
+          <div className="lg:hidden grid grid-cols-2 gap-3" role="list">
             {steps.map((step) => (
               <div
                 key={step.number}
                 role="listitem"
-                className="bg-card border border-border rounded-2xl p-4 flex items-start gap-4"
+                className="bg-card border border-border rounded-2xl p-4 flex flex-col items-center text-center gap-3"
               >
-                <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
                   <step.icon className="w-4 h-4 text-accent" aria-hidden="true" />
                 </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xs font-bold text-accent">{step.number}</span>
-                    <h3 className="text-sm font-semibold text-foreground">{step.title}</h3>
-                    <span className="ml-auto text-xs text-muted-foreground border border-border rounded-full px-2 py-0.5 whitespace-nowrap flex-shrink-0">
-                      {step.duration}
-                    </span>
-                  </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{step.description}</p>
+                <div>
+                  <p className="text-xs font-bold text-accent mb-0.5">{step.number}</p>
+                  <h3 className="text-sm font-semibold text-foreground">{step.title}</h3>
+                  <p className="text-xs text-muted-foreground mt-1">{step.duration}</p>
+                  <p className="text-xs text-muted-foreground/80 mt-2 leading-snug">{step.tagline}</p>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Desktop grid */}
+          {/* Desktop: horizontal timeline */}
           <div className="hidden lg:block relative">
             <div
               className="absolute top-10 left-[calc(12.5%+24px)] right-[calc(12.5%+24px)] h-px bg-border"
@@ -111,23 +111,21 @@ export function ServicesSection() {
             />
             <div className="grid lg:grid-cols-4 gap-6" role="list">
               {steps.map((step) => (
-                <div key={step.number} className="relative flex flex-col" role="listitem">
-                  <div className="relative z-10 w-12 h-12 rounded-full bg-card border-2 border-border flex items-center justify-center mb-5">
+                <div key={step.number} className="relative flex flex-col items-center text-center" role="listitem">
+                  <div className="relative z-10 w-12 h-12 rounded-full bg-card border-2 border-border flex items-center justify-center mb-4">
                     <step.icon className="w-5 h-5 text-accent" aria-hidden="true" />
                   </div>
                   <span
-                    className="absolute -top-2 left-8 text-xs font-bold text-accent bg-secondary px-1.5 rounded"
+                    className="absolute -top-2 left-[calc(50%+8px)] text-xs font-bold text-accent bg-secondary px-1.5 rounded"
                     aria-hidden="true"
                   >
                     {step.number}
                   </span>
-                  <div className="flex items-center gap-2 mb-2">
-                    <h3 className="text-lg font-semibold text-foreground">{step.title}</h3>
-                    <span className="text-xs text-muted-foreground border border-border rounded-full px-2 py-0.5 whitespace-nowrap">
-                      {step.duration}
-                    </span>
-                  </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{step.description}</p>
+                  <h3 className="text-base font-semibold text-foreground mb-1">{step.title}</h3>
+                  <span className="text-xs text-muted-foreground border border-border rounded-full px-2 py-0.5">
+                    {step.duration}
+                  </span>
+                  <p className="text-xs text-muted-foreground/80 mt-3 whitespace-nowrap">{step.tagline}</p>
                 </div>
               ))}
             </div>
@@ -147,18 +145,27 @@ export function ServicesSection() {
           ))}
         </div>
 
-        {/* CTA — desktop only to avoid extra scroll on mobile */}
-        <div className="hidden lg:block text-center mt-12">
-          <p className="text-muted-foreground mb-4">
+        {/* CTA */}
+        <div className="text-center mt-8 lg:mt-12">
+          <p className="text-muted-foreground mb-5">
             Vous voulez voir la méthode appliquée à votre projet ?
           </p>
-          <Link
-            href="#contact"
-            className="inline-flex items-center gap-2 text-accent font-medium hover:text-accent/80 transition-colors"
-          >
-            Démarrons ensemble
-            <ArrowRight className="w-4 h-4" aria-hidden="true" />
-          </Link>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Link
+              href="/methode"
+              className="group inline-flex items-center gap-2 bg-accent text-accent-foreground px-5 py-2.5 rounded-xl font-semibold text-sm hover:bg-accent/90 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:shadow-sm transition-all duration-200"
+            >
+              Notre méthode en détail
+              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+            </Link>
+            <Link
+              href="#contact"
+              className="group inline-flex items-center gap-2 text-sm text-muted-foreground font-medium hover:text-foreground transition-all duration-200"
+            >
+              Démarrons ensemble
+              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+            </Link>
+          </div>
         </div>
 
       </div>

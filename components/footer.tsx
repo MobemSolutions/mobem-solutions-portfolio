@@ -1,15 +1,16 @@
 "use client"
 
 import Link from "next/link"
-import { Linkedin } from "lucide-react"
+import { LinkedinIcon } from "lucide-react"
 
 const navigation = {
   main: [
-    { name: "Accueil", href: "#hero" },
-    { name: "Services", href: "#services" },
-    { name: "Réalisations", href: "#realisations" },
-    { name: "Équipe", href: "#equipe" },
-    { name: "Contact", href: "#contact" },
+    { name: "Accueil", href: "/" },
+    { name: "Méthodes", href: "/methode" },
+    { name: "Réalisations", href: "/realisations" },
+    { name: "À propos", href: "/a-propos" },
+    { name: "Blog", href: "/blog" },
+    { name: "Contact", href: "/#contact" },
   ],
   services: [
     { name: "Ingénierie & Développement", href: "#services" },
@@ -22,7 +23,7 @@ const navigation = {
     { name: "Politique de confidentialité", href: "/confidentialite" },
   ],
   social: [
-    { name: "LinkedIn", href: "https://www.linkedin.com/in/mobem-solutions-136816404/", icon: Linkedin },
+    { name: "LinkedIn", href: "https://www.linkedin.com/in/mobem-solutions-136816404/", icon: LinkedinIcon },
   ],
 }
 

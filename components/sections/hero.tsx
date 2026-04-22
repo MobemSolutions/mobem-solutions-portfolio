@@ -34,11 +34,11 @@ export function HeroSection() {
         />
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        <div className="grid xl:grid-cols-2 gap-12 xl:gap-16 items-center">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 lg:py-16 xl:py-24">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 xl:gap-16 items-center">
 
           {/* Content (Gauche) */}
-          <div className="text-center xl:text-left">
+          <div className="text-center lg:text-left">
             <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-sm font-medium text-muted-foreground mb-6 animate-fade-up">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
@@ -47,7 +47,7 @@ export function HeroSection() {
               Agence digitale à Nantes
             </div>
 
-            <h1 id="hero-heading" className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground mb-6 animate-fade-up animation-delay-100">
+            <h1 id="hero-heading" className="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-foreground mb-6 animate-fade-up animation-delay-100">
               <span className="text-balance">
                 La précision digitale,{" "}
                 <span className="text-accent">à l&apos;échelle humaine</span>
@@ -58,11 +58,11 @@ export function HeroSection() {
               Mobem Solutions accompagne les PME et ETI ambitieuses dans leur transformation digitale. Ingénierie, Design, Stratégie — trois expertises complémentaires pour des résultats concrets.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center xl:justify-start animate-fade-up animation-delay-300">
-              <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 font-medium text-base px-8">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-up animation-delay-300">
+              <Button asChild size="lg" className="group bg-accent text-accent-foreground hover:bg-accent/90 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:shadow-sm font-medium text-base px-8">
                 <Link href="#contact" onClick={handleScrollToContact}>
                   Lancer mon projet
-                  <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
                 </Link>
               </Button>
               <CalendlyButton text="Prendre rendez-vous" variant="outline" size="lg" className="font-medium text-base px-8 border-border hover:bg-secondary" />
