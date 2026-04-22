@@ -38,7 +38,7 @@ const team = [
     role: "Responsable Design & Expérience Utilisateur (UX/UI)",
     description: "Créateur d'interfaces intuitives, Antoine place l'utilisateur au centre de la réflexion. Son rôle est de traduire les besoins fonctionnels en expériences visuelles marquantes, alliant esthétisme moderne et ergonomie fluide pour maximiser l'impact de chaque plateforme.",
     expertise: ["UX/UI Design", "Design Systems", "Prototypage"],
-    linkedin: "https://www.linkedin.com/in/antoine-clv/",
+    linkedin: "https://www.linkedin.com/in/antoine-clavier-561750204/",
     email: "antoine.clavier@mobem-solutions.com",
     initials: "AC",
     color: "chart-4",
@@ -108,6 +108,8 @@ export function TeamSection() {
       <div className="flex items-center gap-3">
         <Link
           href={member.linkedin}
+          target="_blank" // Ouvre dans un nouvel onglet
+          rel="noopener noreferrer" // Sécurité : empêche l'onglet ouvert de contrôler le tien
           className="w-9 h-9 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/80 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           aria-label={`Profil LinkedIn de ${member.name}`}
         >
