@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
+import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
@@ -80,9 +80,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          {/* On place les analytics ici pour qu'ils profitent du contexte du site */}
+          <Analytics />
+          <SpeedInsights />
         </ThemeProvider>
-        {process.env.NODE_ENV === 'production' && <Analytics />}
-        {process.env.NODE_ENV === 'production' && <SpeedInsights />}
       </body>
     </html>
   )

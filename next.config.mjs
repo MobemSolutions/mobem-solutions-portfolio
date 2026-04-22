@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
-    // On garde ça pour que ton build passe même s'il y a des petits soucis de types
+    // Ignore les erreurs de types pour ne plus bloquer le build
     ignoreBuildErrors: true,
   },
   images: {
@@ -10,7 +10,6 @@ const nextConfig = {
       { protocol: 'https', hostname: 'cdn.sanity.io' },
     ],
   },
-  // On ajoute la section headers ici
   async headers() {
     return [
       {
@@ -31,6 +30,22 @@ const nextConfig = {
           {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload',
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: [
+              "default-src 'self';",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://assets.calendly.com;",
+              "style-src 'self' 'unsafe-inline' https://assets.calendly.com;",
+              "img-src 'self' blob: data: cdn.sanity.io https://assets.calendly.com;",
+              "font-src 'self' data:;",
+              "connect-src 'self' *.sanity.io *.vercel-analytics.com https://api.resend.com;",
+              "frame-src 'self' https://calendly.com;",
+            ].join(' '),
           },
         ],
       },
