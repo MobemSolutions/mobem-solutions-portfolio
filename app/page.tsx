@@ -1,7 +1,7 @@
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/sections/hero"
 import { ServicesSection } from "@/components/sections/services"
-import { PortfolioSection } from "@/components/sections/portfolio"
+import { PortfolioTeaser } from "@/components/sections/portfolio-teaser"
 import { TeamSection } from "@/components/sections/team"
 import { TestimonialsSection } from "@/components/sections/testimonials"
 import { PricingSection } from "@/components/sections/pricing"
@@ -22,7 +22,7 @@ export default function HomePage() {
         <HeroSection />
         <ServicesSection />
         <PricingSection />
-        <PortfolioSection />
+        <PortfolioTeaser />
         {/* <TestimonialsSection /> */}
         <TeamSection />
         <ContactSection />
