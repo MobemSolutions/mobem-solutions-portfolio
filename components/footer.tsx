@@ -1,26 +1,20 @@
 "use client"
 
 import Link from "next/link"
-import { LinkedinIcon } from "lucide-react"
+import { LinkedinIcon, ArrowUpRight } from "lucide-react"
 
 const navigation = {
   main: [
     { name: "Accueil", href: "/" },
-    { name: "Méthodes", href: "/methode" },
-    { name: "Réalisations", href: "/realisations" },
-    { name: "À propos", href: "/a-propos" },
+    { name: "Methode", href: "/methode" },
+    { name: "Realisations", href: "/realisations" },
+    { name: "A propos", href: "/a-propos" },
     { name: "Blog", href: "/blog" },
-    { name: "Contact", href: "/#contact" },
-  ],
-  services: [
-    { name: "Ingénierie & Développement", href: "#services" },
-    { name: "Design & Expérience", href: "#services" },
-    { name: "Stratégie & Croissance", href: "#services" },
   ],
   legal: [
-    { name: "Mentions légales", href: "/mentions-legales" },
+    { name: "Mentions legales", href: "/mentions-legales" },
     { name: "CGV", href: "/cgv" },
-    { name: "Politique de confidentialité", href: "/confidentialite" },
+    { name: "Confidentialite", href: "/confidentialite" },
   ],
   social: [
     { name: "LinkedIn", href: "https://www.linkedin.com/in/mobem-solutions-136816404/", icon: LinkedinIcon },
@@ -28,150 +22,116 @@ const navigation = {
 }
 
 export function Footer() {
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith("#")) {
-      e.preventDefault()
-      const element = document.querySelector(href)
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" })
-      }
-    }
-  }
-
   return (
     <footer
-      className="border-t border-border bg-card"
+      className="border-t border-border bg-background"
       role="contentinfo"
       aria-label="Pied de page"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 lg:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        
+        {/* Main Footer Grid */}
+        <div className="py-12 lg:py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+            
+            {/* Brand Column */}
+            <div className="lg:col-span-5">
+              <Link href="/" className="inline-block mb-4">
+                <span className="text-xl font-black tracking-tight text-foreground uppercase">
+                  Mobem
+                </span>
+                <span className="text-xl font-light tracking-tight text-muted-foreground ml-2">
+                  Solutions
+                </span>
+              </Link>
+              <p className="text-sm text-muted-foreground leading-relaxed max-w-sm mb-6">
+                Conseil en digitalisation pour PME et ETI ambitieuses. 
+                Strategie, design et ingenierie — un seul interlocuteur.
+              </p>
+              <div className="flex items-center gap-4">
+                {navigation.social.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground transition-colors"
+                    aria-label={item.name}
+                  >
+                    <item.icon className="w-4 h-4" aria-hidden="true" />
+                  </a>
+                ))}
+              </div>
+            </div>
 
-        {/* Mobile: brand + liens compacts */}
-        <div className="flex items-center justify-between mb-6 md:hidden">
-          <Link href="#hero" onClick={(e) => handleNavClick(e, "#hero")} className="inline-flex items-center">
-            <img src="/mobem-logo-redimension-removebg-preview.png" alt="Logo Mobem Solutions" className="h-8 w-auto object-contain" />
-          </Link>
-          <div className="flex items-center gap-2">
-            {navigation.social.map((item) => (
-              <a key={item.name} href={item.href} target="_blank" rel="noopener noreferrer"
-                className="w-8 h-8 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-                aria-label={item.name}>
-                <item.icon className="w-3.5 h-3.5" aria-hidden="true" />
-              </a>
-            ))}
-          </div>
-        </div>
+            {/* Navigation */}
+            <div className="lg:col-span-3">
+              <h3 className="text-xs font-bold text-foreground uppercase tracking-wider mb-4">
+                Navigation
+              </h3>
+              <ul className="space-y-2" role="list">
+                {navigation.main.map((item) => (
+                  <li key={item.name}>
+                    <Link
+                      href={item.href}
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1 group"
+                    >
+                      {item.name}
+                      <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" aria-hidden="true" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-        {/* Mobile: 3 colonnes de liens */}
-        <div className="grid grid-cols-3 gap-4 mb-6 md:hidden">
-          <div>
-            <h3 className="font-semibold text-foreground text-xs mb-2 uppercase tracking-wide">Navigation</h3>
-            <ul className="space-y-1.5" role="list">
-              {navigation.main.map((item) => (
-                <li key={item.name}>
-                  <Link href={item.href} onClick={(e) => handleNavClick(e, item.href)}
-                    className="text-xs text-muted-foreground hover:text-foreground transition-colors">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-semibold text-foreground text-xs mb-2 uppercase tracking-wide">Services</h3>
-            <ul className="space-y-1.5" role="list">
-              {navigation.services.map((item) => (
-                <li key={item.name}>
-                  <Link href={item.href} onClick={(e) => handleNavClick(e, item.href)}
-                    className="text-xs text-muted-foreground hover:text-foreground transition-colors">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-semibold text-foreground text-xs mb-2 uppercase tracking-wide">Légal</h3>
-            <ul className="space-y-1.5" role="list">
-              {navigation.legal.map((item) => (
-                <li key={item.name}>
-                  <Link href={item.href} className="text-xs text-muted-foreground hover:text-foreground transition-colors">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+            {/* Legal */}
+            <div className="lg:col-span-2">
+              <h3 className="text-xs font-bold text-foreground uppercase tracking-wider mb-4">
+                Legal
+              </h3>
+              <ul className="space-y-2" role="list">
+                {navigation.legal.map((item) => (
+                  <li key={item.name}>
+                    <Link
+                      href={item.href}
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-        {/* Desktop: layout original 4 colonnes */}
-        <div className="hidden md:grid md:grid-cols-4 gap-8 lg:gap-12">
-          <div className="col-span-1">
-            <Link href="#hero" onClick={(e) => handleNavClick(e, "#hero")} className="inline-flex items-center mb-4">
-              <img src="/mobem-logo-redimension-removebg-preview.png" alt="Logo Mobem Solutions" className="h-10 w-auto object-contain" />
-            </Link>
-            <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-              Agence digitale à Nantes. Ingénierie, Design & Stratégie pour les PME et ETI ambitieuses.
-            </p>
-            <div className="flex items-center gap-3">
-              {navigation.social.map((item) => (
-                <a key={item.name} href={item.href} target="_blank" rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/80 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-                  aria-label={item.name}>
-                  <item.icon className="w-4 h-4" aria-hidden="true" />
+            {/* Contact */}
+            <div className="lg:col-span-2">
+              <h3 className="text-xs font-bold text-foreground uppercase tracking-wider mb-4">
+                Contact
+              </h3>
+              <div className="space-y-2 text-sm text-muted-foreground">
+                <p>Nantes, France</p>
+                <a 
+                  href="mailto:contact@mobem-solutions.com" 
+                  className="block hover:text-foreground transition-colors"
+                >
+                  contact@mobem-solutions.com
                 </a>
-              ))}
-            </div>
-          </div>
-          <div>
-            <h3 className="font-semibold text-foreground text-sm mb-4">Navigation</h3>
-            <ul className="space-y-3" role="list">
-              {navigation.main.map((item) => (
-                <li key={item.name}>
-                  <Link href={item.href} onClick={(e) => handleNavClick(e, item.href)}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-semibold text-foreground text-sm mb-4">Services</h3>
-            <ul className="space-y-3" role="list">
-              {navigation.services.map((item) => (
-                <li key={item.name}>
-                  <Link href={item.href} onClick={(e) => handleNavClick(e, item.href)}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-semibold text-foreground text-sm mb-4">Informations</h3>
-            <ul className="space-y-3" role="list">
-              {navigation.legal.map((item) => (
-                <li key={item.name}>
-                  <Link href={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-6 pt-6 border-t border-border">
-              <p className="text-xs text-muted-foreground">Nantes, Pays de la Loire</p>
-              <p className="text-xs text-muted-foreground">France</p>
+                <a 
+                  href="tel:+33784275383" 
+                  className="block hover:text-foreground transition-colors"
+                >
+                  07 84 27 53 83
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-6 lg:mt-12 pt-5 lg:pt-8 border-t border-border">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-2">
+        {/* Bottom Bar - Swiss grid visible */}
+        <div className="border-t border-border py-6">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-xs text-muted-foreground">
-              © {new Date().getFullYear()} Mobem Solutions. Tous droits réservés.
+              © {new Date().getFullYear()} Mobem Solutions. Tous droits reserves.
             </p>
             <p className="text-xs text-muted-foreground">
               SIRET: 91514447100017

@@ -3,117 +3,129 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Mobem Solutions - Premium Digital Agency Theme
-   Concept: "La précision à l'échelle humaine"
-   Brand Territory: Sobre-premium, Expert, Accessible
+/* Mobem Solutions - Swiss Style Design System
+   Direction Artistique 2026
+   Swiss Style x Bento Grid
+   5 couleurs, pas une de plus.
 */
 
 :root {
-  /* Primary: Deep Navy - Trust, expertise, professionalism */
-  --background: oklch(0.99 0.002 260);
-  --foreground: oklch(0.15 0.02 260);
+  /* Encre - Le noir absolu. Fonds, titres, dominance. */
+  --ink: #0D0D0D;
   
-  /* Cards and surfaces */
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0.02 260);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0.02 260);
+  /* Papier - Le blanc cassé. Respiration, espace vide. */
+  --paper: #F7F7F5;
   
-  /* Primary: Deep Navy #0A1628 */
-  --primary: oklch(0.18 0.03 260);
-  --primary-foreground: oklch(0.99 0 0);
+  /* Gris - Le secondaire. Légendes, tags, discret. */
+  --gray: #888888;
   
-  /* Secondary: Warm Gray */
-  --secondary: oklch(0.96 0.005 80);
-  --secondary-foreground: oklch(0.18 0.03 260);
+  /* Règle - Le trait. Séparateurs, bordures. */
+  --rule: #E2E2E2;
   
-  /* Muted elements */
-  --muted: oklch(0.96 0.005 80);
-  --muted-foreground: oklch(0.45 0.02 260);
+  /* Signal - L'accent unique. Bouton, flèche, alerte. */
+  --signal: #E63030;
   
-  /* Accent: Burnt Orange #E86A33 - Energy, action, conversion */
-  --accent: oklch(0.65 0.18 45);
-  --accent-foreground: oklch(0.99 0 0);
+  /* Design Tokens - Light Mode */
+  --background: var(--paper);
+  --foreground: var(--ink);
   
-  /* Destructive */
-  --destructive: oklch(0.55 0.22 25);
-  --destructive-foreground: oklch(0.99 0 0);
+  --card: #FFFFFF;
+  --card-foreground: var(--ink);
+  --popover: #FFFFFF;
+  --popover-foreground: var(--ink);
   
-  /* Borders and inputs */
-  --border: oklch(0.90 0.005 260);
-  --input: oklch(0.90 0.005 260);
-  --ring: oklch(0.65 0.18 45);
+  --primary: var(--ink);
+  --primary-foreground: var(--paper);
   
-  /* Charts */
-  --chart-1: oklch(0.65 0.18 45);
-  --chart-2: oklch(0.55 0.15 200);
-  --chart-3: oklch(0.45 0.12 260);
-  --chart-4: oklch(0.70 0.15 150);
-  --chart-5: oklch(0.60 0.20 330);
+  --secondary: #F0F0EE;
+  --secondary-foreground: var(--ink);
   
-  --radius: 0.5rem;
+  --muted: #F0F0EE;
+  --muted-foreground: var(--gray);
+  
+  --accent: var(--signal);
+  --accent-foreground: #FFFFFF;
+  
+  --destructive: var(--signal);
+  --destructive-foreground: #FFFFFF;
+  
+  --border: var(--rule);
+  --input: var(--rule);
+  --ring: var(--signal);
+  
+  /* Charts - Monochrome with signal */
+  --chart-1: var(--signal);
+  --chart-2: var(--ink);
+  --chart-3: var(--gray);
+  --chart-4: #2D7D46;
+  --chart-5: #1D4ED8;
+  
+  /* Swiss: Coins droits ou radius minimal */
+  --radius: 0.125rem;
   
   /* Sidebar */
-  --sidebar: oklch(0.99 0.002 260);
-  --sidebar-foreground: oklch(0.15 0.02 260);
-  --sidebar-primary: oklch(0.18 0.03 260);
-  --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.96 0.005 80);
-  --sidebar-accent-foreground: oklch(0.18 0.03 260);
-  --sidebar-border: oklch(0.90 0.005 260);
-  --sidebar-ring: oklch(0.65 0.18 45);
+  --sidebar: var(--paper);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--ink);
+  --sidebar-primary-foreground: var(--paper);
+  --sidebar-accent: #F0F0EE;
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--rule);
+  --sidebar-ring: var(--signal);
 }
 
 .dark {
-  /* Dark mode - Inverted for premium night aesthetic */
-  --background: oklch(0.12 0.02 260);
-  --foreground: oklch(0.95 0.005 80);
+  /* Dark mode - Swiss inversé */
+  --background: var(--ink);
+  --foreground: var(--paper);
   
-  --card: oklch(0.16 0.02 260);
-  --card-foreground: oklch(0.95 0.005 80);
-  --popover: oklch(0.16 0.02 260);
-  --popover-foreground: oklch(0.95 0.005 80);
+  --card: #1A1A1A;
+  --card-foreground: var(--paper);
+  --popover: #1A1A1A;
+  --popover-foreground: var(--paper);
   
-  --primary: oklch(0.95 0.005 80);
-  --primary-foreground: oklch(0.12 0.02 260);
+  --primary: var(--paper);
+  --primary-foreground: var(--ink);
   
-  --secondary: oklch(0.22 0.02 260);
-  --secondary-foreground: oklch(0.95 0.005 80);
+  --secondary: #262626;
+  --secondary-foreground: var(--paper);
   
-  --muted: oklch(0.22 0.02 260);
-  --muted-foreground: oklch(0.65 0.01 260);
+  --muted: #262626;
+  --muted-foreground: #A0A0A0;
   
-  /* Accent stays vibrant in dark mode */
-  --accent: oklch(0.68 0.18 45);
-  --accent-foreground: oklch(0.12 0.02 260);
+  --accent: var(--signal);
+  --accent-foreground: #FFFFFF;
   
-  --destructive: oklch(0.45 0.18 25);
-  --destructive-foreground: oklch(0.95 0 0);
+  --destructive: var(--signal);
+  --destructive-foreground: #FFFFFF;
   
-  --border: oklch(0.25 0.02 260);
-  --input: oklch(0.25 0.02 260);
-  --ring: oklch(0.68 0.18 45);
+  --border: #333333;
+  --input: #333333;
+  --ring: var(--signal);
   
-  --chart-1: oklch(0.68 0.18 45);
-  --chart-2: oklch(0.60 0.15 200);
-  --chart-3: oklch(0.55 0.12 260);
-  --chart-4: oklch(0.72 0.15 150);
-  --chart-5: oklch(0.65 0.20 330);
+  --chart-1: var(--signal);
+  --chart-2: var(--paper);
+  --chart-3: #A0A0A0;
+  --chart-4: #4ADE80;
+  --chart-5: #60A5FA;
   
-  --sidebar: oklch(0.14 0.02 260);
-  --sidebar-foreground: oklch(0.95 0.005 80);
-  --sidebar-primary: oklch(0.68 0.18 45);
-  --sidebar-primary-foreground: oklch(0.12 0.02 260);
-  --sidebar-accent: oklch(0.22 0.02 260);
-  --sidebar-accent-foreground: oklch(0.95 0.005 80);
-  --sidebar-border: oklch(0.25 0.02 260);
-  --sidebar-ring: oklch(0.68 0.18 45);
+  --sidebar: #141414;
+  --sidebar-foreground: var(--paper);
+  --sidebar-primary: var(--signal);
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #262626;
+  --sidebar-accent-foreground: var(--paper);
+  --sidebar-border: #333333;
+  --sidebar-ring: var(--signal);
 }
 
 @theme inline {
+  /* Inter Variable - La principale */
   --font-sans: var(--font-inter), system-ui, sans-serif;
-  --font-serif: var(--font-playfair), Georgia, serif;
+  /* DM Serif Display - Accents éditoriaux */
+  --font-serif: var(--font-dm-serif), Georgia, serif;
   --font-mono: 'Geist Mono', monospace;
+  
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -138,9 +150,9 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
   --radius-xl: calc(var(--radius) + 4px);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
@@ -219,11 +231,11 @@
   @apply space-y-2 list-none;
 }
 
-/* Custom animations */
+/* Swiss Style Animations - Discrete, never distracting */
 @keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -240,27 +252,12 @@
   }
 }
 
-@keyframes slide-in-right {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
 .animate-fade-up {
-  animation: fade-up 0.6s ease-out forwards;
+  animation: fade-up 0.4s ease-out forwards;
 }
 
 .animate-fade-in {
-  animation: fade-in 0.5s ease-out forwards;
-}
-
-.animate-slide-in-right {
-  animation: slide-in-right 0.5s ease-out forwards;
+  animation: fade-in 0.3s ease-out forwards;
 }
 
 /* Animation delays */
@@ -273,10 +270,31 @@
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-up,
-  .animate-fade-in,
-  .animate-slide-in-right {
+  .animate-fade-in {
     animation: none;
     opacity: 1;
     transform: none;
   }
+}
+
+/* Swiss Grid - Visible structure */
+.swiss-grid {
+  display: grid;
+  gap: 1px;
+  background-color: var(--border);
+}
+
+.swiss-grid > * {
+  background-color: var(--background);
+}
+
+/* Bento Grid */
+.bento-grid {
+  display: grid;
+  gap: 1px;
+  background-color: var(--border);
+}
+
+.bento-grid > * {
+  background-color: var(--card);
 }
