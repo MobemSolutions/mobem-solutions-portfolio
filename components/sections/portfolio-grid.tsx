@@ -141,7 +141,7 @@ export function PortfolioGrid() {
               >
                 {/* Visual area */}
                 <div className={cn(
-                  "relative aspect-[4/3] bg-gradient-to-br overflow-hidden",
+                  "relative aspect-[4/3] overflow-hidden",
                   scheme.cardGradient
                 )}>
                   {project.images?.home ? (
@@ -157,13 +157,13 @@ export function PortfolioGrid() {
                   ) : (
                     <div className="absolute inset-3 md:inset-5 rounded-lg md:rounded-xl bg-card shadow-lg overflow-hidden border border-border/40">
                       <div className="h-5 md:h-6 bg-muted/80 flex items-center px-2 gap-1 border-b border-border/30">
-                        <span className="w-1.5 h-1.5 rounded-full bg-destructive/40" />
-                        <span className="w-1.5 h-1.5 rounded-full bg-yellow-400/40" />
-                        <span className="w-1.5 h-1.5 rounded-full bg-green-400/40" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-foreground/30" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-foreground/20" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-foreground/10" />
                         <div className="flex-1 mx-2 h-1.5 rounded-full bg-muted" />
                       </div>
                       <div className="p-2 md:p-3 space-y-1.5 md:space-y-2">
-                        <div className={cn("h-10 md:h-16 rounded-lg bg-gradient-to-br", scheme.mockupBg)} />
+                        <div className={cn("h-10 md:h-16 rounded-lg", scheme.mockupBg)} />
                         <div className="h-1.5 md:h-2 rounded-full bg-muted w-3/4" />
                         <div className="h-1.5 md:h-2 rounded-full bg-muted w-1/2" />
                       </div>

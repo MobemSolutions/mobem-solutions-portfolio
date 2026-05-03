@@ -39,8 +39,9 @@ function PerformanceGauge({
   const r = 36
   const circ = 2 * Math.PI * r
   const offset = circ * (1 - score / 100)
+  // Swiss Style: Monochrome colors only
   const scoreColor =
-    score >= 90 ? color : score >= 70 ? "#F59E0B" : "#EF4444"
+    score >= 90 ? "#0D0D0D" : score >= 70 ? "#888888" : "#E63030"
 
   return (
     <div className="flex flex-col items-center gap-3">
@@ -89,18 +90,18 @@ function ProjectMockup({
       )}
       aria-label={label}
     >
-      <div className={cn("absolute inset-0 bg-gradient-to-br", scheme.heroBg)} />
+      <div className={cn("absolute inset-0", scheme.heroBg)} />
       <div className="absolute inset-3 rounded-lg bg-background/80 shadow-inner overflow-hidden">
         {/* Browser chrome */}
         <div className="h-5 bg-muted/80 flex items-center px-2 gap-1 border-b border-border/30">
-          <span className="w-1.5 h-1.5 rounded-full bg-destructive/50" />
-          <span className="w-1.5 h-1.5 rounded-full bg-yellow-400/50" />
-          <span className="w-1.5 h-1.5 rounded-full bg-green-400/50" />
+<span className="w-1.5 h-1.5 rounded-full bg-foreground/30" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-foreground/20" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-foreground/10" />
           <div className="flex-1 mx-2 h-2 rounded-full bg-muted" />
         </div>
         {/* Skeleton content */}
         <div className="p-3 space-y-2">
-          <div className={cn("rounded-md bg-gradient-to-br", scheme.mockupBg, variant === "desktop" ? "h-24" : "h-16")} />
+          <div className={cn("rounded-md", scheme.mockupBg, variant === "desktop" ? "h-24" : "h-16")} />
           <div className="h-2 rounded-full bg-muted w-3/4" />
           <div className="h-2 rounded-full bg-muted w-2/3" />
           {variant !== "detail" && (
@@ -143,7 +144,7 @@ export default async function ProjectPage({ params }: Props) {
       <main className="pt-20 lg:pt-24">
 
         {/* ── HERO ──────────────────────────────────────────────────── */}
-        <section className={cn("py-16 lg:py-20 bg-gradient-to-br", scheme.heroBg)}>
+        <section className={cn("py-16 lg:py-20", scheme.heroBg)}>
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
             {/* Breadcrumb */}
@@ -234,12 +235,12 @@ export default async function ProjectPage({ params }: Props) {
                       />
                     </div>
                   ) : (
-                    <div className={cn("aspect-[9/16] bg-gradient-to-b", scheme.heroBg)}>
+                    <div className={cn("aspect-[9/16]", scheme.heroBg)}>
                       <div className="h-3 bg-muted/80 flex items-center px-1.5 gap-0.5">
                         <div className="flex-1 h-1.5 rounded-full bg-muted" />
                       </div>
                       <div className="p-1.5 space-y-1">
-                        <div className={cn("h-8 rounded bg-gradient-to-br", scheme.mockupBg)} />
+                        <div className={cn("h-8 rounded", scheme.mockupBg)} />
                         <div className="h-1 rounded-full bg-muted w-3/4" />
                         <div className="h-1 rounded-full bg-muted w-1/2" />
                       </div>
@@ -273,7 +274,7 @@ export default async function ProjectPage({ params }: Props) {
               <div>
                 <div className="rounded-2xl border border-border bg-card p-6 sticky top-28">
                   <div className="flex items-center gap-3 mb-5 pb-5 border-b border-border">
-                    <div className={cn("w-10 h-10 rounded-xl flex items-center justify-center bg-gradient-to-br", scheme.cardGradient)}>
+                    <div className={cn("w-10 h-10 rounded-xl flex items-center justify-center", scheme.cardGradient)}>
                       <Building2 className="w-5 h-5 text-foreground/70" aria-hidden="true" />
                     </div>
                     <div>
@@ -396,7 +397,7 @@ export default async function ProjectPage({ params }: Props) {
         </section>
 
         {/* ── RÉSULTATS & PERFORMANCE ───────────────────────────────── */}
-        <section className={cn("py-20 border-b border-border bg-gradient-to-br", scheme.heroBg)}>
+        <section className={cn("py-20 border-b border-border", scheme.heroBg)}>
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mb-12">
               <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-3">
@@ -439,22 +440,22 @@ export default async function ProjectPage({ params }: Props) {
                 <PerformanceGauge
                   score={project.performance.performance}
                   label="Performance"
-                  color="#3B82F6"
+                  color="#0D0D0D"
                 />
                 <PerformanceGauge
                   score={project.performance.accessibility}
                   label="Accessibilité"
-                  color="#10B981"
+                  color="#0D0D0D"
                 />
                 <PerformanceGauge
                   score={project.performance.seo}
                   label="SEO"
-                  color="#8B5CF6"
+                  color="#0D0D0D"
                 />
                 <PerformanceGauge
                   score={project.performance.bestPractices}
                   label="Bonnes pratiques"
-                  color="#F59E0B"
+                  color="#0D0D0D"
                 />
               </div>
 

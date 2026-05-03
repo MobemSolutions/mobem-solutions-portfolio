@@ -42,7 +42,7 @@ export function NewsletterInline() {
   }
 
   return (
-    <div className="relative my-12 overflow-hidden rounded-2xl bg-gradient-to-br from-accent/90 to-accent px-8 py-10 text-white shadow-lg">
+    <div className="relative my-12 overflow-hidden rounded-sm bg-foreground px-8 py-10 text-background shadow-lg">
       {/* Decorative circles */}
       <div className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-white/10" />
       <div className="pointer-events-none absolute -bottom-8 -left-8 h-36 w-36 rounded-full bg-white/5" />

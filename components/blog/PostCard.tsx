@@ -40,8 +40,8 @@ export function PostCard({ post, featured = false }: PostCardProps) {
             unoptimized
           />
         ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-secondary flex items-center justify-center">
-            <span className="text-4xl text-accent/30 font-bold">M</span>
+          <div className="absolute inset-0 bg-secondary flex items-center justify-center">
+            <span className="text-4xl text-foreground/20 font-bold">M</span>
           </div>
         )}
         {/* Category badge overlay */}
