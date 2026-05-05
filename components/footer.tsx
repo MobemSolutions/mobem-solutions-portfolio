@@ -12,6 +12,11 @@ const navigation = {
     { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/#contact" },
   ],
+  seo: [
+    { name: "Sites par métier", href: "/metiers" },
+    { name: "Sites par ville", href: "/villes" },
+    { name: "Plan du site", href: "/plan-du-site" },
+  ],
   services: [
     { name: "Ingénierie & Développement", href: "#services" },
     { name: "Design & Expérience", href: "#services" },
@@ -62,8 +67,8 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Mobile: 3 colonnes de liens */}
-        <div className="grid grid-cols-3 gap-4 mb-6 md:hidden">
+        {/* Mobile: 4 colonnes de liens */}
+        <div className="grid grid-cols-2 gap-4 mb-6 md:hidden">
           <div>
             <h3 className="font-semibold text-foreground text-xs mb-2 uppercase tracking-wide">Navigation</h3>
             <ul className="space-y-1.5" role="list">
@@ -71,6 +76,18 @@ export function Footer() {
                 <li key={item.name}>
                   <Link href={item.href} onClick={(e) => handleNavClick(e, item.href)}
                     className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-semibold text-foreground text-xs mb-2 uppercase tracking-wide">Référencement</h3>
+            <ul className="space-y-1.5" role="list">
+              {navigation.seo.map((item) => (
+                <li key={item.name}>
+                  <Link href={item.href} className="text-xs text-muted-foreground hover:text-foreground transition-colors">
                     {item.name}
                   </Link>
                 </li>
@@ -104,8 +121,8 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Desktop: layout original 4 colonnes */}
-        <div className="hidden md:grid md:grid-cols-4 gap-8 lg:gap-12">
+        {/* Desktop: 5 colonnes */}
+        <div className="hidden md:grid md:grid-cols-5 gap-8 lg:gap-10">
           <div className="col-span-1">
             <Link href="#hero" onClick={(e) => handleNavClick(e, "#hero")} className="inline-flex items-center mb-4">
               <img src="/mobem-logo-redimension-removebg-preview.png" alt="Logo Mobem Solutions" className="h-10 w-auto object-contain" />
@@ -130,6 +147,18 @@ export function Footer() {
                 <li key={item.name}>
                   <Link href={item.href} onClick={(e) => handleNavClick(e, item.href)}
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-semibold text-foreground text-sm mb-4">Référencement</h3>
+            <ul className="space-y-3" role="list">
+              {navigation.seo.map((item) => (
+                <li key={item.name}>
+                  <Link href={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                     {item.name}
                   </Link>
                 </li>
