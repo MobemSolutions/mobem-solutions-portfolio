@@ -1,7 +1,6 @@
 "use client"
 
 import Link from "next/link"
-<<<<<<< HEAD
 import { LinkedinIcon, ArrowUpRight } from "lucide-react"
 
 const navigation = {
@@ -138,102 +137,6 @@ export function Footer() {
               SIRET: 91514447100017
             </p>
           </div>
-=======
-
-const navCabinet = [
-  { name: "Accueil", href: "/" },
-  { name: "Réalisations", href: "/realisations" },
-  { name: "Blog", href: "/blog" },
-  { name: "Contact", href: "/#contact" },
-]
-
-const navSeo = [
-  { name: "Sites par métier", href: "/metiers" },
-  { name: "Sites par ville", href: "/villes" },
-  { name: "Plan du site", href: "/plan-du-site" },
-]
-
-const navLegal = [
-  { name: "Mentions légales", href: "/mentions-legales" },
-  { name: "CGV", href: "/cgv" },
-  { name: "Confidentialité", href: "/confidentialite" },
-]
-
-export function Footer() {
-  return (
-    <footer className="bg-foreground text-background" role="contentinfo" aria-label="Pied de page">
-
-      {/* Top section */}
-      <div className="px-4 sm:px-6 lg:px-8 pt-14 sm:pt-16 lg:pt-20 pb-8 mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-0">
-
-          {/* Manifesto — big type */}
-          <div className="lg:col-span-7 lg:pr-10">
-            <h2 className="font-bold text-[clamp(44px,6.5vw,96px)] leading-[0.90] tracking-[-0.04em]">
-              Diagnostiquer<br />
-              <span className="font-serif font-normal italic tracking-[-0.02em] text-accent">avant</span><br />
-              de prescrire.
-            </h2>
-          </div>
-
-          {/* Nav columns */}
-          <div className="lg:col-span-2 flex flex-col gap-2.5">
-            <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-background/60 mb-1">
-              Cabinet
-            </span>
-            {navCabinet.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-[13px] text-background/70 hover:text-accent hover:pl-1 transition-all duration-150"
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-
-          <div className="lg:col-span-2 flex flex-col gap-2.5">
-            <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-background/60 mb-1">
-              Référencement
-            </span>
-            {navSeo.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-[13px] text-background/70 hover:text-accent hover:pl-1 transition-all duration-150"
-              >
-                {item.name}
-              </Link>
-            ))}
-            <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-background/60 mt-4 mb-1">
-              Légal
-            </span>
-            {navLegal.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-[13px] text-background/70 hover:text-accent hover:pl-1 transition-all duration-150"
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-
-          <div className="lg:col-span-1 flex flex-col gap-2.5">
-            <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-background/60 mb-1">
-              Liens
-            </span>
-            <a
-              href="https://www.linkedin.com/in/mobem-solutions-136816404/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[13px] text-background/70 hover:text-accent hover:pl-1 transition-all duration-150"
-            >
-              LinkedIn ↗
-            </a>
-          </div>
-
->>>>>>> 38f194d (maj)
         </div>
       </div>
 
