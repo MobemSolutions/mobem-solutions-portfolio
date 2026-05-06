@@ -1,10 +1,16 @@
 "use client"
 
 import { useState } from "react"
+<<<<<<< HEAD
 import { ArrowRight, Check } from "lucide-react"
+=======
+import { Check, ArrowRight } from "lucide-react"
+import { cn } from "@/lib/utils"
+>>>>>>> 38f194d (maj)
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 
+<<<<<<< HEAD
 type Offre = {
   id: string
   name: string
@@ -35,6 +41,18 @@ const offres: Offre[] = [
     price: "A partir de 1 500 €",
     priceDetail: "Tarif unique",
     highlighted: false,
+=======
+const OFFERS = [
+  {
+    code: "S1",
+    name: "Essentiel",
+    sub: "Sites en production sous 10 jours.",
+    price: "À partir de",
+    priceVal: "1 500 €",
+    priceUnit: "forfait",
+    flagship: false,
+    target: "Artisans & Indépendants",
+>>>>>>> 38f194d (maj)
     features: [
       "Site en ligne sous 10 jours",
       "100% responsive mobile",
@@ -42,15 +60,27 @@ const offres: Offre[] = [
       "Design sur-mesure",
       "Hebergement 1 an inclus",
     ],
+    proof: ["Lighthouse 90+", "Mise en ligne 10 j"],
   },
   {
+<<<<<<< HEAD
     id: "expert",
+=======
+    code: "S2",
+>>>>>>> 38f194d (maj)
     name: "Expert",
-    tagline: "Le fleuron",
+    sub: "Plateformes pensées pour convertir.",
+    price: "À partir de",
+    priceVal: "4 500 €",
+    priceUnit: "projet",
+    flagship: true,
     target: "PME & Startups",
+<<<<<<< HEAD
     price: "A partir de 4 500 €",
     priceDetail: "Cle en main",
     highlighted: true,
+=======
+>>>>>>> 38f194d (maj)
     features: [
       "Architecture multi-pages",
       "UI/UX premium",
@@ -59,15 +89,26 @@ const offres: Offre[] = [
       "SEO semantique avance",
       "Rapport mensuel",
     ],
+    proof: ["Lighthouse 96+", "WCAG AA", "Conv. ×2.4 obs."],
   },
   {
+<<<<<<< HEAD
     id: "surmesure",
+=======
+    code: "S3",
+>>>>>>> 38f194d (maj)
     name: "Sur mesure",
-    tagline: "L'unique",
-    target: "Grands projets & ETI",
+    sub: "Accompagnement long-terme, personnalisé.",
     price: "Sur devis",
+<<<<<<< HEAD
     priceDetail: "Selon perimetre",
     highlighted: false,
+=======
+    priceVal: "Custom",
+    priceUnit: "selon périmètre",
+    flagship: false,
+    target: "ETI & Grands projets",
+>>>>>>> 38f194d (maj)
     features: [
       "Architecture sur-mesure",
       "Integrations API complexes",
@@ -76,6 +117,7 @@ const offres: Offre[] = [
       "SLA personnalise",
       "Scalabilite garantie",
     ],
+<<<<<<< HEAD
   },
 ]
 
@@ -110,10 +152,14 @@ const formules: Formule[] = [
       "Tests A/B",
       "Google Ads",
     ],
+=======
+    proof: ["Roadmap trimestrielle", "WCAG AAA", "SLA 4 h"],
+>>>>>>> 38f194d (maj)
   },
 ]
 
 export function PricingSection() {
+<<<<<<< HEAD
   const [activeSection, setActiveSection] = useState<"offres" | "formules">("offres")
   const [isAnnual, setIsAnnual] = useState(false)
 
@@ -408,7 +454,127 @@ export function PricingSection() {
             parlons de votre projet
           </Link>.
         </p>
+=======
+  const [active, setActive] = useState("S2")
+
+  return (
+    <section id="prestations" className="border-t border-border" aria-labelledby="pricing-heading">
+
+      {/* Section head */}
+      <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-5 border-b border-border">
+        <div className="flex items-baseline gap-5">
+          <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">// 03</span>
+          <h2 id="pricing-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
+            Services — Le Bento
+          </h2>
+        </div>
+        <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
+          Trois offres · Une promesse mesurable
+        </span>
+>>>>>>> 38f194d (maj)
       </div>
+
+      {/* Mobile tab selector */}
+      <div className="lg:hidden flex border-b border-border">
+        {OFFERS.map((o) => (
+          <button
+            key={o.code}
+            onClick={() => setActive(o.code)}
+            className={cn(
+              "flex-1 px-4 py-3 font-mono text-[11px] uppercase tracking-[0.06em] transition-colors border-r border-border last:border-r-0",
+              active === o.code
+                ? "bg-foreground text-background"
+                : "text-muted-foreground hover:bg-secondary"
+            )}
+          >
+            {o.code} · {o.name}
+          </button>
+        ))}
+      </div>
+
+      {/* Cards — desktop: 3 cols / mobile: active one */}
+      <div className="hidden lg:grid lg:grid-cols-3">
+        {OFFERS.map((o, i) => <OfferCard key={o.code} offer={o} idx={i} />)}
+      </div>
+      <div className="lg:hidden">
+        {OFFERS.filter((o) => o.code === active).map((o, i) => (
+          <OfferCard key={o.code} offer={o} idx={i} />
+        ))}
+      </div>
+
+      <p className="px-4 sm:px-6 lg:px-8 py-4 border-t border-border font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
+        Tous les tarifs sont HT ·{" "}
+        <Link href="#contact" className="text-accent hover:underline">
+          Devis sur-mesure disponible
+        </Link>
+      </p>
     </section>
+  )
+}
+
+function OfferCard({ offer, idx }: { offer: typeof OFFERS[number]; idx: number }) {
+  return (
+    <div
+      className={cn(
+        "group relative flex flex-col p-6 lg:p-8 min-h-[520px] transition-colors",
+        offer.flagship
+          ? "bg-accent text-accent-foreground hover:bg-foreground hover:text-background"
+          : "bento-hover",
+        idx < 2 && "lg:border-r lg:border-border"
+      )}
+    >
+      {/* Hover badge */}
+      <span className="absolute top-[4.5rem] left-6 font-mono text-[9.5px] uppercase tracking-[0.06em] px-2 py-1 border border-current opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 delay-75 pointer-events-none">
+        Offre {offer.code}
+      </span>
+
+      <div className="flex justify-between items-start mb-8">
+        <span className="font-mono text-[11px] uppercase tracking-[0.06em] opacity-70">// {offer.code}</span>
+        <ArrowRight className="w-5 h-5 opacity-70 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden="true" />
+      </div>
+
+      <div className="mb-6">
+        <div className="text-[40px] sm:text-[48px] font-bold tracking-[-0.035em] leading-none mb-2">{offer.name}</div>
+        <div className="text-[15px] opacity-80 leading-[1.4]">{offer.sub}</div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.06em] opacity-60 mt-2">{offer.target}</div>
+      </div>
+
+      <ul className="space-y-2.5 mb-6 flex-1" role="list">
+        {offer.features.map((f) => (
+          <li key={f} className="flex items-start gap-3 text-[13.5px] leading-[1.45]">
+            <span className="mt-[9px] w-2.5 h-px bg-current opacity-60 flex-shrink-0" aria-hidden="true" />
+            <span>{f}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div className="flex flex-wrap gap-1.5 mb-5">
+        {offer.proof.map((p) => (
+          <span
+            key={p}
+            className="font-mono text-[9.5px] uppercase tracking-[0.06em] px-2 py-1 border border-current opacity-70"
+          >
+            {p}
+          </span>
+        ))}
+      </div>
+
+      <div className="pt-4 border-t border-current/20 flex flex-col gap-1">
+        <div className="font-mono text-[10px] uppercase tracking-[0.06em] opacity-60">{offer.price}</div>
+        <div className="text-[26px] font-bold tracking-[-0.02em] leading-none">{offer.priceVal}</div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.06em] opacity-60">/ {offer.priceUnit}</div>
+        <Link
+          href="#contact"
+          className={cn(
+            "mt-4 inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-colors self-start border",
+            offer.flagship
+              ? "border-accent-foreground bg-accent-foreground text-accent hover:bg-transparent hover:text-accent-foreground"
+              : "border-current hover:bg-foreground hover:text-background hover:border-foreground"
+          )}
+        >
+          Démarrer <ArrowRight className="w-4 h-4" aria-hidden="true" />
+        </Link>
+      </div>
+    </div>
   )
 }

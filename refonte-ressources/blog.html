@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blog — Mobem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .blog-hero-grid { display: grid; grid-template-columns: 7fr 5fr; border-bottom: 1px solid var(--line); }
+  .blog-hero-grid > div { padding: 32px; }
+  .blog-hero-grid > div + div { border-left: 1px solid var(--line); }
+  .featured { display: block; color: var(--fg); }
+  .featured .ph { aspect-ratio: 16/10; margin-bottom: 24px; }
+  .featured h2 { margin: 12px 0; font-size: clamp(36px, 4vw, 56px); font-weight: 700; letter-spacing: -0.025em; line-height: 1; }
+  .featured p { margin: 12px 0 0; font-size: 16px; line-height: 1.55; color: var(--muted); }
+
+  .article-list { display: flex; flex-direction: column; }
+  .article-row { display: grid; grid-template-columns: 80px 1fr 140px 60px; align-items: center; gap: 24px; padding: 24px 32px; border-bottom: 1px solid var(--line); color: var(--fg); transition: background 200ms ease; }
+  .article-row:hover { background: rgba(230, 48, 48, 0.04); }
+  .article-row:hover .arr { transform: translate(6px, -6px); color: var(--signal); }
+  .article-row .arr { transition: transform 280ms ease, color 200ms ease; }
+  .article-row h3 { margin: 0 0 6px; font-size: 22px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; }
+  .article-row p { margin: 0; font-size: 13px; color: var(--muted); }
+  .cat-tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--signal); }
+
+  .grid-articles { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .grid-card { padding: 32px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 16px; color: var(--fg); }
+  .grid-card .ph { aspect-ratio: 4/3; }
+  .grid-card h3 { margin: 8px 0 0; font-size: 22px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
+  .grid-card p { margin: 0; font-size: 13px; line-height: 1.55; color: var(--muted); }
+  .grid-card .meta { display: flex; justify-content: space-between; align-items: baseline; }
+
+  .filters { display: flex; gap: 0; padding: 0 32px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .filter-btn { padding: 14px 18px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border: 0; background: transparent; cursor: pointer; border-right: 1px solid var(--line); transition: all 180ms ease; }
+  .filter-btn:hover, .filter-btn.is-active { color: var(--fg); }
+  .filter-btn.is-active { border-bottom: 2px solid var(--signal); margin-bottom: -1px; color: var(--fg); }
+
+  @media (max-width: 900px) {
+    .blog-hero-grid { grid-template-columns: 1fr; }
+    .blog-hero-grid > div + div { border-left: 0; border-top: 1px solid var(--line); }
+    .grid-articles { grid-template-columns: 1fr; }
+    .article-row { grid-template-columns: 1fr; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<section class="pg-hero">
+  <div class="pg-crumbs">
+    <a href="Mobem.html">Accueil</a>
+    <span>/</span>
+    <span style="color: var(--fg);">Blog</span>
+  </div>
+  <h1 class="pg-h1">Le journal du <em>cabinet</em>.</h1>
+  <p class="pg-lede">Diagnostics terrain, retours d'expérience, méthodes éprouvées. <strong>Sans bruit, sans hype</strong> — uniquement ce qui sert vos décisions digitales.</p>
+</section>
+
+<div class="filters">
+  <button class="filter-btn is-active">Tous · 24</button>
+  <button class="filter-btn">Stratégie · 7</button>
+  <button class="filter-btn">SEO local · 6</button>
+  <button class="filter-btn">Performance · 4</button>
+  <button class="filter-btn">Design · 4</button>
+  <button class="filter-btn">Conseil · 3</button>
+</div>
+
+<div class="section-head">
+  <div class="label">
+    <span class="num">// 01</span>
+    <h2>À la une</h2>
+  </div>
+  <span class="num">Édition 04 · 2026</span>
+</div>
+
+<div class="blog-hero-grid">
+  <a href="article.html" class="featured">
+    <div class="ph">[ image · article principal ]</div>
+    <span class="cat-tag">Stratégie · 12 min</span>
+    <h2>Pourquoi 78% des refontes ratent leur cible business — et comment ne pas en faire partie.</h2>
+    <p>Trois ans de diagnostics terrain dans des PME de tous secteurs. Voici les schémas récurrents que nous voyons, et la méthode pour les éviter dès le brief.</p>
+    <div style="display: flex; justify-content: space-between; margin-top: 20px;" class="mono">
+      <span style="color: var(--muted);">Par L. Mobem · 02 mai 2026</span>
+      <span style="color: var(--signal);">Lire l'article →</span>
+    </div>
+  </a>
+
+  <div style="display: flex; flex-direction: column;">
+    <div class="article-list" id="topList"></div>
+  </div>
+</div>
+
+<div class="section-head">
+  <div class="label">
+    <span class="num">// 02</span>
+    <h2>Tous les articles</h2>
+  </div>
+  <span class="num">24 articles publiés</span>
+</div>
+
+<div class="grid-articles" id="gridArticles"></div>
+
+<section style="padding: 96px 32px; border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">
+  <div>
+    <div class="mono" style="color: var(--muted); margin-bottom: 16px;">// Newsletter</div>
+    <h2 style="margin: 0 0 16px; font-size: clamp(36px, 4vw, 64px); font-weight: 800; letter-spacing: -0.03em; line-height: 0.95;">
+      Le bulletin <em style="font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--signal);">mensuel.</em>
+    </h2>
+    <p style="margin: 0; font-size: 16px; line-height: 1.55; color: var(--muted); max-width: 480px;">Un mail par mois. Trois constats terrain, deux outils que nous utilisons, une question pour vous. Aucun spam.</p>
+  </div>
+  <div style="display: flex; gap: 0; border: 1px solid var(--line); padding: 4px;">
+    <input type="email" placeholder="vous@entreprise.fr" style="flex: 1; border: 0; outline: 0; padding: 16px; background: transparent; color: var(--fg); font-family: var(--sans); font-size: 15px;">
+    <button class="btn btn-signal">S'abonner
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17 L17 7"/><path d="M9 7 H17 V15"/></svg>
+    </button>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="site.js"></script>
+<script>
+  const articles = [
+    { idx: '02', cat: 'SEO local', mins: 8, title: 'Le SEO local en 2026 : comment passer #1 sur Google dans votre ville en 90 jours', desc: 'Méthode éprouvée sur 47 clients. Fiche Google, citations, schemas, contenus localisés.', author: 'L. Mobem', date: '28 avril 2026' },
+    { idx: '03', cat: 'Performance', mins: 6, title: 'LCP sous 1.5s : ce que personne ne vous dit sur les Core Web Vitals', desc: 'Au-delà du score Lighthouse, les patterns réels qui font la différence en production.', author: 'A. Dumas', date: '21 avril 2026' },
+    { idx: '04', cat: 'Design', mins: 9, title: 'Design system pour PME : pourquoi commencer petit (et comment le faire)', desc: 'Le piège des design systems qui finissent jamais utilisés. Une approche minimaliste qui fonctionne.', author: 'M. Vrain', date: '14 avril 2026' },
+    { idx: '05', cat: 'Conseil', mins: 5, title: 'Pourquoi nous refusons 60% des projets entrants', desc: 'Notre cadre de qualification, et pourquoi dire non est le meilleur service que nous rendons.', author: 'L. Mobem', date: '07 avril 2026' },
+    { idx: '06', cat: 'SEO local', mins: 7, title: 'Pages métier × ville : la stratégie SEO programmatique qui ne ressemble pas à du spam', desc: 'Comment publier 300 pages utiles en 30 jours sans pénalité Google.', author: 'A. Dumas', date: '02 avril 2026' },
+    { idx: '07', cat: 'Stratégie', mins: 11, title: 'Refonte ou amélioration continue ? Le faux dilemme qui coûte cher', desc: 'Trois critères pour trancher, et le coût caché de chaque option.', author: 'L. Mobem', date: '24 mars 2026' },
+    { idx: '08', cat: 'Design', mins: 6, title: 'Typographie web : 5 règles que nous appliquons sur chaque projet', desc: 'Hiérarchie, contraste, rythme. Des principes simples, des résultats mesurables.', author: 'M. Vrain', date: '17 mars 2026' },
+    { idx: '09', cat: 'Performance', mins: 8, title: 'Hébergement web : quand quitter son hébergeur classique pour Vercel ou Cloudflare', desc: 'Comparatif honnête, coûts réels, et le seuil critique où la migration devient rentable.', author: 'A. Dumas', date: '10 mars 2026' },
+    { idx: '10', cat: 'Conseil', mins: 4, title: 'Le brief en 90 minutes : notre format de diagnostic gratuit', desc: 'Ce que nous demandons, ce que nous écoutons, ce que nous livrons à la fin de l\'appel.', author: 'L. Mobem', date: '03 mars 2026' },
+    { idx: '11', cat: 'Stratégie', mins: 10, title: 'CRM, CMS, ERP : démêler ce dont une PME a vraiment besoin', desc: 'Cartographie des outils, intégrations, et pourquoi le sur-équipement tue l\'adoption.', author: 'L. Mobem', date: '24 février 2026' },
+    { idx: '12', cat: 'SEO local', mins: 6, title: 'Avis Google : comment passer de 12 à 412 avis (sans tricher)', desc: 'Cas Boucherie Marchand. Process réel, scripts d\'envoi, taux de transformation.', author: 'A. Dumas', date: '17 février 2026' },
+    { idx: '13', cat: 'Design', mins: 7, title: 'Accessibilité WCAG AAA : ce que nous avons appris sur 6 sites', desc: 'Au-delà du checklist, l\'impact business inattendu d\'un site accessible.', author: 'M. Vrain', date: '10 février 2026' },
+  ];
+
+  function row(a) {
+    return `
+      <a href="article.html" class="article-row">
+        <span class="mono" style="color: var(--muted);">${a.idx}</span>
+        <div>
+          <span class="cat-tag">${a.cat} · ${a.mins} min</span>
+          <h3>${a.title}</h3>
+          <p>${a.author} · ${a.date}</p>
+        </div>
+        <span class="mono" style="color: var(--muted);">${a.date.split(' ').slice(0,2).join(' ')}</span>
+        <div style="display: flex; justify-content: flex-end;">
+          <svg class="arr" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17 L17 7"/><path d="M9 7 H17 V15"/></svg>
+        </div>
+      </a>
+    `;
+  }
+
+  function card(a) {
+    return `
+      <a href="article.html" class="grid-card">
+        <div class="ph">[ image · ${a.idx} ]</div>
+        <div class="meta">
+          <span class="cat-tag">${a.cat}</span>
+          <span class="mono" style="color: var(--muted);">${a.mins} min</span>
+        </div>
+        <h3>${a.title}</h3>
+        <p>${a.desc}</p>
+        <div class="mono" style="color: var(--muted); margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); display: flex; justify-content: space-between;">
+          <span>${a.author}</span><span>${a.date}</span>
+        </div>
+      </a>
+    `;
+  }
+
+  document.getElementById('topList').innerHTML = articles.slice(0, 4).map(row).join('');
+  document.getElementById('gridArticles').innerHTML = articles.map(card).join('');
+
+  MobemSite.init('Blog');
+</script>
+</body>
+</html>

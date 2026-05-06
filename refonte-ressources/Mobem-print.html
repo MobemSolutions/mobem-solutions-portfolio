@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mobem — Cabinet de conseil digital</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink: #0D0D0D;
+    --paper: #F7F7F5;
+    --signal: #E63030;
+    --gray: #888888;
+    --rule: #E2E2E2;
+
+    --bg: var(--paper);
+    --fg: var(--ink);
+    --muted: var(--gray);
+    --line: var(--rule);
+
+    --col: minmax(0, 1fr);
+    --gutter: 24px;
+    --pad: 32px;
+
+    --serif: "DM Serif Display", "Times New Roman", serif;
+    --sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  }
+
+  [data-theme="dark"] {
+    --bg: var(--ink);
+    --fg: var(--paper);
+    --muted: #888888;
+    --line: #1f1f1f;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--sans);
+    font-feature-settings: "ss01", "cv11";
+    background: var(--bg);
+    color: var(--fg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background 240ms ease, color 240ms ease;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--signal); color: var(--paper); }
+
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+
+  /* Reusable type */
+  .mono {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .serif { font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; }
+
+  /* Grid container */
+  .grid12 {
+    display: grid;
+    grid-template-columns: repeat(12, var(--col));
+    gap: 0;
+  }
+
+  /* Site frame */
+  .frame {
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    margin: 0 24px;
+  }
+
+  /* Selection rings on the bento */
+  .cell {
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+  .cell:last-child { border-right: 0; }
+
+  /* Reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 700ms cubic-bezier(.2,.7,.2,1), transform 700ms cubic-bezier(.2,.7,.2,1);
+    transition-delay: var(--rd, 0ms);
+  }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* Custom cursor */
+  .cursor {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid var(--fg);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 200ms ease, height 200ms ease, background 200ms ease, border-color 200ms ease, opacity 200ms ease;
+    mix-blend-mode: difference;
+    opacity: 0;
+  }
+  .cursor[data-mode="hover"] {
+    width: 64px; height: 64px;
+    background: var(--signal);
+    border-color: var(--signal);
+  }
+  .cursor[data-mode="text"] {
+    width: 4px; height: 22px; border-radius: 0;
+    background: var(--fg);
+  }
+  .cursor-label {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(16px, 16px);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 4px 8px;
+    opacity: 0;
+    transition: opacity 200ms ease;
+  }
+
+  /* No-cursor on touch */
+  @media (hover: none) {
+    .cursor, .cursor-label { display: none; }
+  }
+
+  /* Marquee */
+  .marquee {
+    display: flex;
+    overflow: hidden;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--bg);
+  }
+  .marquee-track {
+    display: flex;
+    animation: scroll 60s linear infinite;
+    white-space: nowrap;
+    will-change: transform;
+  }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  .marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 32px;
+    padding: 22px 32px;
+    font-family: var(--serif);
+    font-size: 64px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .marquee-item .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--signal);
+    flex-shrink: 0;
+  }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 22px;
+    border: 1px solid var(--fg);
+    background: var(--fg);
+    color: var(--bg);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: transform 240ms ease, background 200ms ease, color 200ms ease;
+    cursor: pointer;
+  }
+  .btn:hover { background: var(--signal); border-color: var(--signal); color: var(--paper); transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--fg);
+  }
+  .btn-ghost:hover { background: var(--fg); color: var(--bg); }
+  .btn-signal {
+    background: var(--signal);
+    border-color: var(--signal);
+    color: var(--paper);
+  }
+  .btn-signal:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+
+  /* Tags / chips */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .chip .sig-dot { width: 6px; height: 6px; background: var(--signal); border-radius: 50%; }
+
+  /* Big number */
+  .bignum {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: clamp(56px, 9vw, 132px);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    font-feature-settings: "tnum" 1;
+  }
+
+  /* Hide scrollbar nicely on inner scrollers */
+  .no-scroll::-webkit-scrollbar { display: none; }
+
+  /* Selection caret on hero */
+  .caret {
+    display: inline-block;
+    width: 0.06em;
+    height: 0.85em;
+    background: var(--signal);
+    margin-left: 0.05em;
+    vertical-align: -0.08em;
+    animation: blink 1.05s steps(2) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* placeholder image (subtle stripes + label) */
+  .ph {
+    background:
+      repeating-linear-gradient(135deg, var(--line) 0 1px, transparent 1px 14px),
+      var(--bg);
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  /* Underline link */
+  .ul {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 100% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 320ms ease;
+  }
+  .ul:hover { background-size: 0% 1px; background-position: 100% 100%; }
+
+  /* Bento cell hover */
+  .bento-cell {
+    transition: background 240ms ease, color 240ms ease;
+  }
+  .bento-cell:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  [data-theme="dark"] .bento-cell:hover {
+    background: var(--paper);
+    color: var(--ink);
+  }
+  .bento-cell:hover .arrow {
+    transform: translate(6px, -6px);
+    color: var(--signal);
+  }
+  .bento-cell .arrow { transition: transform 280ms ease, color 200ms ease; }
+
+  /* Signal cell — special offer (always red) */
+  .bento-cell.flagship {
+    background: var(--signal);
+    color: var(--paper);
+  }
+  .bento-cell.flagship:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  /* Splittable rules in headers */
+  .row-rule {
+    border-top: 1px solid var(--line);
+  }
+
+  /* spinner-ish dot pattern divider (subtle) */
+  .dotrule {
+    height: 12px;
+    background-image: radial-gradient(circle, var(--muted) 0.5px, transparent 0.7px);
+    background-size: 8px 8px;
+    background-position: center;
+    opacity: 0.35;
+  }
+
+  /* Section header */
+  .section-head {
+    padding: 24px 32px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .section-head .label {
+    display: flex; gap: 24px; align-items: baseline;
+  }
+  .section-head .num {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .section-head h2 {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  /* Form */
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .field label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .field input, .field textarea {
+    font: inherit;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    color: var(--fg);
+    font-size: 18px;
+    padding: 4px 0;
+    resize: none;
+    font-family: var(--sans);
+  }
+  .field input::placeholder, .field textarea::placeholder { color: var(--muted); opacity: 0.6; }
+
+  /* Tooltip dot */
+  .liveDot {
+    width: 8px; height: 8px;
+    background: var(--signal);
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(230, 48, 48, .55);
+    animation: pulse 2s infinite;
+    display: inline-block;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(230, 48, 48, .55); }
+    70%  { box-shadow: 0 0 0 10px rgba(230, 48, 48, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(230, 48, 48, 0); }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0ms !important; transition-duration: 0ms !important; }
+  }
+
+  /* Print */
+  @media print {
+    @page { size: A3 portrait; margin: 0.6cm; }
+    html, body {
+      background: var(--paper) !important;
+      color: var(--ink) !important;
+      overflow: visible !important;
+    }
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    * {
+      animation: none !important;
+      transition: none !important;
+    }
+    .reveal { opacity: 1 !important; transform: none !important; }
+    /* hide cursor + tweaks panel + sticky nav effects */
+    .cursor, .cursor-label, .twk-panel, .twk-fab { display: none !important; }
+    /* unstick nav so it doesn't repeat */
+    header { position: static !important; }
+    /* page breaks between major sections */
+    section { break-inside: avoid-page; page-break-inside: avoid; }
+    section + section { break-before: page; page-break-before: always; }
+    footer { break-before: page; page-break-before: always; }
+    .marquee { break-inside: avoid; }
+    /* safer text wrap */
+    h1, h2, h3 { break-after: avoid; page-break-after: avoid; }
+    /* stop hover-only color flips */
+    .bento-cell:hover { background: inherit !important; color: inherit !important; }
+    /* keep frame borders subtle */
+    .frame { margin: 0 !important; border: 0 !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Scroll-progress + custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-label" id="cursorLabel"></div>
+
+<div id="root"></div>
+
+<!-- React + Babel -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<!-- Tweakable defaults -->
+<script>
+  window.TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "theme": "light",
+    "withImages": true,
+    "heroVariant": "stack",
+    "bentoDensity": "comfortable"
+  }/*EDITMODE-END*/;
+</script>
+
+<!-- Tweaks shell -->
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+
+<!-- App parts -->
+<script type="text/babel" src="parts/shared.jsx"></script>
+<script type="text/babel" src="parts/nav.jsx"></script>
+<script type="text/babel" src="parts/hero.jsx"></script>
+<script type="text/babel" src="parts/marquee.jsx"></script>
+<script type="text/babel" src="parts/bento.jsx"></script>
+<script type="text/babel" src="parts/method.jsx"></script>
+<script type="text/babel" src="parts/proof.jsx"></script>
+<script type="text/babel" src="parts/work.jsx"></script>
+<script type="text/babel" src="parts/contact.jsx"></script>
+<script type="text/babel" src="parts/footer.jsx"></script>
+<script type="text/babel" src="app.jsx"></script>
+
+<script type="text/babel">
+  // Auto-print: wait for fonts + React render, then print.
+  (async () => {
+    try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch (e) {}
+    // Wait for the React tree to mount (root has children)
+    const root = document.getElementById('root');
+    const waitForRoot = new Promise(resolve => {
+      if (root && root.children.length > 0) return resolve();
+      const obs = new MutationObserver(() => {
+        if (root.children.length > 0) { obs.disconnect(); resolve(); }
+      });
+      obs.observe(root, { childList: true, subtree: true });
+      setTimeout(() => { obs.disconnect(); resolve(); }, 4000);
+    });
+    await waitForRoot;
+    // Force-reveal anything that was waiting on intersection
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+    // Settle delay for layout
+    await new Promise(r => setTimeout(r, 800));
+    window.print();
+  })();
+</script>
+
+</body>
+</html>

@@ -1,13 +1,26 @@
-import { ArrowRight, ArrowUpRight } from "lucide-react"
-import Image from "next/image"
+"use client"
+
+import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
+<<<<<<< HEAD
 import { projects, COLOR_SCHEMES } from "@/lib/projects"
+=======
+import { projects } from "@/lib/projects"
+>>>>>>> 38f194d (maj)
 
-const teaserProjects = projects.filter((p) => p.featured).slice(0, 3)
+const teaserProjects = projects.filter((p) => p.featured).slice(0, 4)
+
+const HOVER_COLORS = [
+  "bg-accent",
+  "bg-[#00C9A7]",
+  "bg-[#A78BFA]",
+  "bg-accent/70",
+]
 
 export function PortfolioTeaser() {
   return (
+<<<<<<< HEAD
     <section
       id="realisations"
       className="py-20 lg:py-32 bg-secondary/30"
@@ -32,9 +45,50 @@ export function PortfolioTeaser() {
             <p className="text-base text-muted-foreground max-w-sm lg:text-right">
               Architectures haute-performance et solutions metier sur mesure.
             </p>
-          </div>
-        </div>
+=======
+    <section id="realisations" className="border-t border-border" aria-labelledby="portfolio-teaser-heading">
 
+      {/* Section head */}
+      <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-5 border-b border-border">
+        <div className="flex items-baseline gap-5">
+          <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">// 04</span>
+          <h2 id="portfolio-teaser-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
+            Réalisations
+          </h2>
+        </div>
+        <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
+          Sélection — 2025 / 2026
+        </span>
+      </div>
+
+      {/* Project rows */}
+      {teaserProjects.map((project, i) => (
+        <Link
+          key={project.id}
+          href={`/realisations/${project.slug}`}
+          aria-label={`Voir le projet ${project.title}`}
+          className="group relative flex items-center gap-4 lg:grid lg:grid-cols-12 px-4 sm:px-6 lg:px-8 py-7 lg:py-9 border-b border-border overflow-hidden bento-hover"
+        >
+          {/* Hover circle */}
+          <div
+            className={cn(
+              "absolute right-16 lg:right-24 top-1/2 -translate-y-1/2 w-20 h-20 lg:w-28 lg:h-28 rounded-full pointer-events-none",
+              "opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500 ease-out",
+              HOVER_COLORS[i % HOVER_COLORS.length]
+            )}
+            aria-hidden="true"
+          />
+
+          <span className="shrink-0 lg:col-span-1 font-mono text-[11px] text-muted-foreground transition-colors">
+            0{i + 1}
+          </span>
+
+          <div className="flex-1 lg:col-span-5 text-[24px] sm:text-[30px] lg:text-[36px] font-bold tracking-[-0.025em] leading-none">
+            {project.client.name}
+>>>>>>> 38f194d (maj)
+          </div>
+
+<<<<<<< HEAD
         {/* Projects Grid - Swiss bento */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
           {teaserProjects.map((project) => {
@@ -135,6 +189,43 @@ export function PortfolioTeaser() {
             Parlons de votre projet
           </Link>
         </div>
+=======
+          <div className="hidden lg:block lg:col-span-2 font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground transition-colors">
+            {project.client.sector}
+          </div>
+
+          <div className="hidden lg:block lg:col-span-2 text-[13px] text-muted-foreground transition-colors">
+            {project.tags[0]}
+          </div>
+
+          <div className="hidden lg:flex lg:col-span-1 items-center">
+            <span className="text-[13px] font-semibold text-accent">
+              {project.heroMetric}
+            </span>
+          </div>
+
+          <div className="shrink-0 lg:col-span-1 flex justify-end">
+            <ArrowRight
+              className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+              aria-hidden="true"
+            />
+          </div>
+        </Link>
+      ))}
+
+      {/* Footer */}
+      <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-5">
+        <Link
+          href="/realisations"
+          className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+        >
+          Toutes les réalisations
+          <ArrowRight className="w-4 h-4" aria-hidden="true" />
+        </Link>
+        <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
+          {projects.filter((p) => p.featured).length} projets
+        </span>
+>>>>>>> 38f194d (maj)
       </div>
     </section>
   )

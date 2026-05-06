@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sites par métier — Mobem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .cat-section { border-top: 1px solid var(--line); }
+  .cat-head { padding: 48px 32px 24px; display: flex; align-items: baseline; gap: 16px; }
+  .cat-head h2 { margin: 0; font-size: clamp(36px, 4vw, 56px); font-weight: 800; letter-spacing: -0.03em; }
+  .cat-head .count { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .metier-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+  .metier-card { padding: 28px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 14px; min-height: 260px; }
+  .metier-card h3 { margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+  .metier-card p { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--muted); flex: 1; }
+  .metier-card .villes { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .metier-card .v-tag { display: inline-block; padding: 4px 9px; border: 1px solid var(--line); font-size: 10px; color: var(--signal); font-family: var(--mono); letter-spacing: 0.04em; text-transform: uppercase; transition: all 180ms ease; white-space: nowrap; }
+  .metier-card .v-tag:hover { border-color: var(--signal); background: var(--signal); color: var(--paper); }
+  .metier-card .v-tag.muted { color: var(--muted); }
+  @media (max-width: 900px) { .metier-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<section class="pg-hero">
+  <div class="pg-crumbs">
+    <a href="Mobem.html">Accueil</a><span>/</span><span style="color: var(--fg);">Sites par métier</span>
+  </div>
+  <h1 class="pg-h1">Création de site<br/>par <em>métier</em>.</h1>
+  <p class="pg-lede"><strong>42 métiers couverts</strong> partout en France. Chaque site inclut une optimisation SEO locale pour dominer Google dans votre ville.</p>
+</section>
+
+<div id="catalog"></div>
+
+<section style="padding: 96px 32px; border-top: 1px solid var(--line); text-align: center;">
+  <div class="mono" style="color: var(--muted); margin-bottom: 16px;">// Votre métier n'est pas listé ?</div>
+  <h2 style="margin: 0 auto 24px; max-width: 800px; font-size: clamp(36px, 4.5vw, 64px); font-weight: 800; letter-spacing: -0.03em; line-height: 0.95;">
+    Nous adaptons à <em style="font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--signal);">tous les métiers</em>.
+  </h2>
+  <a href="Mobem.html#contact" class="btn btn-signal" style="margin-top: 8px;">Parler de mon projet
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17 L17 7"/><path d="M9 7 H17 V15"/></svg>
+  </a>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="site.js"></script>
+<script>
+  const villesTop = ['Paris', 'Lyon', 'Grenoble', 'Clermont-Ferrand', 'Saint-Étienne', 'Marseille', 'Nice', 'Toulon'];
+  const cat = [
+    ['Bâtiment & Travaux', [
+      ['Plombier', 'Captez les demandes d\'urgence et de devis dans votre zone d\'intervention. Pages SEO ciblées par prestation.'],
+      ['Électricien', 'Apparaissez en premier pour rénovation électrique, installation, dépannage. Demandes qualifiées 24/7.'],
+      ['Paysagiste', 'Galerie de réalisations, devis en ligne, prise de RDV. Idéal pour propriétaires premium en recherche.'],
+      ['Maçon', 'Mettez en avant vos chantiers avec photos avant/après. Captation locale par ville et prestation.'],
+      ['Carreleur', 'Site portfolio + devis express. Mise en avant des matériaux et finitions premium.'],
+      ['Peintre en bâtiment', 'Site essentiel + galerie chantiers. Devis express pour particuliers et syndics.'],
+      ['Couvreur', 'Captez les urgences toiture et les ravalements. Référencement local sur 30 km autour de votre base.'],
+      ['Menuisier', 'Présentez vos créations sur mesure. Espace devis avec photos de votre atelier.'],
+      ['Plaquiste', 'Site simple, photos chantiers, devis rapide. SEO local sur les communes que vous couvrez.'],
+      ['Chauffagiste', 'Interventions urgentes + entretien annuel. Système de prise de RDV intégré.'],
+      ['Serrurier', 'Site adapté urgences 24/7. Numéro mis en avant, géolocalisation des interventions.'],
+    ]],
+    ['Santé & Bien-être', [
+      ['Ostéopathe', 'Pages SEO ciblées par symptôme. Intégration Doctolib, blog conseils, agenda toujours plein.'],
+      ['Kinésithérapeute', 'Présentation des spécialités, équipe, plateau technique. Prise de RDV simple et conforme RGPD.'],
+      ['Psychologue', 'Site sobre et rassurant. Présentation approche, tarifs, prise de contact discrète.'],
+      ['Diététicien', 'Programme nutritionnel en ligne, suivi patient, témoignages. Conversion vers consultation.'],
+      ['Dentiste', 'Présentation cabinet, équipe, équipements. Urgences + prise de RDV + paiement échelonné.'],
+      ['Sage-femme', 'Présentation accompagnement, ateliers, tarifs. Espace ressources futures mamans.'],
+    ]],
+    ['Beauté', [
+      ['Salon de coiffure', 'Réservation Planity intégrée, galerie Instagram, équipe. Identité forte et conversion mobile.'],
+      ['Esthéticienne', 'Carte des soins, réservation en ligne, espace fidélité. Idéal pour cabinet à domicile ou en institut.'],
+      ['Barbier', 'Réservation rapide, ambiance, équipe. Pensé mobile-first pour la cible 25-45 ans.'],
+      ['Manucure', 'Galerie inspirations, prise de RDV, fidélité. Très visuel, optimisé Instagram.'],
+      ['Spa', 'Carte des prestations, packages cadeau, réservation cabines. Identité haut de gamme.'],
+    ]],
+    ['Mobilité & Transport', [
+      ['Auto-école', 'Réservation code en ligne, paiement échelonné, suivi élève. Captation locale forte.'],
+      ['Garage automobile', 'Devis en ligne, RDV entretien, urgences mécanique. SEO sur marques et modèles.'],
+      ['Taxi VTC', 'Réservation simple, tarifs transparents, course longue distance. Mobile-first absolu.'],
+    ]],
+    ['Sport & Loisirs', [
+      ['Coach sportif', 'Programmes, témoignages, transformation clients. Conversion vers séance d\'essai.'],
+      ['Salle de sport', 'Inscription en ligne, planning cours collectifs, espace adhérent.'],
+      ['École de danse', 'Inscription par cours, calendrier galas, photos studios. Captation rentrée septembre.'],
+      ['École de musique', 'Inscription instruments, professeurs, événements. Espace parents adhérents.'],
+      ['Bowling', 'Réservation pistes, anniversaires, soirées. Animation visuelle forte.'],
+    ]],
+    ['Restauration & Commerce', [
+      ['Restaurant', 'Réservation en ligne, carte digitale QR, photos métier. Présence Google maximale.'],
+      ['Boulangerie', 'Click & collect, carte des produits, ouvertures. Fidélisation locale renforcée.'],
+      ['Épicerie fine', 'E-commerce ou vitrine. Mise en avant des producteurs et histoires.'],
+      ['Caviste', 'Catalogue par appellation, dégustations, événements. SEO local et niche.'],
+      ['Traiteur', 'Devis événementiel, prestations, mariages. Galerie buffet et témoignages.'],
+    ]],
+    ['Juridique & Finance', [
+      ['Avocat', 'Présentation cabinet, expertises, équipe. Prise de RDV et paiement honoraires intégrés.'],
+      ['Comptable', 'Présentation services, équipe, tarifs forfaitaires. Captation TPE/PME locales.'],
+      ['Conseiller financier', 'Présentation approche patrimoniale, simulateurs, prise de RDV qualifié.'],
+      ['Notaire', 'Présentation office, équipe, démarches. Espace ressources et formulaires.'],
+      ['Huissier', 'Services, urgences, prise de RDV. Site institutionnel sobre et conforme.'],
+    ]],
+  ];
+
+  function tagsRow(extra = 0) {
+    const v = villesTop.slice(0, 8).map(x => `<a href="#" class="v-tag">${x}</a>`).join('');
+    return v + `<span class="v-tag muted">+${22 + extra} villes</span>`;
+  }
+
+  document.getElementById('catalog').innerHTML = cat.map(([catName, items]) => `
+    <section class="cat-section">
+      <div class="cat-head">
+        <h2>${catName}</h2>
+        <span class="count">${items.length} métiers</span>
+      </div>
+      <div class="metier-grid">
+        ${items.map(([n, d]) => `
+          <a href="metier-detail.html" class="metier-card">
+            <h3>${n}</h3>
+            <p>${d}</p>
+            <div class="villes">${tagsRow()}</div>
+          </a>
+        `).join('')}
+      </div>
+    </section>
+  `).join('');
+
+  MobemSite.init('Sites par métier');
+</script>
+</body>
+</html>
