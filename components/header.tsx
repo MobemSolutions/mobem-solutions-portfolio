@@ -132,7 +132,6 @@ export function Header() {
                 className="inline-flex items-baseline gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
 >>>>>>> 38f194d (maj)
               >
-                <span className="font-mono text-[10px] text-muted-foreground/50">{item.num}</span>
                 {item.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-foreground transition-all duration-200 group-hover:w-full" />
               </Link>
@@ -142,10 +141,11 @@ export function Header() {
             <div className="relative" ref={metierRef}>
               <button
                 onClick={() => { setIsMetierDropdownOpen((v) => !v); setIsVilleDropdownOpen(false) }}
-                className="inline-flex items-baseline gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                onPointerDown={triggerRipple}
+                className="relative overflow-hidden inline-flex items-baseline gap-2 text-sm font-medium text-muted-foreground transition-all hover:text-foreground active:scale-[0.95] active:opacity-70"
                 aria-expanded={isMetierDropdownOpen}
+                data-cursor="hover"
               >
-                <span className="font-mono text-[10px] text-muted-foreground/50">04</span>
                 Sites par métier
                 <ChevronDown className={cn("w-3.5 h-3.5 transition-transform duration-200 self-center", isMetierDropdownOpen && "rotate-180")} />
               </button>
@@ -194,10 +194,11 @@ export function Header() {
             <div className="relative" ref={villeRef}>
               <button
                 onClick={() => { setIsVilleDropdownOpen((v) => !v); setIsMetierDropdownOpen(false) }}
-                className="inline-flex items-baseline gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                onPointerDown={triggerRipple}
+                className="relative overflow-hidden inline-flex items-baseline gap-2 text-sm font-medium text-muted-foreground transition-all hover:text-foreground active:scale-[0.95] active:opacity-70"
                 aria-expanded={isVilleDropdownOpen}
+                data-cursor="hover"
               >
-                <span className="font-mono text-[10px] text-muted-foreground/50">05</span>
                 Nos villes
                 <ChevronDown className={cn("w-3.5 h-3.5 transition-transform duration-200 self-center", isVilleDropdownOpen && "rotate-180")} />
               </button>
@@ -366,7 +367,6 @@ export function Header() {
                 className="flex items-baseline gap-3 px-4 py-3 text-base font-medium text-muted-foreground transition-colors hover:text-foreground border-b border-border"
                 tabIndex={isMobileMenuOpen ? 0 : -1}
               >
-                <span className="font-mono text-[10px] text-muted-foreground/50">{item.num}</span>
                 {item.name}
               </Link>
             ))}
@@ -378,7 +378,6 @@ export function Header() {
               tabIndex={isMobileMenuOpen ? 0 : -1}
             >
               <span className="flex items-baseline gap-3">
-                <span className="font-mono text-[10px] text-muted-foreground/50">04</span>
                 Sites par métier
               </span>
               <ChevronDown className={cn("w-4 h-4 transition-transform duration-200", isMobileMetierOpen && "rotate-180")} />
@@ -422,7 +421,6 @@ export function Header() {
               tabIndex={isMobileMenuOpen ? 0 : -1}
             >
               <span className="flex items-baseline gap-3">
-                <span className="font-mono text-[10px] text-muted-foreground/50">05</span>
                 Nos villes
               </span>
               <ChevronDown className={cn("w-4 h-4 transition-transform duration-200", isMobileVilleOpen && "rotate-180")} />
@@ -464,7 +462,8 @@ export function Header() {
               <Link
                 href="#contact"
                 onClick={(e) => handleNavClick(e, "#contact")}
-                className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-accent text-accent-foreground text-sm font-medium transition-colors hover:bg-foreground"
+                onPointerDown={triggerRipple}
+                className="relative overflow-hidden w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-accent text-accent-foreground text-sm font-medium transition-colors hover:bg-foreground hover:text-background"
                 tabIndex={isMobileMenuOpen ? 0 : -1}
               >
                 Diagnostic gratuit

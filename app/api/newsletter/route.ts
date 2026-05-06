@@ -26,7 +26,8 @@ export async function POST(req: NextRequest) {
     })
 
     return NextResponse.json({ success: true })
-  } catch {
+  } catch (err) {
+    console.error('[newsletter] send error:', err)
     return NextResponse.json({ error: "Erreur lors de l'inscription." }, { status: 500 })
   }
 }

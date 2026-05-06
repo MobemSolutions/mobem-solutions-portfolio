@@ -1,27 +1,23 @@
 import type { Metadata } from "next"
-import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ArrowLeft, ArrowRight, Clock, MapPin, Building2, Calendar, CheckCircle2, Quote } from "lucide-react"
-import { LegalHeader } from "@/components/legal-header"
+import { CASES, getCaseBySlug, getAdjacentCases } from "@/lib/cases"
+import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { projects, getProject, getAdjacentProjects, COLOR_SCHEMES, type Project, type ColorScheme } from "@/lib/projects"
-import { cn } from "@/lib/utils"
 
 type Props = { params: Promise<{ slug: string }> }
 
 export async function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }))
+  return CASES.map((c) => ({ slug: c.slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const project = getProject(slug)
-  if (!project) return { title: "Projet non trouvé | Mobem Solutions" }
+  const c = getCaseBySlug(slug)
+  if (!c) return { title: "Cas non trouvé | Mobem Solutions" }
   return {
-    title: `${project.title} — ${project.client.name} | Mobem Solutions`,
-    description: project.description,
-    robots: { index: true, follow: true },
+    title: `${c.client} — ${c.tag} | Mobem Solutions`,
+    description: c.desc,
   }
 }
 
@@ -130,13 +126,12 @@ function ProjectMockup({
 
 /* ─── Page ─────────────────────────────────────────────────────────── */
 
-export default async function ProjectPage({ params }: Props) {
+export default async function CaseDetailPage({ params }: Props) {
   const { slug } = await params
-  const project = getProject(slug)
-  if (!project) notFound()
+  const c = getCaseBySlug(slug)
+  if (!c) notFound()
 
-  const { next, prev } = getAdjacentProjects(slug)
-  const scheme = COLOR_SCHEMES[project.colorScheme]
+  const { prev, next } = getAdjacentCases(slug)
 
   return (
     <>
@@ -156,64 +151,43 @@ export default async function ProjectPage({ params }: Props) {
               <span className="text-foreground font-medium truncate">{project.client.name}</span>
             </nav>
 
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-              {/* Left: Text */}
-              <div>
-                <div className="flex flex-wrap items-center gap-2 mb-6">
-                  <span className={cn("text-xs font-semibold px-3 py-1.5 rounded-full", scheme.badge)}>
-                    {project.categoryLabel}
-                  </span>
-                  <span className="text-xs text-muted-foreground px-3 py-1.5 rounded-full border border-border bg-background/60">
-                    {project.client.sector}
-                  </span>
-                </div>
+                <span className="inline-flex items-center gap-2 mb-6 px-2.5 py-1.5 border border-border font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
+                  Cas n°{c.idx} · {c.tag}
+                </span>
 
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground tracking-tight mb-4">
-                  {project.title}
+                <h1
+                  className="mb-6 font-extrabold leading-[0.92] tracking-[-0.04em]"
+                  style={{ fontSize: "clamp(40px, 5.5vw, 80px)" }}
+                >
+                  {c.client},<br />
+                  <em className="font-serif font-normal italic text-accent tracking-[-0.02em]">
+                    {c.tag.toLowerCase()}.
+                  </em>
                 </h1>
-                <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                  {project.tagline}
-                </p>
 
-                {/* Hero metrics */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-                  {project.results.slice(0, 4).map((r) => (
-                    <div key={r.label} className="bg-background/60 rounded-xl border border-border/50 p-3">
-                      <p className={cn("text-xl font-bold", scheme.accentText)}>{r.value}</p>
-                      <p className="text-xs text-muted-foreground mt-0.5 leading-tight">{r.label}</p>
-                    </div>
-                  ))}
-                </div>
+                <p className="text-[18px] leading-[1.5] text-muted-foreground max-w-[540px] mb-8">{c.desc}</p>
 
-                {/* Meta */}
-                <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-                  <span className="flex items-center gap-1.5">
-                    <Clock className="w-4 h-4" aria-hidden="true" />
-                    {project.duration}
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <Calendar className="w-4 h-4" aria-hidden="true" />
-                    {project.year}
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <MapPin className="w-4 h-4" aria-hidden="true" />
-                    {project.client.location}
-                  </span>
-                </div>
+                <Link
+                  href="#diagnostic"
+                  className="inline-flex items-center gap-3 px-6 py-3.5 bg-accent text-accent-foreground font-medium text-[14px] hover:bg-foreground hover:text-background transition-colors"
+                >
+                  Lire le cas <Arrow size={14} />
+                </Link>
               </div>
 
-              {/* Right: Main mockup */}
-              <div className="relative">
-                {project.images?.maquette ? (
-                  <div className="relative aspect-[16/9] rounded-xl overflow-hidden border border-border shadow-lg">
-                    <Image
-                      src={project.images.maquette}
-                      alt={`Maquettage du site ${project.client.name}`}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                      priority
-                    />
+              {/* Right — meta rows */}
+              <div className="flex flex-col gap-4 pt-8 border-t border-border lg:border-t-0 lg:pt-0 lg:border-l lg:pl-12">
+                {[
+                  { l: "Client",      v: c.client },
+                  { l: "Secteur",     v: c.sector },
+                  { l: "Année",       v: c.year },
+                  { l: "Catégorie",   v: c.tag },
+                  { l: "KPI principal", v: c.kpi },
+                ].map(({ l, v }) => (
+                  <div key={l} className="flex justify-between gap-4 pb-4 border-b border-border">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">{l}</span>
+                    <span className="text-[14px] font-medium text-right">{v}</span>
                   </div>
                 ) : (
                   <ProjectMockup
@@ -299,102 +273,65 @@ export default async function ProjectPage({ params }: Props) {
               </div>
             </div>
           </div>
-        </section>
 
-        {/* ── APPROCHE ──────────────────────────────────────────────── */}
-        <section className="py-20 border-b border-border bg-muted/20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mb-12">
-              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-3">
-                Notre méthode
-              </p>
-              <h2 className="text-2xl lg:text-3xl font-bold text-foreground">
-                Comment on a attaqué le problème
-              </h2>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              {project.approach.map((step) => (
+          {/* ── KPI band ────────────────────────────────────────────────────── */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 border-b border-border">
+            {c.kpis.map((k, i) => (
+              <div
+                key={i}
+                className="px-7 py-10"
+                style={{ borderRight: i < c.kpis.length - 1 ? "1px solid var(--color-border)" : "none" }}
+              >
                 <div
-                  key={step.step}
-                  className="flex gap-5 bg-card rounded-2xl border border-border p-6"
+                  className="font-extrabold leading-[0.95] tracking-[-0.03em] text-accent"
+                  style={{ fontSize: "clamp(40px, 5vw, 64px)" }}
                 >
-                  <div className="shrink-0">
-                    <div className={cn(
-                      "w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold border-2",
-                      scheme.accentText,
-                      "border-current bg-background"
-                    )}>
-                      {String(step.step).padStart(2, "0")}
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground mb-2">{step.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{step.description}</p>
-                  </div>
+                  {k.v}
+                </div>
+                <div className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground mt-3">
+                  {k.l}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* ── Case body ────────────────────────────────────────────────────── */}
+          <section
+            id="diagnostic"
+            className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-16 px-4 sm:px-6 lg:px-8 py-16 lg:py-20 border-b border-border"
+          >
+            {/* TOC */}
+            <aside className="lg:sticky lg:top-24 lg:self-start">
+              <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-foreground mb-5">Sommaire</p>
+              <ul className="flex flex-col gap-0">
+                {c.body.map((section) => (
+                  <li key={section.title}>
+                    <a
+                      href={`#${section.title.replace(/\s+/g, "-").toLowerCase()}`}
+                      className="font-mono text-[13px] tracking-[0.02em] text-muted-foreground hover:text-accent transition-colors block py-3 pl-5 border-l-2 border-border hover:border-accent"
+                    >
+                      {section.title.split("·")[0]?.trim()}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </aside>
+
+            {/* Prose */}
+            <div className="max-w-[720px] text-[18px] leading-[1.7]">
+              {c.body.map((section) => (
+                <div key={section.title} id={section.title.replace(/\s+/g, "-").toLowerCase()} className="mb-14 scroll-mt-24">
+                  <h2 className="text-[32px] font-bold tracking-[-0.025em] leading-[1.1] mb-4">
+                    {section.title.split("·")[0]?.trim()}{" "}
+                    <em className="font-serif font-normal italic text-accent">
+                      {section.title.split("·")[1]?.trim()}
+                    </em>
+                  </h2>
+                  <p className="text-muted-foreground">{section.content}</p>
                 </div>
               ))}
             </div>
-          </div>
-        </section>
-
-        {/* ── LIVRABLES / MOCKUPS ───────────────────────────────────── */}
-        <section className="py-20 border-b border-border">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mb-12">
-              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-3">
-                Ce qu'on a livré
-              </p>
-              <h2 className="text-2xl lg:text-3xl font-bold text-foreground">
-                Les livrables du projet
-              </h2>
-            </div>
-
-            {/* Mockup grid */}
-            <div className="grid md:grid-cols-3 gap-4 mb-10">
-              <div className="md:col-span-2">
-                {project.images?.section1 ? (
-                  <div className="relative aspect-[16/9] rounded-xl overflow-hidden border border-border shadow-md">
-                    <Image
-                      src={project.images.section1}
-                      alt={`Sections du site — ${project.client.name}`}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 66vw"
-                    />
-                  </div>
-                ) : (
-                  <ProjectMockup colorScheme={project.colorScheme} variant="desktop" label="Page services" />
-                )}
-              </div>
-              <div>
-                {project.images?.home ? (
-                  <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-border shadow-md">
-                    <Image
-                      src={project.images.home}
-                      alt={`Page d'accueil ${project.client.name}`}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                  </div>
-                ) : (
-                  <ProjectMockup colorScheme={project.colorScheme} variant="tablet" label="Page d'accueil" />
-                )}
-              </div>
-            </div>
-
-            {/* Deliverables list */}
-            <div className="grid sm:grid-cols-2 gap-3">
-              {project.deliverables.map((d) => (
-                <div key={d} className="flex items-start gap-3 bg-card rounded-xl border border-border p-4">
-                  <CheckCircle2 className={cn("w-4 h-4 mt-0.5 shrink-0", scheme.accentText)} aria-hidden="true" />
-                  <p className="text-sm text-foreground">{d}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+          </section>
 
         {/* ── RÉSULTATS & PERFORMANCE ───────────────────────────────── */}
         <section className={cn("py-20 border-b border-border", scheme.heroBg)}>
@@ -477,111 +414,81 @@ export default async function ProjectPage({ params }: Props) {
               </div>
             </div>
           </div>
-        </section>
 
-        {/* ── TÉMOIGNAGE ────────────────────────────────────────────── */}
-        <section className="py-20 border-b border-border">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-8">
-              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest">
-                Ce qu'ils en disent
-              </p>
-            </div>
-            <div className="bg-card rounded-2xl border border-border p-8 lg:p-12 relative">
-              <Quote
-                className={cn("absolute top-6 right-8 w-8 h-8 opacity-20", scheme.accentText)}
-                aria-hidden="true"
-              />
-              <blockquote className="text-lg lg:text-xl text-foreground leading-relaxed font-medium mb-6 text-balance">
-                "{project.testimonial.quote}"
+          {/* ── Testimonial ──────────────────────────────────────────────────── */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-16 px-4 sm:px-6 lg:px-8 py-20 border-b border-border items-center">
+            <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">Témoignage</div>
+            <div>
+              <blockquote
+                className="font-serif font-normal italic leading-[1.25] tracking-[-0.015em] mb-8"
+                style={{ fontSize: "clamp(24px, 3vw, 40px)" }}
+              >
+                «&nbsp;{c.quote.text}&nbsp;»
               </blockquote>
-              <footer className="flex items-center gap-4">
-                <div className={cn(
-                  "w-10 h-10 rounded-full bg-gradient-to-br flex items-center justify-center shrink-0 text-sm font-bold text-foreground/80",
-                  scheme.cardGradient
-                )}>
-                  {project.testimonial.author.charAt(0)}
+              <div className="flex items-center gap-4">
+                <div className="w-11 h-11 bg-accent text-accent-foreground flex items-center justify-center font-serif text-[18px] flex-shrink-0">
+                  {c.quote.author[0]}
                 </div>
                 <div>
-                  <p className="font-semibold text-foreground text-sm">{project.testimonial.author}</p>
-                  <p className="text-xs text-muted-foreground">{project.testimonial.role}</p>
+                  <div className="font-semibold text-[15px]">{c.quote.author}</div>
+                  <div className="text-[13px] text-muted-foreground">{c.quote.role}</div>
                 </div>
-              </footer>
+              </div>
             </div>
           </div>
-        </section>
 
-        {/* ── CTA ───────────────────────────────────────────────────── */}
-        <section className="py-20 border-b border-border bg-muted/20">
-          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
-            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-4">
-              Votre projet
-            </p>
-            <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-4">
-              Votre secteur mérite la même attention
-            </h2>
-            <p className="text-muted-foreground mb-8 leading-relaxed">
-              Chaque projet que nous menons part d'une vraie compréhension de votre métier. Pas de template. Pas de raccourcis.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <a
-                href="/#contact"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent text-accent-foreground font-medium hover:bg-accent/90 transition-colors"
-              >
-                Discuter de votre projet
-                <ArrowRight className="w-4 h-4" aria-hidden="true" />
-              </a>
-              <Link
-                href="/#realisations"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border bg-background text-foreground font-medium hover:bg-muted transition-colors text-sm"
-              >
-                Voir toutes les réalisations
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* ── NAVIGATION PROJETS ────────────────────────────────────── */}
-        <section className="py-12">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid sm:grid-cols-2 gap-4">
-              {/* Projet précédent */}
+          {/* ── Previous / Next ──────────────────────────────────────────────── */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 border-b border-border">
+            {prev ? (
               <Link
                 href={`/realisations/${prev.slug}`}
-                className="group flex items-center gap-4 bg-card rounded-2xl border border-border p-5 hover:border-accent/50 transition-all"
+                className="group flex flex-col gap-3 p-8 lg:p-12 border-r border-border hover:bg-[rgba(230,48,48,0.04)] transition-colors"
+                data-cursor="hover"
               >
-                <div className="w-9 h-9 rounded-full border border-border flex items-center justify-center shrink-0 group-hover:border-accent transition-colors">
-                  <ArrowLeft className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" aria-hidden="true" />
+                <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">— Cas précédent</span>
+                <div className="mt-auto">
+                  <div className="text-[24px] font-bold tracking-[-0.02em]">{prev.client}</div>
+                  <em className="font-serif italic text-accent text-[20px]">{prev.tag}.</em>
                 </div>
-                <div>
-                  <p className="text-xs text-muted-foreground mb-0.5">Projet précédent</p>
-                  <p className="text-sm font-semibold text-foreground group-hover:text-accent transition-colors">
-                    {prev.client.name}
-                  </p>
-                  <p className="text-xs text-muted-foreground">{prev.title}</p>
-                </div>
+                <Arrow reverse size={24} className="transition-transform group-hover:-translate-x-1.5 group-hover:-translate-y-1.5 group-hover:text-accent" />
               </Link>
-
-              {/* Projet suivant */}
+            ) : (
+              <div className="p-8 lg:p-12 border-r border-border text-muted-foreground font-mono text-[11px]">— Premier cas</div>
+            )}
+            {next ? (
               <Link
                 href={`/realisations/${next.slug}`}
-                className="group flex items-center justify-end gap-4 bg-card rounded-2xl border border-border p-5 hover:border-accent/50 transition-all"
+                className="group flex flex-col gap-3 p-8 lg:p-12 text-right hover:bg-[rgba(230,48,48,0.04)] transition-colors"
+                data-cursor="hover"
               >
-                <div className="text-right">
-                  <p className="text-xs text-muted-foreground mb-0.5">Projet suivant</p>
-                  <p className="text-sm font-semibold text-foreground group-hover:text-accent transition-colors">
-                    {next.client.name}
-                  </p>
-                  <p className="text-xs text-muted-foreground">{next.title}</p>
+                <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground self-end">— Cas suivant</span>
+                <div className="mt-auto">
+                  <div className="text-[24px] font-bold tracking-[-0.02em]">{next.client}</div>
+                  <em className="font-serif italic text-accent text-[20px]">{next.tag}.</em>
                 </div>
-                <div className="w-9 h-9 rounded-full border border-border flex items-center justify-center shrink-0 group-hover:border-accent transition-colors">
-                  <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" aria-hidden="true" />
-                </div>
+                <Arrow size={24} className="self-end transition-transform group-hover:translate-x-1.5 group-hover:-translate-y-1.5 group-hover:text-accent" />
               </Link>
-            </div>
+            ) : (
+              <div className="p-8 lg:p-12 text-right text-muted-foreground font-mono text-[11px]">Dernier cas —</div>
+            )}
           </div>
-        </section>
 
+          {/* ── CTA ──────────────────────────────────────────────────────────── */}
+          <section className="px-4 sm:px-6 lg:px-8 py-24 text-center border-b border-border">
+            <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground mb-6">Votre projet</div>
+            <h2 className="mx-auto mb-6 max-w-[720px] font-extrabold tracking-[-0.03em] leading-[0.95]" style={{ fontSize: "clamp(36px,4vw,64px)" }}>
+              Le prochain cas{" "}
+              <em className="font-serif font-normal italic text-accent">pourrait être le vôtre.</em>
+            </h2>
+            <Link
+              href="/#contact"
+              className="inline-flex items-center gap-3 px-8 py-5 bg-accent text-accent-foreground font-medium text-[14px] hover:bg-foreground hover:text-background transition-colors"
+            >
+              Démarrer un diagnostic <Arrow size={14} />
+            </Link>
+          </section>
+
+        </article>
       </main>
       <Footer />
     </>

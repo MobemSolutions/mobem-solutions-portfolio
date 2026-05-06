@@ -115,13 +115,12 @@ export function TeamSection() {
       {/* Section head */}
       <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-5 border-b border-border">
         <div className="flex items-baseline gap-5">
-          <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">// 05</span>
           <h2 id="team-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
             Équipe
 >>>>>>> 38f194d (maj)
           </h2>
         </div>
-        <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
+        <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">
           Trois associés · Une vision commune
         </span>
       </div>
@@ -206,14 +205,15 @@ export function TeamSection() {
         {team.map((member, i) => (
           <div
             key={member.num}
+            data-cursor="hover"
             className={cn(
-              "flex flex-col px-4 sm:px-6 lg:px-8 py-8 lg:py-10 bento-hover",
+              "group flex flex-col px-4 sm:px-6 lg:px-8 py-8 lg:py-10 bento-hover",
               i < 2 && "border-b border-border lg:border-b-0 lg:border-r lg:border-border"
             )}
           >
             <div className="flex items-baseline justify-between mb-6">
-              <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">// {member.num}</span>
-              <div className="w-9 h-9 border border-current/20 flex items-center justify-center font-mono text-[11px] text-muted-foreground">
+              <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground group-hover:text-background/60 transition-colors">{member.num}</span>
+              <div className="w-9 h-9 border border-current/20 flex items-center justify-center font-mono text-[11px] text-foreground/70 group-hover:text-background/70 transition-colors">
                 {member.initials}
 >>>>>>> 38f194d (maj)
               </div>
@@ -222,10 +222,10 @@ export function TeamSection() {
             <h3 className="text-[28px] lg:text-[32px] font-bold tracking-[-0.025em] leading-none mb-2">
               {member.name}
             </h3>
-            <p className="font-mono text-[10px] uppercase tracking-[0.06em] text-muted-foreground mb-5">
+            <p className="font-mono text-[10px] uppercase tracking-[0.06em] text-foreground group-hover:text-background/70 mb-5 transition-colors">
               {member.role}
             </p>
-            <p className="text-[14px] leading-relaxed text-muted-foreground flex-1 mb-6">
+            <p className="text-[14px] leading-relaxed text-muted-foreground group-hover:text-background/60 flex-1 mb-6 transition-colors">
               {member.description}
             </p>
 
@@ -242,7 +242,7 @@ export function TeamSection() {
                 href={member.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 border border-current/20 flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-current/50 transition-colors"
+                className="w-8 h-8 border border-current/20 flex items-center justify-center text-muted-foreground group-hover:text-background/60 hover:opacity-100 hover:border-current/50 transition-colors"
                 aria-label={`Profil LinkedIn de ${member.name}`}
               >
                 <Linkedin className="w-3.5 h-3.5" aria-hidden="true" />

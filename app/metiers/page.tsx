@@ -64,28 +64,29 @@ export default function MetiersPage() {
                 {cat.metiers.length} métiers
               </span>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-l border-border">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-l border-foreground/10 dark:border-foreground/15">
               {cat.metiers.map((metier) => (
                 <Link
                   key={metier.slug}
                   href={`/metiers/${metier.slug}`}
-                  className="group p-7 border-r border-b border-border flex flex-col gap-3.5 min-h-[260px] transition-colors hover:bg-secondary"
+                  className="group bento-hover p-7 border-r border-b border-foreground/10 dark:border-foreground/15 flex flex-col gap-3.5 min-h-[260px] transition-colors"
+                  data-cursor="hover"
                   aria-label={`Création de site internet pour ${metier.label}`}
                 >
                   <h3 className="text-[22px] font-bold tracking-[-0.02em]">{metier.label}</h3>
-                  <p className="text-[13.5px] leading-[1.55] text-muted-foreground flex-1">
+                  <p className="text-[13.5px] leading-[1.55] text-muted-foreground group-hover:text-background/70 flex-1 transition-colors">
                     {metier.description}
                   </p>
                   <div className="flex flex-wrap gap-1.5 items-center" aria-hidden="true">
                     {TOP_VILLES.map((v) => (
                       <span
                         key={v.slug}
-                        className="px-[9px] py-1 border border-border font-mono text-[10px] text-accent tracking-[0.04em] uppercase whitespace-nowrap"
+                        className="px-[9px] py-1 border border-current/20 font-mono text-[10px] text-accent tracking-[0.04em] uppercase whitespace-nowrap"
                       >
                         {v.label}
                       </span>
                     ))}
-                    <span className="px-[9px] py-1 border border-border font-mono text-[10px] text-muted-foreground tracking-[0.04em] uppercase whitespace-nowrap">
+                    <span className="px-[9px] py-1 border border-current/20 font-mono text-[10px] text-muted-foreground group-hover:text-background/60 tracking-[0.04em] uppercase whitespace-nowrap transition-colors">
                       +{EXTRA_VILLES} villes
                     </span>
                   </div>
@@ -97,8 +98,8 @@ export default function MetiersPage() {
 
         {/* Final CTA */}
         <section className="px-4 sm:px-6 lg:px-8 py-24 border-t border-border text-center">
-          <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground mb-4">
-            // Votre métier n&apos;est pas listé ?
+          <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground mb-4">
+            Votre métier n&apos;est pas listé ?
           </div>
           <h2 className="mx-auto mb-8 max-w-[800px] text-[clamp(36px,4.5vw,64px)] font-extrabold tracking-[-0.03em] leading-[0.95]">
             Nous adaptons à{" "}
@@ -108,7 +109,7 @@ export default function MetiersPage() {
           </h2>
           <Link
             href="/#contact"
-            className="inline-flex items-center gap-3 px-6 py-4 bg-accent text-accent-foreground font-medium text-sm transition-colors hover:bg-foreground"
+            className="inline-flex items-center gap-3 px-6 py-4 bg-accent text-accent-foreground font-medium text-sm transition-colors hover:bg-foreground hover:text-background"
           >
             Parler de mon projet
             <ArrowRight className="w-4 h-4" aria-hidden="true" />

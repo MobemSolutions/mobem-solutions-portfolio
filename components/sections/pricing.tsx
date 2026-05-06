@@ -462,13 +462,10 @@ export function PricingSection() {
 
       {/* Section head */}
       <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-5 border-b border-border">
-        <div className="flex items-baseline gap-5">
-          <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">// 03</span>
-          <h2 id="pricing-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
-            Services — Le Bento
-          </h2>
-        </div>
-        <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
+        <h2 id="pricing-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
+          Services
+        </h2>
+        <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">
           Trois offres · Une promesse mesurable
         </span>
 >>>>>>> 38f194d (maj)
@@ -502,12 +499,31 @@ export function PricingSection() {
         ))}
       </div>
 
-      <p className="px-4 sm:px-6 lg:px-8 py-4 border-t border-border font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
-        Tous les tarifs sont HT ·{" "}
-        <Link href="#contact" className="text-accent hover:underline">
-          Devis sur-mesure disponible
-        </Link>
-      </p>
+      {/* ── Capacités transverses ─────────────────────────────────────── */}
+      <div className="border-t border-border">
+        <div className="flex justify-between px-4 sm:px-6 lg:px-8 py-5 border-b border-border">
+          <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">Capacités transverses</span>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-border">
+          {CAPS.map((c, i) => (
+            <div
+              key={c.k}
+              data-cursor="hover"
+              className="bento-hover border-r border-b border-border flex flex-col gap-3 p-6 min-h-[180px]"
+            >
+              <div className="flex justify-end items-start">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                  <path d="M7 17 L17 7"/><path d="M9 7 H17 V15"/>
+                </svg>
+              </div>
+              <div className="text-[22px] font-bold tracking-[-0.02em] mt-2">{c.v}</div>
+              <div className="text-[12px] text-muted-foreground">{c.d}</div>
+              <div className="mt-auto text-[11px] font-semibold text-accent">● {c.proof}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
     </section>
   )
 }
@@ -515,6 +531,7 @@ export function PricingSection() {
 function OfferCard({ offer, idx }: { offer: typeof OFFERS[number]; idx: number }) {
   return (
     <div
+      data-cursor="hover"
       className={cn(
         "group relative flex flex-col p-6 lg:p-8 min-h-[520px] transition-colors",
         offer.flagship
@@ -523,13 +540,7 @@ function OfferCard({ offer, idx }: { offer: typeof OFFERS[number]; idx: number }
         idx < 2 && "lg:border-r lg:border-border"
       )}
     >
-      {/* Hover badge */}
-      <span className="absolute top-[4.5rem] left-6 font-mono text-[9.5px] uppercase tracking-[0.06em] px-2 py-1 border border-current opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 delay-75 pointer-events-none">
-        Offre {offer.code}
-      </span>
-
-      <div className="flex justify-between items-start mb-8">
-        <span className="font-mono text-[11px] uppercase tracking-[0.06em] opacity-70">// {offer.code}</span>
+      <div className="flex justify-end items-start mb-8">
         <ArrowRight className="w-5 h-5 opacity-70 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden="true" />
       </div>
 

@@ -1,16 +1,15 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import { CheckCircle2, TrendingUp, MapPin, Phone } from "lucide-react"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
 import {
   ALL_METIERS,
   ALL_VILLES,
   getMetierBySlug,
   getVilleBySlug,
-  REGIONS,
+  METIER_CATEGORIES,
 } from "@/lib/seo-data"
+import { Header } from "@/components/header"
+import { Footer } from "@/components/footer"
 
 interface Props {
   params: Promise<{ slug: string; ville: string }>
@@ -27,174 +26,282 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const metier = getMetierBySlug(slug)
   const ville = getVilleBySlug(villeSlug)
   if (!metier || !ville) return {}
+
+  const label = metier.labelPluriel ?? metier.label
+
   return {
-    title: `Création de site internet pour ${metier.label} à ${ville.label} | Mobem Solutions`,
-    description: `Site internet professionnel pour ${metier.label} à ${ville.label} (${ville.codePostal}). SEO local, mise en ligne en 72h, 50 €/mois tout inclus. Dominez Google à ${ville.label}.`,
+    title: `Création de site pour ${label} à ${ville.label} — Mobem Solutions`,
+    description: `Mobem Solutions crée des sites internet professionnels pour les ${label.toLowerCase()} à ${ville.label} (${ville.codePostal}). SEO local inclus, livré en 10 jours, Lighthouse 90+. Diagnostic gratuit.`,
+    keywords: [
+      `site internet ${metier.label.toLowerCase()} ${ville.label}`,
+      `création site ${metier.label.toLowerCase()} ${ville.label}`,
+      `${metier.label.toLowerCase()} ${ville.label} site web`,
+      `agence web ${ville.label}`,
+    ],
+    alternates: {
+      canonical: `https://mobem-solutions.com/metiers/${slug}/${villeSlug}`,
+    },
     openGraph: {
-      title: `Site internet ${metier.label} à ${ville.label} | Mobem Solutions`,
-      description: `Création de site internet pour ${metier.label} à ${ville.label}. Optimisé SEO local, en ligne en 72h.`,
-      url: `https://mobem-solutions.com/metiers/${metier.slug}/${ville.slug}`,
+      title: `Site internet pour ${label} à ${ville.label} — Mobem Solutions`,
+      description: `Sites web professionnels pour ${label.toLowerCase()} à ${ville.label}. Livrés en 10 jours, SEO local, Lighthouse 90+.`,
+      url: `https://mobem-solutions.com/metiers/${slug}/${villeSlug}`,
+      images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
     },
   }
 }
 
-const AVANTAGES = [
-  "Site live en 72h — sans engagement",
+function ArrowDiag({ className = "" }: { className?: string }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className={className} aria-hidden="true">
+      <path d="M7 17 L17 7" /><path d="M9 7 H17 V15" />
+    </svg>
+  )
+}
+
+function CheckIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+      <path d="M20 6L9 17l-5-5" />
+    </svg>
+  )
+}
+
+const DELIVERABLES = [
+  "Design sur-mesure adapté à votre secteur",
   "SEO local optimisé pour votre ville",
-  "Hébergement, maintenance et mises à jour inclus",
-  "Prise de contact en ligne 24h/24",
-  "Fiche Google My Business optimisée",
-  "Rapport de performance mensuel",
+  "Lighthouse 90+ garanti à la livraison",
+  "Formulaire de contact & prise de RDV",
+  "Version mobile optimisée",
+  "Mise en ligne en 10 jours ouvrés",
+]
+
+const WHY_ITEMS = [
+  { v: "10 j", l: "Délai de livraison moyen" },
+  { v: "90+", l: "Score Lighthouse garanti" },
+  { v: "94%", l: "Clients page 1 Google (90j)" },
+  { v: "0 €", l: "Diagnostic initial" },
 ]
 
 export default async function MetierVillePage({ params }: Props) {
   const { slug, ville: villeSlug } = await params
   const metier = getMetierBySlug(slug)
   const ville = getVilleBySlug(villeSlug)
+
   if (!metier || !ville) notFound()
 
-  const autresVilles = ALL_VILLES.filter((v) => v.slug !== villeSlug).slice(0, 6)
+  const label = metier.labelPluriel ?? metier.label
+  const labelSingulier = metier.label
+
+  const autresVilles = ALL_VILLES
+    .filter((v) => v.slug !== villeSlug)
+    .slice(0, 5)
+
+  const autresMetiersCat = METIER_CATEGORIES
+    .find((c) => c.metiers.some((m) => m.slug === slug))
+
+  const autresMetiers = autresMetiersCat?.metiers
+    .filter((m) => m.slug !== slug)
+    .slice(0, 4) ?? []
 
   return (
     <>
       <Header />
-      <main className="pt-20 pb-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <main className="min-h-screen">
 
-          {/* Breadcrumb */}
-          <nav className="pt-8 pb-4 text-sm text-muted-foreground" aria-label="Fil d'Ariane">
-            <Link href="/" className="hover:text-foreground transition-colors">Accueil</Link>
-            <span className="mx-2">&gt;</span>
-            <Link href="/metiers" className="hover:text-foreground transition-colors">Nos métiers</Link>
-            <span className="mx-2">&gt;</span>
-            <Link href={`/metiers/${slug}`} className="hover:text-foreground transition-colors">
-              Site {metier.label}
-            </Link>
-            <span className="mx-2">&gt;</span>
-            <span className="text-foreground">{ville.label}</span>
-          </nav>
+        {/* ── Hero ─────────────────────────────────────────────────────────── */}
+        <section className="pt-14 lg:pt-16 border-t border-border">
+          <div className="px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 lg:pt-24 pb-16 border-b border-border grid grid-cols-1 lg:grid-cols-[7fr_5fr] gap-16">
+            <div>
+              <nav
+                className="flex items-center flex-wrap gap-2.5 mb-10 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground"
+                aria-label="Fil d'Ariane"
+              >
+                <Link href="/" className="hover:text-accent transition-colors">Accueil</Link>
+                <span>/</span>
+                <Link href="/metiers" className="hover:text-accent transition-colors">Métiers</Link>
+                <span>/</span>
+                <Link href={`/metiers/${slug}`} className="hover:text-accent transition-colors">{labelSingulier}</Link>
+                <span>/</span>
+                <span className="text-foreground">{ville.label}</span>
+              </nav>
 
-          <div className="grid lg:grid-cols-3 gap-12 pt-4">
-
-            {/* Contenu principal */}
-            <div className="lg:col-span-2">
-              <div className="flex items-center gap-2 mb-4">
-                <MapPin className="w-4 h-4 text-accent" />
-                <span className="text-sm text-muted-foreground">
-                  {ville.departement} ({ville.codePostal}) — {ville.population}
-                </span>
+              <div className="inline-block mb-6 border-l-2 border-accent pl-3 pr-4 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
+                SEO local · {ville.departement}
               </div>
 
-              <h1 className="text-4xl font-bold text-foreground mb-6">
-                Création de site internet pour {metier.label.toLowerCase()} à {ville.label}
+              <h1 className="font-extrabold leading-[0.92] tracking-[-0.04em] text-[clamp(36px,5.5vw,80px)] mb-6">
+                Site internet pour{" "}
+                <em className="font-serif font-normal italic text-accent tracking-[-0.02em]">
+                  {label.toLowerCase()}
+                </em>{" "}
+                à {ville.label}
               </h1>
 
-              <p className="text-muted-foreground leading-relaxed mb-8">
-                {metier.description.replace(/dans sa ville/g, `à ${ville.label}`)} À {ville.label},
-                {" "}{ville.population.replace(" hab.", "")} habitants cherchent régulièrement un
-                {" "}{metier.label.toLowerCase()} en ligne. Sans site internet, vous passez à côté de
-                dizaines de clients potentiels chaque mois. Avec un site Mobem Solutions optimisé,
-                votre numéro de téléphone apparaît en évidence, votre zone d&apos;intervention à
-                {" "}{ville.label} est claire, et vos avis clients rassurent immédiatement.
+              <p className="text-[18px] leading-[1.55] text-muted-foreground max-w-[580px] mb-8">
+                {metier.description}
               </p>
 
-              {/* Badge prix */}
-              <div className="inline-flex items-center gap-3 border border-accent/30 bg-accent/5 rounded-xl px-5 py-3 mb-6">
-                <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0" />
-                <div>
-                  <p className="font-semibold text-foreground text-sm">50 €/mois — tout inclus</p>
-                  <p className="text-xs text-muted-foreground">Sans engagement · En ligne en 72h</p>
-                </div>
-              </div>
-
-              {/* Stat SEO */}
-              <div className="border border-border rounded-xl p-5 mb-10 bg-secondary/50">
-                <div className="flex items-start gap-3">
-                  <TrendingUp className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    <strong className="text-foreground">76 % des personnes</strong> qui effectuent une recherche
-                    locale sur leur smartphone à {ville.label} se rendent dans un commerce ou contactent un professionnel
-                    dans les 24 heures{" "}
-                    <span className="text-xs">(source : Google, Think with Google 2023).</span>
-                  </p>
-                </div>
-              </div>
-
-              {/* Ce qu'on inclut */}
-              <h2 className="text-2xl font-bold text-foreground mb-5">
-                Votre site {metier.label.toLowerCase()} à {ville.label} en détail
-              </h2>
-              <ul className="space-y-3 mb-10">
-                {AVANTAGES.map((avantage) => (
-                  <li key={avantage} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
-                    <span className="text-sm text-muted-foreground">{avantage}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* Autres villes */}
-              <div className="border-t border-border pt-8 mb-8">
-                <h2 className="text-xl font-bold text-foreground mb-4">
-                  Site {metier.label} dans d&apos;autres villes
-                </h2>
-                <div className="flex flex-wrap gap-2">
-                  {autresVilles.map((v) => (
-                    <Link
-                      key={v.slug}
-                      href={`/metiers/${slug}/${v.slug}`}
-                      className="text-sm text-accent border border-accent/20 rounded-lg px-3 py-1.5 hover:bg-accent/5 transition-colors"
-                    >
-                      {metier.label} {v.label}
-                    </Link>
-                  ))}
-                  <Link
-                    href={`/metiers/${slug}`}
-                    className="text-sm text-muted-foreground border border-border rounded-lg px-3 py-1.5 hover:bg-secondary transition-colors"
-                  >
-                    Voir toutes les villes →
-                  </Link>
-                </div>
-              </div>
+              <Link
+                href="/#contact"
+                data-cursor="hover"
+                className="inline-flex items-center gap-3 px-7 py-4 bg-accent text-accent-foreground font-medium text-[15px] hover:bg-foreground hover:text-background transition-colors"
+              >
+                Diagnostic gratuit — {ville.label}
+                <ArrowDiag />
+              </Link>
             </div>
 
-            {/* Sidebar CTA */}
-            <aside className="lg:col-span-1">
-              <div className="sticky top-24 border border-border rounded-2xl p-6 bg-card shadow-sm">
-                <h3 className="text-lg font-bold text-foreground mb-2">
-                  Votre site {metier.label.toLowerCase()} à {ville.label}
-                </h3>
-                <p className="text-sm text-muted-foreground mb-5">
-                  En ligne en 72h. Premier mois offert. Sans engagement.
-                </p>
-                <div className="space-y-3">
-                  <Link
-                    href="/#contact"
-                    className="flex items-center justify-center gap-2 w-full bg-accent text-accent-foreground font-medium px-5 py-3 rounded-lg hover:bg-accent/90 transition-colors text-sm"
-                  >
-                    Démarrer mon projet
-                  </Link>
-                  <a
-                    href="tel:+33000000000"
-                    className="flex items-center justify-center gap-2 w-full border border-border text-foreground font-medium px-5 py-3 rounded-lg hover:bg-secondary transition-colors text-sm"
-                  >
-                    <Phone className="w-4 h-4" />
-                    Appeler directement
-                  </a>
+            {/* Meta sidebar */}
+            <div className="flex flex-col gap-0 border-t border-border lg:border-t-0 lg:border-l lg:pl-12 pt-8 lg:pt-0">
+              {[
+                { l: "Métier", v: labelSingulier },
+                { l: "Ville", v: ville.label },
+                { l: "Département", v: `${ville.departement} (${ville.codePostal})` },
+                { l: "Population", v: ville.population },
+                { l: "Délai livraison", v: "10 jours ouvrés" },
+                { l: "Diagnostic", v: "Gratuit · Sans engagement" },
+              ].map(({ l, v }) => (
+                <div key={l} className="flex justify-between gap-4 py-4 border-b border-border last:border-b-0">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">{l}</span>
+                  <span className="text-[13px] font-medium text-right max-w-[200px]">{v}</span>
                 </div>
-                <div className="mt-5 pt-5 border-t border-border space-y-2">
-                  {["50 €/mois tout inclus", "En ligne en 72h", "Sans engagement", "SEO local inclus"].map((item) => (
-                    <div key={item} className="flex items-center gap-2 text-xs text-muted-foreground">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-accent" />
-                      {item}
-                    </div>
-                  ))}
-                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── Stats band ───────────────────────────────────────────────────── */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 border-b border-border">
+          {WHY_ITEMS.map((item, i) => (
+            <div
+              key={i}
+              className="group bento-hover px-7 py-10 border-r border-border last:border-r-0 transition-colors"
+              data-cursor="hover"
+            >
+              <div className="text-[clamp(32px,4vw,52px)] font-bold tracking-[-0.03em] text-accent leading-[0.95]">
+                {item.v}
               </div>
-            </aside>
+              <div className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground group-hover:text-background/60 mt-3 transition-colors">
+                {item.l}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* ── Deliverables ─────────────────────────────────────────────────── */}
+        <section className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] border-b border-border">
+          <div className="px-4 sm:px-6 lg:px-8 py-16 border-b lg:border-b-0 lg:border-r border-border">
+            <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground mb-6">Ce qui est inclus</div>
+            <h2 className="text-[clamp(28px,3vw,44px)] font-bold tracking-[-0.03em] leading-[1.05] mb-10">
+              Site livré clé en main,{" "}
+              <em className="font-serif font-normal italic text-accent">sans surprise.</em>
+            </h2>
+            <ul className="space-y-4">
+              {DELIVERABLES.map((item, i) => (
+                <li
+                  key={i}
+                  className="group bento-hover flex items-start gap-4 px-5 py-4 border border-border transition-colors"
+                  data-cursor="hover"
+                >
+                  <span className="text-accent mt-0.5 flex-shrink-0 group-hover:text-accent"><CheckIcon /></span>
+                  <span className="text-[15px] font-medium">{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
 
-        </div>
+          <div className="px-4 sm:px-6 lg:px-8 py-16">
+            <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground mb-6">Pourquoi Mobem</div>
+            <h2 className="text-[clamp(28px,3vw,44px)] font-bold tracking-[-0.03em] leading-[1.05] mb-10">
+              Local, rapide,{" "}
+              <em className="font-serif font-normal italic text-accent">mesurable.</em>
+            </h2>
+            <div className="space-y-6 text-[15px] leading-[1.65] text-muted-foreground">
+              <p>
+                Les {label.toLowerCase()} à {ville.label} font face à une concurrence accrue sur Google. Sans site optimisé, vous perdez des clients chaque jour au profit de concurrents mieux référencés.
+              </p>
+              <p>
+                Mobem conçoit des sites pensés pour le SEO local : structure technique, contenu géolocalisé, Google Business Profile, balisage schema.org.
+              </p>
+              <p>
+                Livraison en 10 jours ouvrés, avec un score Lighthouse 90+ garanti.
+              </p>
+            </div>
+            <Link
+              href={`/metiers/${slug}`}
+              data-cursor="hover"
+              className="group inline-flex items-center gap-3 mt-10 font-mono text-[11px] uppercase tracking-[0.08em] text-accent hover:underline transition-colors"
+            >
+              Voir la page {labelSingulier} <ArrowDiag className="group-hover:translate-x-1.5 group-hover:-translate-y-1.5 transition-transform" />
+            </Link>
+          </div>
+        </section>
+
+        {/* ── Autres villes ────────────────────────────────────────────────── */}
+        <section className="border-b border-border">
+          <div className="px-4 sm:px-6 lg:px-8 py-6 flex items-baseline justify-between border-b border-border">
+            <h2 className="text-[13px] font-medium uppercase tracking-[0.02em]">{labelSingulier} dans d&apos;autres villes</h2>
+            <Link href={`/metiers/${slug}`} className="font-mono text-[11px] uppercase tracking-[0.06em] text-accent hover:underline">Voir tout →</Link>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 border-t border-l border-border">
+            {autresVilles.map((v) => (
+              <Link
+                key={v.slug}
+                href={`/metiers/${slug}/${v.slug}`}
+                data-cursor="hover"
+                className="group bento-hover border-r border-b border-border px-6 py-6 flex flex-col gap-2 transition-colors"
+              >
+                <span className="text-[17px] font-semibold tracking-[-0.01em]">{v.label}</span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.06em] text-accent">{v.departement}</span>
+                <span className="font-mono text-[10px] text-muted-foreground group-hover:text-background/60 transition-colors mt-auto">{labelSingulier} →</span>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* ── Autres métiers ────────────────────────────────────────────────── */}
+        {autresMetiers.length > 0 && (
+          <section className="border-b border-border">
+            <div className="px-4 sm:px-6 lg:px-8 py-6 flex items-baseline justify-between border-b border-border">
+              <h2 className="text-[13px] font-medium uppercase tracking-[0.02em]">Autres métiers à {ville.label}</h2>
+              <Link href={`/villes/${villeSlug}`} className="font-mono text-[11px] uppercase tracking-[0.06em] text-accent hover:underline">Voir la ville →</Link>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-border">
+              {autresMetiers.map((m) => (
+                <Link
+                  key={m.slug}
+                  href={`/metiers/${m.slug}/${villeSlug}`}
+                  data-cursor="hover"
+                  className="group bento-hover border-r border-b border-border px-6 py-6 flex items-center justify-between gap-4 transition-colors"
+                >
+                  <span className="text-[16px] font-semibold">{m.label}</span>
+                  <ArrowDiag className="flex-shrink-0 group-hover:translate-x-1.5 group-hover:-translate-y-1.5 transition-transform" />
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* ── CTA ──────────────────────────────────────────────────────────── */}
+        <section className="px-4 sm:px-6 lg:px-8 py-24 border-b border-border text-center">
+          <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground mb-6">Démarrer maintenant</div>
+          <h2 className="mx-auto mb-6 max-w-[860px] text-[clamp(36px,5vw,80px)] font-extrabold tracking-[-0.04em] leading-[0.95]">
+            Prêt à être le {labelSingulier.toLowerCase()} de référence{" "}
+            <em className="font-serif font-normal italic text-accent">à {ville.label}&nbsp;?</em>
+          </h2>
+          <p className="mx-auto mb-8 max-w-[560px] text-[18px] leading-[1.55] text-muted-foreground">
+            Diagnostic gratuit en 15 minutes. On regarde votre situation actuelle et on vous dit honnêtement ce qu&apos;on peut faire.
+          </p>
+          <Link
+            href="/#contact"
+            data-cursor="hover"
+            className="inline-flex items-center gap-3 px-8 py-5 bg-accent text-accent-foreground font-medium text-[15px] hover:bg-foreground hover:text-background transition-colors"
+          >
+            Diagnostic gratuit — {ville.label}
+            <ArrowDiag />
+          </Link>
+        </section>
+
       </main>
       <Footer />
     </>

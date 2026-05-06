@@ -130,7 +130,7 @@
 =======
 /* Mobem Solutions — Direction Artistique "Refonte"
    Palette éditoriale : Ink / Paper / Signal Red
-   Typographie : Inter + DM Serif Display + JetBrains Mono
+   Typographie : Inter + DM Serif Display + Syne
 */
 
 :root {
@@ -204,7 +204,7 @@
   --secondary-foreground: oklch(0.973 0.003 80);
 
   --muted: oklch(0.16 0 0);
-  --muted-foreground: oklch(0.59 0 0);
+  --muted-foreground: oklch(0.68 0 0);
 
   /* Signal reste identique en dark */
   --accent: oklch(0.51 0.22 27);
@@ -313,7 +313,7 @@
 /* ─── Marquee ─────────────────────────────────────── */
 .marquee-track {
   display: flex;
-  animation: marquee-scroll 60s linear infinite;
+  animation: marquee-scroll var(--marquee-duration, 12s) linear infinite;
   white-space: nowrap;
   will-change: transform;
 }
@@ -323,6 +323,28 @@
 @keyframes marquee-scroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
+}
+@media (min-width: 640px) {
+  .marquee-track { --marquee-duration: 18s; }
+}
+@media (min-width: 1024px) {
+  .marquee-track { --marquee-duration: 22s; }
+}
+
+/* ─── Nav ripple ──────────────────────────────────── */
+.nav-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0);
+  animation: nav-ripple-anim 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes nav-ripple-anim {
+  0%   { transform: scale(0); opacity: 0.28; }
+  60%  { transform: scale(1); opacity: 0.10; }
+  100% { transform: scale(1); opacity: 0; }
 }
 
 /* ─── Blinking caret ──────────────────────────────── */
@@ -367,6 +389,10 @@
 @keyframes ring-pulse {
   0%   { transform: scale(1);   opacity: 0.6; }
   100% { transform: scale(1.6); opacity: 0; }
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 
 <<<<<<< HEAD
@@ -491,4 +517,52 @@
 
 .bento-grid > * {
   background-color: var(--card);
+}
+
+/* ─── Custom cursor ──────────────────────────────── */
+#mobem-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 240ms cubic-bezier(.2,.7,.2,1), height 240ms cubic-bezier(.2,.7,.2,1), background 240ms ease, opacity 200ms ease;
+  opacity: 0;
+}
+#mobem-cursor[data-mode="hover"] {
+  opacity: 1;
+  width: 64px;
+  height: 64px;
+  background: var(--color-accent);
+  mix-blend-mode: difference;
+}
+#mobem-cursor[data-mode="text"] {
+  opacity: 1;
+  width: 3px;
+  height: 22px;
+  border-radius: 0;
+  background: var(--color-foreground);
+}
+#mobem-cursor-label {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(16px, 16px);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--color-foreground);
+  color: var(--color-background);
+  padding: 4px 8px;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+@media (hover: none) {
+  #mobem-cursor, #mobem-cursor-label { display: none; }
+}
+@media (hover: hover) {
+  [data-cursor] { cursor: none; }
 }

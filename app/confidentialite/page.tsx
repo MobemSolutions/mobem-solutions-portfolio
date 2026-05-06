@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { LegalHeader } from "@/components/legal-header"
+import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { CopyEmail } from "@/components/ui/copy-email"
 
@@ -28,59 +28,50 @@ const sections = [
 export default function ConfidentialitePage() {
   return (
     <>
-      <LegalHeader />
-      <main className="pt-20 lg:pt-24 pb-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Hero */}
-          <div className="py-12 lg:py-16 border-b border-border">
-            <p className="text-sm font-medium text-accent mb-3 tracking-wide uppercase">Informations légales</p>
-            <h1 className="text-4xl lg:text-5xl font-bold text-foreground tracking-tight">
-              Politique de confidentialité
+      <Header />
+      <main className="min-h-screen">
+        <section className="pt-14 lg:pt-16 border-t border-border">
+          <div className="px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-12 border-b border-border">
+            <nav className="flex items-center gap-2.5 mb-10 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground" aria-label="Fil d'Ariane">
+              <Link href="/" className="hover:text-accent transition-colors">Accueil</Link>
+              <span>/</span>
+              <span className="text-foreground">Confidentialité</span>
+            </nav>
+            <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground mb-4">Informations légales</div>
+            <h1 className="font-extrabold leading-[0.92] tracking-[-0.04em] text-[clamp(36px,5vw,72px)] mb-4">
+              Politique de <em className="font-serif font-normal italic text-accent">confidentialité.</em>
             </h1>
-            <p className="mt-4 text-muted-foreground max-w-2xl">
-              Mobem Solutions s'engage à protéger la vie privée de ses visiteurs et clients. Cette politique décrit
-              comment nous collectons, utilisons et protégeons vos données personnelles conformément au RGPD
-              (Règlement UE 2016/679).
+            <p className="text-[16px] leading-[1.55] text-muted-foreground max-w-[640px]">
+              Mobem Solutions s'engage à protéger la vie privée de ses visiteurs et clients, conformément au RGPD (UE 2016/679).{" "}
+              <span className="font-mono text-[11px]">Mise à jour : janvier 2025.</span>
             </p>
-            <p className="mt-2 text-sm text-muted-foreground">Dernière mise à jour : janvier 2025</p>
           </div>
-
-          <div className="mt-12 lg:mt-16 grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-16">
-            {/* Sidebar TOC */}
-            <aside className="lg:col-span-1">
-              <div className="sticky top-24">
-                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-4">
-                  Sommaire
+        </section>
+        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] border-b border-border">
+          <aside className="border-b lg:border-b-0 lg:border-r border-border px-4 sm:px-6 lg:px-8 py-8">
+            <div className="lg:sticky lg:top-24 max-h-[80vh] overflow-y-auto">
+              <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground mb-4">Sommaire</p>
+              <nav className="flex flex-col gap-1">
+                {sections.map((s, i) => (
+                  <a key={s.id} href={`#${s.id}`}
+                    data-cursor="hover"
+                    className="flex items-start gap-2 font-mono text-[11px] text-muted-foreground hover:text-accent transition-colors py-1.5 pl-3 border-l border-border hover:border-accent">
+                    <span className="text-accent/50 shrink-0">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="uppercase tracking-[0.04em]">{s.label}</span>
+                  </a>
+                ))}
+              </nav>
+              <div className="mt-6 pt-6 border-t border-border">
+                <p className="font-mono text-[10px] uppercase tracking-[0.06em] text-muted-foreground">
+                  Voir aussi :{" "}
+                  <Link href="/mentions-legales" className="text-accent hover:underline">Mentions légales</Link>
+                  {" "}—{" "}
+                  <Link href="/cgv" className="text-accent hover:underline">CGV</Link>
                 </p>
-                <nav className="space-y-1 max-h-[70vh] overflow-y-auto pr-2">
-                  {sections.map((s, i) => (
-                    <a
-                      key={s.id}
-                      href={`#${s.id}`}
-                      className="flex gap-2 text-sm text-muted-foreground hover:text-foreground py-1.5 border-l-2 border-transparent hover:border-accent pl-3 transition-colors"
-                    >
-                      <span className="text-accent/60 font-mono text-xs mt-0.5 shrink-0">{String(i + 1).padStart(2, "0")}</span>
-                      <span>{s.label}</span>
-                    </a>
-                  ))}
-                </nav>
-                <div className="mt-6 pt-6 border-t border-border">
-                  <p className="text-xs text-muted-foreground">
-                    Voir aussi :{" "}
-                    <Link href="/mentions-legales" className="underline hover:text-foreground">
-                      Mentions légales
-                    </Link>{" "}
-                    —{" "}
-                    <Link href="/cgv" className="underline hover:text-foreground">
-                      CGV
-                    </Link>
-                  </p>
-                </div>
               </div>
-            </aside>
-
-            {/* Content */}
-            <div className="lg:col-span-3 space-y-14">
+            </div>
+          </aside>
+          <div className="px-4 sm:px-6 lg:px-8 py-16 space-y-14 max-w-[780px]">
 
               <section id="responsable" className="scroll-mt-28">
                 <h2 className="text-xl font-semibold text-foreground mb-4">1. Responsable du traitement</h2>
@@ -519,8 +510,7 @@ export default function ConfidentialitePage() {
               </div>
             </div>
           </div>
-        </div>
-      </main>
+        </main>
       <Footer />
     </>
   )

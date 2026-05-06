@@ -106,7 +106,7 @@ export function HeroSection() {
         {/* Sub-row */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 border-t border-border pt-8 pb-10 lg:pb-14">
           <div className="hidden lg:flex lg:col-span-1 items-start pt-1">
-            <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">— 01</span>
+            <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">01</span>
           </div>
           <div className="lg:col-span-5 lg:pr-10">
             <p className="text-[17px] sm:text-[18px] leading-[1.5] text-muted-foreground">
@@ -115,7 +115,7 @@ export function HeroSection() {
             </p>
           </div>
           <div className="lg:col-span-3 lg:px-8 lg:border-l lg:border-border flex flex-col gap-2">
-            <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">— Engagement</span>
+            <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">Engagement</span>
             <p className="text-[14px] leading-relaxed text-foreground">
               Roadmap trimestrielle. Tarification à la valeur. Un seul interlocuteur, trois associés.
             </p>
@@ -124,7 +124,7 @@ export function HeroSection() {
             <Link
               href="#contact"
               onClick={handleScrollTo("#contact")}
-              className="inline-flex items-center gap-2.5 px-5 py-3 bg-accent text-accent-foreground text-sm font-medium transition-colors hover:bg-foreground"
+              className="inline-flex items-center gap-2.5 px-5 py-3 bg-accent text-accent-foreground text-sm font-medium transition-colors hover:bg-foreground hover:text-background"
             >
               Démarrer un diagnostic
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -180,7 +180,7 @@ export function HeroSection() {
               i < 2 && "border-b border-border lg:border-b-0",
             )}
           >
-            <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
+            <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">
               0{i + 1} · {key}
             </span>
             <div className="text-[36px] sm:text-[44px] font-bold tracking-[-0.03em] leading-none">{value}</div>

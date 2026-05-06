@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { LegalHeader } from "@/components/legal-header"
+import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 
 export const metadata: Metadata = {
@@ -30,62 +30,59 @@ const sections = [
 export default function CGVPage() {
   return (
     <>
-      <LegalHeader />
-      <main className="pt-20 lg:pt-24 pb-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Hero */}
-          <div className="py-12 lg:py-16 border-b border-border">
-            <p className="text-sm font-medium text-accent mb-3 tracking-wide uppercase">Informations légales</p>
-            <h1 className="text-4xl lg:text-5xl font-bold text-foreground tracking-tight">
-              Conditions Générales de Vente
+      <Header />
+      <main className="min-h-screen">
+
+        {/* ── Hero ─────────────────────────────────────────────────────────── */}
+        <section className="pt-14 lg:pt-16 border-t border-border">
+          <div className="px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-12 border-b border-border">
+            <nav className="flex items-center gap-2.5 mb-10 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground" aria-label="Fil d'Ariane">
+              <Link href="/" className="hover:text-accent transition-colors">Accueil</Link>
+              <span>/</span>
+              <span className="text-foreground">CGV</span>
+            </nav>
+            <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground mb-4">Informations légales</div>
+            <h1 className="font-extrabold leading-[0.92] tracking-[-0.04em] text-[clamp(36px,5vw,72px)] mb-4">
+              Conditions Générales <em className="font-serif font-normal italic text-accent">de Vente.</em>
             </h1>
-            <p className="mt-4 text-muted-foreground max-w-2xl">
-              Les présentes CGV régissent l'ensemble des relations contractuelles entre Mobem Solutions et tout
-              client ayant passé commande de ses prestations.
+            <p className="text-[16px] leading-[1.55] text-muted-foreground max-w-[640px]">
+              Les présentes CGV régissent l'ensemble des relations contractuelles entre Mobem Solutions et tout client
+              ayant passé commande de ses prestations.{" "}
+              <span className="font-mono text-[11px]">En vigueur au 1er janvier 2025.</span>
             </p>
-            <p className="mt-2 text-sm text-muted-foreground">En vigueur au 1er janvier 2025</p>
           </div>
+        </section>
 
-          <div className="mt-12 lg:mt-16 grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-16">
-            {/* Sidebar TOC */}
-            <aside className="lg:col-span-1">
-              <div className="sticky top-24">
-                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-4">
-                  Sommaire
+        {/* ── Content + TOC ────────────────────────────────────────────────── */}
+        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] border-b border-border">
+          <aside className="border-b lg:border-b-0 lg:border-r border-border px-4 sm:px-6 lg:px-8 py-8">
+            <div className="lg:sticky lg:top-24 max-h-[80vh] overflow-y-auto">
+              <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground mb-4">Sommaire</p>
+              <nav className="flex flex-col gap-1">
+                {sections.map((s, i) => (
+                  <a key={s.id} href={`#${s.id}`}
+                    data-cursor="hover"
+                    className="flex items-start gap-2 font-mono text-[11px] text-muted-foreground hover:text-accent transition-colors py-1.5 pl-3 border-l border-border hover:border-accent">
+                    <span className="text-accent/50 shrink-0">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="uppercase tracking-[0.04em]">{s.label}</span>
+                  </a>
+                ))}
+              </nav>
+              <div className="mt-6 pt-6 border-t border-border">
+                <p className="font-mono text-[10px] uppercase tracking-[0.06em] text-muted-foreground">
+                  Voir aussi :{" "}
+                  <Link href="/mentions-legales" className="text-accent hover:underline">Mentions légales</Link>
+                  {" "}—{" "}
+                  <Link href="/confidentialite" className="text-accent hover:underline">Confidentialité</Link>
                 </p>
-                <nav className="space-y-1 max-h-[70vh] overflow-y-auto pr-2">
-                  {sections.map((s, i) => (
-                    <a
-                      key={s.id}
-                      href={`#${s.id}`}
-                      className="flex gap-2 text-sm text-muted-foreground hover:text-foreground py-1.5 border-l-2 border-transparent hover:border-accent pl-3 transition-colors"
-                    >
-                      <span className="text-accent/60 font-mono text-xs mt-0.5 shrink-0">{String(i + 1).padStart(2, "0")}</span>
-                      <span>{s.label}</span>
-                    </a>
-                  ))}
-                </nav>
-                <div className="mt-6 pt-6 border-t border-border">
-                  <p className="text-xs text-muted-foreground">
-                    Voir aussi :{" "}
-                    <Link href="/mentions-legales" className="underline hover:text-foreground">
-                      Mentions légales
-                    </Link>{" "}
-                    —{" "}
-                    <Link href="/confidentialite" className="underline hover:text-foreground">
-                      Confidentialité
-                    </Link>
-                  </p>
-                </div>
               </div>
-            </aside>
-
-            {/* Content */}
-            <div className="lg:col-span-3 space-y-14">
+            </div>
+          </aside>
+          <div className="px-4 sm:px-6 lg:px-8 py-16 space-y-14 max-w-[780px]">
 
               {/* Préambule */}
-              <div className="rounded-xl border border-border bg-card p-6">
-                <h2 className="font-semibold text-foreground mb-3">Préambule</h2>
+              <div className="border-l-2 border-accent bg-secondary/30 pl-6 py-4 pr-6">
+                <h2 className="font-mono text-[11px] uppercase tracking-[0.08em] text-accent mb-3">Préambule</h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   Toute commande passée auprès de Mobem Solutions implique l'acceptation pleine et entière des
                   présentes CGV, qui prévalent sur tout autre document du Client, sauf convention particulière
@@ -97,7 +94,7 @@ export default function CGVPage() {
                     { name: "Arnaud Clavier", role: "Co-Mandataire technique, Responsable Développement" },
                     { name: "Antoine Clavier", role: "Responsable Design" },
                   ].map((m) => (
-                    <div key={m.name} className="rounded-lg border border-border bg-background p-3">
+                    <div key={m.name} className="border border-border bg-background p-3">
                       <p className="text-sm font-semibold text-foreground">{m.name}</p>
                       <p className="text-xs text-muted-foreground mt-1">{m.role}</p>
                     </div>
@@ -106,7 +103,7 @@ export default function CGVPage() {
               </div>
 
               <section id="structure" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-1">
+                <h2 className="text-[22px] font-bold tracking-[-0.02em] mb-1">
                   Article 1 — Structure juridique du GME et représentation
                 </h2>
                 <div className="prose-legal space-y-4 mt-4">
@@ -139,7 +136,7 @@ export default function CGVPage() {
               </section>
 
               <section id="prestations" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">
+                <h2 className="text-[22px] font-bold tracking-[-0.02em] mb-4">
                   Article 2 — Prestations proposées
                 </h2>
                 <div className="grid gap-3 sm:grid-cols-3">
@@ -157,7 +154,7 @@ export default function CGVPage() {
                       desc: "Maintenance récurrente, sécurité et mises à jour (voir Article 10).",
                     },
                   ].map((p) => (
-                    <div key={p.title} className="rounded-xl border border-border bg-card p-5">
+                    <div key={p.title} className=" border border-border bg-card p-5">
                       <p className="font-semibold text-foreground text-sm">{p.title}</p>
                       <p className="text-sm text-muted-foreground mt-2">{p.desc}</p>
                     </div>
@@ -170,7 +167,7 @@ export default function CGVPage() {
               </section>
 
               <section id="formation" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">
+                <h2 className="text-[22px] font-bold tracking-[-0.02em] mb-4">
                   Article 3 — Formation du contrat et commande
                 </h2>
                 <div className="prose-legal space-y-3">
@@ -187,7 +184,7 @@ export default function CGVPage() {
               </section>
 
               <section id="financier" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">
+                <h2 className="text-[22px] font-bold tracking-[-0.02em] mb-4">
                   Article 4 — Conditions financières
                 </h2>
                 <div className="prose-legal space-y-6">
@@ -200,15 +197,15 @@ export default function CGVPage() {
                   </div>
                   <div>
                     <h3 className="font-medium text-foreground mb-3">4.2 Modalités de paiement</h3>
-                    <div className="grid gap-3 sm:grid-cols-3">
+                    <div className="grid border-t border-l border-border sm:grid-cols-3">
                       {[
                         { pct: "30 %", label: "À la commande", detail: "Acompte" },
-                        { pct: "40 %", label: "Recette provisoire", detail: "Validation maquettes / développement" },
+                        { pct: "40 %", label: "Recette provisoire", detail: "Validation maquettes" },
                         { pct: "30 %", label: "Livraison finale", detail: "Solde" },
                       ].map((e) => (
-                        <div key={e.label} className="rounded-xl border border-border bg-card p-4 text-center">
-                          <p className="text-2xl font-bold text-accent">{e.pct}</p>
-                          <p className="text-sm font-medium text-foreground mt-1">{e.label}</p>
+                        <div key={e.label} className="border-r border-b border-border p-5">
+                          <p className="text-[40px] font-bold tracking-[-0.03em] text-accent leading-none">{e.pct}</p>
+                          <p className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground mt-3">{e.label}</p>
                           <p className="text-xs text-muted-foreground mt-1">{e.detail}</p>
                         </div>
                       ))}
@@ -230,11 +227,11 @@ export default function CGVPage() {
               </section>
 
               <section id="suspension" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">
+                <h2 className="text-[22px] font-bold tracking-[-0.02em] mb-4">
                   Article 5 — Clause de suspension pour non-paiement
                 </h2>
-                <div className="rounded-xl border border-destructive/30 bg-destructive/5 p-5 prose-legal">
-                  <p className="font-semibold text-foreground text-sm mb-3">
+                <div className="border-l-2 border-destructive bg-destructive/5 pl-6 py-4 pr-6 prose-legal">
+                  <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-destructive mb-3">
                     Clause de réserve de propriété et de suspension d'accès
                   </p>
                   <p>
@@ -248,7 +245,7 @@ export default function CGVPage() {
               </section>
 
               <section id="propriete" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">
+                <h2 className="text-[22px] font-bold tracking-[-0.02em] mb-4">
                   Article 6 — Propriété intellectuelle
                 </h2>
                 <div className="prose-legal space-y-6">
@@ -273,7 +270,7 @@ export default function CGVPage() {
               </section>
 
               <section id="responsabilite-contenu" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">
+                <h2 className="text-[22px] font-bold tracking-[-0.02em] mb-4">
                   Article 7 — Responsabilité sur les contenus du Client
                 </h2>
                 <div className="prose-legal space-y-3">
@@ -290,7 +287,7 @@ export default function CGVPage() {
               </section>
 
               <section id="portfolio" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">
+                <h2 className="text-[22px] font-bold tracking-[-0.02em] mb-4">
                   Article 8 — Clause portfolio
                 </h2>
                 <div className="prose-legal">
@@ -308,7 +305,7 @@ export default function CGVPage() {
               </section>
 
               <section id="hebergement" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">
+                <h2 className="text-[22px] font-bold tracking-[-0.02em] mb-4">
                   Article 9 — Hébergement
                 </h2>
                 <div className="prose-legal space-y-3">
@@ -324,7 +321,7 @@ export default function CGVPage() {
               </section>
 
               <section id="maintenance" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">
+                <h2 className="text-[22px] font-bold tracking-[-0.02em] mb-4">
                   Article 10 — Le Pack Sérénité (Maintenance)
                 </h2>
                 <div className="prose-legal space-y-6">
@@ -349,7 +346,7 @@ export default function CGVPage() {
                       ))}
                     </ul>
                   </div>
-                  <div className="rounded-xl border border-border bg-card p-4">
+                  <div className=" border border-border bg-card p-4">
                     <p className="text-sm font-medium text-foreground">Garantie d'intervention</p>
                     <p className="text-sm text-muted-foreground mt-1">
                       Intervention sous <strong>48 heures ouvrables</strong> pour tout bug bloquant. Les
@@ -368,7 +365,7 @@ export default function CGVPage() {
               </section>
 
               <section id="obligations" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">
+                <h2 className="text-[22px] font-bold tracking-[-0.02em] mb-4">
                   Article 11 — Obligations du Client et impact sur les délais
                 </h2>
                 <div className="prose-legal space-y-4">
@@ -390,7 +387,7 @@ export default function CGVPage() {
               </section>
 
               <section id="limitation" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">
+                <h2 className="text-[22px] font-bold tracking-[-0.02em] mb-4">
                   Article 12 — Limitation de responsabilité du Prestataire
                 </h2>
                 <div className="prose-legal space-y-3">
@@ -407,7 +404,7 @@ export default function CGVPage() {
               </section>
 
               <section id="confidentialite" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">
+                <h2 className="text-[22px] font-bold tracking-[-0.02em] mb-4">
                   Article 13 — Confidentialité
                 </h2>
                 <div className="prose-legal">
@@ -420,7 +417,7 @@ export default function CGVPage() {
               </section>
 
               <section id="resiliation" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">
+                <h2 className="text-[22px] font-bold tracking-[-0.02em] mb-4">
                   Article 15 — Résiliation
                 </h2>
                 <div className="prose-legal space-y-3">
@@ -438,7 +435,7 @@ export default function CGVPage() {
               </section>
 
               <section id="droit" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">
+                <h2 className="text-[22px] font-bold tracking-[-0.02em] mb-4">
                   Article 17 — Droit applicable et juridiction compétente
                 </h2>
                 <div className="prose-legal">
@@ -451,17 +448,16 @@ export default function CGVPage() {
               </section>
 
               <div className="pt-8 border-t border-border">
-                <p className="text-xs text-muted-foreground">
+                <p className="font-mono text-[11px] text-muted-foreground">
                   Mobem Solutions — CGV en vigueur au 1er janvier 2025
                 </p>
-                <p className="text-xs text-muted-foreground mt-1">
+                <p className="font-mono text-[11px] text-muted-foreground mt-1">
                   GME | Nathan Portier (Mandataire) & Arnaud Clavier (Co-Mandataire) — Tribunal de Commerce d'Angers
                 </p>
               </div>
             </div>
           </div>
-        </div>
-      </main>
+        </main>
       <Footer />
     </>
   )

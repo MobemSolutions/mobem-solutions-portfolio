@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useCountdown } from "@/hooks/useCountdown"
 import { createPortal } from "react-dom"
 import { ArrowRight, ArrowUpRight, Check, MapPin, Mail, Phone, Clock, Loader2, X, CalendarDays } from "lucide-react"
 import { useSuccessSound } from "@/hooks/useSuccessSound"
@@ -50,12 +49,18 @@ interface FormErrors {
 
 function SuccessCard({ name, email, onReset }: { name: string; email: string; onReset: () => void }) {
   const firstName = name.split(" ")[0]
-  const countdown = useCountdown(10, true)
+  const [seconds, setSeconds] = useState(10)
 
   useEffect(() => {
     const t = setTimeout(onReset, 10000)
     return () => clearTimeout(t)
   }, [onReset])
+
+  useEffect(() => {
+    if (seconds <= 0) return
+    const t = setTimeout(() => setSeconds((s) => s - 1), 1000)
+    return () => clearTimeout(t)
+  }, [seconds])
 
   return (
     <div className="flex flex-col items-center justify-center text-center gap-6 py-12">
@@ -211,28 +216,11 @@ export function ContactSection() {
 =======
       {/* Editorial header */}
       <div className="px-4 sm:px-6 lg:px-8 pt-10 pb-8 border-b border-border mx-auto max-w-7xl">
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-0 items-end">
-          <h3 className="text-[clamp(44px,6vw,80px)] font-bold leading-[0.92] tracking-[-0.04em]">
-            Parlons<br />
-            de votre{" "}
-            <span className="font-serif font-normal italic tracking-[-0.02em] text-accent">levier.</span>
-          </h3>
-          <div className="lg:pl-12 lg:border-l lg:border-border">
-            <div className="flex flex-col gap-4">
-              <div>
-                <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">— Email</span>
-                <div className="text-[16px] mt-1">contact@mobem-solutions.com</div>
-              </div>
-              <div>
-                <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">— Disponibilité</span>
-                <div className="flex items-center gap-2.5 mt-1">
-                  <span className="live-dot" aria-hidden="true" />
-                  <span className="text-[14px]">Q2 {new Date().getFullYear()} — 2 places ouvertes</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <h3 className="text-[clamp(44px,6vw,80px)] font-bold leading-[0.92] tracking-[-0.04em]">
+          Parlons<br />
+          de votre{" "}
+          <span className="font-serif font-normal italic tracking-[-0.02em] text-accent">levier.</span>
+        </h3>
       </div>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">

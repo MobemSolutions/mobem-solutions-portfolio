@@ -51,13 +51,12 @@ export function PortfolioTeaser() {
       {/* Section head */}
       <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-5 border-b border-border">
         <div className="flex items-baseline gap-5">
-          <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">// 04</span>
           <h2 id="portfolio-teaser-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
             Réalisations
           </h2>
         </div>
-        <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
-          Sélection — 2025 / 2026
+        <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">
+          Sélection 2025 / 2026
         </span>
       </div>
 
@@ -79,7 +78,7 @@ export function PortfolioTeaser() {
             aria-hidden="true"
           />
 
-          <span className="shrink-0 lg:col-span-1 font-mono text-[11px] text-muted-foreground transition-colors">
+          <span className="shrink-0 lg:col-span-1 font-mono text-[11px] text-foreground/60 transition-colors">
             0{i + 1}
           </span>
 
@@ -194,7 +193,7 @@ export function PortfolioTeaser() {
             {project.client.sector}
           </div>
 
-          <div className="hidden lg:block lg:col-span-2 text-[13px] text-muted-foreground transition-colors">
+          <div className="hidden lg:block lg:col-span-2 text-[13px] text-foreground/60 transition-colors">
             {project.tags[0]}
           </div>
 
@@ -222,7 +221,7 @@ export function PortfolioTeaser() {
           Toutes les réalisations
           <ArrowRight className="w-4 h-4" aria-hidden="true" />
         </Link>
-        <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
+        <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">
           {projects.filter((p) => p.featured).length} projets
         </span>
 >>>>>>> 38f194d (maj)

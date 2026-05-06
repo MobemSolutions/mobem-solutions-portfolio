@@ -141,13 +141,10 @@ export function ServicesSection() {
 
       {/* Section head */}
       <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-5 border-b border-border">
-        <div className="flex items-baseline gap-5">
-          <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">// 02</span>
-          <h2 id="services-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
-            Méthode
-          </h2>
-        </div>
-        <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
+        <h2 id="services-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
+          Méthode
+        </h2>
+        <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">
           Diagnostiquer avant de prescrire
         </span>
       </div>
@@ -215,8 +212,9 @@ export function ServicesSection() {
             <div
               key={step.number}
               role="listitem"
+              data-cursor="hover"
               className={cn(
-                "bento-hover grid grid-cols-1 sm:grid-cols-12 gap-3 sm:gap-6 px-4 sm:px-6 lg:px-8 py-6 lg:py-7 items-baseline",
+                "group bento-hover grid grid-cols-1 sm:grid-cols-12 gap-3 sm:gap-6 px-4 sm:px-6 lg:px-8 py-6 lg:py-7 items-baseline",
                 i < steps.length - 1 && "border-b border-border"
               )}
             >
@@ -225,15 +223,15 @@ export function ServicesSection() {
                 <div className="text-[20px] sm:text-[22px] font-bold tracking-[-0.025em] leading-none mb-2">
                   {step.title}
                 </div>
-                <div className="text-[13px] text-muted-foreground leading-relaxed">
+                <div className="text-[13px] text-muted-foreground group-hover:text-background/60 leading-relaxed transition-colors">
                   {step.description}
                 </div>
               </div>
-              <div className="sm:col-span-2 font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
-                {step.duration}
+              <div className="sm:col-span-2 font-mono text-[11px] uppercase tracking-[0.06em] text-foreground group-hover:text-background transition-colors">
+                <span className="tabular-nums whitespace-nowrap">{step.duration}</span>
               </div>
               <div className="sm:col-span-4 sm:text-right">
-                <span className="font-mono text-[10px] uppercase tracking-[0.06em] text-muted-foreground">
+                <span className="font-mono text-[10px] uppercase tracking-[0.06em] text-foreground/70 group-hover:text-background/60 transition-colors">
                   Livrable —
                 </span>
                 <br />
@@ -301,28 +299,6 @@ export function ServicesSection() {
 >>>>>>> 38f194d (maj)
       </div>
 
-      {/* Stats strip */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 border-t border-border">
-        {stats.map(({ value, label }, i) => (
-          <div
-            key={label}
-            className={cn(
-              "px-4 sm:px-6 lg:px-8 py-6 lg:py-8 flex flex-col gap-2",
-              i < 3 && "lg:border-r lg:border-border",
-              i % 2 === 0 && "border-r border-border lg:border-r-0",
-              i < 2 && "border-b border-border lg:border-b-0",
-            )}
-          >
-            <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
-              0{i + 1}
-            </span>
-            <div className="text-[36px] sm:text-[48px] font-bold tracking-[-0.03em] leading-none text-accent">
-              {value}
-            </div>
-            <div className="text-xs text-muted-foreground">{label}</div>
-          </div>
-        ))}
-      </div>
 
     </section>
   )

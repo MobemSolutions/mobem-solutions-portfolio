@@ -8,6 +8,7 @@ import { Analytics } from '@vercel/analytics/next'
 >>>>>>> 38f194d (maj)
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { ThemeProvider } from '@/components/theme-provider'
+import { Cursor } from '@/components/cursor'
 import './globals.css'
 
 const inter = Inter({
@@ -30,8 +31,9 @@ const dmSerif = DM_Serif_Display({
   display: 'swap',
 })
 
-const jetbrains = JetBrains_Mono({
+const syne = Syne({
   subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
   variable: '--font-jetbrains',
 >>>>>>> 38f194d (maj)
   display: 'swap',
@@ -71,6 +73,13 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 }
 
@@ -102,6 +111,7 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
+          <Cursor />
           {children}
           <Analytics />
           <SpeedInsights />

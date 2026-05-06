@@ -169,9 +169,6 @@ export function Footer() {
 
           {/* Manifesto — big type */}
           <div className="lg:col-span-7 lg:pr-10">
-            <p className="font-mono text-[11px] uppercase tracking-[0.06em] text-background/40 mb-6">
-              // Manifeste
-            </p>
             <h2 className="font-bold text-[clamp(44px,6.5vw,96px)] leading-[0.90] tracking-[-0.04em]">
               Diagnostiquer<br />
               <span className="font-serif font-normal italic tracking-[-0.02em] text-accent">avant</span><br />
@@ -181,14 +178,14 @@ export function Footer() {
 
           {/* Nav columns */}
           <div className="lg:col-span-2 flex flex-col gap-2.5">
-            <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-background/40 mb-1">
-              — Cabinet
+            <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-background/60 mb-1">
+              Cabinet
             </span>
             {navCabinet.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-[13px] text-background/70 hover:text-background transition-colors"
+                className="text-[13px] text-background/70 hover:text-accent hover:pl-1 transition-all duration-150"
               >
                 {item.name}
               </Link>
@@ -196,26 +193,26 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-2 flex flex-col gap-2.5">
-            <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-background/40 mb-1">
-              — Référencement
+            <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-background/60 mb-1">
+              Référencement
             </span>
             {navSeo.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-[13px] text-background/70 hover:text-background transition-colors"
+                className="text-[13px] text-background/70 hover:text-accent hover:pl-1 transition-all duration-150"
               >
                 {item.name}
               </Link>
             ))}
-            <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-background/40 mt-4 mb-1">
-              — Légal
+            <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-background/60 mt-4 mb-1">
+              Légal
             </span>
             {navLegal.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-[13px] text-background/70 hover:text-background transition-colors"
+                className="text-[13px] text-background/70 hover:text-accent hover:pl-1 transition-all duration-150"
               >
                 {item.name}
               </Link>
@@ -223,14 +220,14 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-1 flex flex-col gap-2.5">
-            <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-background/40 mb-1">
-              — Liens
+            <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-background/60 mb-1">
+              Liens
             </span>
             <a
               href="https://www.linkedin.com/in/mobem-solutions-136816404/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[13px] text-background/70 hover:text-background transition-colors"
+              className="text-[13px] text-background/70 hover:text-accent hover:pl-1 transition-all duration-150"
             >
               LinkedIn ↗
             </a>
@@ -242,9 +239,9 @@ export function Footer() {
 
       {/* Bottom bar */}
       <div className="border-t border-background/10 px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
-        <div className="py-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 font-mono text-[11px] uppercase tracking-[0.06em] text-background/40">
+        <div className="py-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 font-mono text-[11px] uppercase tracking-[0.06em] text-background/60">
           <span>© Mobem Solutions · {new Date().getFullYear()} · Tous droits réservés</span>
-          <span>SIRET : 91514447100017</span>
+          <span className="whitespace-nowrap">SIRET&nbsp;: 91514447100017</span>
           <span>Nantes · Pays de la Loire · France</span>
         </div>
       </div>

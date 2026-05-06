@@ -24,12 +24,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const metier = getMetierBySlug(slug)
   if (!metier) return {}
   return {
-    title: `Création de site internet pour ${metier.label} | Mobem Solutions`,
-    description: `Site internet professionnel pour ${metier.label}. SEO local, mise en ligne en 8 jours, Lighthouse 90+. Dominez Google dans votre ville.`,
+    title: `Site internet pour ${metier.label} — Mobem Solutions | Livré en 10 jours`,
+    description: `Création de site web professionnel pour ${metier.label}. SEO local, Lighthouse 90+, livré en 10 jours. Mobem Solutions — agence web Nantes. Audit gratuit.`,
+    keywords: [
+      `site internet ${metier.label}`,
+      `création site web ${metier.label}`,
+      `référencement ${metier.label}`,
+      `agence web artisan`,
+      `site vitrine PME`,
+    ],
+    alternates: {
+      canonical: `https://mobem-solutions.com/metiers/${metier.slug}`,
+    },
     openGraph: {
-      title: `Site internet pour ${metier.label} | Mobem Solutions`,
+      title: `Site internet pour ${metier.label} — Mobem Solutions`,
       description: metier.description,
       url: `https://mobem-solutions.com/metiers/${metier.slug}`,
+      images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Site internet pour ${metier.label} — Mobem Solutions`,
+      description: metier.description,
     },
   }
 }
@@ -164,9 +180,8 @@ export default async function MetierPage({ params }: Props) {
                 <span className="text-foreground">{metier.label}</span>
               </nav>
               {category && (
-                <span className="inline-flex items-center gap-2 px-2.5 py-1.5 border border-border font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground mb-6">
-                  <span className="w-1.5 h-1.5 bg-accent flex-shrink-0" aria-hidden="true" />
-                  {category.label} · {category.metiers.length} sites livrés
+                <span className="inline-block border-l-2 border-accent pl-3 pr-4 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground mb-6">
+                  {category.label}
                 </span>
               )}
               <h1 className="font-extrabold leading-[0.92] tracking-[-0.04em] text-[clamp(56px,7vw,112px)] mb-6">
@@ -183,7 +198,7 @@ export default async function MetierPage({ params }: Props) {
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="#tarifs"
-                  className="inline-flex items-center gap-2.5 px-5 py-3 bg-accent text-accent-foreground text-sm font-medium transition-colors hover:bg-foreground"
+                  className="inline-flex items-center gap-2.5 px-5 py-3 bg-accent text-accent-foreground text-sm font-medium transition-colors hover:bg-foreground hover:text-background"
                 >
                   Voir les tarifs
                   <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -223,8 +238,8 @@ export default async function MetierPage({ params }: Props) {
         {/* Pain band */}
         <section className="border-t border-border" aria-labelledby="pain-heading">
           <div className="px-4 sm:px-6 lg:px-8 pt-16 pb-0">
-            <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground mb-4">
-              // Le constat
+            <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground mb-4">
+              Le constat
             </div>
             <h2 id="pain-heading" className="text-[clamp(36px,4.5vw,64px)] font-extrabold tracking-[-0.03em] leading-none mb-10 max-w-[880px]">
               Pourquoi 9 {labelPluriel} sur 10<br />
@@ -239,7 +254,7 @@ export default async function MetierPage({ params }: Props) {
                 key={pain.num}
                 className="px-8 py-8 border-r border-b border-border flex flex-col gap-3.5 min-h-[240px]"
               >
-                <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-accent">// {pain.num}</span>
+                <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-accent">{pain.num}</span>
                 <h3 className="text-[22px] font-bold tracking-[-0.02em] leading-[1.15]">{pain.title}</h3>
                 <p className="text-[14px] leading-[1.55] text-muted-foreground">{pain.text}</p>
               </div>
@@ -250,8 +265,8 @@ export default async function MetierPage({ params }: Props) {
         {/* Features band */}
         <section className="border-t border-border grid grid-cols-1 lg:grid-cols-12" aria-labelledby="features-heading">
           <div className="lg:col-span-5 px-4 sm:px-6 lg:px-8 py-16 lg:border-r lg:border-border">
-            <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground mb-4">
-              // Inclus dans chaque site
+            <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground mb-4">
+              Inclus dans chaque site
             </div>
             <h2 id="features-heading" className="text-[clamp(36px,4.5vw,64px)] font-extrabold tracking-[-0.03em] leading-none mb-4">
               Tout ce dont vous<br />avez{" "}
@@ -273,14 +288,15 @@ export default async function MetierPage({ params }: Props) {
               {FEATURES.map((feat, i) => (
                 <div
                   key={feat.num}
-                  className={`grid grid-cols-[50px_1fr_24px] gap-6 py-5 items-baseline border-t border-border${
+                  data-cursor="hover"
+                  className={`group bento-hover grid grid-cols-[50px_1fr_24px] gap-6 py-5 px-3 items-baseline border-t border-border transition-colors${
                     i === FEATURES.length - 1 ? " border-b border-border" : ""
                   }`}
                 >
-                  <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground">{feat.num}</span>
+                  <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-foreground/50 dark:text-foreground/75 group-hover:text-background/50 transition-colors">{feat.num}</span>
                   <div>
                     <h3 className="text-[19px] font-semibold tracking-[-0.015em] mb-1.5">{feat.title}</h3>
-                    <p className="text-[14px] leading-[1.55] text-muted-foreground">{feat.text}</p>
+                    <p className="text-[14px] leading-[1.55] text-foreground/60 group-hover:text-background/70 transition-colors">{feat.text}</p>
                   </div>
                   <span className="text-accent font-bold" aria-hidden="true">✓</span>
                 </div>
@@ -295,6 +311,7 @@ export default async function MetierPage({ params }: Props) {
           {PRICING.map((plan) => (
             <div
               key={plan.code}
+              data-cursor="hover"
               className={`px-7 py-9 border-r border-b lg:border-b-0 border-border flex flex-col gap-4${
                 plan.flagship ? " bg-foreground text-background" : ""
               }`}
@@ -337,8 +354,8 @@ export default async function MetierPage({ params }: Props) {
 
         {/* Villes pills */}
         <section className="px-4 sm:px-6 lg:px-8 py-14 border-t border-border" aria-labelledby="villes-heading">
-          <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground mb-4">
-            // Disponible partout en France
+          <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground mb-4">
+            Disponible partout en France
           </div>
           <h2 id="villes-heading" className="text-[clamp(28px,3.4vw,44px)] font-extrabold tracking-[-0.025em] mb-8">
             {metier.label} dans{" "}
@@ -350,6 +367,7 @@ export default async function MetierPage({ params }: Props) {
                 key={v.slug}
                 href={`/metiers/${metier.slug}/${v.slug}`}
                 className="px-4 py-2.5 border border-border text-[13px] font-medium transition-all duration-[180ms] hover:border-accent hover:bg-accent hover:text-accent-foreground"
+                data-cursor="hover"
               >
                 {metier.label} à {v.label}
               </Link>
@@ -360,8 +378,8 @@ export default async function MetierPage({ params }: Props) {
         {/* FAQ */}
         <section className="border-t border-border grid grid-cols-1 lg:grid-cols-12" aria-labelledby="faq-heading">
           <div className="lg:col-span-5 px-4 sm:px-6 lg:px-8 py-16 lg:border-r lg:border-border">
-            <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground mb-4">
-              // Questions fréquentes
+            <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground mb-4">
+              Questions fréquentes
             </div>
             <h2 id="faq-heading" className="text-[clamp(36px,4.5vw,64px)] font-extrabold tracking-[-0.03em] leading-none">
               Vos{" "}
@@ -372,13 +390,13 @@ export default async function MetierPage({ params }: Props) {
             {FAQ_ITEMS.map((item, i) => (
               <details
                 key={i}
-                className="faq-details py-5 border-t border-border last:border-b last:border-border"
+                className="faq-details bento-hover group py-5 border-t border-border last:border-b last:border-border"
                 open={i === 0}
               >
-                <summary className="cursor-pointer list-none flex justify-between items-center text-[18px] font-semibold tracking-[-0.01em] gap-4">
+                <summary className="list-none flex justify-between items-center text-[18px] font-semibold tracking-[-0.01em] gap-4" data-cursor="hover">
                   {item.q}
                 </summary>
-                <p className="mt-3.5 text-muted-foreground leading-[1.6] max-w-[640px] text-[15px]">
+                <p className="mt-3.5 text-muted-foreground group-hover:text-background/60 leading-[1.6] max-w-[640px] text-[15px]">
                   {item.a}
                 </p>
               </details>
@@ -388,8 +406,8 @@ export default async function MetierPage({ params }: Props) {
 
         {/* Final CTA */}
         <section className="px-4 sm:px-6 lg:px-8 py-24 text-center border-t border-border">
-          <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground mb-6">
-            // Démarrer maintenant
+          <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground mb-6">
+            Démarrer maintenant
           </div>
           <h2 className="mx-auto mb-6 max-w-[980px] text-[clamp(40px,5.5vw,88px)] font-extrabold tracking-[-0.03em] leading-[0.95]">
             Prêt à devenir le{" "}
@@ -403,7 +421,7 @@ export default async function MetierPage({ params }: Props) {
           </p>
           <Link
             href="/#contact"
-            className="inline-flex items-center gap-3 px-7 py-4 bg-accent text-accent-foreground text-sm font-medium transition-colors hover:bg-foreground"
+            className="inline-flex items-center gap-3 px-7 py-4 bg-accent text-accent-foreground text-sm font-medium transition-colors hover:bg-foreground hover:text-background"
           >
             Réserver mon créneau
             <ArrowRight className="w-4 h-4" aria-hidden="true" />
