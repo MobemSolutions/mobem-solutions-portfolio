@@ -144,7 +144,7 @@ export default async function MetierVillePage({ params }: Props) {
               <Link
                 href="/#contact"
                 data-cursor="hover"
-                className="inline-flex items-center gap-3 px-7 py-4 bg-accent text-accent-foreground font-medium text-[15px] hover:bg-foreground hover:text-background transition-colors"
+                className="inline-flex items-center gap-3 px-7 py-4 bg-accent text-accent-foreground font-medium text-[15px] cta-hover transition-colors"
               >
                 Diagnostic gratuit — {ville.label}
                 <ArrowDiag />
@@ -295,7 +295,7 @@ export default async function MetierVillePage({ params }: Props) {
           <Link
             href="/#contact"
             data-cursor="hover"
-            className="inline-flex items-center gap-3 px-8 py-5 bg-accent text-accent-foreground font-medium text-[15px] hover:bg-foreground hover:text-background transition-colors"
+            className="inline-flex items-center gap-3 px-8 py-5 bg-accent text-accent-foreground font-medium text-[15px] cta-hover transition-colors"
           >
             Diagnostic gratuit — {ville.label}
             <ArrowDiag />

@@ -103,6 +103,8 @@ export default function OgImage() {
           <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
             <div
               style={{
+                display: "flex",
+                flexDirection: "column",
                 fontSize: "88px",
                 fontWeight: "900",
                 letterSpacing: "-0.045em",
@@ -110,8 +112,7 @@ export default function OgImage() {
                 color: "#FAFAF8",
               }}
             >
-              Sites web qui
-              <br />
+              <span>Sites web qui</span>
               <span style={{ color: "#E63030" }}>convertissent.</span>
             </div>
             <div

@@ -208,7 +208,6 @@ export default function MentionsLegalesPage() {
               </div>
             </div>
           </div>
-        </div>
       </main>
       <Footer />
     </>

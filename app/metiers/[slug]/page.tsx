@@ -198,7 +198,7 @@ export default async function MetierPage({ params }: Props) {
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="#tarifs"
-                  className="inline-flex items-center gap-2.5 px-5 py-3 bg-accent text-accent-foreground text-sm font-medium transition-colors hover:bg-foreground hover:text-background"
+                  className="inline-flex items-center gap-2.5 px-5 py-3 bg-accent text-accent-foreground text-sm font-medium transition-colors cta-hover"
                 >
                   Voir les tarifs
                   <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -293,7 +293,7 @@ export default async function MetierPage({ params }: Props) {
                     i === FEATURES.length - 1 ? " border-b border-border" : ""
                   }`}
                 >
-                  <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-foreground/50 dark:text-foreground/75 group-hover:text-background/50 transition-colors">{feat.num}</span>
+                  <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-foreground/55 group-hover:text-background/65 transition-colors">{feat.num}</span>
                   <div>
                     <h3 className="text-[19px] font-semibold tracking-[-0.015em] mb-1.5">{feat.title}</h3>
                     <p className="text-[14px] leading-[1.55] text-foreground/60 group-hover:text-background/70 transition-colors">{feat.text}</p>
@@ -342,7 +342,7 @@ export default async function MetierPage({ params }: Props) {
                 className={`mt-auto inline-flex items-center gap-2 px-5 py-3 text-sm font-medium transition-colors border${
                   plan.flagship
                     ? " border-accent bg-accent text-accent-foreground hover:bg-transparent hover:text-background"
-                    : " border-current hover:bg-foreground hover:text-background"
+                    : " border-current cta-hover"
                 }`}
               >
                 {plan.cta}
@@ -421,7 +421,7 @@ export default async function MetierPage({ params }: Props) {
           </p>
           <Link
             href="/#contact"
-            className="inline-flex items-center gap-3 px-7 py-4 bg-accent text-accent-foreground text-sm font-medium transition-colors hover:bg-foreground hover:text-background"
+            className="inline-flex items-center gap-3 px-7 py-4 bg-accent text-accent-foreground text-sm font-medium transition-colors cta-hover"
           >
             Réserver mon créneau
             <ArrowRight className="w-4 h-4" aria-hidden="true" />

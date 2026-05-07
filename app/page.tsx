@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/sections/hero"
 import { LogoMarquee } from "@/components/sections/logo-marquee"
 import { PricingSection } from "@/components/sections/pricing"
 import { ServicesSection } from "@/components/sections/services"
+import { FinderSection } from "@/components/sections/finder"
 import { ProofSection } from "@/components/sections/proof"
 import { TeamSection } from "@/components/sections/team"
 import { ContactSection } from "@/components/sections/contact"
@@ -150,8 +151,9 @@ export default function HomePage() {
       <main id="main-content">
         <HeroSection />
         <LogoMarquee />
-        <PricingSection />
         <ServicesSection />
+        <FinderSection />
+        <PricingSection />
         <ProofSection />
         <TeamSection />
         <ContactSection />

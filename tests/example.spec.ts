@@ -1,18 +1,19 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '@playwright/test'
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+test('homepage loads', async ({ page }) => {
+  await page.goto('/')
+  await expect(page).toHaveTitle(/Mobem/)
+})
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+test('opengraph-image returns a valid image', async ({ request }) => {
+  const response = await request.get('/opengraph-image')
+  expect(response.status()).toBe(200)
+  const contentType = response.headers()['content-type']
+  expect(contentType).toMatch(/^image\//)
+})
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
-
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
-});
+test('logo navigates correctly from inner page', async ({ page }) => {
+  await page.goto('/realisations')
+  await page.click('a[aria-label*="Mobem Solutions"]')
+  await expect(page).toHaveURL('/')
+})

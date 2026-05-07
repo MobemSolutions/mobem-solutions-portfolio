@@ -71,7 +71,7 @@ export default function NewsletterPage() {
               <button
                 type="submit"
                 data-cursor="hover"
-                className="inline-flex items-center justify-center gap-3 px-7 py-4 bg-accent text-accent-foreground font-medium text-[14px] hover:bg-foreground hover:text-background transition-colors whitespace-nowrap"
+                className="inline-flex items-center justify-center gap-3 px-7 py-4 bg-accent text-accent-foreground font-medium text-[14px] cta-hover transition-colors whitespace-nowrap"
               >
                 S&apos;abonner
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />

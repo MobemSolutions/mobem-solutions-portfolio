@@ -153,7 +153,7 @@ export function NewsletterWidget() {
           type="submit"
           disabled={state === "loading"}
           data-cursor="hover"
-          className="inline-flex items-center gap-2.5 px-6 py-4 bg-accent text-accent-foreground text-[13px] font-medium whitespace-nowrap hover:bg-foreground hover:text-background transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+          className="inline-flex items-center gap-2.5 px-6 py-4 bg-accent text-accent-foreground text-[13px] font-medium whitespace-nowrap cta-hover transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
         >
           {state === "loading" ? (
             <>

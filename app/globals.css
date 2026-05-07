@@ -3,134 +3,9 @@
 
 @custom-variant dark (&:is(.dark *));
 
-<<<<<<< HEAD
-/* Mobem Solutions - Swiss Style Design System
-   Direction Artistique 2026
-   Swiss Style x Bento Grid
-   5 couleurs, pas une de plus.
-*/
-
-:root {
-  /* Encre - Le noir absolu. Fonds, titres, dominance. */
-  --ink: #0D0D0D;
-  
-  /* Papier - Le blanc cassé. Respiration, espace vide. */
-  --paper: #F7F7F5;
-  
-  /* Gris - Le secondaire. Légendes, tags, discret. */
-  --gray: #888888;
-  
-  /* Règle - Le trait. Séparateurs, bordures. */
-  --rule: #E2E2E2;
-  
-  /* Signal - L'accent unique. Bouton, flèche, alerte. */
-  --signal: #E63030;
-  
-  /* Design Tokens - Light Mode */
-  --background: var(--paper);
-  --foreground: var(--ink);
-  
-  --card: #FFFFFF;
-  --card-foreground: var(--ink);
-  --popover: #FFFFFF;
-  --popover-foreground: var(--ink);
-  
-  --primary: var(--ink);
-  --primary-foreground: var(--paper);
-  
-  --secondary: #F0F0EE;
-  --secondary-foreground: var(--ink);
-  
-  --muted: #F0F0EE;
-  --muted-foreground: var(--gray);
-  
-  --accent: var(--signal);
-  --accent-foreground: #FFFFFF;
-  
-  --destructive: var(--signal);
-  --destructive-foreground: #FFFFFF;
-  
-  --border: var(--rule);
-  --input: var(--rule);
-  --ring: var(--signal);
-  
-  /* Charts - Monochrome with signal */
-  --chart-1: var(--signal);
-  --chart-2: var(--ink);
-  --chart-3: var(--gray);
-  --chart-4: #2D7D46;
-  --chart-5: #1D4ED8;
-  
-  /* Swiss: Coins droits ou radius minimal */
-  --radius: 0.125rem;
-  
-  /* Sidebar */
-  --sidebar: var(--paper);
-  --sidebar-foreground: var(--ink);
-  --sidebar-primary: var(--ink);
-  --sidebar-primary-foreground: var(--paper);
-  --sidebar-accent: #F0F0EE;
-  --sidebar-accent-foreground: var(--ink);
-  --sidebar-border: var(--rule);
-  --sidebar-ring: var(--signal);
-}
-
-.dark {
-  /* Dark mode - Swiss inversé */
-  --background: var(--ink);
-  --foreground: var(--paper);
-  
-  --card: #1A1A1A;
-  --card-foreground: var(--paper);
-  --popover: #1A1A1A;
-  --popover-foreground: var(--paper);
-  
-  --primary: var(--paper);
-  --primary-foreground: var(--ink);
-  
-  --secondary: #262626;
-  --secondary-foreground: var(--paper);
-  
-  --muted: #262626;
-  --muted-foreground: #A0A0A0;
-  
-  --accent: var(--signal);
-  --accent-foreground: #FFFFFF;
-  
-  --destructive: var(--signal);
-  --destructive-foreground: #FFFFFF;
-  
-  --border: #333333;
-  --input: #333333;
-  --ring: var(--signal);
-  
-  --chart-1: var(--signal);
-  --chart-2: var(--paper);
-  --chart-3: #A0A0A0;
-  --chart-4: #4ADE80;
-  --chart-5: #60A5FA;
-  
-  --sidebar: #141414;
-  --sidebar-foreground: var(--paper);
-  --sidebar-primary: var(--signal);
-  --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #262626;
-  --sidebar-accent-foreground: var(--paper);
-  --sidebar-border: #333333;
-  --sidebar-ring: var(--signal);
-}
-
-@theme inline {
-  /* Inter Variable - La principale */
-  --font-sans: var(--font-inter), system-ui, sans-serif;
-  /* DM Serif Display - Accents éditoriaux */
-  --font-serif: var(--font-dm-serif), Georgia, serif;
-  --font-mono: 'Geist Mono', monospace;
-  
-=======
 /* Mobem Solutions — Direction Artistique "Refonte"
    Palette éditoriale : Ink / Paper / Signal Red
-   Typographie : Inter + DM Serif Display + Syne
+   Typographie : Inter + DM Serif Display + JetBrains Mono
 */
 
 :root {
@@ -213,8 +88,8 @@
   --destructive: oklch(0.51 0.22 27);
   --destructive-foreground: oklch(0.973 0.003 80);
 
-  --border: oklch(0.16 0 0);
-  --input: oklch(0.16 0 0);
+  --border: oklch(0.26 0 0);
+  --input: oklch(0.26 0 0);
   --ring: oklch(0.51 0.22 27);
 
   --chart-1: oklch(0.51 0.22 27);
@@ -229,15 +104,14 @@
   --sidebar-primary-foreground: oklch(0.973 0.003 80);
   --sidebar-accent: oklch(0.16 0 0);
   --sidebar-accent-foreground: oklch(0.973 0.003 80);
-  --sidebar-border: oklch(0.16 0 0);
+  --sidebar-border: oklch(0.26 0 0);
   --sidebar-ring: oklch(0.51 0.22 27);
 }
 
 @theme inline {
   --font-sans: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
   --font-serif: var(--font-dm-serif), "Times New Roman", serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, Menlo, monospace;
->>>>>>> 38f194d (maj)
+  --font-mono: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -395,69 +269,25 @@
   to   { transform: rotate(360deg); }
 }
 
-<<<<<<< HEAD
-/* Legal pages typography */
-.prose-legal p {
-  @apply text-sm text-muted-foreground leading-relaxed;
-}
-
-.prose-legal strong {
-  @apply font-semibold text-foreground;
-}
-
-.prose-legal a {
-  @apply text-accent hover:underline;
-}
-
-.prose-legal ul {
-  @apply space-y-2 list-none;
-}
-
-/* Swiss Style Animations - Discrete, never distracting */
-@keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-=======
 /* ─── Scroll animations ───────────────────────────── */
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
->>>>>>> 38f194d (maj)
 }
 @keyframes fade-in {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
 
-<<<<<<< HEAD
-.animate-fade-up {
-  animation: fade-up 0.4s ease-out forwards;
-}
-
-.animate-fade-in {
-  animation: fade-in 0.3s ease-out forwards;
-}
-
-/* Animation delays */
-=======
 .animate-fade-up   { animation: fade-up 0.6s ease-out forwards; }
 .animate-fade-in   { animation: fade-in 0.5s ease-out forwards; }
 
->>>>>>> 38f194d (maj)
 .animation-delay-100 { animation-delay: 100ms; }
 .animation-delay-200 { animation-delay: 200ms; }
 .animation-delay-300 { animation-delay: 300ms; }
 .animation-delay-400 { animation-delay: 400ms; }
 .animation-delay-500 { animation-delay: 500ms; }
 
-<<<<<<< HEAD
-/* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-up,
   .animate-fade-in {
@@ -465,7 +295,8 @@
     opacity: 1;
     transform: none;
   }
-=======
+}
+
 /* ─── Legal pages ─────────────────────────────────── */
 .prose-legal p       { @apply text-sm text-muted-foreground leading-relaxed; }
 .prose-legal strong  { @apply font-semibold text-foreground; }
@@ -481,6 +312,21 @@
   color: var(--color-background);
 }
 
+/* ─── CTA button hover ────────────────────────────── */
+.cta-hover {
+  transition: background 220ms ease, color 220ms ease, border-color 220ms ease;
+}
+.cta-hover:hover {
+  background: oklch(0.07 0 0);
+  color: oklch(0.973 0.003 80);
+  border-color: oklch(0.07 0 0);
+}
+.dark .cta-hover:hover {
+  background: oklch(0.22 0 0);
+  color: oklch(0.973 0.003 80);
+  border-color: oklch(0.35 0 0);
+}
+
 /* ─── FAQ accordion ───────────────────────────────── */
 .faq-details summary::-webkit-details-marker { display: none; }
 .faq-details summary::marker { display: none; }
@@ -494,7 +340,6 @@
 }
 .faq-details[open] summary::after {
   transform: rotate(45deg);
->>>>>>> 38f194d (maj)
 }
 
 /* Swiss Grid - Visible structure */

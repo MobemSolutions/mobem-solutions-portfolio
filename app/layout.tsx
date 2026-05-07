@@ -1,11 +1,6 @@
 import type { Metadata, Viewport } from 'next'
-<<<<<<< HEAD
-import { Inter, DM_Serif_Display } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/react'
-=======
 import { Inter, DM_Serif_Display, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
->>>>>>> 38f194d (maj)
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Cursor } from '@/components/cursor'
@@ -17,12 +12,6 @@ const inter = Inter({
   display: 'swap',
 })
 
-<<<<<<< HEAD
-const dmSerif = DM_Serif_Display({ 
-  weight: '400',
-  subsets: ['latin'],
-  variable: '--font-dm-serif',
-=======
 const dmSerif = DM_Serif_Display({
   subsets: ['latin'],
   weight: '400',
@@ -31,11 +20,9 @@ const dmSerif = DM_Serif_Display({
   display: 'swap',
 })
 
-const syne = Syne({
+const jetBrains = JetBrains_Mono({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
   variable: '--font-jetbrains',
->>>>>>> 38f194d (maj)
   display: 'swap',
 })
 
@@ -98,13 +85,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-<<<<<<< HEAD
-    <html lang="fr" suppressHydrationWarning className="bg-background">
-      <body className={`${inter.variable} ${dmSerif.variable} font-sans antialiased`}>
-=======
     <html lang="fr" suppressHydrationWarning className="bg-background" data-scroll-behavior="smooth">
-      <body className={`${inter.variable} ${dmSerif.variable} ${jetbrains.variable} font-sans antialiased`}>
->>>>>>> 38f194d (maj)
+      <body className={`${inter.variable} ${dmSerif.variable} ${jetBrains.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

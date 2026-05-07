@@ -420,7 +420,7 @@ export default async function ArticlePage({ params }: PageProps) {
         </p>
         <Link
           href="/#contact"
-          className="inline-flex items-center gap-3 px-8 py-5 bg-accent text-accent-foreground font-medium text-[14px] hover:bg-foreground hover:text-background transition-colors"
+          className="inline-flex items-center gap-3 px-8 py-5 bg-accent text-accent-foreground font-medium text-[14px] cta-hover transition-colors"
         >
           Lancer mon projet{" "}
           <ArrowDiag />

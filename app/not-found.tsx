@@ -31,7 +31,7 @@ export default function NotFound() {
                   <Link
                     href="/"
                     data-cursor="hover"
-                    className="inline-flex items-center gap-3 px-6 py-4 bg-accent text-accent-foreground font-medium text-[14px] hover:bg-foreground hover:text-background transition-colors"
+                    className="inline-flex items-center gap-3 px-6 py-4 bg-accent text-accent-foreground font-medium text-[14px] cta-hover transition-colors"
                   >
                     Retour à l'accueil
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
