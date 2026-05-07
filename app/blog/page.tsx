@@ -72,21 +72,21 @@ function ArticleRow({ post }: { post: Post }) {
   return (
     <Link
       href={`/blog/${post.slug?.current}`}
-      className="group bento-hover grid grid-cols-[1fr_120px_40px] items-center gap-6 px-4 sm:px-6 py-6 border-b border-border transition-colors"
+      className="group bento-hover grid grid-cols-[1fr_40px] sm:grid-cols-[1fr_120px_40px] items-center gap-4 sm:gap-6 px-4 sm:px-6 py-5 border-b border-border transition-colors"
       data-cursor="hover"
     >
-      <div>
-        <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-accent">
+      <div className="min-w-0">
+        <span className="text-[10px] uppercase tracking-[0.08em] text-accent">
           {post.categories?.[0]?.title ?? "Article"} · {readTime} min
         </span>
-        <h3 className="mt-1.5 text-[20px] font-semibold tracking-[-0.02em] leading-[1.15]">
+        <h3 className="mt-1 text-[17px] sm:text-[20px] font-semibold tracking-[-0.02em] leading-[1.2] truncate sm:whitespace-normal">
           {post.title}
         </h3>
-        <p className="mt-0.5 text-[13px] text-muted-foreground group-hover:text-background/60 transition-colors">
+        <p className="mt-0.5 text-[12px] sm:text-[13px] text-muted-foreground group-hover:text-background/60 transition-colors">
           {post.authors?.[0]?.name ?? "Mobem Solutions"} · {date}
         </p>
       </div>
-      <span className="font-mono text-[11px] text-foreground/60 group-hover:text-background/60 hidden sm:block transition-colors">
+      <span className="text-[11px] text-foreground/60 group-hover:text-background/60 hidden sm:block transition-colors">
         {shortDate}
       </span>
       <div className="flex justify-end">

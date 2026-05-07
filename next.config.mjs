@@ -1,9 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  typescript: {
-    // Ignore les erreurs de types pour ne plus bloquer le build
-    ignoreBuildErrors: true,
-  },
   images: {
     unoptimized: true,
     remotePatterns: [

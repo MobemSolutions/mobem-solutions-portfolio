@@ -200,7 +200,7 @@ export default async function VilleDetailPage({ params }: PageProps) {
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/#contact"
-                  className="inline-flex items-center gap-3 px-6 py-4 bg-accent text-accent-foreground font-medium text-sm hover:bg-foreground hover:text-background transition-colors"
+                  className="inline-flex items-center gap-3 px-6 py-4 bg-accent text-accent-foreground font-medium text-sm cta-hover transition-colors"
                 >
                   Diagnostic gratuit <ArrowRight />
                 </Link>
@@ -307,7 +307,7 @@ export default async function VilleDetailPage({ params }: PageProps) {
                 <span className="font-semibold text-[16px] tracking-[-0.01em]">
                   {q.name}
                 </span>
-                <span className="font-mono text-[10px] tracking-[0.08em] text-foreground/50 dark:text-foreground/75 group-hover:text-background/50 transition-colors">
+                <span className="font-mono text-[10px] tracking-[0.08em] text-foreground/55 group-hover:text-background/65 transition-colors">
                   {q.code}
                 </span>
               </div>
@@ -430,7 +430,7 @@ export default async function VilleDetailPage({ params }: PageProps) {
           </p>
           <Link
             href="/#contact"
-            className="inline-flex items-center gap-3 px-8 py-5 bg-accent text-accent-foreground font-medium text-[14px] hover:bg-foreground hover:text-background transition-colors"
+            className="inline-flex items-center gap-3 px-8 py-5 bg-accent text-accent-foreground font-medium text-[14px] cta-hover transition-colors"
           >
             Réserver un diagnostic à {ville.label} <ArrowRight />
           </Link>

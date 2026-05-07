@@ -51,6 +51,15 @@ const footer = `
   </tr>
 `
 
+function esc(str: string) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#x27;")
+}
+
 export async function POST(req: NextRequest) {
   try {
     const { name, email, company, services, budget, message } = await req.json()
@@ -59,9 +68,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Champs requis manquants." }, { status: 400 })
     }
 
+    const safeName    = esc(String(name).slice(0, 200))
+    const safeEmail   = esc(String(email).slice(0, 254))
+    const safeCompany = company ? esc(String(company).slice(0, 200)) : ""
+    const safeMessage = esc(String(message).slice(0, 5000))
+
     const serviceLabel = Array.isArray(services) ? services[0] : services
-    const servicesLine = serviceLabel || "Non précisé"
-    const budgetLine = budget || "Non précisé"
+    const servicesLine = serviceLabel ? esc(String(serviceLabel)) : "Non précisé"
+    const budgetLine   = budget ? esc(String(budget)) : "Non précisé"
 
     const toAddresses = [MOBEM_EMAIL]
     if (serviceLabel && SERVICE_ROUTING[serviceLabel]) {
@@ -73,7 +87,7 @@ export async function POST(req: NextRequest) {
     await resend.emails.send({
       from: FROM_EMAIL,
       to: toAddresses,
-      subject: `Nouveau contact — ${name}${company ? ` (${company})` : ""}`,
+      subject: `Nouveau contact — ${safeName}${safeCompany ? ` (${safeCompany})` : ""}`,
       html: `
         <table width="100%" cellpadding="0" cellspacing="0" style="background:${B.paper};padding:40px 16px;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif">
           <tbody><tr><td align="center">
@@ -86,15 +100,15 @@ export async function POST(req: NextRequest) {
                       Nouveau message reçu
                     </p>
                     <h1 style="margin:0 0 24px;font-size:24px;font-weight:800;color:${B.ink};letter-spacing:-0.4px">
-                      ${name}${company ? ` · ${company}` : ""}
+                      ${safeName}${safeCompany ? ` · ${safeCompany}` : ""}
                     </h1>
                     <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px">
                       <tbody>
                         <tr>
                           <td style="padding:10px 0;border-bottom:1px solid ${B.border};font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:${B.faint};width:130px">Email</td>
-                          <td style="padding:10px 0;border-bottom:1px solid ${B.border};font-size:14px"><a href="mailto:${email}" style="color:${B.red};text-decoration:none">${email}</a></td>
+                          <td style="padding:10px 0;border-bottom:1px solid ${B.border};font-size:14px"><a href="mailto:${safeEmail}" style="color:${B.red};text-decoration:none">${safeEmail}</a></td>
                         </tr>
-                        ${company ? `<tr><td style="padding:10px 0;border-bottom:1px solid ${B.border};font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:${B.faint};width:130px">Entreprise</td><td style="padding:10px 0;border-bottom:1px solid ${B.border};font-size:14px">${company}</td></tr>` : ""}
+                        ${safeCompany ? `<tr><td style="padding:10px 0;border-bottom:1px solid ${B.border};font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:${B.faint};width:130px">Entreprise</td><td style="padding:10px 0;border-bottom:1px solid ${B.border};font-size:14px">${safeCompany}</td></tr>` : ""}
                         <tr>
                           <td style="padding:10px 0;border-bottom:1px solid ${B.border};font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:${B.faint}">Prestation</td>
                           <td style="padding:10px 0;border-bottom:1px solid ${B.border};font-size:14px">${servicesLine}</td>
@@ -107,7 +121,7 @@ export async function POST(req: NextRequest) {
                     </table>
                     <p style="margin:0 0 10px;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:${B.faint}">Message</p>
                     <div style="background:${B.subtle};border-left:3px solid ${B.red};padding:16px 20px">
-                      <p style="margin:0;font-size:14px;line-height:1.7;color:${B.ink};white-space:pre-wrap">${message}</p>
+                      <p style="margin:0;font-size:14px;line-height:1.7;color:${B.ink};white-space:pre-wrap">${safeMessage}</p>
                     </div>
                   </td>
                 </tr>
@@ -136,7 +150,7 @@ export async function POST(req: NextRequest) {
                       Message reçu
                     </p>
                     <h1 style="margin:0 0 20px;font-size:30px;font-weight:800;line-height:1.1;color:${B.ink};letter-spacing:-0.6px">
-                      Merci ${name.split(" ")[0]},<br />on revient vite.
+                      Merci ${safeName.split(" ")[0]},<br />on revient vite.
                     </h1>
                     <p style="margin:0 0 10px;font-size:15px;line-height:1.7;color:${B.muted}">
                       Votre message est bien reçu. Un associé vous répondra <strong style="color:${B.ink}">sous 24 heures ouvrées</strong>.

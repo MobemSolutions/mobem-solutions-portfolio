@@ -1,9 +1,11 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { ArrowRight, ArrowLeft, Building2, CheckCircle2 } from "lucide-react"
 import { CASES, getCaseBySlug, getAdjacentCases } from "@/lib/cases"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { cn } from "@/lib/utils"
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -37,7 +39,7 @@ function PerformanceGauge({
   const offset = circ * (1 - score / 100)
   // Swiss Style: Monochrome colors only
   const scoreColor =
-    score >= 90 ? "#0D0D0D" : score >= 70 ? "#888888" : "#E63030"
+    score >= 90 ? "var(--color-foreground)" : score >= 70 ? "var(--color-muted-foreground)" : "#E63030"
 
   return (
     <div className="flex flex-col items-center gap-3">
@@ -46,12 +48,12 @@ function PerformanceGauge({
           <circle
             cx="40" cy="40" r={r}
             fill="none" stroke="currentColor" strokeWidth="6"
-            className="text-muted/20"
+            className="text-muted-foreground/30"
           />
           <circle
             cx="40" cy="40" r={r}
             fill="none"
-            stroke={scoreColor}
+            style={{ stroke: scoreColor }}
             strokeWidth="6"
             strokeDasharray={circ}
             strokeDashoffset={offset}
@@ -68,60 +70,10 @@ function PerformanceGauge({
   )
 }
 
-function ProjectMockup({
-  colorScheme,
-  variant = "desktop",
-  label,
-}: {
-  colorScheme: ColorScheme
-  variant?: "desktop" | "tablet" | "detail"
-  label: string
-}) {
-  const scheme = COLOR_SCHEMES[colorScheme]
-  return (
-    <div
-      className={cn(
-        "relative overflow-hidden rounded-xl border border-border bg-card",
-        variant === "desktop" ? "aspect-[16/9]" : variant === "tablet" ? "aspect-[4/3]" : "aspect-[3/4]"
-      )}
-      aria-label={label}
-    >
-      <div className={cn("absolute inset-0", scheme.heroBg)} />
-      <div className="absolute inset-3 rounded-lg bg-background/80 shadow-inner overflow-hidden">
-        {/* Browser chrome */}
-        <div className="h-5 bg-muted/80 flex items-center px-2 gap-1 border-b border-border/30">
-<span className="w-1.5 h-1.5 rounded-full bg-foreground/30" />
-                          <span className="w-1.5 h-1.5 rounded-full bg-foreground/20" />
-                          <span className="w-1.5 h-1.5 rounded-full bg-foreground/10" />
-          <div className="flex-1 mx-2 h-2 rounded-full bg-muted" />
-        </div>
-        {/* Skeleton content */}
-        <div className="p-3 space-y-2">
-          <div className={cn("rounded-md", scheme.mockupBg, variant === "desktop" ? "h-24" : "h-16")} />
-          <div className="h-2 rounded-full bg-muted w-3/4" />
-          <div className="h-2 rounded-full bg-muted w-2/3" />
-          {variant !== "detail" && (
-            <div className="grid grid-cols-3 gap-1.5 pt-2">
-              <div className="h-8 rounded bg-muted/40" />
-              <div className="h-8 rounded bg-muted/40" />
-              <div className="h-8 rounded bg-muted/40" />
-            </div>
-          )}
-          {variant === "detail" && (
-            <div className="space-y-1.5 pt-1">
-              <div className="h-2 rounded-full bg-muted w-full" />
-              <div className="h-2 rounded-full bg-muted w-5/6" />
-              <div className="h-2 rounded-full bg-muted w-4/6" />
-            </div>
-          )}
-        </div>
-      </div>
-      {/* Image replacement label */}
-      <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-background/70 text-[10px] text-muted-foreground border border-border/40">
-        {label}
-      </div>
-    </div>
-  )
+function Arrow({ size = 16, reverse = false, className = "" }: { size?: number; reverse?: boolean; className?: string }) {
+  return reverse
+    ? <ArrowLeft width={size} height={size} className={className} />
+    : <ArrowRight width={size} height={size} className={className} />
 }
 
 /* ─── Page ─────────────────────────────────────────────────────────── */
@@ -133,9 +85,29 @@ export default async function CaseDetailPage({ params }: Props) {
 
   const { prev, next } = getAdjacentCases(slug)
 
+  const scheme = {
+    heroBg: "bg-secondary/20",
+    accentText: "text-accent",
+    cardGradient: "bg-secondary",
+  }
+
+  const project = {
+    challenge: c.desc,
+    client: {
+      name: c.client,
+      sector: c.sector,
+      location: c.sector.split("·")[1]?.trim() ?? c.sector,
+      size: "Entreprise",
+    },
+    duration: "10 jours",
+    year: c.year,
+    results: c.kpis.map((k) => ({ value: k.v, label: k.l, description: k.d })),
+    performance: { performance: 96, accessibility: 100, seo: 100, bestPractices: 95 },
+  }
+
   return (
     <>
-      <LegalHeader />
+      <Header />
       <main className="pt-20 lg:pt-24">
 
         {/* ── HERO ──────────────────────────────────────────────────── */}
@@ -151,8 +123,9 @@ export default async function CaseDetailPage({ params }: Props) {
               <span className="text-foreground font-medium truncate">{project.client.name}</span>
             </nav>
 
-                <span className="inline-flex items-center gap-2 mb-6 px-2.5 py-1.5 border border-border font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 lg:items-start">
+              <div>
+                <span className="inline-block border-l-2 border-accent pl-3 pr-4 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground mb-6">
                   Cas n°{c.idx} · {c.tag}
                 </span>
 
@@ -170,7 +143,7 @@ export default async function CaseDetailPage({ params }: Props) {
 
                 <Link
                   href="#diagnostic"
-                  className="inline-flex items-center gap-3 px-6 py-3.5 bg-accent text-accent-foreground font-medium text-[14px] hover:bg-foreground hover:text-background transition-colors"
+                  className="inline-flex items-center gap-3 px-6 py-3.5 bg-accent text-accent-foreground font-medium text-[14px] cta-hover transition-colors"
                 >
                   Lire le cas <Arrow size={14} />
                 </Link>
@@ -179,48 +152,17 @@ export default async function CaseDetailPage({ params }: Props) {
               {/* Right — meta rows */}
               <div className="flex flex-col gap-4 pt-8 border-t border-border lg:border-t-0 lg:pt-0 lg:border-l lg:pl-12">
                 {[
-                  { l: "Client",      v: c.client },
-                  { l: "Secteur",     v: c.sector },
-                  { l: "Année",       v: c.year },
-                  { l: "Catégorie",   v: c.tag },
+                  { l: "Client",       v: c.client },
+                  { l: "Secteur",      v: c.sector },
+                  { l: "Année",        v: c.year },
+                  { l: "Catégorie",    v: c.tag },
                   { l: "KPI principal", v: c.kpi },
                 ].map(({ l, v }) => (
                   <div key={l} className="flex justify-between gap-4 pb-4 border-b border-border">
                     <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">{l}</span>
                     <span className="text-[14px] font-medium text-right">{v}</span>
                   </div>
-                ) : (
-                  <ProjectMockup
-                    colorScheme={project.colorScheme}
-                    variant="desktop"
-                    label="Remplacer par capture homepage"
-                  />
-                )}
-                {/* Floating mobile */}
-                <div className="absolute -bottom-6 -right-4 w-28 shadow-2xl rounded-xl overflow-hidden border border-border">
-                  {project.images?.mobile ? (
-                    <div className="relative aspect-[9/16]">
-                      <Image
-                        src={project.images.mobile}
-                        alt={`Vue mobile ${project.client.name}`}
-                        fill
-                        className="object-cover"
-                        sizes="112px"
-                      />
-                    </div>
-                  ) : (
-                    <div className={cn("aspect-[9/16]", scheme.heroBg)}>
-                      <div className="h-3 bg-muted/80 flex items-center px-1.5 gap-0.5">
-                        <div className="flex-1 h-1.5 rounded-full bg-muted" />
-                      </div>
-                      <div className="p-1.5 space-y-1">
-                        <div className={cn("h-8 rounded", scheme.mockupBg)} />
-                        <div className="h-1 rounded-full bg-muted w-3/4" />
-                        <div className="h-1 rounded-full bg-muted w-1/2" />
-                      </div>
-                    </div>
-                  )}
-                </div>
+                ))}
               </div>
             </div>
           </div>
@@ -332,6 +274,7 @@ export default async function CaseDetailPage({ params }: Props) {
               ))}
             </div>
           </section>
+        </section>
 
         {/* ── RÉSULTATS & PERFORMANCE ───────────────────────────────── */}
         <section className={cn("py-20 border-b border-border", scheme.heroBg)}>
@@ -414,8 +357,9 @@ export default async function CaseDetailPage({ params }: Props) {
               </div>
             </div>
           </div>
+        </section>
 
-          {/* ── Testimonial ──────────────────────────────────────────────────── */}
+        {/* ── Testimonial ──────────────────────────────────────────────────── */}
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-16 px-4 sm:px-6 lg:px-8 py-20 border-b border-border items-center">
             <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">Témoignage</div>
             <div>
@@ -482,13 +426,12 @@ export default async function CaseDetailPage({ params }: Props) {
             </h2>
             <Link
               href="/#contact"
-              className="inline-flex items-center gap-3 px-8 py-5 bg-accent text-accent-foreground font-medium text-[14px] hover:bg-foreground hover:text-background transition-colors"
+              className="inline-flex items-center gap-3 px-8 py-5 bg-accent text-accent-foreground font-medium text-[14px] cta-hover transition-colors"
             >
               Démarrer un diagnostic <Arrow size={14} />
             </Link>
           </section>
 
-        </article>
       </main>
       <Footer />
     </>

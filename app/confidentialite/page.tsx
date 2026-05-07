@@ -42,8 +42,9 @@ export default function ConfidentialitePage() {
               Politique de <em className="font-serif font-normal italic text-accent">confidentialité.</em>
             </h1>
             <p className="text-[16px] leading-[1.55] text-muted-foreground max-w-[640px]">
-              Mobem Solutions s'engage à protéger la vie privée de ses visiteurs et clients, conformément au RGPD (UE 2016/679).{" "}
-              <span className="font-mono text-[11px]">Mise à jour : janvier 2025.</span>
+              Mobem Solutions s&apos;engage à protéger la vie privée de ses visiteurs et clients,<br />
+              conformément au RGPD (UE 2016/679).<br />
+              <span className="font-mono text-[11px] mt-3 inline-block">Mise à jour : janvier 2026.</span>
             </p>
           </div>
         </section>
@@ -81,12 +82,12 @@ export default function ConfidentialitePage() {
                     le GME <strong>Mobem Solutions</strong>, représenté conjointement par ses mandataires :
                   </p>
                   <div className="grid gap-3 sm:grid-cols-2">
-                    <div className="rounded-xl border border-border bg-card p-4">
+                    <div className="border border-border bg-card p-4">
                       <p className="font-semibold text-foreground text-sm">Nathan Portier</p>
                       <p className="text-xs text-muted-foreground mt-1">Mandataire administratif & commercial</p>
                       <p className="text-xs font-mono text-muted-foreground mt-1">SIRET : 91514447100017</p>
                     </div>
-                    <div className="rounded-xl border border-border bg-card p-4">
+                    <div className="border border-border bg-card p-4">
                       <p className="font-semibold text-foreground text-sm">Arnaud Clavier</p>
                       <p className="text-xs text-muted-foreground mt-1">Co-Mandataire technique</p>
                       <p className="text-xs font-mono text-muted-foreground mt-1">SIRET : 99285845600013</p>
@@ -179,7 +180,7 @@ export default function ConfidentialitePage() {
                       desc: "Conserver certaines données comptables et contractuelles conformément aux obligations légales françaises.",
                     },
                   ].map((item) => (
-                    <div key={item.title} className="flex gap-3 rounded-xl border border-border bg-card p-4">
+                    <div key={item.title} className="flex gap-3 border border-border bg-card p-4">
                       <span className="text-accent mt-0.5 shrink-0">→</span>
                       <div>
                         <p className="text-sm font-semibold text-foreground">{item.title}</p>
@@ -215,7 +216,7 @@ export default function ConfidentialitePage() {
                         desc: "Pour la conservation des documents comptables et contractuels imposée par la loi.",
                       },
                     ].map((b) => (
-                      <div key={b.base} className="rounded-xl border border-border bg-card p-4">
+                      <div key={b.base} className="border border-border bg-card p-4">
                         <p className="text-sm font-semibold text-foreground">{b.base}</p>
                         <p className="text-sm text-muted-foreground mt-2">{b.desc}</p>
                       </div>
@@ -290,7 +291,7 @@ export default function ConfidentialitePage() {
                         link: "calendly.com/privacy",
                       },
                     ].map((st) => (
-                      <div key={st.name} className="rounded-xl border border-border bg-card p-4">
+                      <div key={st.name} className="border border-border bg-card p-4">
                         <p className="font-semibold text-foreground text-sm">{st.name}</p>
                         <p className="text-xs text-muted-foreground mt-1">{st.role}</p>
                         <p className="text-xs text-muted-foreground mt-1">{st.location}</p>
@@ -312,7 +313,7 @@ export default function ConfidentialitePage() {
                     utilisés sur ce site :
                   </p>
                   <div className="space-y-3">
-                    <div className="rounded-xl border border-border bg-card p-4">
+                    <div className="border border-border bg-card p-4">
                       <div className="flex items-center justify-between mb-2">
                         <p className="font-semibold text-foreground text-sm">Cookies essentiels</p>
                         <span className="text-xs px-2 py-0.5 rounded-full bg-accent/10 text-accent font-medium">Toujours actifs</span>
@@ -322,7 +323,7 @@ export default function ConfidentialitePage() {
                         consentement requis (exemptés par la CNIL).
                       </p>
                     </div>
-                    <div className="rounded-xl border border-border bg-card p-4">
+                    <div className="border border-border bg-card p-4">
                       <div className="flex items-center justify-between mb-2">
                         <p className="font-semibold text-foreground text-sm">Cookies analytiques</p>
                         <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-medium">Consentement requis</span>
@@ -333,7 +334,7 @@ export default function ConfidentialitePage() {
                         13 mois maximum.
                       </p>
                     </div>
-                    <div className="rounded-xl border border-border bg-card p-4">
+                    <div className="border border-border bg-card p-4">
                       <div className="flex items-center justify-between mb-2">
                         <p className="font-semibold text-foreground text-sm">Cookies tiers (Calendly)</p>
                         <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-medium">Consentement requis</span>
@@ -426,7 +427,7 @@ export default function ConfidentialitePage() {
                         desc: "Introduire une réclamation auprès de la CNIL (cnil.fr) si vous estimez que vos droits ne sont pas respectés.",
                       },
                     ].map((r) => (
-                      <div key={r.right} className="rounded-xl border border-border bg-card p-4">
+                      <div key={r.right} className="border border-border bg-card p-4">
                         <p className="text-sm font-semibold text-foreground">{r.right}</p>
                         <p className="text-sm text-muted-foreground mt-1">{r.desc}</p>
                       </div>
@@ -502,7 +503,7 @@ export default function ConfidentialitePage() {
 
               <div className="pt-8 border-t border-border">
                 <p className="text-xs text-muted-foreground">
-                  Mobem Solutions — Politique de confidentialité en vigueur au 1er janvier 2025
+                  Mobem Solutions — Politique de confidentialité en vigueur au 1er janvier 2026
                 </p>
                 <p className="text-xs text-muted-foreground mt-1">
                   GME | Nathan Portier & Arnaud Clavier — Nantes, France
