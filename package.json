@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint .",
     "seed:realisations": "tsx --env-file=.env.local scripts/seed-realisations.ts",
-    "fix:cover-image": "tsx --env-file=.env.local scripts/fix-cover-image.ts"
+    "fix:cover-image": "tsx --env-file=.env.local scripts/fix-cover-image.ts",
+    "perf": "tsx --env-file=.env.local scripts/perf-check.ts"
   },
   "dependencies": {
     "@fontsource/dm-serif-display": "^5.2.8",
