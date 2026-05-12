@@ -1,13 +1,15 @@
 import type { Metadata } from "next"
+import dynamic from "next/dynamic"
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/sections/hero"
-import { LogoMarquee } from "@/components/sections/logo-marquee"
-import { PricingSection } from "@/components/sections/pricing"
-import { ServicesSection } from "@/components/sections/services"
-import { ProofSection } from "@/components/sections/proof"
-import { TeamSection } from "@/components/sections/team"
-import { ContactSection } from "@/components/sections/contact"
-import { Footer } from "@/components/footer"
+
+const LogoMarquee = dynamic(() => import("@/components/sections/logo-marquee").then(m => ({ default: m.LogoMarquee })))
+const ServicesSection = dynamic(() => import("@/components/sections/services").then(m => ({ default: m.ServicesSection })))
+const ProofSection = dynamic(() => import("@/components/sections/proof").then(m => ({ default: m.ProofSection })))
+const PricingSection = dynamic(() => import("@/components/sections/pricing").then(m => ({ default: m.PricingSection })))
+const TeamSection = dynamic(() => import("@/components/sections/team").then(m => ({ default: m.TeamSection })))
+const ContactSection = dynamic(() => import("@/components/sections/contact").then(m => ({ default: m.ContactSection })))
+const Footer = dynamic(() => import("@/components/footer").then(m => ({ default: m.Footer })))
 
 export const metadata: Metadata = {
   title: "Mobem Solutions — Agence Web Nantes | Sites pro livrés en 10 jours",

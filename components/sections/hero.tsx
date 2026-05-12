@@ -1,8 +1,5 @@
-"use client"
-
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
-import { cn } from "@/lib/utils"
 
 const kpis = [
   { key: "Diagnostic", value: "90 min", desc: "Audit gratuit, sans engagement" },
@@ -12,11 +9,6 @@ const kpis = [
 ]
 
 export function HeroSection() {
-  const handleScrollTo = (id: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
-    document.querySelector(id)?.scrollIntoView({ behavior: "smooth" })
-  }
-
   return (
     <section id="hero" className="pt-14 lg:pt-16 border-t border-border relative" aria-labelledby="hero-heading">
 
@@ -67,7 +59,6 @@ export function HeroSection() {
           <div className="lg:col-span-3 lg:px-8 lg:border-l lg:border-border flex flex-col gap-2 items-start">
             <Link
               href="#contact"
-              onClick={handleScrollTo("#contact")}
               className="inline-flex items-center gap-2.5 px-5 py-3.5 bg-accent text-accent-foreground text-[15px] font-semibold transition-colors cta-hover"
             >
               Démarrer un diagnostic
@@ -78,7 +69,6 @@ export function HeroSection() {
             </span>
             <Link
               href="#services"
-              onClick={handleScrollTo("#services")}
               className="inline-flex items-center gap-2.5 px-5 py-3.5 border border-border text-sm font-medium transition-colors hover:bg-secondary mt-2"
             >
               Voir les services
