@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { ArrowUpRight } from "lucide-react"
 
 const navCabinet = [
   { name: "Accueil", href: "/" },
@@ -84,7 +85,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className={LINK}
               >
-                LinkedIn ↗
+                LinkedIn <ArrowUpRight className="inline w-3 h-3 mb-0.5" aria-hidden="true" />
               </a>
             </div>
 
