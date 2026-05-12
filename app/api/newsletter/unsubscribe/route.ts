@@ -3,7 +3,7 @@ import { Resend } from 'resend'
 import { verifyUnsubscribeToken } from '@/lib/newsletter-token'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://mobem-solutions.com'
+const BASE_URL = process.env.APP_URL ?? 'https://mobem-solutions.com'
 const AUDIENCE_ID = process.env.RESEND_AUDIENCE_ID ?? ''
 
 export async function GET(req: NextRequest) {

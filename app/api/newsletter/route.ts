@@ -5,7 +5,8 @@ import { ConfirmEmail } from '@/emails/ConfirmEmail'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 const FROM_EMAIL = process.env.FROM_EMAIL ?? 'Mobem Solutions <noreply@mobem-solutions.com>'
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://mobem-solutions.com'
+const BASE_URL = process.env.APP_URL ?? 'https://mobem-solutions.com'
+const AUDIENCE_ID = process.env.RESEND_AUDIENCE_ID ?? ''
 
 export async function POST(req: NextRequest) {
   try {
@@ -13,6 +14,20 @@ export async function POST(req: NextRequest) {
 
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json({ error: 'Email invalide.' }, { status: 400 })
+    }
+
+    // Check for existing confirmed subscription
+    if (AUDIENCE_ID) {
+      const { data: audienceData } = await resend.contacts.list({ audienceId: AUDIENCE_ID })
+      const existing = audienceData?.data?.find(
+        (c: { email: string; unsubscribed: boolean }) => c.email === email && !c.unsubscribed
+      )
+      if (existing) {
+        return NextResponse.json(
+          { error: 'Vous êtes déjà inscrit(e) à notre newsletter.', alreadySubscribed: true },
+          { status: 409 }
+        )
+      }
     }
 
     const token = generateConfirmToken(email)

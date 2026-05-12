@@ -24,7 +24,7 @@ export default function MetiersPage() {
       <main>
         {/* Hero */}
         <section className="pt-14 lg:pt-16 border-t border-border" aria-labelledby="metiers-heading">
-          <div className="px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 lg:pt-24 pb-12 lg:pb-16">
+          <div className="px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 lg:pt-36 pb-16 lg:pb-20">
             <nav className="flex items-center gap-2.5 mb-10 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground" aria-label="Fil d'Ariane">
               <Link href="/" className="hover:text-accent transition-colors">Accueil</Link>
               <span aria-hidden="true">/</span>

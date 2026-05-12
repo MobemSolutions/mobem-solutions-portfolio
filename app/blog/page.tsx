@@ -72,7 +72,7 @@ function ArticleRow({ post }: { post: Post }) {
   return (
     <Link
       href={`/blog/${post.slug?.current}`}
-      className="group bento-hover grid grid-cols-[1fr_40px] sm:grid-cols-[1fr_120px_40px] items-center gap-4 sm:gap-6 px-4 sm:px-6 py-5 border-b border-border transition-colors"
+      className="group bento-hover grid grid-cols-[1fr_40px] sm:grid-cols-[1fr_120px_40px] items-center gap-4 sm:gap-6 px-4 sm:px-6 py-7 border-b border-border transition-colors"
       data-cursor="hover"
     >
       <div className="min-w-0">
@@ -90,7 +90,7 @@ function ArticleRow({ post }: { post: Post }) {
         {shortDate}
       </span>
       <div className="flex justify-end">
-        <ArrowDiag className="group-hover:translate-x-1.5 group-hover:-translate-y-1.5 transition-all" />
+        <ArrowDiag className="group-hover:translate-x-1.5 group-hover:-translate-y-1.5 transition-transform" />
       </div>
     </Link>
   )
@@ -113,15 +113,16 @@ function ArticleCard({ post }: { post: Post }) {
   return (
     <Link
       href={`/blog/${post.slug?.current}`}
-      className="group bento-hover border-r border-b border-border flex flex-col gap-4 p-8 transition-colors"
+      className="group bento-hover border-r border-b border-border flex flex-col gap-4 p-10 transition-colors"
       data-cursor="hover"
     >
       <div className="aspect-[4/3] bg-secondary relative overflow-hidden">
         {projectId && post.mainImage?.asset && (
           <Image
-            src={urlFor(post.mainImage).width(600).height(450).url()}
+            src={urlFor(post.mainImage).width(600).height(450).auto('format').url()}
             alt={post.mainImage.alt || post.title}
             fill
+            unoptimized
             className="object-cover"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
@@ -180,7 +181,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
         <section className="pt-14 lg:pt-16 border-t border-border">
-          <div className="px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 lg:pt-24 pb-12 lg:pb-16">
+          <div className="px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 lg:pt-36 pb-16 lg:pb-20">
             <nav
               className="flex items-center gap-2.5 mb-10 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground"
               aria-label="Fil d'Ariane"
@@ -201,11 +202,20 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               Analyses terrain, retours d&apos;expérience et stratégies concrètes pour
               les PME et ETI ambitieuses. Rédigé par nos consultants.
             </p>
+            <a
+              href="#newsletter"
+              className="mt-8 inline-flex items-center gap-3 px-8 py-5 bg-accent text-accent-foreground font-medium text-[14px] cta-hover transition-colors"
+            >
+              S&apos;inscrire à la newsletter
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                <path d="M12 5v14M5 12l7 7 7-7" />
+              </svg>
+            </a>
           </div>
         </section>
 
         {/* ── Filters ──────────────────────────────────────────────────────── */}
-        <div className="flex items-center gap-3 flex-wrap px-4 sm:px-6 lg:px-8 py-5 border-t border-b border-border overflow-x-auto">
+        <div className="flex items-center gap-3 flex-wrap px-4 sm:px-6 lg:px-8 py-5 border-t border-b border-border">
           <Link
             href="/blog"
             className={`font-mono text-[11px] uppercase tracking-[0.08em] px-4 py-2 border border-border transition-colors whitespace-nowrap ${
@@ -255,15 +265,16 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               {featured && (
                 <Link
                   href={`/blog/${featured.slug?.current}`}
-                  className="group flex flex-col gap-6 p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-border hover:bg-[rgba(230,48,48,0.04)] transition-colors"
+                  className="group flex flex-col gap-6 p-10 lg:p-16 border-b lg:border-b-0 lg:border-r border-border hover:bg-accent/[0.04] transition-colors"
                   data-cursor="hover"
                 >
                   <div className="aspect-[16/9] bg-secondary relative overflow-hidden">
                     {projectId && featured.mainImage?.asset && (
                       <Image
-                        src={urlFor(featured.mainImage).width(900).height(506).url()}
+                        src={urlFor(featured.mainImage).width(900).height(506).auto('format').url()}
                         alt={featured.mainImage.alt || featured.title}
                         fill
+                        unoptimized
                         className="object-cover"
                         sizes="(max-width: 1024px) 100vw, 58vw"
                       />
@@ -344,7 +355,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
         )}
 
         {/* ── Newsletter ───────────────────────────────────────────────────── */}
-        <section id="newsletter" className="px-4 sm:px-6 lg:px-8 py-24 border-t border-border grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <section id="newsletter" className="px-4 sm:px-6 lg:px-8 py-32 lg:py-40 border-t border-border grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
             <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground mb-4">
               Newsletter

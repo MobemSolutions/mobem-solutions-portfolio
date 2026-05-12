@@ -35,7 +35,7 @@ export default function CGVPage() {
 
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
         <section className="pt-14 lg:pt-16 border-t border-border">
-          <div className="px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-12 border-b border-border">
+          <div className="px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 pb-16 border-b border-border">
             <nav className="flex items-center gap-2.5 mb-10 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground" aria-label="Fil d'Ariane">
               <Link href="/" className="hover:text-accent transition-colors">Accueil</Link>
               <span>/</span>
@@ -81,7 +81,7 @@ export default function CGVPage() {
           <div className="px-4 sm:px-6 lg:px-8 py-16 space-y-14 max-w-[780px]">
 
               {/* Préambule */}
-              <div className="border-l-2 border-accent bg-secondary/30 pl-6 py-4 pr-6">
+              <div className="border border-accent/30 bg-secondary/30 px-6 py-4">
                 <h2 className="font-mono text-[11px] uppercase tracking-[0.08em] text-accent mb-3">Préambule</h2>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   Toute commande passée auprès de Mobem Solutions implique l'acceptation pleine et entière des
@@ -230,7 +230,7 @@ export default function CGVPage() {
                 <h2 className="text-[22px] font-bold tracking-[-0.02em] mb-4">
                   Article 5 — Clause de suspension pour non-paiement
                 </h2>
-                <div className="border-l-2 border-destructive bg-destructive/5 pl-6 py-4 pr-6 prose-legal">
+                <div className="border border-destructive/40 bg-destructive/5 px-6 py-4 prose-legal">
                   <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-destructive mb-3">
                     Clause de réserve de propriété et de suspension d'accès
                   </p>

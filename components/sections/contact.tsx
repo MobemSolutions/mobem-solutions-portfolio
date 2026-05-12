@@ -1,14 +1,19 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { createPortal } from "react-dom"
+import dynamic from "next/dynamic"
+import * as Dialog from "@radix-ui/react-dialog"
 import { ArrowRight, Check, MapPin, Mail, Phone, Clock, Loader2, X, CalendarDays } from "lucide-react"
 import { useSuccessSound } from "@/hooks/useSuccessSound"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { cn } from "@/lib/utils"
-import { InlineWidget } from "react-calendly"
+
+const InlineWidget = dynamic(
+  () => import("react-calendly").then((m) => m.InlineWidget),
+  { ssr: false },
+)
 
 const CALENDLY_URL = "https://calendly.com/contact-mobem-solutions/15min"
 
@@ -33,7 +38,7 @@ const BUDGET_OPTIONS = [
 const selectClass = "flex h-10 w-full border border-border bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
 
 const reassuranceItems = [
-  { icon: Check, title: "Sans engagement", description: "Diagnostic gratuit, 90 minutes" },
+  { icon: Check, title: "Sans engagement", description: "Diagnostic gratuit, 45 minutes" },
   { icon: Clock, title: "Réponse sous 24h", description: "Jours ouvrés garantis" },
   { icon: MapPin, title: "Équipe locale", description: "Nantes, pas un sous-traitant distant" },
 ]
@@ -73,7 +78,7 @@ function SuccessCard({ name, email, onReset }: { name: string; email: string; on
   return (
     <div className="flex flex-col items-center justify-center text-center gap-6 py-12">
       <div className="w-16 h-16 bg-chart-4 flex items-center justify-center">
-        <Check className="w-8 h-8 text-white" aria-hidden="true" />
+        <Check className="w-8 h-8 text-inverted-foreground" aria-hidden="true" />
       </div>
       <div>
         <h3 className="text-2xl font-black text-foreground mb-2">
@@ -102,14 +107,6 @@ export function ContactSection() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const playSuccess = useSuccessSound()
   const [calendlyOpen, setCalendlyOpen] = useState(false)
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => { setMounted(true) }, [])
-
-  useEffect(() => {
-    document.body.style.overflow = calendlyOpen ? "hidden" : ""
-    return () => { document.body.style.overflow = "" }
-  }, [calendlyOpen])
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {}
@@ -162,14 +159,14 @@ export function ContactSection() {
     <section id="contact" className="border-t border-border" aria-labelledby="contact-heading">
 
       {/* Section head */}
-      <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-5 border-b border-border">
+      <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-7 lg:py-9 border-b border-border">
         <div className="flex items-baseline gap-5">
           <h2 id="contact-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
             Diagnostic
           </h2>
         </div>
         <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
-          90 minutes · sans engagement
+          45 minutes · sans engagement
         </span>
       </div>
 
@@ -342,34 +339,35 @@ export function ContactSection() {
           <div className="lg:col-span-2 flex flex-col gap-4">
 
             {/* Calendly popup card */}
-            <div className="relative border border-accent/30 bg-accent/5 p-6 overflow-hidden">
-              <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-accent/10 blur-2xl pointer-events-none" aria-hidden="true" />
-              <div className="relative">
-                <div className="w-10 h-10 rounded-xl bg-accent/15 flex items-center justify-center mb-4">
-                  <CalendarDays className="w-5 h-5 text-accent" aria-hidden="true" />
-                </div>
-                <h3 className="text-base font-bold text-foreground mb-1">
-                  Préférez un échange direct ?
-                </h3>
-                <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                  Réservez un appel de 15 minutes avec un de nos associés. Gratuit, sans engagement.
-                </p>
-                <div className="flex flex-wrap gap-2 mb-5">
-                  {["15 min", "Gratuit", "Sans engagement"].map((tag) => (
-                    <span key={tag} className="text-xs font-medium px-2.5 py-1 rounded-full bg-accent/10 text-accent border border-accent/20">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setCalendlyOpen(true)}
-                  className="w-full inline-flex items-center justify-center gap-2 bg-accent text-accent-foreground px-4 py-2.5 text-sm font-semibold cta-hover active:scale-[0.98] transition-all"
-                >
-                  <CalendarDays className="w-4 h-4" aria-hidden="true" />
-                  Choisir un créneau
-                </button>
+            <div className="relative border border-accent/30 bg-accent/5 p-6">
+              <div className="flex items-baseline justify-between mb-5">
+                <span className="font-mono text-[10px] uppercase tracking-[0.06em] text-accent">B · Calendly</span>
+                <CalendarDays className="w-4 h-4 text-accent" aria-hidden="true" />
               </div>
+              <h3 className="text-base font-bold text-foreground mb-1">
+                Préférez un échange direct ?
+              </h3>
+              <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                Réservez un appel de 15 minutes avec un de nos associés. Gratuit, sans engagement.
+              </p>
+              <div className="flex flex-wrap gap-1.5 mb-5">
+                {["15 min", "Gratuit", "Sans engagement"].map((tag) => (
+                  <span
+                    key={tag}
+                    className="font-mono text-[10px] uppercase tracking-[0.06em] px-2 py-1 border border-accent/30 text-accent"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <button
+                type="button"
+                onClick={() => setCalendlyOpen(true)}
+                className="w-full inline-flex items-center justify-center gap-2 bg-accent text-accent-foreground px-4 py-2.5 text-sm font-semibold cta-hover active:scale-[0.98] transition-colors"
+              >
+                <CalendarDays className="w-4 h-4" aria-hidden="true" />
+                Choisir un créneau
+              </button>
             </div>
 
             {/* Reassurance + contact info */}
@@ -378,7 +376,7 @@ export function ContactSection() {
               <div className="space-y-3 mb-6">
                 {reassuranceItems.map((item) => (
                   <div key={item.title} className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                    <div className="w-8 h-8 bg-accent/10 flex items-center justify-center flex-shrink-0">
                       <item.icon className="w-3.5 h-3.5 text-accent" aria-hidden="true" />
                     </div>
                     <div>
@@ -422,30 +420,32 @@ export function ContactSection() {
       </div>
 
       {/* Calendly Modal */}
-      {mounted && calendlyOpen && createPortal(
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6">
-          <div
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-            onClick={() => setCalendlyOpen(false)}
-            aria-hidden="true"
-          />
-          <div className="relative bg-white shadow-2xl w-full max-w-3xl overflow-hidden">
-            <button
-              onClick={() => setCalendlyOpen(false)}
-              className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-black/10 hover:bg-black/20 flex items-center justify-center transition-colors"
-              aria-label="Fermer"
-            >
-              <X className="w-4 h-4 text-zinc-700" />
-            </button>
+      <Dialog.Root open={calendlyOpen} onOpenChange={setCalendlyOpen}>
+        <Dialog.Portal>
+          <Dialog.Overlay className="fixed inset-0 z-[9999] bg-[oklch(0.07_0_0/0.7)] data-[state=open]:animate-fade-in" />
+          <Dialog.Content
+            aria-describedby={undefined}
+            className="fixed left-1/2 top-1/2 z-[10000] w-[calc(100%-2rem)] max-w-3xl -translate-x-1/2 -translate-y-1/2 bg-card border border-border focus:outline-none"
+          >
+            <div className="flex items-center justify-between px-5 py-3 border-b border-border">
+              <Dialog.Title className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">
+                Diagnostic · 15 min · Calendly
+              </Dialog.Title>
+              <Dialog.Close
+                aria-label="Fermer"
+                className="w-8 h-8 border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              >
+                <X className="w-4 h-4" aria-hidden="true" />
+              </Dialog.Close>
+            </div>
             <InlineWidget
               url={CALENDLY_URL}
               styles={{ height: "670px", minWidth: "320px" }}
               pageSettings={{ hideGdprBanner: true }}
             />
-          </div>
-        </div>,
-        document.body
-      )}
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
     </section>
   )
 }

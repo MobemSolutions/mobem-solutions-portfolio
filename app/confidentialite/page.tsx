@@ -31,7 +31,7 @@ export default function ConfidentialitePage() {
       <Header />
       <main className="min-h-screen">
         <section className="pt-14 lg:pt-16 border-t border-border">
-          <div className="px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-12 border-b border-border">
+          <div className="px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 pb-16 border-b border-border">
             <nav className="flex items-center gap-2.5 mb-10 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground" aria-label="Fil d'Ariane">
               <Link href="/" className="hover:text-accent transition-colors">Accueil</Link>
               <span>/</span>
@@ -316,7 +316,7 @@ export default function ConfidentialitePage() {
                     <div className="border border-border bg-card p-4">
                       <div className="flex items-center justify-between mb-2">
                         <p className="font-semibold text-foreground text-sm">Cookies essentiels</p>
-                        <span className="text-xs px-2 py-0.5 rounded-full bg-accent/10 text-accent font-medium">Toujours actifs</span>
+                        <span className="text-xs px-2 py-0.5 bg-accent/10 text-accent font-medium">Toujours actifs</span>
                       </div>
                       <p className="text-sm text-muted-foreground">
                         Nécessaires au bon fonctionnement du site (préférences de thème clair/sombre). Aucun
@@ -326,7 +326,7 @@ export default function ConfidentialitePage() {
                     <div className="border border-border bg-card p-4">
                       <div className="flex items-center justify-between mb-2">
                         <p className="font-semibold text-foreground text-sm">Cookies analytiques</p>
-                        <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-medium">Consentement requis</span>
+                        <span className="text-xs px-2 py-0.5 bg-muted text-muted-foreground font-medium">Consentement requis</span>
                       </div>
                       <p className="text-sm text-muted-foreground">
                         Vercel Analytics : mesure d'audience anonymisée (pages vues, durée de session, pays,
@@ -337,7 +337,7 @@ export default function ConfidentialitePage() {
                     <div className="border border-border bg-card p-4">
                       <div className="flex items-center justify-between mb-2">
                         <p className="font-semibold text-foreground text-sm">Cookies tiers (Calendly)</p>
-                        <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-medium">Consentement requis</span>
+                        <span className="text-xs px-2 py-0.5 bg-muted text-muted-foreground font-medium">Consentement requis</span>
                       </div>
                       <p className="text-sm text-muted-foreground">
                         Lors du chargement du widget Calendly, des cookies tiers peuvent être déposés par
@@ -433,7 +433,7 @@ export default function ConfidentialitePage() {
                       </div>
                     ))}
                   </div>
-                  <div className="rounded-xl border border-accent/30 bg-accent/5 p-5">
+                  <div className="border border-accent/30 bg-accent/5 p-5">
                     <p className="font-semibold text-foreground text-sm mb-2">Exercer vos droits</p>
                     <p className="text-sm text-muted-foreground">
                       Pour exercer l'un de ces droits, adressez votre demande par email à{" "}
@@ -476,7 +476,7 @@ export default function ConfidentialitePage() {
 
               <section id="contact" className="scroll-mt-28">
                 <h2 className="text-xl font-semibold text-foreground mb-4">12. Nous contacter</h2>
-                <div className="rounded-xl border border-border bg-card p-6">
+                <div className="border border-border bg-card p-6">
                   <p className="text-sm text-muted-foreground mb-4">
                     Pour toute question relative à cette politique ou à l'exercice de vos droits :
                   </p>

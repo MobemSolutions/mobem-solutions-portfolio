@@ -27,8 +27,9 @@ export default defineType({
     }),
     defineField({
       name: 'mainImage',
-      title: 'Image de couverture',
+      title: 'Image couverture (miniature listing)',
       type: 'image',
+      description: 'Affichée sur les cartes de la page Journal et en image OG/Twitter.',
       options: { hotspot: true },
       validation: (Rule) =>
         Rule.custom((value: any) => {
@@ -43,6 +44,27 @@ export default defineType({
           title: 'Texte alternatif (SEO obligatoire)',
           type: 'string',
           validation: (Rule) => Rule.required(),
+        }),
+      ],
+    }),
+    defineField({
+      name: 'ficheImage',
+      title: 'Image fiche (page article)',
+      type: 'image',
+      description: 'Grande image affichée en pleine largeur sous le titre de l\'article.',
+      options: { hotspot: true },
+      validation: (Rule) =>
+        Rule.custom((value: any) => {
+          if (!value) return true
+          if (!value?.asset?._ref)
+            return "L'image est encore en cours de chargement — attendez qu'elle soit complète avant de publier."
+          return true
+        }),
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Texte alternatif',
+          type: 'string',
         }),
       ],
     }),
@@ -63,6 +85,7 @@ export default defineType({
       title: 'Extrait (méta-description SEO)',
       type: 'text',
       rows: 3,
+      description: 'Max 200 caractères.',
       validation: (Rule) => Rule.required().max(200),
     }),
     defineField({

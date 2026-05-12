@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { NewsletterSignupForm } from "@/components/newsletter-signup-form"
 
 export const metadata: Metadata = {
   title: "Newsletter — Le bulletin mensuel | Mobem Solutions",
@@ -18,7 +18,7 @@ export default function NewsletterPage() {
 
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
         <section className="pt-14 lg:pt-16 border-t border-border">
-          <div className="px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 lg:pt-24 pb-16 border-b border-border grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-16 items-end max-w-7xl mx-auto">
+          <div className="px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 lg:pt-36 pb-20 border-b border-border grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-16 items-end max-w-7xl mx-auto">
             <div>
               <nav
                 className="flex items-center gap-2.5 mb-10 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground"
@@ -56,27 +56,7 @@ export default function NewsletterPage() {
               Rejoindre{" "}
               <em className="font-serif font-normal italic text-accent">la liste.</em>
             </h2>
-            <form
-              action="/api/newsletter"
-              method="POST"
-              className="flex flex-col sm:flex-row gap-3"
-            >
-              <input
-                type="email"
-                name="email"
-                placeholder="vous@entreprise.fr"
-                required
-                className="flex-1 border border-border bg-transparent px-5 py-4 text-[15px] text-foreground placeholder:text-muted-foreground outline-none focus:border-foreground transition-colors"
-              />
-              <button
-                type="submit"
-                data-cursor="hover"
-                className="inline-flex items-center justify-center gap-3 px-7 py-4 bg-accent text-accent-foreground font-medium text-[14px] cta-hover transition-colors whitespace-nowrap"
-              >
-                S&apos;abonner
-                <ArrowRight className="w-4 h-4" aria-hidden="true" />
-              </button>
-            </form>
+            <NewsletterSignupForm />
             <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
               Désabonnement en un clic. Aucune donnée revendue.
             </p>
