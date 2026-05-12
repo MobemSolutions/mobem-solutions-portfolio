@@ -41,7 +41,7 @@ async function fix() {
 
   console.log(`\n🔧  Suppression du coverImage cassé sur "${docId}"...`)
   await client.patch(docId).unset(['coverImage']).commit()
-  console.log('✅  Fait. Rechargez Sanity Studio et ré-uploadez l'image.\n')
+  console.log("✅  Fait. Rechargez Sanity Studio et ré-uploadez l'image.\n")
 }
 
 fix()
