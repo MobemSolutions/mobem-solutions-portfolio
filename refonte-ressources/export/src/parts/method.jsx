@@ -1,6 +1,6 @@
 function Method() {
   const steps = [
-    { n: '01', t: 'Diagnostic', d: 'Audit gratuit, 90 minutes, sans engagement. On regarde ce qui marche, ce qui freine, ce qui coûte.', dur: 'Semaine 0', deliv: 'Rapport stratégique 10 pages' },
+    { n: '01', t: 'Diagnostic', d: 'Audit gratuit, 45 minutes, sans engagement. On regarde ce qui marche, ce qui freine, ce qui coûte.', dur: 'Semaine 0', deliv: 'Rapport stratégique 10 pages' },
     { n: '02', t: 'Prescription', d: 'Roadmap chiffrée, prioritaire, alignée sur vos OKR. Vous validez avant que nous bougions une ligne de code.', dur: 'Semaine 1', deliv: 'Plan d\'action + budget' },
     { n: '03', t: 'Exécution', d: 'Sprints courts, livrables hebdomadaires. Design system, ingénierie, contenu — un seul interlocuteur.', dur: 'Semaines 2–10', deliv: 'Mise en production' },
     { n: '04', t: 'Itération', d: 'Roadmap trimestrielle. Rapport de performance mensuel. Ce qu\'on mesure, on l\'améliore.', dur: 'Continu', deliv: 'Rapport mensuel + revue Q' },

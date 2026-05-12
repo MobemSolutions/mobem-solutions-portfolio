@@ -19,8 +19,11 @@ export default defineConfig({
           .title('Contenu')
           .items([
             S.listItem().title('Articles').child(S.documentTypeList('post').title('Articles')),
+            S.listItem().title('Réalisations').child(S.documentTypeList('realisation').title('Réalisations')),
+            S.divider(),
             S.listItem().title('Auteurs').child(S.documentTypeList('author').title('Auteurs')),
             S.listItem().title('Catégories').child(S.documentTypeList('category').title('Catégories')),
+            S.listItem().title('Clients').child(S.documentTypeList('client').title('Clients')),
           ]),
     }),
   ],

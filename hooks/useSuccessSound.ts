@@ -3,6 +3,7 @@
 export function useSuccessSound() {
   return function playSuccess() {
     if (typeof window === 'undefined') return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     try {
       const audio = new Audio('/ressources/sounds/mixkit-bubble-pop-up-alert-notification-2357.wav')
       audio.volume = 0.6

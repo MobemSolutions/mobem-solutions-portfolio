@@ -1,7 +1,30 @@
 import { NextRequest, NextResponse } from "next/server"
 import { Resend } from "resend"
+import { z } from "zod"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
+
+const VALID_SERVICES = [
+  "Design UI/UX",
+  "Création de site vitrine",
+  "Refonte de site existant",
+  "Application web (SaaS / backoffice)",
+  "Application mobile",
+  "E-commerce",
+  "SEO & Référencement naturel",
+  "Conseil & stratégie digitale",
+] as const
+
+const ContactSchema = z.object({
+  name: z.string().min(1).max(200),
+  email: z.string().email().max(254),
+  company: z.string().max(200).optional(),
+  services: z
+    .union([z.enum(VALID_SERVICES), z.array(z.enum(VALID_SERVICES))])
+    .optional(),
+  budget: z.string().max(100).optional(),
+  message: z.string().min(1).max(5000),
+})
 
 const MOBEM_EMAIL = "contact@mobem-solutions.com"
 const FROM_EMAIL = process.env.FROM_EMAIL ?? "Mobem Solutions <noreply@mobem-solutions.com>"
@@ -62,16 +85,19 @@ function esc(str: string) {
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, company, services, budget, message } = await req.json()
+    const body = await req.json()
+    const parsed = ContactSchema.safeParse(body)
 
-    if (!name || !email || !message) {
-      return NextResponse.json({ error: "Champs requis manquants." }, { status: 400 })
+    if (!parsed.success) {
+      return NextResponse.json({ error: "Données invalides." }, { status: 400 })
     }
 
-    const safeName    = esc(String(name).slice(0, 200))
-    const safeEmail   = esc(String(email).slice(0, 254))
-    const safeCompany = company ? esc(String(company).slice(0, 200)) : ""
-    const safeMessage = esc(String(message).slice(0, 5000))
+    const { name, email, company, services, budget, message } = parsed.data
+
+    const safeName    = esc(name)
+    const safeEmail   = esc(email)
+    const safeCompany = company ? esc(company) : ""
+    const safeMessage = esc(message)
 
     const serviceLabel = Array.isArray(services) ? services[0] : services
     const servicesLine = serviceLabel ? esc(String(serviceLabel)) : "Non précisé"

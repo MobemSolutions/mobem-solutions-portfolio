@@ -12,7 +12,7 @@ function Contact() {
 
   return (
     <section id="contact" className="reveal" style={{ borderTop: '1px solid var(--line)' }}>
-      <SectionHead num="// 06" title="Diagnostic" meta="90 minutes · sans engagement" />
+      <SectionHead num="// 06" title="Diagnostic" meta="45 minutes · sans engagement" />
 
       <div className="grid12">
         <div style={{ gridColumn: 'span 5', padding: '48px 32px', borderRight: '1px solid var(--line)' }}>

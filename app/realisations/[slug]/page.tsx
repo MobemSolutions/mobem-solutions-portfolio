@@ -1,21 +1,51 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import Image from "next/image"
 import { notFound } from "next/navigation"
 import { ArrowRight, ArrowLeft, Building2, CheckCircle2 } from "lucide-react"
-import { CASES, getCaseBySlug, getAdjacentCases } from "@/lib/cases"
+import { CASES, getCaseBySlug, type Case } from "@/lib/cases"
+import { getAllRealisations, urlFor } from "@/lib/sanity"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { EditorialBadge } from "@/components/ui/editorial-badge"
 import { cn } from "@/lib/utils"
 
 type Props = { params: Promise<{ slug: string }> }
 
+function normaliseSanityCase(r: any): Case {
+  return {
+    idx:        r.idx        ?? '',
+    client:     r.client     ?? '',
+    sector:     r.sector     ?? '',
+    tag:        r.tag        ?? '',
+    kpi:        r.kpi        ?? '',
+    year:       r.year       ?? '',
+    cat:        r.cat        ?? '',
+    slug:       r.slug       ?? '',
+    desc:       r.desc       ?? '',
+    stats:      (r.stats ?? []).map((s: { v: string; l: string }) => [s.v, s.l] as [string, string]),
+    kpis:       r.kpis       ?? [],
+    body:       r.body       ?? [],
+    stack:      r.stack      ?? [],
+    quote:      r.quote      ?? { text: '', author: '', role: '' },
+    coverImage: r.coverImage ?? undefined,
+    ficheImage: r.ficheImage ?? undefined,
+  }
+}
+
 export async function generateStaticParams() {
-  return CASES.map((c) => ({ slug: c.slug }))
+  const slugs = await getAllRealisations().catch(() => [])
+  const sanity = slugs.map((r: any) => ({ slug: r.slug }))
+  const hardcoded = CASES.map((c) => ({ slug: c.slug }))
+  const all = [...sanity, ...hardcoded.filter(h => !sanity.find((s: any) => s.slug === h.slug))]
+  return all
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const c = getCaseBySlug(slug)
+  const allRaw = await getAllRealisations().catch(() => [])
+  const rawCase = allRaw.find((r: any) => r.slug === slug) ?? null
+  const c = rawCase ? normaliseSanityCase(rawCase) : getCaseBySlug(slug)
   if (!c) return { title: "Cas non trouvé | Mobem Solutions" }
   return {
     title: `${c.client} — ${c.tag} | Mobem Solutions`,
@@ -28,18 +58,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 function PerformanceGauge({
   score,
   label,
-  color,
 }: {
   score: number
   label: string
-  color: string
 }) {
   const r = 36
   const circ = 2 * Math.PI * r
   const offset = circ * (1 - score / 100)
   // Swiss Style: Monochrome colors only
   const scoreColor =
-    score >= 90 ? "var(--color-foreground)" : score >= 70 ? "var(--color-muted-foreground)" : "#E63030"
+    score >= 90 ? "var(--color-foreground)" : score >= 70 ? "var(--color-muted-foreground)" : "var(--color-accent)"
 
   return (
     <div className="flex flex-col items-center gap-3">
@@ -80,10 +108,17 @@ function Arrow({ size = 16, reverse = false, className = "" }: { size?: number; 
 
 export default async function CaseDetailPage({ params }: Props) {
   const { slug } = await params
-  const c = getCaseBySlug(slug)
+
+  const allRaw = await getAllRealisations().catch(() => [])
+  const allCases: Case[] = allRaw.length > 0 ? allRaw.map(normaliseSanityCase) : CASES
+
+  const rawCase = allRaw.find((r: any) => r.slug === slug) ?? null
+  const c: Case | undefined = rawCase ? normaliseSanityCase(rawCase) : getCaseBySlug(slug)
   if (!c) notFound()
 
-  const { prev, next } = getAdjacentCases(slug)
+  const idx = allCases.findIndex((r) => r.slug === slug)
+  const prev = idx > 0 ? allCases[idx - 1] : null
+  const next = idx < allCases.length - 1 ? allCases[idx + 1] : null
 
   const scheme = {
     heroBg: "bg-secondary/20",
@@ -102,7 +137,7 @@ export default async function CaseDetailPage({ params }: Props) {
     duration: "10 jours",
     year: c.year,
     results: c.kpis.map((k) => ({ value: k.v, label: k.l, description: k.d })),
-    performance: { performance: 96, accessibility: 100, seo: 100, bestPractices: 95 },
+    performance: rawCase?.performance ?? { performance: 96, accessibility: 100, seo: 100, bestPractices: 95 },
   }
 
   return (
@@ -118,16 +153,16 @@ export default async function CaseDetailPage({ params }: Props) {
             <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-10" aria-label="Fil d'Ariane">
               <Link href="/" className="hover:text-foreground transition-colors">Accueil</Link>
               <span>/</span>
-              <Link href="/#realisations" className="hover:text-foreground transition-colors">Réalisations</Link>
+              <Link href="/realisations" className="hover:text-foreground transition-colors">Réalisations</Link>
               <span>/</span>
               <span className="text-foreground font-medium truncate">{project.client.name}</span>
             </nav>
 
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 lg:items-start">
               <div>
-                <span className="inline-block border-l-2 border-accent pl-3 pr-4 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground mb-6">
+                <EditorialBadge variant="muted" className="mb-6">
                   Cas n°{c.idx} · {c.tag}
-                </span>
+                </EditorialBadge>
 
                 <h1
                   className="mb-6 font-extrabold leading-[0.92] tracking-[-0.04em]"
@@ -139,14 +174,7 @@ export default async function CaseDetailPage({ params }: Props) {
                   </em>
                 </h1>
 
-                <p className="text-[18px] leading-[1.5] text-muted-foreground max-w-[540px] mb-8">{c.desc}</p>
-
-                <Link
-                  href="#diagnostic"
-                  className="inline-flex items-center gap-3 px-6 py-3.5 bg-accent text-accent-foreground font-medium text-[14px] cta-hover transition-colors"
-                >
-                  Lire le cas <Arrow size={14} />
-                </Link>
+                <p className="text-[18px] leading-[1.5] text-muted-foreground max-w-[540px]">{c.desc}</p>
               </div>
 
               {/* Right — meta rows */}
@@ -168,8 +196,35 @@ export default async function CaseDetailPage({ params }: Props) {
           </div>
         </section>
 
+        {/* ── Fiche image ───────────────────────────────────────────── */}
+        {c.ficheImage?.asset && (
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10">
+            <div className="relative aspect-[16/7] w-full overflow-hidden border border-border">
+              <Image
+                src={urlFor(c.ficheImage).width(1400).height(613).auto('format').url()}
+                alt={c.ficheImage.alt ?? c.client}
+                fill
+                unoptimized
+                className="object-cover"
+                priority
+                sizes="(max-width: 1280px) 100vw, 1280px"
+              />
+            </div>
+          </div>
+        )}
+
+        {/* ── Lire le cas CTA ───────────────────────────────────────── */}
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+          <Link
+            href="#contexte"
+            className="inline-flex items-center gap-3 px-6 py-3.5 bg-accent text-accent-foreground font-medium text-[14px] cta-hover transition-colors"
+          >
+            Lire le cas <Arrow size={14} />
+          </Link>
+        </div>
+
         {/* ── CONTEXTE ──────────────────────────────────────────────── */}
-        <section className="py-20 border-b border-border">
+        <section id="contexte" className="py-20 border-b border-border">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
 
@@ -188,9 +243,9 @@ export default async function CaseDetailPage({ params }: Props) {
 
               {/* Client card */}
               <div>
-                <div className="rounded-2xl border border-border bg-card p-6 sticky top-28">
+                <div className="border border-border bg-card p-6 sticky top-28">
                   <div className="flex items-center gap-3 mb-5 pb-5 border-b border-border">
-                    <div className={cn("w-10 h-10 rounded-xl flex items-center justify-center", scheme.cardGradient)}>
+                    <div className={cn("w-10 h-10 flex items-center justify-center", scheme.cardGradient)}>
                       <Building2 className="w-5 h-5 text-foreground/70" aria-hidden="true" />
                     </div>
                     <div>
@@ -250,7 +305,7 @@ export default async function CaseDetailPage({ params }: Props) {
                   <li key={section.title}>
                     <a
                       href={`#${section.title.replace(/\s+/g, "-").toLowerCase()}`}
-                      className="font-mono text-[13px] tracking-[0.02em] text-muted-foreground hover:text-accent transition-colors block py-3 pl-5 border-l-2 border-border hover:border-accent"
+                      className="font-mono text-[13px] tracking-[0.02em] text-muted-foreground hover:text-accent transition-colors block py-3 pl-5 border-l border-border hover:border-accent"
                     >
                       {section.title.split("·")[0]?.trim()}
                     </a>
@@ -290,10 +345,10 @@ export default async function CaseDetailPage({ params }: Props) {
 
             {/* Impact metrics */}
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
-              {project.results.map((r) => (
+              {project.results.map((r, i) => (
                 <div
-                  key={r.label}
-                  className="bg-background/70 rounded-2xl border border-border/50 p-6 backdrop-blur-sm"
+                  key={i}
+                  className="bg-card border border-border p-6"
                 >
                   <p className={cn("text-3xl font-bold mb-1", scheme.accentText)}>{r.value}</p>
                   <p className="font-semibold text-foreground text-sm mb-2">{r.label}</p>
@@ -303,40 +358,24 @@ export default async function CaseDetailPage({ params }: Props) {
             </div>
 
             {/* Performance section */}
-            <div className="bg-background/70 rounded-2xl border border-border/50 p-8 backdrop-blur-sm">
+            <div className="bg-card border border-border p-8">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                 <div>
                   <h3 className="font-bold text-foreground text-lg">Performance technique</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Scores Lighthouse — standard d'excellence Google
+                    Scores Lighthouse — standard d&apos;excellence Google
                   </p>
                 </div>
-                <div className="text-xs text-muted-foreground bg-muted/50 rounded-lg px-3 py-2 max-w-xs">
+                <div className="text-xs text-muted-foreground bg-muted/50 px-3 py-2 max-w-xs">
                   Mesurés sur la version de production, mobile et desktop, via Lighthouse 12
                 </div>
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 lg:gap-8">
-                <PerformanceGauge
-                  score={project.performance.performance}
-                  label="Performance"
-                  color="#0D0D0D"
-                />
-                <PerformanceGauge
-                  score={project.performance.accessibility}
-                  label="Accessibilité"
-                  color="#0D0D0D"
-                />
-                <PerformanceGauge
-                  score={project.performance.seo}
-                  label="SEO"
-                  color="#0D0D0D"
-                />
-                <PerformanceGauge
-                  score={project.performance.bestPractices}
-                  label="Bonnes pratiques"
-                  color="#0D0D0D"
-                />
+                <PerformanceGauge score={project.performance.performance} label="Performance" />
+                <PerformanceGauge score={project.performance.accessibility} label="Accessibilité" />
+                <PerformanceGauge score={project.performance.seo} label="SEO" />
+                <PerformanceGauge score={project.performance.bestPractices} label="Bonnes pratiques" />
               </div>
 
               {/* Performance detail */}
@@ -360,33 +399,35 @@ export default async function CaseDetailPage({ params }: Props) {
         </section>
 
         {/* ── Testimonial ──────────────────────────────────────────────────── */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-16 px-4 sm:px-6 lg:px-8 py-20 border-b border-border items-center">
-            <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">Témoignage</div>
-            <div>
-              <blockquote
-                className="font-serif font-normal italic leading-[1.25] tracking-[-0.015em] mb-8"
-                style={{ fontSize: "clamp(24px, 3vw, 40px)" }}
-              >
-                «&nbsp;{c.quote.text}&nbsp;»
-              </blockquote>
-              <div className="flex items-center gap-4">
-                <div className="w-11 h-11 bg-accent text-accent-foreground flex items-center justify-center font-serif text-[18px] flex-shrink-0">
-                  {c.quote.author[0]}
-                </div>
-                <div>
-                  <div className="font-semibold text-[15px]">{c.quote.author}</div>
-                  <div className="text-[13px] text-muted-foreground">{c.quote.role}</div>
+          {c.quote?.text && (
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-16 px-4 sm:px-6 lg:px-8 py-20 border-b border-border items-center">
+              <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">Témoignage</div>
+              <div>
+                <blockquote
+                  className="font-serif font-normal italic leading-[1.25] tracking-[-0.015em] mb-8"
+                  style={{ fontSize: "clamp(24px, 3vw, 40px)" }}
+                >
+                  «&nbsp;{c.quote.text}&nbsp;»
+                </blockquote>
+                <div className="flex items-center gap-4">
+                  <div className="w-11 h-11 bg-accent text-accent-foreground flex items-center justify-center font-serif text-[18px] flex-shrink-0">
+                    {c.quote.author[0]}
+                  </div>
+                  <div>
+                    <div className="font-semibold text-[15px]">{c.quote.author}</div>
+                    <div className="text-[13px] text-muted-foreground">{c.quote.role}</div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
 
           {/* ── Previous / Next ──────────────────────────────────────────────── */}
           <div className="grid grid-cols-1 sm:grid-cols-2 border-b border-border">
             {prev ? (
               <Link
                 href={`/realisations/${prev.slug}`}
-                className="group flex flex-col gap-3 p-8 lg:p-12 border-r border-border hover:bg-[rgba(230,48,48,0.04)] transition-colors"
+                className="group flex flex-col gap-3 p-8 lg:p-12 border-r border-border hover:bg-accent/[0.04] transition-colors"
                 data-cursor="hover"
               >
                 <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">— Cas précédent</span>
@@ -402,7 +443,7 @@ export default async function CaseDetailPage({ params }: Props) {
             {next ? (
               <Link
                 href={`/realisations/${next.slug}`}
-                className="group flex flex-col gap-3 p-8 lg:p-12 text-right hover:bg-[rgba(230,48,48,0.04)] transition-colors"
+                className="group flex flex-col gap-3 p-8 lg:p-12 text-right hover:bg-accent/[0.04] transition-colors"
                 data-cursor="hover"
               >
                 <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground self-end">— Cas suivant</span>

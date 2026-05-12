@@ -79,15 +79,6 @@ export default defineConfig({
       },
     },
 
-    // --- BRANDED BROWSER ---
-    {
-      name: 'Microsoft Edge',
-      use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    },
-    {
-      name: 'Google Chrome',
-      use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    },
   ],
 
   /* Lancement automatique du serveur local pour les tests */

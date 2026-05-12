@@ -23,15 +23,15 @@ const navLegal = [
   { name: "Confidentialité", href: "/confidentialite" },
 ]
 
-const LINK = "text-[13px] text-background/60 hover:text-accent hover:pl-1 transition-all duration-150"
-const HEAD = "text-[11px] font-semibold text-background/50 mb-2"
+const LINK = "inline-block text-[13px] text-inverted-foreground/65 hover:text-accent hover:translate-x-1 transition-[color,transform] duration-150"
+const HEAD = "text-[11px] font-semibold text-inverted-foreground/55 mb-2"
 
 export function Footer() {
   return (
-    <footer className="bg-foreground text-background" role="contentinfo" aria-label="Pied de page">
+    <footer className="bg-inverted text-inverted-foreground" role="contentinfo" aria-label="Pied de page">
 
       {/* Top section */}
-      <div className="px-4 sm:px-6 lg:px-8 pt-14 sm:pt-16 lg:pt-20 pb-10 mx-auto max-w-7xl">
+      <div className="px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 lg:pt-32 pb-16 mx-auto max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-0">
 
           {/* Manifeste — grand titre */}
@@ -41,7 +41,7 @@ export function Footer() {
               <em className="font-serif font-normal italic tracking-[-0.02em] text-accent not-italic" style={{ fontStyle: "italic" }}>avant</em><br />
               de prescrire.
             </h2>
-            <p className="mt-6 text-[14px] text-background/50 leading-relaxed max-w-sm">
+            <p className="mt-6 text-[14px] text-inverted-foreground/55 leading-relaxed max-w-sm">
               Agence digitale à Nantes — ingénierie, design et stratégie pour PME et ETI ambitieuses.
             </p>
           </div>
@@ -94,8 +94,8 @@ export function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-background/10 px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
-        <div className="py-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 text-[11px] uppercase tracking-[0.06em] text-background/35 font-medium">
+      <div className="border-t border-inverted-foreground/10 px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
+        <div className="py-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 text-[11px] uppercase tracking-[0.06em] text-inverted-foreground/45 font-medium">
           <span>© Mobem Solutions · {new Date().getFullYear()} · Tous droits réservés</span>
           <span className="whitespace-nowrap">SIRET&nbsp;: 91514447100017</span>
           <span>Nantes · Pays de la Loire · France</span>

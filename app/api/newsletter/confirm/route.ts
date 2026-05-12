@@ -5,7 +5,7 @@ import { verifyConfirmToken } from '@/lib/newsletter-token'
 const resend = new Resend(process.env.RESEND_API_KEY)
 const MOBEM_EMAIL = 'contact@mobem-solutions.com'
 const FROM_EMAIL = process.env.FROM_EMAIL ?? 'Mobem Solutions <noreply@mobem-solutions.com>'
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://mobem-solutions.com'
+const BASE_URL = process.env.APP_URL ?? 'https://mobem-solutions.com'
 const AUDIENCE_ID = process.env.RESEND_AUDIENCE_ID ?? ''
 
 export async function GET(req: NextRequest) {

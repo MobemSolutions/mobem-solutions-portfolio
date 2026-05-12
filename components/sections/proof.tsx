@@ -1,12 +1,13 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import { cn } from "@/lib/utils"
 
 const STATS = [
-  { v: 10, s: " j",  l: "Délai moyen de livraison",     d: "Pour les sites essentiels — de la signature à la mise en ligne." },
-  { v: 90, s: "+",   l: "Score Lighthouse garanti",      d: "Performance contractualisée. Mesurée à chaque livraison." },
-  { v: 3,  s: "",    l: "Associés complémentaires",      d: "Stratégie · Design · Ingénierie. Un seul point de contact." },
-  { v: 24, s: " h",  l: "Délai de réponse support",      d: "SLA réponse inclus dès l'offre Expert." },
+  { v: 10,  s: " j", l: "Livraison garantie",        d: "De la signature à la mise en ligne — délai inscrit au contrat, ou reprise à nos frais." },
+  { v: 100, s: " %", l: "Livrés dans les délais",    d: "Tous nos projets livrés dans les délais convenus — sans exception." },
+  { v: 3,   s: "",   l: "Experts dédiés",             d: "Stratégie, design et code — un seul interlocuteur pour vous." },
+  { v: 24,  s: " h", l: "Réponse garantie",           d: "Sur toute demande urgente, en jours ouvrés." },
 ]
 
 function ProofNumber({
@@ -45,63 +46,49 @@ function ProofNumber({
   return (
     <div
       ref={ref}
-      className="flex flex-col gap-3 px-7 py-10"
-      style={{ borderRight: last ? "none" : "1px solid #1f1f1f" }}
+      className={cn(
+        "flex flex-col gap-3 px-7 py-10",
+        !last && "border-r border-inverted-foreground/10",
+      )}
     >
-      <span className="font-mono text-[11px] uppercase tracking-[0.06em]" style={{ color: "#888" }}>
+      <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-inverted-foreground/55">
         0{idx + 1}
       </span>
       <div
-        className="font-extrabold leading-[0.9] tracking-[-0.05em]"
+        className="font-extrabold leading-[0.9] tracking-[-0.05em] whitespace-nowrap"
         style={{ fontSize: "clamp(72px, 8vw, 120px)", fontFeatureSettings: '"tnum" 1' }}
       >
         {Math.round(val)}
-        <span style={{ color: "var(--color-accent)" }}>{suffix}</span>
+        <span className="text-accent" style={{ fontSize: "0.55em" }}>{suffix}</span>
       </div>
       <div className="text-[14px] font-semibold tracking-[-0.005em]">{label}</div>
-      <div className="text-[12px] leading-[1.5]" style={{ color: "#888" }}>{sub}</div>
+      <div className="text-[12px] leading-[1.5] text-inverted-foreground/55">{sub}</div>
     </div>
   )
 }
 
 export function ProofSection() {
   return (
-    <section
-      id="chiffres"
-      style={{ background: "var(--color-foreground)", color: "var(--color-background)" }}
-    >
+    <section id="chiffres" className="bg-inverted text-inverted-foreground" aria-labelledby="proof-heading">
       {/* Section head */}
-      <div
-        className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-5"
-        style={{ borderTop: "1px solid #1f1f1f", borderBottom: "1px solid #1f1f1f" }}
-      >
-        <h2 className="text-[13px] font-medium uppercase tracking-[0.02em]">Témoignage</h2>
-        <span className="font-mono text-[11px] uppercase tracking-[0.06em]" style={{ color: "#888" }}>Client — 2025</span>
+      <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-7 lg:py-9 border-t border-b border-inverted-foreground/10">
+        <h2 id="proof-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">Nos engagements</h2>
+        <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-inverted-foreground/55">Contractuels — 2026</span>
       </div>
 
-      {/* Quote band */}
-      <div
-        className="px-4 sm:px-6 lg:px-8 py-16 lg:py-20"
-        style={{ borderBottom: "1px solid #1f1f1f" }}
-      >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          <div className="hidden lg:block lg:col-span-1 font-mono text-[11px]" style={{ color: "#888" }}>—</div>
-          <blockquote
-            className="lg:col-span-8 font-serif font-normal italic leading-[1.05] tracking-[-0.018em]"
-            style={{ fontSize: "clamp(28px, 3.5vw, 52px)", margin: 0 }}
-          >
-            «&nbsp;Mobem ne nous a pas vendu un site. Ils nous ont vendu un{" "}
-            <em style={{ color: "var(--color-accent)" }}>plan</em>. Six mois plus tard,
-            on a triplé nos demandes entrantes.&nbsp;»
-          </blockquote>
-          <div className="lg:col-span-3 flex flex-col gap-1 font-mono text-[11px]">
-            <span style={{ color: "#888" }}>— Témoignage</span>
-            <span className="mt-2 text-[13px] font-medium not-mono" style={{ fontFamily: "var(--font-sans)" }}>
-              Directrice marketing
-            </span>
-            <span style={{ color: "#888" }}>PME industrielle · 80 collab.</span>
-          </div>
-        </div>
+      {/* Stats grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        {STATS.map((s, i) => (
+          <ProofNumber
+            key={i}
+            value={s.v}
+            suffix={s.s}
+            label={s.l}
+            sub={s.d}
+            idx={i}
+            last={i === STATS.length - 1}
+          />
+        ))}
       </div>
     </section>
   )

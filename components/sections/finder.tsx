@@ -41,15 +41,15 @@ export function FinderSection() {
 
   return (
     <section
-      className="border-t border-border bg-foreground text-background"
+      className="border-t border-border bg-inverted text-inverted-foreground"
       aria-labelledby="finder-heading"
     >
       {/* Section head */}
-      <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-5 border-b border-background/10">
-        <h2 id="finder-heading" className="text-[13px] font-medium uppercase tracking-[0.02em] text-background/70">
+      <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-7 lg:py-9 border-b border-inverted-foreground/10">
+        <h2 id="finder-heading" className="text-[13px] font-medium uppercase tracking-[0.02em] text-inverted-foreground/80">
           Trouver mon site
         </h2>
-        <span className="hidden sm:block text-[11px] uppercase tracking-[0.06em] text-background/40">
+        <span className="hidden sm:block text-[11px] uppercase tracking-[0.06em] text-inverted-foreground/55">
           Métier × Ville
         </span>
       </div>
@@ -58,12 +58,12 @@ export function FinderSection() {
       <div className="flex flex-col lg:flex-row">
 
         {/* Left — édito */}
-        <div className="lg:w-[36%] px-4 sm:px-6 lg:px-8 py-6 lg:py-14 lg:border-r lg:border-background/10 shrink-0">
+        <div className="lg:w-[36%] px-4 sm:px-6 lg:px-8 py-6 lg:py-14 lg:border-r lg:border-inverted-foreground/10 shrink-0">
           <h3 className="font-extrabold leading-[0.92] tracking-[-0.035em] text-[clamp(26px,3.2vw,50px)] mb-3">
             Quel site vous{" "}
             <em className="font-serif font-normal italic text-accent">faut-il ?</em>
           </h3>
-          <p className="text-[13px] leading-relaxed text-background/55 max-w-xs">
+          <p className="text-[13px] leading-relaxed text-inverted-foreground/55 max-w-xs">
             Votre métier + votre ville = une page dédiée, SEO local inclus, livrée en 10 jours.
           </p>
         </div>
@@ -73,14 +73,14 @@ export function FinderSection() {
 
           <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-2 mb-5">
             <div className="relative flex-1">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-background/35" aria-hidden="true" />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-inverted-foreground/45" aria-hidden="true" />
               <input
                 type="text"
                 value={metier}
                 onChange={(e) => setMetier(e.target.value)}
                 placeholder="Votre métier…"
                 list="metier-suggestions"
-                className="w-full pl-10 pr-4 py-3 bg-background/8 border border-background/15 text-[13px] text-background placeholder:text-background/35 focus:outline-none focus:border-accent transition-colors"
+                className="w-full pl-10 pr-4 py-3 bg-inverted-foreground/[0.08] border border-inverted-foreground/20 text-[13px] text-inverted-foreground placeholder:text-inverted-foreground/45 focus:outline-none focus:border-accent transition-colors"
                 aria-label="Votre métier"
               />
               <datalist id="metier-suggestions">
@@ -90,14 +90,14 @@ export function FinderSection() {
               </datalist>
             </div>
             <div className="relative flex-1">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-background/35" aria-hidden="true" />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-inverted-foreground/45" aria-hidden="true" />
               <input
                 type="text"
                 value={ville}
                 onChange={(e) => setVille(e.target.value)}
                 placeholder="Votre ville…"
                 list="ville-suggestions"
-                className="w-full pl-10 pr-4 py-3 bg-background/8 border border-background/15 text-[13px] text-background placeholder:text-background/35 focus:outline-none focus:border-accent transition-colors"
+                className="w-full pl-10 pr-4 py-3 bg-inverted-foreground/[0.08] border border-inverted-foreground/20 text-[13px] text-inverted-foreground placeholder:text-inverted-foreground/45 focus:outline-none focus:border-accent transition-colors"
                 aria-label="Votre ville"
               />
               <datalist id="ville-suggestions">
@@ -108,7 +108,7 @@ export function FinderSection() {
             </div>
             <button
               type="submit"
-              className="flex items-center justify-center gap-2 px-5 py-3 bg-accent text-accent-foreground font-medium text-[13px] hover:bg-background hover:text-foreground transition-colors whitespace-nowrap shrink-0"
+              className="flex items-center justify-center gap-2 px-5 py-3 bg-accent text-accent-foreground font-medium text-[13px] hover:bg-inverted-foreground hover:text-inverted transition-colors whitespace-nowrap shrink-0"
             >
               Chercher <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
             </button>
@@ -117,17 +117,17 @@ export function FinderSection() {
           {/* Quick tags */}
           <div className="flex flex-col gap-2.5">
             <div>
-              <span className="text-[10px] uppercase tracking-[0.07em] text-background/35 block mb-2">Métiers</span>
-              <div className="flex flex-wrap gap-1.5">
+              <span className="text-[10px] uppercase tracking-[0.07em] text-inverted-foreground/65 block mb-2">Métiers</span>
+              <div className="flex flex-wrap gap-2">
                 {QUICK_METIERS.map((m) => (
                   <button
                     key={m.slug}
                     onClick={() => setMetier(m.label)}
                     className={cn(
-                      "px-2.5 py-1 border text-[11px] transition-colors",
+                      "min-h-9 px-3 py-2 border text-[11px] transition-colors",
                       metier === m.label
                         ? "bg-accent border-accent text-accent-foreground"
-                        : "border-background/15 text-background/50 hover:border-background/40 hover:text-background/80"
+                        : "border-inverted-foreground/25 text-inverted-foreground/70 hover:border-inverted-foreground/55 hover:text-inverted-foreground"
                     )}
                   >
                     {m.label}
@@ -136,17 +136,17 @@ export function FinderSection() {
               </div>
             </div>
             <div>
-              <span className="text-[10px] uppercase tracking-[0.07em] text-background/35 block mb-2">Villes</span>
-              <div className="flex flex-wrap gap-1.5">
+              <span className="text-[10px] uppercase tracking-[0.07em] text-inverted-foreground/65 block mb-2">Villes</span>
+              <div className="flex flex-wrap gap-2">
                 {QUICK_VILLES.map((v) => (
                   <button
                     key={v.slug}
                     onClick={() => setVille(v.label)}
                     className={cn(
-                      "px-2.5 py-1 border text-[11px] transition-colors",
+                      "min-h-9 px-3 py-2 border text-[11px] transition-colors",
                       ville === v.label
                         ? "bg-accent border-accent text-accent-foreground"
-                        : "border-background/15 text-background/50 hover:border-background/40 hover:text-background/80"
+                        : "border-inverted-foreground/25 text-inverted-foreground/70 hover:border-inverted-foreground/55 hover:text-inverted-foreground"
                     )}
                   >
                     {v.label}

@@ -27,7 +27,7 @@ export default function MentionsLegalesPage() {
 
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
         <section className="pt-14 lg:pt-16 border-t border-border">
-          <div className="px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-12 border-b border-border">
+          <div className="px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 pb-16 border-b border-border">
             <nav className="flex items-center gap-2.5 mb-10 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground" aria-label="Fil d'Ariane">
               <Link href="/" className="hover:text-accent transition-colors">Accueil</Link>
               <span>/</span>

@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!post) return {}
 
   const ogImage = post.mainImage?.asset
-    ? urlFor(post.mainImage).width(1200).height(630).url()
+    ? urlFor(post.mainImage).width(1200).height(630).auto('format').url()
     : undefined
 
   return {
@@ -119,7 +119,7 @@ export default async function ArticlePage({ params }: PageProps) {
       "@id": `https://mobem-solutions.com/blog/${slug}`,
     },
     image: post.mainImage?.asset
-      ? urlFor(post.mainImage).width(1200).height(630).url()
+      ? urlFor(post.mainImage).width(1200).height(630).auto('format').url()
       : undefined,
   }
 
@@ -217,16 +217,16 @@ export default async function ArticlePage({ params }: PageProps) {
         </div>
 
         {/* ── Art cover ─────────────────────────────────────────────────────── */}
-        <div className="aspect-[16/9] bg-secondary border-b border-border max-h-[520px] overflow-hidden">
-          {post.mainImage?.asset && (
-            // eslint-disable-next-line @next/next/no-img-element
+        {post.ficheImage?.asset && (
+          <div className="aspect-[16/9] bg-secondary border-b border-border max-h-[520px] overflow-hidden">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={urlFor(post.mainImage).width(1600).height(900).quality(90).url()}
-              alt={post.mainImage.alt || post.title}
+              src={urlFor(post.ficheImage).width(1600).height(900).quality(90).url()}
+              alt={post.ficheImage.alt || post.title}
               className="w-full h-full object-cover"
             />
-          )}
-        </div>
+          </div>
+        )}
 
         {/* ── Art body ──────────────────────────────────────────────────────── */}
         <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr_200px] gap-12 px-4 sm:px-6 lg:px-8 py-16 max-w-[1280px] mx-auto">
