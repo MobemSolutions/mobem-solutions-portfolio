@@ -205,7 +205,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               Analyses terrain, retours d&apos;expérience et stratégies concrètes pour
               les PME et ETI ambitieuses. Rédigé par nos consultants.
             </p>
-            <a
+            {/* <a
               href="#newsletter"
               className="mt-8 inline-flex items-center gap-3 px-8 py-5 bg-accent text-accent-foreground font-medium text-[14px] cta-hover transition-colors"
             >
@@ -213,7 +213,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
                 <path d="M12 5v14M5 12l7 7 7-7" />
               </svg>
-            </a>
+            </a> */}
           </div>
         </section>
 
@@ -401,7 +401,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
         )}
 
         {/* ── Newsletter ───────────────────────────────────────────────────── */}
-        <section id="newsletter" className="px-4 sm:px-6 lg:px-8 py-32 lg:py-40 border-t border-border grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        {/* <section id="newsletter" className="px-4 sm:px-6 lg:px-8 py-32 lg:py-40 border-t border-border grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
             <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground mb-4">
               Newsletter
@@ -418,7 +418,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             </p>
           </div>
           <NewsletterWidget />
-        </section>
+        </section> */}
       </main>
       <Footer />
     </>

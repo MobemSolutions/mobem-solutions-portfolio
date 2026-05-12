@@ -1,9 +1,9 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowRight, Search, PenTool, Code2, Rocket } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { EditorialBadge } from "@/components/ui/editorial-badge"
+import { MethodeFaq } from "@/components/methode-faq"
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
@@ -20,7 +20,6 @@ export const metadata: Metadata = {
 const steps = [
   {
     number: "01",
-    icon: Search,
     title: "Découverte & Brief",
     duration: "Jour 1–2",
     summary: "On ne code pas une ligne avant de comprendre votre business.",
@@ -34,7 +33,6 @@ const steps = [
   },
   {
     number: "02",
-    icon: PenTool,
     title: "Design & Maquettage",
     duration: "Jour 3–5",
     summary: "Des interfaces validées avant de coder, UX d'abord, esthétique ensuite.",
@@ -48,7 +46,6 @@ const steps = [
   },
   {
     number: "03",
-    icon: Code2,
     title: "Développement",
     duration: "Jour 5–9",
     summary: "Stack moderne, code propre, performances dans l'ADN.",
@@ -62,7 +59,6 @@ const steps = [
   },
   {
     number: "04",
-    icon: Rocket,
     title: "Lancement & Transfert",
     duration: "Jour 10",
     summary: "Mise en ligne sans friction, vous repartez avec les clés.",
@@ -189,7 +185,6 @@ export default function MethodePage() {
           </div>
 
           <div className="px-4 sm:px-6 lg:px-8 pt-14 sm:pt-20 lg:pt-28 mx-auto max-w-7xl">
-            <EditorialBadge className="mb-10">Notre méthode</EditorialBadge>
             <h1
               id="methode-hero"
               className="font-bold leading-[0.92] tracking-[-0.04em] text-[clamp(44px,7.5vw,120px)] mb-12 sm:mb-16 lg:mb-24"
@@ -255,13 +250,10 @@ export default function MethodePage() {
                   i < steps.length - 1 && "border-b border-border",
                 )}
               >
-                <div className="lg:col-span-2 flex items-baseline gap-3">
-                  <step.icon className="w-5 h-5 text-accent shrink-0 mt-0.5 group-hover:text-background transition-colors" aria-hidden="true" />
-                  <span className="font-mono text-[28px] sm:text-[36px] font-bold tracking-[-0.02em] leading-none text-accent group-hover:text-background tabular-nums transition-colors">
-                    {step.number}
-                  </span>
+                <div className="lg:col-span-1">
+                  <span className="font-mono text-[14px] text-accent font-medium">{step.number}</span>
                 </div>
-                <div className="lg:col-span-5">
+                <div className="lg:col-span-6">
                   <h3 className="text-[22px] sm:text-[26px] font-bold tracking-[-0.025em] leading-[1.1] mb-3">
                     {step.title}
                   </h3>
@@ -377,22 +369,7 @@ export default function MethodePage() {
           </div>
 
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
-            {faqs.map((faq, i) => (
-              <details
-                key={faq.question}
-                className={cn(
-                  "faq-details group",
-                  i < faqs.length - 1 && "border-b border-border",
-                )}
-              >
-                <summary className="flex items-center justify-between gap-6 py-6 cursor-pointer list-none text-[16px] font-semibold leading-snug hover:text-accent transition-colors">
-                  <span>{faq.question}</span>
-                </summary>
-                <p className="pb-6 text-[14px] leading-[1.6] text-muted-foreground max-w-[68ch]">
-                  {faq.answer}
-                </p>
-              </details>
-            ))}
+            <MethodeFaq items={faqs} />
           </div>
         </section>
 
