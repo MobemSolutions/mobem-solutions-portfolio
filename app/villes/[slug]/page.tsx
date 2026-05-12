@@ -9,6 +9,7 @@ import {
 } from "@/lib/seo-data"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { EditorialBadge } from "@/components/ui/editorial-badge"
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -180,9 +181,9 @@ export default async function VilleDetailPage({ params }: PageProps) {
               </nav>
 
               {/* Chip */}
-              <div className="inline-block border-l-2 border-accent pl-3 pr-4 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground mb-8">
+              <EditorialBadge variant="muted" className="mb-8">
                 {ville.region}
-              </div>
+              </EditorialBadge>
 
               {/* H1 */}
               <h1 className="font-extrabold leading-[0.92] tracking-[-0.045em] text-[clamp(48px,7vw,112px)] mb-6">
@@ -338,7 +339,7 @@ export default async function VilleDetailPage({ params }: PageProps) {
                 <span className="font-semibold text-[15px] tracking-[-0.01em]">
                   {metier.label}
                 </span>
-                <ArrowDiag className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-all flex-shrink-0" />
+                <ArrowDiag className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform flex-shrink-0" />
               </Link>
             ))}
           </div>

@@ -43,7 +43,7 @@ export function ServicesSection() {
     <section id="services" className="border-t border-border" aria-labelledby="services-heading">
 
       {/* Section head */}
-      <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-5 border-b border-border">
+      <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-8 lg:py-10 border-b border-border">
         <h2 id="services-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
           Méthode
         </h2>
@@ -56,7 +56,14 @@ export function ServicesSection() {
       <div className="flex flex-col lg:flex-row">
 
         {/* Left — editorial quote */}
-        <div className="lg:w-[34%] px-4 sm:px-6 lg:px-8 py-10 lg:py-14 lg:border-r lg:border-border shrink-0">
+        <div className="lg:w-[34%] px-4 sm:px-6 lg:px-8 py-14 lg:py-20 lg:border-r lg:border-border shrink-0 relative overflow-hidden">
+          {/* Decorative oversized index */}
+          <span
+            className="hidden lg:block absolute bottom-6 right-8 font-bold text-[clamp(80px,9vw,140px)] leading-none tracking-[-0.04em] text-foreground/[0.04] select-none pointer-events-none tabular-nums"
+            aria-hidden="true"
+          >
+            01
+          </span>
           <h3 className="font-serif font-normal text-[clamp(36px,4.5vw,56px)] leading-[0.95] tracking-[-0.02em] mb-6 italic">
             On commence par{" "}
             <em className="text-accent not-italic font-serif">écouter.</em>
@@ -120,7 +127,7 @@ export function ServicesSection() {
                 role="listitem"
                 data-cursor="hover"
                 className={cn(
-                  "group bento-hover grid grid-cols-12 gap-6 px-6 lg:px-8 py-6 lg:py-7 items-baseline",
+                  "group bento-hover grid grid-cols-12 gap-6 px-6 lg:px-8 py-8 lg:py-10 items-baseline",
                   i < steps.length - 1 && "border-b border-border"
                 )}
               >

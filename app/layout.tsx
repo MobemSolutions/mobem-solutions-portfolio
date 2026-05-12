@@ -45,10 +45,10 @@ export const metadata: Metadata = {
     description: 'Conseil et accompagnement dans la transformation digitale pour PME et ETI. Basée à Nantes.',
     images: [
       {
-        url: '/opengraph-image.jpg',
+        url: '/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'Mobem Solutions - Conseil en Digitalisation',
+        alt: 'Mobem Solutions — Agence Web Nantes',
       },
     ],
   },
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#F7F7F5' },
-    { media: '(prefers-color-scheme: dark)', color: '#0D0D0D' },
+    { media: '(prefers-color-scheme: dark)', color: '#1C1813' },
   ],
   width: 'device-width',
   initialScale: 1,
@@ -89,7 +89,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${dmSerif.variable} ${jetBrains.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="light"
           enableSystem={false}
           disableTransitionOnChange
         >

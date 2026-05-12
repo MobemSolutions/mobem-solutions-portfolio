@@ -1,8 +1,10 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import Image from "next/image"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { CASES } from "@/lib/cases"
+import { CASES, type Case } from "@/lib/cases"
+import { getAllRealisations, urlFor } from "@/lib/sanity"
 
 export const metadata: Metadata = {
   title: "Réalisations — Mobem Solutions",
@@ -13,14 +15,6 @@ export const metadata: Metadata = {
     url: "https://mobem-solutions.com/realisations",
   },
 }
-
-const FILTERS = [
-  { id: "all",       label: "Tous",             count: CASES.length },
-  { id: "refonte",   label: "Refontes",          count: CASES.filter(c => c.cat === "refonte").length },
-  { id: "essentiel", label: "Sites essentiels",  count: CASES.filter(c => c.cat === "essentiel").length },
-  { id: "plateforme",label: "Plateformes",       count: CASES.filter(c => c.cat === "plateforme").length },
-  { id: "seo",       label: "SEO local",         count: CASES.filter(c => c.cat === "seo").length },
-]
 
 // ── Arrow SVG ──────────────────────────────────────────────────────────────
 
@@ -38,11 +32,11 @@ function Arrow({ className = "", size = 20 }: { className?: string; size?: numbe
 
 // ── Case row ───────────────────────────────────────────────────────────────
 
-function CaseRow({ c }: { c: typeof CASES[number] }) {
+function CaseRow({ c }: { c: Case }) {
   return (
     <Link
       href={`/realisations/${c.slug}`}
-      className="group bento-hover flex items-center gap-4 px-4 sm:px-6 lg:px-8 py-6 border-b border-border transition-colors lg:grid lg:items-center lg:gap-6 lg:[grid-template-columns:70px_2fr_1.2fr_1fr_1fr_48px]"
+      className="group bento-hover flex items-center gap-4 px-4 sm:px-6 lg:px-8 py-8 border-b border-border transition-colors lg:grid lg:items-center lg:gap-6 lg:[grid-template-columns:70px_2fr_1.2fr_1fr_1fr_48px]"
       data-cursor="hover"
     >
       <span className="hidden lg:block text-[11px] text-foreground/50 group-hover:text-background/50 transition-colors">{c.idx}</span>
@@ -64,15 +58,28 @@ function CaseRow({ c }: { c: typeof CASES[number] }) {
 
 // ── Case card ──────────────────────────────────────────────────────────────
 
-function CaseCard({ c }: { c: typeof CASES[number] }) {
+function CaseCard({ c }: { c: Case }) {
   return (
     <Link
       href={`/realisations/${c.slug}`}
-      className="group bento-hover w-[320px] sm:w-auto border-r border-b border-border flex flex-col gap-4 p-8 transition-colors"
+      className="group bento-hover w-[340px] sm:w-auto border-r border-b border-border flex flex-col gap-4 p-10 transition-colors"
       data-cursor="hover"
     >
-      <div className="aspect-[4/3] bg-foreground/[.06] group-hover:bg-background/10 transition-colors flex items-center justify-center font-mono text-[10px] uppercase tracking-[0.1em] text-foreground/30 dark:text-foreground/60 group-hover:text-background/40">
-        [ capture · {c.client.toLowerCase()} ]
+      <div className="relative aspect-[4/3] bg-foreground/[.06] group-hover:bg-background/10 transition-colors overflow-hidden">
+        {c.coverImage?.asset ? (
+          <Image
+            src={urlFor(c.coverImage).width(680).height(510).auto('format').url()}
+            alt={c.coverImage.alt ?? c.client}
+            fill
+            unoptimized
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 640px) 340px, (max-width: 1024px) 50vw, 33vw"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center font-mono text-[10px] uppercase tracking-[0.1em] text-foreground/30 dark:text-foreground/60 group-hover:text-background/40">
+            [ capture · {c.client.toLowerCase()} ]
+          </div>
+        )}
       </div>
       <div className="flex items-center justify-between gap-4">
         <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-foreground/50 dark:text-foreground/75 group-hover:text-background/50 transition-colors">{c.idx} · {c.year}</span>
@@ -92,6 +99,28 @@ function CaseCard({ c }: { c: typeof CASES[number] }) {
   )
 }
 
+// ── Helpers ────────────────────────────────────────────────────────────────
+
+function normaliseSanityCase(r: any): Case {
+  return {
+    idx:         r.idx         ?? '',
+    client:      r.client      ?? '',
+    sector:      r.sector      ?? '',
+    tag:         r.tag         ?? '',
+    kpi:         r.kpi         ?? '',
+    year:        r.year        ?? '',
+    cat:         r.cat         ?? '',
+    slug:        r.slug        ?? '',
+    desc:        r.desc        ?? '',
+    stats:       (r.stats ?? []).map((s: { v: string; l: string }) => [s.v, s.l] as [string, string]),
+    kpis:        r.kpis        ?? [],
+    body:        r.body        ?? [],
+    stack:       r.stack       ?? [],
+    quote:       r.quote       ?? { text: '', author: '', role: '' },
+    coverImage:  r.coverImage  ?? undefined,
+  }
+}
+
 // ── Page ───────────────────────────────────────────────────────────────────
 
 interface PageProps {
@@ -102,12 +131,23 @@ export default async function RealisationsPage({ searchParams }: PageProps) {
   const params = await searchParams
   const activeFilter = params.filtre || "all"
 
+  const raw = await getAllRealisations().catch(() => [])
+  const cases: Case[] = raw.length > 0 ? raw.map(normaliseSanityCase) : CASES
+
+  const filters = [
+    { id: "all",        label: "Tous",            count: cases.length },
+    { id: "refonte",    label: "Refontes",         count: cases.filter(c => c.cat === "refonte").length },
+    { id: "essentiel",  label: "Sites essentiels", count: cases.filter(c => c.cat === "essentiel").length },
+    { id: "plateforme", label: "Plateformes",      count: cases.filter(c => c.cat === "plateforme").length },
+    { id: "seo",        label: "SEO local",        count: cases.filter(c => c.cat === "seo").length },
+  ]
+
   const filteredCases = activeFilter === "all"
-    ? CASES
-    : CASES.filter(c => c.cat === activeFilter)
+    ? cases
+    : cases.filter(c => c.cat === activeFilter)
 
   const selectionCases = activeFilter === "all"
-    ? CASES.slice(0, 6)
+    ? cases.slice(0, 6)
     : filteredCases
 
   return (
@@ -117,7 +157,7 @@ export default async function RealisationsPage({ searchParams }: PageProps) {
 
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
         <section className="pt-14 lg:pt-16 border-t border-border">
-          <div className="px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 lg:pt-24 pb-12 lg:pb-16">
+          <div className="px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 lg:pt-36 pb-16 lg:pb-20">
             <nav
               className="flex items-center gap-2.5 mb-10 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground"
               aria-label="Fil d'Ariane"
@@ -129,24 +169,23 @@ export default async function RealisationsPage({ searchParams }: PageProps) {
             <h1 className="font-extrabold leading-[0.92] tracking-[-0.045em] text-[clamp(56px,8vw,128px)] mb-6">
               Réalisations<br />
               <em className="font-serif font-normal italic text-accent tracking-[-0.02em]">
-                2024 — 2026.
+                2025 — 2026.
               </em>
             </h1>
             <p className="text-xl leading-[1.5] max-w-[720px] text-muted-foreground">
-              <strong>47 projets livrés</strong> en France — refontes, sites essentiels,
-              plateformes sur mesure. Chaque cas est un diagnostic, une prescription, une exécution mesurée.
+              Des <strong>cas d'études</strong> pour illustrer notre approche — refontes, sites essentiels, plateformes sur mesure. Chaque cas : un diagnostic, une prescription, une exécution mesurée.
             </p>
           </div>
         </section>
 
         {/* ── Filters ──────────────────────────────────────────────────────── */}
-        <div className="flex items-center flex-wrap border-t border-b border-border overflow-x-auto">
-          {FILTERS.map((f) => (
+        <div className="flex items-stretch flex-wrap border-t border-b border-border">
+          {filters.map((f) => (
             <Link
               key={f.id}
               href={f.id === "all" ? "/realisations" : `/realisations?filtre=${f.id}`}
               data-cursor="hover"
-              className={`font-mono text-[11px] uppercase tracking-[0.08em] px-5 py-4 border-r border-border whitespace-nowrap transition-colors ${
+              className={`font-mono text-[11px] uppercase tracking-[0.08em] px-4 sm:px-5 py-4 border-r border-border whitespace-nowrap transition-colors ${
                 activeFilter === f.id
                   ? "text-foreground border-b-2 border-b-accent -mb-px"
                   : "text-muted-foreground hover:text-foreground"
@@ -188,7 +227,7 @@ export default async function RealisationsPage({ searchParams }: PageProps) {
         </div>
 
         {/* ── CTA ──────────────────────────────────────────────────────────── */}
-        <section className="px-4 sm:px-6 lg:px-8 py-24 border-t border-border text-center">
+        <section className="px-4 sm:px-6 lg:px-8 py-32 lg:py-40 border-t border-border text-center">
           <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground mb-6">
             Votre projet
           </div>

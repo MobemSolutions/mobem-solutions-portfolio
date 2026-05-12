@@ -14,7 +14,7 @@ const navigation = [
   { num: "03", name: "Blog", href: "/blog", external: true },
 ]
 
-function triggerRipple(e: React.PointerEvent<HTMLButtonElement>) {
+function triggerRipple(e: React.PointerEvent<HTMLElement>) {
   const btn = e.currentTarget
   const ripple = document.createElement("span")
   const size = Math.max(btn.offsetWidth, btn.offsetHeight)
@@ -74,7 +74,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-200",
+        "fixed top-0 left-0 right-0 z-50 transition-[background-color,border-color] duration-200",
         isScrolled
           ? "bg-background/95 backdrop-blur-md border-b border-border"
           : "bg-background/95 border-b border-border lg:bg-transparent lg:border-transparent"
@@ -94,12 +94,9 @@ export function Header() {
             className="group flex items-center gap-3 transition-opacity hover:opacity-70"
             aria-label="Mobem Solutions - Retour à l'accueil"
           >
-            <div className="flex items-center justify-center w-9 h-9 bg-foreground transition-transform duration-200 group-hover:scale-105 group-active:scale-95 flex-shrink-0" aria-hidden="true">
-              <span className="text-[20px] font-black text-accent leading-none select-none">M</span>
-            </div>
             <div className="flex flex-col leading-none">
-              <span className="text-[13px] font-bold tracking-[-0.01em] text-foreground uppercase">Mobem</span>
-              <span className="text-[11px] font-light tracking-[0.04em] text-muted-foreground">Solutions</span>
+              <span className="text-[17px] font-bold tracking-[-0.02em] text-foreground uppercase">Mobem</span>
+              <span className="text-[12px] font-light tracking-[0.06em] text-muted-foreground">Solutions</span>
             </div>
           </Link>
 
@@ -110,7 +107,9 @@ export function Header() {
                 key={item.name}
                 href={item.href}
                 onClick={item.external ? undefined : (e) => handleNavClick(e, item.href)}
-                className="inline-flex items-baseline gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                onPointerDown={triggerRipple}
+                className="relative overflow-hidden inline-flex items-baseline gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                data-cursor="hover"
               >
                 {item.name}
               </Link>
@@ -121,7 +120,7 @@ export function Header() {
               <button
                 onClick={() => { setIsMetierDropdownOpen((v) => !v); setIsVilleDropdownOpen(false) }}
                 onPointerDown={triggerRipple}
-                className="relative overflow-hidden inline-flex items-baseline gap-2 text-sm font-medium text-muted-foreground transition-all hover:text-foreground active:scale-[0.95] active:opacity-70"
+                className="relative overflow-hidden inline-flex items-baseline gap-2 text-sm font-medium text-muted-foreground transition-[color,transform,opacity] hover:text-foreground active:scale-[0.95] active:opacity-70"
                 aria-expanded={isMetierDropdownOpen}
                 data-cursor="hover"
               >
@@ -174,7 +173,7 @@ export function Header() {
               <button
                 onClick={() => { setIsVilleDropdownOpen((v) => !v); setIsMetierDropdownOpen(false) }}
                 onPointerDown={triggerRipple}
-                className="relative overflow-hidden inline-flex items-baseline gap-2 text-sm font-medium text-muted-foreground transition-all hover:text-foreground active:scale-[0.95] active:opacity-70"
+                className="relative overflow-hidden inline-flex items-baseline gap-2 text-sm font-medium text-muted-foreground transition-[color,transform,opacity] hover:text-foreground active:scale-[0.95] active:opacity-70"
                 aria-expanded={isVilleDropdownOpen}
                 data-cursor="hover"
               >
@@ -236,7 +235,9 @@ export function Header() {
             <Link
               href="#contact"
               onClick={(e) => handleNavClick(e, "#contact")}
-              className="inline-flex items-center gap-2 px-4 py-2.5 bg-accent text-accent-foreground text-sm font-medium transition-colors cta-hover"
+              onPointerDown={triggerRipple}
+              className="relative overflow-hidden inline-flex items-center gap-2 px-4 py-2.5 bg-accent text-accent-foreground text-sm font-medium transition-colors cta-hover"
+              data-cursor="hover"
             >
               Diagnostic gratuit
               <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
@@ -272,7 +273,7 @@ export function Header() {
         <div
           id="mobile-menu"
           className={cn(
-            "lg:hidden transition-all duration-200",
+            "lg:hidden transition-[max-height,opacity] duration-200",
             isMobileMenuOpen ? "max-h-[80vh] overflow-y-auto opacity-100" : "max-h-0 overflow-hidden opacity-0"
           )}
           aria-hidden={!isMobileMenuOpen}

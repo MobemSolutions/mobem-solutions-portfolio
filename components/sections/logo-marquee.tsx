@@ -47,8 +47,9 @@ export function LogoMarquee() {
 
   return (
     <div
-      className="marquee-wrap overflow-hidden border-t border-b border-border"
+      role="region"
       aria-label="Stack technique"
+      className="marquee-wrap overflow-hidden border-t border-b border-border"
     >
       <div className="marquee-track flex" aria-hidden="true">
         {items.map((s, i) => (

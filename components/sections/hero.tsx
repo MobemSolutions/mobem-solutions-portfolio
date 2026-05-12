@@ -18,24 +18,37 @@ export function HeroSection() {
   }
 
   return (
-    <section id="hero" className="pt-14 lg:pt-16 border-t border-border" aria-labelledby="hero-heading">
+    <section id="hero" className="pt-14 lg:pt-16 border-t border-border relative" aria-labelledby="hero-heading">
+
+      {/* Vertical editorial label — right margin */}
+      <div className="hidden lg:flex absolute right-0 top-0 h-full items-start pt-8 pr-6 pointer-events-none" aria-hidden="true">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-px h-16 bg-border" />
+          <span
+            className="font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/25 select-none"
+            style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+          >
+            Nantes · France · 2026
+          </span>
+        </div>
+      </div>
 
       {/* Main content */}
-      <div className="px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 lg:pt-20 mx-auto max-w-7xl">
+      <div className="px-4 sm:px-6 lg:px-8 pt-14 sm:pt-20 lg:pt-28 mx-auto max-w-7xl">
 
         <h1
           id="hero-heading"
-          className="font-bold leading-[0.88] tracking-[-0.045em] text-[clamp(52px,10vw,168px)] mb-10 sm:mb-14 lg:mb-20"
+          className="font-bold leading-[0.88] tracking-[-0.045em] text-[clamp(22px,8.5vw,136px)] mb-12 sm:mb-16 lg:mb-24"
         >
           La précision<br />
           <span className="text-accent" aria-hidden="true">·</span> digitale,<br />
-          <span className="font-serif font-normal italic tracking-[-0.02em]">
+          <span className="font-serif font-normal italic tracking-[-0.02em] lg:ml-[0.16em] whitespace-nowrap">
             à l&apos;échelle humaine<span className="caret" aria-hidden="true" />
           </span>
         </h1>
 
         {/* Sub-row */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 border-t border-border pt-8 pb-10 lg:pb-14">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 border-t border-border pt-10 pb-14 lg:pb-20">
           <div className="hidden lg:flex lg:col-span-1 items-start pt-1">
             <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">01</span>
           </div>
@@ -51,19 +64,22 @@ export function HeroSection() {
               Roadmap trimestrielle. Tarification à la valeur. Un seul interlocuteur, trois associés.
             </p>
           </div>
-          <div className="lg:col-span-3 lg:px-8 lg:border-l lg:border-border flex flex-col gap-3 items-start">
+          <div className="lg:col-span-3 lg:px-8 lg:border-l lg:border-border flex flex-col gap-2 items-start">
             <Link
               href="#contact"
               onClick={handleScrollTo("#contact")}
-              className="inline-flex items-center gap-2.5 px-5 py-3 bg-accent text-accent-foreground text-sm font-medium transition-colors cta-hover"
+              className="inline-flex items-center gap-2.5 px-5 py-3.5 bg-accent text-accent-foreground text-[15px] font-semibold transition-colors cta-hover"
             >
               Démarrer un diagnostic
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </Link>
+            <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
+              Sans engagement · 90 min · Réponse 24 h
+            </span>
             <Link
               href="#services"
               onClick={handleScrollTo("#services")}
-              className="inline-flex items-center gap-2.5 px-5 py-3 border border-border text-sm font-medium transition-colors hover:bg-secondary"
+              className="inline-flex items-center gap-2.5 px-5 py-3.5 border border-border text-sm font-medium transition-colors hover:bg-secondary mt-2"
             >
               Voir les services
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -72,28 +88,6 @@ export function HeroSection() {
         </div>
 
       </div>
-
-      {/* KPI strip */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 border-t border-border">
-        {kpis.map(({ key, value, desc }, i) => (
-          <div
-            key={key}
-            className={cn(
-              "px-4 sm:px-6 lg:px-8 py-6 lg:py-8 flex flex-col gap-2",
-              i < 3 && "lg:border-r lg:border-border",
-              i % 2 === 0 && "border-r border-border lg:border-r-0",
-              i < 2 && "border-b border-border lg:border-b-0",
-            )}
-          >
-            <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">
-              0{i + 1} · {key}
-            </span>
-            <div className="text-[36px] sm:text-[44px] font-bold tracking-[-0.03em] leading-none">{value}</div>
-            <div className="text-xs text-muted-foreground">{desc}</div>
-          </div>
-        ))}
-      </div>
-
     </section>
   )
 }

@@ -19,14 +19,15 @@ export function PortfolioTeaser() {
     <section id="realisations" className="border-t border-border" aria-labelledby="portfolio-teaser-heading">
 
       {/* Section head */}
-      <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-5 border-b border-border">
+      <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-7 border-b border-border">
         <div className="flex items-baseline gap-5">
           <h2 id="portfolio-teaser-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
             Réalisations
           </h2>
+          <span className="hidden lg:block w-8 h-px bg-accent self-center" aria-hidden="true" />
         </div>
         <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">
-          Sélection 2025 / 2026
+          Sélection 2025&thinsp;/&thinsp;2026
         </span>
       </div>
 
@@ -36,7 +37,7 @@ export function PortfolioTeaser() {
           key={project.id}
           href={`/realisations/${project.slug}`}
           aria-label={`Voir le projet ${project.title}`}
-          className="group relative flex items-center gap-4 lg:grid lg:grid-cols-12 px-4 sm:px-6 lg:px-8 py-7 lg:py-9 border-b border-border overflow-hidden bento-hover"
+          className="group relative flex items-center gap-4 lg:grid lg:grid-cols-12 px-4 sm:px-6 lg:px-8 py-9 lg:py-11 border-b border-border overflow-hidden bento-hover"
         >
           {/* Hover circle */}
           <div
@@ -80,7 +81,7 @@ export function PortfolioTeaser() {
       ))}
 
       {/* Footer */}
-      <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-5">
+      <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-7">
         <Link
           href="/realisations"
           className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
