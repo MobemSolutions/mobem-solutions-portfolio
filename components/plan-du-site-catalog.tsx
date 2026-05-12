@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react"
 import Link from "next/link"
-import { Search, X } from "lucide-react"
+import { Search, X, ChevronDown } from "lucide-react"
 import { METIER_CATEGORIES, REGIONS, ALL_METIERS, ALL_VILLES } from "@/lib/seo-data"
 
 const PAGES_PRINCIPALES = [
@@ -37,6 +37,7 @@ const TABS: { id: TabId; label: string }[] = [
 export function PlanDuSiteCatalog() {
   const [query, setQuery] = useState("")
   const [activeTab, setActiveTab] = useState<TabId>("metiers")
+  const [expandedMetiers, setExpandedMetiers] = useState<Set<string>>(new Set())
 
   const filteredMetiers = useMemo(() => {
     if (!query.trim()) return METIER_CATEGORIES
@@ -60,13 +61,33 @@ export function PlanDuSiteCatalog() {
     return PAGES_PRINCIPALES.filter((p) => p.name.toLowerCase().includes(q))
   }, [query])
 
-  const filteredMetiersFlat = useMemo(() => {
-    return filteredMetiers.flatMap((c) => c.metiers)
-  }, [filteredMetiers])
+  // Combinaisons-specific filters: searching by ville or métier independently
+  const combinaisonsMetiers = useMemo(() => {
+    if (!query.trim()) return ALL_METIERS
+    const q = query.toLowerCase()
+    const byMetier = ALL_METIERS.filter((m) => m.label.toLowerCase().includes(q))
+    return byMetier.length > 0 ? byMetier : ALL_METIERS
+  }, [query])
 
-  const filteredVillesFlat = useMemo(() => {
-    return filteredVilles.flatMap((r) => r.villes)
-  }, [filteredVilles])
+  const combinaisonsVilles = useMemo(() => {
+    if (!query.trim()) return ALL_VILLES
+    const q = query.toLowerCase()
+    const byVille = ALL_VILLES.filter((v) => v.label.toLowerCase().includes(q))
+    return byVille.length > 0 ? byVille : ALL_VILLES
+  }, [query])
+
+  const isSearching = query.trim().length > 0
+
+  const isExpanded = (slug: string) => isSearching || expandedMetiers.has(slug)
+
+  const toggleExpand = (slug: string) => {
+    if (isSearching) return
+    setExpandedMetiers((prev) => {
+      const next = new Set(prev)
+      next.has(slug) ? next.delete(slug) : next.add(slug)
+      return next
+    })
+  }
 
   return (
     <>
@@ -218,39 +239,51 @@ export function PlanDuSiteCatalog() {
             <div className="flex items-baseline justify-between mb-6">
               <h2 className="text-[13px] font-medium uppercase tracking-[0.02em]">Pages métier × ville</h2>
               <span className="font-mono text-[11px] text-foreground/70">
-                {(ALL_METIERS.length * ALL_VILLES.length).toLocaleString("fr-FR")} combinaisons
+                {combinaisonsMetiers.length} métier{combinaisonsMetiers.length > 1 ? "s" : ""} · {combinaisonsVilles.length} ville{combinaisonsVilles.length > 1 ? "s" : ""}
               </span>
             </div>
-            <div className="space-y-1">
-              {filteredMetiersFlat.map((metier) => (
-                <details key={metier.slug} className="group faq-details border border-border">
-                  <summary
-                    data-cursor="hover"
-                    className="group flex items-center justify-between px-5 py-4 select-none bento-hover transition-colors"
-                  >
-                    <div className="flex items-baseline gap-4">
-                      <span className="font-mono text-[10px] text-muted-foreground/50 group-hover:text-background/50">→</span>
-                      <span className="font-medium text-foreground text-[15px] group-hover:text-background">{metier.label}</span>
-                      <span className="font-mono text-[10px] text-muted-foreground group-hover:text-background/60">{ALL_VILLES.length} villes</span>
+            {combinaisonsMetiers.length === 0 ? (
+              <p className="text-muted-foreground py-12 text-center">Aucun résultat pour « {query} »</p>
+            ) : (
+              <div className="space-y-1">
+                {combinaisonsMetiers.map((metier) => {
+                  const open = isExpanded(metier.slug)
+                  return (
+                    <div key={metier.slug} className="border border-border">
+                      <button
+                        type="button"
+                        onClick={() => toggleExpand(metier.slug)}
+                        data-cursor="hover"
+                        className="w-full flex items-center justify-between px-5 py-4 bento-hover transition-colors text-left"
+                      >
+                        <div className="flex items-baseline gap-4">
+                          <span className="font-mono text-[10px] text-muted-foreground/50 group-hover:text-background/50">→</span>
+                          <span className="font-medium text-[15px]">{metier.label}</span>
+                          <span className="font-mono text-[10px] text-muted-foreground">{combinaisonsVilles.length} ville{combinaisonsVilles.length > 1 ? "s" : ""}</span>
+                        </div>
+                        <ChevronDown className={`w-4 h-4 text-muted-foreground shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
+                      </button>
+                      {open && (
+                        <div className="overflow-x-auto scrollbar-none">
+                          <div className="border-t border-border flex lg:grid lg:grid-cols-5 border-l border-border min-w-max lg:min-w-0">
+                            {combinaisonsVilles.map((ville) => (
+                              <Link
+                                key={ville.slug}
+                                href={`/metiers/${metier.slug}/${ville.slug}`}
+                                data-cursor="hover"
+                                className="border-r border-b border-border px-4 py-3 w-[200px] lg:w-auto font-mono text-[11px] text-accent bento-hover transition-colors"
+                              >
+                                {metier.label} {ville.label}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  </summary>
-                  <div className="overflow-x-auto scrollbar-none">
-                    <div className="border-t border-border flex lg:grid lg:grid-cols-5 border-l border-border min-w-max lg:min-w-0">
-                      {filteredVillesFlat.map((ville) => (
-                        <Link
-                          key={ville.slug}
-                          href={`/metiers/${metier.slug}/${ville.slug}`}
-                          data-cursor="hover"
-                          className="border-r border-b border-border px-4 py-3 w-[200px] lg:w-auto font-mono text-[11px] text-accent bento-hover transition-colors"
-                        >
-                          {metier.label} {ville.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </details>
-              ))}
-            </div>
+                  )
+                })}
+              </div>
+            )}
           </section>
         )}
 
