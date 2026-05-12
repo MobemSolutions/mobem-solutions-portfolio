@@ -5,7 +5,9 @@ import { ConfirmEmail } from '@/emails/ConfirmEmail'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 const FROM_EMAIL = process.env.FROM_EMAIL ?? 'Mobem Solutions <noreply@mobem-solutions.com>'
-const BASE_URL = process.env.APP_URL ?? (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://mobem-solutions.com')
+const BASE_URL = (process.env.VERCEL_ENV !== 'production' && process.env.VERCEL_URL)
+  ? `https://${process.env.VERCEL_URL}`
+  : (process.env.NEXT_PUBLIC_APP_URL ?? process.env.APP_URL ?? 'https://mobem-solutions.com')
 const AUDIENCE_ID = process.env.RESEND_AUDIENCE_ID ?? ''
 
 export async function POST(req: NextRequest) {
