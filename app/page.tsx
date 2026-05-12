@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     siteName: "Mobem Solutions",
     title: "Mobem Solutions — Agence Web Nantes | Sites pro livrés en 10 jours",
     description:
-      "Sites web professionnels pour PME & artisans. Livrés en 10 jours, SEO local inclus, Lighthouse 90+. Diagnostic gratuit.",
+      "Sites pros en 10 jours · SEO local · Lighthouse 90+ · Diagnostic gratuit.",
     images: [
       {
         url: "/opengraph-image",
