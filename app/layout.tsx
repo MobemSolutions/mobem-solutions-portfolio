@@ -27,7 +27,7 @@ const jetBrains = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://mobem-solutions.com'),
+  metadataBase: new URL('https://www.mobem-solutions.com'),
   title: 'Mobem Solutions - Conseil en Digitalisation | Nantes',
   description: 'Mobem Solutions accompagne les PME et ETI dans leur transformation digitale. Conseil, stratégie et solutions sur-mesure. Agence basée à Nantes.',
   keywords: ['conseil digital', 'digitalisation', 'Nantes', 'transformation digitale', 'stratégie digitale', 'PME', 'ETI', 'agence conseil', 'solutions digitales'],
