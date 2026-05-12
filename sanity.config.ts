@@ -13,8 +13,6 @@ export default defineConfig({
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
 
   plugins: [
-    bulkDeletePlugin(),
-    unsplashImageAsset(),
     structureTool({
       structure: (S) =>
         S.list()
@@ -28,6 +26,8 @@ export default defineConfig({
             S.listItem().title('Clients').child(S.documentTypeList('client').title('Clients')),
           ]),
     }),
+    unsplashImageAsset(),
+    bulkDeletePlugin(),
   ],
 
   schema: { types: schemaTypes },
