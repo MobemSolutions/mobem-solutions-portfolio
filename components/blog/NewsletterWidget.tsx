@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 
-type FormState = "idle" | "loading" | "success" | "error"
+type FormState = "idle" | "loading" | "success" | "error" | "already-subscribed"
 
 function CheckSvg() {
   return (
@@ -77,6 +77,8 @@ export function NewsletterWidget() {
       if (res.ok) {
         setState("success")
         setSeconds(10)
+      } else if (res.status === 409) {
+        setState("already-subscribed")
       } else {
         setState("error")
       }
@@ -117,10 +119,25 @@ export function NewsletterWidget() {
     )
   }
 
+  if (state === "already-subscribed") {
+    return (
+      <div className="border border-border bg-secondary px-6 py-4 flex items-center justify-between gap-4">
+        <p className="text-[13px] text-foreground leading-relaxed">
+          Cette adresse est déjà abonnée à notre newsletter.
+        </p>
+        <button
+          onClick={() => { setState("idle"); setEmail("") }}
+          className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap"
+        >
+          OK
+        </button>
+      </div>
+    )
+  }
+
   if (state === "error") {
     return (
       <div className="flex flex-col gap-4">
-        {/* Error card */}
         <div className="border border-destructive/30 bg-destructive/5 px-6 py-4 flex items-center justify-between gap-4">
           <p className="text-[13px] text-destructive leading-relaxed">
             Une erreur est survenue. Réessayez dans quelques instants.

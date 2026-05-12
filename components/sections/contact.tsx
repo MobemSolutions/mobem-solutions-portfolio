@@ -19,12 +19,13 @@ const CALENDLY_URL = "https://calendly.com/contact-mobem-solutions/15min"
 
 const SERVICES = [
   "Design UI/UX",
-  "Site vitrine",
-  "Refonte de site",
-  "Application web",
+  "Création de site vitrine",
+  "Refonte de site existant",
+  "Application web (SaaS / backoffice)",
+  "Application mobile",
   "E-commerce",
-  "SEO",
-  "Conseil digital",
+  "SEO & Référencement naturel",
+  "Conseil & stratégie digitale",
 ]
 
 const BUDGET_OPTIONS = [

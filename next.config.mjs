@@ -19,11 +19,11 @@ const nextConfig = {
 
     const appCsp = [
       "default-src 'self';",
-      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://assets.calendly.com https://va.vercel-scripts.com;`,
+      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://assets.calendly.com https://va.vercel-scripts.com https://vercel.live;`,
       "style-src 'self' 'unsafe-inline' https://assets.calendly.com;",
       "img-src 'self' blob: data: cdn.sanity.io https://assets.calendly.com https://images.unsplash.com;",
       "font-src 'self' data:;",
-      "connect-src 'self' *.sanity.io *.vercel-analytics.com https://va.vercel-scripts.com https://api.resend.com https://calendly.com https://api.unsplash.com;",
+      "connect-src 'self' *.sanity.io *.vercel-analytics.com https://va.vercel-scripts.com https://api.resend.com https://calendly.com https://api.unsplash.com https://vercel.live wss://ws-us3.pusher.com;",
       "frame-src 'self' https://calendly.com;",
       "worker-src 'self' blob:;",
     ].join(' ')
