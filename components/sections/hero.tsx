@@ -38,7 +38,7 @@ export function HeroSection() {
 
         <h1
           id="hero-heading"
-          className="font-bold leading-[0.88] tracking-[-0.045em] text-[clamp(22px,8.5vw,136px)] mb-12 sm:mb-16 lg:mb-24"
+          className="font-bold leading-[0.88] tracking-[-0.045em] text-[clamp(32px,8.5vw,136px)] mb-12 sm:mb-16 lg:mb-24"
         >
           La précision<br />
           <span className="text-accent" aria-hidden="true">·</span> digitale,<br />
