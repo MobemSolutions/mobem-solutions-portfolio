@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/_next/', '/studio/'],
+        disallow: ['/api/', '/_next/', '/studio/', '/opengraph-image'],
       },
     ],
     sitemap: 'https://mobem-solutions.com/sitemap.xml',
