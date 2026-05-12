@@ -35,6 +35,7 @@ const POST_FIELDS = `
   title,
   slug,
   mainImage { asset, alt },
+  ficheImage { asset, alt },
   excerpt,
   publishedAt,
   "authors": authors[]->{ name, image, role, bio },
@@ -97,6 +98,7 @@ export async function getPostBySlug(slug: string, preview = false) {
       title,
       slug,
       mainImage { asset, alt },
+      ficheImage { asset, alt },
       excerpt,
       publishedAt,
       "authors": authors[]->{ name, image, role, bio },
@@ -141,6 +143,58 @@ export async function getRelatedPosts(currentSlug: string, categoryIds: string[]
       body
     }`,
     { currentSlug, categoryIds },
+    { next: { revalidate: 60 } }
+  )
+}
+
+// ── Réalisations ───────────────────────────────────────────────────────────
+
+const REALISATION_FIELDS = `
+  _id,
+  idx,
+  client,
+  "slug": slug.current,
+  cat,
+  sector,
+  tag,
+  year,
+  kpi,
+  desc,
+  featured,
+  publishedAt,
+  stats[] { v, l },
+  kpis[] { v, l, d },
+  body[] { title, content },
+  stack,
+  quote { text, author, role },
+  coverImage { asset, alt },
+  ficheImage { asset, alt },
+  performance { performance, accessibility, seo, bestPractices }
+`
+
+export async function getAllRealisations() {
+  if (!client) return []
+  return client.fetch(
+    `*[_type == "realisation" && defined(slug.current)] | order(idx asc) { ${REALISATION_FIELDS} }`,
+    {},
+    { next: { revalidate: 60 } }
+  )
+}
+
+export async function getRealisationBySlug(slug: string) {
+  if (!client) return null
+  return client.fetch(
+    `*[_type == "realisation" && slug.current == $slug][0] { ${REALISATION_FIELDS} }`,
+    { slug },
+    { next: { revalidate: 60 } }
+  )
+}
+
+export async function getAllRealisationSlugs() {
+  if (!client) return []
+  return client.fetch(
+    `*[_type == "realisation" && defined(slug.current)]{ "slug": slug.current } | order(idx asc)`,
+    {},
     { next: { revalidate: 60 } }
   )
 }

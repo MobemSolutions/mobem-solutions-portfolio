@@ -10,6 +10,7 @@ import {
 } from "@/lib/seo-data"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { EditorialBadge } from "@/components/ui/editorial-badge"
 
 interface Props {
   params: Promise<{ slug: string; ville: string }>
@@ -110,7 +111,7 @@ export default async function MetierVillePage({ params }: Props) {
 
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
         <section className="pt-14 lg:pt-16 border-t border-border">
-          <div className="px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 lg:pt-24 pb-16 border-b border-border grid grid-cols-1 lg:grid-cols-[7fr_5fr] gap-16">
+          <div className="px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 lg:pt-36 pb-16 border-b border-border grid grid-cols-1 lg:grid-cols-[7fr_5fr] gap-16">
             <div>
               <nav
                 className="flex items-center flex-wrap gap-2.5 mb-10 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground"
@@ -125,9 +126,9 @@ export default async function MetierVillePage({ params }: Props) {
                 <span className="text-foreground">{ville.label}</span>
               </nav>
 
-              <div className="inline-block mb-6 border-l-2 border-accent pl-3 pr-4 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
+              <EditorialBadge variant="muted" className="mb-6">
                 SEO local · {ville.departement}
-              </div>
+              </EditorialBadge>
 
               <h1 className="font-extrabold leading-[0.92] tracking-[-0.04em] text-[clamp(36px,5.5vw,80px)] mb-6">
                 Site internet pour{" "}

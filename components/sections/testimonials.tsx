@@ -62,8 +62,8 @@ export function TestimonialsSection() {
             <figure
               key={testimonial.id}
               className={cn(
-                "relative bg-card rounded-2xl border border-border p-8 transition-all duration-300",
-                "hover:shadow-lg hover:border-border/50"
+                "relative bg-card border border-border p-8 transition-[border-color] duration-300",
+                "hover:border-accent/40"
               )}
             >
               {/* Quote icon */}
@@ -82,7 +82,7 @@ export function TestimonialsSection() {
               {/* Author */}
               <figcaption className="flex items-center gap-4">
                 <div
-                  className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent font-semibold"
+                  className="w-12 h-12 bg-accent/10 flex items-center justify-center text-accent font-semibold"
                   aria-hidden="true"
                 >
                   {testimonial.initials}

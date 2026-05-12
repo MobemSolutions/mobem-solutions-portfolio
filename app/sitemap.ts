@@ -1,11 +1,14 @@
 import type { MetadataRoute } from 'next'
-import { getAllPostSlugs } from '@/lib/sanity'
+import { getAllPostSlugs, getAllRealisationSlugs } from '@/lib/sanity'
 import { ALL_METIERS, ALL_VILLES } from '@/lib/seo-data'
 
 const BASE_URL = 'https://mobem-solutions.com'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const slugs = await getAllPostSlugs()
+  const [slugs, realisationSlugs] = await Promise.all([
+    getAllPostSlugs(),
+    getAllRealisationSlugs(),
+  ])
 
   const posts: MetadataRoute.Sitemap = slugs.map(({ slug }: { slug: string }) => ({
     url: `${BASE_URL}/blog/${slug}`,
@@ -37,6 +40,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }))
   )
 
+  const realisationPages: MetadataRoute.Sitemap = realisationSlugs.map(({ slug }: { slug: string }) => ({
+    url: `${BASE_URL}/realisations/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
+  }))
+
   return [
     { url: BASE_URL, lastModified: new Date(), changeFrequency: 'monthly', priority: 1 },
     { url: `${BASE_URL}/methode`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
@@ -49,6 +59,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...metierPages,
     ...villePages,
     ...posts,
+    ...realisationPages,
     ...metierVillePages,
   ]
 }

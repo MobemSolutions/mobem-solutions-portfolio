@@ -78,7 +78,7 @@ export function PricingSection() {
     <section id="prestations" className="border-t border-border" aria-labelledby="pricing-heading">
 
       {/* Section head */}
-      <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-5 border-b border-border">
+      <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-8 lg:py-10 border-b border-border">
         <h2 id="pricing-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
           Services
         </h2>
@@ -105,8 +105,8 @@ export function PricingSection() {
         ))}
       </div>
 
-      {/* Cards — desktop: 3 cols / mobile: active one */}
-      <div className="hidden lg:grid lg:grid-cols-3">
+      {/* Cards — desktop: asymmetric (S2 flagship dominates), mobile: active one */}
+      <div className="hidden lg:grid lg:grid-cols-[1fr_1.15fr_1fr]">
         {OFFERS.map((o, i) => <OfferCard key={o.code} offer={o} idx={i} />)}
       </div>
       <div className="lg:hidden">
@@ -114,34 +114,6 @@ export function PricingSection() {
           <OfferCard key={o.code} offer={o} idx={i} />
         ))}
       </div>
-
-      {/* Capacités transverses */}
-      <div className="border-t border-border">
-        <div className="flex justify-between px-4 sm:px-6 lg:px-8 py-5 border-b border-border">
-          <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">Capacités transverses</span>
-        </div>
-        <div className="overflow-x-auto sm:overflow-visible scrollbar-none">
-        <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-border min-w-max sm:min-w-0">
-          {CAPS.map((c) => (
-            <div
-              key={c.k}
-              data-cursor="hover"
-              className="bento-hover w-[220px] sm:w-auto border-r border-b border-border flex flex-col gap-3 p-6 min-h-[180px]"
-            >
-              <div className="flex justify-end items-start">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-                  <path d="M7 17 L17 7"/><path d="M9 7 H17 V15"/>
-                </svg>
-              </div>
-              <div className="text-[22px] font-bold tracking-[-0.02em] mt-2">{c.v}</div>
-              <div className="text-[12px] text-muted-foreground">{c.d}</div>
-              <div className="mt-auto text-[11px] font-semibold text-accent">● {c.proof}</div>
-            </div>
-          ))}
-        </div>
-        </div>
-      </div>
-
     </section>
   )
 }
@@ -151,15 +123,30 @@ function OfferCard({ offer, idx }: { offer: typeof OFFERS[number]; idx: number }
     <div
       data-cursor="hover"
       className={cn(
-        "group relative flex flex-col p-6 lg:p-8 min-h-[520px] transition-colors",
+        "group relative flex flex-col p-8 lg:min-h-[560px] transition-colors overflow-hidden",
         offer.flagship
-          ? "bg-accent text-accent-foreground cta-hover"
-          : "bento-hover",
+          ? "bg-accent text-accent-foreground cta-hover lg:p-14"
+          : "bento-hover lg:p-12",
         idx < 2 && "lg:border-r lg:border-border"
       )}
     >
-      <div className="flex justify-end items-start mb-8">
-        <ArrowRight className="w-5 h-5 opacity-70 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden="true" />
+      {/* Oversized background index — editorial accent */}
+      <span
+        className="absolute bottom-4 right-4 font-bold leading-none tracking-[-0.04em] select-none pointer-events-none tabular-nums text-[clamp(60px,7vw,100px)]"
+        style={{ opacity: offer.flagship ? 0.08 : 0.04 }}
+        aria-hidden="true"
+      >
+        S{idx + 1}
+      </span>
+      <div className="flex justify-between items-start mb-8 gap-3">
+        {offer.flagship ? (
+          <span className="font-mono text-[10px] uppercase tracking-[0.08em] px-2.5 py-1 border border-current">
+            Recommandé · Notre choix
+          </span>
+        ) : (
+          <span aria-hidden="true" />
+        )}
+        <ArrowRight className="w-5 h-5 opacity-70 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 shrink-0" aria-hidden="true" />
       </div>
 
       <div className="mb-6">

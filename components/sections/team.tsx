@@ -43,7 +43,7 @@ export function TeamSection() {
     <section id="equipe" className="border-t border-border" aria-labelledby="team-heading">
 
       {/* Section head */}
-      <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-5 border-b border-border">
+      <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-7 lg:py-9 border-b border-border">
         <div className="flex items-baseline gap-5">
           <h2 id="team-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
             Équipe
@@ -52,17 +52,20 @@ export function TeamSection() {
         <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">
           Trois associés · Une vision commune
         </span>
+        <span className="sm:hidden font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground" aria-hidden="true">
+          Faire défiler →
+        </span>
       </div>
 
-      {/* Team grid — desktop: 3 cols, mobile: horizontal scroll */}
-      <div className="overflow-x-auto lg:overflow-visible scrollbar-none">
-      <div className="flex lg:grid lg:grid-cols-3 min-w-max lg:min-w-0">
+      {/* Team grid — desktop: 3 cols, mobile: horizontal scroll with snap */}
+      <div className="overflow-x-auto lg:overflow-visible scrollbar-none snap-x snap-mandatory lg:snap-none">
+      <div className="flex lg:grid lg:grid-cols-[1.12fr_1fr_0.92fr] min-w-max lg:min-w-0">
         {team.map((member, i) => (
           <div
             key={member.num}
             data-cursor="hover"
             className={cn(
-              "group flex flex-col w-[320px] lg:w-auto px-6 lg:px-8 py-8 lg:py-10 bento-hover border-r border-border lg:border-r-0",
+              "group flex flex-col w-[320px] lg:w-auto px-6 lg:px-8 py-8 lg:py-10 bento-hover border-r border-border lg:border-r-0 snap-start lg:snap-align-none",
               i < 2 && "lg:border-r lg:border-border"
             )}
           >

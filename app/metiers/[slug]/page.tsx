@@ -4,6 +4,7 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { EditorialBadge } from "@/components/ui/editorial-badge"
 import {
   ALL_METIERS,
   ALL_VILLES,
@@ -180,9 +181,9 @@ export default async function MetierPage({ params }: Props) {
                 <span className="text-foreground">{metier.label}</span>
               </nav>
               {category && (
-                <span className="inline-block border-l-2 border-accent pl-3 pr-4 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground mb-6">
+                <EditorialBadge variant="muted" className="mb-6">
                   {category.label}
-                </span>
+                </EditorialBadge>
               )}
               <h1 className="font-extrabold leading-[0.92] tracking-[-0.04em] text-[clamp(56px,7vw,112px)] mb-6">
                 Création de site<br />pour{" "}
@@ -366,7 +367,7 @@ export default async function MetierPage({ params }: Props) {
               <Link
                 key={v.slug}
                 href={`/metiers/${metier.slug}/${v.slug}`}
-                className="px-4 py-2.5 border border-border text-[13px] font-medium transition-all duration-[180ms] hover:border-accent hover:bg-accent hover:text-accent-foreground"
+                className="px-4 py-2.5 border border-border text-[13px] font-medium transition-[border-color,background-color,color] duration-[180ms] hover:border-accent hover:bg-accent hover:text-accent-foreground"
                 data-cursor="hover"
               >
                 {metier.label} à {v.label}

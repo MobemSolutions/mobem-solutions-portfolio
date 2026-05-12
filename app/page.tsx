@@ -153,8 +153,8 @@ export default function HomePage() {
         <LogoMarquee />
         <ServicesSection />
         <FinderSection />
-        <PricingSection />
         <ProofSection />
+        <PricingSection />
         <TeamSection />
         <ContactSection />
       </main>

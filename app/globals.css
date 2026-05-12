@@ -42,6 +42,11 @@
   --input: oklch(0.90 0 0);
   --ring: oklch(0.51 0.22 27);
 
+  /* Inverted band — bande sombre persistante (Proof / Finder / Footer / logo tile)
+     Ne suit pas l'inversion de thème : reste Ink/Paper en dark mode comme en light. */
+  --inverted: oklch(0.07 0 0);
+  --inverted-foreground: oklch(0.973 0.003 80);
+
   --chart-1: oklch(0.51 0.22 27);
   --chart-2: oklch(0.55 0.15 200);
   --chart-3: oklch(0.45 0.12 260);
@@ -62,35 +67,40 @@
 }
 
 .dark {
-  /* Ink #0D0D0D */
-  --background: oklch(0.07 0 0);
-  --foreground: oklch(0.973 0.003 80);
+  /* Charbon chaud — chroma 0.010 hue 55 (brun chaud assumé, pas neutre froid)
+     Hiérarchie de surfaces : bg 0.115 → card 0.155 → muted 0.20 → border 0.28 */
+  --background: oklch(0.115 0.010 55);
+  --foreground: oklch(0.965 0.005 80);
 
-  --card: oklch(0.13 0 0);
-  --card-foreground: oklch(0.973 0.003 80);
-  --popover: oklch(0.13 0 0);
-  --popover-foreground: oklch(0.973 0.003 80);
+  --card: oklch(0.155 0.010 55);
+  --card-foreground: oklch(0.965 0.005 80);
+  --popover: oklch(0.155 0.010 55);
+  --popover-foreground: oklch(0.965 0.005 80);
 
-  --primary: oklch(0.973 0.003 80);
-  --primary-foreground: oklch(0.07 0 0);
+  --primary: oklch(0.965 0.005 80);
+  --primary-foreground: oklch(0.115 0.010 55);
 
-  /* #1f1f1f */
-  --secondary: oklch(0.16 0 0);
-  --secondary-foreground: oklch(0.973 0.003 80);
+  --secondary: oklch(0.20 0.008 55);
+  --secondary-foreground: oklch(0.965 0.005 80);
 
-  --muted: oklch(0.16 0 0);
-  --muted-foreground: oklch(0.68 0 0);
+  --muted: oklch(0.20 0.008 55);
+  --muted-foreground: oklch(0.68 0.008 55);
 
-  /* Signal reste identique en dark */
+  /* Signal rouge — strictement inchangé (brand mark) */
   --accent: oklch(0.51 0.22 27);
-  --accent-foreground: oklch(0.973 0.003 80);
+  --accent-foreground: oklch(0.965 0.005 80);
 
   --destructive: oklch(0.51 0.22 27);
-  --destructive-foreground: oklch(0.973 0.003 80);
+  --destructive-foreground: oklch(0.965 0.005 80);
 
-  --border: oklch(0.26 0 0);
-  --input: oklch(0.26 0 0);
+  --border: oklch(0.28 0.008 55);
+  --input: oklch(0.28 0.008 55);
   --ring: oklch(0.51 0.22 27);
+
+  /* Bande inversée en dark = encore plus profonde que le bg, pas une bande claire.
+     Texte cream pour lisibilité. */
+  --inverted: oklch(0.055 0.012 55);
+  --inverted-foreground: oklch(0.965 0.005 80);
 
   --chart-1: oklch(0.51 0.22 27);
   --chart-2: oklch(0.60 0.15 200);
@@ -98,13 +108,13 @@
   --chart-4: oklch(0.68 0.18 145);
   --chart-5: oklch(0.65 0.20 330);
 
-  --sidebar: oklch(0.10 0 0);
-  --sidebar-foreground: oklch(0.973 0.003 80);
+  --sidebar: oklch(0.13 0.010 55);
+  --sidebar-foreground: oklch(0.965 0.005 80);
   --sidebar-primary: oklch(0.51 0.22 27);
-  --sidebar-primary-foreground: oklch(0.973 0.003 80);
-  --sidebar-accent: oklch(0.16 0 0);
-  --sidebar-accent-foreground: oklch(0.973 0.003 80);
-  --sidebar-border: oklch(0.26 0 0);
+  --sidebar-primary-foreground: oklch(0.965 0.005 80);
+  --sidebar-accent: oklch(0.20 0.008 55);
+  --sidebar-accent-foreground: oklch(0.965 0.005 80);
+  --sidebar-border: oklch(0.28 0.008 55);
   --sidebar-ring: oklch(0.51 0.22 27);
 }
 
@@ -126,6 +136,8 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-inverted: var(--inverted);
+  --color-inverted-foreground: var(--inverted-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
@@ -159,6 +171,7 @@
     font-feature-settings: "ss01", "cv11";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
   }
 
   ::selection {
@@ -172,6 +185,7 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: clip;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -191,7 +205,8 @@
   white-space: nowrap;
   will-change: transform;
 }
-.marquee-wrap:hover .marquee-track {
+.marquee-wrap:hover .marquee-track,
+.marquee-wrap:focus-within .marquee-track {
   animation-play-state: paused;
 }
 @keyframes marquee-scroll {
@@ -224,11 +239,11 @@
 /* ─── Blinking caret ──────────────────────────────── */
 .caret {
   display: inline-block;
-  width: 0.06em;
-  height: 0.82em;
+  width: 0.055em;
+  height: 0.78em;
   background: var(--color-accent);
-  margin-left: 0.06em;
-  vertical-align: -0.08em;
+  margin-left: 0.04em;
+  vertical-align: -0.05em;
   animation: blink 1.05s steps(2) infinite;
 }
 @keyframes blink {
