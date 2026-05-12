@@ -57,7 +57,7 @@ export default function ConfidentialitePage() {
                   <a key={s.id} href={`#${s.id}`}
                     data-cursor="hover"
                     className="flex items-start gap-2 font-mono text-[11px] text-muted-foreground hover:text-accent transition-colors py-1.5 pl-3 border-l border-border hover:border-accent">
-                    <span className="text-accent/50 shrink-0">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="text-accent shrink-0">{String(i + 1).padStart(2, "0")}</span>
                     <span className="uppercase tracking-[0.04em]">{s.label}</span>
                   </a>
                 ))}

@@ -27,8 +27,8 @@
   --secondary-foreground: oklch(0.07 0 0);
 
   --muted: oklch(0.95 0 0);
-  /* Gray #888888 */
-  --muted-foreground: oklch(0.59 0 0);
+  /* Gray — darkened to oklch(0.46) for WCAG AA 4.5:1 on Paper background */
+  --muted-foreground: oklch(0.46 0 0);
 
   /* Signal Red #E63030 */
   --accent: oklch(0.51 0.22 27);

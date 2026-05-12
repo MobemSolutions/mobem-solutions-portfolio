@@ -68,10 +68,9 @@ function CaseCard({ c }: { c: Case }) {
       <div className="relative aspect-[4/3] bg-foreground/[.06] group-hover:bg-background/10 transition-colors overflow-hidden">
         {c.coverImage?.asset ? (
           <Image
-            src={urlFor(c.coverImage).width(680).height(510).auto('format').url()}
+            src={urlFor(c.coverImage).width(1200).auto('format').url()}
             alt={c.coverImage.alt ?? c.client}
             fill
-            unoptimized
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 640px) 340px, (max-width: 1024px) 50vw, 33vw"
           />
