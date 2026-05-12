@@ -163,10 +163,13 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const activeCategory = params.categorie || ""
   const page = Math.max(1, parseInt(params.page || "1", 10))
 
-  const [posts, categories] = await Promise.all([
+  const [posts, categories, totalCount] = await Promise.all([
     getPaginatedPosts({ page, category: activeCategory, preview }),
     getAllCategories(),
+    getPostCount(activeCategory),
   ])
+
+  const totalPages = Math.ceil(totalCount / 9)
 
   const featured: Post | null =
     !activeCategory && page === 1 && posts.length > 0 ? posts[0] : null
@@ -351,6 +354,49 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 <ArticleCard key={post._id} post={post} />
               ))}
             </div>
+
+            {/* ── Pagination ───────────────────────────────────────────────── */}
+            {totalPages > 1 && (
+              <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-6 border-t border-border">
+                <Link
+                  href={page > 1 ? `/blog?${activeCategory ? `categorie=${activeCategory}&` : ""}page=${page - 1}` : "#"}
+                  aria-disabled={page <= 1}
+                  className={`font-mono text-[11px] uppercase tracking-[0.06em] px-5 py-3 border border-border transition-colors ${
+                    page <= 1
+                      ? "opacity-30 pointer-events-none"
+                      : "hover:bg-foreground hover:text-background"
+                  }`}
+                >
+                  ← Précédent
+                </Link>
+                <div className="flex items-center gap-1">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                    <Link
+                      key={p}
+                      href={`/blog?${activeCategory ? `categorie=${activeCategory}&` : ""}page=${p}`}
+                      className={`w-9 h-9 flex items-center justify-center font-mono text-[12px] border transition-colors ${
+                        p === page
+                          ? "bg-foreground text-background border-foreground"
+                          : "border-border hover:border-foreground hover:text-foreground"
+                      }`}
+                    >
+                      {p}
+                    </Link>
+                  ))}
+                </div>
+                <Link
+                  href={page < totalPages ? `/blog?${activeCategory ? `categorie=${activeCategory}&` : ""}page=${page + 1}` : "#"}
+                  aria-disabled={page >= totalPages}
+                  className={`font-mono text-[11px] uppercase tracking-[0.06em] px-5 py-3 border border-border transition-colors ${
+                    page >= totalPages
+                      ? "opacity-30 pointer-events-none"
+                      : "hover:bg-foreground hover:text-background"
+                  }`}
+                >
+                  Suivant →
+                </Link>
+              </div>
+            )}
           </>
         )}
 
