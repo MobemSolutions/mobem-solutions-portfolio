@@ -32,7 +32,7 @@ const team = [
     role: "Responsable Design & UX/UI",
     description: "Créateur d'interfaces intuitives, Antoine place l'utilisateur au centre. Son rôle : traduire les besoins fonctionnels en expériences visuelles marquantes qui maximisent l'impact de chaque plateforme.",
     expertise: ["UX/UI Design", "Design Systems", "Prototypage"],
-    linkedin: "https://www.linkedin.com/in/antoine-clv/",
+    linkedin: "https://www.linkedin.com/in/antoine-clavier-561750204/",
     email: "antoine.clavier@mobem-solutions.com",
     initials: "AC",
   },

@@ -10,9 +10,6 @@ const OFFERS = [
     code: "S1",
     name: "Essentiel",
     sub: "Sites en production sous 10 jours.",
-    price: "À partir de",
-    priceVal: "1 500 €",
-    priceUnit: "forfait",
     flagship: false,
     target: "Artisans & Indépendants",
     features: [
@@ -28,9 +25,6 @@ const OFFERS = [
     code: "S2",
     name: "Expert",
     sub: "Plateformes pensées pour convertir.",
-    price: "À partir de",
-    priceVal: "4 500 €",
-    priceUnit: "projet",
     flagship: true,
     target: "PME & Startups",
     features: [
@@ -47,9 +41,6 @@ const OFFERS = [
     code: "S3",
     name: "Sur mesure",
     sub: "Accompagnement long-terme, personnalisé.",
-    price: "Sur devis",
-    priceVal: "Custom",
-    priceUnit: "selon périmètre",
     flagship: false,
     target: "ETI & Grands projets",
     features: [
@@ -176,9 +167,8 @@ function OfferCard({ offer, idx }: { offer: typeof OFFERS[number]; idx: number }
       </div>
 
       <div className="pt-4 border-t border-current/20 flex flex-col gap-1">
-        <div className="font-mono text-[10px] uppercase tracking-[0.06em] opacity-60">{offer.price}</div>
-        <div className="text-[26px] font-bold tracking-[-0.02em] leading-none">{offer.priceVal}</div>
-        <div className="font-mono text-[10px] uppercase tracking-[0.06em] opacity-60">/ {offer.priceUnit}</div>
+        <div className="text-[22px] font-bold tracking-[-0.02em] leading-none">Sur devis</div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.06em] opacity-60">Devis gratuit · Réponse 24 h</div>
         <Link
           href="#contact"
           className={cn(

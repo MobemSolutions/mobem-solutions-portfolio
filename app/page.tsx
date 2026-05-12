@@ -4,7 +4,6 @@ import { HeroSection } from "@/components/sections/hero"
 import { LogoMarquee } from "@/components/sections/logo-marquee"
 import { PricingSection } from "@/components/sections/pricing"
 import { ServicesSection } from "@/components/sections/services"
-import { FinderSection } from "@/components/sections/finder"
 import { ProofSection } from "@/components/sections/proof"
 import { TeamSection } from "@/components/sections/team"
 import { ContactSection } from "@/components/sections/contact"
@@ -103,15 +102,11 @@ const jsonLd = {
             "@type": "Offer",
             name: "Site web Essentiel",
             description: "Site vitrine professionnel livré en 10 jours",
-            price: "1500",
-            priceCurrency: "EUR",
           },
           {
             "@type": "Offer",
             name: "Site web Expert",
             description: "Plateforme sur-mesure pensée pour convertir",
-            price: "4500",
-            priceCurrency: "EUR",
           },
         ],
       },
@@ -152,7 +147,6 @@ export default function HomePage() {
         <HeroSection />
         <LogoMarquee />
         <ServicesSection />
-        <FinderSection />
         <ProofSection />
         <PricingSection />
         <TeamSection />

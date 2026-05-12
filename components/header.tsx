@@ -1,12 +1,11 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Menu, X, Moon, Sun, ChevronDown, ArrowRight } from "lucide-react"
+import { Menu, X, Moon, Sun, ArrowRight } from "lucide-react"
 import { useTheme } from "next-themes"
 import { cn } from "@/lib/utils"
-import { METIER_CATEGORIES, REGIONS } from "@/lib/seo-data"
 
 const navigation = [
   { num: "01", name: "Accueil", href: "/" },
@@ -28,14 +27,8 @@ function triggerRipple(e: React.PointerEvent<HTMLElement>) {
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [isMetierDropdownOpen, setIsMetierDropdownOpen] = useState(false)
-  const [isVilleDropdownOpen, setIsVilleDropdownOpen] = useState(false)
-  const [isMobileMetierOpen, setIsMobileMetierOpen] = useState(false)
-  const [isMobileVilleOpen, setIsMobileVilleOpen] = useState(false)
   const { resolvedTheme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
-  const metierRef = useRef<HTMLDivElement>(null)
-  const villeRef = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
 
   const closeMobile = () => setIsMobileMenuOpen(false)
@@ -45,19 +38,6 @@ export function Header() {
     const handleScroll = () => setIsScrolled(window.scrollY > 20)
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (metierRef.current && !metierRef.current.contains(e.target as Node)) {
-        setIsMetierDropdownOpen(false)
-      }
-      if (villeRef.current && !villeRef.current.contains(e.target as Node)) {
-        setIsVilleDropdownOpen(false)
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [])
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -115,108 +95,6 @@ export function Header() {
               </Link>
             ))}
 
-            {/* Dropdown Sites par métier */}
-            <div className="relative" ref={metierRef}>
-              <button
-                onClick={() => { setIsMetierDropdownOpen((v) => !v); setIsVilleDropdownOpen(false) }}
-                onPointerDown={triggerRipple}
-                className="relative overflow-hidden inline-flex items-baseline gap-2 text-sm font-medium text-muted-foreground transition-[color,transform,opacity] hover:text-foreground active:scale-[0.95] active:opacity-70"
-                aria-expanded={isMetierDropdownOpen}
-                data-cursor="hover"
-              >
-                Sites par métier
-                <ChevronDown className={cn("w-3.5 h-3.5 transition-transform duration-200 self-center", isMetierDropdownOpen && "rotate-180")} />
-              </button>
-
-              {isMetierDropdownOpen && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[700px] border border-border bg-card shadow-xl z-50 flex flex-col max-h-[min(560px,calc(100vh-5rem))]">
-                  <div className="overflow-y-auto p-5 flex-1">
-                    <div className="grid grid-cols-3 gap-6">
-                      {METIER_CATEGORIES.map((cat) => (
-                        <div key={cat.slug}>
-                          <p className="font-mono text-[10px] uppercase tracking-[0.06em] text-muted-foreground mb-2">{cat.label}</p>
-                          <ul className="space-y-1.5">
-                            {cat.metiers.slice(0, 5).map((m) => (
-                              <li key={m.slug}>
-                                <Link
-                                  href={`/metiers/${m.slug}`}
-                                  onClick={() => setIsMetierDropdownOpen(false)}
-                                  className="text-sm text-foreground hover:text-accent transition-colors"
-                                >
-                                  {m.label}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="shrink-0 px-5 py-3 border-t border-border flex justify-between items-center bg-card">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.06em] text-muted-foreground">
-                      {METIER_CATEGORIES.reduce((acc, c) => acc + c.metiers.length, 0)} métiers disponibles
-                    </span>
-                    <Link
-                      href="/metiers"
-                      onClick={() => setIsMetierDropdownOpen(false)}
-                      className="font-mono text-[10px] uppercase tracking-[0.06em] text-accent hover:text-accent/80 transition-colors"
-                    >
-                      Voir tous les métiers →
-                    </Link>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Dropdown Nos villes */}
-            <div className="relative" ref={villeRef}>
-              <button
-                onClick={() => { setIsVilleDropdownOpen((v) => !v); setIsMetierDropdownOpen(false) }}
-                onPointerDown={triggerRipple}
-                className="relative overflow-hidden inline-flex items-baseline gap-2 text-sm font-medium text-muted-foreground transition-[color,transform,opacity] hover:text-foreground active:scale-[0.95] active:opacity-70"
-                aria-expanded={isVilleDropdownOpen}
-                data-cursor="hover"
-              >
-                Nos villes
-                <ChevronDown className={cn("w-3.5 h-3.5 transition-transform duration-200 self-center", isVilleDropdownOpen && "rotate-180")} />
-              </button>
-
-              {isVilleDropdownOpen && (
-                <div className="absolute top-full right-0 mt-3 w-[480px] border border-border bg-card shadow-xl z-50 flex flex-col max-h-[min(520px,calc(100vh-5rem))]">
-                  <div className="overflow-y-auto p-5 flex-1 scrollbar-thin">
-                    <div className="grid grid-cols-2 gap-x-8 gap-y-4">
-                      {REGIONS.map((region) => (
-                        <div key={region.label}>
-                          <p className="font-mono text-[10px] uppercase tracking-[0.06em] text-muted-foreground mb-2">{region.label}</p>
-                          <ul className="space-y-1">
-                            {region.villes.map((v) => (
-                              <li key={v.slug}>
-                                <Link
-                                  href={`/villes/${v.slug}`}
-                                  onClick={() => setIsVilleDropdownOpen(false)}
-                                  className="text-sm text-foreground hover:text-accent transition-colors"
-                                >
-                                  {v.label}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="shrink-0 px-5 py-3 border-t border-border flex justify-end bg-card">
-                    <Link
-                      href="/villes"
-                      onClick={() => setIsVilleDropdownOpen(false)}
-                      className="font-mono text-[10px] uppercase tracking-[0.06em] text-accent hover:text-accent/80 transition-colors"
-                    >
-                      Voir toutes les villes →
-                    </Link>
-                  </div>
-                </div>
-              )}
-            </div>
           </div>
 
           {/* Desktop CTA + thème */}
@@ -291,96 +169,6 @@ export function Header() {
                 {item.name}
               </Link>
             ))}
-
-            {/* Accordéon Sites par métier */}
-            <button
-              onClick={() => setIsMobileMetierOpen((v) => !v)}
-              className="flex items-center justify-between w-full px-4 py-3 text-base font-medium text-muted-foreground transition-colors hover:text-foreground border-b border-border"
-              tabIndex={isMobileMenuOpen ? 0 : -1}
-            >
-              <span>Sites par métier</span>
-              <ChevronDown className={cn("w-4 h-4 transition-transform duration-200", isMobileMetierOpen && "rotate-180")} />
-            </button>
-
-            {isMobileMetierOpen && (
-              <div className="border-b border-border bg-secondary/30">
-                <div className="p-4 space-y-4">
-                  {METIER_CATEGORIES.map((cat) => (
-                    <div key={cat.slug}>
-                      <p className="text-[10px] uppercase tracking-[0.06em] text-muted-foreground mb-2">{cat.label}</p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {cat.metiers.map((m) => (
-                          <Link
-                            key={m.slug}
-                            href={`/metiers/${m.slug}`}
-                            onClick={closeMobile}
-                            className="text-[11px] text-accent border border-accent/20 px-2.5 py-1 hover:bg-accent/5 transition-colors"
-                            tabIndex={isMobileMenuOpen ? 0 : -1}
-                          >
-                            {m.label}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="px-4 py-2.5 border-t border-border">
-                  <Link
-                    href="/metiers"
-                    onClick={closeMobile}
-                    className="text-[11px] text-accent"
-                    tabIndex={isMobileMenuOpen ? 0 : -1}
-                  >
-                    Voir tous les métiers →
-                  </Link>
-                </div>
-              </div>
-            )}
-
-            {/* Accordéon Nos villes */}
-            <button
-              onClick={() => setIsMobileVilleOpen((v) => !v)}
-              className="flex items-center justify-between w-full px-4 py-3 text-base font-medium text-muted-foreground transition-colors hover:text-foreground border-b border-border"
-              tabIndex={isMobileMenuOpen ? 0 : -1}
-            >
-              <span>Nos villes</span>
-              <ChevronDown className={cn("w-4 h-4 transition-transform duration-200", isMobileVilleOpen && "rotate-180")} />
-            </button>
-
-            {isMobileVilleOpen && (
-              <div className="border-b border-border bg-secondary/30">
-                <div className="p-4 space-y-4">
-                  {REGIONS.map((region) => (
-                    <div key={region.label}>
-                      <p className="text-[10px] uppercase tracking-[0.06em] text-muted-foreground mb-2">{region.label}</p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {region.villes.map((v) => (
-                          <Link
-                            key={v.slug}
-                            href={`/villes/${v.slug}`}
-                            onClick={closeMobile}
-                            className="text-[11px] text-foreground border border-border px-2.5 py-1 hover:bg-secondary transition-colors"
-                            tabIndex={isMobileMenuOpen ? 0 : -1}
-                          >
-                            {v.label}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="px-4 py-2.5 border-t border-border">
-                  <Link
-                    href="/villes"
-                    onClick={closeMobile}
-                    className="text-[11px] text-accent"
-                    tabIndex={isMobileMenuOpen ? 0 : -1}
-                  >
-                    Voir toutes les villes →
-                  </Link>
-                </div>
-              </div>
-            )}
 
             {/* CTA */}
             <div className="pt-4 px-4">

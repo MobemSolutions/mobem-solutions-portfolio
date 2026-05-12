@@ -20,15 +20,22 @@ export async function POST(req: NextRequest) {
 
     // Check for existing confirmed subscription
     if (AUDIENCE_ID) {
-      const { data: audienceData } = await resend.contacts.list({ audienceId: AUDIENCE_ID })
-      const existing = audienceData?.data?.find(
-        (c: { email: string; unsubscribed: boolean }) => c.email === email && !c.unsubscribed
-      )
-      if (existing) {
-        return NextResponse.json(
-          { error: 'Vous êtes déjà inscrit(e) à notre newsletter.', alreadySubscribed: true },
-          { status: 409 }
-        )
+      try {
+        const { data: audienceData, error: listError } = await resend.contacts.list({ audienceId: AUDIENCE_ID })
+        if (!listError && audienceData?.data) {
+          const existing = audienceData.data.find(
+            (c: { email: string; unsubscribed: boolean }) =>
+              c.email.toLowerCase() === email.toLowerCase() && !c.unsubscribed
+          )
+          if (existing) {
+            return NextResponse.json(
+              { error: 'Vous êtes déjà inscrit(e) à notre newsletter.', alreadySubscribed: true },
+              { status: 409 }
+            )
+          }
+        }
+      } catch (e) {
+        console.error('[newsletter] contacts.list error:', e)
       }
     }
 

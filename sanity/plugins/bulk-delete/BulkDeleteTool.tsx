@@ -13,6 +13,7 @@ interface SanityDoc {
   publishedAt?: string
   _createdAt: string
   slug?: { current: string }
+  coverUrl?: string
 }
 
 const TABS: { id: DocType; label: string }[] = [
@@ -21,8 +22,8 @@ const TABS: { id: DocType; label: string }[] = [
 ]
 
 const QUERIES: Record<DocType, string> = {
-  post: `*[_type == "post"] | order(publishedAt desc) { _id, _type, title, publishedAt, _createdAt, slug }`,
-  realisation: `*[_type == "realisation"] | order(_createdAt desc) { _id, _type, title, client, _createdAt, slug }`,
+  post: `*[_type == "post"] | order(publishedAt desc) { _id, _type, title, publishedAt, _createdAt, slug, "coverUrl": mainImage.asset->url }`,
+  realisation: `*[_type == "realisation"] | order(_createdAt desc) { _id, _type, title, client, _createdAt, slug, "coverUrl": coverImage.asset->url }`,
 }
 
 function formatDate(iso?: string) {
@@ -278,6 +279,24 @@ export function BulkDeleteTool() {
                     style={s.checkbox}
                     aria-label={`Sélectionner ${docLabel(doc)}`}
                   />
+                  {doc.coverUrl ? (
+                    <img
+                      src={`${doc.coverUrl}?w=96&h=72&fit=crop&auto=format`}
+                      alt=""
+                      width={48}
+                      height={36}
+                      style={{ width: 48, height: 36, objectFit: 'cover', borderRadius: 3, flexShrink: 0, display: 'block' }}
+                      onError={e => { (e.currentTarget as HTMLImageElement).style.display = 'none'; (e.currentTarget.nextElementSibling as HTMLElement | null)?.style && ((e.currentTarget.nextElementSibling as HTMLElement).style.display = 'flex') }}
+                    />
+                  ) : (
+                    <div style={{ width: 48, height: 36, borderRadius: 3, flexShrink: 0, background: '#f3f4f6', border: '1px solid #e5e7eb', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" strokeWidth="1.5" aria-hidden="true">
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <polyline points="21 15 16 10 5 21" />
+                      </svg>
+                    </div>
+                  )}
                   <span style={s.label(sel)}>{docLabel(doc)}</span>
                   <span style={s.date}>{formatDate(doc.publishedAt || doc._createdAt)}</span>
                 </div>
