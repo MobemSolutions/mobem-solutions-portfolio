@@ -199,12 +199,8 @@ export default function MentionsLegalesPage() {
                 </div>
               </section>
 
-              <div className="pt-8 border-t border-border"> 
-                  <p>
-                    Le site est édité par Arnaud Clavier, agissant sous le nom commercial Mobem Solutions, Entrepreneur Individuel (EI) immatriculé au SIRET <b>99285845600013</b>.
-                  </p>
-                  <br></br>
-                <p className="text-xs text-muted-foreground">Dernière mise à jour : janvier 2025</p>
+              <div className="pt-8 border-t border-border">
+                <p className="font-mono text-[11px] text-muted-foreground">Dernière mise à jour : mai 2026</p>
               </div>
             </div>
           </div>
