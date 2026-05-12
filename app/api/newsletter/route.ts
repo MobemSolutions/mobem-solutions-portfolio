@@ -19,23 +19,19 @@ export async function POST(req: NextRequest) {
     }
 
     // Check for existing confirmed subscription
+    // Note: contacts.list() broken in Resend SDK v6 (uses segments endpoint).
+    // contacts.get({ audienceId, email }) calls /audiences/{id}/contacts/{email} correctly.
     if (AUDIENCE_ID) {
       try {
-        const { data: audienceData, error: listError } = await resend.contacts.list({ audienceId: AUDIENCE_ID })
-        if (!listError && audienceData?.data) {
-          const existing = audienceData.data.find(
-            (c: { email: string; unsubscribed: boolean }) =>
-              c.email.toLowerCase() === email.toLowerCase() && !c.unsubscribed
+        const { data: contact, error } = await resend.contacts.get({ audienceId: AUDIENCE_ID, email })
+        if (!error && contact && !(contact as { unsubscribed?: boolean }).unsubscribed) {
+          return NextResponse.json(
+            { error: 'Vous êtes déjà inscrit(e) à notre newsletter.', alreadySubscribed: true },
+            { status: 409 }
           )
-          if (existing) {
-            return NextResponse.json(
-              { error: 'Vous êtes déjà inscrit(e) à notre newsletter.', alreadySubscribed: true },
-              { status: 409 }
-            )
-          }
         }
       } catch (e) {
-        console.error('[newsletter] contacts.list error:', e)
+        console.error('[newsletter] contacts.get error:', e)
       }
     }
 
