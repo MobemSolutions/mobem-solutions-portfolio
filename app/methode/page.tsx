@@ -257,26 +257,26 @@ export default function MethodePage() {
                   <h3 className="text-[22px] sm:text-[26px] font-bold tracking-[-0.025em] leading-[1.1] mb-3">
                     {step.title}
                   </h3>
-                  <p className="text-[15px] leading-relaxed text-muted-foreground group-hover:text-background/65 mb-5 transition-colors max-w-[60ch]">
+                  <p className="text-[15px] leading-relaxed text-muted-foreground lg:group-hover:text-background/65 mb-5 transition-colors max-w-[60ch]">
                     {step.summary}
                   </p>
                   <ul className="space-y-2.5">
                     {step.details.map((d) => (
-                      <li key={d} className="flex items-start gap-3 text-[13.5px] leading-[1.55] text-foreground/85 group-hover:text-background/80 transition-colors">
+                      <li key={d} className="flex items-start gap-3 text-[13.5px] leading-[1.55] text-foreground/85 lg:group-hover:text-background/80 transition-colors">
                         <span className="mt-[10px] w-2.5 h-px bg-current opacity-60 flex-shrink-0" aria-hidden="true" />
                         <span>{d}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-                <div className="lg:col-span-2 lg:border-l lg:border-border lg:group-hover:border-background/15 lg:pl-6 transition-colors">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground group-hover:text-background/55 transition-colors block mb-2">
+                <div className="lg:col-span-2 lg:border-l lg:border-border lg:group-hover:border-accent/30 lg:pl-6 transition-colors">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground lg:group-hover:text-background/55 transition-colors block mb-2">
                     Durée
                   </span>
                   <span className="font-mono text-[14px] tabular-nums">{step.duration}</span>
                 </div>
-                <div className="lg:col-span-3 lg:border-l lg:border-border lg:group-hover:border-background/15 lg:pl-6 transition-colors">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-accent group-hover:text-background/55 block mb-2 transition-colors">
+                <div className="lg:col-span-3 lg:border-l lg:border-border lg:group-hover:border-accent/30 lg:pl-6 transition-colors">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-accent lg:group-hover:text-background/55 block mb-2 transition-colors">
                     Livrable
                   </span>
                   <p className="text-[14px] leading-[1.5] font-medium">{step.output}</p>

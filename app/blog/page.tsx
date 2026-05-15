@@ -174,7 +174,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const featured: Post | null =
     !activeCategory && page === 1 && posts.length > 0 ? posts[0] : null
   const topList: Post[] = posts.slice(1, 5)
-  const gridArticles: Post[] = posts
+  const gridArticles: Post[] = featured ? posts.slice(1) : posts
 
   return (
     <>

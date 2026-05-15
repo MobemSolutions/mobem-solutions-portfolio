@@ -329,7 +329,7 @@ export default function AProposPage() {
         </section>
 
         {/* Local anchor — Nantes, as inverted band */}
-        <section className="border-t border-border bg-inverted text-inverted-foreground" aria-labelledby="local-heading">
+        {/* <section className="border-t border-border bg-inverted text-inverted-foreground" aria-labelledby="local-heading">
           <div className="px-4 sm:px-6 lg:px-8 py-20 lg:py-28 mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
             <div className="lg:col-span-8">
               <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-accent mb-6 block">
@@ -348,7 +348,7 @@ export default function AProposPage() {
               </p>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Final CTA */}
         <section className="border-t border-border" aria-labelledby="cta-heading">
