@@ -1,213 +1,108 @@
 "use client"
 
 import Link from "next/link"
-import { LinkedinIcon } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
 
-const navigation = {
-  main: [
-    { name: "Accueil", href: "/" },
-    { name: "Méthodes", href: "/methode" },
-    { name: "Réalisations", href: "/realisations" },
-    { name: "À propos", href: "/a-propos" },
-    { name: "Blog", href: "/blog" },
-    { name: "Contact", href: "/#contact" },
-  ],
-  seo: [
-    { name: "Sites par métier", href: "/metiers" },
-    { name: "Sites par ville", href: "/villes" },
-    { name: "Plan du site", href: "/plan-du-site" },
-  ],
-  services: [
-    { name: "Ingénierie & Développement", href: "#services" },
-    { name: "Design & Expérience", href: "#services" },
-    { name: "Stratégie & Croissance", href: "#services" },
-  ],
-  legal: [
-    { name: "Mentions légales", href: "/mentions-legales" },
-    { name: "CGV", href: "/cgv" },
-    { name: "Politique de confidentialité", href: "/confidentialite" },
-  ],
-  social: [
-    { name: "LinkedIn", href: "https://www.linkedin.com/in/mobem-solutions-136816404/", icon: LinkedinIcon },
-  ],
-}
+const navCabinet = [
+  { name: "Accueil", href: "/" },
+  { name: "Méthodes", href: "/methode" },
+  { name: "Réalisations", href: "/realisations" },
+  { name: "À propos", href: "/a-propos" },
+  { name: "Blog", href: "/blog" },
+  { name: "Contact", href: "/#contact" },
+]
+
+const navSeo = [
+  { name: "Sites par métier", href: "/metiers" },
+  { name: "Sites par ville", href: "/villes" },
+  { name: "Plan du site", href: "/plan-du-site" },
+]
+
+const navLegal = [
+  { name: "Mentions légales", href: "/mentions-legales" },
+  { name: "CGV", href: "/cgv" },
+  { name: "Confidentialité", href: "/confidentialite" },
+]
+
+const LINK = "inline-block text-[13px] text-inverted-foreground/65 hover:text-accent hover:translate-x-1 transition-[color,transform] duration-150"
+const HEAD = "text-[11px] font-semibold text-inverted-foreground/55 mb-2"
 
 export function Footer() {
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith("#")) {
-      e.preventDefault()
-      const element = document.querySelector(href)
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" })
-      }
-    }
-  }
-
   return (
-    <footer
-      className="border-t border-border bg-card"
-      role="contentinfo"
-      aria-label="Pied de page"
-    >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 lg:py-16">
+    <footer className="bg-inverted text-inverted-foreground" role="contentinfo" aria-label="Pied de page">
 
-        {/* Mobile: brand + liens compacts */}
-        <div className="flex items-center justify-between mb-6 md:hidden">
-          <Link href="#hero" onClick={(e) => handleNavClick(e, "#hero")} className="inline-flex items-center">
-            <img src="/mobem-logo-redimension-removebg-preview.png" alt="Logo Mobem Solutions" className="h-8 w-auto object-contain" />
-          </Link>
-          <div className="flex items-center gap-2">
-            {navigation.social.map((item) => (
-              <a key={item.name} href={item.href} target="_blank" rel="noopener noreferrer"
-                className="w-8 h-8 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-                aria-label={item.name}>
-                <item.icon className="w-3.5 h-3.5" aria-hidden="true" />
+      {/* Top section */}
+      <div className="px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 lg:pt-32 pb-16 mx-auto max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-0">
+
+          {/* Manifeste — grand titre */}
+          <div className="lg:col-span-6 lg:pr-12">
+            <h2 className="font-extrabold text-[clamp(40px,6vw,88px)] leading-[0.90] tracking-[-0.04em]">
+              Diagnostiquer<br />
+              <em className="font-serif font-normal italic tracking-[-0.02em] text-accent not-italic" style={{ fontStyle: "italic" }}>avant</em><br />
+              de prescrire.
+            </h2>
+            <p className="mt-6 text-[14px] text-inverted-foreground/55 leading-relaxed max-w-sm">
+              Agence digitale à Nantes — ingénierie, design et stratégie pour PME et ETI ambitieuses.
+            </p>
+          </div>
+
+          {/* Nav columns — 2-col sur mobile, transparent sur desktop */}
+          <div className="grid grid-cols-2 gap-x-6 gap-y-8 lg:contents">
+
+            {/* Cabinet */}
+            <div className="lg:col-span-2 flex flex-col gap-2">
+              <span className={HEAD}>Cabinet</span>
+              {navCabinet.map((item) => (
+                <Link key={item.name} href={item.href} className={LINK}>
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+
+            {/* Référencement + Légal */}
+            <div className="lg:col-span-2 flex flex-col gap-2">
+              <span className={HEAD}>Référencement</span>
+              {navSeo.map((item) => (
+                <Link key={item.name} href={item.href} className={LINK}>
+                  {item.name}
+                </Link>
+              ))}
+              <span className={`${HEAD} mt-5`}>Légal</span>
+              {navLegal.map((item) => (
+                <Link key={item.name} href={item.href} className={LINK}>
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+
+            {/* Liens */}
+            <div className="lg:col-span-2 flex flex-col gap-2">
+              <span className={HEAD}>Liens</span>
+              <a
+                href="https://www.linkedin.com/in/mobem-solutions-136816404/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={LINK}
+              >
+                LinkedIn <ArrowUpRight className="inline w-3 h-3 mb-0.5" aria-hidden="true" />
               </a>
-            ))}
-          </div>
-        </div>
-
-        {/* Mobile: 4 colonnes de liens */}
-        <div className="grid grid-cols-2 gap-4 mb-6 md:hidden">
-          <div>
-            <h3 className="font-semibold text-foreground text-xs mb-2 uppercase tracking-wide">Navigation</h3>
-            <ul className="space-y-1.5" role="list">
-              {navigation.main.map((item) => (
-                <li key={item.name}>
-                  <Link href={item.href} onClick={(e) => handleNavClick(e, item.href)}
-                    className="text-xs text-muted-foreground hover:text-foreground transition-colors">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-semibold text-foreground text-xs mb-2 uppercase tracking-wide">Référencement</h3>
-            <ul className="space-y-1.5" role="list">
-              {navigation.seo.map((item) => (
-                <li key={item.name}>
-                  <Link href={item.href} className="text-xs text-muted-foreground hover:text-foreground transition-colors">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-semibold text-foreground text-xs mb-2 uppercase tracking-wide">Services</h3>
-            <ul className="space-y-1.5" role="list">
-              {navigation.services.map((item) => (
-                <li key={item.name}>
-                  <Link href={item.href} onClick={(e) => handleNavClick(e, item.href)}
-                    className="text-xs text-muted-foreground hover:text-foreground transition-colors">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-semibold text-foreground text-xs mb-2 uppercase tracking-wide">Légal</h3>
-            <ul className="space-y-1.5" role="list">
-              {navigation.legal.map((item) => (
-                <li key={item.name}>
-                  <Link href={item.href} className="text-xs text-muted-foreground hover:text-foreground transition-colors">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* Desktop: 5 colonnes */}
-        <div className="hidden md:grid md:grid-cols-5 gap-8 lg:gap-10">
-          <div className="col-span-1">
-            <Link href="#hero" onClick={(e) => handleNavClick(e, "#hero")} className="inline-flex items-center mb-4">
-              <img src="/mobem-logo-redimension-removebg-preview.png" alt="Logo Mobem Solutions" className="h-10 w-auto object-contain" />
-            </Link>
-            <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-              Agence digitale à Nantes. Ingénierie, Design & Stratégie pour les PME et ETI ambitieuses.
-            </p>
-            <div className="flex items-center gap-3">
-              {navigation.social.map((item) => (
-                <a key={item.name} href={item.href} target="_blank" rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/80 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-                  aria-label={item.name}>
-                  <item.icon className="w-4 h-4" aria-hidden="true" />
-                </a>
-              ))}
             </div>
-          </div>
-          <div>
-            <h3 className="font-semibold text-foreground text-sm mb-4">Navigation</h3>
-            <ul className="space-y-3" role="list">
-              {navigation.main.map((item) => (
-                <li key={item.name}>
-                  <Link href={item.href} onClick={(e) => handleNavClick(e, item.href)}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-semibold text-foreground text-sm mb-4">Référencement</h3>
-            <ul className="space-y-3" role="list">
-              {navigation.seo.map((item) => (
-                <li key={item.name}>
-                  <Link href={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-semibold text-foreground text-sm mb-4">Services</h3>
-            <ul className="space-y-3" role="list">
-              {navigation.services.map((item) => (
-                <li key={item.name}>
-                  <Link href={item.href} onClick={(e) => handleNavClick(e, item.href)}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-semibold text-foreground text-sm mb-4">Informations</h3>
-            <ul className="space-y-3" role="list">
-              {navigation.legal.map((item) => (
-                <li key={item.name}>
-                  <Link href={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-6 pt-6 border-t border-border">
-              <p className="text-xs text-muted-foreground">Nantes, Pays de la Loire</p>
-              <p className="text-xs text-muted-foreground">France</p>
-            </div>
-          </div>
-        </div>
 
-        {/* Bottom bar */}
-        <div className="mt-6 lg:mt-12 pt-5 lg:pt-8 border-t border-border">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-2">
-            <p className="text-xs text-muted-foreground">
-              © {new Date().getFullYear()} Mobem Solutions. Tous droits réservés.
-            </p>
-            <p className="text-xs text-muted-foreground">
-              SIRET: 91514447100017
-            </p>
           </div>
+
         </div>
       </div>
+
+      {/* Bottom bar */}
+      <div className="border-t border-inverted-foreground/10 px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
+        <div className="py-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 text-[11px] uppercase tracking-[0.06em] text-inverted-foreground/45 font-medium">
+          <span>© Mobem Solutions · {new Date().getFullYear()} · Tous droits réservés</span>
+          <span className="whitespace-nowrap">SIRET&nbsp;: 91514447100017</span>
+          <span>Nantes · Pays de la Loire · France</span>
+        </div>
+      </div>
+
     </footer>
   )
 }

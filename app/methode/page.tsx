@@ -1,13 +1,15 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowRight, Search, PenTool, Code2, Rocket, CheckCircle2, Zap, Shield, Clock, Gauge } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { MethodeFaq } from "@/components/methode-faq"
+import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
   title: "Notre méthode — De l'idée au site live en 10 jours | Mobem Solutions",
   description:
-    "Découvrez le processus Mobem : Brief, Design, Développement, Lancement — un cycle court de 10 jours qui garantit un site performant, accessible et référencé dès le premier jour.",
+    "Découvrez le processus Mobem : Brief, Design, Développement, Lancement. Un cycle court de 10 jours qui garantit un site performant, accessible et référencé dès le premier jour.",
   openGraph: {
     title: "Notre méthode — De l'idée au site live en 10 jours",
     description: "Un processus court, transparent et itératif pour livrer des sites haute-performance en 10 jours.",
@@ -18,111 +20,87 @@ export const metadata: Metadata = {
 const steps = [
   {
     number: "01",
-    icon: Search,
     title: "Découverte & Brief",
     duration: "Jour 1–2",
-    color: "accent",
     summary: "On ne code pas une ligne avant de comprendre votre business.",
     details: [
-      "Audit de l'existant : site actuel, positionnement SEO, concurrents directs",
-      "Définition des personas et des parcours utilisateur cibles",
-      "Brief stratégique co-construit : objectifs mesurables, KPIs, contraintes techniques",
-      "Choix de l'architecture technique adaptée (SSG, SSR, SPA, hybride)",
+      "Audit de l'existant : site actuel, positionnement SEO, concurrents directs.",
+      "Définition des personas et des parcours utilisateur cibles.",
+      "Brief stratégique co-construit : objectifs mesurables, KPIs, contraintes techniques.",
+      "Choix de l'architecture technique adaptée (SSG, SSR, SPA, hybride).",
     ],
     output: "Cahier des charges validé + architecture technique définie",
   },
   {
     number: "02",
-    icon: PenTool,
     title: "Design & Maquettage",
     duration: "Jour 3–5",
-    color: "chart-2",
-    summary: "Des interfaces validées avant de coder — UX d'abord, esthétique ensuite.",
+    summary: "Des interfaces validées avant de coder, UX d'abord, esthétique ensuite.",
     details: [
-      "Wireframes basse fidélité pour valider les parcours utilisateur",
-      "Design haute fidélité sous Figma : typographie, couleurs, composants",
-      "Responsive design natif : mobile-first, tablet, desktop",
-      "Validation client à chaque itération — pas de surprise en fin de projet",
+      "Wireframes basse fidélité pour valider les parcours utilisateur.",
+      "Design haute fidélité sous Figma : typographie, couleurs, composants.",
+      "Responsive design natif : mobile-first, tablet, desktop.",
+      "Validation client à chaque itération, pas de surprise en fin de projet.",
     ],
     output: "Maquettes validées + Design System livré",
   },
   {
     number: "03",
-    icon: Code2,
     title: "Développement",
     duration: "Jour 5–9",
-    color: "chart-4",
     summary: "Stack moderne, code propre, performances dans l'ADN.",
     details: [
-      "Next.js App Router + TypeScript strict pour la fiabilité et le SEO",
-      "Tailwind CSS pour un design system cohérent et maintenable",
-      "Intégration CMS headless (Sanity) pour l'autonomie éditoriale",
-      "Audit Lighthouse > 90 à chaque livraison partielle",
+      "Next.js App Router + TypeScript strict pour la fiabilité et le SEO.",
+      "Tailwind CSS pour un design system cohérent et maintenable.",
+      "Intégration CMS headless (Sanity) pour l'autonomie éditoriale.",
+      "Audit Lighthouse > 90 à chaque livraison partielle.",
     ],
     output: "Site fonctionnel en staging + rapport de performance",
   },
   {
     number: "04",
-    icon: Rocket,
     title: "Lancement & Transfert",
     duration: "Jour 10",
-    color: "accent",
-    summary: "Mise en ligne sans friction — vous repartez avec les clés.",
+    summary: "Mise en ligne sans friction, vous repartez avec les clés.",
     details: [
-      "Déploiement sur Vercel : CDN mondial, SSL, domaine custom configuré",
-      "Redirections 301 et sitemap XML soumis à Google Search Console",
-      "Rapport de performance final (Lighthouse, Core Web Vitals)",
-      "Formation de 30 min pour gérer le CMS en autonomie",
+      "Déploiement sur Vercel : CDN mondial, SSL, domaine custom configuré.",
+      "Redirections 301 et sitemap XML soumis à Google Search Console.",
+      "Rapport de performance final (Lighthouse, Core Web Vitals).",
+      "Formation de 30 min pour gérer le CMS en autonomie.",
     ],
     output: "Site live + accès complets transmis + documentation",
   },
 ]
 
 const guarantees = [
-  {
-    icon: Gauge,
-    title: "Score Lighthouse > 90",
-    description: "Garanti sur les 4 critères : Performance, Accessibilité, SEO, Bonnes pratiques. Mesuré et livré avec rapport.",
-  },
-  {
-    icon: Clock,
-    title: "Livraison en 10 jours ouvrés",
-    description: "Un délai court et tenu. Chaque jalon est fixé en début de projet et respecté — pas d'effet tunnel.",
-  },
-  {
-    icon: Shield,
-    title: "Réactivité 24h",
-    description: "Un associé joignable, pas un ticket de support anonyme. Réponse garantie sous 24h ouvrées post-lancement.",
-  },
-  {
-    icon: Zap,
-    title: "Core Web Vitals validés",
-    description: "LCP < 2,5s, INP < 200ms, CLS < 0,1 — les métriques Google qui font la différence sur le référencement.",
-  },
+  { k: "Lighthouse", v: "90+", d: "Garanti sur les 4 critères : Performance, Accessibilité, SEO, Bonnes pratiques. Mesuré et livré avec rapport." },
+  { k: "Livraison", v: "10 j", d: "Un délai court et tenu. Chaque jalon est fixé en début de projet et respecté, pas d'effet tunnel." },
+  { k: "Réactivité", v: "24 h", d: "Un associé joignable, pas un ticket de support anonyme. Réponse garantie sous 24h ouvrées post-lancement." },
+  { k: "Core Web Vitals", v: "AA", d: "LCP < 2,5s, INP < 200ms, CLS < 0,1. Les métriques Google qui font la différence sur le référencement." },
 ]
 
 const stack = [
-  { category: "Frontend", items: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS"] },
+  { category: "Frontend", items: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS"] },
   { category: "CMS", items: ["Sanity v5", "Portable Text", "GROQ", "Live Preview"] },
   { category: "Infra", items: ["Vercel", "CDN Edge", "SSL auto", "CI/CD intégré"] },
-  { category: "Outils", items: ["Figma", "Resend", "Lighthouse", "Google Search Console"] },
+  { category: "Outils", items: ["Figma", "Resend", "Lighthouse", "Search Console"] },
 ]
 
 const faqs = [
   {
-    question: "Combien de temps faut-il pour créer un site web avec Mobem Solutions ?",
+    question: "Combien de temps faut-il pour créer un site avec Mobem Solutions ?",
     answer:
       "Notre processus standard est de 10 jours ouvrés, du brief à la mise en ligne. Ce délai couvre la découverte, le design, le développement et le lancement. Pour des projets plus complexes (e-commerce, application SaaS), le délai est défini lors du brief.",
   },
   {
     question: "Quelles technologies utilisez-vous pour développer les sites ?",
     answer:
-      "Nous utilisons Next.js (App Router), React 19, TypeScript et Tailwind CSS pour le frontend. Pour le CMS, nous recommandons Sanity v5. L'hébergement se fait sur Vercel, avec CDN mondial et certificat SSL inclus.",
+      "Next.js (App Router), React 19, TypeScript et Tailwind CSS pour le frontend. Pour le CMS, nous recommandons Sanity v5. L'hébergement se fait sur Vercel, avec CDN mondial et certificat SSL inclus.",
   },
   {
     question: "Pouvez-vous garantir les performances du site ?",
     answer:
-      "Oui. Nous garantissons un score Lighthouse supérieur à 90 sur les 4 critères (Performance, Accessibilité, SEO, Bonnes pratiques) et des Core Web Vitals conformes aux recommandations Google. Un rapport est fourni à la livraison.",
+      "Oui. Score Lighthouse supérieur à 90 sur les 4 critères (Performance, Accessibilité, SEO, Bonnes pratiques) et Core Web Vitals conformes aux recommandations Google. Un rapport est fourni à la livraison.",
   },
   {
     question: "Que se passe-t-il après le lancement ?",
@@ -137,17 +115,17 @@ const faqs = [
   {
     question: "Puis-je modifier le site moi-même après livraison ?",
     answer:
-      "Oui, c'est un critère de conception. Nous intégrons Sanity CMS (interface intuitive, sans code) et nous vous formons dessus à la livraison. Vous pouvez publier des articles, modifier des textes et ajouter des images en totale autonomie.",
+      "Oui, c'est un critère de conception. Nous intégrons Sanity CMS (interface intuitive, sans code) et nous vous formons dessus à la livraison. Vous pouvez publier des articles, modifier des textes et ajouter des images en autonomie.",
   },
   {
     question: "Quelle est votre approche pour le référencement naturel (SEO) ?",
     answer:
-      "Le SEO est intégré dès la phase de développement : structure HTML sémantique, métadonnées Open Graph, sitemap XML, données structurées JSON-LD, Core Web Vitals optimisés. Nous ne traitons pas le SEO comme une option — c'est une exigence de base.",
+      "Le SEO est intégré dès la phase de développement : structure HTML sémantique, métadonnées Open Graph, sitemap XML, données structurées JSON-LD, Core Web Vitals optimisés. Pas une option ajoutée, une exigence de base.",
   },
   {
-    question: "Quelle est la différence entre Mobem Solutions et une agence web classique ?",
+    question: "Quelle est la différence avec une agence web classique ?",
     answer:
-      "Trois associés complémentaires (Growth, Design, Engineering) qui interviennent directement sur votre projet — sans sous-traitance. Un interlocuteur unique, un process transparent, des résultats mesurables. Et 10 jours, pas 3 mois.",
+      "Trois associés complémentaires (Growth, Design, Engineering) qui interviennent directement sur votre projet, sans sous-traitance. Un interlocuteur unique, un process transparent, des résultats mesurables. Et 10 jours, pas 3 mois.",
   },
 ]
 
@@ -157,10 +135,7 @@ const faqJsonLd = {
   mainEntity: faqs.map((faq) => ({
     "@type": "Question",
     name: faq.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: faq.answer,
-    },
+    acceptedAnswer: { "@type": "Answer", text: faq.answer },
   })),
 }
 
@@ -183,11 +158,7 @@ const serviceJsonLd = {
   },
   areaServed: "FR",
   serviceType: "Développement web",
-  offers: {
-    "@type": "Offer",
-    priceCurrency: "EUR",
-    availability: "https://schema.org/InStock",
-  },
+  offers: { "@type": "Offer", priceCurrency: "EUR", availability: "https://schema.org/InStock" },
 }
 
 export default function MethodePage() {
@@ -199,206 +170,233 @@ export default function MethodePage() {
 
       <main id="main-content" className="pt-14 lg:pt-16">
 
-        {/* Hero */}
-        <section className="py-20 lg:py-32 bg-secondary/30">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl">
-              <span className="inline-block text-sm font-medium text-accent uppercase tracking-wider mb-4">
-                Notre méthode
+        {/* Hero — editorial asymmetric */}
+        <section className="border-t border-border relative" aria-labelledby="methode-hero">
+          <div className="hidden lg:flex absolute right-0 top-0 h-full items-start pt-8 pr-6 pointer-events-none" aria-hidden="true">
+            <div className="flex flex-col items-center gap-4">
+              <div className="w-px h-16 bg-border" />
+              <span
+                className="font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/25 select-none"
+                style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+              >
+                Méthode · 10 jours · 04 étapes
               </span>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
-                De l'idée au site live{" "}
-                <span className="text-accent">en 10 jours</span>
-              </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-2xl">
-                Un processus court, itératif et transparent. Quatre étapes claires,
-                des jalons validés ensemble, un résultat mesurable. Pas d'effet tunnel,
-                pas de mauvaise surprise.
-              </p>
-              <div className="flex flex-wrap gap-3">
+            </div>
+          </div>
+
+          <div className="px-4 sm:px-6 lg:px-8 pt-14 sm:pt-20 lg:pt-28 mx-auto max-w-7xl">
+            <h1
+              id="methode-hero"
+              className="font-bold leading-[0.92] tracking-[-0.04em] text-[clamp(44px,7.5vw,120px)] mb-12 sm:mb-16 lg:mb-24"
+            >
+              De l&apos;idée<br />
+              <span className="text-accent" aria-hidden="true">·</span> au site live,<br />
+              <span className="font-serif font-normal italic tracking-[-0.02em]">en 10 jours.</span>
+            </h1>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 border-t border-border pt-10 pb-14 lg:pb-20">
+              <div className="hidden lg:flex lg:col-span-1 items-start pt-1">
+                <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">00</span>
+              </div>
+              <div className="lg:col-span-6 lg:pr-10">
+                <p className="text-[17px] sm:text-[18px] leading-[1.5] text-muted-foreground max-w-[58ch]">
+                  Un processus court, itératif et transparent. Quatre étapes claires,
+                  des jalons validés ensemble, un résultat mesurable. Pas d&apos;effet tunnel,
+                  pas de mauvaise surprise.
+                </p>
+              </div>
+              <div className="lg:col-span-5 lg:pl-8 lg:border-l lg:border-border flex flex-col gap-2 items-start">
                 <Link
                   href="/#contact"
-                  className="group inline-flex items-center gap-2 bg-accent text-accent-foreground px-6 py-3 rounded-xl font-semibold hover:bg-accent/90 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:shadow-sm transition-all duration-200"
+                  className="inline-flex items-center gap-2.5 px-5 py-3.5 bg-accent text-accent-foreground text-[15px] font-semibold transition-colors cta-hover"
                 >
                   Démarrer un projet
-                  <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
                 </Link>
+                <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
+                  Diagnostic gratuit · 90 min · Sans engagement
+                </span>
                 <Link
                   href="/realisations"
-                  className="inline-flex items-center gap-2 bg-secondary text-secondary-foreground px-6 py-3 rounded-xl font-semibold hover:bg-secondary/70 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 transition-all duration-200"
+                  className="inline-flex items-center gap-2.5 px-5 py-3.5 border border-border text-sm font-medium transition-colors hover:bg-secondary mt-2"
                 >
                   Voir nos réalisations
+                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
                 </Link>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Process steps */}
-        <section className="py-24 lg:py-32" aria-labelledby="process-heading">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 id="process-heading" className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-                Les 4 étapes du processus
-              </h2>
-              <p className="text-muted-foreground max-w-xl mx-auto">
-                Chaque étape a un livrable précis. Vous validez avant qu'on avance.
-              </p>
-            </div>
-
-            <div className="space-y-8">
-              {steps.map((step, i) => (
-                <div
-                  key={step.number}
-                  className="bg-card border border-border rounded-2xl p-8 lg:p-10 grid lg:grid-cols-[auto_1fr_1fr] gap-8 lg:gap-12 items-start"
-                >
-                  {/* Number + icon */}
-                  <div className="flex lg:flex-col items-center lg:items-start gap-4">
-                    <span className="text-5xl font-bold text-accent/20 leading-none tabular-nums">
-                      {step.number}
-                    </span>
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
-                        <step.icon className="w-5 h-5 text-accent" aria-hidden="true" />
-                      </div>
-                      <span className="text-xs text-muted-foreground border border-border rounded-full px-3 py-1">
-                        {step.duration}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Description */}
-                  <div>
-                    <h3 className="text-xl font-bold text-foreground mb-2">{step.title}</h3>
-                    <p className="text-muted-foreground mb-4 leading-relaxed">{step.summary}</p>
-                    <ul className="space-y-2">
-                      {step.details.map((d) => (
-                        <li key={d} className="flex items-start gap-2 text-sm text-muted-foreground">
-                          <CheckCircle2 className="w-4 h-4 text-accent shrink-0 mt-0.5" aria-hidden="true" />
-                          {d}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Output */}
-                  <div className="bg-accent/5 border border-accent/15 rounded-xl p-5">
-                    <p className="text-xs font-bold text-accent uppercase tracking-wider mb-2">Livrable</p>
-                    <p className="text-sm text-foreground font-medium">{step.output}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+        {/* Process steps — Swiss table */}
+        <section className="border-t border-border" aria-labelledby="process-heading">
+          <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-8 lg:py-10 border-b border-border">
+            <h2 id="process-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
+              Processus
+            </h2>
+            <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
+              Quatre étapes · validation à chaque jalon
+            </span>
           </div>
-        </section>
 
-        {/* Guarantees */}
-        <section className="py-24 bg-secondary/30" aria-labelledby="guarantees-heading">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <span className="inline-block text-sm font-medium text-accent uppercase tracking-wider mb-4">
-                Nos engagements
-              </span>
-              <h2 id="guarantees-heading" className="text-3xl sm:text-4xl font-bold text-foreground">
-                Ce qu'on garantit, par écrit
-              </h2>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {guarantees.map((g) => (
-                <div key={g.title} className="bg-card border border-border rounded-2xl p-6">
-                  <div className="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center mb-4">
-                    <g.icon className="w-5 h-5 text-accent" aria-hidden="true" />
-                  </div>
-                  <h3 className="font-bold text-foreground mb-2">{g.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{g.description}</p>
+          <div role="list">
+            {steps.map((step, i) => (
+              <article
+                key={step.number}
+                role="listitem"
+                data-cursor="hover"
+                className={cn(
+                  "group bento-hover grid lg:grid-cols-12 gap-6 lg:gap-10 px-4 sm:px-6 lg:px-8 py-10 lg:py-14",
+                  i < steps.length - 1 && "border-b border-border",
+                )}
+              >
+                <div className="lg:col-span-1">
+                  <span className="font-mono text-[14px] text-accent font-medium">{step.number}</span>
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Tech stack */}
-        <section className="py-24 lg:py-32" aria-labelledby="stack-heading">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
-              <div>
-                <span className="inline-block text-sm font-medium text-accent uppercase tracking-wider mb-4">
-                  Stack technique
-                </span>
-                <h2 id="stack-heading" className="text-3xl sm:text-4xl font-bold text-foreground">
-                  Les outils qui font la différence
-                </h2>
-              </div>
-              <p className="text-muted-foreground max-w-sm lg:text-right">
-                Pas de page builder, pas de WordPress mal sécurisé. Des technologies
-                modernes qui tiennent leurs promesses de performance.
-              </p>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {stack.map((s) => (
-                <div key={s.category} className="bg-card border border-border rounded-2xl p-6">
-                  <p className="text-xs font-bold text-accent uppercase tracking-wider mb-4">{s.category}</p>
-                  <ul className="space-y-2">
-                    {s.items.map((item) => (
-                      <li key={item} className="flex items-center gap-2 text-sm text-foreground">
-                        <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
-                        {item}
+                <div className="lg:col-span-6">
+                  <h3 className="text-[22px] sm:text-[26px] font-bold tracking-[-0.025em] leading-[1.1] mb-3">
+                    {step.title}
+                  </h3>
+                  <p className="text-[15px] leading-relaxed text-muted-foreground lg:group-hover:text-background/65 mb-5 transition-colors max-w-[60ch]">
+                    {step.summary}
+                  </p>
+                  <ul className="space-y-2.5">
+                    {step.details.map((d) => (
+                      <li key={d} className="flex items-start gap-3 text-[13.5px] leading-[1.55] text-foreground/85 lg:group-hover:text-background/80 transition-colors">
+                        <span className="mt-[10px] w-2.5 h-px bg-current opacity-60 flex-shrink-0" aria-hidden="true" />
+                        <span>{d}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-              ))}
-            </div>
+                <div className="lg:col-span-2 lg:border-l lg:border-border lg:group-hover:border-accent/30 lg:pl-6 transition-colors">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground lg:group-hover:text-background/55 transition-colors block mb-2">
+                    Durée
+                  </span>
+                  <span className="font-mono text-[14px] tabular-nums">{step.duration}</span>
+                </div>
+                <div className="lg:col-span-3 lg:border-l lg:border-border lg:group-hover:border-accent/30 lg:pl-6 transition-colors">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-accent lg:group-hover:text-background/55 block mb-2 transition-colors">
+                    Livrable
+                  </span>
+                  <p className="text-[14px] leading-[1.5] font-medium">{step.output}</p>
+                </div>
+              </article>
+            ))}
           </div>
         </section>
 
-        {/* FAQ */}
-        <section className="py-24 bg-secondary/30" aria-labelledby="faq-heading">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <span className="inline-block text-sm font-medium text-accent uppercase tracking-wider mb-4">
-                FAQ
+        {/* Guarantees — Swiss KPI strip */}
+        <section className="border-t border-border" aria-labelledby="guarantees-heading">
+          <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-8 lg:py-10 border-b border-border">
+            <h2 id="guarantees-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
+              Engagements
+            </h2>
+            <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
+              Ce qu&apos;on garantit par écrit
+            </span>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4">
+            {guarantees.map(({ k, v, d }, i) => (
+              <div
+                key={k}
+                className={cn(
+                  "px-4 sm:px-6 lg:px-8 py-10 lg:py-14 flex flex-col gap-3",
+                  i < 3 && "lg:border-r lg:border-border",
+                  i % 2 === 0 && "border-r border-border lg:border-r-0",
+                  i < 2 && "border-b border-border lg:border-b-0",
+                )}
+              >
+                <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">
+                  0{i + 1} · {k}
+                </span>
+                <div className="text-[40px] sm:text-[52px] font-bold tracking-[-0.03em] leading-none">{v}</div>
+                <div className="text-[12.5px] leading-[1.5] text-muted-foreground max-w-[28ch]">{d}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Tech stack — bento grid */}
+        <section className="border-t border-border" aria-labelledby="stack-heading">
+          <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-8 lg:py-10 border-b border-border">
+            <h2 id="stack-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
+              Stack
+            </h2>
+            <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
+              Les outils qui font la différence
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+            {stack.map((s, i) => (
+              <div
+                key={s.category}
+                className={cn(
+                  "px-4 sm:px-6 lg:px-8 py-10 lg:py-12 flex flex-col gap-5",
+                  i < stack.length - 1 && "lg:border-r lg:border-border",
+                  i % 2 === 0 && "sm:border-r sm:border-border lg:border-r-0",
+                  i < 2 && "border-b border-border sm:border-b lg:border-b-0",
+                  i === 0 || i === 1 ? "sm:border-b sm:border-border" : "",
+                )}
+              >
+                <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-accent">
+                  {s.category}
+                </span>
+                <ul className="space-y-2">
+                  {s.items.map((item) => (
+                    <li key={item} className="flex items-center gap-3 text-[14px]">
+                      <span className="w-1.5 h-1.5 bg-accent shrink-0" aria-hidden="true" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* FAQ — editorial accordion */}
+        <section className="border-t border-border" aria-labelledby="faq-heading">
+          <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-8 lg:py-10 border-b border-border">
+            <h2 id="faq-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
+              FAQ
+            </h2>
+            <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
+              Questions fréquentes
+            </span>
+          </div>
+
+          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
+            <MethodeFaq items={faqs} />
+          </div>
+        </section>
+
+        {/* Final CTA — editorial closing */}
+        <section className="border-t border-border bg-inverted text-inverted-foreground" aria-labelledby="cta-heading">
+          <div className="px-4 sm:px-6 lg:px-8 py-20 lg:py-32 mx-auto max-w-7xl grid lg:grid-cols-12 gap-10 items-end">
+            <div className="lg:col-span-8">
+              <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-accent block mb-6">
+                Prochaine étape
               </span>
-              <h2 id="faq-heading" className="text-3xl sm:text-4xl font-bold text-foreground">
-                Questions fréquentes
+              <h2 id="cta-heading" className="font-bold tracking-[-0.035em] leading-[0.92] text-[clamp(40px,5.5vw,80px)]">
+                Diagnostic gratuit,<br />
+                <span className="font-serif font-normal italic">45 minutes,</span> sans engagement.
               </h2>
             </div>
-            <div className="space-y-4">
-              {faqs.map((faq) => (
-                <details
-                  key={faq.question}
-                  className="group bg-card border border-border rounded-2xl overflow-hidden"
-                >
-                  <summary className="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none font-semibold text-foreground hover:text-accent transition-colors">
-                    {faq.question}
-                    <span className="shrink-0 text-muted-foreground group-open:rotate-45 transition-transform duration-200 text-xl leading-none">+</span>
-                  </summary>
-                  <div className="px-6 pb-5">
-                    <p className="text-sm text-muted-foreground leading-relaxed">{faq.answer}</p>
-                  </div>
-                </details>
-              ))}
+            <div className="lg:col-span-4 flex flex-col gap-3 items-start">
+              <Link
+                href="/#contact"
+                className="inline-flex items-center gap-2.5 px-5 py-3.5 bg-accent text-accent-foreground text-[15px] font-semibold transition-colors cta-hover"
+              >
+                Démarrer maintenant
+                <ArrowRight className="w-4 h-4" aria-hidden="true" />
+              </Link>
+              <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-inverted-foreground/55">
+                Réponse sous 24 h ouvrées
+              </span>
             </div>
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section className="py-24 lg:py-32">
-          <div className="mx-auto max-w-3xl px-4 text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              Prêt à lancer votre projet ?
-            </h2>
-            <p className="text-muted-foreground mb-8 leading-relaxed">
-              Répondez à quelques questions sur votre projet, on revient vers vous sous 24h
-              avec une proposition adaptée.
-            </p>
-            <Link
-              href="/#contact"
-              className="group inline-flex items-center gap-2 bg-accent text-accent-foreground px-8 py-4 rounded-xl font-semibold text-lg hover:bg-accent/90 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:shadow-sm transition-all duration-200"
-            >
-              Démarrer maintenant
-              <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
-            </Link>
           </div>
         </section>
 

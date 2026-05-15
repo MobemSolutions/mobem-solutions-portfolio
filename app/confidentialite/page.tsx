@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { LegalHeader } from "@/components/legal-header"
+import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { CopyEmail } from "@/components/ui/copy-email"
 
@@ -28,59 +28,51 @@ const sections = [
 export default function ConfidentialitePage() {
   return (
     <>
-      <LegalHeader />
-      <main className="pt-20 lg:pt-24 pb-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Hero */}
-          <div className="py-12 lg:py-16 border-b border-border">
-            <p className="text-sm font-medium text-accent mb-3 tracking-wide uppercase">Informations légales</p>
-            <h1 className="text-4xl lg:text-5xl font-bold text-foreground tracking-tight">
-              Politique de confidentialité
+      <Header />
+      <main className="min-h-screen">
+        <section className="pt-14 lg:pt-16 border-t border-border">
+          <div className="px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 pb-16 border-b border-border">
+            <nav className="flex items-center gap-2.5 mb-10 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground" aria-label="Fil d'Ariane">
+              <Link href="/" className="hover:text-accent transition-colors">Accueil</Link>
+              <span>/</span>
+              <span className="text-foreground">Confidentialité</span>
+            </nav>
+            <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground mb-4">Informations légales</div>
+            <h1 className="font-extrabold leading-[0.92] tracking-[-0.04em] text-[clamp(36px,5vw,72px)] mb-4">
+              Politique de <em className="font-serif font-normal italic text-accent">confidentialité.</em>
             </h1>
-            <p className="mt-4 text-muted-foreground max-w-2xl">
-              Mobem Solutions s'engage à protéger la vie privée de ses visiteurs et clients. Cette politique décrit
-              comment nous collectons, utilisons et protégeons vos données personnelles conformément au RGPD
-              (Règlement UE 2016/679).
+            <p className="text-[16px] leading-[1.55] text-muted-foreground max-w-[640px]">
+              Mobem Solutions s&apos;engage à protéger la vie privée de ses visiteurs et clients,<br />
+              conformément au RGPD (UE 2016/679).<br />
+              <span className="font-mono text-[11px] mt-3 inline-block">Mise à jour : janvier 2026.</span>
             </p>
-            <p className="mt-2 text-sm text-muted-foreground">Dernière mise à jour : janvier 2025</p>
           </div>
-
-          <div className="mt-12 lg:mt-16 grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-16">
-            {/* Sidebar TOC */}
-            <aside className="lg:col-span-1">
-              <div className="sticky top-24">
-                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-4">
-                  Sommaire
+        </section>
+        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] border-b border-border">
+          <aside className="border-b lg:border-b-0 lg:border-r border-border px-4 sm:px-6 lg:px-8 py-8">
+            <div className="lg:sticky lg:top-24 max-h-[80vh] overflow-y-auto">
+              <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground mb-4">Sommaire</p>
+              <nav className="flex flex-col gap-1">
+                {sections.map((s, i) => (
+                  <a key={s.id} href={`#${s.id}`}
+                    data-cursor="hover"
+                    className="flex items-start gap-2 font-mono text-[11px] text-muted-foreground hover:text-accent transition-colors py-1.5 pl-3 border-l border-border hover:border-accent">
+                    <span className="text-accent shrink-0">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="uppercase tracking-[0.04em]">{s.label}</span>
+                  </a>
+                ))}
+              </nav>
+              <div className="mt-6 pt-6 border-t border-border">
+                <p className="font-mono text-[10px] uppercase tracking-[0.06em] text-muted-foreground">
+                  Voir aussi :{" "}
+                  <Link href="/mentions-legales" className="text-accent hover:underline">Mentions légales</Link>
+                  {" "}—{" "}
+                  <Link href="/cgv" className="text-accent hover:underline">CGV</Link>
                 </p>
-                <nav className="space-y-1 max-h-[70vh] overflow-y-auto pr-2">
-                  {sections.map((s, i) => (
-                    <a
-                      key={s.id}
-                      href={`#${s.id}`}
-                      className="flex gap-2 text-sm text-muted-foreground hover:text-foreground py-1.5 border-l-2 border-transparent hover:border-accent pl-3 transition-colors"
-                    >
-                      <span className="text-accent/60 font-mono text-xs mt-0.5 shrink-0">{String(i + 1).padStart(2, "0")}</span>
-                      <span>{s.label}</span>
-                    </a>
-                  ))}
-                </nav>
-                <div className="mt-6 pt-6 border-t border-border">
-                  <p className="text-xs text-muted-foreground">
-                    Voir aussi :{" "}
-                    <Link href="/mentions-legales" className="underline hover:text-foreground">
-                      Mentions légales
-                    </Link>{" "}
-                    —{" "}
-                    <Link href="/cgv" className="underline hover:text-foreground">
-                      CGV
-                    </Link>
-                  </p>
-                </div>
               </div>
-            </aside>
-
-            {/* Content */}
-            <div className="lg:col-span-3 space-y-14">
+            </div>
+          </aside>
+          <div className="px-4 sm:px-6 lg:px-8 py-16 space-y-14 max-w-[780px]">
 
               <section id="responsable" className="scroll-mt-28">
                 <h2 className="text-xl font-semibold text-foreground mb-4">1. Responsable du traitement</h2>
@@ -90,12 +82,12 @@ export default function ConfidentialitePage() {
                     le GME <strong>Mobem Solutions</strong>, représenté conjointement par ses mandataires :
                   </p>
                   <div className="grid gap-3 sm:grid-cols-2">
-                    <div className="rounded-xl border border-border bg-card p-4">
+                    <div className="border border-border bg-card p-4">
                       <p className="font-semibold text-foreground text-sm">Nathan Portier</p>
                       <p className="text-xs text-muted-foreground mt-1">Mandataire administratif & commercial</p>
                       <p className="text-xs font-mono text-muted-foreground mt-1">SIRET : 91514447100017</p>
                     </div>
-                    <div className="rounded-xl border border-border bg-card p-4">
+                    <div className="border border-border bg-card p-4">
                       <p className="font-semibold text-foreground text-sm">Arnaud Clavier</p>
                       <p className="text-xs text-muted-foreground mt-1">Co-Mandataire technique</p>
                       <p className="text-xs font-mono text-muted-foreground mt-1">SIRET : 99285845600013</p>
@@ -188,7 +180,7 @@ export default function ConfidentialitePage() {
                       desc: "Conserver certaines données comptables et contractuelles conformément aux obligations légales françaises.",
                     },
                   ].map((item) => (
-                    <div key={item.title} className="flex gap-3 rounded-xl border border-border bg-card p-4">
+                    <div key={item.title} className="flex gap-3 border border-border bg-card p-4">
                       <span className="text-accent mt-0.5 shrink-0">→</span>
                       <div>
                         <p className="text-sm font-semibold text-foreground">{item.title}</p>
@@ -224,7 +216,7 @@ export default function ConfidentialitePage() {
                         desc: "Pour la conservation des documents comptables et contractuels imposée par la loi.",
                       },
                     ].map((b) => (
-                      <div key={b.base} className="rounded-xl border border-border bg-card p-4">
+                      <div key={b.base} className="border border-border bg-card p-4">
                         <p className="text-sm font-semibold text-foreground">{b.base}</p>
                         <p className="text-sm text-muted-foreground mt-2">{b.desc}</p>
                       </div>
@@ -299,7 +291,7 @@ export default function ConfidentialitePage() {
                         link: "calendly.com/privacy",
                       },
                     ].map((st) => (
-                      <div key={st.name} className="rounded-xl border border-border bg-card p-4">
+                      <div key={st.name} className="border border-border bg-card p-4">
                         <p className="font-semibold text-foreground text-sm">{st.name}</p>
                         <p className="text-xs text-muted-foreground mt-1">{st.role}</p>
                         <p className="text-xs text-muted-foreground mt-1">{st.location}</p>
@@ -321,20 +313,20 @@ export default function ConfidentialitePage() {
                     utilisés sur ce site :
                   </p>
                   <div className="space-y-3">
-                    <div className="rounded-xl border border-border bg-card p-4">
+                    <div className="border border-border bg-card p-4">
                       <div className="flex items-center justify-between mb-2">
                         <p className="font-semibold text-foreground text-sm">Cookies essentiels</p>
-                        <span className="text-xs px-2 py-0.5 rounded-full bg-accent/10 text-accent font-medium">Toujours actifs</span>
+                        <span className="text-xs px-2 py-0.5 bg-accent/10 text-accent font-medium">Toujours actifs</span>
                       </div>
                       <p className="text-sm text-muted-foreground">
                         Nécessaires au bon fonctionnement du site (préférences de thème clair/sombre). Aucun
                         consentement requis (exemptés par la CNIL).
                       </p>
                     </div>
-                    <div className="rounded-xl border border-border bg-card p-4">
+                    <div className="border border-border bg-card p-4">
                       <div className="flex items-center justify-between mb-2">
                         <p className="font-semibold text-foreground text-sm">Cookies analytiques</p>
-                        <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-medium">Consentement requis</span>
+                        <span className="text-xs px-2 py-0.5 bg-muted text-muted-foreground font-medium">Consentement requis</span>
                       </div>
                       <p className="text-sm text-muted-foreground">
                         Vercel Analytics : mesure d'audience anonymisée (pages vues, durée de session, pays,
@@ -342,10 +334,10 @@ export default function ConfidentialitePage() {
                         13 mois maximum.
                       </p>
                     </div>
-                    <div className="rounded-xl border border-border bg-card p-4">
+                    <div className="border border-border bg-card p-4">
                       <div className="flex items-center justify-between mb-2">
                         <p className="font-semibold text-foreground text-sm">Cookies tiers (Calendly)</p>
-                        <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-medium">Consentement requis</span>
+                        <span className="text-xs px-2 py-0.5 bg-muted text-muted-foreground font-medium">Consentement requis</span>
                       </div>
                       <p className="text-sm text-muted-foreground">
                         Lors du chargement du widget Calendly, des cookies tiers peuvent être déposés par
@@ -435,13 +427,13 @@ export default function ConfidentialitePage() {
                         desc: "Introduire une réclamation auprès de la CNIL (cnil.fr) si vous estimez que vos droits ne sont pas respectés.",
                       },
                     ].map((r) => (
-                      <div key={r.right} className="rounded-xl border border-border bg-card p-4">
+                      <div key={r.right} className="border border-border bg-card p-4">
                         <p className="text-sm font-semibold text-foreground">{r.right}</p>
                         <p className="text-sm text-muted-foreground mt-1">{r.desc}</p>
                       </div>
                     ))}
                   </div>
-                  <div className="rounded-xl border border-accent/30 bg-accent/5 p-5">
+                  <div className="border border-accent/30 bg-accent/5 p-5">
                     <p className="font-semibold text-foreground text-sm mb-2">Exercer vos droits</p>
                     <p className="text-sm text-muted-foreground">
                       Pour exercer l'un de ces droits, adressez votre demande par email à{" "}
@@ -484,7 +476,7 @@ export default function ConfidentialitePage() {
 
               <section id="contact" className="scroll-mt-28">
                 <h2 className="text-xl font-semibold text-foreground mb-4">12. Nous contacter</h2>
-                <div className="rounded-xl border border-border bg-card p-6">
+                <div className="border border-border bg-card p-6">
                   <p className="text-sm text-muted-foreground mb-4">
                     Pour toute question relative à cette politique ou à l'exercice de vos droits :
                   </p>
@@ -511,7 +503,7 @@ export default function ConfidentialitePage() {
 
               <div className="pt-8 border-t border-border">
                 <p className="text-xs text-muted-foreground">
-                  Mobem Solutions — Politique de confidentialité en vigueur au 1er janvier 2025
+                  Mobem Solutions — Politique de confidentialité en vigueur au 1er janvier 2026
                 </p>
                 <p className="text-xs text-muted-foreground mt-1">
                   GME | Nathan Portier & Arnaud Clavier — Nantes, France
@@ -519,8 +511,7 @@ export default function ConfidentialitePage() {
               </div>
             </div>
           </div>
-        </div>
-      </main>
+        </main>
       <Footer />
     </>
   )

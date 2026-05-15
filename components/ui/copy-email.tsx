@@ -45,8 +45,8 @@ export function CopyEmail({
       <button
         onClick={handleCopy}
         className={cn(
-          "relative w-9 h-9 rounded-lg bg-secondary flex items-center justify-center",
-          "text-muted-foreground hover:text-foreground hover:bg-secondary/80 transition-colors",
+          "relative w-8 h-8 border border-current/20 flex items-center justify-center",
+          "opacity-60 hover:opacity-100 hover:border-current/50 transition-all",
           "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
           className
         )}

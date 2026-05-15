@@ -1,488 +1,428 @@
 "use client"
 
 import { useState } from "react"
-import { Zap, Sparkles, Shield, Layers, TrendingUp, Check, ArrowRight, BadgeCheck, Award } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
+import { ArrowRight } from "lucide-react"
 import Link from "next/link"
+import { cn } from "@/lib/utils"
 
-type Offre = {
-  id: string
-  icon: React.ElementType
-  name: string
-  tagline: string
-  target: string
-  price: string
-  priceDetail: string
-  cta: string
-  highlighted: boolean
-  badge: string | null
-  lighthouseGuarantee: boolean
-  features: string[]
-}
+// ─── Données — Offres projets ───────────────────────────────────────────────
 
-type Formule = {
-  id: string
-  icon: React.ElementType
-  name: string
-  tagline: string
-  target: string
-  monthlyPrice: number
-  cta: string
-  highlighted: boolean
-  badge: string | null
-  features: string[]
-}
-
-const offres: Offre[] = [
+const OFFERS = [
   {
-    id: "essentiel",
-    icon: Zap,
+    code: "S1",
     name: "Essentiel",
-    tagline: "Le starter",
+    sub: "En ligne sous 10 jours, sans compromis.",
+    flagship: false,
     target: "Artisans & Indépendants",
-    price: "À partir de 1 500 €",
-    priceDetail: "Tarif unique · pas d'abonnement",
-    cta: "Démarrer mon projet",
-    highlighted: false,
-    badge: null,
-    lighthouseGuarantee: true,
     features: [
-      "Votre site en ligne sous 10 jours",
-      "100 % lisible sur mobile & tablette",
-      "Trouvé par vos clients locaux (SEO local)",
-      "Design professionnel sur-mesure",
-      "Hébergement inclus la 1ère année",
+      "Site en ligne sous 10 jours",
+      "100 % responsive mobile",
+      "SEO local optimisé",
+      "Design sur-mesure",
+      "Hébergement 1 an inclus",
     ],
+    proof: ["Lighthouse 90+", "Livraison 10 j"],
   },
   {
-    id: "expert",
-    icon: Sparkles,
+    code: "S2",
     name: "Expert",
-    tagline: "Le fleuron",
+    sub: "Conçu pour convertir, pas juste exister.",
+    flagship: true,
     target: "PME & Startups",
-    price: "À partir de 4 500 €",
-    priceDetail: "Tarif unique · livraison clé en main",
-    cta: "Construire ma solution",
-    highlighted: true,
-    badge: "Recommandé",
-    lighthouseGuarantee: true,
     features: [
-      "Architecture multi-pages évolutive",
-      "UI/UX premium qui convertit",
-      "Gestion de contenu en autonomie",
-      "Connexion à vos outils (CRM, Calendly…)",
+      "Architecture multi-pages",
+      "UI/UX premium",
+      "CMS autonome (Sanity)",
+      "Intégrations (CRM, Calendly…)",
       "SEO sémantique avancé",
-      "Rapport de performance mensuel",
+      "Rapport de performance",
     ],
+    proof: ["Lighthouse 96+", "WCAG AA", "Conv. ×2.4 obs."],
   },
   {
-    id: "surmesure",
-    icon: Layers,
+    code: "S3",
     name: "Sur mesure",
-    tagline: "L'unique",
-    target: "Grands projets & ETI",
-    price: "Sur devis",
-    priceDetail: "Selon périmètre et complexité",
-    cta: "Discuter de mon projet",
-    highlighted: false,
-    badge: null,
-    lighthouseGuarantee: true,
+    sub: "Quand aucune offre standard ne suffit.",
+    flagship: false,
+    target: "ETI & Grands projets",
     features: [
-      "Architecture sur-mesure pensée pour durer",
-      "Intégrations API & systèmes tiers complexes",
+      "Architecture sur-mesure",
+      "Intégrations API complexes",
       "Design system propriétaire",
-      "Accompagnement stratégique dédié",
-      "SLA personnalisé & équipe dédiée",
-      "Scalabilité et évolutivité garanties",
+      "Accompagnement stratégique",
+      "SLA personnalisé",
+      "Scalabilité garantie",
     ],
+    proof: ["Roadmap trimestrielle", "WCAG AAA", "SLA 4 h"],
   },
 ]
 
-const formules: Formule[] = [
+// ─── Données — Abonnements ──────────────────────────────────────────────────
+// TODO: ajuster les prix avec vos tarifs réels
+
+const SUBSCRIPTIONS = [
   {
-    id: "serenite",
-    icon: Shield,
+    code: "A1",
     name: "Sérénité",
-    tagline: "La maintenance",
-    target: "Tous les sites Mobem",
-    monthlyPrice: 149,
-    cta: "Activer ma maintenance",
-    highlighted: false,
-    badge: null,
+    sub: "Votre site entre de bonnes mains.",
+    flagship: false,
+    target: "Tout client Mobem",
+    price: "89",
+    priceLabel: "€ HT / mois",
+    commitment: "Mensuel · Résiliable",
     features: [
-      "Hébergement Vercel haute disponibilité",
-      "Sauvegardes quotidiennes automatiques",
-      "Modifications illimitées (petits ajustements)",
-      "Rapport mensuel de performance",
-      "Support dédié sous 24h/48h",
+      "Mises à jour sécurité mensuelles",
+      "Sauvegardes régulières",
+      "Monitoring de disponibilité 24/7",
+      "Rapport Lighthouse mensuel",
+      "Bugs bloquants sous 48 h ouvrées",
     ],
+    proof: ["SLA 48 h", "Rapport mensuel"],
   },
   {
-    id: "acceleration",
-    icon: TrendingUp,
-    name: "Accélération",
-    tagline: "La croissance",
-    target: "Sites actifs & ambitieux",
-    monthlyPrice: 299,
-    cta: "Booster mon activité",
-    highlighted: true,
-    badge: "Populaire",
+    code: "A2",
+    name: "Visibilité",
+    sub: "Plus de trafic, plus de clients locaux.",
+    flagship: false,
+    target: "PME & Artisans",
+    price: "149",
+    priceLabel: "€ HT / mois",
+    commitment: "Mensuel · Résiliable",
+    features: [
+      "1 article de blog / mois",
+      "Suivi positionnement SEO (10 mots-clés)",
+      "Optimisation Google My Business",
+      "Audit SEO trimestriel",
+      "Rapport SEO mensuel",
+    ],
+    proof: ["SEO local", "Blog pro"],
+  },
+  {
+    code: "A3",
+    name: "Croissance",
+    sub: "Maintenance + visibilité + stratégie.",
+    flagship: true,
+    target: "Clients ambitieux",
+    price: "249",
+    priceLabel: "€ HT / mois",
+    commitment: "Trimestriel · Sur devis annuel",
     features: [
       "Tout Sérénité inclus",
-      "Audit SEO mensuel & optimisations",
-      "Création de contenus (2 pages/mois)",
-      "Suivi Google Analytics & heatmaps",
-      "Tests A/B & amélioration continue",
-      "Pilotage campagnes Google Ads",
+      "Tout Visibilité inclus",
+      "Appel stratégique mensuel (1 h)",
+      "Roadmap trimestrielle",
+      "Recommandations CRO",
+      "SLA prioritaire 24 h",
     ],
+    proof: ["SLA 24 h", "Roadmap", "CRO"],
   },
 ]
 
+// ─── Carte Offre projet ─────────────────────────────────────────────────────
+
+function OfferCard({ offer, idx }: { offer: typeof OFFERS[number]; idx: number }) {
+  return (
+    <div
+      data-cursor="hover"
+      className={cn(
+        "group relative flex flex-col px-8 py-10 lg:px-14 lg:py-14 lg:min-h-[600px] transition-colors overflow-hidden",
+        offer.flagship
+          ? "bg-accent text-accent-foreground"
+          : "bento-hover",
+        idx < 2 && "lg:border-r lg:border-border"
+      )}
+    >
+      {/* Decorative background index */}
+      <span
+        className="absolute bottom-6 right-6 font-bold leading-none tracking-[-0.05em] select-none pointer-events-none tabular-nums text-[clamp(80px,10vw,130px)]"
+        style={{ opacity: offer.flagship ? 0.07 : 0.04 }}
+        aria-hidden="true"
+      >
+        {String(idx + 1).padStart(2, "0")}
+      </span>
+
+      {/* Header */}
+      <div className="flex items-start justify-between mb-10 gap-4">
+        <div className="flex flex-col gap-1.5">
+          <span className="font-mono text-[10px] uppercase tracking-[0.1em] opacity-50">{offer.code}</span>
+          {offer.flagship && (
+            <span className="font-mono text-[10px] uppercase tracking-[0.08em] px-2.5 py-1 border border-current self-start">
+              Recommandé
+            </span>
+          )}
+        </div>
+        <ArrowRight
+          className="w-5 h-5 opacity-40 transition-transform duration-300 group-hover:translate-x-1.5 group-hover:-translate-y-1.5 shrink-0 mt-1"
+          aria-hidden="true"
+        />
+      </div>
+
+      {/* Name */}
+      <div className="mb-8">
+        <div className="text-[clamp(48px,5.5vw,76px)] font-bold tracking-[-0.04em] leading-[0.9] mb-3">
+          {offer.name}
+        </div>
+        <div className="text-[15px] leading-[1.45] opacity-75">{offer.sub}</div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.08em] opacity-50 mt-2">{offer.target}</div>
+      </div>
+
+      {/* Features */}
+      <ul className="space-y-3 mb-8 flex-1" role="list">
+        {offer.features.map((f) => (
+          <li key={f} className="flex items-start gap-3 text-[13.5px] leading-[1.5]">
+            <span className="mt-[9px] w-2.5 h-px bg-current opacity-50 flex-shrink-0" aria-hidden="true" />
+            <span>{f}</span>
+          </li>
+        ))}
+      </ul>
+
+      {/* Proof chips */}
+      <div className="flex flex-wrap gap-1.5 mb-8">
+        {offer.proof.map((p) => (
+          <span key={p} className="font-mono text-[9px] uppercase tracking-[0.07em] px-2 py-1 border border-current opacity-50">
+            {p}
+          </span>
+        ))}
+      </div>
+
+      {/* CTA */}
+      <div className="pt-5 border-t border-current/15 flex flex-col gap-1.5">
+        <div className="text-[24px] font-bold tracking-[-0.025em] leading-none">Sur devis</div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.06em] opacity-50">Devis gratuit · Réponse 24 h</div>
+        <Link
+          href="#contact"
+          className={cn(
+            "mt-5 inline-flex items-center gap-2.5 px-5 py-3 text-[13px] font-semibold transition-colors self-start border",
+            offer.flagship
+              ? "border-accent-foreground bg-accent-foreground text-accent hover:bg-transparent hover:text-accent-foreground"
+              : "border-current cta-hover"
+          )}
+        >
+          Démarrer un diagnostic
+          <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+        </Link>
+      </div>
+    </div>
+  )
+}
+
+// ─── Carte Abonnement ───────────────────────────────────────────────────────
+
+function SubCard({ sub, idx }: { sub: typeof SUBSCRIPTIONS[number]; idx: number }) {
+  return (
+    <div
+      data-cursor="hover"
+      className={cn(
+        "group relative flex flex-col px-8 py-10 lg:px-12 lg:py-12 lg:min-h-[580px] transition-colors overflow-hidden",
+        sub.flagship
+          ? "bg-inverted text-inverted-foreground"
+          : "bento-hover",
+        idx < 2 && "lg:border-r lg:border-border"
+      )}
+    >
+      {/* Decorative background index */}
+      <span
+        className="absolute bottom-6 right-6 font-bold leading-none tracking-[-0.05em] select-none pointer-events-none tabular-nums text-[clamp(80px,10vw,130px)]"
+        style={{ opacity: sub.flagship ? 0.06 : 0.04 }}
+        aria-hidden="true"
+      >
+        {String(idx + 1).padStart(2, "0")}
+      </span>
+
+      {/* Header */}
+      <div className="flex items-start justify-between mb-10 gap-4">
+        <div className="flex flex-col gap-1.5">
+          <span className="font-mono text-[10px] uppercase tracking-[0.1em] opacity-50">{sub.code}</span>
+          {sub.flagship && (
+            <span className="font-mono text-[10px] uppercase tracking-[0.08em] px-2.5 py-1 border border-current self-start">
+              Recommandé
+            </span>
+          )}
+        </div>
+        <ArrowRight
+          className="w-5 h-5 opacity-40 transition-transform duration-300 group-hover:translate-x-1.5 group-hover:-translate-y-1.5 shrink-0 mt-1"
+          aria-hidden="true"
+        />
+      </div>
+
+      {/* Name */}
+      <div className="mb-8">
+        <div className="text-[clamp(40px,4.5vw,64px)] font-bold tracking-[-0.04em] leading-[0.9] mb-3">
+          {sub.name}
+        </div>
+        <div className="text-[15px] leading-[1.45] opacity-75">{sub.sub}</div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.08em] opacity-50 mt-2">{sub.target}</div>
+      </div>
+
+      {/* Features */}
+      <ul className="space-y-3 mb-8 flex-1" role="list">
+        {sub.features.map((f) => (
+          <li key={f} className="flex items-start gap-3 text-[13.5px] leading-[1.5]">
+            <span className="mt-[9px] w-2.5 h-px bg-current opacity-50 flex-shrink-0" aria-hidden="true" />
+            <span>{f}</span>
+          </li>
+        ))}
+      </ul>
+
+      {/* Proof chips */}
+      <div className="flex flex-wrap gap-1.5 mb-8">
+        {sub.proof.map((p) => (
+          <span key={p} className="font-mono text-[9px] uppercase tracking-[0.07em] px-2 py-1 border border-current opacity-50">
+            {p}
+          </span>
+        ))}
+      </div>
+
+      {/* Price + CTA */}
+      <div className="pt-5 border-t border-current/15 flex flex-col gap-1.5">
+        <div className="flex items-baseline gap-1.5">
+          <span className="font-mono text-[10px] uppercase tracking-[0.08em] opacity-50 mb-1 block">À partir de</span>
+        </div>
+        <div className="flex items-baseline gap-1">
+          <span className="text-[clamp(32px,3.5vw,48px)] font-bold tracking-[-0.04em] leading-none">{sub.price}€</span>
+          <span className="font-mono text-[11px] uppercase tracking-[0.06em] opacity-60 ml-1">HT / mois</span>
+        </div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.06em] opacity-40">{sub.commitment}</div>
+        <Link
+          href="#contact"
+          className={cn(
+            "mt-5 inline-flex items-center gap-2.5 px-5 py-3 text-[13px] font-semibold transition-colors self-start border",
+            sub.flagship
+              ? "border-inverted-foreground bg-inverted-foreground text-inverted hover:bg-transparent hover:text-inverted-foreground"
+              : "border-current cta-hover"
+          )}
+        >
+          Démarrer
+          <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+        </Link>
+      </div>
+    </div>
+  )
+}
+
+// ─── Section principale ─────────────────────────────────────────────────────
+
 export function PricingSection() {
-  const [activeSection, setActiveSection] = useState<"offres" | "formules">("offres")
-  const [activeOffre, setActiveOffre] = useState("expert")
-  const [activeFormule, setActiveFormule] = useState("acceleration")
-  const [isAnnual, setIsAnnual] = useState(false)
-
-  const annualPrice = (monthly: number) => Math.round(monthly * 0.8)
-
-  const renderOffreCard = (offre: Offre) => {
-    const hl = offre.highlighted
-    return (
-      <article
-        key={offre.id}
-        className={cn(
-          "relative rounded-2xl border flex flex-col p-6 lg:p-8 transition-all duration-300",
-          hl
-            ? "bg-card border-accent shadow-2xl shadow-accent/10 ring-1 ring-accent lg:scale-105 lg:-translate-y-2"
-            : "bg-card border-border"
-        )}
-      >
-        {offre.badge && (
-          <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-            <span className="inline-flex items-center gap-1.5 bg-accent text-accent-foreground text-xs font-bold px-4 py-1.5 rounded-full shadow-lg tracking-wide uppercase">
-              <Award className="w-3.5 h-3.5" aria-hidden="true" />
-              {offre.badge}
-            </span>
-          </div>
-        )}
-
-        <div className={cn(
-          "w-10 h-10 lg:w-12 lg:h-12 rounded-xl flex items-center justify-center mb-4",
-          hl ? "bg-accent/15 text-accent" : "bg-secondary text-muted-foreground"
-        )}>
-          <offre.icon className="w-5 h-5 lg:w-6 lg:h-6" aria-hidden="true" />
-        </div>
-
-        <div className="mb-4">
-          <div className="flex items-center gap-2 mb-1">
-            <h3 className="text-lg lg:text-xl font-bold text-foreground">{offre.name}</h3>
-            <span className="text-xs text-muted-foreground border border-border rounded-full px-2 py-0.5 whitespace-nowrap">
-              {offre.tagline}
-            </span>
-          </div>
-          <p className="text-sm text-muted-foreground">
-            Pour les <span className="font-medium text-foreground">{offre.target}</span>
-          </p>
-        </div>
-
-        <div className="mb-5 pb-5 border-b border-border">
-          <p className="text-2xl lg:text-3xl font-bold text-foreground mb-1">{offre.price}</p>
-          <p className="text-sm text-muted-foreground">{offre.priceDetail}</p>
-        </div>
-
-        <ul className="space-y-2.5 mb-5 flex-1" role="list">
-          {offre.features.map((feature) => (
-            <li key={feature} className="flex items-start gap-3 text-sm">
-              <Check
-                className={cn("w-4 h-4 mt-0.5 flex-shrink-0", hl ? "text-accent" : "text-muted-foreground")}
-                aria-hidden="true"
-              />
-              <span className="text-muted-foreground">{feature}</span>
-            </li>
-          ))}
-        </ul>
-
-        {offre.lighthouseGuarantee && (
-          <div className="flex items-center gap-2.5 mb-5 p-3 rounded-lg bg-chart-4/10 border border-chart-4/20">
-            <BadgeCheck className="w-4 h-4 text-chart-4 flex-shrink-0" aria-hidden="true" />
-            <p className="text-xs text-chart-4 font-medium">Performance Lighthouse garantie (score vert)</p>
-          </div>
-        )}
-
-        <Button
-          asChild
-          size="lg"
-          className={cn(
-            "w-full font-semibold mt-auto",
-            hl
-              ? "bg-accent text-accent-foreground hover:bg-accent/90"
-              : "bg-secondary text-foreground hover:bg-muted border border-border"
-          )}
-        >
-          <Link href="#contact">
-            {offre.cta}
-            <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-          </Link>
-        </Button>
-      </article>
-    )
-  }
-
-  const renderFormuleCard = (formule: Formule) => {
-    const hl = formule.highlighted
-    const price = isAnnual ? annualPrice(formule.monthlyPrice) : formule.monthlyPrice
-    return (
-      <article
-        key={formule.id}
-        className={cn(
-          "relative rounded-2xl border flex flex-col p-6 lg:p-8 transition-all duration-300",
-          hl
-            ? "bg-card border-accent shadow-2xl shadow-accent/10 ring-1 ring-accent"
-            : "bg-card border-border"
-        )}
-      >
-        {formule.badge && (
-          <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-            <span className="inline-flex items-center gap-1.5 bg-accent text-accent-foreground text-xs font-bold px-4 py-1.5 rounded-full shadow-lg tracking-wide uppercase">
-              <Award className="w-3.5 h-3.5" aria-hidden="true" />
-              {formule.badge}
-            </span>
-          </div>
-        )}
-
-        <div className={cn(
-          "w-10 h-10 lg:w-12 lg:h-12 rounded-xl flex items-center justify-center mb-4",
-          hl ? "bg-accent/15 text-accent" : "bg-secondary text-muted-foreground"
-        )}>
-          <formule.icon className="w-5 h-5 lg:w-6 lg:h-6" aria-hidden="true" />
-        </div>
-
-        <div className="mb-4">
-          <div className="flex items-center gap-2 mb-1">
-            <h3 className="text-lg lg:text-xl font-bold text-foreground">{formule.name}</h3>
-            <span className="text-xs text-muted-foreground border border-border rounded-full px-2 py-0.5 whitespace-nowrap">
-              {formule.tagline}
-            </span>
-          </div>
-          <p className="text-sm text-muted-foreground">
-            Pour les <span className="font-medium text-foreground">{formule.target}</span>
-          </p>
-        </div>
-
-        <div className="mb-5 pb-5 border-b border-border">
-          <div className="flex items-end gap-1">
-            <span className="text-3xl lg:text-4xl font-bold text-foreground">{price} €</span>
-            <span className="text-muted-foreground mb-1.5 ml-1">/mois</span>
-          </div>
-          {isAnnual && (
-            <p className="text-xs text-muted-foreground mt-1.5">
-              Facturé {price * 12} €/an ·{" "}
-              <span className="text-accent font-medium">2 mois offerts</span>
-            </p>
-          )}
-        </div>
-
-        <ul className="space-y-2.5 mb-5 flex-1" role="list">
-          {formule.features.map((feature) => (
-            <li key={feature} className="flex items-start gap-3 text-sm">
-              <Check
-                className={cn("w-4 h-4 mt-0.5 flex-shrink-0", hl ? "text-accent" : "text-muted-foreground")}
-                aria-hidden="true"
-              />
-              <span className="text-muted-foreground">{feature}</span>
-            </li>
-          ))}
-        </ul>
-
-        <Button
-          asChild
-          size="lg"
-          className={cn(
-            "w-full font-semibold mt-auto",
-            hl
-              ? "bg-accent text-accent-foreground hover:bg-accent/90"
-              : "bg-secondary text-foreground hover:bg-muted border border-border"
-          )}
-        >
-          <Link href="#contact">
-            {formule.cta}
-            <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-          </Link>
-        </Button>
-      </article>
-    )
-  }
+  const [tab, setTab]         = useState<"offres" | "abonnements">("offres")
+  const [activeOffer, setActiveOffer]   = useState("S2")
+  const [activeSub, setActiveSub]       = useState("A3")
 
   return (
-    <section id="prestations" className="py-14 lg:py-32" aria-labelledby="pricing-heading">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="prestations" className="border-t border-border" aria-labelledby="pricing-heading">
 
-        <div className="text-center mb-8 lg:mb-14">
-          <span className="inline-block text-sm font-medium text-accent uppercase tracking-wider mb-3">
-            Offres & Tarifs
-          </span>
-          <h2 id="pricing-heading" className="text-2xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-3">
-            <span className="text-balance">
-              Des packs conçus pour{" "}
-              <span className="text-accent">chaque étape de votre croissance</span>
-            </span>
-          </h2>
-          <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Pas d&apos;abonnements cachés, pas de mauvaises surprises. Des offres claires,
-            des résultats mesurables.
-          </p>
-        </div>
-
-        {/* Section tabs: Offres / Formules */}
-        <div className="flex justify-center mb-8 lg:mb-12">
-          <div className="inline-flex bg-secondary rounded-2xl p-1 gap-1" role="tablist" aria-label="Type de tarification">
-            <button
-              role="tab"
-              aria-selected={activeSection === "offres"}
-              onClick={() => setActiveSection("offres")}
-              className={cn(
-                "px-6 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200",
-                activeSection === "offres"
-                  ? "bg-card text-foreground shadow-sm"
-                  : "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              Offres projets
-            </button>
-            <button
-              role="tab"
-              aria-selected={activeSection === "formules"}
-              onClick={() => setActiveSection("formules")}
-              className={cn(
-                "px-6 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200",
-                activeSection === "formules"
-                  ? "bg-card text-foreground shadow-sm"
-                  : "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              Formules mensuelles
-            </button>
-          </div>
-        </div>
-
-        {/* ── OFFRES ── */}
-        {activeSection === "offres" && (
-          <>
-            {/* Mobile + tablettes */}
-            <div className="xl:hidden">
-              <div className="flex bg-secondary rounded-2xl p-1 gap-1 mb-6" role="tablist" aria-label="Choisir une offre">
-                {offres.map((o) => (
-                  <button
-                    key={o.id}
-                    role="tab"
-                    aria-selected={activeOffre === o.id}
-                    onClick={() => setActiveOffre(o.id)}
-                    className={cn(
-                      "flex-1 py-2.5 text-sm font-medium rounded-xl transition-all duration-200",
-                      activeOffre === o.id
-                        ? "bg-card text-foreground shadow-sm"
-                        : "text-muted-foreground hover:text-foreground"
-                    )}
-                  >
-                    {o.name}
-                    {o.badge && <span className="ml-1 text-accent">✦</span>}
-                  </button>
-                ))}
-              </div>
-              <div className="mt-8 pt-2">
-                {offres.filter((o) => o.id === activeOffre).map(renderOffreCard)}
-              </div>
-            </div>
-
-            {/* Desktop: 3-column grid */}
-            <div className="hidden xl:grid xl:grid-cols-3 gap-8 items-start">
-              {offres.map(renderOffreCard)}
-            </div>
-          </>
-        )}
-
-        {/* ── FORMULES ── */}
-        {activeSection === "formules" && (
-          <>
-            {/* Billing toggle */}
-            <div className="flex justify-center mb-8">
-              <div className="flex items-center gap-3" role="group" aria-label="Fréquence de facturation">
-                <span
-                  className={cn("text-sm font-medium cursor-pointer select-none transition-colors", !isAnnual ? "text-foreground" : "text-muted-foreground")}
-                  onClick={() => setIsAnnual(false)}
-                >
-                  Mensuel
-                </span>
-                <button
-                  role="switch"
-                  aria-checked={isAnnual}
-                  aria-label="Basculer vers facturation annuelle"
-                  onClick={() => setIsAnnual(!isAnnual)}
-                  className={cn(
-                    "relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors",
-                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2",
-                    isAnnual ? "bg-accent" : "bg-border"
-                  )}
-                >
-                  <span className={cn(
-                    "inline-block h-4 w-4 rounded-full bg-white shadow-md transition-transform duration-200",
-                    isAnnual ? "translate-x-6" : "translate-x-1"
-                  )} />
-                </button>
-                <span
-                  className={cn("text-sm font-medium cursor-pointer select-none transition-colors flex items-center gap-1.5", isAnnual ? "text-foreground" : "text-muted-foreground")}
-                  onClick={() => setIsAnnual(true)}
-                >
-                  Annuel
-                  <span className="text-xs bg-accent/15 text-accent px-1.5 py-0.5 rounded-full font-semibold">−20 %</span>
-                </span>
-              </div>
-            </div>
-
-            {/* Mobile + tablettes */}
-            <div className="xl:hidden">
-              <div className="flex bg-secondary rounded-2xl p-1 gap-1 mb-6" role="tablist" aria-label="Choisir une formule">
-                {formules.map((f) => (
-                  <button
-                    key={f.id}
-                    role="tab"
-                    aria-selected={activeFormule === f.id}
-                    onClick={() => setActiveFormule(f.id)}
-                    className={cn(
-                      "flex-1 py-2.5 text-sm font-medium rounded-xl transition-all duration-200",
-                      activeFormule === f.id
-                        ? "bg-card text-foreground shadow-sm"
-                        : "text-muted-foreground hover:text-foreground"
-                    )}
-                  >
-                    {f.name}
-                    {f.badge && <span className="ml-1 text-accent">✦</span>}
-                  </button>
-                ))}
-              </div>
-              <div className="mt-8 pt-2">
-                {formules.filter((f) => f.id === activeFormule).map(renderFormuleCard)}
-              </div>
-            </div>
-
-            {/* Desktop: 2-column grid centré */}
-            <div className="hidden xl:grid xl:grid-cols-2 gap-8 items-start max-w-3xl mx-auto">
-              {formules.map(renderFormuleCard)}
-            </div>
-          </>
-        )}
-
-        <p className="text-center text-sm text-muted-foreground mt-8 lg:mt-12">
-          Tous les tarifs sont{" "}
-          <strong className="text-foreground font-semibold">HT</strong>.
-          {" "}Devis sur-mesure disponible —{" "}
-          <Link href="#contact" className="text-accent hover:underline">
-            parlons de votre projet
-          </Link>.
-        </p>
+      {/* Section label */}
+      <div className="px-4 sm:px-6 lg:px-8 py-5 lg:py-6 border-b border-border">
+        <h2 id="pricing-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
+          Services &amp; Abonnements
+        </h2>
       </div>
+
+      {/* Tab selector — éditorial large format */}
+      <div className="grid grid-cols-2 border-b border-border" role="tablist" aria-label="Type de prestation">
+        <button
+          role="tab"
+          data-cursor="hover"
+          aria-selected={tab === "offres"}
+          aria-controls="panel-offres"
+          onClick={() => setTab("offres")}
+          className={cn(
+            "group flex flex-col gap-2 px-4 sm:px-6 lg:px-8 py-8 lg:py-10 text-left border-r border-border transition-colors",
+            tab === "offres"
+              ? "bg-foreground text-background"
+              : "hover:bg-secondary"
+          )}
+        >
+          <span className={cn("font-mono text-[11px] uppercase tracking-[0.08em]", tab === "offres" ? "text-background/50" : "text-muted-foreground")}>
+            01
+          </span>
+          <span className="text-[clamp(20px,2.5vw,28px)] font-bold tracking-[-0.025em] leading-none">Offres</span>
+          <span className={cn("font-mono text-[10px] uppercase tracking-[0.06em]", tab === "offres" ? "text-background/45" : "text-muted-foreground")}>
+            Sites web · Projets uniques
+          </span>
+        </button>
+        <button
+          role="tab"
+          data-cursor="hover"
+          aria-selected={tab === "abonnements"}
+          aria-controls="panel-abonnements"
+          onClick={() => setTab("abonnements")}
+          className={cn(
+            "group flex flex-col gap-2 px-4 sm:px-6 lg:px-8 py-8 lg:py-10 text-left transition-colors",
+            tab === "abonnements"
+              ? "bg-foreground text-background"
+              : "hover:bg-secondary"
+          )}
+        >
+          <span className={cn("font-mono text-[11px] uppercase tracking-[0.08em]", tab === "abonnements" ? "text-background/50" : "text-muted-foreground")}>
+            02
+          </span>
+          <span className="text-[clamp(20px,2.5vw,28px)] font-bold tracking-[-0.025em] leading-none">Abonnements</span>
+          <span className={cn("font-mono text-[10px] uppercase tracking-[0.06em]", tab === "abonnements" ? "text-background/45" : "text-muted-foreground")}>
+            Maintenance · SEO · Croissance
+          </span>
+        </button>
+      </div>
+
+      {/* ── Panel Offres ── */}
+      <div id="panel-offres" role="tabpanel" hidden={tab !== "offres"}>
+        {/* Mobile selector */}
+        <div className="lg:hidden flex border-b border-border" role="tablist">
+          {OFFERS.map((o) => (
+            <button
+              key={o.code}
+              role="tab"
+              aria-selected={activeOffer === o.code}
+              onClick={() => setActiveOffer(o.code)}
+              className={cn(
+                "flex-1 px-3 py-3 font-mono text-[10px] uppercase tracking-[0.06em] transition-colors border-r border-border last:border-r-0",
+                activeOffer === o.code ? "bg-foreground text-background" : "text-muted-foreground hover:bg-secondary"
+              )}
+            >
+              {o.name}
+            </button>
+          ))}
+        </div>
+
+        <div className="hidden lg:grid lg:grid-cols-[1fr_1.15fr_1fr]">
+          {OFFERS.map((o, i) => <OfferCard key={o.code} offer={o} idx={i} />)}
+        </div>
+        <div className="lg:hidden">
+          {OFFERS.filter((o) => o.code === activeOffer).map((o, i) => (
+            <OfferCard key={o.code} offer={o} idx={i} />
+          ))}
+        </div>
+      </div>
+
+      {/* ── Panel Abonnements ── */}
+      <div id="panel-abonnements" role="tabpanel" hidden={tab !== "abonnements"}>
+        {/* Mobile selector */}
+        <div className="lg:hidden flex border-b border-border" role="tablist">
+          {SUBSCRIPTIONS.map((s) => (
+            <button
+              key={s.code}
+              role="tab"
+              aria-selected={activeSub === s.code}
+              onClick={() => setActiveSub(s.code)}
+              className={cn(
+                "flex-1 px-2 py-3 font-mono text-[10px] uppercase tracking-[0.05em] transition-colors border-r border-border last:border-r-0",
+                activeSub === s.code ? "bg-foreground text-background" : "text-muted-foreground hover:bg-secondary"
+              )}
+            >
+              {s.name}
+            </button>
+          ))}
+        </div>
+
+        <div className="hidden lg:grid lg:grid-cols-[1fr_1fr_1.1fr]">
+          {SUBSCRIPTIONS.map((s, i) => <SubCard key={s.code} sub={s} idx={i} />)}
+        </div>
+        <div className="lg:hidden">
+          {SUBSCRIPTIONS.filter((s) => s.code === activeSub).map((s, i) => (
+            <SubCard key={s.code} sub={s} idx={i} />
+          ))}
+        </div>
+      </div>
+
     </section>
   )
 }

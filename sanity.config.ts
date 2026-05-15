@@ -2,6 +2,7 @@ import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
 import { schemaTypes } from './sanity/schemaTypes'
+import { bulkDeletePlugin } from './sanity/plugins/bulk-delete'
 
 export default defineConfig({
   name: 'mobem-solutions',
@@ -12,17 +13,21 @@ export default defineConfig({
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
 
   plugins: [
-    unsplashImageAsset(),
     structureTool({
       structure: (S) =>
         S.list()
           .title('Contenu')
           .items([
             S.listItem().title('Articles').child(S.documentTypeList('post').title('Articles')),
+            S.listItem().title('Réalisations').child(S.documentTypeList('realisation').title('Réalisations')),
+            S.divider(),
             S.listItem().title('Auteurs').child(S.documentTypeList('author').title('Auteurs')),
             S.listItem().title('Catégories').child(S.documentTypeList('category').title('Catégories')),
+            S.listItem().title('Clients').child(S.documentTypeList('client').title('Clients')),
           ]),
     }),
+    unsplashImageAsset(),
+    bulkDeletePlugin(),
   ],
 
   schema: { types: schemaTypes },

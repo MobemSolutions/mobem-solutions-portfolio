@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Plan du site — Mobem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .sm-section { border-top: 1px solid var(--line); padding: 48px 32px; }
+  .sm-section h2 { margin: 0 0 24px; font-size: clamp(28px, 3vw, 40px); font-weight: 800; letter-spacing: -0.025em; }
+  .sm-section h3 { margin: 28px 0 12px; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+  .sm-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px 32px; }
+  .sm-cols a { display: block; padding: 6px 0; color: var(--signal); font-size: 14px; }
+  .sm-cols a:hover { text-decoration: underline; }
+  .sm-grid-mv { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px 32px; }
+  .sm-grid-mv h3 { margin: 0 0 8px; }
+  @media (max-width: 900px) { .sm-cols, .sm-grid-mv { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<section class="pg-hero">
+  <div class="pg-crumbs">
+    <a href="Mobem.html">Accueil</a><span>/</span><span style="color: var(--fg);">Plan du site</span>
+  </div>
+  <h1 class="pg-h1">Plan du <em>site</em>.</h1>
+  <p class="pg-lede">Retrouvez l'ensemble des <strong>1 341 pages</strong> de notre site — pages principales, métiers, villes, articles et combinaisons.</p>
+</section>
+
+<section class="sm-section">
+  <h2>Pages principales</h2>
+  <div class="sm-cols">
+    <a href="Mobem.html">Accueil</a>
+    <a href="realisations.html">Réalisations</a>
+    <a href="blog.html">Blog</a>
+    <a href="metiers.html">Sites par métier</a>
+    <a href="villes.html">Nos villes</a>
+    <a href="#">Tarifs</a>
+    <a href="#">À propos</a>
+    <a href="#">Comment ça marche</a>
+    <a href="#">Mentions légales</a>
+    <a href="#">CGV</a>
+    <a href="#">Confidentialité</a>
+    <a href="plan-du-site.html">Plan du site</a>
+  </div>
+</section>
+
+<section class="sm-section">
+  <h2>Sites par métier</h2>
+  <a href="metiers.html" class="ul" style="color: var(--signal); font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">→ Voir tous les métiers</a>
+  <div id="metiersList" style="margin-top: 32px;"></div>
+</section>
+
+<section class="sm-section">
+  <h2>Sites par ville</h2>
+  <a href="villes.html" class="ul" style="color: var(--signal); font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">→ Voir toutes les villes</a>
+  <div id="villesList" style="margin-top: 32px;"></div>
+</section>
+
+<section class="sm-section">
+  <h2>Articles de blog</h2>
+  <a href="blog.html" class="ul" style="color: var(--signal); font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;">→ Voir tous les articles</a>
+  <div class="sm-cols" style="margin-top: 32px;">
+    <a href="article.html">Pourquoi 78% des refontes ratent leur cible business</a>
+    <a href="article.html">Le SEO local en 2026 : passer #1 sur Google en 90 jours</a>
+    <a href="article.html">LCP sous 1.5s : Core Web Vitals en production</a>
+    <a href="article.html">Design system pour PME : pourquoi commencer petit</a>
+    <a href="article.html">Pourquoi nous refusons 60% des projets entrants</a>
+    <a href="article.html">Pages métier × ville : SEO programmatique sans spam</a>
+    <a href="article.html">Refonte ou amélioration continue ?</a>
+    <a href="article.html">Typographie web : 5 règles de chaque projet</a>
+    <a href="article.html">Hébergement : quitter son hébergeur classique ?</a>
+    <a href="article.html">Le brief en 15 minutes</a>
+    <a href="article.html">CRM, CMS, ERP : ce dont une PME a vraiment besoin</a>
+    <a href="article.html">Avis Google : passer de 12 à 412 avis</a>
+  </div>
+</section>
+
+<section class="sm-section">
+  <h2>Combinaisons métier × ville</h2>
+  <p style="margin: 0 0 24px; color: var(--muted); max-width: 720px;">Plus de <strong style="color: var(--signal);">1 260 pages</strong> dédiées générées pour combiner chaque métier avec chaque ville. Quelques exemples ci-dessous :</p>
+  <div class="sm-cols">
+    <a href="#">Plombier à Paris</a>
+    <a href="#">Plombier à Lyon</a>
+    <a href="#">Plombier à Nantes</a>
+    <a href="#">Plombier à Marseille</a>
+    <a href="#">Électricien à Paris</a>
+    <a href="#">Électricien à Bordeaux</a>
+    <a href="#">Salon de coiffure à Nantes</a>
+    <a href="#">Salon de coiffure à Lille</a>
+    <a href="#">Ostéopathe à Toulouse</a>
+    <a href="#">Ostéopathe à Rennes</a>
+    <a href="#">Restaurant à Nice</a>
+    <a href="#">Restaurant à Strasbourg</a>
+    <a href="#">Avocat à Paris</a>
+    <a href="#">Avocat à Bordeaux</a>
+    <a href="#">Auto-école à Caen</a>
+    <a href="#">Auto-école à Nice</a>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="site.js"></script>
+<script>
+  const metiers = [
+    ['Bâtiment & Travaux', ['Plombier', 'Électricien', 'Paysagiste', 'Maçon', 'Carreleur', 'Peintre en bâtiment', 'Couvreur', 'Menuisier', 'Plaquiste', 'Chauffagiste', 'Serrurier']],
+    ['Santé & Bien-être', ['Ostéopathe', 'Kinésithérapeute', 'Psychologue', 'Diététicien', 'Dentiste', 'Sage-femme']],
+    ['Beauté', ['Salon de coiffure', 'Esthéticienne', 'Barbier', 'Manucure', 'Spa']],
+    ['Mobilité & Transport', ['Auto-école', 'Garage automobile', 'Taxi VTC']],
+    ['Sport & Loisirs', ['Coach sportif', 'Salle de sport', 'École de danse', 'École de musique', 'Bowling']],
+    ['Restauration & Commerce', ['Restaurant', 'Boulangerie', 'Épicerie fine', 'Caviste', 'Traiteur']],
+    ['Juridique & Finance', ['Avocat', 'Comptable', 'Conseiller financier', 'Notaire', 'Huissier']],
+  ];
+  const villes = [
+    ['Île-de-France', ['Paris']],
+    ['Auvergne-Rhône-Alpes', ['Lyon', 'Grenoble', 'Clermont-Ferrand', 'Saint-Étienne']],
+    ['Provence-Alpes-Côte d\'Azur', ['Marseille', 'Nice', 'Toulon', 'Aix-en-Provence']],
+    ['Pays de la Loire', ['Nantes', 'Angers', 'Le Mans']],
+    ['Bretagne', ['Rennes', 'Brest']],
+    ['Occitanie', ['Toulouse', 'Montpellier', 'Nîmes']],
+    ['Nouvelle-Aquitaine', ['Bordeaux', 'Limoges', 'Poitiers']],
+    ['Hauts-de-France', ['Lille', 'Amiens']],
+    ['Grand Est', ['Strasbourg', 'Reims', 'Metz']],
+    ['Normandie', ['Rouen', 'Caen', 'Le Havre']],
+  ];
+
+  document.getElementById('metiersList').innerHTML = metiers.map(([cat, items]) => `
+    <h3>${cat}</h3>
+    <div class="sm-cols">${items.map(m => `<a href="#">${m}</a>`).join('')}</div>
+  `).join('');
+
+  document.getElementById('villesList').innerHTML = villes.map(([reg, items]) => `
+    <h3>${reg}</h3>
+    <div class="sm-cols">${items.map(v => `<a href="#">${v}</a>`).join('')}</div>
+  `).join('');
+
+  MobemSite.init('Plan du site');
+</script>
+</body>
+</html>

@@ -1,113 +1,82 @@
-"use client"
-
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { CalendlyButton } from "@/components/calendly-button"
+
+const kpis = [
+  { key: "Diagnostic", value: "90 min", desc: "Audit gratuit, sans engagement" },
+  { key: "Livraison", value: "10 j", desc: "Sites essentiels en production" },
+  { key: "Lighthouse", value: "90+", desc: "Performance garantie au contrat" },
+  { key: "Support", value: "24 h", desc: "SLA réponse inclus" },
+]
 
 export function HeroSection() {
-  const handleScrollToContact = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
-    const element = document.querySelector("#contact")
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
-  }
-
   return (
-    <section
-      id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 lg:pt-20"
-      aria-labelledby="hero-heading"
-    >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 -z-10" aria-hidden="true">
-        <div className="absolute inset-0 bg-gradient-to-b from-secondary/50 to-background" />
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
-        <div 
-          className="absolute inset-0 opacity-[0.015]"
-          style={{
-            backgroundImage: `linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px)`,
-            backgroundSize: '64px 64px'
-          }}
-        />
+    <section id="hero" className="pt-14 lg:pt-16 border-t border-border relative" aria-labelledby="hero-heading">
+
+      {/* Vertical editorial label — right margin */}
+      <div className="hidden lg:flex absolute right-0 top-0 h-full items-start pt-8 pr-6 pointer-events-none" aria-hidden="true">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-px h-16 bg-border" />
+          <span
+            className="font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/25 select-none"
+            style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+          >
+            Nantes · France · 2026
+          </span>
+        </div>
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 lg:py-16 xl:py-24">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 xl:gap-16 items-center">
+      {/* Main content */}
+      <div className="px-4 sm:px-6 lg:px-8 pt-14 sm:pt-20 lg:pt-28 mx-auto max-w-7xl">
 
-          {/* Content (Gauche) */}
-          <div className="text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-sm font-medium text-muted-foreground mb-6 animate-fade-up">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
-              </span>
-              Agence digitale à Nantes
-            </div>
+        <h1
+          id="hero-heading"
+          className="font-bold leading-[0.88] tracking-[-0.045em] text-[clamp(32px,8.5vw,136px)] mb-12 sm:mb-16 lg:mb-24"
+        >
+          La précision<br />
+          <span className="text-accent" aria-hidden="true">·</span> digitale,<br />
+          <span className="font-serif font-normal italic tracking-[-0.02em] lg:ml-[0.16em] whitespace-nowrap">
+            à l&apos;échelle humaine<span className="caret" aria-hidden="true" />
+          </span>
+        </h1>
 
-            <h1 id="hero-heading" className="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-foreground mb-6 animate-fade-up animation-delay-100">
-              <span className="text-balance">
-                La précision digitale,{" "}
-                <span className="text-accent">à l&apos;échelle humaine</span>
-              </span>
-            </h1>
-
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0 mb-8 animate-fade-up animation-delay-200 leading-relaxed">
-              Mobem Solutions accompagne les PME et ETI ambitieuses dans leur transformation digitale. Ingénierie, Design, Stratégie — trois expertises complémentaires pour des résultats concrets.
+        {/* Sub-row */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 border-t border-border pt-10 pb-14 lg:pb-20">
+          <div className="hidden lg:flex lg:col-span-1 items-start pt-1">
+            <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">01</span>
+          </div>
+          <div className="lg:col-span-5 lg:pr-10">
+            <p className="text-[17px] sm:text-[18px] leading-[1.5] text-muted-foreground">
+              On ne livre pas un site. On diagnostique, on prescrit, on exécute — pour que chaque clic,
+              chaque page, chaque ligne de code serve la croissance de votre entreprise.
             </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-up animation-delay-300">
-              <Button asChild size="lg" className="group bg-accent text-accent-foreground hover:bg-accent/90 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:shadow-sm font-medium text-base px-8">
-                <Link href="#contact" onClick={handleScrollToContact}>
-                  Lancer mon projet
-                  <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
-                </Link>
-              </Button>
-              <CalendlyButton text="Prendre rendez-vous" variant="outline" size="lg" className="font-medium text-base px-8 border-border hover:bg-secondary" />
-            </div>
           </div>
-
-          {/* Visual Element (Droite) - TON NOUVEAU VISUEL */}
-          <div className="relative animate-fade-up animation-delay-200" aria-hidden="true">
-            <div className="relative aspect-square max-w-lg mx-auto">
-              
-              {/* Conteneur de l'image avec un léger effet de flottement */}
-              <div className="absolute inset-4 sm:inset-8 bg-transparent rounded-2xl overflow-hidden flex items-center justify-center">
-                <img 
-                  src="/home-section-main-illustration-removebg-preview.png" 
-                  alt="Schéma technique et créatif Mobem Solutions"
-                  className="w-full h-auto object-contain drop-shadow-2xl"
-                />
-              </div>
-
-              {/* Éléments flottants conservés pour le relief
-              <div className="absolute top-0 right-0 bg-card/80 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-border animate-bounce-slow">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
-                    <ArrowRight className="w-5 h-5 text-accent" />
-                  </div>
-                  <div>
-                    <div className="text-sm font-semibold text-foreground">Sur-mesure</div>
-                    <div className="text-[10px] text-muted-foreground uppercase tracking-widest">Atelier digital</div>
-                  </div>
-                </div>
-              </div> */}
-
-              {/* <div className="absolute bottom-0 left-0 bg-card/80 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-border">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-chart-2/20 flex items-center justify-center">
-                    <div className="w-2 h-2 rounded-full bg-chart-2 animate-pulse" />
-                  </div>
-                  <div className="text-xs text-muted-foreground font-medium">Pensé • Dessiné • Codé</div>
-                </div>
-              </div> */}
-
-            </div>
+          <div className="lg:col-span-3 lg:px-8 lg:border-l lg:border-border flex flex-col gap-2">
+            <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">Engagement</span>
+            <p className="text-[14px] leading-relaxed text-foreground">
+              Roadmap trimestrielle. Tarification à la valeur. Un seul interlocuteur, trois associés.
+            </p>
           </div>
-
+          <div className="lg:col-span-3 lg:px-8 lg:border-l lg:border-border flex flex-col gap-2 items-start">
+            <Link
+              href="#contact"
+              className="inline-flex items-center gap-2.5 px-5 py-3.5 bg-accent text-accent-foreground text-[15px] font-semibold transition-colors cta-hover"
+            >
+              Démarrer un diagnostic
+              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+            </Link>
+            <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
+              Sans engagement · 90 min · Réponse 24 h
+            </span>
+            <Link
+              href="#services"
+              className="inline-flex items-center gap-2.5 px-5 py-3.5 border border-border text-sm font-medium transition-colors hover:bg-secondary mt-2"
+            >
+              Voir les services
+              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+            </Link>
+          </div>
         </div>
+
       </div>
     </section>
   )

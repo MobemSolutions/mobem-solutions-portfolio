@@ -16,7 +16,7 @@ interface CalendlyButtonProps {
 const CALENDLY_URL = "https://calendly.com/contact-mobem-solutions/15min"
 
 export function CalendlyButton({
-  text = "Réserver un appel",
+  text = "Reserver un appel",
   variant = "default",
   size = "default",
   className = "",
@@ -46,17 +46,17 @@ export function CalendlyButton({
       {mounted && isOpen && createPortal(
         <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6">
           <div
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            className="absolute inset-0 bg-foreground/80"
             onClick={() => setIsOpen(false)}
             aria-hidden="true"
           />
-          <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden">
+          <div className="relative bg-card w-full max-w-3xl overflow-hidden">
             <button
               onClick={() => setIsOpen(false)}
-              className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-black/10 hover:bg-black/20 flex items-center justify-center transition-colors"
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-foreground text-background flex items-center justify-center hover:bg-foreground/90 transition-colors"
               aria-label="Fermer"
             >
-              <X className="w-4 h-4 text-zinc-700" />
+              <X className="w-5 h-5" />
             </button>
             <InlineWidget
               url={CALENDLY_URL}

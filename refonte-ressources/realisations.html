@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Réalisations — Mobem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .case-row { display: grid; grid-template-columns: 70px 2fr 1.2fr 1fr 1fr 60px; align-items: center; gap: 24px; padding: 28px 32px; border-bottom: 1px solid var(--line); transition: background 200ms ease; color: var(--fg); }
+  .case-row:hover { background: rgba(230, 48, 48, 0.04); }
+  .case-row:hover .case-arrow { transform: translate(6px, -6px); color: var(--signal); }
+  .case-arrow { transition: transform 280ms ease, color 200ms ease; }
+  .case-client { font-size: 36px; font-weight: 700; letter-spacing: -0.025em; line-height: 1; }
+  .case-kpi { font-size: 16px; font-weight: 600; color: var(--signal); }
+
+  .filters { display: flex; gap: 0; padding: 0 32px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .filter-btn { padding: 14px 18px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border: 0; background: transparent; cursor: pointer; border-right: 1px solid var(--line); transition: all 180ms ease; }
+  .filter-btn:hover, .filter-btn.is-active { color: var(--signal); background: var(--bg); }
+  .filter-btn.is-active { color: var(--fg); border-bottom: 2px solid var(--signal); margin-bottom: -1px; }
+
+  .grid-gallery { display: grid; grid-template-columns: repeat(2, 1fr); }
+  .grid-gallery .case-card { padding: 32px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 16px; color: var(--fg); }
+  .case-card .ph { aspect-ratio: 4/3; }
+  .case-card .meta-row { display: flex; justify-content: space-between; gap: 16px; }
+  .case-card h3 { margin: 8px 0 0; font-size: 32px; font-weight: 700; letter-spacing: -0.025em; line-height: 1; }
+  .case-card p { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--muted); }
+  .case-stats { display: flex; gap: 32px; padding-top: 12px; border-top: 1px solid var(--line); }
+  .case-stat .v { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; color: var(--signal); }
+  .case-stat .l { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+
+  @media (max-width: 900px) {
+    .case-row { grid-template-columns: 1fr; gap: 8px; padding: 20px; }
+    .grid-gallery { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<section class="pg-hero">
+  <div class="pg-crumbs">
+    <a href="Mobem.html">Accueil</a>
+    <span>/</span>
+    <span style="color: var(--fg);">Réalisations</span>
+  </div>
+  <h1 class="pg-h1">Réalisations<br/><em>2024 — 2026</em></h1>
+  <p class="pg-lede"><strong>47 projets livrés</strong> en France — refonte, sites essentiels, plateformes sur mesure. Chaque cas est un diagnostic, une prescription, une exécution mesurée.</p>
+</section>
+
+<div class="filters">
+  <button class="filter-btn is-active" data-filter="all">Tous · 47</button>
+  <button class="filter-btn" data-filter="refonte">Refontes · 18</button>
+  <button class="filter-btn" data-filter="essentiel">Sites essentiels · 21</button>
+  <button class="filter-btn" data-filter="plateforme">Plateformes · 8</button>
+  <button class="filter-btn" data-filter="seo">SEO local · 12</button>
+</div>
+
+<div class="section-head">
+  <div class="label">
+    <span class="num">// 01</span>
+    <h2>Sélection éditoriale</h2>
+  </div>
+  <span class="num">Vue liste</span>
+</div>
+
+<div id="caseList"></div>
+
+<div class="section-head">
+  <div class="label">
+    <span class="num">// 02</span>
+    <h2>Galerie complète</h2>
+  </div>
+  <span class="num">Vue grille</span>
+</div>
+
+<div class="grid-gallery" id="gridGallery"></div>
+
+<section style="padding: 96px 32px; border-top: 1px solid var(--line); text-align: center;">
+  <div class="mono" style="color: var(--muted); margin-bottom: 16px;">// Votre projet</div>
+  <h2 style="margin: 0 auto 24px; max-width: 800px; font-size: clamp(40px, 5vw, 72px); font-weight: 800; letter-spacing: -0.03em; line-height: 0.95;">
+    Le prochain cas <em style="font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--signal);">pourrait être le vôtre.</em>
+  </h2>
+  <a href="Mobem.html#contact" class="btn btn-signal" style="margin-top: 24px;">Démarrer un diagnostic
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17 L17 7"/><path d="M9 7 H17 V15"/></svg>
+  </a>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="site.js"></script>
+<script>
+  const cases = [
+    { idx: '01', client: 'Atelier Vernay', sector: 'Industrie · Loire-Atlantique', tag: 'Refonte + SEO', kpi: '+241% trafic', year: '2025', cat: 'refonte', desc: 'Refonte complète d\'un site corporate vieillissant. Architecture SEO repensée, performance pour usage industriel sur réseaux faibles.', stats: [['+241%', 'Trafic organique'], ['1.2s', 'LCP mobile'], ['96', 'Lighthouse']] },
+    { idx: '02', client: 'Cabinet Lefranc', sector: 'Services pro. · Nantes', tag: 'Site essentiel', kpi: 'LCP 1.2s', year: '2025', cat: 'essentiel', desc: 'Site essentiel pour cabinet d\'avocats. Editorial sobre, prise de RDV en ligne, conformité RGPD intégrale.', stats: [['1.2s', 'LCP'], ['100', 'Accessibilité'], ['8j', 'Délai livraison']] },
+    { idx: '03', client: 'Maison Ferré', sector: 'Hospitalité · Bordeaux', tag: 'Plateforme + CRM', kpi: 'Conv. ×3.1', year: '2026', cat: 'plateforme', desc: 'Plateforme réservation chambres d\'hôtes. Connexion Stripe, calendrier en temps réel, CRM intégré pour suivi clientèle.', stats: [['×3.1', 'Conversion'], ['98', 'Lighthouse'], ['320k€', 'Revenus 2025']] },
+    { idx: '04', client: 'Groupe Pénard', sector: 'BTP · ETI Vendée', tag: 'Stratégie + DS', kpi: 'WCAG AAA', year: '2026', cat: 'refonte', desc: 'Design system + refonte multi-marques pour ETI du BTP. Cohérence sur 6 filiales, gouvernance éditoriale formalisée.', stats: [['AAA', 'WCAG'], ['6', 'Sites unifiés'], ['142', 'Composants DS']] },
+    { idx: '05', client: 'Studio Carène', sector: 'Architecture · Rennes', tag: 'Portfolio sur mesure', kpi: '94 Lighthouse', year: '2025', cat: 'plateforme', desc: 'Portfolio architecte avec rendu immersif des projets. Galeries plein écran, animations subtiles, WebP optimisé.', stats: [['94', 'Lighthouse'], ['+58%', 'Temps moyen'], ['12', 'Projets en ligne']] },
+    { idx: '06', client: 'Boucherie Marchand', sector: 'Commerce · Lyon', tag: 'Site essentiel + SEO', kpi: '#1 Google local', year: '2025', cat: 'seo', desc: 'Boucherie traditionnelle propulsée en première position locale. Fiche Google optimisée, schémas LocalBusiness, photos métier.', stats: [['#1', 'Google local'], ['+412', 'Avis Google'], ['+86%', 'Appels reçus']] },
+    { idx: '07', client: 'Cliniques du Sud', sector: 'Santé · Toulouse', tag: 'Plateforme RDV', kpi: '24/7 booking', year: '2026', cat: 'plateforme', desc: 'Plateforme de prise de rendez-vous multi-praticiens. Synchronisation Doctolib, espace patient sécurisé, RGPD santé.', stats: [['24/7', 'Disponibilité'], ['12k', 'RDV/mois'], ['HDS', 'Hébergement']] },
+    { idx: '08', client: 'Salon Bardou', sector: 'Beauté · Marseille', tag: 'Site essentiel', kpi: '+180% RDV', year: '2025', cat: 'essentiel', desc: 'Salon de coiffure haut de gamme. Réservation Planity intégrée, galerie Instagram, identité forte.', stats: [['+180%', 'RDV en ligne'], ['1.4s', 'LCP'], ['7j', 'Livraison']] },
+    { idx: '09', client: 'Domaine Pinot', sector: 'Vins · Bourgogne', tag: 'E-commerce + SEO', kpi: '+340k€ CA', year: '2025', cat: 'plateforme', desc: 'E-commerce vins en direct producteur. Catalogue par millésime, fiches techniques détaillées, expédition optimisée.', stats: [['+340k€', 'CA en ligne'], ['38%', 'Commandes export'], ['92', 'Lighthouse']] },
+    { idx: '10', client: 'Auto-École Castro', sector: 'Mobilité · Nice', tag: 'Site essentiel', kpi: '+120 inscriptions', year: '2026', cat: 'essentiel', desc: 'Auto-école de quartier transformée en référence locale. Réservation code en ligne, paiement échelonné, suivi élève.', stats: [['+120', 'Inscriptions/an'], ['#2', 'Google local'], ['1.1s', 'LCP']] },
+    { idx: '11', client: 'Ostéo Rivière', sector: 'Santé · Angers', tag: 'Site essentiel + Doctolib', kpi: 'Agenda 100% plein', year: '2026', cat: 'essentiel', desc: 'Praticienne ostéopathe. Pages SEO ciblées par symptôme, intégration Doctolib, blog conseils.', stats: [['100%', 'Agenda rempli'], ['+92%', 'Nouveaux patients'], ['28', 'Pages SEO']] },
+    { idx: '12', client: 'Restaurant L\'Établi', sector: 'Restauration · Paris 11', tag: 'Site + carte digitale', kpi: '+58% réservations', year: '2025', cat: 'seo', desc: 'Bistro de quartier. Carte digitale en QR, réservation en ligne, photos métier, présence Google maximale.', stats: [['+58%', 'Résa en ligne'], ['4.8★', 'Note Google'], ['230', 'Avis ajoutés']] },
+  ];
+
+  function row(c) {
+    return `
+      <a href="#" class="case-row" data-cat="${c.cat}">
+        <span class="mono" style="color: var(--muted);">${c.idx}</span>
+        <div class="case-client">${c.client}</div>
+        <div class="mono" style="color: var(--muted);">${c.sector}</div>
+        <div style="font-size: 13.5px;">${c.tag}</div>
+        <div class="case-kpi">${c.kpi}</div>
+        <div style="display: flex; justify-content: flex-end;">
+          <svg class="case-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17 L17 7"/><path d="M9 7 H17 V15"/></svg>
+        </div>
+      </a>
+    `;
+  }
+
+  function card(c) {
+    return `
+      <a href="realisation-detail.html" class="case-card" data-cat="${c.cat}">
+        <div class="ph">[ capture · ${c.client.toLowerCase()} ]</div>
+        <div class="meta-row">
+          <span class="mono" style="color: var(--muted);">${c.idx} · ${c.year}</span>
+          <span class="mono" style="color: var(--signal);">${c.tag}</span>
+        </div>
+        <h3>${c.client}</h3>
+        <p>${c.desc}</p>
+        <div class="case-stats">
+          ${c.stats.map(([v, l]) => `<div class="case-stat"><div class="v">${v}</div><div class="l">${l}</div></div>`).join('')}
+        </div>
+      </a>
+    `;
+  }
+
+  document.getElementById('caseList').innerHTML = cases.slice(0, 6).map(row).join('');
+  document.getElementById('gridGallery').innerHTML = cases.map(card).join('');
+
+  // Filtering
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      const f = btn.dataset.filter;
+      document.querySelectorAll('[data-cat]').forEach(el => {
+        el.style.display = (f === 'all' || el.dataset.cat === f) ? '' : 'none';
+      });
+    });
+  });
+
+  MobemSite.init('Réalisations');
+</script>
+</body>
+</html>

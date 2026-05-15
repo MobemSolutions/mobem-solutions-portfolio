@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Création de site pour plombier — Mobem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .mh-hero { padding: 64px 32px 48px; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 7fr 5fr; gap: 64px; align-items: end; }
+  .mh-hero h1 { margin: 16px 0 24px; font-size: clamp(56px, 7vw, 112px); font-weight: 800; letter-spacing: -0.04em; line-height: 0.92; }
+  .mh-hero h1 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--signal); }
+  .mh-hero p { font-size: 19px; line-height: 1.5; color: var(--muted); margin: 0 0 28px; max-width: 540px; }
+  .mh-hero .ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .mh-hero-side { display: flex; flex-direction: column; gap: 16px; }
+  .mh-stat { padding: 24px; border: 1px solid var(--line); }
+  .mh-stat .v { font-size: 40px; font-weight: 700; letter-spacing: -0.03em; line-height: 0.95; color: var(--signal); }
+  .mh-stat .l { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-top: 8px; }
+
+  .pain-band { padding: 64px 32px; border-bottom: 1px solid var(--line); }
+  .pain-band h2 { margin: 0 0 32px; font-size: clamp(36px, 4.5vw, 64px); font-weight: 800; letter-spacing: -0.03em; line-height: 1; max-width: 880px; }
+  .pain-band h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--signal); }
+  .pains { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+  .pain { padding: 32px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 14px; min-height: 240px; }
+  .pain .num { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; color: var(--signal); }
+  .pain h3 { margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
+  .pain p { margin: 0; font-size: 14px; line-height: 1.55; color: var(--muted); }
+
+  .feat-band { padding: 64px 32px; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 5fr 7fr; gap: 64px; }
+  .feat-band h2 { margin: 0 0 16px; font-size: clamp(36px, 4.5vw, 64px); font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
+  .feat-band h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--signal); }
+  .feat-band p { font-size: 16px; line-height: 1.55; color: var(--muted); margin: 0 0 20px; max-width: 480px; }
+  .feat-list { display: flex; flex-direction: column; }
+  .feat { display: grid; grid-template-columns: 50px 1fr 24px; gap: 24px; padding: 22px 0; border-top: 1px solid var(--line); align-items: baseline; }
+  .feat:last-child { border-bottom: 1px solid var(--line); }
+  .feat .num { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; color: var(--muted); }
+  .feat h3 { margin: 0 0 6px; font-size: 19px; font-weight: 600; letter-spacing: -0.015em; }
+  .feat p { margin: 0; font-size: 14px; line-height: 1.55; color: var(--muted); }
+  .feat .check { color: var(--signal); }
+
+  .price-band { padding: 64px 32px; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-left: 1px solid var(--line); }
+  .price { padding: 36px 28px; border-right: 1px solid var(--line); display: flex; flex-direction: column; gap: 16px; }
+  .price.featured { background: var(--fg); color: var(--bg); }
+  .price.featured .mono { color: rgba(255,255,255,0.55); }
+  .price h3 { margin: 0; font-size: 28px; font-weight: 700; letter-spacing: -0.025em; }
+  .price .amount { font-size: 48px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; }
+  .price .amount .from { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 8px; }
+  .price.featured .amount .from { color: rgba(255,255,255,0.55); }
+  .price ul { list-style: none; padding: 0; margin: 16px 0 24px; display: flex; flex-direction: column; gap: 10px; font-size: 14px; }
+  .price li { padding-left: 22px; position: relative; }
+  .price li::before { content: "✓"; position: absolute; left: 0; color: var(--signal); }
+  .price.featured li::before { color: var(--signal); }
+  .price .btn { margin-top: auto; }
+
+  .villes-pill-band { padding: 56px 32px; border-bottom: 1px solid var(--line); }
+  .villes-pill-band h2 { margin: 0 0 24px; font-size: clamp(28px, 3.4vw, 44px); font-weight: 800; letter-spacing: -0.025em; }
+  .villes-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .villes-pills a { padding: 10px 16px; border: 1px solid var(--line); font-size: 13px; font-weight: 500; transition: all 180ms ease; }
+  .villes-pills a:hover { border-color: var(--signal); background: var(--signal); color: var(--paper); }
+  .villes-pills a.muted { color: var(--muted); }
+
+  .faq-band { padding: 64px 32px; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 5fr 7fr; gap: 64px; }
+  .faq-band h2 { margin: 0; font-size: clamp(36px, 4.5vw, 64px); font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
+  .faq-band h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--signal); }
+  .faq-list details { padding: 22px 0; border-top: 1px solid var(--line); }
+  .faq-list details:last-child { border-bottom: 1px solid var(--line); }
+  .faq-list summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after { content: "+"; color: var(--signal); font-size: 24px; font-weight: 300; transition: transform 220ms ease; }
+  .faq-list details[open] summary::after { transform: rotate(45deg); }
+  .faq-list details p { margin: 14px 0 0; color: var(--muted); line-height: 1.6; max-width: 640px; }
+
+  .final-cta { padding: 96px 32px; text-align: center; border-bottom: 1px solid var(--line); }
+  .final-cta h2 { margin: 0 auto 24px; font-size: clamp(40px, 5.5vw, 88px); font-weight: 800; letter-spacing: -0.03em; line-height: 0.95; max-width: 980px; }
+  .final-cta h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--signal); }
+
+  @media (max-width: 900px) {
+    .mh-hero, .feat-band, .faq-band { grid-template-columns: 1fr; gap: 32px; }
+    .pains, .price-band { grid-template-columns: 1fr; border-left: 0; }
+  }
+</style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<section class="mh-hero">
+  <div>
+    <div class="pg-crumbs">
+      <a href="Mobem.html">Accueil</a><span>/</span>
+      <a href="metiers.html">Sites par métier</a><span>/</span>
+      <span style="color: var(--fg);">Plombier</span>
+    </div>
+    <span class="chip"><span class="sig-dot"></span>Bâtiment & Travaux · 28 sites livrés</span>
+    <h1>Création de site pour <em>plombiers</em>.</h1>
+    <p>Captez les demandes d'urgence et de devis dans votre zone d'intervention. <strong>Site en ligne en 8 jours</strong>, optimisé SEO local pour dominer Google dans votre ville.</p>
+    <div class="ctas">
+      <a href="#tarifs" class="btn btn-signal">Voir les tarifs
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17 L17 7"/><path d="M9 7 H17 V15"/></svg>
+      </a>
+      <a href="Mobem.html#contact" class="btn btn-ghost">Diagnostic 15 min</a>
+    </div>
+  </div>
+  <div class="mh-hero-side">
+    <div class="mh-stat"><div class="v">+86%</div><div class="l">Appels reçus<br/>moyenne sur 12 mois</div></div>
+    <div class="mh-stat"><div class="v">8 jours</div><div class="l">Délai de livraison<br/>du site complet</div></div>
+    <div class="mh-stat"><div class="v">#1<span style="color: var(--muted); font-size: 0.5em;"> google local</span></div><div class="l">Position moyenne<br/>après 90 jours</div></div>
+  </div>
+</section>
+
+<section class="pain-band">
+  <div class="mono" style="color: var(--muted); margin-bottom: 16px;">// Le constat</div>
+  <h2>Pourquoi 9 plombiers sur 10<br/>perdent des <em>contrats</em> en ligne.</h2>
+  <div class="pains">
+    <div class="pain">
+      <span class="num">// 01</span>
+      <h3>Invisible sur Google local</h3>
+      <p>Sans pages dédiées par ville et par prestation, vous laissez les urgences plomberie à vos concurrents qui ont compris le SEO local.</p>
+    </div>
+    <div class="pain">
+      <span class="num">// 02</span>
+      <h3>Pas de fiche Google optimisée</h3>
+      <p>Vos avis clients existent — mais ne convertissent pas faute de fiche structurée, de photos métier et de réponses publiques.</p>
+    </div>
+    <div class="pain">
+      <span class="num">// 03</span>
+      <h3>Site trop lent sur mobile</h3>
+      <p>72% des demandes urgentes viennent du mobile. Au-delà de 3 secondes de chargement, le client appelle un autre numéro.</p>
+    </div>
+  </div>
+</section>
+
+<section class="feat-band">
+  <div>
+    <div class="mono" style="color: var(--muted); margin-bottom: 16px;">// Inclus dans chaque site</div>
+    <h2>Tout ce dont vous avez <em>besoin</em>.</h2>
+    <p>Un site essentiel mais complet, conçu pour transformer chaque visiteur en demande de devis ou en appel direct. Pas de fonctionnalités superflues, pas d'usine à gaz.</p>
+    <a href="Mobem.html#contact" class="btn btn-ghost">Voir une démo →</a>
+  </div>
+  <div class="feat-list">
+    <div class="feat"><span class="num">01</span><div><h3>Pages métier dédiées</h3><p>Dépannage, installation, rénovation, urgences — chaque prestation a sa page SEO optimisée par mot-clé local.</p></div><span class="check">✓</span></div>
+    <div class="feat"><span class="num">02</span><div><h3>Numéro click-to-call</h3><p>Bouton d'appel mis en avant en sticky mobile. Tracking précis pour mesurer chaque conversion.</p></div><span class="check">✓</span></div>
+    <div class="feat"><span class="num">03</span><div><h3>Devis express en 3 étapes</h3><p>Formulaire qualifié pour filtrer les demandes sérieuses. Notifications email + SMS instantanées.</p></div><span class="check">✓</span></div>
+    <div class="feat"><span class="num">04</span><div><h3>Fiche Google optimisée</h3><p>Configuration complète, schémas LocalBusiness, photos métier, gestion des avis — formation incluse.</p></div><span class="check">✓</span></div>
+    <div class="feat"><span class="num">05</span><div><h3>Pages par ville d'intervention</h3><p>Une page SEO par commune que vous couvrez (jusqu'à 12 villes incluses). Mots-clés "plombier + ville" ciblés.</p></div><span class="check">✓</span></div>
+    <div class="feat"><span class="num">06</span><div><h3>Galerie photos chantiers</h3><p>Section avant/après pour rassurer. Format optimisé pour partage Instagram et Google.</p></div><span class="check">✓</span></div>
+    <div class="feat"><span class="num">07</span><div><h3>Hébergement & maintenance</h3><p>Inclus 12 mois. Mises à jour, sauvegardes, surveillance LCP, support email sous 24h.</p></div><span class="check">✓</span></div>
+    <div class="feat"><span class="num">08</span><div><h3>Conformité RGPD complète</h3><p>Mentions légales, CGV, cookies, politique de confidentialité — tout est livré conforme et à jour.</p></div><span class="check">✓</span></div>
+  </div>
+</section>
+
+<section class="price-band" id="tarifs">
+  <div class="price">
+    <span class="mono" style="color: var(--muted);">— Formule Essentiel</span>
+    <h3>Site Vitrine</h3>
+    <div class="amount"><span class="from">À partir de</span>1 490 €</div>
+    <p style="margin: 0; color: var(--muted); font-size: 13.5px;">Site en ligne en 8 jours. Idéal pour démarrer votre présence locale rapidement.</p>
+    <ul>
+      <li>5 pages essentielles</li>
+      <li>3 villes d'intervention</li>
+      <li>Fiche Google optimisée</li>
+      <li>Hébergement 12 mois</li>
+    </ul>
+    <a href="Mobem.html#contact" class="btn btn-ghost">Choisir Vitrine</a>
+  </div>
+  <div class="price featured">
+    <span class="mono">— Formule Croissance · ●</span>
+    <h3>Site + SEO Local</h3>
+    <div class="amount"><span class="from">À partir de</span>2 890 €</div>
+    <p style="margin: 0; color: rgba(255,255,255,0.7); font-size: 13.5px;">La formule la plus choisie. Pour dominer Google sur votre ville et générer du flux entrant continu.</p>
+    <ul>
+      <li>12 pages incluses</li>
+      <li>12 villes d'intervention</li>
+      <li>SEO local 90 jours</li>
+      <li>Suivi mensuel positions</li>
+    </ul>
+    <a href="Mobem.html#contact" class="btn btn-signal">Choisir Croissance</a>
+  </div>
+  <div class="price">
+    <span class="mono" style="color: var(--muted);">— Formule Stratégique</span>
+    <h3>Sur mesure</h3>
+    <div class="amount"><span class="from">Sur devis</span>—</div>
+    <p style="margin: 0; color: var(--muted); font-size: 13.5px;">Pour les entreprises multi-sites avec équipe commerciale et volume important.</p>
+    <ul>
+      <li>Pages illimitées</li>
+      <li>CRM & devis automatisés</li>
+      <li>Multi-sites & multi-villes</li>
+      <li>Accompagnement dédié</li>
+    </ul>
+    <a href="Mobem.html#contact" class="btn btn-ghost">Demander un devis</a>
+  </div>
+</section>
+
+<section class="villes-pill-band">
+  <div class="mono" style="color: var(--muted); margin-bottom: 16px;">// Disponible partout en France</div>
+  <h2>Plombier dans <em style="font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--signal);">votre ville</em>.</h2>
+  <div class="villes-pills">
+    <a href="#">Plombier à Paris</a>
+    <a href="#">Plombier à Lyon</a>
+    <a href="#">Plombier à Marseille</a>
+    <a href="#">Plombier à Toulouse</a>
+    <a href="#">Plombier à Nice</a>
+    <a href="#">Plombier à Nantes</a>
+    <a href="#">Plombier à Bordeaux</a>
+    <a href="#">Plombier à Lille</a>
+    <a href="#">Plombier à Strasbourg</a>
+    <a href="#">Plombier à Rennes</a>
+    <a href="#">Plombier à Montpellier</a>
+    <a href="#">Plombier à Grenoble</a>
+    <a href="#">Plombier à Angers</a>
+    <a href="#">Plombier à Le Mans</a>
+    <a href="#">Plombier à Reims</a>
+    <a href="#">Plombier à Rouen</a>
+    <a href="villes.html" class="muted">+ 14 autres villes →</a>
+  </div>
+</section>
+
+<section class="faq-band">
+  <div>
+    <div class="mono" style="color: var(--muted); margin-bottom: 16px;">// Questions fréquentes</div>
+    <h2>Vos <em>questions</em>.</h2>
+  </div>
+  <div class="faq-list">
+    <details open>
+      <summary>Combien de temps pour mettre en ligne mon site ?</summary>
+      <p>Comptez 8 jours pour la formule Vitrine et 3 semaines pour la formule Croissance, à partir de la réception de vos contenus (logo, photos, textes guidés). Nous fournissons un planning détaillé dès la signature.</p>
+    </details>
+    <details>
+      <summary>Comment fonctionne le SEO local ?</summary>
+      <p>Nous créons une page dédiée pour chaque ville où vous intervenez, avec un contenu unique optimisé sur les mots-clés "plombier + ville", "dépannage plomberie + ville", etc. Couplé à une fiche Google professionnellement configurée, cela vous fait apparaître dans le pack local Google sous 60 à 90 jours.</p>
+    </details>
+    <details>
+      <summary>Que se passe-t-il après les 12 mois d'hébergement inclus ?</summary>
+      <p>Vous restez propriétaire du site et de votre nom de domaine. L'hébergement + maintenance se renouvelle à 29€/mois sans engagement. Vous pouvez aussi héberger ailleurs si vous le souhaitez — nous fournissons les fichiers.</p>
+    </details>
+    <details>
+      <summary>Puis-je modifier le site moi-même ensuite ?</summary>
+      <p>Oui. Le site est livré avec un panneau d'administration simple où vous pouvez modifier textes, photos, horaires, ajouter des chantiers à votre galerie. Une formation vidéo de 30 min vous est livrée.</p>
+    </details>
+    <details>
+      <summary>Garantissez-vous des résultats sur Google ?</summary>
+      <p>Nous garantissons l'apparition dans le pack local Google sous 90 jours pour 90% de nos clients. Si le résultat n'est pas atteint, nous travaillons gratuitement jusqu'à atteindre l'objectif.</p>
+    </details>
+    <details>
+      <summary>Travaillez-vous avec d'autres métiers du bâtiment ?</summary>
+      <p>Oui. Nous avons des sites en production pour électriciens, paysagistes, maçons, carreleurs, peintres, couvreurs, menuisiers, plaquistes, chauffagistes et serruriers. <a href="metiers.html" style="color: var(--signal); border-bottom: 1px solid;">Voir tous les métiers couverts</a>.</p>
+    </details>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="mono" style="color: var(--muted); margin-bottom: 24px;">// Démarrer maintenant</div>
+  <h2>Prêt à devenir le <em>plombier de référence</em> de votre ville ?</h2>
+  <p style="margin: 0 auto 32px; max-width: 640px; font-size: 18px; line-height: 1.55; color: var(--muted);">Diagnostic gratuit en 15 minutes. Nous regardons votre situation actuelle et vous disons honnêtement si nous pouvons vous aider.</p>
+  <a href="Mobem.html#contact" class="btn btn-signal" style="font-size: 14px; padding: 16px 28px;">Réserver mon créneau
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17 L17 7"/><path d="M9 7 H17 V15"/></svg>
+  </a>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="site.js"></script>
+<script>MobemSite.init('Sites par métier');</script>
+</body>
+</html>

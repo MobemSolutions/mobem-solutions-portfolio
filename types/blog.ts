@@ -16,6 +16,7 @@ export type Post = {
   title: string
   slug: { current: string }
   mainImage?: { asset: any; alt: string }
+  ficheImage?: { asset: any; alt: string }
   excerpt?: string
   publishedAt?: string
   authors?: Author[]

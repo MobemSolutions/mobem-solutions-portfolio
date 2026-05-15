@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Atelier Vernay — Cas Mobem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .case-hero { padding: 64px 32px 48px; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 7fr 5fr; gap: 64px; }
+  .case-hero h1 { margin: 16px 0 24px; font-size: clamp(48px, 6.5vw, 96px); font-weight: 800; letter-spacing: -0.04em; line-height: 0.92; }
+  .case-hero h1 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--signal); }
+  .case-hero p { font-size: 18px; line-height: 1.5; color: var(--muted); margin: 0 0 24px; max-width: 540px; }
+  .case-meta { display: flex; flex-direction: column; gap: 18px; padding-top: 32px; border-top: 1px solid var(--line); }
+  .case-meta-row { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .case-meta-row .l { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .case-meta-row .v { font-size: 14px; font-weight: 500; text-align: right; }
+
+  .case-cover { aspect-ratio: 16/9; border-bottom: 1px solid var(--line); }
+
+  .kpi-band { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--line); }
+  .kpi { padding: 40px 28px; border-right: 1px solid var(--line); }
+  .kpi .v { font-size: clamp(40px, 5vw, 64px); font-weight: 700; letter-spacing: -0.03em; line-height: 0.95; color: var(--signal); }
+  .kpi .l { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-top: 12px; }
+
+  .case-body { display: grid; grid-template-columns: 200px 1fr; gap: 64px; padding: 64px 32px; max-width: 1280px; }
+  .case-body aside { font-family: var(--mono); font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); position: sticky; top: 96px; align-self: start; }
+  .case-body aside ul { list-style: none; padding: 0; margin: 12px 0 0; display: flex; flex-direction: column; gap: 10px; }
+  .case-body aside ul a { display: block; padding-left: 12px; border-left: 1px solid var(--line); }
+  .case-body aside ul a:hover, .case-body aside ul a.is-active { color: var(--signal); border-color: var(--signal); }
+
+  .prose { font-size: 18px; line-height: 1.7; max-width: 720px; }
+  .prose h2 { font-size: 36px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; margin: 56px 0 16px; }
+  .prose h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--signal); }
+  .prose h3 { font-size: 22px; font-weight: 600; letter-spacing: -0.015em; margin: 36px 0 12px; }
+  .prose p { margin: 0 0 22px; }
+  .prose blockquote { margin: 36px 0; padding: 28px 32px; border-left: 3px solid var(--signal); background: rgba(230, 48, 48, 0.04); font-family: var(--serif); font-size: 26px; line-height: 1.35; font-style: italic; }
+  .prose blockquote cite { display: block; font-family: var(--sans); font-style: normal; font-size: 13px; color: var(--muted); margin-top: 12px; }
+  .prose ul { padding-left: 24px; margin: 0 0 22px; }
+  .prose li { margin-bottom: 8px; }
+  .prose hr { border: 0; border-top: 1px solid var(--line); margin: 48px 0; }
+
+  .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); }
+  .gallery-grid .ph { aspect-ratio: 16/10; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .gallery-grid .ph:nth-child(2n) { border-right: 0; }
+
+  .stack-band { padding: 64px 32px; border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 2fr; gap: 64px; }
+  .stack-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .stack-list span { padding: 8px 14px; border: 1px solid var(--line); font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+  .testim { padding: 96px 32px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: center; }
+  .testim .quote { font-family: var(--serif); font-style: italic; font-size: clamp(28px, 3.4vw, 48px); line-height: 1.25; letter-spacing: -0.015em; }
+  .testim .author { display: flex; align-items: center; gap: 14px; margin-top: 24px; }
+  .testim .avatar { width: 44px; height: 44px; background: var(--signal); color: var(--paper); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 18px; }
+
+  .next-band { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
+  .next-card { padding: 48px 32px; display: flex; flex-direction: column; gap: 12px; min-height: 260px; }
+  .next-card:first-child { border-right: 1px solid var(--line); }
+  .next-card .arr { transition: transform 280ms ease; align-self: flex-end; }
+  .next-card:hover .arr { transform: translate(8px, -8px); color: var(--signal); }
+  .next-card h3 { margin: auto 0 0; font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+
+  @media (max-width: 900px) {
+    .case-hero, .case-body, .stack-band, .testim, .next-band { grid-template-columns: 1fr; gap: 32px; }
+    .kpi-band { grid-template-columns: repeat(2, 1fr); }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .case-body aside { position: static; }
+  }
+</style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<article>
+  <section class="case-hero">
+    <div>
+      <div class="pg-crumbs">
+        <a href="Mobem.html">Accueil</a><span>/</span>
+        <a href="realisations.html">Réalisations</a><span>/</span>
+        <span style="color: var(--fg);">Atelier Vernay</span>
+      </div>
+      <span class="chip"><span class="sig-dot"></span>Cas n°01 · Refonte + SEO</span>
+      <h1>Atelier Vernay,<br/>repenser un site <em>industriel</em>.</h1>
+      <p>Refonte complète d'un site corporate vieillissant pour une PME industrielle de Loire-Atlantique. Architecture SEO repensée, performance pensée pour usage industriel sur réseaux 4G faibles.</p>
+      <a href="#diagnostic" class="btn btn-signal">Lire le cas
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17 L17 7"/><path d="M9 7 H17 V15"/></svg>
+      </a>
+    </div>
+    <div class="case-meta">
+      <div class="case-meta-row"><span class="l">Client</span><span class="v">Atelier Vernay SAS</span></div>
+      <div class="case-meta-row"><span class="l">Secteur</span><span class="v">Industrie · Tournage</span></div>
+      <div class="case-meta-row"><span class="l">Localisation</span><span class="v">Saint-Herblain (44)</span></div>
+      <div class="case-meta-row"><span class="l">Effectifs</span><span class="v">42 collaborateurs</span></div>
+      <div class="case-meta-row"><span class="l">CA 2025</span><span class="v">8.2 M€</span></div>
+      <div class="case-meta-row"><span class="l">Période mission</span><span class="v">Janv. → Mars 2025</span></div>
+      <div class="case-meta-row"><span class="l">Durée</span><span class="v">11 semaines</span></div>
+      <div class="case-meta-row"><span class="l">Investissement</span><span class="v">38 000 €</span></div>
+      <div class="case-meta-row" style="border-bottom: 0;"><span class="l">Mise en ligne</span><span class="v">21 mars 2025</span></div>
+    </div>
+  </section>
+
+  <div class="ph case-cover">[ capture · atelier vernay · 16/9 ]</div>
+
+  <section class="kpi-band">
+    <div class="kpi"><div class="v">+241%</div><div class="l">Trafic organique<br/>en 6 mois</div></div>
+    <div class="kpi"><div class="v">1.2s</div><div class="l">LCP mobile<br/>(Core Web Vitals)</div></div>
+    <div class="kpi"><div class="v">96<span style="color: var(--muted); font-size: 0.5em;">/100</span></div><div class="l">Score Lighthouse<br/>Performance</div></div>
+    <div class="kpi" style="border-right: 0;"><div class="v">×3.4</div><div class="l">Demandes de devis<br/>qualifiées</div></div>
+  </section>
+
+  <section class="case-body" id="diagnostic">
+    <aside>
+      <div>Sommaire</div>
+      <ul>
+        <li><a href="#i1" class="ul is-active">01 · Contexte</a></li>
+        <li><a href="#i2" class="ul">02 · Diagnostic</a></li>
+        <li><a href="#i3" class="ul">03 · Prescription</a></li>
+        <li><a href="#i4" class="ul">04 · Exécution</a></li>
+        <li><a href="#i5" class="ul">05 · Résultats</a></li>
+      </ul>
+    </aside>
+
+    <div class="prose">
+      <h2 id="i1">01 · Contexte <em>terrain</em></h2>
+      <p>Atelier Vernay est une PME industrielle spécialisée dans le tournage de précision pour l'aéronautique et la défense. 42 collaborateurs, un atelier de 2 800 m², un carnet de commandes solide — mais un site web datant de 2014, lent, mal référencé et déconnecté de la réalité commerciale.</p>
+      <p>La direction commerciale rapportait un constat simple : <strong>les prospects ne trouvaient plus l'entreprise sur Google</strong>, et quand ils arrivaient sur le site, ils repartaient sans laisser de trace. Le formulaire de contact recevait moins de 3 demandes par mois pour un secteur où chaque devis peut représenter 80 000 € à 500 000 €.</p>
+
+      <h2 id="i2">02 · Diagnostic</h2>
+      <p>Notre audit a mis en évidence quatre problèmes structurels :</p>
+      <ul>
+        <li><strong>Architecture SEO inexistante.</strong> Les pages métier (tournage CNC, décolletage, micro-mécanique) n'existaient pas. Aucune page ciblée par certification (EN 9100, ISO 9001).</li>
+        <li><strong>Performance désastreuse.</strong> 8.4s de LCP sur mobile, 22 s pour atteindre l'interactivité. Inutilisable pour un acheteur consultant en mobilité depuis un site client.</li>
+        <li><strong>Aucun élément de réassurance.</strong> Pas de chiffres clés, pas de logos clients, pas de certifications visibles.</li>
+        <li><strong>Formulaire générique.</strong> Aucune qualification du besoin, aucune segmentation par typologie de pièce.</li>
+      </ul>
+
+      <blockquote>
+        Nous avions le savoir-faire, les certifications, les clients prestigieux. Mais notre site disait l'inverse de tout ça.
+        <cite>— Frédéric Vernay, dirigeant</cite>
+      </blockquote>
+
+      <h2 id="i3">03 · Prescription</h2>
+      <p>Notre prescription tenait en 12 pages. Elle priorisait <strong>3 axes</strong>, dans l'ordre :</p>
+      <ol>
+        <li>Reconstruire l'arborescence autour de 18 pages métier × certification × secteur (aéro / défense / médical).</li>
+        <li>Refondre la performance technique : passage à un stack léger (Astro + Vercel), images WebP, polices auto-hébergées.</li>
+        <li>Remplacer le formulaire générique par un parcours qualifié en 3 étapes (typologie pièce, volume, délai).</li>
+      </ol>
+
+      <h2 id="i4">04 · Exécution <em>par sprints</em></h2>
+      <p>11 semaines, 5 sprints de 2 semaines, chacun validé sur une métrique précise :</p>
+      <ul>
+        <li><strong>Sprint 1 — Foundation.</strong> Stack technique, design system minimaliste (Inter + Söhne Mono), composants de base. <em>Critère : Lighthouse 90+ sur la home.</em></li>
+        <li><strong>Sprint 2 — Pages piliers.</strong> 6 pages "métier × secteur" rédigées avec leur direction technique. <em>Critère : 5 mots-clés en page 2 Google.</em></li>
+        <li><strong>Sprint 3 — Pages secondaires.</strong> 12 pages complémentaires + études de cas clients. <em>Critère : profondeur sémantique cohérente.</em></li>
+        <li><strong>Sprint 4 — Conversion.</strong> Refonte parcours devis, intégration CRM (HubSpot). <em>Critère : 1 demande/jour.</em></li>
+        <li><strong>Sprint 5 — Mise en ligne.</strong> Migration progressive, redirections 301, monitoring 30 jours. <em>Critère : aucune perte de trafic existant.</em></li>
+      </ul>
+
+      <h2 id="i5">05 · Résultats <em>à 12 mois</em></h2>
+      <p>Le site a été mis en ligne le 21 mars 2025. Les chiffres ci-dessous sont mesurés au 21 mars 2026 :</p>
+      <ul>
+        <li><strong>+241%</strong> de trafic organique (vs même période n-1).</li>
+        <li><strong>×3.4</strong> sur le nombre de demandes de devis qualifiées (de 3/mois à 10/mois).</li>
+        <li><strong>2 nouveaux comptes stratégiques</strong> signés directement via le formulaire devis : un fournisseur Dassault Aviation et un sous-traitant Safran.</li>
+        <li><strong>3 nouvelles certifications</strong> mises en avant ont attiré des contacts qualifiés inattendus (NADCAP).</li>
+      </ul>
+
+      <hr/>
+      <p>Au-delà des chiffres, le client rapporte un changement plus discret mais fondamental : ses commerciaux n'ont plus à expliquer ce que fait l'entreprise. Le site fait ce travail pour eux.</p>
+    </div>
+  </section>
+
+  <section class="gallery-grid">
+    <div class="ph">[ capture · home ]</div>
+    <div class="ph">[ capture · page tournage cnc ]</div>
+    <div class="ph">[ capture · parcours devis ]</div>
+    <div class="ph">[ capture · études de cas ]</div>
+  </section>
+
+  <section class="stack-band">
+    <div>
+      <div class="mono" style="color: var(--muted); margin-bottom: 16px;">// Stack technique</div>
+      <h2 style="margin: 0; font-size: 36px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.1;">Outils, pour information.</h2>
+    </div>
+    <div class="stack-list">
+      <span>Astro</span><span>TypeScript</span><span>Tailwind</span><span>Sanity CMS</span><span>Vercel</span><span>HubSpot CRM</span><span>Plausible</span><span>Cloudinary</span><span>Resend</span><span>GitHub Actions</span>
+    </div>
+  </section>
+
+  <section class="testim">
+    <div class="mono" style="color: var(--muted);">// Témoignage</div>
+    <div>
+      <p class="quote" style="margin: 0;">« Trois mois après la mise en ligne, deux comptes stratégiques signés sont arrivés directement par le formulaire. Pour un site, ça paie son investissement. »</p>
+      <div class="author">
+        <div class="avatar">F</div>
+        <div>
+          <div style="font-weight: 600;">Frédéric Vernay</div>
+          <div style="font-size: 13px; color: var(--muted);">Dirigeant · Atelier Vernay SAS</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="next-band">
+    <a href="#" class="next-card">
+      <div class="mono" style="color: var(--muted);">— Cas précédent</div>
+      <h3>Cabinet Lefranc<br/><span style="color: var(--signal); font-family: var(--serif); font-style: italic; font-weight: 400;">Site essentiel.</span></h3>
+      <svg class="arr" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 17 L7 7"/><path d="M15 7 H7 V15"/></svg>
+    </a>
+    <a href="#" class="next-card">
+      <div class="mono" style="color: var(--muted); align-self: flex-end;">— Cas suivant</div>
+      <h3 style="text-align: right;">Maison Ferré<br/><span style="color: var(--signal); font-family: var(--serif); font-style: italic; font-weight: 400;">Plateforme.</span></h3>
+      <svg class="arr" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17 L17 7"/><path d="M9 7 H17 V15"/></svg>
+    </a>
+  </section>
+</article>
+
+<div id="site-footer"></div>
+
+<script src="site.js"></script>
+<script>MobemSite.init('Réalisations');</script>
+</body>
+</html>

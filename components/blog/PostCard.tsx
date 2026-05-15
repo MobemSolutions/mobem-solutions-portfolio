@@ -19,7 +19,7 @@ export function PostCard({ post, featured = false }: PostCardProps) {
   return (
     <article
       className={cn(
-        "group relative flex flex-col bg-card border border-border rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-accent/5 hover:-translate-y-1",
+        "group relative flex flex-col bg-card border border-border overflow-hidden transition-[border-color,transform] duration-300 hover:-translate-y-px hover:border-accent/40",
         featured && "md:flex-row"
       )}
     >
@@ -40,14 +40,14 @@ export function PostCard({ post, featured = false }: PostCardProps) {
             unoptimized
           />
         ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-secondary flex items-center justify-center">
-            <span className="text-4xl text-accent/30 font-bold">M</span>
+          <div className="absolute inset-0 bg-secondary flex items-center justify-center">
+            <span className="text-4xl text-foreground/20 font-bold">M</span>
           </div>
         )}
         {/* Category badge overlay */}
         {post.categories?.[0] && (
           <div className="absolute top-3 left-3">
-            <span className="inline-block bg-accent text-accent-foreground text-xs font-semibold px-3 py-1 rounded-full">
+            <span className="inline-block bg-accent text-accent-foreground font-mono text-[10px] uppercase tracking-[0.06em] px-2.5 py-1">
               {post.categories[0].title}
             </span>
           </div>

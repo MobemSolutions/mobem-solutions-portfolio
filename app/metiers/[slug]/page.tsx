@@ -1,16 +1,15 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import { CheckCircle2, TrendingUp, MapPin, Phone } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { EditorialBadge } from "@/components/ui/editorial-badge"
 import {
   ALL_METIERS,
   ALL_VILLES,
   getMetierBySlug,
   getMetierCategory,
-  METIER_CATEGORIES,
-  REGIONS,
 } from "@/lib/seo-data"
 
 interface Props {
@@ -26,23 +25,130 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const metier = getMetierBySlug(slug)
   if (!metier) return {}
   return {
-    title: `Création de site internet pour ${metier.label} | Mobem Solutions`,
-    description: `Site internet professionnel pour ${metier.label}. SEO local, mise en ligne en 72h, 50 €/mois tout inclus. Couvrez les 30 plus grandes villes de France.`,
+    title: `Site internet pour ${metier.label} — Mobem Solutions | Livré en 10 jours`,
+    description: `Création de site web professionnel pour ${metier.label}. SEO local, Lighthouse 90+, livré en 10 jours. Mobem Solutions — agence web Nantes. Audit gratuit.`,
+    keywords: [
+      `site internet ${metier.label}`,
+      `création site web ${metier.label}`,
+      `référencement ${metier.label}`,
+      `agence web artisan`,
+      `site vitrine PME`,
+    ],
+    alternates: {
+      canonical: `https://mobem-solutions.com/metiers/${metier.slug}`,
+    },
     openGraph: {
-      title: `Site internet pour ${metier.label} | Mobem Solutions`,
+      title: `Site internet pour ${metier.label} — Mobem Solutions`,
       description: metier.description,
       url: `https://mobem-solutions.com/metiers/${metier.slug}`,
+      images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Site internet pour ${metier.label} — Mobem Solutions`,
+      description: metier.description,
     },
   }
 }
 
-const AVANTAGES = [
-  "Site live en 72h — sans engagement",
-  "SEO local optimisé dès la mise en ligne",
-  "Hébergement, maintenance et mises à jour inclus",
-  "Prise de contact en ligne 24h/24",
-  "Fiche Google My Business optimisée",
-  "Rapport de performance mensuel",
+function pluralize(label: string): string {
+  const lower = label.toLowerCase()
+  if (lower.endsWith("s") || lower.endsWith("x")) return lower
+  return lower + "s"
+}
+
+const PAIN_POINTS = [
+  {
+    num: "01",
+    title: "Invisible sur Google local",
+    text: "Sans pages dédiées par ville et par prestation, vous laissez chaque jour des clients potentiels à vos concurrents mieux référencés.",
+  },
+  {
+    num: "02",
+    title: "Aucune prise de contact automatisée",
+    text: "Vos prospects cherchent en ligne 24h/24. Sans formulaire ni prise de RDV en ligne, vous perdez des contacts chaque nuit.",
+  },
+  {
+    num: "03",
+    title: "Site inexistant ou trop lent",
+    text: "72% des recherches locales viennent du mobile. Au-delà de 3 secondes de chargement, le client appelle la concurrence.",
+  },
+]
+
+const FEATURES = [
+  { num: "01", title: "Pages métier dédiées", text: "Chaque prestation a sa page SEO optimisée par mot-clé local. Votre zone d'intervention, vos services, vos tarifs — bien structurés pour Google." },
+  { num: "02", title: "Numéro click-to-call", text: "Bouton d'appel mis en avant en sticky mobile. Tracking précis pour mesurer chaque conversion." },
+  { num: "03", title: "Devis express en 3 étapes", text: "Formulaire qualifié pour filtrer les demandes sérieuses. Notifications email instantanées." },
+  { num: "04", title: "Fiche Google optimisée", text: "Configuration complète, schémas LocalBusiness, photos métier, gestion des avis — formation incluse." },
+  { num: "05", title: "Pages par ville d'intervention", text: "Une page SEO par commune que vous couvrez. Mots-clés ciblés pour dominer le pack local." },
+  { num: "06", title: "Galerie photos & réalisations", text: "Section avant/après pour rassurer. Format optimisé pour partage Instagram et Google." },
+  { num: "07", title: "Hébergement & maintenance", text: "Inclus 12 mois. Mises à jour, sauvegardes, surveillance LCP, support email sous 24h." },
+  { num: "08", title: "Conformité RGPD complète", text: "Mentions légales, CGV, cookies, politique de confidentialité — tout est livré conforme et à jour." },
+]
+
+const PRICING = [
+  {
+    code: "S1",
+    label: "— Formule Essentiel",
+    name: "Site Vitrine",
+    from: "À partir de",
+    amount: "1 490 €",
+    sub: "Site en ligne en 8 jours. Idéal pour démarrer votre présence locale rapidement.",
+    features: ["5 pages essentielles", "3 villes d'intervention", "Fiche Google optimisée", "Hébergement 12 mois"],
+    cta: "Choisir Vitrine",
+    flagship: false,
+  },
+  {
+    code: "S2",
+    label: "— Formule Croissance · ●",
+    name: "Site + SEO Local",
+    from: "À partir de",
+    amount: "2 890 €",
+    sub: "La formule la plus choisie. Pour dominer Google sur votre ville et générer du flux entrant continu.",
+    features: ["12 pages incluses", "12 villes d'intervention", "SEO local 90 jours", "Suivi mensuel positions"],
+    cta: "Choisir Croissance",
+    flagship: true,
+  },
+  {
+    code: "S3",
+    label: "— Formule Stratégique",
+    name: "Sur mesure",
+    from: "Sur devis",
+    amount: "—",
+    sub: "Pour les entreprises multi-sites avec équipe commerciale et volume important.",
+    features: ["Pages illimitées", "CRM & devis automatisés", "Multi-sites & multi-villes", "Accompagnement dédié"],
+    cta: "Demander un devis",
+    flagship: false,
+  },
+]
+
+const FAQ_ITEMS = [
+  {
+    q: "Combien de temps pour mettre en ligne mon site ?",
+    a: "Comptez 8 jours pour la formule Vitrine et 3 semaines pour la formule Croissance, à partir de la réception de vos contenus (logo, photos, textes guidés). Nous fournissons un planning détaillé dès la signature.",
+  },
+  {
+    q: "Comment fonctionne le SEO local ?",
+    a: "Nous créons une page dédiée pour chaque ville où vous intervenez, avec un contenu unique optimisé sur les mots-clés ciblés. Couplé à une fiche Google professionnellement configurée, cela vous fait apparaître dans le pack local Google sous 60 à 90 jours.",
+  },
+  {
+    q: "Que se passe-t-il après les 12 mois d'hébergement inclus ?",
+    a: "Vous restez propriétaire du site et de votre nom de domaine. L'hébergement + maintenance se renouvelle à 29 €/mois sans engagement. Vous pouvez aussi héberger ailleurs — nous fournissons les fichiers.",
+  },
+  {
+    q: "Puis-je modifier le site moi-même ensuite ?",
+    a: "Oui. Le site est livré avec un panneau d'administration simple où vous pouvez modifier textes, photos et horaires. Une formation vidéo de 30 min vous est livrée.",
+  },
+  {
+    q: "Garantissez-vous des résultats sur Google ?",
+    a: "Nous garantissons l'apparition dans le pack local Google sous 90 jours pour 90 % de nos clients. Si le résultat n'est pas atteint, nous travaillons gratuitement jusqu'à atteindre l'objectif.",
+  },
+]
+
+const HERO_STATS = [
+  { value: "+86%", label: "Appels reçus\nmoyenne sur 12 mois" },
+  { value: "8 jours", label: "Délai de livraison\ndu site complet" },
+  { value: "#1", sub: " Google local", label: "Position moyenne\naprès 90 jours" },
 ]
 
 export default async function MetierPage({ params }: Props) {
@@ -51,169 +157,278 @@ export default async function MetierPage({ params }: Props) {
   if (!metier) notFound()
 
   const category = getMetierCategory(slug)
-  const autresMetiers = category?.metiers.filter((m) => m.slug !== slug).slice(0, 4) ?? []
+  const labelPluriel = pluralize(metier.label)
 
   return (
     <>
       <Header />
-      <main className="pt-20 pb-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <main>
 
-          {/* Breadcrumb */}
-          <nav className="pt-8 pb-4 text-sm text-muted-foreground" aria-label="Fil d'Ariane">
-            <Link href="/" className="hover:text-foreground transition-colors">Accueil</Link>
-            <span className="mx-2">&gt;</span>
-            <Link href="/metiers" className="hover:text-foreground transition-colors">Nos métiers</Link>
-            <span className="mx-2">&gt;</span>
-            <span className="text-foreground">Site {metier.label}</span>
-          </nav>
+        {/* Hero */}
+        <section className="pt-14 lg:pt-16 border-t border-border">
+          <div className="px-4 sm:px-6 lg:px-8 pt-16 pb-12 border-b border-border grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-end">
 
-          <div className="grid lg:grid-cols-3 gap-12 pt-4">
-
-            {/* Contenu principal */}
-            <div className="lg:col-span-2">
-              <h1 className="text-4xl font-bold text-foreground mb-6">
-                Création de site internet pour {metier.label.toLowerCase()}
+            {/* Left — 7/12 */}
+            <div className="lg:col-span-7">
+              <nav
+                className="flex items-center gap-2.5 mb-8 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground"
+                aria-label="Fil d'Ariane"
+              >
+                <Link href="/" className="hover:text-accent transition-colors">Accueil</Link>
+                <span aria-hidden="true">/</span>
+                <Link href="/metiers" className="hover:text-accent transition-colors">Sites par métier</Link>
+                <span aria-hidden="true">/</span>
+                <span className="text-foreground">{metier.label}</span>
+              </nav>
+              {category && (
+                <EditorialBadge variant="muted" className="mb-6">
+                  {category.label}
+                </EditorialBadge>
+              )}
+              <h1 className="font-extrabold leading-[0.92] tracking-[-0.04em] text-[clamp(56px,7vw,112px)] mb-6">
+                Création de site<br />pour{" "}
+                <em className="font-serif font-normal italic text-accent tracking-[-0.02em]">
+                  {labelPluriel}
+                </em>.
               </h1>
-
-              <p className="text-muted-foreground leading-relaxed mb-8">
-                {metier.description} Avec un site Mobem Solutions optimisé, votre numéro de téléphone
-                apparaît en évidence, votre zone d&apos;intervention est claire, et vos avis clients rassurent
-                immédiatement. Vous recevez des demandes qualifiées 24h/24 sans effort commercial.
-                Chaque mois, votre site travaille pour vous. Le retour sur investissement est mesurable
-                dès les premières semaines grâce aux appels entrants traçables directement depuis votre
-                fiche Google et votre site.
+              <p className="text-[19px] leading-[1.5] text-muted-foreground mb-8 max-w-[540px]">
+                {metier.description}{" "}
+                <strong className="font-semibold text-foreground">Site en ligne en 8 jours</strong>,{" "}
+                optimisé SEO local pour dominer Google dans votre ville.
               </p>
-
-              {/* Badge prix */}
-              <div className="inline-flex items-center gap-3 border border-accent/30 bg-accent/5 rounded-xl px-5 py-3 mb-6">
-                <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0" />
-                <div>
-                  <p className="font-semibold text-foreground text-sm">50 €/mois — tout inclus</p>
-                  <p className="text-xs text-muted-foreground">Sans engagement · En ligne en 72h</p>
-                </div>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="#tarifs"
+                  className="inline-flex items-center gap-2.5 px-5 py-3 bg-accent text-accent-foreground text-sm font-medium transition-colors cta-hover"
+                >
+                  Voir les tarifs
+                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                </Link>
+                <Link
+                  href="/#contact"
+                  className="inline-flex items-center gap-2.5 px-5 py-3 border border-border text-sm font-medium transition-colors hover:bg-secondary"
+                >
+                  Diagnostic 15 min
+                </Link>
               </div>
+            </div>
 
-              {/* Stat SEO */}
-              <div className="border border-border rounded-xl p-5 mb-10 bg-secondary/50">
-                <div className="flex items-start gap-3">
-                  <TrendingUp className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    <strong className="text-foreground">76 % des personnes</strong> qui effectuent une recherche
-                    locale sur leur smartphone se rendent dans un commerce ou contactent un professionnel dans les
-                    24 heures{" "}
-                    <span className="text-xs">(source : Google, Think with Google 2023).</span>
-                  </p>
+            {/* Right — 5/12 stats */}
+            <div className="lg:col-span-5 flex flex-col gap-4">
+              {HERO_STATS.map((stat) => (
+                <div key={stat.value} className="px-6 py-5 border border-border">
+                  <div className="text-[40px] font-bold tracking-[-0.03em] leading-[0.95] text-accent">
+                    {stat.value}
+                    {stat.sub && (
+                      <span className="text-muted-foreground" style={{ fontSize: "0.5em" }}>{stat.sub}</span>
+                    )}
+                  </div>
+                  <div
+                    className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground mt-2"
+                    style={{ whiteSpace: "pre-line" }}
+                  >
+                    {stat.label}
+                  </div>
                 </div>
-              </div>
+              ))}
+            </div>
 
-              {/* Ce qu'on inclut */}
-              <h2 className="text-2xl font-bold text-foreground mb-5">
-                Ce que comprend votre site {metier.label.toLowerCase()}
-              </h2>
-              <ul className="space-y-3 mb-10">
-                {AVANTAGES.map((avantage) => (
-                  <li key={avantage} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
-                    <span className="text-sm text-muted-foreground">{avantage}</span>
+          </div>
+        </section>
+
+        {/* Pain band */}
+        <section className="border-t border-border" aria-labelledby="pain-heading">
+          <div className="px-4 sm:px-6 lg:px-8 pt-16 pb-0">
+            <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground mb-4">
+              Le constat
+            </div>
+            <h2 id="pain-heading" className="text-[clamp(36px,4.5vw,64px)] font-extrabold tracking-[-0.03em] leading-none mb-10 max-w-[880px]">
+              Pourquoi 9 {labelPluriel} sur 10<br />
+              perdent des{" "}
+              <em className="font-serif font-normal italic text-accent">contrats</em>{" "}
+              en ligne.
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 border-t border-l border-border">
+            {PAIN_POINTS.map((pain) => (
+              <div
+                key={pain.num}
+                className="px-8 py-8 border-r border-b border-border flex flex-col gap-3.5 min-h-[240px]"
+              >
+                <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-accent">{pain.num}</span>
+                <h3 className="text-[22px] font-bold tracking-[-0.02em] leading-[1.15]">{pain.title}</h3>
+                <p className="text-[14px] leading-[1.55] text-muted-foreground">{pain.text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Features band */}
+        <section className="border-t border-border grid grid-cols-1 lg:grid-cols-12" aria-labelledby="features-heading">
+          <div className="lg:col-span-5 px-4 sm:px-6 lg:px-8 py-16 lg:border-r lg:border-border">
+            <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground mb-4">
+              Inclus dans chaque site
+            </div>
+            <h2 id="features-heading" className="text-[clamp(36px,4.5vw,64px)] font-extrabold tracking-[-0.03em] leading-none mb-4">
+              Tout ce dont vous<br />avez{" "}
+              <em className="font-serif font-normal italic text-accent">besoin</em>.
+            </h2>
+            <p className="text-[16px] leading-[1.55] text-muted-foreground mb-6 max-w-[480px]">
+              Un site complet, conçu pour transformer chaque visiteur en demande de devis ou en appel direct. Pas de fonctionnalités superflues.
+            </p>
+            <Link
+              href="/#contact"
+              className="inline-flex items-center gap-2.5 px-5 py-3 border border-border text-sm font-medium transition-colors hover:bg-secondary"
+            >
+              Voir une démo
+              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+            </Link>
+          </div>
+          <div className="lg:col-span-7 px-4 sm:px-6 lg:px-8 py-16">
+            <div className="flex flex-col">
+              {FEATURES.map((feat, i) => (
+                <div
+                  key={feat.num}
+                  data-cursor="hover"
+                  className={`group bento-hover grid grid-cols-[50px_1fr_24px] gap-6 py-5 px-3 items-baseline border-t border-border transition-colors${
+                    i === FEATURES.length - 1 ? " border-b border-border" : ""
+                  }`}
+                >
+                  <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-foreground/55 group-hover:text-background/65 transition-colors">{feat.num}</span>
+                  <div>
+                    <h3 className="text-[19px] font-semibold tracking-[-0.015em] mb-1.5">{feat.title}</h3>
+                    <p className="text-[14px] leading-[1.55] text-foreground/60 group-hover:text-background/70 transition-colors">{feat.text}</p>
+                  </div>
+                  <span className="text-accent font-bold" aria-hidden="true">✓</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Pricing */}
+        <section id="tarifs" className="border-t border-border border-l border-border grid grid-cols-1 lg:grid-cols-3" aria-labelledby="pricing-heading">
+          <h2 id="pricing-heading" className="sr-only">Tarifs</h2>
+          {PRICING.map((plan) => (
+            <div
+              key={plan.code}
+              data-cursor="hover"
+              className={`px-7 py-9 border-r border-b lg:border-b-0 border-border flex flex-col gap-4${
+                plan.flagship ? " bg-foreground text-background" : ""
+              }`}
+            >
+              <span className={`font-mono text-[11px] uppercase tracking-[0.08em] ${plan.flagship ? "opacity-55" : "text-muted-foreground"}`}>
+                {plan.label}
+              </span>
+              <h3 className="text-[28px] font-bold tracking-[-0.025em]">{plan.name}</h3>
+              <div>
+                <span className={`block font-mono text-[11px] uppercase tracking-[0.08em] mb-2 ${plan.flagship ? "opacity-55" : "text-muted-foreground"}`}>
+                  {plan.from}
+                </span>
+                <span className="text-[48px] font-bold tracking-[-0.03em] leading-none">{plan.amount}</span>
+              </div>
+              <p className={`text-[13.5px] leading-relaxed ${plan.flagship ? "opacity-70" : "text-muted-foreground"}`}>
+                {plan.sub}
+              </p>
+              <ul className="space-y-2.5 text-[14px] flex-1" role="list">
+                {plan.features.map((f) => (
+                  <li key={f} className="pl-5 relative">
+                    <span className="absolute left-0 text-accent font-bold" aria-hidden="true">✓</span>
+                    {f}
                   </li>
                 ))}
               </ul>
-
-              {/* Villes couvertes */}
-              <h2 className="text-2xl font-bold text-foreground mb-5">
-                Villes couvertes pour les {metier.label.toLowerCase()}s
-              </h2>
-              <div className="space-y-8 mb-10">
-                {REGIONS.map((region) => (
-                  <div key={region.label}>
-                    <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-3">
-                      {region.label}
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
-                      {region.villes.map((ville) => (
-                        <Link
-                          key={ville.slug}
-                          href={`/metiers/${slug}/${ville.slug}`}
-                          className="inline-flex items-center gap-1.5 text-sm text-accent border border-accent/20 rounded-lg px-3 py-1.5 hover:bg-accent/5 transition-colors"
-                        >
-                          <MapPin className="w-3 h-3" />
-                          {metier.label} {ville.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Autres métiers de la catégorie */}
-              {autresMetiers.length > 0 && (
-                <div className="border-t border-border pt-8">
-                  <h2 className="text-xl font-bold text-foreground mb-4">
-                    Autres métiers — {category?.label}
-                  </h2>
-                  <div className="grid grid-cols-2 gap-3">
-                    {autresMetiers.map((m) => (
-                      <Link
-                        key={m.slug}
-                        href={`/metiers/${m.slug}`}
-                        className="text-sm text-accent hover:underline"
-                      >
-                        Site internet {m.label}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
+              <Link
+                href="/#contact"
+                className={`mt-auto inline-flex items-center gap-2 px-5 py-3 text-sm font-medium transition-colors border${
+                  plan.flagship
+                    ? " border-accent bg-accent text-accent-foreground hover:bg-transparent hover:text-background"
+                    : " border-current cta-hover"
+                }`}
+              >
+                {plan.cta}
+                <ArrowRight className="w-4 h-4" aria-hidden="true" />
+              </Link>
             </div>
+          ))}
+        </section>
 
-            {/* Sidebar CTA */}
-            <aside className="lg:col-span-1">
-              <div className="sticky top-24 border border-border rounded-2xl p-6 bg-card shadow-sm">
-                <h3 className="text-lg font-bold text-foreground mb-2">
-                  Lancez votre site {metier.label.toLowerCase()}
-                </h3>
-                <p className="text-sm text-muted-foreground mb-5">
-                  Site en ligne en 72h. Premier mois offert. Sans engagement.
-                </p>
-                <div className="space-y-3">
-                  <Link
-                    href="/#contact"
-                    className="flex items-center justify-center gap-2 w-full bg-accent text-accent-foreground font-medium px-5 py-3 rounded-lg hover:bg-accent/90 transition-colors text-sm"
-                  >
-                    Démarrer mon projet
-                  </Link>
-                  <a
-                    href="tel:+33000000000"
-                    className="flex items-center justify-center gap-2 w-full border border-border text-foreground font-medium px-5 py-3 rounded-lg hover:bg-secondary transition-colors text-sm"
-                  >
-                    <Phone className="w-4 h-4" />
-                    Appeler directement
-                  </a>
-                </div>
-                <div className="mt-5 pt-5 border-t border-border space-y-2">
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-accent" />
-                    50 €/mois tout inclus
-                  </div>
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-accent" />
-                    En ligne en 72h
-                  </div>
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-accent" />
-                    Sans engagement
-                  </div>
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-accent" />
-                    SEO local inclus
-                  </div>
-                </div>
-              </div>
-            </aside>
+        {/* Villes pills */}
+        <section className="px-4 sm:px-6 lg:px-8 py-14 border-t border-border" aria-labelledby="villes-heading">
+          <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground mb-4">
+            Disponible partout en France
           </div>
+          <h2 id="villes-heading" className="text-[clamp(28px,3.4vw,44px)] font-extrabold tracking-[-0.025em] mb-8">
+            {metier.label} dans{" "}
+            <em className="font-serif font-normal italic text-accent">votre ville</em>.
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {ALL_VILLES.map((v) => (
+              <Link
+                key={v.slug}
+                href={`/metiers/${metier.slug}/${v.slug}`}
+                className="px-4 py-2.5 border border-border text-[13px] font-medium transition-[border-color,background-color,color] duration-[180ms] hover:border-accent hover:bg-accent hover:text-accent-foreground"
+                data-cursor="hover"
+              >
+                {metier.label} à {v.label}
+              </Link>
+            ))}
+          </div>
+        </section>
 
-        </div>
+        {/* FAQ */}
+        <section className="border-t border-border grid grid-cols-1 lg:grid-cols-12" aria-labelledby="faq-heading">
+          <div className="lg:col-span-5 px-4 sm:px-6 lg:px-8 py-16 lg:border-r lg:border-border">
+            <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground mb-4">
+              Questions fréquentes
+            </div>
+            <h2 id="faq-heading" className="text-[clamp(36px,4.5vw,64px)] font-extrabold tracking-[-0.03em] leading-none">
+              Vos{" "}
+              <em className="font-serif font-normal italic text-accent">questions</em>.
+            </h2>
+          </div>
+          <div className="lg:col-span-7 px-4 sm:px-6 lg:px-8 py-16">
+            {FAQ_ITEMS.map((item, i) => (
+              <details
+                key={i}
+                className="faq-details bento-hover group py-5 border-t border-border last:border-b last:border-border"
+                open={i === 0}
+              >
+                <summary className="list-none flex justify-between items-center text-[18px] font-semibold tracking-[-0.01em] gap-4" data-cursor="hover">
+                  {item.q}
+                </summary>
+                <p className="mt-3.5 text-muted-foreground group-hover:text-background/60 leading-[1.6] max-w-[640px] text-[15px]">
+                  {item.a}
+                </p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        {/* Final CTA */}
+        <section className="px-4 sm:px-6 lg:px-8 py-24 text-center border-t border-border">
+          <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground mb-6">
+            Démarrer maintenant
+          </div>
+          <h2 className="mx-auto mb-6 max-w-[980px] text-[clamp(40px,5.5vw,88px)] font-extrabold tracking-[-0.03em] leading-[0.95]">
+            Prêt à devenir le{" "}
+            <em className="font-serif font-normal italic text-accent">
+              {metier.label.toLowerCase()} de référence
+            </em>{" "}
+            de votre ville&nbsp;?
+          </h2>
+          <p className="mx-auto mb-8 max-w-[640px] text-[18px] leading-[1.55] text-muted-foreground">
+            Diagnostic gratuit en 15 minutes. Nous regardons votre situation actuelle et vous disons honnêtement si nous pouvons vous aider.
+          </p>
+          <Link
+            href="/#contact"
+            className="inline-flex items-center gap-3 px-7 py-4 bg-accent text-accent-foreground text-sm font-medium transition-colors cta-hover"
+          >
+            Réserver mon créneau
+            <ArrowRight className="w-4 h-4" aria-hidden="true" />
+          </Link>
+        </section>
+
       </main>
       <Footer />
     </>

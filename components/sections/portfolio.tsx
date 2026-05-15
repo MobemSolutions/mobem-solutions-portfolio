@@ -65,7 +65,7 @@ export function PortfolioSection() {
               role="tab"
               aria-selected={activeCategory === cat.id}
               className={cn(
-                "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
+                "px-4 py-2 text-sm font-medium transition-[background-color,color] duration-200",
                 "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
                 activeCategory === cat.id
                   ? "bg-foreground text-background"
@@ -89,19 +89,19 @@ export function PortfolioSection() {
                 key={project.id}
                 href={`/realisations/${project.slug}`}
                 className={cn(
-                  "group relative bg-card rounded-xl md:rounded-2xl border border-border overflow-hidden",
-                  "transition-all duration-300 hover:shadow-xl hover:-translate-y-1",
+                  "group relative bg-card rounded-none border border-border overflow-hidden",
+                  "transition-[border-color,transform] duration-300 hover:-translate-y-px hover:border-accent/40",
                   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
                 )}
                 aria-label={`Voir le projet ${project.title} — ${project.client.name}`}
               >
                 {/* Visual area */}
                 <div className={cn(
-                  "relative aspect-[4/3] bg-gradient-to-br overflow-hidden",
+                  "relative aspect-[4/3] overflow-hidden",
                   scheme.cardGradient
                 )}>
                   {project.images?.home ? (
-                    <div className="absolute inset-3 md:inset-5 rounded-lg md:rounded-xl overflow-hidden shadow-lg">
+                    <div className="absolute inset-3 md:inset-5 rounded-none overflow-hidden shadow-lg">
                       <Image
                         src={project.images.home}
                         alt={project.title}
@@ -111,23 +111,23 @@ export function PortfolioSection() {
                       />
                     </div>
                   ) : (
-                    <div className="absolute inset-3 md:inset-5 rounded-lg md:rounded-xl bg-card shadow-lg overflow-hidden border border-border/40">
+                    <div className="absolute inset-3 md:inset-5 rounded-none bg-card shadow-lg overflow-hidden border border-border/40">
                       <div className="h-5 md:h-6 bg-muted/80 flex items-center px-2 gap-1 border-b border-border/30">
-                        <span className="w-1.5 h-1.5 rounded-full bg-destructive/40" />
-                        <span className="w-1.5 h-1.5 rounded-full bg-yellow-400/40" />
-                        <span className="w-1.5 h-1.5 rounded-full bg-green-400/40" />
-                        <div className="flex-1 mx-2 h-1.5 rounded-full bg-muted" />
+                        <span className="w-1.5 h-1.5 rounded-none bg-foreground/30" />
+                        <span className="w-1.5 h-1.5 rounded-none bg-foreground/20" />
+                        <span className="w-1.5 h-1.5 rounded-none bg-foreground/10" />
+                        <div className="flex-1 mx-2 h-1.5 rounded-none bg-muted" />
                       </div>
                       <div className="p-2 md:p-3 space-y-1.5 md:space-y-2">
-                        <div className={cn("h-10 md:h-16 rounded-lg bg-gradient-to-br", scheme.mockupBg)} />
-                        <div className="h-1.5 md:h-2 rounded-full bg-muted w-3/4" />
-                        <div className="h-1.5 md:h-2 rounded-full bg-muted w-1/2" />
+                        <div className={cn("h-10 md:h-16 rounded-lg", scheme.mockupBg)} />
+                        <div className="h-1.5 md:h-2 rounded-none bg-muted w-3/4" />
+                        <div className="h-1.5 md:h-2 rounded-none bg-muted w-1/2" />
                       </div>
                     </div>
                   )}
 
                   {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-foreground/70 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+                  <div className="absolute inset-0 bg-foreground/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <span className="text-background font-medium flex items-center gap-1.5 text-xs md:text-sm">
                       Voir l'étude
                       <ArrowUpRight className="w-3.5 h-3.5 md:w-4 md:h-4" aria-hidden="true" />
@@ -136,14 +136,14 @@ export function PortfolioSection() {
 
                   {/* Category badge */}
                   <div className="absolute top-2 left-2 md:top-3 md:left-3">
-                    <span className={cn("text-[9px] md:text-[10px] font-bold px-1.5 md:px-2 py-0.5 rounded-full uppercase tracking-tighter", scheme.badge)}>
+                    <span className={cn("text-[9px] md:text-[10px] font-bold px-1.5 md:px-2 py-0.5 rounded-none uppercase tracking-tighter", scheme.badge)}>
                       {project.categoryLabel}
                     </span>
                   </div>
 
                   {/* Metric badge */}
                   <div className="absolute top-2 right-2 md:top-3 md:right-3">
-                    <span className="text-[9px] md:text-[10px] font-bold px-1.5 md:px-2 py-0.5 rounded-full bg-foreground text-background">
+                    <span className="text-[9px] md:text-[10px] font-bold px-1.5 md:px-2 py-0.5 rounded-none bg-foreground text-background">
                       {project.heroMetric}
                     </span>
                   </div>

@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Création de site par ville — Mobem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .region-section { border-top: 1px solid var(--line); }
+  .region-head { padding: 48px 32px 24px; display: flex; align-items: baseline; gap: 16px; }
+  .region-head h2 { margin: 0; font-size: clamp(36px, 4vw, 56px); font-weight: 800; letter-spacing: -0.03em; }
+  .region-head .count { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+  .ville-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+  .ville-card { padding: 28px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 14px; min-height: 240px; }
+  .ville-card .head { display: flex; align-items: center; gap: 10px; }
+  .ville-card .pin { color: var(--signal); flex-shrink: 0; }
+  .ville-card h3 { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.025em; }
+  .ville-card .sub { font-size: 13px; color: var(--signal); font-family: var(--mono); letter-spacing: 0.04em; }
+  .ville-card .metiers { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; align-items: center; }
+  .ville-card .m-tag { display: inline-block; padding: 4px 9px; border: 1px solid var(--line); font-size: 10px; color: var(--signal); font-family: var(--mono); letter-spacing: 0.04em; text-transform: uppercase; transition: all 180ms ease; white-space: nowrap; }
+  .ville-card .m-tag:hover { border-color: var(--signal); background: var(--signal); color: var(--paper); }
+  .ville-card .m-tag.muted { color: var(--muted); }
+
+  @media (max-width: 900px) { .ville-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<section class="pg-hero">
+  <div class="pg-crumbs">
+    <a href="Mobem.html">Accueil</a><span>/</span><span style="color: var(--fg);">Nos villes</span>
+  </div>
+  <h1 class="pg-h1">Création de site<br/>par <em>ville</em>.</h1>
+  <p class="pg-lede"><strong>30 villes couvertes</strong> dans toute la France. Chaque site inclut une <a href="#" style="color: var(--signal); border-bottom: 1px solid;">optimisation SEO locale</a> pour dominer Google dans votre ville.</p>
+</section>
+
+<div id="catalog"></div>
+
+<section style="padding: 96px 32px; border-top: 1px solid var(--line); text-align: center;">
+  <div class="mono" style="color: var(--muted); margin-bottom: 16px;">// Votre ville n'apparaît pas ?</div>
+  <h2 style="margin: 0 auto 24px; max-width: 800px; font-size: clamp(36px, 4.5vw, 64px); font-weight: 800; letter-spacing: -0.03em; line-height: 0.95;">
+    Nous intervenons <em style="font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--signal);">partout en France</em>.
+  </h2>
+  <a href="Mobem.html#contact" class="btn btn-signal">Vérifier ma ville
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17 L17 7"/><path d="M9 7 H17 V15"/></svg>
+  </a>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="site.js"></script>
+<script>
+  const metiersTop = ['Plombier', 'Électricien', 'Paysagiste', 'Maçon', 'Carreleur', 'Peintre en bâtiment'];
+  const regions = [
+    ['Île-de-France', [['Paris', 'Paris (75)', '2 100 000']]],
+    ['Auvergne-Rhône-Alpes', [
+      ['Lyon', 'Rhône (69)', '522 000'],
+      ['Grenoble', 'Isère (38)', '158 000'],
+      ['Clermont-Ferrand', 'Puy-de-Dôme (63)', '147 000'],
+      ['Saint-Étienne', 'Loire (42)', '173 000'],
+    ]],
+    ['Provence-Alpes-Côte d\'Azur', [
+      ['Marseille', 'Bouches-du-Rhône (13)', '870 000'],
+      ['Nice', 'Alpes-Maritimes (06)', '342 000'],
+      ['Toulon', 'Var (83)', '176 000'],
+      ['Aix-en-Provence', 'Bouches-du-Rhône (13)', '143 000'],
+    ]],
+    ['Pays de la Loire', [
+      ['Nantes', 'Loire-Atlantique (44)', '320 000'],
+      ['Angers', 'Maine-et-Loire (49)', '155 000'],
+      ['Le Mans', 'Sarthe (72)', '143 000'],
+    ]],
+    ['Bretagne', [
+      ['Rennes', 'Ille-et-Vilaine (35)', '220 000'],
+      ['Brest', 'Finistère (29)', '139 000'],
+    ]],
+    ['Occitanie', [
+      ['Toulouse', 'Haute-Garonne (31)', '498 000'],
+      ['Montpellier', 'Hérault (34)', '299 000'],
+      ['Nîmes', 'Gard (30)', '149 000'],
+    ]],
+    ['Nouvelle-Aquitaine', [
+      ['Bordeaux', 'Gironde (33)', '260 000'],
+      ['Limoges', 'Haute-Vienne (87)', '131 000'],
+      ['Poitiers', 'Vienne (86)', '90 000'],
+    ]],
+    ['Hauts-de-France', [
+      ['Lille', 'Nord (59)', '236 000'],
+      ['Amiens', 'Somme (80)', '135 000'],
+    ]],
+    ['Grand Est', [
+      ['Strasbourg', 'Bas-Rhin (67)', '290 000'],
+      ['Reims', 'Marne (51)', '182 000'],
+      ['Metz', 'Moselle (57)', '121 000'],
+    ]],
+    ['Normandie', [
+      ['Rouen', 'Seine-Maritime (76)', '116 000'],
+      ['Caen', 'Calvados (14)', '105 000'],
+      ['Le Havre', 'Seine-Maritime (76)', '170 000'],
+    ]],
+  ];
+
+  function pin() {
+    return '<svg class="pin" width="16" height="20" viewBox="0 0 16 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 19s6-7.5 6-12A6 6 0 1 0 2 7c0 4.5 6 12 6 12z"/><circle cx="8" cy="7" r="2"/></svg>';
+  }
+
+  function tags() {
+    return metiersTop.map(m => `<a href="#" class="m-tag">${m}</a>`).join('') + '<span class="m-tag muted">+36 métiers</span>';
+  }
+
+  document.getElementById('catalog').innerHTML = regions.map(([name, villes]) => `
+    <section class="region-section">
+      <div class="region-head">
+        <h2>${name}</h2>
+        <span class="count">${villes.length} ville${villes.length > 1 ? 's' : ''}</span>
+      </div>
+      <div class="ville-grid">
+        ${villes.map(([v, dep, hab]) => `
+          <a href="ville-detail.html" class="ville-card">
+            <div class="head">${pin()}<h3>${v}</h3></div>
+            <div class="sub">${dep} — ${hab} hab.</div>
+            <div class="metiers">${tags()}</div>
+          </a>
+        `).join('')}
+      </div>
+    </section>
+  `).join('');
+
+  MobemSite.init('Nos villes');
+</script>
+</body>
+</html>

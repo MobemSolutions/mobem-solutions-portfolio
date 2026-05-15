@@ -1,4 +1,7 @@
-export type ColorScheme = "amber" | "slate" | "gold" | "teal" | "blue" | "rose"
+/* Swiss Style Color Scheme - Monochrome + Signal accent only
+   DA 2026: Encre #0D0D0D, Papier #F7F7F5, Gris #888888, Règle #E2E2E2, Signal #E63030
+*/
+export type ColorScheme = "default" | "inverse" | "signal"
 
 export type Project = {
   id: number
@@ -53,6 +56,7 @@ export type Project = {
   }
 }
 
+/* Swiss Style: No gradients, monochrome with single accent */
 export const COLOR_SCHEMES: Record<ColorScheme, {
   cardGradient: string
   heroBg: string
@@ -61,53 +65,29 @@ export const COLOR_SCHEMES: Record<ColorScheme, {
   badge: string
   gaugeColor: string
 }> = {
-  amber: {
-    cardGradient: "from-amber-500/15 to-orange-400/8",
-    heroBg: "from-amber-100 to-orange-50 dark:from-amber-950/20 dark:to-orange-900/10",
-    mockupBg: "from-amber-200/50 to-orange-100/50",
-    accentText: "text-amber-600 dark:text-amber-400",
-    badge: "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300",
-    gaugeColor: "#F59E0B",
+  default: {
+    cardGradient: "bg-secondary",
+    heroBg: "bg-secondary",
+    mockupBg: "bg-muted",
+    accentText: "text-foreground",
+    badge: "bg-foreground text-background",
+    gaugeColor: "#0D0D0D",
   },
-  slate: {
-    cardGradient: "from-slate-600/15 to-blue-900/8",
-    heroBg: "from-slate-100 to-blue-50 dark:from-slate-900/30 dark:to-blue-950/15",
-    mockupBg: "from-slate-200/50 to-blue-100/50",
-    accentText: "text-slate-600 dark:text-slate-300",
-    badge: "bg-slate-100 text-slate-700 dark:bg-slate-800/60 dark:text-slate-300",
-    gaugeColor: "#64748B",
+  inverse: {
+    cardGradient: "bg-foreground",
+    heroBg: "bg-foreground",
+    mockupBg: "bg-muted-foreground",
+    accentText: "text-accent",
+    badge: "bg-accent text-accent-foreground",
+    gaugeColor: "#E63030",
   },
-  gold: {
-    cardGradient: "from-yellow-500/15 to-amber-300/8",
-    heroBg: "from-yellow-50 to-amber-100/50 dark:from-yellow-950/20 dark:to-amber-950/10",
-    mockupBg: "from-yellow-200/50 to-amber-100/50",
-    accentText: "text-yellow-600 dark:text-yellow-400",
-    badge: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/40 dark:text-yellow-300",
-    gaugeColor: "#EAB308",
-  },
-  teal: {
-    cardGradient: "from-teal-500/15 to-emerald-400/8",
-    heroBg: "from-teal-50 to-emerald-50 dark:from-teal-950/20 dark:to-emerald-950/10",
-    mockupBg: "from-teal-200/50 to-emerald-100/50",
-    accentText: "text-teal-600 dark:text-teal-400",
-    badge: "bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300",
-    gaugeColor: "#14B8A6",
-  },
-  blue: {
-    cardGradient: "from-blue-600/15 to-cyan-500/8",
-    heroBg: "from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/10",
-    mockupBg: "from-blue-200/50 to-cyan-100/50",
-    accentText: "text-blue-600 dark:text-blue-400",
-    badge: "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300",
-    gaugeColor: "#3B82F6",
-  },
-  rose: {
-    cardGradient: "from-rose-700/15 to-slate-600/8",
-    heroBg: "from-rose-50 to-slate-50 dark:from-rose-950/20 dark:to-slate-900/10",
-    mockupBg: "from-rose-200/50 to-slate-100/50",
-    accentText: "text-rose-700 dark:text-rose-400",
-    badge: "bg-rose-100 text-rose-800 dark:bg-rose-900/40 dark:text-rose-300",
-    gaugeColor: "#E11D48",
+  signal: {
+    cardGradient: "bg-accent/10",
+    heroBg: "bg-accent/5",
+    mockupBg: "bg-accent/10",
+    accentText: "text-accent",
+    badge: "bg-accent text-accent-foreground",
+    gaugeColor: "#E63030",
   },
 }
 
@@ -129,7 +109,7 @@ export const projects: Project[] = [
       "Système de capture de leads et stratégie de référencement local pour entreprises du bâtiment.",
     tags: ["Solution Sectorielle", "Performance", "SEO Local", "UX Design"],
     featured: true,
-    colorScheme: "amber",
+    colorScheme: "default",
     heroMetric: "Core Web Vitals : OK",
 
     challenge:
@@ -213,7 +193,7 @@ export const projects: Project[] = [
       "Refonte digitale axée sur l'empathie, la transparence tarifaire et l'accessibilité universelle (WCAG).",
     tags: ["Accessibilité WCAG", "UX Empathique", "Conformité Légale", "Next.js"],
     featured: true,
-    colorScheme: "slate",
+    colorScheme: "inverse",
     heroMetric: "SEO Optimized",
 
     challenge:
@@ -298,7 +278,7 @@ export const projects: Project[] = [
       "Système de qualification intelligente et tunnel de conversion haute-fidélité pour lieux événementiels.",
     tags: ["UX Immersive", "Lead Qualification", "Conversion", "SEO Local"],
     featured: true,
-    colorScheme: "gold",
+    colorScheme: "signal",
     heroMetric: "UX Ready",
 
     challenge:
@@ -383,7 +363,7 @@ export const projects: Project[] = [
       "Digitalisation de cabinet : automatisation du parcours patient et SEO santé à haute valeur ajoutée.",
     tags: ["Souveraineté Numérique", "SEO Santé", "Conformité Ordinale", "UX Mobile"],
     featured: false,
-    colorScheme: "teal",
+    colorScheme: "default",
     heroMetric: "Performance 99/100",
 
     challenge:
@@ -468,7 +448,7 @@ export const projects: Project[] = [
       "Architecture de contenu expert et système de génération de leads pour prescripteurs du bâtiment.",
     tags: ["Autorité SEO", "Lead Generation B2B", "Stratégie E-E-A-T", "Next.js"],
     featured: false,
-    colorScheme: "blue",
+    colorScheme: "inverse",
     heroMetric: "Scalable Architecture",
 
     challenge:
@@ -553,7 +533,7 @@ export const projects: Project[] = [
       "Identité premium et architecture d'acquisition pour cabinets d'expertise et professions libérales de haut niveau.",
     tags: ["Identité Premium", "SEO Juridique", "Stratégie E-E-A-T", "Conversion"],
     featured: false,
-    colorScheme: "rose",
+    colorScheme: "signal",
     heroMetric: "Conversion Focused",
 
     challenge:

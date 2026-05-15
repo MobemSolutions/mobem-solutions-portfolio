@@ -1,0 +1,287 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-11T00:00:00Z",
+  "title": "Design System: Mobem Solutions",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper (ivoire chaud)",
+        "canonical": "oklch(0.973 0.003 80)",
+        "tonalRamp": [
+          "oklch(0.99 0.002 80)",
+          "oklch(0.973 0.003 80)",
+          "oklch(0.93 0.004 80)",
+          "oklch(0.85 0.005 80)",
+          "oklch(0.70 0.006 80)",
+          "oklch(0.55 0.006 80)",
+          "oklch(0.40 0.006 80)",
+          "oklch(0.25 0.006 80)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink (encre profonde)",
+        "canonical": "oklch(0.07 0 0)",
+        "tonalRamp": [
+          "oklch(0.07 0 0)",
+          "oklch(0.15 0 0)",
+          "oklch(0.25 0 0)",
+          "oklch(0.35 0 0)",
+          "oklch(0.50 0 0)",
+          "oklch(0.65 0 0)",
+          "oklch(0.80 0 0)",
+          "oklch(0.92 0 0)"
+        ]
+      },
+      "charbon": {
+        "role": "neutral",
+        "displayName": "Charbon chaud (mode sombre)",
+        "canonical": "oklch(0.11 0.006 55)",
+        "tonalRamp": [
+          "oklch(0.08 0.005 55)",
+          "oklch(0.11 0.006 55)",
+          "oklch(0.18 0.006 55)",
+          "oklch(0.28 0.006 55)",
+          "oklch(0.40 0.006 55)",
+          "oklch(0.55 0.006 55)",
+          "oklch(0.72 0.005 55)",
+          "oklch(0.90 0.004 55)"
+        ]
+      },
+      "signal-red": {
+        "role": "primary",
+        "displayName": "Signal Red (encre signalétique)",
+        "canonical": "oklch(0.51 0.22 27)",
+        "tonalRamp": [
+          "oklch(0.30 0.16 27)",
+          "oklch(0.40 0.20 27)",
+          "oklch(0.51 0.22 27)",
+          "oklch(0.62 0.22 27)",
+          "oklch(0.72 0.20 27)",
+          "oklch(0.82 0.16 27)",
+          "oklch(0.90 0.10 27)",
+          "oklch(0.96 0.04 27)"
+        ]
+      },
+      "gris": {
+        "role": "neutral",
+        "displayName": "Gris (texte secondaire)",
+        "canonical": "oklch(0.59 0 0)",
+        "tonalRamp": [
+          "oklch(0.30 0 0)",
+          "oklch(0.40 0 0)",
+          "oklch(0.50 0 0)",
+          "oklch(0.59 0 0)",
+          "oklch(0.68 0 0)",
+          "oklch(0.78 0 0)",
+          "oklch(0.88 0 0)",
+          "oklch(0.94 0 0)"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Rule (filet 1px)",
+        "canonical": "oklch(0.90 0 0)",
+        "tonalRamp": [
+          "oklch(0.70 0 0)",
+          "oklch(0.78 0 0)",
+          "oklch(0.85 0 0)",
+          "oklch(0.90 0 0)",
+          "oklch(0.93 0 0)",
+          "oklch(0.95 0 0)",
+          "oklch(0.97 0 0)",
+          "oklch(0.99 0 0)"
+        ]
+      },
+      "carte-claire": {
+        "role": "neutral",
+        "displayName": "Carte (surface claire)",
+        "canonical": "oklch(1 0 0)",
+        "tonalRamp": [
+          "oklch(0.85 0 0)",
+          "oklch(0.90 0 0)",
+          "oklch(0.95 0 0)",
+          "oklch(0.98 0 0)",
+          "oklch(1 0 0)",
+          "oklch(1 0 0)",
+          "oklch(1 0 0)",
+          "oklch(1 0 0)"
+        ]
+      },
+      "carte-sombre": {
+        "role": "neutral",
+        "displayName": "Carte (surface sombre)",
+        "canonical": "oklch(0.14 0.005 55)",
+        "tonalRamp": [
+          "oklch(0.10 0.005 55)",
+          "oklch(0.14 0.005 55)",
+          "oklch(0.20 0.005 55)",
+          "oklch(0.30 0.005 55)",
+          "oklch(0.45 0.005 55)",
+          "oklch(0.60 0.005 55)",
+          "oklch(0.75 0.005 55)",
+          "oklch(0.90 0.004 55)"
+        ]
+      },
+      "rule-sombre": {
+        "role": "neutral",
+        "displayName": "Rule (sombre)",
+        "canonical": "oklch(0.24 0.005 55)",
+        "tonalRamp": [
+          "oklch(0.15 0.005 55)",
+          "oklch(0.20 0.005 55)",
+          "oklch(0.24 0.005 55)",
+          "oklch(0.30 0.005 55)",
+          "oklch(0.40 0.005 55)",
+          "oklch(0.55 0.005 55)",
+          "oklch(0.72 0.005 55)",
+          "oklch(0.88 0.004 55)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display (Inter Bold)", "purpose": "Hero h1 uniquement. Tracking serré, line-height 0.88." },
+      "display-serif": { "displayName": "Display Serif Italic (DM Serif)", "purpose": "Segment émotionnel intra-titre du hero, jamais en bloc." },
+      "headline": { "displayName": "Headline", "purpose": "Titres de section sur pages secondaires (realisations, blog, methode)." },
+      "title": { "displayName": "Title (mono-like, 13px uppercase)", "purpose": "Titre fonctionnel de section sur la home." },
+      "body": { "displayName": "Body (17px)", "purpose": "Paragraphes principaux. Cap 65-75ch." },
+      "body-small": { "displayName": "Body Small (14px)", "purpose": "Descriptions, sous-lignes, items." },
+      "label": { "displayName": "Label Mono (11px uppercase)", "purpose": "Numérotation, métadonnées système, légendes KPI." },
+      "label-micro": { "displayName": "Label Micro (10px uppercase vertical)", "purpose": "Watermarks, labels verticaux writing-mode." }
+    },
+    "shadows": [
+      { "name": "none", "value": "none", "purpose": "Défaut système. Hero, sections, KPI strip, swiss cells, bento : plates." },
+      { "name": "card-rest", "value": "0 1px 2px 0 rgba(15, 13, 10, 0.04)", "purpose": "Card primitive Radix au repos. Très subtile, à peine visible." },
+      { "name": "overlay-lift", "value": "0 20px 25px -5px rgba(15, 13, 10, 0.10), 0 8px 10px -6px rgba(15, 13, 10, 0.08)", "purpose": "Dropdowns de navigation, popovers, dialogs. Signale le détachement du flux." }
+    ],
+    "motion": [
+      { "name": "ease-quart-out", "value": "cubic-bezier(0.2, 0.7, 0.2, 1)", "purpose": "Easing par défaut. Custom cursor, transitions d'état." },
+      { "name": "duration-fast", "value": "200ms", "purpose": "Hover, focus, état immédiat (input border, ghost button)." },
+      { "name": "duration-normal", "value": "220ms", "purpose": "CTA hover, bento hover, dropdown chevron." },
+      { "name": "duration-cursor", "value": "240ms", "purpose": "Custom cursor scaling et mode change." },
+      { "name": "ripple", "value": "0.55s cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Nav ripple effect au pointer-down." },
+      { "name": "blink", "value": "1.05s steps(2) infinite", "purpose": "Caret typographique du hero." },
+      { "name": "pulse-dot", "value": "2s infinite", "purpose": "Live availability dot." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" },
+      { "name": "2xl", "value": "1536px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary CTA Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "CTA principal du site. Fond Signal Red, hover Ink, flèche droite Lucide inline.",
+      "html": "<a href=\"#contact\" class=\"ds-btn-primary\">Diagnostic gratuit<svg class=\"ds-btn-primary__arrow\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"square\" stroke-linejoin=\"miter\" aria-hidden=\"true\"><line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"/><polyline points=\"12 5 19 12 12 19\"/></svg></a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; background: oklch(0.51 0.22 27); color: oklch(0.973 0.003 80); font-family: var(--font-inter, 'Inter', 'Helvetica Neue', Arial, sans-serif); font-size: 14px; font-weight: 500; line-height: 1; text-decoration: none; border: none; border-radius: 0; cursor: pointer; transition: background 220ms ease, color 220ms ease; } .ds-btn-primary:hover { background: oklch(0.07 0 0); color: oklch(0.973 0.003 80); } .ds-btn-primary:focus-visible { outline: 2px solid oklch(0.51 0.22 27); outline-offset: 2px; } .ds-btn-primary__arrow { width: 14px; height: 14px; flex-shrink: 0; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Bouton secondaire. Transparent + border Rule, hover border Ink. Usage cluster CTA secondaire (Voir les services).",
+      "html": "<a href=\"#services\" class=\"ds-btn-outline\">Voir les services<svg class=\"ds-btn-outline__arrow\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"square\" stroke-linejoin=\"miter\" aria-hidden=\"true\"><line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"/><polyline points=\"12 5 19 12 12 19\"/></svg></a>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; background: transparent; color: oklch(0.07 0 0); font-family: var(--font-inter, 'Inter', 'Helvetica Neue', Arial, sans-serif); font-size: 14px; font-weight: 500; line-height: 1; text-decoration: none; border: 1px solid oklch(0.90 0 0); border-radius: 0; cursor: pointer; transition: border-color 220ms ease, background 220ms ease; } .ds-btn-outline:hover { border-color: oklch(0.07 0 0); background: oklch(0.95 0 0); } .ds-btn-outline:focus-visible { outline: 2px solid oklch(0.51 0.22 27); outline-offset: 2px; }"
+    },
+    {
+      "name": "Mono Tab Selector",
+      "kind": "button",
+      "refersTo": "button-default",
+      "description": "Sélecteur d'onglet mobile (pricing). Mono label uppercase, état actif inverse Ink/Paper.",
+      "html": "<div class=\"ds-tab-group\"><button class=\"ds-tab ds-tab--active\">S1 · Essentiel</button><button class=\"ds-tab\">S2 · Expert</button><button class=\"ds-tab\">S3 · Sur mesure</button></div>",
+      "css": ".ds-tab-group { display: flex; border-bottom: 1px solid oklch(0.90 0 0); } .ds-tab { flex: 1; padding: 12px 16px; background: transparent; color: oklch(0.59 0 0); font-family: var(--font-jetbrains, 'JetBrains Mono', ui-monospace, monospace); font-size: 11px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1; border: none; border-right: 1px solid oklch(0.90 0 0); border-radius: 0; cursor: pointer; transition: background 220ms ease, color 220ms ease; } .ds-tab:last-child { border-right: none; } .ds-tab:hover { background: oklch(0.95 0 0); color: oklch(0.07 0 0); } .ds-tab--active { background: oklch(0.07 0 0); color: oklch(0.973 0.003 80); } .ds-tab:focus-visible { outline: 2px solid oklch(0.51 0.22 27); outline-offset: -2px; }"
+    },
+    {
+      "name": "Input Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Input texte. Border Rule, focus border Ink, aucun radius.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field__label\">Email professionnel</span><input class=\"ds-input\" type=\"email\" placeholder=\"vous@entreprise.fr\"></label>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 6px; } .ds-field__label { font-family: var(--font-jetbrains, 'JetBrains Mono', ui-monospace, monospace); font-size: 11px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: oklch(0.07 0 0); line-height: 1.2; } .ds-input { height: 40px; width: 100%; padding: 8px 12px; background: oklch(0.973 0.003 80); color: oklch(0.07 0 0); font-family: var(--font-inter, 'Inter', 'Helvetica Neue', Arial, sans-serif); font-size: 14px; line-height: 1.5; border: 1px solid oklch(0.90 0 0); border-radius: 0; outline: none; transition: border-color 200ms ease; } .ds-input::placeholder { color: oklch(0.59 0 0); } .ds-input:focus-visible { border-color: oklch(0.07 0 0); } .ds-input[aria-invalid=\"true\"] { border-color: oklch(0.51 0.22 27); }"
+    },
+    {
+      "name": "Swiss KPI Cell",
+      "kind": "card",
+      "refersTo": "swiss-cell",
+      "description": "Cellule de KPI strip. Numérotée mono, chiffre bold tracking serré, description grise. Signature visuelle du hero.",
+      "html": "<div class=\"ds-kpi-strip\"><div class=\"ds-kpi\"><span class=\"ds-kpi__label\">01 · Diagnostic</span><span class=\"ds-kpi__value\">90 min</span><span class=\"ds-kpi__desc\">Audit gratuit, sans engagement</span></div><div class=\"ds-kpi\"><span class=\"ds-kpi__label\">02 · Livraison</span><span class=\"ds-kpi__value\">10 j</span><span class=\"ds-kpi__desc\">Sites essentiels en production</span></div><div class=\"ds-kpi\"><span class=\"ds-kpi__label\">03 · Lighthouse</span><span class=\"ds-kpi__value\">90+</span><span class=\"ds-kpi__desc\">Performance garantie au contrat</span></div><div class=\"ds-kpi\"><span class=\"ds-kpi__label\">04 · Support</span><span class=\"ds-kpi__value\">24 h</span><span class=\"ds-kpi__desc\">SLA réponse inclus</span></div></div>",
+      "css": ".ds-kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: oklch(0.90 0 0); border-top: 1px solid oklch(0.90 0 0); } .ds-kpi { display: flex; flex-direction: column; gap: 8px; padding: 48px 32px; background: oklch(0.973 0.003 80); color: oklch(0.07 0 0); } .ds-kpi__label { font-family: var(--font-jetbrains, 'JetBrains Mono', ui-monospace, monospace); font-size: 11px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: oklch(0.07 0 0); line-height: 1.2; } .ds-kpi__value { font-family: var(--font-inter, 'Inter', 'Helvetica Neue', Arial, sans-serif); font-size: 44px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; color: oklch(0.07 0 0); } .ds-kpi__desc { font-family: var(--font-inter, 'Inter', 'Helvetica Neue', Arial, sans-serif); font-size: 12px; line-height: 1.5; color: oklch(0.59 0 0); }"
+    },
+    {
+      "name": "Bento Cell with Hover Inversion",
+      "kind": "card",
+      "refersTo": "swiss-cell",
+      "description": "Cellule bento avec inversion brutale fond/texte au hover. Aucun fondu de couleur, transition franche 220ms.",
+      "html": "<div class=\"ds-bento-grid\"><div class=\"ds-bento-cell\"><span class=\"ds-bento-cell__label\">A1 · Stratégie</span><h3 class=\"ds-bento-cell__title\">Diagnostic 90 min</h3><p class=\"ds-bento-cell__desc\">On audite, on prescrit, on chiffre.</p></div><div class=\"ds-bento-cell\"><span class=\"ds-bento-cell__label\">A2 · Conception</span><h3 class=\"ds-bento-cell__title\">UX & contenu</h3><p class=\"ds-bento-cell__desc\">Wireframes, parcours, copy.</p></div></div>",
+      "css": ".ds-bento-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: oklch(0.90 0 0); border-top: 1px solid oklch(0.90 0 0); border-bottom: 1px solid oklch(0.90 0 0); } .ds-bento-cell { display: flex; flex-direction: column; gap: 12px; padding: 40px 32px; background: oklch(0.973 0.003 80); color: oklch(0.07 0 0); transition: background 220ms ease, color 220ms ease; cursor: default; } .ds-bento-cell:hover { background: oklch(0.07 0 0); color: oklch(0.973 0.003 80); } .ds-bento-cell__label { font-family: var(--font-jetbrains, 'JetBrains Mono', ui-monospace, monospace); font-size: 11px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.2; } .ds-bento-cell__title { font-family: var(--font-inter, 'Inter', 'Helvetica Neue', Arial, sans-serif); font-size: 24px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; margin: 0; } .ds-bento-cell__desc { font-family: var(--font-inter, 'Inter', 'Helvetica Neue', Arial, sans-serif); font-size: 14px; line-height: 1.5; margin: 0; }"
+    },
+    {
+      "name": "Hero Title with Italic Serif Pivot",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Titre du hero. Inter bold tracking serré + DM Serif italique en bascule + caret terminal Signal Red clignotant. Le geste signature.",
+      "html": "<h1 class=\"ds-hero-title\">La précision<br><span class=\"ds-hero-title__accent\" aria-hidden=\"true\">·</span> digitale,<br><span class=\"ds-hero-title__serif\">à l'échelle humaine<span class=\"ds-hero-title__caret\" aria-hidden=\"true\"></span></span></h1>",
+      "css": ".ds-hero-title { font-family: var(--font-inter, 'Inter', 'Helvetica Neue', Arial, sans-serif); font-size: clamp(48px, 8.5vw, 136px); font-weight: 700; line-height: 0.88; letter-spacing: -0.045em; color: oklch(0.07 0 0); margin: 0; } .ds-hero-title__accent { color: oklch(0.51 0.22 27); } .ds-hero-title__serif { font-family: var(--font-dm-serif, 'DM Serif Display', 'Times New Roman', serif); font-weight: 400; font-style: italic; letter-spacing: -0.02em; white-space: nowrap; } .ds-hero-title__caret { display: inline-block; width: 0.055em; height: 0.78em; background: oklch(0.51 0.22 27); margin-left: 0.04em; vertical-align: -0.05em; animation: ds-caret-blink 1.05s steps(2) infinite; } @keyframes ds-caret-blink { 50% { opacity: 0; } } @media (prefers-reduced-motion: reduce) { .ds-hero-title__caret { animation: none; } }"
+    },
+    {
+      "name": "Live Availability Dot",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Pastille 8px Signal Red avec halo pulsant. Posée à côté d'une mention de disponibilité.",
+      "html": "<span class=\"ds-live\"><span class=\"ds-live__dot\" aria-hidden=\"true\"></span><span class=\"ds-live__text\">Disponible · réponse sous 24h</span></span>",
+      "css": ".ds-live { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-jetbrains, 'JetBrains Mono', ui-monospace, monospace); font-size: 11px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: oklch(0.07 0 0); } .ds-live__dot { display: inline-block; width: 8px; height: 8px; border-radius: 9999px; background: oklch(0.51 0.22 27); flex-shrink: 0; animation: ds-live-pulse 2s infinite; } @keyframes ds-live-pulse { 0% { box-shadow: 0 0 0 0 oklch(0.51 0.22 27 / 0.55); } 70% { box-shadow: 0 0 0 10px oklch(0.51 0.22 27 / 0); } 100% { box-shadow: 0 0 0 0 oklch(0.51 0.22 27 / 0); } } @media (prefers-reduced-motion: reduce) { .ds-live__dot { animation: none; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Atelier Editorial",
+    "overview": "Mobem emprunte au magazine d'architecture imprimé : papier ivoire, encre profonde, une encre signalétique rouge utilisée comme une annotation typographique, et un tracé Swiss strictement orthogonal où chaque filet de 1px porte du sens. Les coins sont durs par doctrine, les fontes sont mixtes par intention (Inter pour la matière, DM Serif Display italique pour le geste, JetBrains Mono pour les métadonnées système), les sections sont numérotées comme des spreads de revue. Ce système rejette explicitement quatre familles : agence WordPress générique, SaaS californien, agence créative parisienne 'awwwards', cabinet conseil corpo. Un dirigeant de PME doit, en cinq secondes, reconnaître qu'il parle à un atelier de spécialistes.",
+    "keyCharacteristics": [
+      "Plat par défaut. Ombres rares, profondeur par filets de 1px et par contraste de couleur, jamais par flou.",
+      "Radius zéro. L'arrondi est l'exception, signalée et justifiée.",
+      "Triple typo intentionnelle. Inter (corps & headlines), DM Serif Display italique (gestes émotionnels), JetBrains Mono (labels système).",
+      "Un seul accent. Le Signal Red porte la conversion ; il n'est jamais décoratif.",
+      "Numérotation visible. Sections, KPI, navigation utilisent des index mono (01, 02, S1, S2).",
+      "Mode sombre = charbon chaud. Jamais noir pur, jamais tech-bro dark mode."
+    ],
+    "rules": [
+      { "name": "The One Voice Rule", "body": "Le Signal Red est le seul accent du système. Pas de color-1/color-2/color-3 inventés. Quand un graphique a besoin de plusieurs couleurs (charts Recharts), les chart-2/3/4/5 existent en tokens mais ne sortent jamais de l'usage data-visualisation.", "section": "colors" },
+      { "name": "The Warm Neutral Rule", "body": "Aucun #000, aucun #fff, jamais. Paper, Ink, Charbon, Gris sont tous tintés. Cette chaleur est la différence palpable entre Mobem et un site d'agence corporate.", "section": "colors" },
+      { "name": "The Doubled Signal Rule", "body": "Le rouge n'est jamais seul porteur d'information. Il est toujours doublé d'un mot, d'une flèche, d'un changement de poids, d'une icône. Daltonisme et a11y AA non négociables.", "section": "colors" },
+      { "name": "The Italic-Serif Rule", "body": "DM Serif Display n'apparaît qu'en italique, et uniquement comme contrepoint dans un titre. Jamais en bloc, jamais en regular, jamais sur un paragraphe.", "section": "typography" },
+      { "name": "The Mono-As-System Rule", "body": "JetBrains Mono est réservé aux indicateurs de système : numéros, labels uppercase, métadonnées. Jamais de prose en mono, jamais de CTA en mono.", "section": "typography" },
+      { "name": "The 65ch Rule", "body": "Tout paragraphe de body texte dépasse 65ch est cassé ou recolonné. Pas de pavé long pleine largeur sur desktop.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "La profondeur naît des filets, pas du flou. Tout drop-shadow décoratif est interdit. Les seules exceptions sont les overlays (dropdowns, dialogs Radix) où l'ombre signale le détachement du flux.", "section": "elevation" },
+      { "name": "The Grid-As-Depth Rule", "body": "La grille Swiss (gap 1px sur fond border) suffit à structurer une section. Pas besoin de boxes séparées : les cellules SONT les boxes.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do utiliser le Signal Red uniquement sur le CTA principal, le caret, le live-dot, les focus rings et les liens d'action critique. Si tu hésites à le poser, ne le pose pas.",
+      "Do numéroter explicitement les sections, KPI, offres (01, 02, S1, S2). C'est la signature éditoriale.",
+      "Do utiliser la grille Swiss (gap 1px sur fond --border) pour tout layout multi-cellules. Les filets sont la profondeur.",
+      "Do mixer Inter + DM Serif italique + JetBrains Mono selon leurs rôles définis. Tout titre émotionnel mérite une bascule serif italique courte ; toute métadonnée mérite la mono.",
+      "Do garder les corners durs (rounded-none). Si une primitive Radix a un radius hérité, soit on l'aplatit, soit on l'isole (avatar, pastille, badge ronde).",
+      "Do prouver prefers-reduced-motion sur toute nouvelle animation. globals.css couvre la base.",
+      "Do capper le body texte à 65-75ch.",
+      "Do doubler le Signal Red d'un mot, d'une icône ou d'un poids quand il porte de l'information."
+    ],
+    "donts": [
+      "Don't ressortir un gradient (linear-gradient, bg-gradient-to-*). Aucun. Le système est plat.",
+      "Don't appliquer background-clip: text avec un gradient. Le gradient text est interdit.",
+      "Don't poser de glassmorphism (backdrop-blur + opacité translucide) sur une carte décorative.",
+      "Don't dupliquer le template hero-métrique (gros chiffre + petit label + accent gradient).",
+      "Don't générer des grilles de cards identiques icône + heading + texte.",
+      "Don't utiliser de side-stripe border (border-l-4 rouge sur une callout).",
+      "Don't sortir le bleu corporate, le bleu Loire, le bleu marine, ni aucun second accent.",
+      "Don't copier un visuel awwwards (scroll-jacking, 3D décoratif, typo géante qui couvre l'écran).",
+      "Don't copier un visuel KPMG (photo équipe costume, fond bleu marine, texture corporate).",
+      "Don't utiliser DM Serif en regular non-italique, ni en bloc de prose. C'est un geste, pas une matière.",
+      "Don't introduire un nouveau radius. Les seules valeurs autorisées sont 0, 2px, 4px, 9999px.",
+      "Don't utiliser #000 ou #fff nulle part. Tous les neutres sont tintés."
+    ]
+  }
+}
