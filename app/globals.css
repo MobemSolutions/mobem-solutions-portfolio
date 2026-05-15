@@ -30,8 +30,8 @@
   /* Gray — darkened to oklch(0.46) for WCAG AA 4.5:1 on Paper background */
   --muted-foreground: oklch(0.46 0 0);
 
-  /* Signal Red #E63030 */
-  --accent: oklch(0.51 0.22 27);
+  /* Nouveau Rouge - Hex: #E63946, OKLCH: oklch(0.605 0.203 27.5) */
+  --accent: oklch(0.605 0.203 27.5);
   --accent-foreground: oklch(0.973 0.003 80);
 
   --destructive: oklch(0.51 0.22 27);
@@ -86,16 +86,16 @@
   --muted: oklch(0.20 0.008 55);
   --muted-foreground: oklch(0.68 0.008 55);
 
-  /* Signal rouge — strictement inchangé (brand mark) */
-  --accent: oklch(0.51 0.22 27);
+  /* Nouveau Rouge - Hex: #E63946, OKLCH: oklch(0.605 0.203 27.5) */
+  --accent: oklch(0.605 0.203 27.5);
   --accent-foreground: oklch(0.965 0.005 80);
 
-  --destructive: oklch(0.51 0.22 27);
+  --destructive: oklch(0.605 0.203 27.5);
   --destructive-foreground: oklch(0.965 0.005 80);
 
   --border: oklch(0.28 0.008 55);
   --input: oklch(0.28 0.008 55);
-  --ring: oklch(0.51 0.22 27);
+  --ring: oklch(0.605 0.203 27.5);
 
   /* Bande inversée en dark = encore plus profonde que le bg, pas une bande claire.
      Texte cream pour lisibilité. */

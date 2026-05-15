@@ -7,7 +7,7 @@ import { METIER_CATEGORIES, REGIONS, ALL_METIERS, ALL_VILLES } from "@/lib/seo-d
 
 const PAGES_PRINCIPALES = [
   { name: "Accueil", href: "/", num: "01" },
-  { name: "Portfolio", href: "/realisations", num: "02" },
+  { name: "Réalisations", href: "/realisations", num: "02" },
   { name: "Tarifs", href: "/#pricing", num: "03" },
   { name: "Comment ça marche", href: "/methode", num: "04" },
   { name: "Blog", href: "/blog", num: "05" },
@@ -36,7 +36,7 @@ const TABS: { id: TabId; label: string }[] = [
 
 export function PlanDuSiteCatalog() {
   const [query, setQuery] = useState("")
-  const [activeTab, setActiveTab] = useState<TabId>("metiers")
+  const [activeTab, setActiveTab] = useState<TabId>("principales")
   const [expandedMetiers, setExpandedMetiers] = useState<Set<string>>(new Set())
 
   const filteredMetiers = useMemo(() => {

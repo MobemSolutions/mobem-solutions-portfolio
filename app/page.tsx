@@ -149,6 +149,26 @@ export default function HomePage() {
         <HeroSection />
         <LogoMarquee />
         <ServicesSection />
+        {/* Section "À propos" redesign - éditorial avec fond sombre */}
+        <section className="bg-inverted text-inverted-foreground py-20 lg:py-28 text-center" aria-labelledby="about-us-heading">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+            <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-accent block mb-4">
+              Qui sommes-nous ?
+            </span>
+            <h2 id="about-us-heading" className="font-bold tracking-[-0.03em] leading-[0.95] text-[clamp(36px,4vw,64px)] mb-6">
+              Notre équipe, <em className="font-serif font-normal italic">notre histoire.</em>
+            </h2>
+            <p className="text-[17px] leading-[1.5] text-inverted-foreground/75 mb-10 max-w-[60ch] mx-auto">
+              Découvrez les valeurs qui nous animent, les experts qui composent Mobem Solutions, et notre vision pour accompagner les PME et ETI.
+            </p>
+            <a href="/a-propos" className="inline-flex items-center gap-3 px-8 py-5 bg-accent text-accent-foreground font-medium text-[14px] cta-hover transition-colors">
+              En savoir plus sur nous
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                <path d="M12 5v14M5 12l7 7 7-7" />
+              </svg>
+            </a>
+          </div>
+        </section>
         <ProofSection />
         <PricingSection />
         <TeamSection />
