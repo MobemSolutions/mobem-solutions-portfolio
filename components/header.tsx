@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { Menu, X, Moon, Sun, ArrowRight } from "lucide-react"
 import { useTheme } from "next-themes"
 import { cn } from "@/lib/utils"
@@ -10,7 +10,9 @@ import { cn } from "@/lib/utils"
 const navigation = [
   { num: "01", name: "Accueil", href: "/" },
   { num: "02", name: "Réalisations", href: "/realisations", external: true },
-  { num: "03", name: "Blog", href: "/blog", external: true },
+  { num: "03", name: "Services", href: "/#services", external: true },
+  { num: "05", name: "Blog", href: "/blog", external: true },  
+  { num: "06", name: "À propos", href: "/a-propos", external: true },
 ]
 
 function triggerRipple(e: React.PointerEvent<HTMLElement>) {
@@ -30,9 +32,7 @@ export function Header() {
   const { resolvedTheme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const pathname = usePathname()
-
-  const closeMobile = () => setIsMobileMenuOpen(false)
-
+  const router = useRouter()
   useEffect(() => {
     setMounted(true)
     const handleScroll = () => setIsScrolled(window.scrollY > 20)
@@ -40,15 +40,39 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith("#")) {
-      e.preventDefault()
-      const element = document.querySelector(href)
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" })
+  useEffect(() => {
+    if (pathname !== "/") return
+    const target = sessionStorage.getItem("pendingScroll")
+    if (!target) return
+    // Don't remove here: Strict Mode runs effects twice, the cleanup would cancel
+    // the first interval and the second run needs sessionStorage still intact.
+    let attempts = 0
+    const poll = setInterval(() => {
+      const el = document.querySelector(target)
+      if (el) {
+        clearInterval(poll)
+        sessionStorage.removeItem("pendingScroll")
+        el.scrollIntoView({ behavior: "smooth" })
+      } else if (++attempts >= 40) {
+        clearInterval(poll)
+        sessionStorage.removeItem("pendingScroll")
       }
-      setIsMobileMenuOpen(false)
+    }, 50)
+    return () => clearInterval(poll)
+  }, [pathname])
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    const anchor = href.startsWith("/#") ? href.slice(1) : href.startsWith("#") ? href : null
+    if (anchor) {
+      e.preventDefault()
+      if (pathname === "/") {
+        document.querySelector(anchor)?.scrollIntoView({ behavior: "smooth" })
+      } else {
+        sessionStorage.setItem("pendingScroll", anchor)
+        router.push("/")
+      }
     }
+    setIsMobileMenuOpen(false)
   }
 
   return (
@@ -86,7 +110,7 @@ export function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                onClick={item.external ? undefined : (e) => handleNavClick(e, item.href)}
+                onClick={(e) => handleNavClick(e, item.href)}
                 onPointerDown={triggerRipple}
                 className="relative overflow-hidden inline-flex items-baseline gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                 data-cursor="hover"
@@ -162,7 +186,7 @@ export function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                onClick={item.external ? closeMobile : (e) => handleNavClick(e, item.href)}
+                onClick={(e) => handleNavClick(e, item.href)}
                 className="flex items-baseline gap-3 px-4 py-3 text-base font-medium text-muted-foreground transition-colors hover:text-foreground border-b border-border"
                 tabIndex={isMobileMenuOpen ? 0 : -1}
               >

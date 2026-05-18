@@ -197,13 +197,14 @@ export default async function CaseDetailPage({ params }: Props) {
         </section>
 
         {/* ── Fiche image ───────────────────────────────────────────── */}
-        {c.ficheImage?.asset && (
+        {c.ficheImage?.asset?.url && (
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10">
             <div className="relative aspect-[16/7] w-full overflow-hidden border border-border">
               <Image
-                src={urlFor(c.ficheImage).width(2560).auto('format').url()}
+                src={`${c.ficheImage.asset.url}?w=2560&auto=format`}
                 alt={c.ficheImage.alt ?? c.client}
                 fill
+                unoptimized
                 className="object-cover"
                 priority
                 sizes="(max-width: 1280px) 100vw, 1280px"

@@ -40,7 +40,7 @@ export function ServicesSection() {
   const [activeStep, setActiveStep] = useState(0)
 
   return (
-    <section id="services" className="border-t border-border" aria-labelledby="services-heading">
+    <section id="methode" className="border-t border-border" aria-labelledby="services-heading">
 
       {/* Section head */}
       <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-8 lg:py-10 border-b border-border">

@@ -4,7 +4,7 @@ import Image from "next/image"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { CASES, type Case } from "@/lib/cases"
-import { getAllRealisations, urlFor } from "@/lib/sanity"
+import { getAllRealisations } from "@/lib/sanity"
 
 export const metadata: Metadata = {
   title: "Réalisations — Mobem Solutions",
@@ -66,11 +66,12 @@ function CaseCard({ c }: { c: Case }) {
       data-cursor="hover"
     >
       <div className="relative aspect-[4/3] bg-foreground/[.06] group-hover:bg-background/10 transition-colors overflow-hidden">
-        {c.coverImage?.asset ? (
+        {c.coverImage?.asset?.url ? (
           <Image
-            src={urlFor(c.coverImage).width(1200).auto('format').url()}
+            src={`${c.coverImage.asset.url}?w=1200&auto=format`}
             alt={c.coverImage.alt ?? c.client}
             fill
+            unoptimized
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 640px) 340px, (max-width: 1024px) 50vw, 33vw"
           />

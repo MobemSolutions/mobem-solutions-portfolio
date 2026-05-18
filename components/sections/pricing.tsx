@@ -308,7 +308,7 @@ export function PricingSection() {
   const [activeSub, setActiveSub]       = useState("A3")
 
   return (
-    <section id="prestations" className="border-t border-border" aria-labelledby="pricing-heading">
+    <section id="services" className="border-t border-border" aria-labelledby="pricing-heading">
 
       {/* Section label */}
       <div className="px-4 sm:px-6 lg:px-8 py-5 lg:py-6 border-b border-border">

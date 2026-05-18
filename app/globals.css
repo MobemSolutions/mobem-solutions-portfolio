@@ -34,20 +34,20 @@
   --accent: oklch(0.605 0.203 27.5);
   --accent-foreground: oklch(0.973 0.003 80);
 
-  --destructive: oklch(0.51 0.22 27);
+  --destructive: oklch(0.605 0.203 27.5);
   --destructive-foreground: oklch(0.973 0.003 80);
 
   /* Rule #E2E2E2 */
   --border: oklch(0.90 0 0);
   --input: oklch(0.90 0 0);
-  --ring: oklch(0.51 0.22 27);
+  --ring: oklch(0.605 0.203 27.5);
 
   /* Inverted band — bande sombre persistante (Proof / Finder / Footer / logo tile)
      Ne suit pas l'inversion de thème : reste Ink/Paper en dark mode comme en light. */
   --inverted: oklch(0.07 0 0);
   --inverted-foreground: oklch(0.973 0.003 80);
 
-  --chart-1: oklch(0.51 0.22 27);
+  --chart-1: oklch(0.605 0.203 27.5);
   --chart-2: oklch(0.55 0.15 200);
   --chart-3: oklch(0.45 0.12 260);
   --chart-4: oklch(0.65 0.18 145);
@@ -63,7 +63,7 @@
   --sidebar-accent: oklch(0.95 0 0);
   --sidebar-accent-foreground: oklch(0.07 0 0);
   --sidebar-border: oklch(0.90 0 0);
-  --sidebar-ring: oklch(0.51 0.22 27);
+  --sidebar-ring: oklch(0.605 0.203 27.5);
 }
 
 .dark {
@@ -102,7 +102,7 @@
   --inverted: oklch(0.055 0.012 55);
   --inverted-foreground: oklch(0.965 0.005 80);
 
-  --chart-1: oklch(0.51 0.22 27);
+  --chart-1: oklch(0.605 0.203 27.5);
   --chart-2: oklch(0.60 0.15 200);
   --chart-3: oklch(0.55 0.12 260);
   --chart-4: oklch(0.68 0.18 145);
@@ -110,12 +110,12 @@
 
   --sidebar: oklch(0.13 0.010 55);
   --sidebar-foreground: oklch(0.965 0.005 80);
-  --sidebar-primary: oklch(0.51 0.22 27);
+  --sidebar-primary: oklch(0.605 0.203 27.5);
   --sidebar-primary-foreground: oklch(0.965 0.005 80);
   --sidebar-accent: oklch(0.20 0.008 55);
   --sidebar-accent-foreground: oklch(0.965 0.005 80);
   --sidebar-border: oklch(0.28 0.008 55);
-  --sidebar-ring: oklch(0.51 0.22 27);
+  --sidebar-ring: oklch(0.605 0.203 27.5);
 }
 
 @theme inline {
@@ -323,9 +323,11 @@
 .bento-hover {
   transition: background 220ms ease, color 220ms ease;
 }
-.bento-hover:hover {
-  background: var(--color-foreground);
-  color: var(--color-background);
+@media (hover: hover) {
+  .bento-hover:hover {
+    background: var(--color-foreground);
+    color: var(--color-background);
+  }
 }
 
 /* ─── CTA button hover ────────────────────────────── */
@@ -341,6 +343,12 @@
   background: oklch(0.22 0 0);
   color: oklch(0.973 0.003 80);
   border-color: oklch(0.35 0 0);
+}
+.cta-hover.cta-hover-on-dark:hover,
+.dark .cta-hover.cta-hover-on-dark:hover {
+  background: oklch(0.973 0.003 80);
+  color: oklch(0.07 0 0);
+  border-color: oklch(0.973 0.003 80);
 }
 
 /* ─── FAQ accordion ───────────────────────────────── */

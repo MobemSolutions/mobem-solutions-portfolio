@@ -7,7 +7,7 @@ const OG_CRAWLERS = [
   'rogerbot', 'embedly', 'quora link preview', 'XING-contenttabreceiver',
 ]
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl
 
   if (!pathname.startsWith('/opengraph-image')) return NextResponse.next()

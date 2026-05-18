@@ -167,8 +167,8 @@ const REALISATION_FIELDS = `
   body[] { title, content },
   stack,
   quote { text, author, role },
-  coverImage { asset, alt },
-  ficheImage { asset, alt },
+  coverImage { "asset": asset->{ _id, url }, alt },
+  ficheImage { "asset": asset->{ _id, url }, alt },
   performance { performance, accessibility, seo, bestPractices }
 `
 

@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { draftMode } from "next/headers"
 import Link from "next/link"
+import Image from "next/image"
 import { PortableText } from "@portabletext/react"
 import {
   getPostBySlug,
@@ -359,7 +360,19 @@ export default async function ArticlePage({ params }: PageProps) {
                   className="group bento-hover p-7 border-r border-b border-border flex flex-col gap-4 transition-colors"
                   data-cursor="hover"
                 >
-                  <div className="aspect-[4/3] bg-secondary" />
+                  {rpost.mainImage?.asset ? (
+                    <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
+                      <Image
+                        src={urlFor(rpost.mainImage).width(600).height(450).url()}
+                        alt={rpost.mainImage.alt || rpost.title}
+                        fill
+                        unoptimized
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                  ) : (
+                    <div className="aspect-[4/3] bg-secondary" />
+                  )}
                   <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-accent">
                     {rcat}
                   </span>
@@ -392,14 +405,15 @@ export default async function ArticlePage({ params }: PageProps) {
               Rejoignez les dirigeants qui lisent notre bulletin mensuel : trois constats terrain, deux outils, une question.
             </p>
           </div>
-          <Link
+          {/* <Link
             href="/blog#newsletter"
             className="inline-flex items-center gap-3 px-7 py-4 bg-accent text-accent-foreground font-medium text-[14px] hover:bg-background hover:text-foreground transition-colors whitespace-nowrap"
             data-cursor="hover"
           >
             S&apos;abonner{" "}
             <ArrowDiag />
-          </Link>
+          </Link> */}
+          <p className="font-mono text-[11px] uppercase tracking-[0.06em] text-background/50 mb-3">A venir...</p>
         </div>
       </section>
 
