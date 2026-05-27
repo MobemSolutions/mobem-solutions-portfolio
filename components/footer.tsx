@@ -98,7 +98,7 @@ export function Footer() {
       <div className="border-t border-inverted-foreground/10 px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
         <div className="py-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 text-[11px] uppercase tracking-[0.06em] text-inverted-foreground/45 font-medium">
           <span>© Mobem Solutions · {new Date().getFullYear()} · Tous droits réservés</span>
-          <span className="whitespace-nowrap">SIRET&nbsp;: 91514447100017</span>
+          {/* <span className="whitespace-nowrap">SIRET&nbsp;: 91514447100017</span> */}
           <span>Nantes · Pays de la Loire · France</span>
         </div>
       </div>

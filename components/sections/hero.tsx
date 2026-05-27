@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 const kpis = [
-  { key: "Diagnostic", value: "90 min", desc: "Audit gratuit, sans engagement" },
+  { key: "Diagnostic", value: "45 min", desc: "Audit gratuit, sans engagement" },
   { key: "Livraison", value: "10 j", desc: "Sites essentiels en production" },
   { key: "Lighthouse", value: "90+", desc: "Performance garantie au contrat" },
   { key: "Support", value: "24 h", desc: "SLA réponse inclus" },
@@ -65,7 +65,7 @@ export function HeroSection() {
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </Link>
             <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
-              Sans engagement · 90 min · Réponse 24 h
+              Sans engagement · 45 min · Réponse 24 h
             </span>
             <Link
               href="#services"

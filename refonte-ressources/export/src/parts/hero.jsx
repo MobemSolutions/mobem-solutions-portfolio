@@ -93,7 +93,7 @@ function Hero({ variant, withImages }) {
         marginTop: 56,
       }}>
         {[
-          ['Diagnostic', '90 min', 'Audit gratuit, sans engagement'],
+          ['Diagnostic', '45 min', 'Audit gratuit, sans engagement'],
           ['Livraison', '10 jours', 'Sites essentiels en production'],
           ['Lighthouse', '90+', 'Performance garantie au contrat'],
           ['Suivi', '24 h', 'SLA réponse support inclus'],

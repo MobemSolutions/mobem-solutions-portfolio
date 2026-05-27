@@ -214,7 +214,7 @@ export default function MethodePage() {
                   <ArrowRight className="w-4 h-4" aria-hidden="true" />
                 </Link>
                 <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
-                  Diagnostic gratuit · 90 min · Sans engagement
+                  Diagnostic gratuit · 45 min · Sans engagement
                 </span>
                 <Link
                   href="/realisations"
