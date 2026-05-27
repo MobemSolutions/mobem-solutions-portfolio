@@ -199,27 +199,6 @@
   }
 }
 
-/* ─── Marquee ─────────────────────────────────────── */
-.marquee-track {
-  display: flex;
-  animation: marquee-scroll var(--marquee-duration, 3s) linear infinite;
-  white-space: nowrap;
-  will-change: transform;
-}
-.marquee-wrap:hover .marquee-track,
-.marquee-wrap:focus-within .marquee-track {
-  animation-play-state: paused;
-}
-@keyframes marquee-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-@media (min-width: 640px) {
-  .marquee-track { --marquee-duration: 4.5s; }
-}
-@media (min-width: 1024px) {
-  .marquee-track { --marquee-duration: 5.5s; }
-}
 
 /* ─── Nav ripple ──────────────────────────────────── */
 .nav-ripple {
