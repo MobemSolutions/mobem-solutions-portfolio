@@ -43,7 +43,7 @@ export function Footer() {
               de prescrire.
             </h2>
             <p className="mt-6 text-[14px] text-inverted-foreground/55 leading-relaxed max-w-sm">
-              Agence digitale à Nantes — ingénierie, design et stratégie pour PME et ETI ambitieuses.
+              Agence digitale nantaise. Ingénierie, design et stratégie pour PME et ETI ambitieuses.
             </p>
           </div>
 

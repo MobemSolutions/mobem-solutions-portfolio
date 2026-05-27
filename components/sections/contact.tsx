@@ -166,9 +166,9 @@ export function ContactSection() {
             Diagnostic
           </h2>
         </div>
-        <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
+        {/* <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
           45 minutes · sans engagement
-        </span>
+        </span> */}
       </div>
 
       {/* Editorial header */}
@@ -342,7 +342,7 @@ export function ContactSection() {
             {/* Calendly popup card */}
             <div className="relative border border-accent/30 bg-accent/5 p-6">
               <div className="flex items-baseline justify-between mb-5">
-                <span className="font-mono text-[10px] uppercase tracking-[0.06em] text-accent">B · Calendly</span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.06em] text-accent">Calendly</span>
                 <CalendarDays className="w-4 h-4 text-accent" aria-hidden="true" />
               </div>
               <h3 className="text-base font-bold text-foreground mb-1">

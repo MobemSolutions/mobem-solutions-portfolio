@@ -11,28 +11,28 @@ const steps = [
     title: "Découverte",
     tagline: "Brief stratégique, zéro template",
     description: "On commence par comprendre votre métier, vos utilisateurs et vos objectifs. Pas de template préfabriqué — chaque projet démarre par un audit et un brief stratégique.",
-    duration: "Jour 1–2",
+    duration: "",
   },
   {
     number: "02",
     title: "Design",
     tagline: "Maquettes validées avant de coder",
     description: "Nos maquettes sont validées avec vous avant de coder une seule ligne. UX d'abord, esthétique ensuite — des interfaces qui convertissent, pas juste qui plaisent.",
-    duration: "Jour 3–5",
+    duration: "",
   },
   {
     number: "03",
     title: "Développement",
     tagline: "Next.js, propre, audité Lighthouse",
     description: "Stack moderne (Next.js, Tailwind), code propre, performances au cœur. Chaque livraison est testée sur mobile, desktop et auditée Lighthouse avant d'être présentée.",
-    duration: "Jour 5–9",
+    duration: "",
   },
   {
     number: "04",
     title: "Lancement",
-    tagline: "Live en J10 — domaine, SSL, rapport",
+    tagline: "Domaine, SSL, rapport",
     description: "Mise en ligne sur Vercel avec domaine, SSL et redirections configurés. Vous repartez avec un site live, un rapport de performance et un associé joignable.",
-    duration: "Jour 10",
+    duration: "",
   },
 ]
 
@@ -47,9 +47,9 @@ export function ServicesSection() {
         <h2 id="services-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
           Méthode
         </h2>
-        <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">
+        {/* <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">
           Diagnostiquer avant de prescrire
-        </span>
+        </span> */}
       </div>
 
       {/* Content */}
@@ -57,20 +57,13 @@ export function ServicesSection() {
 
         {/* Left — editorial quote */}
         <div className="lg:w-[34%] px-4 sm:px-6 lg:px-8 py-14 lg:py-20 lg:border-r lg:border-border shrink-0 relative overflow-hidden">
-          {/* Decorative oversized index */}
-          <span
-            className="hidden lg:block absolute bottom-6 right-8 font-bold text-[clamp(80px,9vw,140px)] leading-none tracking-[-0.04em] text-foreground/[0.04] select-none pointer-events-none tabular-nums"
-            aria-hidden="true"
-          >
-            01
-          </span>
           <h3 className="font-serif font-normal text-[clamp(36px,4.5vw,56px)] leading-[0.95] tracking-[-0.02em] mb-6 italic">
             On commence par{" "}
             <em className="text-accent not-italic font-serif">écouter.</em>
           </h3>
           <p className="text-[15px] leading-relaxed text-muted-foreground max-w-sm">
             Nous refusons les briefs livrés tels quels. Une bonne réponse part toujours
-            d&apos;une bonne question — et d&apos;un audit sans complaisance.
+            d&apos;une bonne question et d&apos;un audit sans complaisance.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row lg:flex-col gap-3">
             <Link
@@ -99,7 +92,7 @@ export function ServicesSection() {
                     : "text-muted-foreground hover:bg-secondary"
                 )}
               >
-                {step.number}
+                {step.title}
               </button>
             ))}
           </div>
@@ -108,7 +101,6 @@ export function ServicesSection() {
           <div className="lg:hidden">
             {steps.filter((_, i) => i === activeStep).map((step) => (
               <div key={step.number} className="px-4 sm:px-6 py-8">
-                <div className="font-mono text-[14px] text-accent font-medium mb-3">{step.number}</div>
                 <div className="text-[24px] font-bold tracking-[-0.025em] leading-none mb-3">{step.title}</div>
                 <div className="text-[13px] text-muted-foreground leading-relaxed mb-4">{step.description}</div>
                 <div className="flex items-center justify-between">
@@ -131,8 +123,7 @@ export function ServicesSection() {
                   i < steps.length - 1 && "border-b border-border"
                 )}
               >
-                <span className="col-span-1 font-mono text-[14px] text-accent font-medium">{step.number}</span>
-                <div className="col-span-5">
+                <div className="col-span-6">
                   <div className="text-[22px] font-bold tracking-[-0.025em] leading-none mb-2">{step.title}</div>
                   <div className="text-[13px] text-muted-foreground group-hover:text-background/60 leading-relaxed transition-colors">{step.description}</div>
                 </div>
@@ -140,7 +131,7 @@ export function ServicesSection() {
                   <span className="tabular-nums whitespace-nowrap">{step.duration}</span>
                 </div>
                 <div className="col-span-4 text-right">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.06em] text-foreground/70 group-hover:text-background/60 transition-colors">Livrable —</span>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.06em] text-foreground/70 group-hover:text-background/60 transition-colors">Livrable</span>
                   <br />
                   <span className="text-[13px] mt-1 inline-block">{step.tagline}</span>
                 </div>

@@ -22,7 +22,7 @@ const team = [
   {
     num: "01",
     name: "Nathan Portier",
-    role: "Mandataire — Croissance & Communication",
+    role: "Mandataire · Croissance & Communication",
     bio: "Stratège orienté résultats, Nathan pilote Mobem Solutions et assure la cohérence entre les objectifs business et leur exécution. Expert en communication et acquisition, il transforme chaque projet en levier de croissance mesurable.",
     expertise: ["Stratégie digitale", "Communication", "Growth Marketing", "Acquisition"],
     linkedin: "https://www.linkedin.com/in/nathan-portier/",
@@ -32,7 +32,7 @@ const team = [
   {
     num: "02",
     name: "Arnaud Clavier",
-    role: "Co-Mandataire — Développement Technique",
+    role: "Co-Mandataire · Développement Technique",
     bio: "Architecte de solutions digitales, Arnaud transforme les idées complexes en architectures robustes et évolutives. Garant technique du collectif, il s'assure que chaque livraison répond aux standards de performance et de sécurité les plus exigeants.",
     expertise: ["Next.js / React", "Architecture système", "TypeScript", "Sécurité web"],
     linkedin: "https://www.linkedin.com/in/arnaud-clvr/",
@@ -132,7 +132,7 @@ export default function AProposPage() {
 
         {/* Hero — editorial asymmetric */}
         <section className="border-t border-border relative" aria-labelledby="apropos-hero">
-          <div className="hidden lg:flex absolute right-0 top-0 h-full items-start pt-8 pr-6 pointer-events-none" aria-hidden="true">
+          {/* <div className="hidden lg:flex absolute right-0 top-0 h-full items-start pt-8 pr-6 pointer-events-none" aria-hidden="true">
             <div className="flex flex-col items-center gap-4">
               <div className="w-px h-16 bg-border" />
               <span
@@ -142,7 +142,7 @@ export default function AProposPage() {
                 Atelier · Nantes · 03 associés
               </span>
             </div>
-          </div>
+          </div> */}
 
           <div className="px-4 sm:px-6 lg:px-8 pt-14 sm:pt-20 lg:pt-28 mx-auto max-w-7xl">
             <EditorialBadge className="mb-10">Qui sommes-nous</EditorialBadge>
@@ -156,9 +156,6 @@ export default function AProposPage() {
             </h1>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 border-t border-border pt-10 pb-14 lg:pb-20">
-              <div className="hidden lg:flex lg:col-span-1 items-start pt-1">
-                <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">00</span>
-              </div>
               <div className="lg:col-span-7 lg:pr-10">
                 <p className="text-[17px] sm:text-[18px] leading-[1.5] text-muted-foreground max-w-[62ch]">
                   Mobem Solutions est fondée par trois associés complémentaires : Growth,
@@ -183,9 +180,9 @@ export default function AProposPage() {
             <h2 id="gme-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
               Philosophie
             </h2>
-            <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
+            {/* <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
               Growth · Marketing · Engineering
-            </span>
+            </span> */}
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3">
@@ -198,12 +195,9 @@ export default function AProposPage() {
                   i < gmeBlocks.length - 1 && "border-b lg:border-b-0 lg:border-r border-border",
                 )}
               >
-                <div className="flex items-baseline justify-between">
+                <div>
                   <span className="font-serif italic font-bold text-[clamp(72px,9vw,120px)] leading-none tracking-[-0.04em] text-accent group-hover:text-background transition-colors">
                     {block.letter}
-                  </span>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground group-hover:text-background/55 transition-colors">
-                    0{i + 1}
                   </span>
                 </div>
                 <div>
@@ -223,9 +217,9 @@ export default function AProposPage() {
             <h2 id="team-page-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
               L&apos;équipe
             </h2>
-            <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
+            {/* <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
               Trois associés · interlocuteurs directs
-            </span>
+            </span> */}
           </div>
 
           <div className="overflow-x-auto lg:overflow-visible scrollbar-none snap-x snap-mandatory lg:snap-none">
@@ -239,10 +233,7 @@ export default function AProposPage() {
                     i < 2 && "lg:border-r lg:border-border",
                   )}
                 >
-                  <div className="flex items-baseline justify-between mb-8">
-                    <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground group-hover:text-background/60 transition-colors">
-                      {member.num} · {member.pole}
-                    </span>
+                  <div className="flex justify-end mb-8">
                     <div className="w-10 h-10 border border-current/20 flex items-center justify-center font-mono text-[11px] text-foreground/70 group-hover:text-background/70 transition-colors">
                       {member.initials}
                     </div>
@@ -288,9 +279,9 @@ export default function AProposPage() {
             <h2 id="values-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
               ADN
             </h2>
-            <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
+            {/* <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
               Ce qui nous guide au quotidien
-            </span>
+            </span> */}
           </div>
 
           <div role="list">

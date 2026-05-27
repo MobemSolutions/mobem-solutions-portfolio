@@ -9,7 +9,7 @@ const team = [
   {
     num: "01",
     name: "Nathan Portier",
-    role: "Mandataire — Croissance & Communication",
+    role: "Mandataire · Croissance & Communication",
     description: "Stratège orienté résultats, Nathan assure le pilotage de Mobem Solutions et la cohérence entre objectifs business et exécution. Expert en communication, il transforme chaque projet en levier de croissance.",
     expertise: ["Stratégie", "Communication", "Growth"],
     linkedin: "https://www.linkedin.com/in/nathan-portier/",
@@ -19,7 +19,7 @@ const team = [
   {
     num: "02",
     name: "Arnaud Clavier",
-    role: "Co-Mandataire — Développement Technique",
+    role: "Co-Mandataire · Développement Technique",
     description: "Architecte de solutions digitales, Arnaud transforme les idées complexes en architectures robustes et évolutives. Garant technique du collectif, il supervise le développement et garantit performance et sécurité.",
     expertise: ["Architecture", "Développement", "Sécurité"],
     linkedin: "https://www.linkedin.com/in/arnaud-clvr/",
@@ -49,9 +49,9 @@ export function TeamSection() {
             Équipe
           </h2>
         </div>
-        <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">
+        {/* <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">
           Trois associés · Une vision commune
-        </span>
+        </span> */}
         <span className="sm:hidden font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground" aria-hidden="true">
           Faire défiler →
         </span>
@@ -69,8 +69,7 @@ export function TeamSection() {
               i < 2 && "lg:border-r lg:border-border"
             )}
           >
-            <div className="flex items-baseline justify-between mb-6">
-              <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground group-hover:text-background/60 transition-colors">{member.num}</span>
+            <div className="flex justify-end mb-6">
               <div className="w-9 h-9 border border-current/20 flex items-center justify-center font-mono text-[11px] text-foreground/70 group-hover:text-background/70 transition-colors">
                 {member.initials}
               </div>

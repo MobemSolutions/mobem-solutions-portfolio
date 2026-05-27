@@ -134,8 +134,13 @@ function OfferCard({ offer, idx }: { offer: typeof OFFERS[number]; idx: number }
     >
       {/* Decorative background index */}
       <span
-        className="absolute bottom-6 right-6 font-bold leading-none tracking-[-0.05em] select-none pointer-events-none tabular-nums text-[clamp(80px,10vw,130px)]"
-        style={{ opacity: offer.flagship ? 0.07 : 0.04 }}
+        className={cn(
+          "absolute bottom-6 right-6 font-bold leading-none tracking-[-0.05em] select-none pointer-events-none tabular-nums text-[clamp(80px,10vw,130px)]",
+          offer.flagship
+            ? "opacity-[0.14]"
+            : "opacity-[0.09] group-hover:opacity-[0.22]"
+        )}
+        style={offer.flagship ? { color: "oklch(0.07 0 0)" } : undefined}
         aria-hidden="true"
       >
         {String(idx + 1).padStart(2, "0")}
@@ -144,7 +149,6 @@ function OfferCard({ offer, idx }: { offer: typeof OFFERS[number]; idx: number }
       {/* Header */}
       <div className="flex items-start justify-between mb-10 gap-4">
         <div className="flex flex-col gap-1.5">
-          <span className="font-mono text-[10px] uppercase tracking-[0.1em] opacity-50">{offer.code}</span>
           {offer.flagship && (
             <span className="font-mono text-[10px] uppercase tracking-[0.08em] px-2.5 py-1 border border-current self-start">
               Recommandé
@@ -215,15 +219,20 @@ function SubCard({ sub, idx }: { sub: typeof SUBSCRIPTIONS[number]; idx: number 
       className={cn(
         "group relative flex flex-col px-8 py-10 lg:px-12 lg:py-12 lg:min-h-[580px] transition-colors overflow-hidden",
         sub.flagship
-          ? "bg-inverted text-inverted-foreground"
+          ? "bg-accent text-accent-foreground"
           : "bento-hover",
         idx < 2 && "lg:border-r lg:border-border"
       )}
     >
       {/* Decorative background index */}
       <span
-        className="absolute bottom-6 right-6 font-bold leading-none tracking-[-0.05em] select-none pointer-events-none tabular-nums text-[clamp(80px,10vw,130px)]"
-        style={{ opacity: sub.flagship ? 0.06 : 0.04 }}
+        className={cn(
+          "absolute bottom-6 right-6 font-bold leading-none tracking-[-0.05em] select-none pointer-events-none tabular-nums text-[clamp(80px,10vw,130px)]",
+          sub.flagship
+            ? "opacity-[0.14]"
+            : "opacity-[0.09] group-hover:opacity-[0.22]"
+        )}
+        style={sub.flagship ? { color: "oklch(0.07 0 0)" } : undefined}
         aria-hidden="true"
       >
         {String(idx + 1).padStart(2, "0")}
@@ -232,7 +241,6 @@ function SubCard({ sub, idx }: { sub: typeof SUBSCRIPTIONS[number]; idx: number 
       {/* Header */}
       <div className="flex items-start justify-between mb-10 gap-4">
         <div className="flex flex-col gap-1.5">
-          <span className="font-mono text-[10px] uppercase tracking-[0.1em] opacity-50">{sub.code}</span>
           {sub.flagship && (
             <span className="font-mono text-[10px] uppercase tracking-[0.08em] px-2.5 py-1 border border-current self-start">
               Recommandé
@@ -288,7 +296,7 @@ function SubCard({ sub, idx }: { sub: typeof SUBSCRIPTIONS[number]; idx: number 
           className={cn(
             "mt-5 inline-flex items-center gap-2.5 px-5 py-3 text-[13px] font-semibold transition-colors self-start border",
             sub.flagship
-              ? "border-inverted-foreground bg-inverted-foreground text-inverted hover:bg-transparent hover:text-inverted-foreground"
+              ? "border-accent-foreground bg-accent-foreground text-accent hover:bg-transparent hover:text-accent-foreground"
               : "border-current cta-hover"
           )}
         >
@@ -332,9 +340,6 @@ export function PricingSection() {
               : "hover:bg-secondary"
           )}
         >
-          <span className={cn("font-mono text-[11px] uppercase tracking-[0.08em]", tab === "offres" ? "text-background/50" : "text-muted-foreground")}>
-            01
-          </span>
           <span className="text-[clamp(20px,2.5vw,28px)] font-bold tracking-[-0.025em] leading-none">Offres</span>
           <span className={cn("font-mono text-[10px] uppercase tracking-[0.06em]", tab === "offres" ? "text-background/45" : "text-muted-foreground")}>
             Sites web · Projets uniques
@@ -353,9 +358,6 @@ export function PricingSection() {
               : "hover:bg-secondary"
           )}
         >
-          <span className={cn("font-mono text-[11px] uppercase tracking-[0.08em]", tab === "abonnements" ? "text-background/50" : "text-muted-foreground")}>
-            02
-          </span>
           <span className="text-[clamp(20px,2.5vw,28px)] font-bold tracking-[-0.025em] leading-none">Abonnements</span>
           <span className={cn("font-mono text-[10px] uppercase tracking-[0.06em]", tab === "abonnements" ? "text-background/45" : "text-muted-foreground")}>
             Maintenance · SEO · Croissance

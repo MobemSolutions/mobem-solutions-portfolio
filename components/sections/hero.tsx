@@ -16,12 +16,12 @@ export function HeroSection() {
       <div className="hidden lg:flex absolute right-0 top-0 h-full items-start pt-8 pr-6 pointer-events-none" aria-hidden="true">
         <div className="flex flex-col items-center gap-4">
           <div className="w-px h-16 bg-border" />
-          <span
+          {/* <span
             className="font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/25 select-none"
             style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
           >
             Nantes · France · 2026
-          </span>
+          </span> */}
         </div>
       </div>
 
@@ -40,40 +40,38 @@ export function HeroSection() {
         </h1>
 
         {/* Sub-row */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 border-t border-border pt-10 pb-14 lg:pb-20">
-          <div className="hidden lg:flex lg:col-span-1 items-start pt-1">
-            <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">01</span>
-          </div>
-          <div className="lg:col-span-5 lg:pr-10">
-            <p className="text-[17px] sm:text-[18px] leading-[1.5] text-muted-foreground">
-              On ne livre pas un site. On diagnostique, on prescrit, on exécute — pour que chaque clic,
-              chaque page, chaque ligne de code serve la croissance de votre entreprise.
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-8 border-t border-border pt-10 pb-14 lg:pb-20">
+          {/* Left — pitch */}
+          <p className="text-[17px] sm:text-[18px] leading-[1.6] text-muted-foreground lg:pr-8">
+            On ne livre pas un site web. On diagnostique votre situation, on conçoit la bonne solution
+            et on l&apos;exécute proprement. Pour que votre présence en ligne travaille vraiment pour vous.
+          </p>
+
+          {/* Right — engagement + CTA */}
+          <div className="flex flex-col gap-5 lg:pl-12 lg:border-l lg:border-border">
+            <p className="text-[14px] leading-relaxed text-muted-foreground">
+              Feuille de route trimestrielle. Tarification à la valeur rendue.<br className="hidden lg:block" />
+              Trois associés, un seul contact direct.
             </p>
-          </div>
-          <div className="lg:col-span-3 lg:px-8 lg:border-l lg:border-border flex flex-col gap-2">
-            <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">Engagement</span>
-            <p className="text-[14px] leading-relaxed text-foreground">
-              Roadmap trimestrielle. Tarification à la valeur. Un seul interlocuteur, trois associés.
-            </p>
-          </div>
-          <div className="lg:col-span-3 lg:px-8 lg:border-l lg:border-border flex flex-col gap-2 items-start">
-            <Link
-              href="#contact"
-              className="inline-flex items-center gap-2.5 px-5 py-3.5 bg-accent text-accent-foreground text-[15px] font-semibold transition-colors cta-hover"
-            >
-              Démarrer un diagnostic
-              <ArrowRight className="w-4 h-4" aria-hidden="true" />
-            </Link>
-            <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
-              Sans engagement · 45 min · Réponse 24 h
-            </span>
-            <Link
-              href="#services"
-              className="inline-flex items-center gap-2.5 px-5 py-3.5 border border-border text-sm font-medium transition-colors hover:bg-secondary mt-2"
-            >
-              Voir les services
-              <ArrowRight className="w-4 h-4" aria-hidden="true" />
-            </Link>
+            <div className="flex flex-col items-start gap-2 pt-1">
+              <Link
+                href="#contact"
+                className="inline-flex items-center gap-2.5 px-5 py-3.5 bg-accent text-accent-foreground text-[15px] font-semibold transition-colors cta-hover"
+              >
+                Démarrer un diagnostic
+                <ArrowRight className="w-4 h-4" aria-hidden="true" />
+              </Link>
+              <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
+                Sans engagement · 45 min · Réponse 24 h
+              </span>
+              <Link
+                href="#services"
+                className="inline-flex items-center gap-2.5 px-5 py-3.5 border border-border text-sm font-medium transition-colors hover:bg-secondary mt-1"
+              >
+                Voir les services
+                <ArrowRight className="w-4 h-4" aria-hidden="true" />
+              </Link>
+            </div>
           </div>
         </div>
 

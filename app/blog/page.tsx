@@ -258,7 +258,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 </h2>
               </div>
               <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-foreground">
-                Édition 04 · 2026
+                Édition · 2026
               </span>
             </div>
 

@@ -4,16 +4,16 @@ import { useEffect, useRef, useState } from "react"
 import { cn } from "@/lib/utils"
 
 const STATS = [
-  { v: 10,  s: " j", l: "Livraison garantie",        d: "De la signature à la mise en ligne — délai inscrit au contrat, ou reprise à nos frais." },
-  { v: 100, s: " %", l: "Livrés dans les délais",    d: "Tous nos projets livrés dans les délais convenus — sans exception." },
-  { v: 3,   s: "",   l: "Experts dédiés",             d: "Stratégie, design et code — un seul interlocuteur pour vous." },
+  { v: 10,  s: " j", l: "Livraison garantie",        d: "De la signature à la mise en ligne, délai inscrit au contrat ou reprise à nos frais." },
+  { v: 100, s: " %", l: "Livrés dans les délais",    d: "Tous nos projets livrés dans les délais convenus, sans exception." },
+  { v: 3,   s: "",   l: "Experts dédiés",             d: "Stratégie, design et code : un seul interlocuteur pour vous." },
   { v: 24,  s: " h", l: "Réponse garantie",           d: "Sur toute demande urgente, en jours ouvrés." },
 ]
 
 function ProofNumber({
-  value, suffix, label, sub, idx, last,
+  value, suffix, label, sub, last,
 }: {
-  value: number; suffix: string; label: string; sub: string; idx: number; last: boolean
+  value: number; suffix: string; label: string; sub: string; last: boolean
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const [trig, setTrig] = useState(false)
@@ -51,9 +51,6 @@ function ProofNumber({
         !last && "border-r border-inverted-foreground/10",
       )}
     >
-      <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-inverted-foreground/55">
-        0{idx + 1}
-      </span>
       <div
         className="font-extrabold leading-[0.9] tracking-[-0.05em] whitespace-nowrap"
         style={{ fontSize: "clamp(72px, 8vw, 120px)", fontFeatureSettings: '"tnum" 1' }}
@@ -73,7 +70,7 @@ export function ProofSection() {
       {/* Section head */}
       <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-7 lg:py-9 border-t border-b border-inverted-foreground/10">
         <h2 id="proof-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">Nos engagements</h2>
-        <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-inverted-foreground/55">Contractuels — 2026</span>
+        {/* <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-inverted-foreground/55">Contractuels — 2026</span> */}
       </div>
 
       {/* Stats grid */}
@@ -85,7 +82,6 @@ export function ProofSection() {
             suffix={s.s}
             label={s.l}
             sub={s.d}
-            idx={i}
             last={i === STATS.length - 1}
           />
         ))}
