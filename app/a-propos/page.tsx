@@ -4,6 +4,7 @@ import { ArrowRight, Lightbulb, Target, Handshake, MapPin, Linkedin } from "luci
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { EditorialBadge } from "@/components/ui/editorial-badge"
+import { SmoothAnchorLink } from "@/components/smooth-anchor-link"
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
@@ -354,13 +355,13 @@ export default function AProposPage() {
               </h2>
             </div>
             <div className="lg:col-span-4 flex flex-col gap-3 items-start">
-              <Link
+              <SmoothAnchorLink
                 href="/#contact"
                 className="inline-flex items-center gap-2.5 px-5 py-3.5 bg-accent text-accent-foreground text-[15px] font-semibold transition-colors cta-hover"
               >
                 Contacter l&apos;équipe
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />
-              </Link>
+              </SmoothAnchorLink>
               <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">
                 Diagnostic gratuit · 45 min · Sans engagement
               </span>

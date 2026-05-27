@@ -174,19 +174,20 @@ export default function MethodePage() {
         <section className="border-t border-border relative" aria-labelledby="methode-hero">
           <div className="hidden lg:flex absolute right-0 top-0 h-full items-start pt-8 pr-6 pointer-events-none" aria-hidden="true">
             <div className="flex flex-col items-center gap-4">
-              <div className="w-px h-16 bg-border" />
-              <span
+              {/* <div className="w-px h-16 bg-border" /> */}
+              {/* <span
                 className="font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/25 select-none"
                 style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
               >
                 Méthode · 10 jours · 04 étapes
-              </span>
+              </span> */}
             </div>
           </div>
 
           <div className="px-4 sm:px-6 lg:px-8 pt-14 sm:pt-20 lg:pt-28 mx-auto max-w-7xl">
             <h1
               id="methode-hero"
+             
               className="font-bold leading-[0.92] tracking-[-0.04em] text-[clamp(44px,7.5vw,120px)] mb-12 sm:mb-16 lg:mb-24"
             >
               De l&apos;idée<br />
@@ -195,9 +196,9 @@ export default function MethodePage() {
             </h1>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 border-t border-border pt-10 pb-14 lg:pb-20">
-              <div className="hidden lg:flex lg:col-span-1 items-start pt-1">
+              {/* <div className="hidden lg:flex lg:col-span-1 items-start pt-1">
                 <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">00</span>
-              </div>
+              </div> */}
               <div className="lg:col-span-6 lg:pr-10">
                 <p className="text-[17px] sm:text-[18px] leading-[1.5] text-muted-foreground max-w-[58ch]">
                   Un processus court, itératif et transparent. Quatre étapes claires,
@@ -234,9 +235,9 @@ export default function MethodePage() {
             <h2 id="process-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
               Processus
             </h2>
-            <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
+            {/* <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
               Quatre étapes · validation à chaque jalon
-            </span>
+            </span> */}
           </div>
 
           <div role="list">
@@ -245,6 +246,8 @@ export default function MethodePage() {
                 key={step.number}
                 role="listitem"
                 data-cursor="hover"
+               
+
                 className={cn(
                   "group bento-hover grid lg:grid-cols-12 gap-6 lg:gap-10 px-4 sm:px-6 lg:px-8 py-10 lg:py-14",
                   i < steps.length - 1 && "border-b border-border",
@@ -292,9 +295,9 @@ export default function MethodePage() {
             <h2 id="guarantees-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
               Engagements
             </h2>
-            <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
+            {/* <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
               Ce qu&apos;on garantit par écrit
-            </span>
+            </span> */}
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4">
@@ -309,7 +312,7 @@ export default function MethodePage() {
                 )}
               >
                 <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">
-                  0{i + 1} · {k}
+                  {k}
                 </span>
                 <div className="text-[40px] sm:text-[52px] font-bold tracking-[-0.03em] leading-none">{v}</div>
                 <div className="text-[12.5px] leading-[1.5] text-muted-foreground max-w-[28ch]">{d}</div>
@@ -324,15 +327,17 @@ export default function MethodePage() {
             <h2 id="stack-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
               Stack
             </h2>
-            <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
+            {/* <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
               Les outils qui font la différence
-            </span>
+            </span> */}
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {stack.map((s, i) => (
               <div
                 key={s.category}
+               
+
                 className={cn(
                   "px-4 sm:px-6 lg:px-8 py-10 lg:py-12 flex flex-col gap-5",
                   i < stack.length - 1 && "lg:border-r lg:border-border",

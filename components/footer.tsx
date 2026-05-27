@@ -37,11 +37,13 @@ export function Footer() {
 
           {/* Manifeste — grand titre */}
           <div className="lg:col-span-6 lg:pr-12">
+
             <h2 className="font-extrabold text-[clamp(40px,6vw,88px)] leading-[0.90] tracking-[-0.04em]">
               Diagnostiquer<br />
               <em className="font-serif font-normal italic tracking-[-0.02em] text-accent not-italic" style={{ fontStyle: "italic" }}>avant</em><br />
               de prescrire.
             </h2>
+
             <p className="mt-6 text-[14px] text-inverted-foreground/55 leading-relaxed max-w-sm">
               Agence digitale nantaise. Ingénierie, design et stratégie pour PME et ETI ambitieuses.
             </p>
@@ -96,10 +98,14 @@ export function Footer() {
 
       {/* Bottom bar */}
       <div className="border-t border-inverted-foreground/10 px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
-        <div className="py-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 text-[11px] uppercase tracking-[0.06em] text-inverted-foreground/45 font-medium">
+        <div className="py-5 flex flex-col sm:flex-row justify-between items-center gap-2 text-[11px] uppercase tracking-[0.06em] text-inverted-foreground/45 font-medium">
           <span>© Mobem Solutions · {new Date().getFullYear()} · Tous droits réservés</span>
           {/* <span className="whitespace-nowrap">SIRET&nbsp;: 91514447100017</span> */}
-          <span>Nantes · Pays de la Loire · France</span>
+          {/* Logo — bas droite */}
+          <div className="flex flex-col leading-none items-end">
+            <span className="text-[17px] font-bold tracking-[-0.02em] text-inverted-foreground/70 uppercase">Mobem</span>
+            <span className="text-[12px] font-light tracking-[0.06em] text-inverted-foreground/35">Solutions</span>
+          </div>
         </div>
       </div>
 

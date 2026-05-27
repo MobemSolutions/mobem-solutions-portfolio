@@ -30,7 +30,8 @@ export function HeroSection() {
 
         <h1
           id="hero-heading"
-          className="font-bold leading-[0.88] tracking-[-0.045em] text-[clamp(32px,8.5vw,136px)] mb-12 sm:mb-16 lg:mb-24"
+         
+          className="font-bold leading-[0.88] tracking-[-0.045em] text-[clamp(32px,8.5vw,136px)] mb-10 sm:mb-14 lg:mb-16"
         >
           La précision<br />
           <span className="text-accent" aria-hidden="true">·</span> digitale,<br />
@@ -38,6 +39,14 @@ export function HeroSection() {
             à l&apos;échelle humaine<span className="caret" aria-hidden="true" />
           </span>
         </h1>
+
+        {/* Scroll mouse indicator */}
+        <div className="flex justify-center mb-10 sm:mb-14 lg:mb-16" aria-hidden="true">
+          <svg width="26" height="42" viewBox="0 0 26 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="1" y="1" width="24" height="40" rx="12" stroke="currentColor" strokeOpacity="0.25" strokeWidth="1.5"/>
+            <circle className="scroll-wheel-dot" cx="13" cy="13" r="3" fill="var(--color-accent)"/>
+          </svg>
+        </div>
 
         {/* Sub-row */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-8 border-t border-border pt-10 pb-14 lg:pb-20">

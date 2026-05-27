@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Cursor } from '@/components/cursor'
+import { ReadProgress } from '@/components/read-progress'
 import './globals.css'
 
 const inter = Inter({
@@ -94,6 +95,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Cursor />
+          <ReadProgress />
           {children}
           <Analytics />
           <SpeedInsights />
