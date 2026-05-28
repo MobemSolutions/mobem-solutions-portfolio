@@ -83,9 +83,9 @@ export default defineConfig({
 
   /* Lancement automatique du serveur local pour les tests */
   webServer: {
-    command: 'pnpm run dev',
+    command: process.env.CI ? 'pnpm start' : 'pnpm run dev',
     url: 'http://localhost:3000',
-    reuseExistingServer: true,
+    reuseExistingServer: !process.env.CI,
     timeout: 120000,
   },
 });

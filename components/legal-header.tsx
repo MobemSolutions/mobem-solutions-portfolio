@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { ArrowLeft, Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
@@ -36,9 +37,11 @@ export function LegalHeader() {
             className="flex items-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
             aria-label="Mobem Solutions - Retour à l'accueil"
           >
-            <img
+            <Image
               src="/mobem-logo-redimension-removebg-preview.png"
               alt="Logo Mobem Solutions"
+              width={120}
+              height={40}
               className="h-10 w-auto object-contain"
             />
           </Link>
