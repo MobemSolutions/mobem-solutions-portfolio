@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from "next/server"
 import { Resend } from "resend"
 import { z } from "zod"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 const VALID_SERVICES = [
   "Design UI/UX",
   "Création de site vitrine",
@@ -85,6 +83,7 @@ function esc(str: string) {
 
 export async function POST(req: NextRequest) {
   try {
+    const resend = new Resend(process.env.RESEND_API_KEY)
     const body = await req.json()
     const parsed = ContactSchema.safeParse(body)
 
