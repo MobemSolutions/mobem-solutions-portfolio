@@ -89,7 +89,8 @@ export function TeamSection() {
                     src={member.photo}
                     alt={`Photo de ${member.name}`}
                     fill
-                    sizes="56px"
+                    sizes="(max-width: 1024px) 96px, 96px"
+                    quality={90}
                     className="object-cover object-top grayscale"
                   />
                 </div>

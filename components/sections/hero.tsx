@@ -30,14 +30,12 @@ export function HeroSection() {
 
         <h1
           id="hero-heading"
-         
-          className="font-bold leading-[0.88] tracking-[-0.045em] text-[clamp(38px,11vw,136px)] mb-10 sm:mb-14 lg:mb-16"
+          className="font-bold leading-[0.88] tracking-[-0.045em] text-[clamp(32px,8vw,100px)] mb-10 sm:mb-14 lg:mb-16"
         >
-          La précision<br />
-          <span className="text-accent" aria-hidden="true">·</span> digitale,<br />
-          <span className="font-serif font-normal italic tracking-[-0.02em] lg:ml-[0.16em] whitespace-nowrap">
-            à l&apos;échelle humaine<span className="caret" aria-hidden="true" />
-          </span>
+          Conçu pour<br />
+          vous <span className="font-serif font-normal italic tracking-[-0.02em] text-accent">ressembler</span>.<br />
+          Optimisé pour{" "}
+          <span className="font-serif font-normal italic tracking-[-0.02em] text-accent whitespace-nowrap">convertir</span><span className="font-serif font-normal italic tracking-[-0.02em] whitespace-nowrap">.<span className="caret" aria-hidden="true" /></span>
         </h1>
 
         {/* Scroll mouse indicator */}
@@ -65,7 +63,7 @@ export function HeroSection() {
             <div className="flex flex-col items-start gap-2 pt-1">
               <Link
                 href="#contact"
-                className="inline-flex items-center gap-2.5 px-5 py-3.5 bg-accent text-accent-foreground text-[15px] font-semibold transition-colors cta-hover"
+                className="inline-flex items-center gap-2.5 px-5 py-3.5 bg-accent text-white text-[15px] font-semibold transition-colors hover:bg-accent/90"
               >
                 Démarrer un diagnostic
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -75,7 +73,7 @@ export function HeroSection() {
               </span>
               <Link
                 href="#services"
-                className="inline-flex items-center gap-2.5 px-5 py-3.5 border border-border text-sm font-medium transition-colors hover:bg-secondary mt-1"
+                className="inline-flex items-center gap-2.5 px-5 py-3.5 bg-foreground text-background text-sm font-medium transition-colors hover:bg-foreground/90 mt-1"
               >
                 Voir les services
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />
