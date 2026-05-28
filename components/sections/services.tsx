@@ -47,11 +47,11 @@ export function ServicesSection() {
       {/* Content */}
       <div className="flex flex-col lg:flex-row">
 
-        {/* Left — editorial quote */}
-        <div className="lg:w-[34%] px-4 sm:px-6 lg:px-8 py-14 lg:py-20 lg:border-r lg:border-border shrink-0 relative overflow-hidden">
-          <h3 className="font-serif font-normal text-[clamp(36px,4.5vw,56px)] leading-[0.95] tracking-[-0.02em] mb-6 italic">
-            On commence par{" "}
-            <em className="text-accent not-italic font-serif">écouter.</em>
+        {/* Left — editorial quote (sticky) */}
+        <div className="lg:w-[44%] shrink-0 lg:border-r lg:border-border">
+          <div className="px-4 sm:px-6 lg:px-8 py-14 lg:py-20 lg:sticky lg:top-16">
+          <h3 className="font-bold text-[clamp(44px,6vw,80px)] leading-[0.92] tracking-[-0.04em] mb-6 whitespace-nowrap">
+            Nos <span className="font-serif font-normal italic tracking-[-0.02em] text-accent">méthodes.</span>
           </h3>
           <p className="text-[15px] leading-relaxed text-muted-foreground max-w-sm">
             Nous refusons les briefs livrés tels quels. Une bonne réponse part toujours
@@ -65,6 +65,7 @@ export function ServicesSection() {
               Notre méthode en détail
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </Link>
+          </div>
           </div>
         </div>
 

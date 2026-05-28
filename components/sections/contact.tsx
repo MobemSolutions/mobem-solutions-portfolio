@@ -162,12 +162,10 @@ export function ContactSection() {
       <h2 id="contact-heading" className="sr-only">Diagnostic</h2>
 
       {/* Editorial header */}
-      <div className="px-4 sm:px-6 lg:px-8 pt-10 pb-8 border-b border-border mx-auto max-w-7xl">
-        <h3 className="text-[clamp(44px,6vw,80px)] font-bold leading-[0.92] tracking-[-0.04em]">
-          Parlons<br />
-          de votre{" "}
-          <span className="font-serif font-normal italic tracking-[-0.02em] text-accent">levier.</span>
-        </h3>
+      <div className="px-4 sm:px-6 lg:px-8 pt-10 pb-8 border-b border-border">
+        <h2 id="contact-heading" className="text-[clamp(44px,6vw,80px)] font-bold leading-[0.92] tracking-[-0.04em]">
+          Un audit <span className="font-serif font-normal italic tracking-[-0.02em] text-accent">gratuit.</span>
+        </h2>
       </div>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">

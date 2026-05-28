@@ -313,7 +313,7 @@ function DesignCard() {
   return (
     <div
       data-cursor="hover"
-      className="group relative flex flex-col px-6 py-8 lg:px-8 lg:py-8 transition-colors overflow-hidden bento-hover bg-[#F2F0ED]"
+      className="group relative flex flex-col px-6 py-8 lg:px-8 lg:py-8 transition-colors overflow-hidden bg-[#F2F0ED] dark:bg-white/[0.04] hover:bg-[#0D0D0D] hover:text-white dark:hover:bg-white dark:hover:text-black"
     >
       {/* Decorative background letter */}
       <span

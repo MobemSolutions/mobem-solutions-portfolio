@@ -46,7 +46,7 @@ export const CASES: Case[] = [
     next: "cabinet-lefranc",
   },
   {
-    idx: "02", client: "Cabinet d'Avocats", sector: "Services pro. · Nantes", tag: "Site essentiel", kpi: "LCP 1.2s",
+    idx: "02", client: "Cabinet d'Avocats", sector: "Services pro. · Nantes", tag: "Site essentiel", kpi: "Livré en 8 j",
     year: "2025", cat: "essentiel", slug: "cabinet-lefranc",
     desc: "Site essentiel pour cabinet d'avocats. Editorial sobre, prise de RDV en ligne, conformité RGPD intégrale.",
     stats: [["1.2s", "LCP"], ["100", "Accessibilité"], ["8j", "Délai livraison"]],
@@ -67,7 +67,7 @@ export const CASES: Case[] = [
     prev: "atelier-vernay", next: "maison-ferre",
   },
   {
-    idx: "03", client: "Chambre d'Hôtes", sector: "Hospitalité · Bordeaux", tag: "Plateforme + CRM", kpi: "Conv. ×3.1",
+    idx: "03", client: "Chambre d'Hôtes", sector: "Hospitalité · Bordeaux", tag: "Plateforme + CRM", kpi: "×3 réservations",
     year: "2026", cat: "plateforme", slug: "maison-ferre",
     desc: "Plateforme réservation chambres d'hôtes. Connexion Stripe, calendrier en temps réel, CRM intégré pour suivi clientèle.",
     stats: [["×3.1", "Conversion"], ["98", "Lighthouse"], ["320k€", "Revenus 2025"]],

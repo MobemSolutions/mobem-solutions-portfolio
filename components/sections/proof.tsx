@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { cn } from "@/lib/utils"
 
 const STATS = [
   { v: 10,  s: " j", l: "Livraison garantie",        d: "De la signature à la mise en ligne, délai inscrit au contrat ou reprise à nos frais." },
@@ -11,9 +10,9 @@ const STATS = [
 ]
 
 function ProofNumber({
-  value, suffix, label, sub, idx,
+  value, suffix, label, sub,
 }: {
-  value: number; suffix: string; label: string; sub: string; idx: number
+  value: number; suffix: string; label: string; sub: string
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const [trig, setTrig] = useState(false)
@@ -43,24 +42,10 @@ function ProofNumber({
     return () => cancelAnimationFrame(raf)
   }, [trig, value])
 
-  // Borders : right si pas en fin de colonne, bottom si première ligne (mobile 2×2 / tablet)
-  const borderRight  = cn(
-    idx % 2 === 0 && "border-r border-inverted-foreground/10",          // mobile 2-col
-    "lg:border-r-0",
-    idx < 3       && "lg:border-r lg:border-inverted-foreground/10"     // desktop 4-col
-  )
-  const borderBottom = cn(
-    idx < 2 && "border-b border-inverted-foreground/10",                // mobile 2-col row 1
-    "lg:border-b-0"
-  )
-
-  // Padding varié : grande ligne haute, plus compacte en bas sur mobile
-  const py = idx < 2 ? "py-7 lg:py-9" : "py-6 lg:py-9"
-
   return (
     <div
       ref={ref}
-      className={cn("flex flex-col gap-3 px-6 sm:px-7", py, borderRight, borderBottom)}
+      className="flex flex-col items-center text-center gap-3 px-6 sm:px-7 py-14 lg:py-20"
     >
       <div
         className="font-extrabold leading-[0.9] tracking-[-0.05em] whitespace-nowrap"
@@ -89,7 +74,6 @@ export function ProofSection() {
             suffix={s.s}
             label={s.l}
             sub={s.d}
-            idx={i}
           />
         ))}
       </div>
