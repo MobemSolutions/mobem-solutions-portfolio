@@ -42,19 +42,10 @@ export function TeamSection() {
   return (
     <section id="equipe" className="border-t border-border" aria-labelledby="team-heading">
 
-      {/* Section head */}
-      <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-7 lg:py-9 border-b border-border">
-        <div className="flex items-baseline gap-5">
-          <h2 id="team-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
-            Équipe
-          </h2>
-        </div>
-        {/* <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">
-          Trois associés · Une vision commune
-        </span> */}
-        <span className="sm:hidden font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground" aria-hidden="true">
-          Faire défiler →
-        </span>
+      <div className="px-4 sm:px-6 lg:px-8 pt-14 lg:pt-20 pb-10 lg:pb-12 border-b border-border">
+        <h2 id="team-heading" className="text-[clamp(44px,6vw,80px)] font-bold leading-[0.92] tracking-[-0.04em]">
+          Notre <span className="font-serif font-normal italic tracking-[-0.02em] text-accent">équipe.</span>
+        </h2>
       </div>
 
       {/* Team grid — desktop: 3 cols, mobile: horizontal scroll with snap */}

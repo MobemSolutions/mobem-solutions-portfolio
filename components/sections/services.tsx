@@ -42,15 +42,7 @@ export function ServicesSection() {
   return (
     <section id="methode" className="border-t border-border" aria-labelledby="services-heading">
 
-      {/* Section head */}
-      <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-8 lg:py-10 border-b border-border">
-        <h2 id="services-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
-          Méthode
-        </h2>
-        {/* <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">
-          Diagnostiquer avant de prescrire
-        </span> */}
-      </div>
+      <h2 id="services-heading" className="sr-only">Méthode</h2>
 
       {/* Content */}
       <div className="flex flex-col lg:flex-row">
@@ -79,20 +71,27 @@ export function ServicesSection() {
         {/* Right — desktop: table rows / mobile: tabs */}
         <div className="flex-1">
 
-          {/* Mobile tab selector */}
-          <div className="flex lg:hidden border-b border-border">
+          {/* Mobile tab selector — 2×2 grid */}
+          <div className="grid grid-cols-2 lg:hidden border-b border-border">
             {steps.map((step, i) => (
               <button
                 key={step.number}
                 onClick={() => setActiveStep(i)}
                 className={cn(
-                  "flex-1 py-3 font-mono text-[11px] uppercase tracking-[0.06em] transition-colors border-r border-border last:border-r-0",
+                  "flex flex-col gap-1.5 px-5 py-4 text-left transition-colors",
+                  i % 2 === 0 && "border-r border-border",
+                  i < 2 && "border-b border-border",
                   activeStep === i
                     ? "bg-foreground text-background"
                     : "text-muted-foreground hover:bg-secondary"
                 )}
               >
-                {step.title}
+                <span className={cn("font-mono text-[10px] tabular-nums", activeStep === i ? "opacity-40" : "opacity-35")}>
+                  {step.number}
+                </span>
+                <span className="font-mono text-[11px] uppercase tracking-[0.06em] leading-tight">
+                  {step.title}
+                </span>
               </button>
             ))}
           </div>

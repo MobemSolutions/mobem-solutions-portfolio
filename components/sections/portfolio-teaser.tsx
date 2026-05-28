@@ -18,18 +18,7 @@ export function PortfolioTeaser() {
   return (
     <section id="realisations" className="border-t border-border" aria-labelledby="portfolio-teaser-heading">
 
-      {/* Section head */}
-      <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-7 border-b border-border">
-        <div className="flex items-baseline gap-5">
-          <h2 id="portfolio-teaser-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
-            Réalisations
-          </h2>
-          <span className="hidden lg:block w-8 h-px bg-accent self-center" aria-hidden="true" />
-        </div>
-        <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">
-          Sélection 2025&thinsp;/&thinsp;2026
-        </span>
-      </div>
+      <h2 id="portfolio-teaser-heading" className="sr-only">Réalisations</h2>
 
       {/* Project rows */}
       {teaserProjects.map((project, i) => (

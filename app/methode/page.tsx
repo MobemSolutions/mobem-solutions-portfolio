@@ -393,7 +393,7 @@ export default function MethodePage() {
             <div className="lg:col-span-4 flex flex-col gap-3 items-start">
               <Link
                 href="/#contact"
-                className="inline-flex items-center gap-2.5 px-5 py-3.5 bg-accent text-accent-foreground text-[15px] font-semibold transition-colors cta-hover"
+                className="inline-flex items-center gap-2.5 px-5 py-3.5 bg-accent text-accent-foreground text-[15px] font-semibold transition-colors cta-hover cta-hover-on-dark"
               >
                 Démarrer maintenant
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />

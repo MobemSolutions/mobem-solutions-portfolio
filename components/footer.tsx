@@ -102,10 +102,10 @@ export function Footer() {
           <span>© Mobem Solutions · {new Date().getFullYear()} · Tous droits réservés</span>
           {/* <span className="whitespace-nowrap">SIRET&nbsp;: 91514447100017</span> */}
           {/* Logo — bas droite */}
-          <div className="flex flex-col leading-none items-end">
-            <span className="text-[17px] font-bold tracking-[-0.02em] text-inverted-foreground/70 uppercase">Mobem</span>
-            <span className="text-[12px] font-light tracking-[0.06em] text-inverted-foreground/35">Solutions</span>
-          </div>
+          <Link href="/" className="flex flex-col leading-none items-end group transition-opacity hover:opacity-70" aria-label="Mobem Solutions — Retour à l'accueil">
+            <span className="text-[17px] font-bold tracking-[-0.02em] text-inverted-foreground/70 uppercase transition-colors group-hover:text-inverted-foreground">Mobem</span>
+            <span className="text-[12px] font-light tracking-[0.06em] text-inverted-foreground/35 transition-colors group-hover:text-inverted-foreground/55">Solutions</span>
+          </Link>
         </div>
       </div>
 

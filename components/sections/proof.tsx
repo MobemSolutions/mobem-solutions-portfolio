@@ -11,9 +11,9 @@ const STATS = [
 ]
 
 function ProofNumber({
-  value, suffix, label, sub, last,
+  value, suffix, label, sub, idx,
 }: {
-  value: number; suffix: string; label: string; sub: string; last: boolean
+  value: number; suffix: string; label: string; sub: string; idx: number
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const [trig, setTrig] = useState(false)
@@ -43,23 +43,34 @@ function ProofNumber({
     return () => cancelAnimationFrame(raf)
   }, [trig, value])
 
+  // Borders : right si pas en fin de colonne, bottom si première ligne (mobile 2×2 / tablet)
+  const borderRight  = cn(
+    idx % 2 === 0 && "border-r border-inverted-foreground/10",          // mobile 2-col
+    "lg:border-r-0",
+    idx < 3       && "lg:border-r lg:border-inverted-foreground/10"     // desktop 4-col
+  )
+  const borderBottom = cn(
+    idx < 2 && "border-b border-inverted-foreground/10",                // mobile 2-col row 1
+    "lg:border-b-0"
+  )
+
+  // Padding varié : grande ligne haute, plus compacte en bas sur mobile
+  const py = idx < 2 ? "py-7 lg:py-9" : "py-6 lg:py-9"
+
   return (
     <div
       ref={ref}
-      className={cn(
-        "flex flex-col gap-3 px-7 py-10",
-        !last && "border-r border-inverted-foreground/10",
-      )}
+      className={cn("flex flex-col gap-3 px-6 sm:px-7", py, borderRight, borderBottom)}
     >
       <div
         className="font-extrabold leading-[0.9] tracking-[-0.05em] whitespace-nowrap"
-        style={{ fontSize: "clamp(72px, 8vw, 120px)", fontFeatureSettings: '"tnum" 1' }}
+        style={{ fontSize: "clamp(60px, 7.5vw, 112px)", fontFeatureSettings: '"tnum" 1' }}
       >
         {Math.round(val)}
-        <span className="text-accent" style={{ fontSize: "0.55em" }}>{suffix}</span>
+        <span className="text-accent" style={{ fontSize: "0.52em" }}>{suffix}</span>
       </div>
-      <div className="text-[14px] font-semibold tracking-[-0.005em]">{label}</div>
-      <div className="text-[12px] leading-[1.5] text-inverted-foreground/55">{sub}</div>
+      <div className="text-[13px] font-semibold tracking-[-0.005em]">{label}</div>
+      <div className="text-[11px] leading-[1.55] text-inverted-foreground/45 max-w-[22ch]">{sub}</div>
     </div>
   )
 }
@@ -67,14 +78,10 @@ function ProofNumber({
 export function ProofSection() {
   return (
     <section id="chiffres" className="bg-inverted text-inverted-foreground" aria-labelledby="proof-heading">
-      {/* Section head */}
-      <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-7 lg:py-9 border-t border-b border-inverted-foreground/10">
-        <h2 id="proof-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">Nos engagements</h2>
-        {/* <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-inverted-foreground/55">Contractuels — 2026</span> */}
-      </div>
+      <h2 id="proof-heading" className="sr-only">Nos engagements</h2>
 
-      {/* Stats grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      {/* Stats grid — 2×2 mobile, 4 cols desktop */}
+      <div className="grid grid-cols-2 lg:grid-cols-4">
         {STATS.map((s, i) => (
           <ProofNumber
             key={i}
@@ -82,7 +89,7 @@ export function ProofSection() {
             suffix={s.s}
             label={s.l}
             sub={s.d}
-            last={i === STATS.length - 1}
+            idx={i}
           />
         ))}
       </div>

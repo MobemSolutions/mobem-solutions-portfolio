@@ -11,9 +11,9 @@ const OFFERS = [
   {
     code: "S1",
     name: "Essentiel",
-    sub: "En ligne sous 10 jours, sans compromis.",
+    sub: "Landing page en ligne sous 10 jours.",
     flagship: false,
-    target: "Artisans & Indépendants",
+    target: "Landing page · Site vitrine",
     features: [
       "Site en ligne sous 10 jours",
       "100 % responsive mobile",
@@ -22,29 +22,33 @@ const OFFERS = [
       "Hébergement 1 an inclus",
     ],
     proof: ["Lighthouse 90+", "Livraison 10 j"],
+    pricePrefix: "À partir de",
+    price: "1 500 € HT",
   },
   {
     code: "S2",
     name: "Expert",
     sub: "Conçu pour convertir, pas juste exister.",
     flagship: true,
-    target: "PME & Startups",
+    target: "Site multipage · Projet ambitieux",
     features: [
       "Architecture multi-pages",
       "UI/UX premium",
       "CMS autonome (Sanity)",
       "Intégrations (CRM, Calendly…)",
-      "SEO sémantique avancé",
+      "SEO sémantique avancé + GEO (citabilité IA)",
       "Rapport de performance",
     ],
-    proof: ["Lighthouse 96+", "WCAG AA", "Conv. ×2.4 obs."],
+    proof: ["Lighthouse 96+", "WCAG AA", "GEO IA"],
+    pricePrefix: "À partir de",
+    price: "3 500 € HT",
   },
   {
     code: "S3",
     name: "Sur mesure",
     sub: "Quand aucune offre standard ne suffit.",
     flagship: false,
-    target: "ETI & Grands projets",
+    target: "Architecture complexe · Sur-mesure",
     features: [
       "Architecture sur-mesure",
       "Intégrations API complexes",
@@ -54,11 +58,92 @@ const OFFERS = [
       "Scalabilité garantie",
     ],
     proof: ["Roadmap trimestrielle", "WCAG AAA", "SLA 4 h"],
+    pricePrefix: "Sur devis",
+    price: "à partir de 8 000 € HT",
+  },
+]
+
+// ─── Données — Identité & Design ───────────────────────────────────────────
+
+const DESIGN_SERVICES = [
+  { label: "Refonte identité",          priceRange: "800 – 1 500 € HT" },
+  { label: "Identité visuelle complète", priceRange: "1 300 – 2 500 € HT" },
+  { label: "Pack Identité + Essentiel",  priceRange: "2 500 – 3 500 € HT" },
+  { label: "Pack Identité + Expert",     priceRange: "4 500 – 6 000 € HT" },
+]
+
+// ─── Données — Conseil & Stratégie ─────────────────────────────────────────
+
+const CONSEIL = [
+  {
+    code: "C1",
+    name: "Audit digital",
+    sub: "Un diagnostic honnête, pas un audit de complaisance.",
+    flagship: false,
+    target: "Site · SEO · Réseaux · Outils",
+    features: [
+      "Analyse site, SEO & réseaux sociaux",
+      "Audit des outils et processus digitaux",
+      "Rapport écrit priorisé",
+      "Présentation des résultats (1 h)",
+      "Recommandations actionnables",
+    ],
+    proof: ["Rapport écrit", "Plan d'action"],
+    pricePrefix: "À partir de",
+    price: "350 € HT",
+  },
+  {
+    code: "C2",
+    name: "Atelier stratégie",
+    sub: "2 heures pour clarifier votre cap digital.",
+    flagship: false,
+    target: "Clarifier · Prioriser · Planifier",
+    features: [
+      "Session 2 h visio ou présentiel",
+      "Recommandations personnalisées",
+      "Feuille de route actionnable",
+      "Compte-rendu écrit inclus",
+    ],
+    proof: ["Session 2 h", "Feuille de route"],
+    pricePrefix: "À partir de",
+    price: "250 € HT",
+  },
+  {
+    code: "C3",
+    name: "Accompagnement digitalisation",
+    sub: "De la réflexion à l'intégration des outils.",
+    flagship: true,
+    target: "Transition digitale · Intégration",
+    features: [
+      "3 séances de suivi personnalisé",
+      "Plan d'action détaillé",
+      "Intégration des outils recommandés",
+      "Support entre les séances",
+      "Bilan final & prochaines étapes",
+    ],
+    proof: ["3 séances", "Plan d'action", "Outils"],
+    pricePrefix: "À partir de",
+    price: "900 € HT",
+  },
+  {
+    code: "C4",
+    name: "Formation outils",
+    sub: "Maîtrisez vos outils, reprenez la main.",
+    flagship: false,
+    target: "CMS · GMB · Analytics",
+    features: [
+      "Session 1h30 visio",
+      "Guide PDF personnalisé",
+      "CMS, Google My Business, Analytics",
+      "Enregistrement vidéo fourni",
+    ],
+    proof: ["Session 1h30", "Guide PDF"],
+    pricePrefix: "À partir de",
+    price: "250 € HT",
   },
 ]
 
 // ─── Données — Abonnements ──────────────────────────────────────────────────
-// TODO: ajuster les prix avec vos tarifs réels
 
 const SUBSCRIPTIONS = [
   {
@@ -66,9 +151,8 @@ const SUBSCRIPTIONS = [
     name: "Sérénité",
     sub: "Votre site entre de bonnes mains.",
     flagship: false,
-    target: "Tout client Mobem",
+    target: "Site en production",
     price: "89",
-    priceLabel: "€ HT / mois",
     commitment: "Mensuel · Résiliable",
     features: [
       "Mises à jour sécurité mensuelles",
@@ -84,12 +168,12 @@ const SUBSCRIPTIONS = [
     name: "Visibilité",
     sub: "Plus de trafic, plus de clients locaux.",
     flagship: false,
-    target: "PME & Artisans",
+    target: "Référencement · Contenu",
     price: "149",
-    priceLabel: "€ HT / mois",
     commitment: "Mensuel · Résiliable",
     features: [
-      "1 article de blog / mois",
+      "Tout Sérénité inclus",
+      "1 article de blog / mois (400–600 mots, optimisé SEO)",
       "Suivi positionnement SEO (10 mots-clés)",
       "Optimisation Google My Business",
       "Audit SEO trimestriel",
@@ -99,55 +183,67 @@ const SUBSCRIPTIONS = [
   },
   {
     code: "A3",
+    name: "Présence",
+    sub: "Votre image, toujours à jour.",
+    flagship: false,
+    target: "Visuels · Social media",
+    price: "149",
+    commitment: "Mensuel · Résiliable",
+    features: [
+      "4 visuels réseaux sociaux / mois (Instagram, LinkedIn, Facebook)",
+      "1 mise à jour graphique / mois (bannière, flyer, carte de visite)",
+      "Cohérence charte graphique garantie",
+      "Livrables en 5 jours ouvrés",
+      "Fichiers sources fournis",
+    ],
+    proof: ["Social media", "Charte garantie", "Fichiers source"],
+  },
+  {
+    code: "A4",
     name: "Croissance",
     sub: "Maintenance + visibilité + stratégie.",
     flagship: true,
-    target: "Clients ambitieux",
+    target: "Stratégie · Performance",
     price: "249",
-    priceLabel: "€ HT / mois",
     commitment: "Trimestriel · Sur devis annuel",
     features: [
       "Tout Sérénité inclus",
       "Tout Visibilité inclus",
-      "Appel stratégique mensuel (1 h)",
+      "Appel stratégique mensuel (1h)",
       "Roadmap trimestrielle",
       "Recommandations CRO",
+      "Optimisation GEO & citabilité IA",
       "SLA prioritaire 24 h",
     ],
-    proof: ["SLA 24 h", "Roadmap", "CRO"],
+    proof: ["SLA 24 h", "Roadmap", "CRO", "Combinable avec Présence"],
   },
 ]
 
 // ─── Carte Offre projet ─────────────────────────────────────────────────────
 
-function OfferCard({ offer, idx }: { offer: typeof OFFERS[number]; idx: number }) {
+function OfferCard({ offer }: { offer: typeof OFFERS[number] }) {
   return (
     <div
       data-cursor="hover"
       className={cn(
-        "group relative flex flex-col px-8 py-10 lg:px-14 lg:py-14 lg:min-h-[600px] transition-colors overflow-hidden",
-        offer.flagship
-          ? "bg-accent text-accent-foreground"
-          : "bento-hover",
-        idx < 2 && "lg:border-r lg:border-border"
+        "group relative flex flex-col px-6 py-8 lg:px-8 lg:py-8 transition-colors overflow-hidden border-b lg:border-b-0 lg:border-r border-border",
+        offer.flagship ? "bg-accent text-accent-foreground" : "bento-hover"
       )}
     >
       {/* Decorative background index */}
       <span
         className={cn(
-          "absolute bottom-6 right-6 font-bold leading-none tracking-[-0.05em] select-none pointer-events-none tabular-nums text-[clamp(80px,10vw,130px)]",
-          offer.flagship
-            ? "opacity-[0.14]"
-            : "opacity-[0.09] group-hover:opacity-[0.22]"
+          "hidden lg:block absolute bottom-6 right-5 font-bold leading-none tracking-[-0.05em] select-none pointer-events-none tabular-nums text-[clamp(70px,8vw,110px)]",
+          offer.flagship ? "opacity-[0.14]" : "opacity-[0.08] group-hover:opacity-[0.20]"
         )}
         style={offer.flagship ? { color: "oklch(0.07 0 0)" } : undefined}
         aria-hidden="true"
       >
-        {String(idx + 1).padStart(2, "0")}
+        {offer.code}
       </span>
 
       {/* Header */}
-      <div className="flex items-start justify-between mb-10 gap-4">
+      <div className="flex items-start justify-between mb-7 gap-4">
         <div className="flex flex-col gap-1.5">
           {offer.flagship && (
             <span className="font-mono text-[10px] uppercase tracking-[0.08em] px-2.5 py-1 border border-current self-start">
@@ -162,26 +258,26 @@ function OfferCard({ offer, idx }: { offer: typeof OFFERS[number]; idx: number }
       </div>
 
       {/* Name */}
-      <div className="mb-8">
-        <div className="text-[clamp(48px,5.5vw,76px)] font-bold tracking-[-0.04em] leading-[0.9] mb-3">
+      <div className="mb-6">
+        <div className="text-[clamp(22px,2.6vw,46px)] font-bold tracking-[-0.04em] leading-[0.9] mb-2">
           {offer.name}
         </div>
-        <div className="text-[15px] leading-[1.45] opacity-75">{offer.sub}</div>
-        <div className="font-mono text-[10px] uppercase tracking-[0.08em] opacity-50 mt-2">{offer.target}</div>
+        <div className="text-[13px] leading-[1.45] opacity-75">{offer.sub}</div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.08em] opacity-50 mt-1.5">{offer.target}</div>
       </div>
 
       {/* Features */}
-      <ul className="space-y-3 mb-8 flex-1" role="list">
+      <ul className="space-y-2.5 mb-6 flex-1" role="list">
         {offer.features.map((f) => (
-          <li key={f} className="flex items-start gap-3 text-[13.5px] leading-[1.5]">
-            <span className="mt-[9px] w-2.5 h-px bg-current opacity-50 flex-shrink-0" aria-hidden="true" />
+          <li key={f} className="flex items-start gap-3 text-[12px] leading-normal">
+            <span className="mt-2 w-2.5 h-px bg-current opacity-50 shrink-0" aria-hidden="true" />
             <span>{f}</span>
           </li>
         ))}
       </ul>
 
       {/* Proof chips */}
-      <div className="flex flex-wrap gap-1.5 mb-8">
+      <div className="flex flex-wrap gap-1.5 mb-6">
         {offer.proof.map((p) => (
           <span key={p} className="font-mono text-[9px] uppercase tracking-[0.07em] px-2 py-1 border border-current opacity-50">
             {p}
@@ -190,19 +286,96 @@ function OfferCard({ offer, idx }: { offer: typeof OFFERS[number]; idx: number }
       </div>
 
       {/* CTA */}
-      <div className="pt-5 border-t border-current/15 flex flex-col gap-1.5">
-        <div className="text-[24px] font-bold tracking-[-0.025em] leading-none">Sur devis</div>
+      <div className="pt-4 border-t border-current/15 flex flex-col gap-1.5">
+        <div className="font-mono text-[10px] uppercase tracking-[0.06em] opacity-50">{offer.pricePrefix}</div>
+        <div className="text-[18px] font-bold tracking-[-0.025em] leading-none">{offer.price}</div>
         <div className="font-mono text-[10px] uppercase tracking-[0.06em] opacity-50">Devis gratuit · Réponse 24 h</div>
         <Link
           href="#contact"
           className={cn(
-            "mt-5 inline-flex items-center gap-2.5 px-5 py-3 text-[13px] font-semibold transition-colors self-start border",
+            "mt-4 inline-flex items-center gap-2.5 px-4 py-2.5 text-[12px] font-semibold transition-colors self-start border",
             offer.flagship
               ? "border-accent-foreground bg-accent-foreground text-accent hover:bg-transparent hover:text-accent-foreground"
               : "border-current cta-hover"
           )}
         >
           Démarrer un diagnostic
+          <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+        </Link>
+      </div>
+    </div>
+  )
+}
+
+// ─── Carte Design ───────────────────────────────────────────────────────────
+
+function DesignCard() {
+  return (
+    <div
+      data-cursor="hover"
+      className="group relative flex flex-col px-6 py-8 lg:px-8 lg:py-8 transition-colors overflow-hidden bento-hover bg-[#F2F0ED]"
+    >
+      {/* Decorative background letter */}
+      <span
+        className="hidden lg:block absolute bottom-8 right-12 font-serif italic font-normal leading-none select-none pointer-events-none text-[clamp(80px,9.5vw,130px)] opacity-[0.07] group-hover:opacity-[0.13]"
+        aria-hidden="true"
+      >
+        D
+      </span>
+
+      {/* Header — identique aux autres cartes */}
+      <div className="flex items-start justify-between mb-7 gap-4">
+        <div />
+        <ArrowRight
+          className="w-5 h-5 opacity-40 transition-transform duration-300 group-hover:translate-x-1.5 group-hover:-translate-y-1.5 shrink-0 mt-1"
+          aria-hidden="true"
+        />
+      </div>
+
+      {/* Name — serif italic comme seul différenciateur visuel */}
+      <div className="mb-6">
+        <div className="font-serif italic font-normal text-[clamp(22px,2.6vw,46px)] tracking-[-0.02em] leading-[0.9] mb-2">
+          Design
+        </div>
+        <div className="text-[13px] leading-[1.45] opacity-75">Identité visuelle &amp; branding.</div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.08em] opacity-50 mt-1.5">Logo · Charte · Brand system</div>
+      </div>
+
+      {/* Services — table de prix à la place des bullets */}
+      <ul className="flex-1 mb-6" role="list">
+        {DESIGN_SERVICES.map((s, i) => (
+          <li
+            key={s.label}
+            className={cn(
+              "flex items-baseline justify-between gap-3 py-2.5",
+              i < DESIGN_SERVICES.length - 1 && "border-b border-current/10 group-hover:border-background/10"
+            )}
+          >
+            <span className="text-[12px]">{s.label}</span>
+            <span className="font-mono text-[10px] opacity-55 whitespace-nowrap shrink-0">{s.priceRange}</span>
+          </li>
+        ))}
+      </ul>
+
+      {/* Proof chips — même style que les autres cartes */}
+      <div className="flex flex-wrap gap-1.5 mb-6">
+        {["Logo", "Charte", "Fichiers source"].map((p) => (
+          <span key={p} className="font-mono text-[9px] uppercase tracking-[0.07em] px-2 py-1 border border-current opacity-50">
+            {p}
+          </span>
+        ))}
+      </div>
+
+      {/* CTA */}
+      <div className="pt-4 border-t border-current/15 flex flex-col gap-1.5">
+        <div className="font-mono text-[10px] uppercase tracking-[0.06em] opacity-50">À partir de</div>
+        <div className="text-[18px] font-bold tracking-[-0.025em] leading-none">800 € HT</div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.06em] opacity-50">Devis gratuit · Réponse 24 h</div>
+        <Link
+          href="#contact"
+          className="mt-4 inline-flex items-center gap-2.5 px-4 py-2.5 text-[12px] font-semibold transition-colors self-start border border-current cta-hover"
+        >
+          Demander un devis
           <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
         </Link>
       </div>
@@ -217,29 +390,25 @@ function SubCard({ sub, idx }: { sub: typeof SUBSCRIPTIONS[number]; idx: number 
     <div
       data-cursor="hover"
       className={cn(
-        "group relative flex flex-col px-8 py-10 lg:px-12 lg:py-12 lg:min-h-[580px] transition-colors overflow-hidden",
-        sub.flagship
-          ? "bg-accent text-accent-foreground"
-          : "bento-hover",
-        idx < 2 && "lg:border-r lg:border-border"
+        "group relative flex flex-col px-6 py-8 lg:px-10 lg:py-10 transition-colors overflow-hidden",
+        sub.flagship ? "bg-accent text-accent-foreground" : "bento-hover",
+        idx < 3 && "lg:border-r lg:border-border"
       )}
     >
       {/* Decorative background index */}
       <span
         className={cn(
-          "absolute bottom-6 right-6 font-bold leading-none tracking-[-0.05em] select-none pointer-events-none tabular-nums text-[clamp(80px,10vw,130px)]",
-          sub.flagship
-            ? "opacity-[0.14]"
-            : "opacity-[0.09] group-hover:opacity-[0.22]"
+          "hidden lg:block absolute bottom-6 right-6 font-bold leading-none tracking-[-0.05em] select-none pointer-events-none tabular-nums text-[clamp(80px,10vw,130px)]",
+          sub.flagship ? "opacity-[0.14]" : "opacity-[0.09] group-hover:opacity-[0.22]"
         )}
         style={sub.flagship ? { color: "oklch(0.07 0 0)" } : undefined}
         aria-hidden="true"
       >
-        {String(idx + 1).padStart(2, "0")}
+        {sub.code}
       </span>
 
       {/* Header */}
-      <div className="flex items-start justify-between mb-10 gap-4">
+      <div className="flex items-start justify-between mb-7 gap-4">
         <div className="flex flex-col gap-1.5">
           {sub.flagship && (
             <span className="font-mono text-[10px] uppercase tracking-[0.08em] px-2.5 py-1 border border-current self-start">
@@ -254,26 +423,26 @@ function SubCard({ sub, idx }: { sub: typeof SUBSCRIPTIONS[number]; idx: number 
       </div>
 
       {/* Name */}
-      <div className="mb-8">
-        <div className="text-[clamp(40px,4.5vw,64px)] font-bold tracking-[-0.04em] leading-[0.9] mb-3">
+      <div className="mb-6">
+        <div className="text-[clamp(20px,2.2vw,42px)] font-bold tracking-[-0.04em] leading-[0.9] mb-2">
           {sub.name}
         </div>
-        <div className="text-[15px] leading-[1.45] opacity-75">{sub.sub}</div>
-        <div className="font-mono text-[10px] uppercase tracking-[0.08em] opacity-50 mt-2">{sub.target}</div>
+        <div className="text-[13px] leading-[1.45] opacity-75">{sub.sub}</div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.08em] opacity-50 mt-1.5">{sub.target}</div>
       </div>
 
       {/* Features */}
-      <ul className="space-y-3 mb-8 flex-1" role="list">
+      <ul className="space-y-2.5 mb-6 flex-1" role="list">
         {sub.features.map((f) => (
-          <li key={f} className="flex items-start gap-3 text-[13.5px] leading-[1.5]">
-            <span className="mt-[9px] w-2.5 h-px bg-current opacity-50 flex-shrink-0" aria-hidden="true" />
+          <li key={f} className="flex items-start gap-3 text-[12px] leading-normal">
+            <span className="mt-2 w-2.5 h-px bg-current opacity-50 shrink-0" aria-hidden="true" />
             <span>{f}</span>
           </li>
         ))}
       </ul>
 
       {/* Proof chips */}
-      <div className="flex flex-wrap gap-1.5 mb-8">
+      <div className="flex flex-wrap gap-1.5 mb-6">
         {sub.proof.map((p) => (
           <span key={p} className="font-mono text-[9px] uppercase tracking-[0.07em] px-2 py-1 border border-current opacity-50">
             {p}
@@ -282,19 +451,17 @@ function SubCard({ sub, idx }: { sub: typeof SUBSCRIPTIONS[number]; idx: number 
       </div>
 
       {/* Price + CTA */}
-      <div className="pt-5 border-t border-current/15 flex flex-col gap-1.5">
-        <div className="flex items-baseline gap-1.5">
-          <span className="font-mono text-[10px] uppercase tracking-[0.08em] opacity-50 mb-1 block">À partir de</span>
-        </div>
+      <div className="pt-4 border-t border-current/15 flex flex-col gap-1.5">
+        <span className="font-mono text-[10px] uppercase tracking-[0.08em] opacity-50 block">À partir de</span>
         <div className="flex items-baseline gap-1">
-          <span className="text-[clamp(32px,3.5vw,48px)] font-bold tracking-[-0.04em] leading-none">{sub.price}€</span>
+          <span className="text-[clamp(28px,3vw,42px)] font-bold tracking-[-0.04em] leading-none">{sub.price}€</span>
           <span className="font-mono text-[11px] uppercase tracking-[0.06em] opacity-60 ml-1">HT / mois</span>
         </div>
         <div className="font-mono text-[10px] uppercase tracking-[0.06em] opacity-40">{sub.commitment}</div>
         <Link
           href="#contact"
           className={cn(
-            "mt-5 inline-flex items-center gap-2.5 px-5 py-3 text-[13px] font-semibold transition-colors self-start border",
+            "mt-4 inline-flex items-center gap-2.5 px-4 py-2.5 text-[12px] font-semibold transition-colors self-start border",
             sub.flagship
               ? "border-accent-foreground bg-accent-foreground text-accent hover:bg-transparent hover:text-accent-foreground"
               : "border-current cta-hover"
@@ -308,25 +475,114 @@ function SubCard({ sub, idx }: { sub: typeof SUBSCRIPTIONS[number]; idx: number 
   )
 }
 
+// ─── Carte Conseil ──────────────────────────────────────────────────────────
+
+function ConseilCard({ conseil, idx }: { conseil: typeof CONSEIL[number]; idx: number }) {
+  return (
+    <div
+      data-cursor="hover"
+      className={cn(
+        "group relative flex flex-col px-6 py-8 lg:px-8 lg:py-8 transition-colors overflow-hidden border-b lg:border-b-0 lg:border-r border-border",
+        conseil.flagship ? "bg-accent text-accent-foreground" : "bento-hover",
+        idx === CONSEIL.length - 1 && "lg:border-r-0"
+      )}
+    >
+      {/* Decorative background index */}
+      <span
+        className={cn(
+          "hidden lg:block absolute bottom-6 right-5 font-bold leading-none tracking-[-0.05em] select-none pointer-events-none tabular-nums text-[clamp(70px,8vw,110px)]",
+          conseil.flagship ? "opacity-[0.14]" : "opacity-[0.08] group-hover:opacity-[0.20]"
+        )}
+        style={conseil.flagship ? { color: "oklch(0.07 0 0)" } : undefined}
+        aria-hidden="true"
+      >
+        {conseil.code}
+      </span>
+
+      {/* Header */}
+      <div className="flex items-start justify-between mb-7 gap-4">
+        <div className="flex flex-col gap-1.5">
+          {conseil.flagship && (
+            <span className="font-mono text-[10px] uppercase tracking-[0.08em] px-2.5 py-1 border border-current self-start">
+              Recommandé
+            </span>
+          )}
+        </div>
+        <ArrowRight
+          className="w-5 h-5 opacity-40 transition-transform duration-300 group-hover:translate-x-1.5 group-hover:-translate-y-1.5 shrink-0 mt-1"
+          aria-hidden="true"
+        />
+      </div>
+
+      {/* Name */}
+      <div className="mb-6 pr-12">
+        <div className="text-[clamp(18px,2vw,36px)] font-bold tracking-[-0.04em] leading-[0.95] mb-2">
+          {conseil.name}
+        </div>
+        <div className="text-[13px] leading-[1.45] opacity-75">{conseil.sub}</div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.08em] opacity-50 mt-1.5">{conseil.target}</div>
+      </div>
+
+      {/* Features */}
+      <ul className="space-y-2.5 mb-6 flex-1" role="list">
+        {conseil.features.map((f) => (
+          <li key={f} className="flex items-start gap-3 text-[12px] leading-normal">
+            <span className="mt-2 w-2.5 h-px bg-current opacity-50 shrink-0" aria-hidden="true" />
+            <span>{f}</span>
+          </li>
+        ))}
+      </ul>
+
+      {/* Proof chips */}
+      <div className="flex flex-wrap gap-1.5 mb-6">
+        {conseil.proof.map((p) => (
+          <span key={p} className="font-mono text-[9px] uppercase tracking-[0.07em] px-2 py-1 border border-current opacity-50">
+            {p}
+          </span>
+        ))}
+      </div>
+
+      {/* CTA */}
+      <div className="pt-4 border-t border-current/15 flex flex-col gap-1.5">
+        <div className="font-mono text-[10px] uppercase tracking-[0.06em] opacity-50">{conseil.pricePrefix}</div>
+        <div className="text-[18px] font-bold tracking-[-0.025em] leading-none">{conseil.price}</div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.06em] opacity-50">Devis gratuit · Réponse 24 h</div>
+        <Link
+          href="#contact"
+          className={cn(
+            "mt-4 inline-flex items-center gap-2.5 px-4 py-2.5 text-[12px] font-semibold transition-colors self-start border",
+            conseil.flagship
+              ? "border-accent-foreground bg-accent-foreground text-accent hover:bg-transparent hover:text-accent-foreground"
+              : "border-current cta-hover"
+          )}
+        >
+          Prendre rendez-vous
+          <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+        </Link>
+      </div>
+    </div>
+  )
+}
+
 // ─── Section principale ─────────────────────────────────────────────────────
 
 export function PricingSection() {
-  const [tab, setTab]         = useState<"offres" | "abonnements">("offres")
-  const [activeOffer, setActiveOffer]   = useState("S2")
+  const [tab, setTab]                   = useState<"offres" | "conseil" | "abonnements">("offres")
+  const [activeOffer, setActiveOffer]   = useState<string>("S2")
+  const [activeConseil, setActiveConseil] = useState("C1")
   const [activeSub, setActiveSub]       = useState("A3")
 
   return (
     <section id="services" className="border-t border-border" aria-labelledby="pricing-heading">
 
-      {/* Section label */}
-      <div className="px-4 sm:px-6 lg:px-8 py-5 lg:py-6 border-b border-border">
-        <h2 id="pricing-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
-          Services &amp; Abonnements
+      <div className="px-4 sm:px-6 lg:px-8 pt-14 lg:pt-20 pb-10 lg:pb-12 border-b border-border">
+        <h2 id="pricing-heading" className="text-[clamp(44px,6vw,80px)] font-bold leading-[0.92] tracking-[-0.04em]">
+          Nos <span className="font-serif font-normal italic tracking-[-0.02em] text-accent">prestations.</span>
         </h2>
       </div>
 
-      {/* Tab selector — éditorial large format */}
-      <div className="grid grid-cols-2 border-b border-border" role="tablist" aria-label="Type de prestation">
+      {/* Tab selector */}
+      <div className="grid grid-cols-3 border-b border-border" role="tablist" aria-label="Type de prestation">
         <button
           role="tab"
           data-cursor="hover"
@@ -334,15 +590,29 @@ export function PricingSection() {
           aria-controls="panel-offres"
           onClick={() => setTab("offres")}
           className={cn(
-            "group flex flex-col gap-2 px-4 sm:px-6 lg:px-8 py-8 lg:py-10 text-left border-r border-border transition-colors",
-            tab === "offres"
-              ? "bg-foreground text-background"
-              : "hover:bg-secondary"
+            "group flex flex-col items-center gap-2 px-4 sm:px-6 lg:px-8 py-8 lg:py-10 text-center border-r border-border transition-colors",
+            tab === "offres" ? "bg-foreground text-background" : "hover:bg-secondary"
           )}
         >
-          <span className="text-[clamp(20px,2.5vw,28px)] font-bold tracking-[-0.025em] leading-none">Offres</span>
-          <span className={cn("font-mono text-[10px] uppercase tracking-[0.06em]", tab === "offres" ? "text-background/45" : "text-muted-foreground")}>
-            Sites web · Projets uniques
+          <span className="text-[clamp(14px,2vw,28px)] font-bold tracking-[-0.025em] leading-none">Services</span>
+          <span className={cn("font-mono text-[10px] uppercase tracking-[0.06em] hidden sm:block", tab === "offres" ? "text-background/45" : "text-muted-foreground")}>
+            Sites web · Design · Projets
+          </span>
+        </button>
+        <button
+          role="tab"
+          data-cursor="hover"
+          aria-selected={tab === "conseil"}
+          aria-controls="panel-conseil"
+          onClick={() => setTab("conseil")}
+          className={cn(
+            "group flex flex-col items-center gap-2 px-4 sm:px-6 lg:px-8 py-8 lg:py-10 text-center border-r border-border transition-colors",
+            tab === "conseil" ? "bg-foreground text-background" : "hover:bg-secondary"
+          )}
+        >
+          <span className="text-[clamp(14px,2vw,28px)] font-bold tracking-[-0.025em] leading-none">Conseils</span>
+          <span className={cn("font-mono text-[10px] uppercase tracking-[0.06em] hidden sm:block", tab === "conseil" ? "text-background/45" : "text-muted-foreground")}>
+            Audit · Stratégie · Formation
           </span>
         </button>
         <button
@@ -352,14 +622,12 @@ export function PricingSection() {
           aria-controls="panel-abonnements"
           onClick={() => setTab("abonnements")}
           className={cn(
-            "group flex flex-col gap-2 px-4 sm:px-6 lg:px-8 py-8 lg:py-10 text-left transition-colors",
-            tab === "abonnements"
-              ? "bg-foreground text-background"
-              : "hover:bg-secondary"
+            "group flex flex-col items-center gap-2 px-4 sm:px-6 lg:px-8 py-8 lg:py-10 text-center transition-colors",
+            tab === "abonnements" ? "bg-foreground text-background" : "hover:bg-secondary"
           )}
         >
-          <span className="text-[clamp(20px,2.5vw,28px)] font-bold tracking-[-0.025em] leading-none">Abonnements</span>
-          <span className={cn("font-mono text-[10px] uppercase tracking-[0.06em]", tab === "abonnements" ? "text-background/45" : "text-muted-foreground")}>
+          <span className="text-[clamp(14px,2vw,28px)] font-bold tracking-[-0.025em] leading-none">Abonnements</span>
+          <span className={cn("font-mono text-[10px] uppercase tracking-[0.06em] hidden sm:block", tab === "abonnements" ? "text-background/45" : "text-muted-foreground")}>
             Maintenance · SEO · Croissance
           </span>
         </button>
@@ -376,28 +644,76 @@ export function PricingSection() {
               aria-selected={activeOffer === o.code}
               onClick={() => setActiveOffer(o.code)}
               className={cn(
-                "flex-1 px-3 py-3 font-mono text-[10px] uppercase tracking-[0.06em] transition-colors border-r border-border last:border-r-0",
+                "flex-1 px-2 py-3 font-mono text-[9px] uppercase tracking-[0.05em] transition-colors border-r border-border",
                 activeOffer === o.code ? "bg-foreground text-background" : "text-muted-foreground hover:bg-secondary"
               )}
             >
               {o.name}
             </button>
           ))}
+          <button
+            role="tab"
+            aria-selected={activeOffer === "design"}
+            onClick={() => setActiveOffer("design")}
+            className={cn(
+              "flex-1 px-2 py-3 font-mono text-[9px] uppercase tracking-[0.05em] transition-colors",
+              activeOffer === "design" ? "bg-foreground text-background" : "text-muted-foreground hover:bg-secondary"
+            )}
+          >
+            Design
+          </button>
         </div>
 
-        <div className="hidden lg:grid lg:grid-cols-[1fr_1.15fr_1fr]">
-          {OFFERS.map((o, i) => <OfferCard key={o.code} offer={o} idx={i} />)}
+        {/* Desktop — grille 4 colonnes */}
+        <div className="hidden lg:grid lg:grid-cols-4">
+          {OFFERS.map((o) => <OfferCard key={o.code} offer={o} />)}
+          <DesignCard />
         </div>
+
+        {/* Mobile — carte active */}
         <div className="lg:hidden">
-          {OFFERS.filter((o) => o.code === activeOffer).map((o, i) => (
-            <OfferCard key={o.code} offer={o} idx={i} />
+          {activeOffer === "design"
+            ? <DesignCard />
+            : OFFERS.filter((o) => o.code === activeOffer).map((o) => (
+                <OfferCard key={o.code} offer={o} />
+              ))
+          }
+        </div>
+      </div>
+
+      {/* ── Panel Conseil ── */}
+      <div id="panel-conseil" role="tabpanel" hidden={tab !== "conseil"}>
+        {/* Mobile selector */}
+        <div className="lg:hidden flex border-b border-border" role="tablist">
+          {CONSEIL.map((c) => (
+            <button
+              key={c.code}
+              role="tab"
+              aria-selected={activeConseil === c.code}
+              onClick={() => setActiveConseil(c.code)}
+              className={cn(
+                "flex-1 px-2 py-3 font-mono text-[9px] uppercase tracking-[0.05em] transition-colors border-r border-border last:border-r-0",
+                activeConseil === c.code ? "bg-foreground text-background" : "text-muted-foreground hover:bg-secondary"
+              )}
+            >
+              {c.name.split(" ")[0]}
+            </button>
+          ))}
+        </div>
+        {/* Desktop — grille 4 colonnes */}
+        <div className="hidden lg:grid lg:grid-cols-4">
+          {CONSEIL.map((c, i) => <ConseilCard key={c.code} conseil={c} idx={i} />)}
+        </div>
+        {/* Mobile — carte active */}
+        <div className="lg:hidden">
+          {CONSEIL.filter((c) => c.code === activeConseil).map((c, i) => (
+            <ConseilCard key={c.code} conseil={c} idx={i} />
           ))}
         </div>
       </div>
 
       {/* ── Panel Abonnements ── */}
       <div id="panel-abonnements" role="tabpanel" hidden={tab !== "abonnements"}>
-        {/* Mobile selector */}
         <div className="lg:hidden flex border-b border-border" role="tablist">
           {SUBSCRIPTIONS.map((s) => (
             <button
@@ -415,7 +731,7 @@ export function PricingSection() {
           ))}
         </div>
 
-        <div className="hidden lg:grid lg:grid-cols-[1fr_1fr_1.1fr]">
+        <div className="hidden lg:grid lg:grid-cols-4">
           {SUBSCRIPTIONS.map((s, i) => <SubCard key={s.code} sub={s} idx={i} />)}
         </div>
         <div className="lg:hidden">

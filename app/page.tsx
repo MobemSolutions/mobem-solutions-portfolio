@@ -147,31 +147,54 @@ export default function HomePage() {
       <Header />
       <main id="main-content">
         <HeroSection />
-        <LogoMarquee />
+        <div className="-mt-6 mb-6 overflow-hidden">
+          <LogoMarquee />
+        </div>
         <ServicesSection />
-        {/* Section "À propos" redesign - éditorial avec fond sombre */}
-        <section className="bg-inverted text-inverted-foreground py-16 lg:py-24" aria-labelledby="about-us-heading">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10 lg:gap-20">
-              <div className="lg:max-w-[52%]">
-                <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-accent block mb-4">
-                  Qui sommes-nous ?
-                </span>
-                <h2 id="about-us-heading" className="font-bold tracking-[-0.03em] leading-[0.95] text-[clamp(34px,3.5vw,54px)]">
-                  Notre équipe, <em className="font-serif font-normal italic">notre histoire.</em>
+        {/* Section À propos — Swiss editorial */}
+        <section className="relative bg-inverted text-inverted-foreground overflow-hidden" aria-labelledby="about-us-heading">
+
+          {/* Typographie oversized décorative — "histoire." déborde à droite */}
+          <span
+            className="hidden lg:block absolute bottom-0 right-0 font-serif italic font-normal leading-[0.82] tracking-[-0.04em] whitespace-nowrap select-none pointer-events-none text-inverted-foreground/[0.06]"
+            style={{ fontSize: "clamp(120px, 18vw, 260px)", transform: "translateX(12%)" }}
+            aria-hidden="true"
+          >
+            histoire.
+          </span>
+
+          {/* Contenu */}
+          <div className="relative z-10 px-4 sm:px-6 lg:px-8 pt-20 lg:pt-28 pb-24 lg:pb-32 mx-auto max-w-7xl">
+
+            {/* Label */}
+            <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-accent block mb-8">
+              Qui sommes-nous ?
+            </span>
+
+            {/* Layout asymétrique : titre large à gauche, bloc droit décalé vers le bas */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-0">
+
+              {/* Titre — 7 cols, très grand */}
+              <div className="lg:col-span-7">
+                <h2 id="about-us-heading" className="font-bold tracking-[-0.04em] leading-[0.9] text-[clamp(44px,6vw,88px)]">
+                  Notre équipe,<br />
+                  <em className="font-serif font-normal italic text-inverted-foreground/80">notre histoire.</em>
                 </h2>
               </div>
-              <div className="flex flex-col items-start gap-8 lg:max-w-[42%]">
-                <p className="text-[17px] leading-[1.6] text-inverted-foreground/75">
+
+              {/* Bloc texte + CTA — 4 cols, poussé à droite et décalé vers le bas */}
+              <div className="lg:col-span-4 lg:col-start-9 lg:pt-16 flex flex-col gap-8">
+                <p className="text-[16px] leading-[1.65] text-inverted-foreground/60">
                   Découvrez les valeurs qui nous animent, les experts qui composent Mobem Solutions, et notre vision pour accompagner les PME et ETI.
                 </p>
-                <a href="/a-propos" className="inline-flex items-center gap-3 px-8 py-5 bg-accent text-accent-foreground font-medium text-[14px] cta-hover cta-hover-on-dark transition-colors">
+                <a href="/a-propos" className="inline-flex items-center gap-3 px-7 py-4 bg-accent text-accent-foreground font-semibold text-[13px] self-start cta-hover cta-hover-on-dark transition-colors">
                   En savoir plus sur nous
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-                    <path d="M12 5v14M5 12l7 7 7-7" />
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>
                 </a>
               </div>
+
             </div>
           </div>
         </section>

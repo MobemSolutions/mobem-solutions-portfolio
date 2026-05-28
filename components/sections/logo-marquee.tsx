@@ -25,7 +25,6 @@ function StackItem({ name, src, large }: { name: string; src: string; large?: bo
     <div
       className="inline-flex flex-col items-center justify-center shrink-0 gap-3 py-7"
       style={{
-        borderRight: "1px solid var(--color-border)",
         paddingLeft: large ? "80px" : "48px",
         paddingRight: large ? "80px" : "48px",
       }}
@@ -111,7 +110,7 @@ export function LogoMarquee() {
     <div
       role="region"
       aria-label="Stack technique"
-      className="overflow-hidden border-t border-b border-border"
+      className="overflow-hidden"
     >
       <div
         ref={trackRef}

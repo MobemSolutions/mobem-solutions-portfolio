@@ -10,7 +10,7 @@ const kpis = [
 
 export function HeroSection() {
   return (
-    <section id="hero" className="pt-14 lg:pt-16 border-t border-border relative" aria-labelledby="hero-heading">
+    <section id="hero" className="pt-14 lg:pt-16 relative" aria-labelledby="hero-heading">
 
       {/* Vertical editorial label — right margin */}
       <div className="hidden lg:flex absolute right-0 top-0 h-full items-start pt-8 pr-6 pointer-events-none" aria-hidden="true">
@@ -31,7 +31,7 @@ export function HeroSection() {
         <h1
           id="hero-heading"
          
-          className="font-bold leading-[0.88] tracking-[-0.045em] text-[clamp(32px,8.5vw,136px)] mb-10 sm:mb-14 lg:mb-16"
+          className="font-bold leading-[0.88] tracking-[-0.045em] text-[clamp(38px,11vw,136px)] mb-10 sm:mb-14 lg:mb-16"
         >
           La précision<br />
           <span className="text-accent" aria-hidden="true">·</span> digitale,<br />

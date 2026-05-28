@@ -159,17 +159,7 @@ export function ContactSection() {
   return (
     <section id="contact" className="border-t border-border" aria-labelledby="contact-heading">
 
-      {/* Section head */}
-      <div className="flex items-baseline justify-between px-4 sm:px-6 lg:px-8 py-7 lg:py-9 border-b border-border">
-        <div className="flex items-baseline gap-5">
-          <h2 id="contact-heading" className="text-[13px] font-medium uppercase tracking-[0.02em]">
-            Diagnostic
-          </h2>
-        </div>
-        {/* <span className="hidden sm:block font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
-          45 minutes · sans engagement
-        </span> */}
-      </div>
+      <h2 id="contact-heading" className="sr-only">Diagnostic</h2>
 
       {/* Editorial header */}
       <div className="px-4 sm:px-6 lg:px-8 pt-10 pb-8 border-b border-border mx-auto max-w-7xl">
