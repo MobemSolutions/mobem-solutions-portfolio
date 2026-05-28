@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { verifyConfirmToken } from '@/lib/newsletter-token'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
 const MOBEM_EMAIL = 'contact@mobem-solutions.com'
 const FROM_EMAIL = process.env.FROM_EMAIL ?? 'Mobem Solutions <noreply@mobem-solutions.com>'
 const BASE_URL = (process.env.VERCEL_ENV !== 'production' && process.env.VERCEL_URL)
@@ -11,6 +10,7 @@ const BASE_URL = (process.env.VERCEL_ENV !== 'production' && process.env.VERCEL_
 const AUDIENCE_ID = process.env.RESEND_AUDIENCE_ID ?? ''
 
 export async function GET(req: NextRequest) {
+  const resend = new Resend(process.env.RESEND_API_KEY)
   const token = req.nextUrl.searchParams.get('token')
 
   if (!token) {

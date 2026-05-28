@@ -2,13 +2,13 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { verifyUnsubscribeToken } from '@/lib/newsletter-token'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
 const BASE_URL = (process.env.VERCEL_ENV !== 'production' && process.env.VERCEL_URL)
   ? `https://${process.env.VERCEL_URL}`
   : (process.env.NEXT_PUBLIC_APP_URL ?? process.env.APP_URL ?? 'https://mobem-solutions.com')
 const AUDIENCE_ID = process.env.RESEND_AUDIENCE_ID ?? ''
 
 export async function GET(req: NextRequest) {
+  const resend = new Resend(process.env.RESEND_API_KEY)
   const token = req.nextUrl.searchParams.get('token')
   if (!token) {
     return NextResponse.redirect(`${BASE_URL}/?newsletter=invalid`)

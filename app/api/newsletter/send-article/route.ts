@@ -3,7 +3,6 @@ import { Resend } from 'resend'
 import { NewArticleAlert } from '@/emails/NewArticleAlert'
 import { generateUnsubscribeToken } from '@/lib/newsletter-token'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
 const FROM_EMAIL = process.env.FROM_EMAIL ?? 'Mobem Solutions <noreply@mobem-solutions.com>'
 const BASE_URL = (process.env.VERCEL_ENV !== 'production' && process.env.VERCEL_URL)
   ? `https://${process.env.VERCEL_URL}`
@@ -27,6 +26,7 @@ function chunk<T>(arr: T[], size: number): T[][] {
 }
 
 export async function POST(req: NextRequest) {
+  const resend = new Resend(process.env.RESEND_API_KEY)
   // Vérifier le secret du webhook Sanity
   const secret = req.headers.get('sanity-webhook-secret')
   if (!WEBHOOK_SECRET || secret !== WEBHOOK_SECRET) {

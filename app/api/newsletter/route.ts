@@ -3,7 +3,6 @@ import { Resend } from 'resend'
 import { generateConfirmToken } from '@/lib/newsletter-token'
 import { ConfirmEmail } from '@/emails/ConfirmEmail'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
 const FROM_EMAIL = process.env.FROM_EMAIL ?? 'Mobem Solutions <noreply@mobem-solutions.com>'
 const BASE_URL = (process.env.VERCEL_ENV !== 'production' && process.env.VERCEL_URL)
   ? `https://${process.env.VERCEL_URL}`
@@ -11,6 +10,7 @@ const BASE_URL = (process.env.VERCEL_ENV !== 'production' && process.env.VERCEL_
 const AUDIENCE_ID = process.env.RESEND_AUDIENCE_ID ?? ''
 
 export async function POST(req: NextRequest) {
+  const resend = new Resend(process.env.RESEND_API_KEY)
   try {
     const { email } = await req.json()
 
