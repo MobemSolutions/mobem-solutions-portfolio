@@ -86,15 +86,15 @@ export default function MentionsLegalesPage() {
                   <p className="mt-4">Le groupement est composé des membres suivants :</p>
                   <div className="mt-4 grid gap-4 sm:grid-cols-3">
                     {[
-                      { name: "Nathan Portier",  role: "Mandataire — Responsable Croissance & Communication", siret: "91514447100017", address: "50 rue des 2 ponts, 49300 Cholet" },
-                      { name: "Arnaud Clavier",  role: "Co-Mandataire — Responsable Développement Technique", siret: "99285845600013", address: "10 rue Mondésir, 44210 Pornic" },
-                      { name: "Antoine Clavier", role: "Responsable Design", siret: "94931641800019", address: "10 rue Mondésir, 44210 Pornic" },
+                      { name: "Nathan Portier",  role: "Mandataire administratif & commercial — Responsable Croissance & Communication", siret: "91514447100017", location: "Cholet (49)" },
+                      { name: "Arnaud Clavier",  role: "Co-Mandataire — Responsable Développement Technique", siret: "99285845600013", location: "Pornic (44)" },
+                      { name: "Antoine Clavier", role: "Responsable Design", siret: "94931641800019", location: "Pornic (44)" },
                     ].map((m) => (
                       <div key={m.name} className="border border-border bg-card p-4">
                         <p className="font-semibold text-foreground text-sm">{m.name}</p>
                         <p className="text-xs text-muted-foreground mt-1">{m.role}</p>
                         <p className="text-xs text-muted-foreground mt-2">SIRET : <span className="font-mono">{m.siret}</span></p>
-                        <p className="text-xs text-muted-foreground">{m.address}</p>
+                        <p className="text-xs text-muted-foreground">{m.location} · <em>Adresse disponible sur demande</em></p>
                       </div>
                     ))}
                   </div>
@@ -105,8 +105,8 @@ export default function MentionsLegalesPage() {
                 <h2 className="text-[22px] font-bold tracking-[-0.02em] mb-6">2. Responsables de la publication</h2>
                 <div className="prose-legal">
                   <p>
-                    Les responsables de la publication sont <strong>Nathan Portier</strong> et{" "}
-                    <strong>Arnaud Clavier</strong>, en leur qualité de Co-Mandataires du GME Mobem Solutions.
+                    Les responsables de la publication sont <strong>Nathan Portier</strong>, Mandataire administratif
+                    &amp; commercial, et <strong>Arnaud Clavier</strong>, Co-Mandataire technique, du GME Mobem Solutions.
                   </p>
                   <p className="mt-4">
                     Contact :{" "}

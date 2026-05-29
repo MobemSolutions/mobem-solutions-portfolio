@@ -48,7 +48,7 @@ export default function CGVPage() {
             <p className="text-[16px] leading-[1.55] text-muted-foreground max-w-[640px]">
               Les présentes CGV régissent l'ensemble des relations contractuelles entre Mobem Solutions et tout client
               ayant passé commande de ses prestations.{" "}
-              <span className="font-mono text-[11px]">En vigueur au 1er janvier 2025.</span>
+              <span className="font-mono text-[11px]">En vigueur au 1er janvier 2026.</span>
             </p>
           </div>
         </section>
@@ -139,22 +139,30 @@ export default function CGVPage() {
                 <h2 className="text-[22px] font-bold tracking-[-0.02em] mb-4">
                   Article 2 — Prestations proposées
                 </h2>
-                <div className="grid gap-3 sm:grid-cols-3">
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {[
                     {
                       title: "Création de sites web",
                       desc: "Conception, intégration, développement et mise en ligne (vitrine, e-commerce, sur-mesure).",
                     },
                     {
-                      title: "Audit technique",
-                      desc: "Analyse de performance, sécurité, référencement naturel (SEO) et recommandations stratégiques.",
+                      title: "Design & identité visuelle",
+                      desc: "Création graphique, charte visuelle, maquettes UI/UX et déclinaisons print ou digitales.",
                     },
                     {
-                      title: "Pack Sérénité",
-                      desc: "Maintenance récurrente, sécurité et mises à jour (voir Article 10).",
+                      title: "Conseil & stratégie digitale",
+                      desc: "Diagnostic de présence en ligne, recommandations stratégiques et accompagnement à la transformation numérique.",
+                    },
+                    {
+                      title: "Audit technique & SEO",
+                      desc: "Analyse de performance, sécurité, référencement naturel et recommandations priorisées.",
+                    },
+                    {
+                      title: "Abonnement maintenance (Pack Sérénité)",
+                      desc: "Maintenance récurrente, mises à jour de sécurité, surveillance et support (voir Article 10).",
                     },
                   ].map((p) => (
-                    <div key={p.title} className=" border border-border bg-card p-5">
+                    <div key={p.title} className="border border-border bg-card p-5">
                       <p className="font-semibold text-foreground text-sm">{p.title}</p>
                       <p className="text-sm text-muted-foreground mt-2">{p.desc}</p>
                     </div>
@@ -418,7 +426,7 @@ export default function CGVPage() {
 
               <section id="resiliation" className="scroll-mt-28">
                 <h2 className="text-[22px] font-bold tracking-[-0.02em] mb-4">
-                  Article 15 — Résiliation
+                  Article 14 — Résiliation
                 </h2>
                 <div className="prose-legal space-y-3">
                   <p>
@@ -436,7 +444,7 @@ export default function CGVPage() {
 
               <section id="droit" className="scroll-mt-28">
                 <h2 className="text-[22px] font-bold tracking-[-0.02em] mb-4">
-                  Article 17 — Droit applicable et juridiction compétente
+                  Article 15 — Droit applicable et juridiction compétente
                 </h2>
                 <div className="prose-legal">
                   <p>
@@ -449,7 +457,7 @@ export default function CGVPage() {
 
               <div className="pt-8 border-t border-border">
                 <p className="font-mono text-[11px] text-muted-foreground">
-                  Mobem Solutions — CGV en vigueur au 1er janvier 2025
+                  Mobem Solutions — CGV en vigueur au 1er janvier 2026
                 </p>
                 <p className="font-mono text-[11px] text-muted-foreground mt-1">
                   GME | Nathan Portier (Mandataire) & Arnaud Clavier (Co-Mandataire) — Tribunal de Commerce d'Angers

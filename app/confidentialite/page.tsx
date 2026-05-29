@@ -129,8 +129,8 @@ export default function ConfidentialitePage() {
                             required: "Oui",
                           },
                           {
-                            source: "Cookies analytiques",
-                            data: "Pages visitées, durée de session, pays, type d'appareil (données agrégées et anonymisées)",
+                            source: "Vercel Analytics (sans cookies)",
+                            data: "Pages visitées, durée de session, pays, type d'appareil (données agrégées et anonymisées — aucune donnée personnelle)",
                             required: "Non",
                           },
                           {
@@ -201,7 +201,7 @@ export default function ConfidentialitePage() {
                     {[
                       {
                         base: "Consentement (art. 6.1.a)",
-                        desc: "Pour les cookies analytiques non essentiels, vous consentez librement lors de votre première visite.",
+                        desc: "Pour les cookies tiers déposés par Calendly lors de la prise de rendez-vous, un consentement préalable est recueilli avant le chargement du widget.",
                       },
                       {
                         base: "Exécution d'un contrat (art. 6.1.b)",
@@ -241,7 +241,7 @@ export default function ConfidentialitePage() {
                           { type: "Prospects (formulaire de contact, sans suite commerciale)", duration: "3 ans après le dernier contact" },
                           { type: "Clients (données contractuelles)", duration: "5 ans après la fin du contrat (prescription commerciale)" },
                           { type: "Documents comptables et factures", duration: "10 ans (obligation légale, art. L123-22 C. com.)" },
-                          { type: "Données analytiques (cookies)", duration: "13 mois maximum" },
+                          { type: "Données analytiques agrégées (Vercel Analytics — sans cookies)", duration: "13 mois maximum" },
                           { type: "Échanges emails", duration: "3 ans après le dernier contact commercial" },
                         ].map((row) => (
                           <tr key={row.type}>
@@ -325,13 +325,14 @@ export default function ConfidentialitePage() {
                     </div>
                     <div className="border border-border bg-card p-4">
                       <div className="flex items-center justify-between mb-2">
-                        <p className="font-semibold text-foreground text-sm">Cookies analytiques</p>
-                        <span className="text-xs px-2 py-0.5 bg-muted text-muted-foreground font-medium">Consentement requis</span>
+                        <p className="font-semibold text-foreground text-sm">Mesure d&apos;audience (Vercel Analytics)</p>
+                        <span className="text-xs px-2 py-0.5 bg-accent/10 text-accent font-medium">Exempté CNIL</span>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        Vercel Analytics : mesure d'audience anonymisée (pages vues, durée de session, pays,
-                        type d'appareil). Aucune donnée personnelle identifiable n'est transmise. Conservation :
-                        13 mois maximum.
+                        Vercel Analytics ne dépose <strong>aucun cookie</strong> et ne collecte aucune donnée personnelle
+                        identifiable. Seules des données agrégées sont produites (pages vues, pays, type d'appareil).
+                        Cet outil satisfait les critères d'exemption de la CNIL pour la mesure d'audience strictement
+                        anonymisée — aucun consentement n'est requis. Conservation des données agrégées : 13 mois maximum.
                       </p>
                     </div>
                     <div className="border border-border bg-card p-4">
