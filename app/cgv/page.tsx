@@ -47,9 +47,9 @@ export default function CGVPage() {
             </h1>
             <p className="text-[16px] leading-[1.55] text-muted-foreground max-w-[640px]">
               Les présentes CGV régissent l'ensemble des relations contractuelles entre Mobem Solutions et tout client
-              ayant passé commande de ses prestations.{" "}
-              <span className="font-mono text-[11px]">En vigueur au 1er janvier 2026.</span>
+              ayant passé commande de ses prestations.
             </p>
+            <span className="font-mono text-[11px] text-muted-foreground mt-3 inline-block">En vigueur au 1er janvier 2026.</span>
           </div>
         </section>
 
