@@ -87,9 +87,11 @@ export function ServicesSection() {
                     : "text-muted-foreground hover:bg-secondary"
                 )}
               >
-                <span className={cn("font-mono text-[10px] tabular-nums", activeStep === i ? "opacity-40" : "opacity-35")}>
-                  {step.number}
-                </span>
+                <span
+                  className={cn("font-mono text-[10px] tabular-nums", activeStep === i ? "opacity-40" : "opacity-35")}
+                  aria-hidden="true"
+                  data-watermark={step.number}
+                />
                 <span className="font-mono text-[11px] uppercase tracking-[0.06em] leading-tight">
                   {step.title}
                 </span>

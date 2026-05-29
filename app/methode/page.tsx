@@ -382,7 +382,7 @@ export default function MethodePage() {
         <section className="border-t border-border bg-inverted text-inverted-foreground" aria-labelledby="cta-heading">
           <div className="px-4 sm:px-6 lg:px-8 py-20 lg:py-32 mx-auto max-w-7xl grid lg:grid-cols-12 gap-10 items-end">
             <div className="lg:col-span-8">
-              <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-accent block mb-6">
+              <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-inverted-foreground/65 block mb-6">
                 Prochaine étape
               </span>
               <h2 id="cta-heading" className="font-bold tracking-[-0.035em] leading-[0.92] text-[clamp(40px,5.5vw,80px)]">

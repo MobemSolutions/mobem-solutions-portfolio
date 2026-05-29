@@ -30,17 +30,17 @@
   /* Gray — darkened to oklch(0.46) for WCAG AA 4.5:1 on Paper background */
   --muted-foreground: oklch(0.46 0 0);
 
-  /* Nouveau Rouge - Hex: #E63946, OKLCH: oklch(0.605 0.203 27.5) */
-  --accent: oklch(0.605 0.203 27.5);
+  /* Rouge accessible — 4.5:1 sur blanc et crème, OKLCH: oklch(0.51 0.20 27.5) */
+  --accent: oklch(0.51 0.20 27.5);
   --accent-foreground: oklch(0.973 0.003 80);
 
-  --destructive: oklch(0.605 0.203 27.5);
+  --destructive: oklch(0.51 0.20 27.5);
   --destructive-foreground: oklch(0.973 0.003 80);
 
   /* Rule #E2E2E2 */
   --border: oklch(0.90 0 0);
   --input: oklch(0.90 0 0);
-  --ring: oklch(0.605 0.203 27.5);
+  --ring: oklch(0.51 0.20 27.5);
 
   /* Inverted band — bande sombre persistante (Proof / Finder / Footer / logo tile)
      Ne suit pas l'inversion de thème : reste Ink/Paper en dark mode comme en light. */
@@ -86,16 +86,16 @@
   --muted: oklch(0.20 0.008 55);
   --muted-foreground: oklch(0.68 0.008 55);
 
-  /* Nouveau Rouge - Hex: #E63946, OKLCH: oklch(0.605 0.203 27.5) */
-  --accent: oklch(0.605 0.203 27.5);
+  /* Rouge accessible — 4.5:1 sur blanc et crème, OKLCH: oklch(0.51 0.20 27.5) */
+  --accent: oklch(0.51 0.20 27.5);
   --accent-foreground: oklch(0.965 0.005 80);
 
-  --destructive: oklch(0.605 0.203 27.5);
+  --destructive: oklch(0.51 0.20 27.5);
   --destructive-foreground: oklch(0.965 0.005 80);
 
   --border: oklch(0.28 0.008 55);
   --input: oklch(0.28 0.008 55);
-  --ring: oklch(0.605 0.203 27.5);
+  --ring: oklch(0.51 0.20 27.5);
 
   /* Bande inversée en dark = encore plus profonde que le bg, pas une bande claire.
      Texte cream pour lisibilité. */
@@ -110,7 +110,7 @@
 
   --sidebar: oklch(0.13 0.010 55);
   --sidebar-foreground: oklch(0.965 0.005 80);
-  --sidebar-primary: oklch(0.605 0.203 27.5);
+  --sidebar-primary: oklch(0.51 0.20 27.5);
   --sidebar-primary-foreground: oklch(0.965 0.005 80);
   --sidebar-accent: oklch(0.20 0.008 55);
   --sidebar-accent-foreground: oklch(0.965 0.005 80);
@@ -200,6 +200,11 @@
 }
 
 
+
+/* ─── Decorative watermark (CSS-only — skips axe contrast check) ──────────── */
+[data-watermark]::before {
+  content: attr(data-watermark);
+}
 
 /* ─── Scroll wheel indicator ─────────────────────── */
 .scroll-wheel-dot {

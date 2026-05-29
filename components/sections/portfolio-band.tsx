@@ -90,10 +90,10 @@ export async function PortfolioBand() {
                 <h3 className="text-[16px] font-bold tracking-[-0.02em] leading-tight text-inverted-foreground group-hover:text-white transition-colors duration-300">
                   {c.client}
                 </h3>
-                <p className="text-[11px] leading-relaxed text-inverted-foreground/40 group-hover:text-white/70 transition-colors duration-300">
+                <p className="text-[11px] leading-relaxed text-inverted-foreground/60 group-hover:text-white transition-colors duration-300">
                   {c.desc}
                 </p>
-                <span className="font-mono text-[9px] uppercase tracking-widest text-inverted-foreground/25 border border-inverted-foreground/10 px-2 py-1 self-start mt-1 group-hover:border-white/40 group-hover:text-white/80 transition-colors duration-300">
+                <span className="font-mono text-[9px] uppercase tracking-widest text-inverted-foreground/60 border border-inverted-foreground/25 px-2 py-1 self-start mt-1 group-hover:border-white/60 group-hover:text-white transition-colors duration-300">
                   {c.tag}
                 </span>
               </div>

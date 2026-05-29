@@ -39,7 +39,7 @@ function CaseRow({ c }: { c: Case }) {
       className="group bento-hover flex items-center gap-4 px-4 sm:px-6 lg:px-8 py-8 border-b border-border transition-colors lg:grid lg:items-center lg:gap-6 lg:[grid-template-columns:70px_2fr_1.2fr_1fr_1fr_48px]"
       data-cursor="hover"
     >
-      <span className="hidden lg:block text-[11px] text-foreground/50 group-hover:text-background/50 transition-colors">{c.idx}</span>
+      <span className="hidden lg:block text-[11px] text-foreground/65 group-hover:text-background/65 transition-colors">{c.idx}</span>
       <div className="flex-1 lg:flex-none min-w-0">
         <div className="text-[clamp(20px,2.5vw,36px)] font-bold tracking-[-0.025em] leading-none truncate">{c.client}</div>
         <div className="lg:hidden mt-1 text-[12px] text-foreground/55 group-hover:text-background/55 transition-colors truncate">
@@ -76,13 +76,13 @@ function CaseCard({ c }: { c: Case }) {
             sizes="(max-width: 640px) 340px, (max-width: 1024px) 50vw, 33vw"
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center font-mono text-[10px] uppercase tracking-[0.1em] text-foreground/30 dark:text-foreground/60 group-hover:text-background/40">
+          <div className="absolute inset-0 flex items-center justify-center font-mono text-[10px] uppercase tracking-[0.1em] text-foreground/65 dark:text-foreground/65 group-hover:text-background/65">
             [ capture · {c.client.toLowerCase()} ]
           </div>
         )}
       </div>
       <div className="flex items-center justify-between gap-4">
-        <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-foreground/50 dark:text-foreground/75 group-hover:text-background/50 transition-colors">{c.idx} · {c.year}</span>
+        <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-foreground/65 dark:text-foreground/80 group-hover:text-background/65 transition-colors">{c.idx} · {c.year}</span>
         <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-accent">{c.tag}</span>
       </div>
       <h3 className="text-[28px] font-bold tracking-[-0.025em] leading-none mt-1">{c.client}</h3>
@@ -91,7 +91,7 @@ function CaseCard({ c }: { c: Case }) {
         {c.stats.map(([v, l], i) => (
           <div key={i} className="flex flex-col gap-1">
             <div className="text-[22px] font-bold tracking-[-0.02em] text-accent leading-none">{v}</div>
-            <div className="font-mono text-[10px] uppercase tracking-[0.08em] text-foreground/50 dark:text-foreground/75 group-hover:text-background/50 transition-colors">{l}</div>
+            <div className="font-mono text-[10px] uppercase tracking-[0.08em] text-foreground/65 dark:text-foreground/80 group-hover:text-background/65 transition-colors">{l}</div>
           </div>
         ))}
       </div>

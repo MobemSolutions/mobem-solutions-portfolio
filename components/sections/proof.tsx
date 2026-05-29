@@ -55,7 +55,7 @@ function ProofNumber({
         <span className="text-accent" style={{ fontSize: "0.52em" }}>{suffix}</span>
       </div>
       <div className="text-[13px] font-semibold tracking-[-0.005em]">{label}</div>
-      <div className="text-[11px] leading-[1.55] text-inverted-foreground/45 max-w-[22ch]">{sub}</div>
+      <div className="text-[11px] leading-[1.55] text-inverted-foreground/60 max-w-[22ch]">{sub}</div>
     </div>
   )
 }
