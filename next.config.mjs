@@ -24,7 +24,7 @@ const nextConfig = {
       "img-src 'self' blob: data: cdn.sanity.io https://assets.calendly.com https://images.unsplash.com;",
       "font-src 'self' data:;",
       "connect-src 'self' *.sanity.io *.vercel-analytics.com https://va.vercel-scripts.com https://api.resend.com https://calendly.com https://api.unsplash.com https://vercel.live wss://ws-us3.pusher.com;",
-      "frame-src 'self' https://calendly.com;",
+      "frame-src 'self' https://calendly.com https://vercel.live;",
       "worker-src 'self' blob:;",
     ].join(' ')
 

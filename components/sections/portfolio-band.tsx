@@ -38,7 +38,7 @@ export async function PortfolioBand() {
     <section className="bg-inverted text-inverted-foreground border-t border-border" aria-labelledby="portfolio-band-heading">
 
       {/* Editorial header */}
-      <div className="flex items-end justify-between gap-6 px-4 sm:px-6 lg:px-8 pt-14 lg:pt-20 pb-10 lg:pb-12 border-b border-inverted-foreground/10">
+      <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-4 px-4 sm:px-6 lg:px-8 pt-14 lg:pt-20 pb-10 lg:pb-12 border-b border-inverted-foreground/10">
         <h2
           id="portfolio-band-heading"
           className="text-[clamp(44px,6vw,80px)] font-bold leading-[0.92] tracking-[-0.04em]"

@@ -26,20 +26,20 @@ export function HeroSection() {
       </div>
 
       {/* Main content */}
-      <div className="px-4 sm:px-6 lg:px-8 pt-14 sm:pt-20 lg:pt-28 mx-auto max-w-7xl">
+      <div className="px-5 sm:px-6 lg:px-8 pt-14 sm:pt-20 lg:pt-28 mx-auto max-w-7xl">
 
         <h1
           id="hero-heading"
-          className="font-bold leading-[0.88] tracking-[-0.045em] text-[clamp(32px,8vw,100px)] mb-10 sm:mb-14 lg:mb-16"
+          className="font-bold leading-[0.88] tracking-[-0.045em] text-[clamp(52px,9vw,100px)] mb-10 sm:mb-14 lg:mb-16"
         >
           Conçu pour<br />
-          vous <span className="font-serif font-normal italic tracking-[-0.02em] text-accent">ressembler</span>.<br />
+          vous<br className="sm:hidden" />{" "}<span className="font-serif font-normal italic tracking-[-0.02em] text-accent">ressembler</span>.<br />
           Optimisé pour{" "}
           <span className="font-serif font-normal italic tracking-[-0.02em] text-accent whitespace-nowrap">convertir</span><span className="font-serif font-normal italic tracking-[-0.02em] whitespace-nowrap">.<span className="caret" aria-hidden="true" /></span>
         </h1>
 
-        {/* Scroll mouse indicator */}
-        <div className="flex justify-center mb-10 sm:mb-14 lg:mb-16" aria-hidden="true">
+        {/* Scroll mouse indicator — desktop only */}
+        <div className="hidden sm:flex justify-center mb-10 sm:mb-14 lg:mb-16" aria-hidden="true">
           <svg width="26" height="42" viewBox="0 0 26 42" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="1" y="1" width="24" height="40" rx="12" stroke="currentColor" strokeOpacity="0.25" strokeWidth="1.5"/>
             <circle className="scroll-wheel-dot" cx="13" cy="13" r="3" fill="var(--color-accent)"/>
