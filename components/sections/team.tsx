@@ -49,10 +49,10 @@ export function TeamSection() {
       {/* Editorial header */}
       <div className="px-4 sm:px-6 lg:px-8 pt-14 lg:pt-20 pb-10 lg:pb-12 border-b border-border">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-end">
-          <h2 id="team-heading" className="text-[clamp(44px,6vw,80px)] font-bold leading-[0.92] tracking-[-0.04em]">
+          <h2 data-animate="" id="team-heading" className="text-[clamp(44px,6vw,80px)] font-bold leading-[0.92] tracking-[-0.04em]">
             Notre <span className="font-serif font-normal italic tracking-[-0.02em] text-accent">équipe.</span>
           </h2>
-          <div className="flex flex-col gap-5">
+          <div data-animate="" data-delay="100" className="flex flex-col gap-5">
             <p className="text-[16px] leading-[1.65] text-muted-foreground">
               Découvrez les valeurs qui nous animent, les experts qui composent Mobem Solutions, et notre vision pour accompagner les PME et ETI.
             </p>
@@ -74,6 +74,8 @@ export function TeamSection() {
           <div
             key={member.num}
             data-cursor="hover"
+            data-animate=""
+            data-delay={i > 0 ? String(i * 100) : undefined}
             className={cn(
               "group flex flex-col w-[320px] lg:w-auto bento-hover border-r border-border lg:border-r-0 snap-start lg:snap-align-none",
               i < 2 && "lg:border-r lg:border-border"

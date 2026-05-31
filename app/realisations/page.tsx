@@ -36,6 +36,7 @@ function CaseRow({ c }: { c: Case }) {
   return (
     <Link
       href={`/realisations/${c.slug}`}
+      data-animate=""
       className="group bento-hover flex items-center gap-4 px-4 sm:px-6 lg:px-8 py-8 border-b border-border transition-colors lg:grid lg:items-center lg:gap-6 lg:[grid-template-columns:70px_2fr_1.2fr_1fr_1fr_48px]"
       data-cursor="hover"
     >
@@ -62,6 +63,7 @@ function CaseCard({ c }: { c: Case }) {
   return (
     <Link
       href={`/realisations/${c.slug}`}
+      data-animate=""
       className="group bento-hover w-[340px] sm:w-auto border-r border-b border-border flex flex-col gap-4 p-10 transition-colors"
       data-cursor="hover"
     >
@@ -166,13 +168,13 @@ export default async function RealisationsPage({ searchParams }: PageProps) {
               <span>/</span>
               <span className="text-foreground">Réalisations</span>
             </nav>
-            <h1 className="font-extrabold leading-[0.92] tracking-[-0.045em] text-[clamp(56px,8vw,128px)] mb-6">
+            <h1 data-animate="" className="font-extrabold leading-[0.92] tracking-[-0.045em] text-[clamp(56px,8vw,128px)] mb-6">
               Réalisations<br />
               <em className="font-serif font-normal italic text-accent tracking-[-0.02em]">
                 2025 — 2026.
               </em>
             </h1>
-            <p className="text-xl leading-[1.5] max-w-[720px] text-muted-foreground">
+            <p data-animate="" data-delay="100" className="text-xl leading-[1.5] max-w-[720px] text-muted-foreground">
               Des <strong>cas d'études</strong> pour illustrer notre approche — refontes, sites essentiels, plateformes sur mesure. Chaque cas : un diagnostic, une prescription, une exécution mesurée.
             </p>
           </div>
@@ -228,10 +230,10 @@ export default async function RealisationsPage({ searchParams }: PageProps) {
 
         {/* ── CTA ──────────────────────────────────────────────────────────── */}
         <section className="px-4 sm:px-6 lg:px-8 py-32 lg:py-40 border-t border-border text-center">
-          <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground mb-6">
+          <div data-animate="" className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground mb-6">
             Votre projet
           </div>
-          <h2 className="mx-auto mb-6 max-w-[720px] text-[clamp(36px,4vw,64px)] font-extrabold tracking-[-0.03em] leading-[0.95]">
+          <h2 data-animate="" data-delay="100" className="mx-auto mb-6 max-w-[720px] text-[clamp(36px,4vw,64px)] font-extrabold tracking-[-0.03em] leading-[0.95]">
             Le prochain cas{" "}
             <em className="font-serif font-normal italic text-accent">
               pourrait être le vôtre.

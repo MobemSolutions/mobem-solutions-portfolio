@@ -572,7 +572,7 @@ export function PricingSection() {
     <section id="services" className="border-t border-border" aria-labelledby="pricing-heading">
 
       <div className="px-4 sm:px-6 lg:px-8 pt-14 lg:pt-20 pb-10 lg:pb-12 border-b border-border">
-        <h2 id="pricing-heading" className="text-[clamp(44px,6vw,80px)] font-bold leading-[0.92] tracking-[-0.04em]">
+        <h2 data-animate="" id="pricing-heading" className="text-[clamp(44px,6vw,80px)] font-bold leading-[0.92] tracking-[-0.04em]">
           Nos <span className="font-serif font-normal italic tracking-[-0.02em] text-accent">prestations.</span>
         </h2>
       </div>

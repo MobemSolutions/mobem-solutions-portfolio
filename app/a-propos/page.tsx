@@ -148,6 +148,7 @@ export default function AProposPage() {
           <div className="px-4 sm:px-6 lg:px-8 pt-14 sm:pt-20 lg:pt-28 mx-auto max-w-7xl">
             <EditorialBadge className="mb-10">Qui sommes-nous</EditorialBadge>
             <h1
+              data-animate=""
               id="apropos-hero"
               className="font-bold leading-[0.9] tracking-[-0.04em] text-[clamp(44px,7.5vw,120px)] mb-12 sm:mb-16 lg:mb-24"
             >
@@ -157,7 +158,7 @@ export default function AProposPage() {
             </h1>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 border-t border-border pt-10 pb-14 lg:pb-20">
-              <div className="lg:col-span-7 lg:pr-10">
+              <div data-animate="" data-delay="100" className="lg:col-span-7 lg:pr-10">
                 <p className="text-[17px] sm:text-[18px] leading-[1.5] text-muted-foreground max-w-[62ch]">
                   Mobem Solutions est fondée par trois associés complémentaires : Growth,
                   Marketing, Engineering. Pas de sous-traitance, pas d&apos;intermédiaires. Les
@@ -191,6 +192,8 @@ export default function AProposPage() {
               <div
                 key={block.letter}
                 data-cursor="hover"
+                data-animate=""
+                data-delay={i > 0 ? String(i * 100) : undefined}
                 className={cn(
                   "group bento-hover px-6 lg:px-10 py-12 lg:py-16 flex flex-col gap-6",
                   i < gmeBlocks.length - 1 && "border-b lg:border-b-0 lg:border-r border-border",
@@ -229,6 +232,8 @@ export default function AProposPage() {
                 <article
                   key={member.name}
                   data-cursor="hover"
+                  data-animate=""
+                  data-delay={i > 0 ? String(i * 100) : undefined}
                   className={cn(
                     "group flex flex-col w-[340px] lg:w-auto px-6 lg:px-10 py-10 lg:py-14 bento-hover border-r border-border lg:border-r-0 snap-start lg:snap-align-none",
                     i < 2 && "lg:border-r lg:border-border",
@@ -291,6 +296,7 @@ export default function AProposPage() {
                 key={value.title}
                 role="listitem"
                 data-cursor="hover"
+                data-animate=""
                 className={cn(
                   "group bento-hover grid lg:grid-cols-12 gap-6 lg:gap-10 px-4 sm:px-6 lg:px-8 py-10 lg:py-14 items-baseline",
                   i < values.length - 1 && "border-b border-border",
@@ -345,7 +351,7 @@ export default function AProposPage() {
         {/* Final CTA */}
         <section className="border-t border-border" aria-labelledby="cta-heading">
           <div className="px-4 sm:px-6 lg:px-8 py-20 lg:py-32 mx-auto max-w-7xl grid lg:grid-cols-12 gap-10 items-end">
-            <div className="lg:col-span-8">
+            <div data-animate="" className="lg:col-span-8">
               <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-accent block mb-6">
                 Travaillons ensemble
               </span>
@@ -354,7 +360,7 @@ export default function AProposPage() {
                 <span className="font-serif font-normal italic">on revient sous 24 h.</span>
               </h2>
             </div>
-            <div className="lg:col-span-4 flex flex-col gap-3 items-start">
+            <div data-animate="" data-delay="100" className="lg:col-span-4 flex flex-col gap-3 items-start">
               <SmoothAnchorLink
                 href="/#contact"
                 className="inline-flex items-center gap-2.5 px-5 py-3.5 bg-accent text-accent-foreground text-[15px] font-semibold transition-colors cta-hover"

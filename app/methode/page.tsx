@@ -186,8 +186,8 @@ export default function MethodePage() {
 
           <div className="px-4 sm:px-6 lg:px-8 pt-14 sm:pt-20 lg:pt-28 mx-auto max-w-7xl">
             <h1
+              data-animate=""
               id="methode-hero"
-             
               className="font-bold leading-[0.92] tracking-[-0.04em] text-[clamp(44px,7.5vw,120px)] mb-12 sm:mb-16 lg:mb-24"
             >
               De l&apos;idée<br />
@@ -199,7 +199,7 @@ export default function MethodePage() {
               {/* <div className="hidden lg:flex lg:col-span-1 items-start pt-1">
                 <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">00</span>
               </div> */}
-              <div className="lg:col-span-6 lg:pr-10">
+              <div data-animate="" data-delay="100" className="lg:col-span-6 lg:pr-10">
                 <p className="text-[17px] sm:text-[18px] leading-[1.5] text-muted-foreground max-w-[58ch]">
                   Un processus court, itératif et transparent. Quatre étapes claires,
                   des jalons validés ensemble, un résultat mesurable. Pas d&apos;effet tunnel,
@@ -246,8 +246,7 @@ export default function MethodePage() {
                 key={step.number}
                 role="listitem"
                 data-cursor="hover"
-               
-
+                data-animate=""
                 className={cn(
                   "group bento-hover grid lg:grid-cols-12 gap-6 lg:gap-10 px-4 sm:px-6 lg:px-8 py-10 lg:py-14",
                   i < steps.length - 1 && "border-b border-border",
@@ -304,6 +303,8 @@ export default function MethodePage() {
             {guarantees.map(({ k, v, d }, i) => (
               <div
                 key={k}
+                data-animate=""
+                data-delay={i > 0 ? String(Math.min(i * 100, 300)) : undefined}
                 className={cn(
                   "px-4 sm:px-6 lg:px-8 py-10 lg:py-14 flex flex-col gap-3",
                   i < 3 && "lg:border-r lg:border-border",
@@ -336,8 +337,8 @@ export default function MethodePage() {
             {stack.map((s, i) => (
               <div
                 key={s.category}
-               
-
+                data-animate=""
+                data-delay={i > 0 ? String(Math.min(i * 100, 300)) : undefined}
                 className={cn(
                   "px-4 sm:px-6 lg:px-8 py-10 lg:py-12 flex flex-col gap-5",
                   i < stack.length - 1 && "lg:border-r lg:border-border",
@@ -373,7 +374,7 @@ export default function MethodePage() {
             </span>
           </div>
 
-          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
+          <div data-animate="" className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
             <MethodeFaq items={faqs} />
           </div>
         </section>
@@ -381,7 +382,7 @@ export default function MethodePage() {
         {/* Final CTA — editorial closing */}
         <section className="border-t border-border bg-inverted text-inverted-foreground" aria-labelledby="cta-heading">
           <div className="px-4 sm:px-6 lg:px-8 py-20 lg:py-32 mx-auto max-w-7xl grid lg:grid-cols-12 gap-10 items-end">
-            <div className="lg:col-span-8">
+            <div data-animate="" className="lg:col-span-8">
               <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-inverted-foreground/65 block mb-6">
                 Prochaine étape
               </span>
@@ -390,7 +391,7 @@ export default function MethodePage() {
                 <span className="font-serif font-normal italic">45 minutes,</span> sans engagement.
               </h2>
             </div>
-            <div className="lg:col-span-4 flex flex-col gap-3 items-start">
+            <div data-animate="" data-delay="100" className="lg:col-span-4 flex flex-col gap-3 items-start">
               <Link
                 href="/#contact"
                 className="inline-flex items-center gap-2.5 px-5 py-3.5 bg-accent text-accent-foreground text-[15px] font-semibold transition-colors cta-hover cta-hover-on-dark"

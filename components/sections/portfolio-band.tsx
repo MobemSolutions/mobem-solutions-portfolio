@@ -38,7 +38,7 @@ export async function PortfolioBand() {
     <section className="bg-inverted text-inverted-foreground border-t border-border" aria-labelledby="portfolio-band-heading">
 
       {/* Editorial header */}
-      <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-4 px-4 sm:px-6 lg:px-8 pt-14 lg:pt-20 pb-10 lg:pb-12 border-b border-inverted-foreground/10">
+      <div data-animate="" className="flex flex-wrap items-end justify-between gap-x-6 gap-y-4 px-4 sm:px-6 lg:px-8 pt-14 lg:pt-20 pb-10 lg:pb-12 border-b border-inverted-foreground/10">
         <h2
           id="portfolio-band-heading"
           className="text-[clamp(44px,6vw,80px)] font-bold leading-[0.92] tracking-[-0.04em]"
@@ -62,6 +62,8 @@ export async function PortfolioBand() {
               key={c.slug || i}
               href={`/realisations/${c.slug}`}
               data-cursor="hover"
+              data-animate=""
+              data-delay={i > 0 ? String(i * 100) : undefined}
               className="group flex flex-col gap-0 transition-colors duration-300 hover:bg-accent"
             >
               {/* Thumbnail — framed with dark padding */}

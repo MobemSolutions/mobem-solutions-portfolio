@@ -72,6 +72,7 @@ function ArticleRow({ post }: { post: Post }) {
   return (
     <Link
       href={`/blog/${post.slug?.current}`}
+      data-animate=""
       className="group bento-hover grid grid-cols-[1fr_40px] sm:grid-cols-[1fr_120px_40px] items-center gap-4 sm:gap-6 px-4 sm:px-6 py-7 border-b border-border transition-colors"
       data-cursor="hover"
     >
@@ -113,6 +114,7 @@ function ArticleCard({ post }: { post: Post }) {
   return (
     <Link
       href={`/blog/${post.slug?.current}`}
+      data-animate=""
       className="group bento-hover border-r border-b border-border flex flex-col gap-4 p-10 transition-colors"
       data-cursor="hover"
     >
@@ -195,13 +197,13 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               <span>/</span>
               <span className="text-foreground">Journal</span>
             </nav>
-            <h1 className="font-extrabold leading-[0.92] tracking-[-0.045em] text-[clamp(56px,8vw,128px)] mb-6">
+            <h1 data-animate="" className="font-extrabold leading-[0.92] tracking-[-0.045em] text-[clamp(56px,8vw,128px)] mb-6">
               Le journal{" "}
               <em className="font-serif font-normal italic text-accent tracking-[-0.02em]">
                 du cabinet.
               </em>
             </h1>
-            <p className="text-xl leading-[1.5] max-w-[720px] text-muted-foreground">
+            <p data-animate="" data-delay="100" className="text-xl leading-[1.5] max-w-[720px] text-muted-foreground">
               Analyses terrain, retours d&apos;expérience et stratégies concrètes pour
               les PME et ETI ambitieuses. Rédigé par nos consultants.
             </p>
@@ -268,6 +270,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               {featured && (
                 <Link
                   href={`/blog/${featured.slug?.current}`}
+                  data-animate=""
                   className="group flex flex-col gap-6 p-10 lg:p-16 border-b lg:border-b-0 lg:border-r border-border hover:bg-accent/[0.04] transition-colors"
                   data-cursor="hover"
                 >

@@ -162,7 +162,7 @@ export function ContactSection() {
       <h2 id="contact-heading" className="sr-only">Diagnostic</h2>
 
       {/* Editorial header */}
-      <div className="px-4 sm:px-6 lg:px-8 pt-10 pb-8 border-b border-border">
+      <div data-animate="" className="px-4 sm:px-6 lg:px-8 pt-10 pb-8 border-b border-border">
         <h2 id="contact-heading" className="text-[clamp(44px,6vw,80px)] font-bold leading-[0.92] tracking-[-0.04em]">
           Un audit <span className="font-serif font-normal italic tracking-[-0.02em] text-accent">gratuit.</span>
         </h2>
@@ -174,7 +174,7 @@ export function ContactSection() {
         <div className="grid lg:grid-cols-5 gap-6 lg:gap-8">
 
           {/* Formulaire (3/5) */}
-          <div className="lg:col-span-3 flex flex-col">
+          <div data-animate="" className="lg:col-span-3 flex flex-col">
             <div className="bg-card border border-border p-6 lg:p-8 flex flex-col flex-1 relative overflow-hidden">
               {isSubmitted ? (
                 <SuccessCard name={formData.name} email={formData.email} onReset={resetForm} />
@@ -325,7 +325,7 @@ export function ContactSection() {
           </div>
 
           {/* Sidebar (2/5) */}
-          <div className="lg:col-span-2 flex flex-col gap-4">
+          <div data-animate="" data-delay="100" className="lg:col-span-2 flex flex-col gap-4">
 
             {/* Calendly popup card */}
             <div className="relative border border-accent/30 bg-accent/5 p-6">

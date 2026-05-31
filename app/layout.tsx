@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { ThemeProvider } from '@/components/theme-provider'
 import { ClientOnlyUI } from '@/components/client-only-ui'
+import { ScrollReveal } from '@/components/scroll-reveal'
 import './globals.css'
 
 const inter = Inter({
@@ -94,6 +95,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <ClientOnlyUI />
+          <ScrollReveal />
           {children}
           <Analytics />
           <SpeedInsights />

@@ -351,6 +351,26 @@
   border-color: oklch(0.973 0.003 80);
 }
 
+/* ─── Scroll reveal — GPU-only, respecte prefers-reduced-motion ──────────── */
+@media (prefers-reduced-motion: no-preference) {
+  [data-animate] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity  0.55s ease,
+      transform 0.55s ease;
+    transition-delay: var(--animate-delay, 0ms);
+  }
+  [data-animate="in"] {
+    opacity: 1;
+    transform: none;
+  }
+  [data-delay="100"] { --animate-delay: 100ms; }
+  [data-delay="200"] { --animate-delay: 200ms; }
+  [data-delay="300"] { --animate-delay: 300ms; }
+  [data-delay="400"] { --animate-delay: 400ms; }
+}
+
 /* ─── FAQ accordion ───────────────────────────────── */
 .faq-details summary::-webkit-details-marker { display: none; }
 .faq-details summary::marker { display: none; }

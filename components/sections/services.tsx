@@ -50,14 +50,14 @@ export function ServicesSection() {
         {/* Left — editorial quote (sticky) */}
         <div className="lg:w-[44%] shrink-0 lg:border-r lg:border-border">
           <div className="px-4 sm:px-6 lg:px-8 py-14 lg:py-20 lg:sticky lg:top-16">
-          <h3 className="font-bold text-[clamp(44px,6vw,80px)] leading-[0.92] tracking-[-0.04em] mb-6 whitespace-nowrap">
+          <h3 data-animate="" className="font-bold text-[clamp(44px,6vw,80px)] leading-[0.92] tracking-[-0.04em] mb-6 whitespace-nowrap">
             Nos <span className="font-serif font-normal italic tracking-[-0.02em] text-accent">méthodes.</span>
           </h3>
-          <p className="text-[15px] leading-relaxed text-muted-foreground max-w-sm">
+          <p data-animate="" data-delay="100" className="text-[15px] leading-relaxed text-muted-foreground max-w-sm">
             Nous refusons les briefs livrés tels quels. Une bonne réponse part toujours
             d&apos;une bonne question et d&apos;un audit sans complaisance.
           </p>
-          <div className="mt-10 flex flex-col sm:flex-row lg:flex-col gap-3">
+          <div data-animate="" data-delay="200" className="mt-10 flex flex-col sm:flex-row lg:flex-col gap-3">
             <Link
               href="/methode"
               className="inline-flex items-center gap-2 border border-border px-4 py-2.5 text-sm font-medium transition-colors hover:bg-secondary self-start"
@@ -120,6 +120,8 @@ export function ServicesSection() {
                 key={step.number}
                 role="listitem"
                 data-cursor="hover"
+                data-animate=""
+                data-delay={i > 0 ? String(i * 100) : undefined}
                 className={cn(
                   "group bento-hover grid grid-cols-12 gap-6 px-6 lg:px-8 py-8 lg:py-10 items-baseline",
                   i < steps.length - 1 && "border-b border-border"
