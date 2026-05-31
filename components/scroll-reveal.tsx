@@ -15,20 +15,27 @@ export function ScrollReveal() {
       { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
     )
 
-    const observe = () =>
-      document
-        .querySelectorAll<Element>('[data-animate]:not([data-animate="in"])')
-        .forEach((el) => io.observe(el))
+    const observe = () => {
+      const pending = document.querySelectorAll<Element>('[data-animate]:not([data-animate="in"])')
+      pending.forEach((el) => io.observe(el))
+      return pending.length
+    }
 
     observe()
 
-    // Capture elements added dynamically (lazy-loaded sections)
-    const mo = new MutationObserver((mutations) => {
-      if (mutations.some((m) => m.addedNodes.length > 0)) observe()
+    // Watch for dynamically added elements (lazy-loaded sections).
+    // Disconnects itself once no pending elements remain, or after 8s max.
+    const mo = new MutationObserver(() => {
+      const remaining = observe()
+      if (remaining === 0) mo.disconnect()
     })
+
     mo.observe(document.body, { childList: true, subtree: true })
 
+    const fallback = setTimeout(() => mo.disconnect(), 8_000)
+
     return () => {
+      clearTimeout(fallback)
       io.disconnect()
       mo.disconnect()
     }

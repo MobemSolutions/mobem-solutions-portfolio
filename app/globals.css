@@ -411,12 +411,14 @@
 /* ─── Custom cursor ──────────────────────────────── */
 #mobem-cursor {
   position: fixed;
+  top: 0;
+  left: 0;
   pointer-events: none;
   z-index: 9999;
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  transform: translate(-50%, -50%);
+  /* transform set entirely by JS via translate(calc(x - 50%), calc(y - 50%)) — no layout cost */
   transition: width 240ms cubic-bezier(.2,.7,.2,1), height 240ms cubic-bezier(.2,.7,.2,1), background 240ms ease, opacity 200ms ease;
   opacity: 0;
 }
@@ -436,9 +438,11 @@
 }
 #mobem-cursor-label {
   position: fixed;
+  top: 0;
+  left: 0;
   pointer-events: none;
   z-index: 9999;
-  transform: translate(16px, 16px);
+  /* offset (16px, 16px) applied in JS transform — no separate CSS transform needed */
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.06em;

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, DM_Serif_Display, JetBrains_Mono } from 'next/font/google'
+import { Inter, DM_Serif_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { ThemeProvider } from '@/components/theme-provider'
@@ -16,16 +16,11 @@ const inter = Inter({
 const dmSerif = DM_Serif_Display({
   subsets: ['latin'],
   weight: '400',
-  style: ['normal', 'italic'],
+  style: ['italic'],
   variable: '--font-dm-serif',
   display: 'swap',
 })
 
-const jetBrains = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-jetbrains',
-  display: 'swap',
-})
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://mobem-solutions.com'),
@@ -87,7 +82,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" suppressHydrationWarning className="bg-background" data-scroll-behavior="smooth">
-      <body className={`${inter.variable} ${dmSerif.variable} ${jetBrains.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${dmSerif.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
