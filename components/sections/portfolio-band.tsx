@@ -56,7 +56,15 @@ export async function PortfolioBand() {
       {/* Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-inverted-foreground/10">
         {cases.map((c, i) => {
-          const imgUrl = (c as any).coverImage?.asset?.url as string | undefined
+          const rawUrl = (c as any).coverImage?.asset?.url as string | undefined
+          // Resize at source: Sanity CDN accepts ?w=&auto=format, Unsplash accepts ?w=&q=&auto=format
+          const imgUrl = rawUrl
+            ? rawUrl.includes('cdn.sanity.io')
+              ? `${rawUrl}?w=800&auto=format&q=75`
+              : rawUrl.includes('unsplash.com')
+              ? `${rawUrl}&w=800&q=75&auto=format`
+              : rawUrl
+            : undefined
           return (
             <Link
               key={c.slug || i}

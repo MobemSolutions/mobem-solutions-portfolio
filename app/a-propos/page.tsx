@@ -148,7 +148,6 @@ export default function AProposPage() {
           <div className="px-4 sm:px-6 lg:px-8 pt-14 sm:pt-20 lg:pt-28 mx-auto max-w-7xl">
             <EditorialBadge className="mb-10">Qui sommes-nous</EditorialBadge>
             <h1
-              data-animate=""
               id="apropos-hero"
               className="font-bold leading-[0.9] tracking-[-0.04em] text-[clamp(44px,7.5vw,120px)] mb-12 sm:mb-16 lg:mb-24"
             >
@@ -158,7 +157,7 @@ export default function AProposPage() {
             </h1>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 border-t border-border pt-10 pb-14 lg:pb-20">
-              <div data-animate="" data-delay="100" className="lg:col-span-7 lg:pr-10">
+              <div className="lg:col-span-7 lg:pr-10">
                 <p className="text-[17px] sm:text-[18px] leading-[1.5] text-muted-foreground max-w-[62ch]">
                   Mobem Solutions est fondée par trois associés complémentaires : Growth,
                   Marketing, Engineering. Pas de sous-traitance, pas d&apos;intermédiaires. Les

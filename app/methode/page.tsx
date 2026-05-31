@@ -186,7 +186,6 @@ export default function MethodePage() {
 
           <div className="px-4 sm:px-6 lg:px-8 pt-14 sm:pt-20 lg:pt-28 mx-auto max-w-7xl">
             <h1
-              data-animate=""
               id="methode-hero"
               className="font-bold leading-[0.92] tracking-[-0.04em] text-[clamp(44px,7.5vw,120px)] mb-12 sm:mb-16 lg:mb-24"
             >
@@ -199,7 +198,7 @@ export default function MethodePage() {
               {/* <div className="hidden lg:flex lg:col-span-1 items-start pt-1">
                 <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground">00</span>
               </div> */}
-              <div data-animate="" data-delay="100" className="lg:col-span-6 lg:pr-10">
+              <div className="lg:col-span-6 lg:pr-10">
                 <p className="text-[17px] sm:text-[18px] leading-[1.5] text-muted-foreground max-w-[58ch]">
                   Un processus court, itératif et transparent. Quatre étapes claires,
                   des jalons validés ensemble, un résultat mesurable. Pas d&apos;effet tunnel,
