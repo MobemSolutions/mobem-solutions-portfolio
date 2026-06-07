@@ -78,19 +78,21 @@ const CONSEIL = [
   {
     code: "C1",
     name: "Audit digital",
-    sub: "Un diagnostic honnête, pas un audit de complaisance.",
+    sub: "Un diagnostic honnête, deux niveaux d'engagement.",
     flagship: false,
     target: "Site · SEO · Réseaux · Outils",
     features: [
       "Analyse site, SEO & réseaux sociaux",
       "Audit des outils et processus digitaux",
       "Rapport écrit priorisé",
-      "Présentation des résultats (1 h)",
+      "Présentation des résultats",
       "Recommandations actionnables",
     ],
     proof: ["Rapport écrit", "Plan d'action"],
-    pricePrefix: "À partir de",
-    price: "350 € HT",
+    priceTiers: [
+      { label: "Audit express · 1 page · 1 h", price: "Offert" },
+      { label: "Audit complet · 10–15 pages · 5 j", price: "490 € HT" },
+    ],
   },
   {
     code: "C2",
@@ -106,7 +108,7 @@ const CONSEIL = [
     ],
     proof: ["Session 2 h", "Feuille de route"],
     pricePrefix: "À partir de",
-    price: "250 € HT",
+    price: "290 € HT",
   },
   {
     code: "C3",
@@ -123,7 +125,7 @@ const CONSEIL = [
     ],
     proof: ["3 séances", "Plan d'action", "Outils"],
     pricePrefix: "À partir de",
-    price: "900 € HT",
+    price: "990 € HT",
   },
   {
     code: "C4",
@@ -152,7 +154,7 @@ const SUBSCRIPTIONS = [
     sub: "Votre site entre de bonnes mains.",
     flagship: false,
     target: "Site en production",
-    price: "89",
+    price: "99",
     commitment: "Mensuel · Résiliable",
     features: [
       "Mises à jour sécurité mensuelles",
@@ -169,7 +171,7 @@ const SUBSCRIPTIONS = [
     sub: "Plus de trafic, plus de clients locaux.",
     flagship: false,
     target: "Référencement · Contenu",
-    price: "149",
+    price: "189",
     commitment: "Mensuel · Résiliable",
     features: [
       "Tout Sérénité inclus",
@@ -187,7 +189,7 @@ const SUBSCRIPTIONS = [
     sub: "Votre image, toujours à jour.",
     flagship: false,
     target: "Visuels · Social media",
-    price: "149",
+    price: "189",
     commitment: "Mensuel · Résiliable",
     features: [
       "4 visuels réseaux sociaux / mois (Instagram, LinkedIn, Facebook)",
@@ -204,7 +206,7 @@ const SUBSCRIPTIONS = [
     sub: "Maintenance + visibilité + stratégie.",
     flagship: true,
     target: "Stratégie · Performance",
-    price: "249",
+    price: "349",
     commitment: "Trimestriel · Sur devis annuel",
     features: [
       "Tout Sérénité inclus",
@@ -388,7 +390,7 @@ function SubCard({ sub, idx }: { sub: typeof SUBSCRIPTIONS[number]; idx: number 
     <div
       data-cursor="hover"
       className={cn(
-        "group relative flex flex-col px-6 py-8 lg:px-10 lg:py-10 transition-colors overflow-hidden",
+        "group relative flex flex-col px-6 py-8 lg:px-8 lg:py-8 transition-colors overflow-hidden",
         sub.flagship ? "bg-accent text-accent-foreground" : "bento-hover",
         idx < 3 && "lg:border-r lg:border-border"
       )}
@@ -396,7 +398,7 @@ function SubCard({ sub, idx }: { sub: typeof SUBSCRIPTIONS[number]; idx: number 
       {/* Decorative background index */}
       <span
         className={cn(
-          "hidden lg:block absolute bottom-6 right-6 font-bold leading-none tracking-[-0.05em] select-none pointer-events-none tabular-nums text-[clamp(80px,10vw,130px)]",
+          "hidden lg:block absolute bottom-6 right-6 font-bold leading-none tracking-[-0.05em] select-none pointer-events-none tabular-nums text-[clamp(70px,8vw,110px)]",
           sub.flagship ? "opacity-[0.14]" : "opacity-[0.09] group-hover:opacity-[0.22]"
         )}
         style={sub.flagship ? { color: "oklch(0.07 0 0)" } : undefined}
@@ -421,7 +423,7 @@ function SubCard({ sub, idx }: { sub: typeof SUBSCRIPTIONS[number]; idx: number 
 
       {/* Name */}
       <div className="mb-6">
-        <div className="text-[clamp(20px,2.2vw,42px)] font-bold tracking-[-0.04em] leading-[0.9] mb-2">
+        <div className="text-[clamp(22px,2.6vw,46px)] font-bold tracking-[-0.04em] leading-[0.9] mb-2">
           {sub.name}
         </div>
         <div className={cn("text-[13px] leading-[1.45]", !sub.flagship && "opacity-75")}>{sub.sub}</div>
@@ -449,11 +451,8 @@ function SubCard({ sub, idx }: { sub: typeof SUBSCRIPTIONS[number]; idx: number 
 
       {/* Price + CTA */}
       <div className="pt-4 border-t border-current/15 flex flex-col gap-1.5">
-        <span className="font-mono text-[10px] uppercase tracking-[0.08em] block">À partir de</span>
-        <div className="flex items-baseline gap-1">
-          <span className="text-[clamp(28px,3vw,42px)] font-bold tracking-[-0.04em] leading-none">{sub.price}€</span>
-          <span className="font-mono text-[11px] uppercase tracking-[0.06em] ml-1">HT / mois</span>
-        </div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.06em]">À partir de</div>
+        <div className="text-[18px] font-bold tracking-[-0.025em] leading-none">{sub.price} € HT / mois</div>
         <div className="font-mono text-[10px] uppercase tracking-[0.06em]">{sub.commitment}</div>
         <Link
           href="#contact"
@@ -540,8 +539,27 @@ function ConseilCard({ conseil, idx }: { conseil: typeof CONSEIL[number]; idx: n
 
       {/* CTA */}
       <div className="pt-4 border-t border-current/15 flex flex-col gap-1.5">
-        <div className="font-mono text-[10px] uppercase tracking-[0.06em]">{conseil.pricePrefix}</div>
-        <div className="text-[18px] font-bold tracking-[-0.025em] leading-none">{conseil.price}</div>
+        {"priceTiers" in conseil && conseil.priceTiers ? (
+          <ul className="mb-1" role="list">
+            {conseil.priceTiers.map((t, i) => (
+              <li
+                key={t.label}
+                className={cn(
+                  "flex items-baseline justify-between gap-3 py-3",
+                  i < conseil.priceTiers!.length - 1 && "border-b border-current/10"
+                )}
+              >
+                <span className="text-[13px] leading-snug">{t.label}</span>
+                <span className="font-mono text-[12px] whitespace-nowrap shrink-0 font-semibold">{t.price}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <>
+            <div className="font-mono text-[10px] uppercase tracking-[0.06em]">{conseil.pricePrefix}</div>
+            <div className="text-[18px] font-bold tracking-[-0.025em] leading-none">{conseil.price}</div>
+          </>
+        )}
         <div className="font-mono text-[10px] uppercase tracking-[0.06em]">Devis gratuit · Réponse 24 h</div>
         <Link
           href="#contact"

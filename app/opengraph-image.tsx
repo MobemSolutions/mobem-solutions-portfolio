@@ -1,87 +1,31 @@
 import { ImageResponse } from "next/og"
+import { readFile } from "node:fs/promises"
+import { join } from "node:path"
 
-export const runtime = "edge"
+export const runtime = "nodejs"
 export const alt = "Mobem Solutions — Agence Web Nantes · Sites pro en 10 jours"
 export const size = { width: 1200, height: 630 }
 export const contentType = "image/png"
 
-export default function OgImage() {
+export default async function OgImage() {
+  // Logo noir (texte sombre) sur fond crème — toujours visible quelle que soit la transparence du PNG
+  const logoData = await readFile(join(process.cwd(), "public", "logos", "mobem-logo-black.png"))
+  const logoSrc  = `data:image/png;base64,${logoData.toString("base64")}`
+
   return new ImageResponse(
     (
       <div
         style={{
           width: "1200px",
           height: "630px",
-          background: "#0D0D0D",
+          background: "#F5F5F0",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          fontFamily: "system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif",
-          position: "relative",
         }}
       >
-        {/* Left red accent bar */}
-        <div
-          style={{
-            position: "absolute",
-            left: 0, top: 0, bottom: 0,
-            width: "10px",
-            background: "#E63030",
-            display: "flex",
-          }}
-        />
-
-        {/* Main content */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "0px",
-          }}
-        >
-          {/* MOBEM — huge, instantly readable at any size */}
-          <div
-            style={{
-              fontSize: "200px",
-              fontWeight: "900",
-              color: "#FFFFFF",
-              letterSpacing: "-8px",
-              lineHeight: "1",
-              textTransform: "uppercase",
-            }}
-          >
-            MOBEM
-          </div>
-
-          {/* SOLUTIONS — accent color, wide tracking */}
-          <div
-            style={{
-              fontSize: "40px",
-              fontWeight: "300",
-              color: "#E63030",
-              letterSpacing: "18px",
-              textTransform: "uppercase",
-              marginTop: "4px",
-            }}
-          >
-            SOLUTIONS
-          </div>
-
-          {/* Subtitle */}
-          <div
-            style={{
-              fontSize: "18px",
-              color: "rgba(255,255,255,0.35)",
-              letterSpacing: "4px",
-              textTransform: "uppercase",
-              marginTop: "40px",
-            }}
-          >
-            AGENCE WEB · NANTES · FRANCE
-          </div>
-        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={logoSrc} alt="Mobem Solutions" style={{ width: "580px", height: "auto" }} />
       </div>
     ),
     { width: 1200, height: 630 }

@@ -65,7 +65,7 @@ const jsonLd = {
       url: "https://mobem-solutions.com",
       logo: {
         "@type": "ImageObject",
-        url: "https://mobem-solutions.com/mobem-logo-redimension-removebg-preview.png",
+        url: "https://mobem-solutions.com/logos/mobem-logo-black.png",
       },
       sameAs: ["https://www.linkedin.com/company/mobem-solutions"],
       description:
@@ -75,7 +75,7 @@ const jsonLd = {
       "@type": "LocalBusiness",
       "@id": "https://mobem-solutions.com/#localbusiness",
       name: "Mobem Solutions",
-      image: "https://mobem-solutions.com/mobem-logo-redimension-removebg-preview.png",
+      image: "https://mobem-solutions.com/logos/mobem-logo-black.png",
       url: "https://mobem-solutions.com",
       telephone: "+33-contact-mobem-solutions",
       priceRange: "€€",

@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowUpRight } from "lucide-react"
 
 const navCabinet = [
@@ -102,9 +103,14 @@ export function Footer() {
           <span>© Mobem Solutions · {new Date().getFullYear()} · Tous droits réservés</span>
           {/* <span className="whitespace-nowrap">SIRET&nbsp;: 91514447100017</span> */}
           {/* Logo — bas droite */}
-          <Link href="/" className="flex flex-col leading-none items-end group transition-opacity hover:opacity-70" aria-label="Mobem Solutions — Retour à l'accueil">
-            <span className="text-[17px] font-bold tracking-[-0.02em] text-inverted-foreground/70 uppercase transition-colors group-hover:text-inverted-foreground">Mobem</span>
-            <span className="text-[12px] font-light tracking-[0.06em] text-inverted-foreground/55 transition-colors group-hover:text-inverted-foreground">Solutions</span>
+          <Link href="/" className="group transition-opacity hover:opacity-70" aria-label="Mobem Solutions — Retour à l'accueil">
+            <Image
+              src="/logos/mobem-mark-white.png"
+              alt="Mobem Solutions"
+              width={120}
+              height={80}
+              className="h-7 w-auto opacity-60 group-hover:opacity-100 transition-opacity"
+            />
           </Link>
         </div>
       </div>

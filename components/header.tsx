@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { Menu, X, Moon, Sun, ArrowRight } from "lucide-react"
@@ -98,10 +99,24 @@ export function Header() {
             className="group flex items-center gap-3 transition-opacity hover:opacity-70"
             aria-label="Mobem Solutions - Retour à l'accueil"
           >
-            <div className="flex flex-col leading-none">
-              <span className="text-[17px] font-bold tracking-[-0.02em] text-foreground uppercase">Mobem</span>
-              <span className="text-[12px] font-light tracking-[0.06em] text-muted-foreground">Solutions</span>
-            </div>
+            {/* Light theme mark */}
+            <Image
+              src="/logos/mobem-mark-black.png"
+              alt="Mobem Solutions"
+              width={120}
+              height={80}
+              className="block dark:hidden h-8 w-auto"
+              priority
+            />
+            {/* Dark theme mark */}
+            <Image
+              src="/logos/mobem-mark-white.png"
+              alt="Mobem Solutions"
+              width={120}
+              height={80}
+              className="hidden dark:block h-8 w-auto"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}

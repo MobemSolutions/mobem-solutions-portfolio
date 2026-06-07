@@ -1,4 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" fill="#FAFAFA"/>
-  <path d="M7,57 L7,8 L19,8 L32,34 L45,8 L57,8 L57,57 L45,57 L45,26 L34,46 L30,46 L19,26 L19,57 Z" fill="#0D0D0D"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#0D0D0D"/>
+  <!-- Jambe gauche -->
+  <rect x="60" y="80" width="60" height="350" fill="#F5F5F0"/>
+  <!-- Jambe droite -->
+  <rect x="392" y="80" width="60" height="350" fill="#F5F5F0"/>
+  <!-- Diagonale gauche (vers creux central) -->
+  <polygon points="120,80 180,80 256,270 196,270" fill="#F5F5F0"/>
+  <!-- Diagonale droite (miroir) -->
+  <polygon points="332,80 392,80 316,270 256,270" fill="#F5F5F0"/>
+  <!-- Accent rouge -->
+  <rect x="376" y="56" width="80" height="28" fill="#BE1217"/>
 </svg>

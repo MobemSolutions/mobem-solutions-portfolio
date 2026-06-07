@@ -7,6 +7,7 @@ const nextConfig = {
       { protocol: 'https', hostname: 'cdn.sanity.io' },
       { protocol: 'https', hostname: 'images.unsplash.com' },
     ],
+    qualities: [75, 90],
   },
   async headers() {
     const securityHeaders = [
