@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     description: 'Conseil et accompagnement dans la transformation digitale pour PME et ETI. Basée à Nantes.',
     images: [
       {
-        url: '/opengraph/openg.png',
+        url: '/opengraph/og-image.png',
         width: 1200,
         height: 630,
         alt: 'Mobem Solutions — Agence Web Nantes',
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Mobem Solutions - Conseil en Digitalisation | Nantes',
     description: 'Conseil et accompagnement dans la transformation digitale pour PME et ETI. Basée à Nantes.',
-    images: ['/opengraph/openg.png'],
+    images: ['/opengraph/og-image.png'],
   },
   icons: {
     icon: [

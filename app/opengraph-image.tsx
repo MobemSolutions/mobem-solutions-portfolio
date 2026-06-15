@@ -8,7 +8,7 @@ export const size = { width: 1200, height: 630 }
 export const contentType = "image/png"
 
 export default async function OgImage() {
-  const data = await readFile(join(process.cwd(), "public", "opengraph", "openg.png"))
+  const data = await readFile(join(process.cwd(), "public", "opengraph", "og-image.png"))
   const src = `data:image/png;base64,${data.toString("base64")}`
 
   return new ImageResponse(
