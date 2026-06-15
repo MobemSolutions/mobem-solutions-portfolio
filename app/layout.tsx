@@ -53,6 +53,14 @@ export const metadata: Metadata = {
     title: 'Mobem Solutions - Conseil en Digitalisation | Nantes',
     description: 'Conseil et accompagnement dans la transformation digitale pour PME et ETI. Basée à Nantes.',
   },
+  icons: {
+    icon: [
+      { url: '/favicon/favicon/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon/favicon/favicon-96x96.png', type: 'image/png', sizes: '96x96' },
+    ],
+    apple: '/favicon/favicon/apple-touch-icon.png',
+  },
+  manifest: '/favicon/favicon/site.webmanifest',
   robots: {
     index: true,
     follow: true,

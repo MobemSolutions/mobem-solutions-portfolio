@@ -228,7 +228,7 @@ function OfferCard({ offer }: { offer: typeof OFFERS[number] }) {
     <div
       data-cursor="hover"
       className={cn(
-        "group relative flex flex-col px-6 py-8 lg:px-8 lg:py-8 transition-colors overflow-hidden border-b lg:border-b-0 lg:border-r border-border",
+        "group relative flex flex-col px-6 py-8 lg:px-8 lg:py-8 transition-colors overflow-hidden border-b lg:border-b-0 lg:border-r lg:last:border-r-0 border-border",
         offer.flagship ? "bg-accent text-accent-foreground" : "bento-hover"
       )}
     >
@@ -310,11 +310,11 @@ function OfferCard({ offer }: { offer: typeof OFFERS[number] }) {
 
 // ─── Carte Design ───────────────────────────────────────────────────────────
 
-function DesignCard() {
+function DesignCard({ className }: { className?: string }) {
   return (
     <div
       data-cursor="hover"
-      className="group relative flex flex-col px-6 py-8 lg:px-8 lg:py-8 transition-colors overflow-hidden bg-[#F2F0ED] dark:bg-white/[0.04] hover:bg-[#0D0D0D] hover:text-white dark:hover:bg-white dark:hover:text-black"
+      className={cn("group relative flex flex-col px-6 py-8 lg:px-8 lg:py-8 transition-colors overflow-hidden bg-[#F2F0ED] dark:bg-white/[0.04] hover:bg-[#0D0D0D] hover:text-white dark:hover:bg-white dark:hover:text-black", className)}
     >
       {/* Decorative background letter — text via CSS to skip axe contrast check */}
       <span
@@ -651,6 +651,17 @@ export function PricingSection() {
       <div id="panel-offres" role="tabpanel" hidden={tab !== "offres"}>
         {/* Mobile selector */}
         <div className="lg:hidden flex border-b border-border" role="tablist">
+          <button
+            role="tab"
+            aria-selected={activeOffer === "design"}
+            onClick={() => setActiveOffer("design")}
+            className={cn(
+              "flex-1 px-2 py-3 font-mono text-[9px] uppercase tracking-[0.05em] transition-colors border-r border-border",
+              activeOffer === "design" ? "bg-foreground text-background" : "text-muted-foreground hover:bg-secondary"
+            )}
+          >
+            Design
+          </button>
           {OFFERS.map((o) => (
             <button
               key={o.code}
@@ -658,30 +669,19 @@ export function PricingSection() {
               aria-selected={activeOffer === o.code}
               onClick={() => setActiveOffer(o.code)}
               className={cn(
-                "flex-1 px-2 py-3 font-mono text-[9px] uppercase tracking-[0.05em] transition-colors border-r border-border",
+                "flex-1 px-2 py-3 font-mono text-[9px] uppercase tracking-[0.05em] transition-colors border-r border-border last:border-r-0",
                 activeOffer === o.code ? "bg-foreground text-background" : "text-muted-foreground hover:bg-secondary"
               )}
             >
               {o.name}
             </button>
           ))}
-          <button
-            role="tab"
-            aria-selected={activeOffer === "design"}
-            onClick={() => setActiveOffer("design")}
-            className={cn(
-              "flex-1 px-2 py-3 font-mono text-[9px] uppercase tracking-[0.05em] transition-colors",
-              activeOffer === "design" ? "bg-foreground text-background" : "text-muted-foreground hover:bg-secondary"
-            )}
-          >
-            Design
-          </button>
         </div>
 
         {/* Desktop — grille 4 colonnes */}
         <div className="hidden lg:grid lg:grid-cols-4">
+          <DesignCard className="border-b lg:border-b-0 lg:border-r border-border" />
           {OFFERS.map((o) => <OfferCard key={o.code} offer={o} />)}
-          <DesignCard />
         </div>
 
         {/* Mobile — carte active */}
