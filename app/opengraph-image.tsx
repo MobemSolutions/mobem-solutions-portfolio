@@ -8,26 +8,12 @@ export const size = { width: 1200, height: 630 }
 export const contentType = "image/png"
 
 export default async function OgImage() {
-  // Logo noir (texte sombre) sur fond crème — toujours visible quelle que soit la transparence du PNG
-  const logoData = await readFile(join(process.cwd(), "public", "logos", "mobem-logo-black.png"))
-  const logoSrc  = `data:image/png;base64,${logoData.toString("base64")}`
+  const data = await readFile(join(process.cwd(), "public", "opengraph", "openg.png"))
+  const src = `data:image/png;base64,${data.toString("base64")}`
 
   return new ImageResponse(
-    (
-      <div
-        style={{
-          width: "1200px",
-          height: "630px",
-          background: "#F5F5F0",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={logoSrc} alt="Mobem Solutions" style={{ width: "580px", height: "auto" }} />
-      </div>
-    ),
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src={src} width={1200} height={630} style={{ objectFit: "cover" }} alt="" />,
     { width: 1200, height: 630 }
   )
 }
