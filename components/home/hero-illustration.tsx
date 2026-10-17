@@ -126,8 +126,15 @@ export function HeroIllustration() {
           <path d="M700 150a16 16 0 0 1 16-16h66l20 20h94a16 16 0 0 1 16 16v130a16 16 0 0 1-16 16H716a16 16 0 0 1-16-16z" fill="#fff" />
           <rect x="722" y="168" width="150" height="10" rx="5" fill={TINT} />
           <path d="M700 196a16 16 0 0 1 16-16h180a16 16 0 0 1 16 16v104a16 16 0 0 1-16 16H716a16 16 0 0 1-16-16z" fill="#f4f6fd" />
-          <rect x="726" y="222" width="96" height="10" rx="5" fill={LINE} />
-          <rect x="726" y="242" width="70" height="10" rx="5" fill={LINE} />
+          {/* Étiquette du dossier : la signature Mobem Solutions */}
+          <g transform="translate(728 232) scale(1.05)" fill={INK}>
+            <path d="M33 12.5L9 26.5M9 26.5L28.5 40M28.5 40L33 12.5" stroke={INK} strokeWidth="5" strokeLinecap="round" fill="none" />
+            <circle cx="33" cy="12.5" r="9" />
+            <circle cx="9" cy="26.5" r="6.5" />
+            <circle cx="28.5" cy="40" r="6.5" />
+          </g>
+          <text x="790" y="254" fill={INK} fontFamily="inherit" fontSize="25" fontWeight="600" letterSpacing="-0.5">Mobem</text>
+          <text x="790" y="280" fill={INK} fontFamily="inherit" fontSize="20" letterSpacing="-0.2">Solutions</text>
         </g>
         <g className="hero-check">
           <circle cx="900" cy="150" r="24" fill={BLUE} stroke="#fff" strokeWidth="5" />

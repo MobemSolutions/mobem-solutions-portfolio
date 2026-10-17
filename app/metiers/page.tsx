@@ -39,7 +39,7 @@ export default function MetiersPage() {
           </Container>
         </section>
 
-        <section className="py-16 lg:py-20" aria-label="Métiers prioritaires">
+        <section className="py-12 sm:py-16 lg:py-20" aria-label="Métiers prioritaires">
           <Container>
             <ul className="grid gap-4 lg:grid-cols-3">
               {TRADES.map((trade) => (

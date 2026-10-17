@@ -19,7 +19,7 @@ const googleSansFlex = Google_Sans_Flex({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://mobem-solutions.com'),
-  title: 'Mobem Solutions — Automatisation des tâches administratives | Nantes',
+  title: 'Mobem Solutions',
   description: 'Mobem Solutions automatise les tâches administratives des TPE-PME, organismes de formation, courtiers et cabinets comptables. Sur vos propres outils, heures gagnées mesurées. Basé à Nantes.',
   keywords: ['automatisation tâches administratives', 'automatisation PME', 'Qualiopi automatisation', 'courtier assurance automatisation', 'cabinet comptable relance pièces', 'Nantes', 'TPE', 'PME'],
   authors: [{ name: 'Mobem Solutions' }],

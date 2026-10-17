@@ -66,7 +66,7 @@ export default function MethodePage() {
           </Container>
         </section>
 
-        <section className="py-16 lg:py-24" aria-labelledby="etapes-heading">
+        <section className="py-12 sm:py-16 lg:py-24" aria-labelledby="etapes-heading">
           <Container>
             <SectionHeading id="etapes-heading" eyebrow="Étape par étape" title="Ce qui se passe, et ce que vous obtenez" />
             <ol className="mt-12 flex flex-col gap-4">
@@ -96,7 +96,7 @@ export default function MethodePage() {
         <Trust />
         <Pricing />
 
-        <section className="py-16 lg:py-24" aria-labelledby="methode-faq-heading">
+        <section className="py-12 sm:py-16 lg:py-24" aria-labelledby="methode-faq-heading">
           <Container className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
             <SectionHeading id="methode-faq-heading" eyebrow="Questions fréquentes" title="Avant de se lancer" />
             <FaqList items={FAQ} />

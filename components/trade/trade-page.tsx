@@ -59,7 +59,7 @@ export function TradePage({ trade }: { trade: Trade }) {
 
         <ToolsStrip />
 
-        <section id="taches" className="py-16 lg:py-24" aria-labelledby="taches-heading">
+        <section id="taches" className="py-12 sm:py-16 lg:py-24" aria-labelledby="taches-heading">
           <Container>
             <SectionHeading
               id="taches-heading"
@@ -86,7 +86,7 @@ export function TradePage({ trade }: { trade: Trade }) {
         <Method />
         <Trust />
 
-        <section className="py-16 lg:py-24" aria-labelledby="trade-faq-heading">
+        <section className="py-12 sm:py-16 lg:py-24" aria-labelledby="trade-faq-heading">
           <Container className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
             <SectionHeading id="trade-faq-heading" eyebrow="Questions fréquentes" title="Vos questions, avant le diagnostic" />
             <FaqList items={[...trade.faq, ...FAQ.slice(0, 3)]} />

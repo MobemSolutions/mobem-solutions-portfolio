@@ -83,7 +83,7 @@ export function ToolsStrip() {
 /* ─── Lignes métiers (exemples) ──────────────────── */
 export function TradeRows() {
   return (
-    <section id="exemples" className="py-16 lg:py-24" aria-labelledby="exemples-heading">
+    <section id="exemples" className="py-12 sm:py-16 lg:py-24" aria-labelledby="exemples-heading">
       <Container>
         <SectionHeading
           id="exemples-heading"
@@ -103,7 +103,7 @@ export function TradeRows() {
 /* ─── Méthode ─────────────────────────────────────── */
 export function Method() {
   return (
-    <section id="methode" className="py-16 lg:py-24" aria-labelledby="methode-heading">
+    <section id="methode" className="py-12 sm:py-16 lg:py-24" aria-labelledby="methode-heading">
       <Container>
         <SectionHeading
           id="methode-heading"
@@ -122,10 +122,10 @@ const TRUST_ICONS = [ShieldCheck, FileLock2, Server, BellRing]
 
 export function Trust() {
   return (
-    <section className="py-16 lg:py-24" aria-labelledby="trust-heading">
+    <section className="py-12 sm:py-16 lg:py-24" aria-labelledby="trust-heading">
       <Container>
         <div className="overflow-hidden rounded-[20px] bg-studio text-white">
-          <div className="grid gap-10 p-6 sm:p-10 lg:grid-cols-[1fr_1.1fr] lg:p-14">
+          <div className="grid gap-8 p-6 sm:gap-10 sm:p-10 lg:grid-cols-[1fr_1.1fr] lg:p-14">
             <div>
               <p className="type-meta text-white/60">Confiance</p>
               <h2 id="trust-heading" className="type-section mt-3 max-w-[18ch] text-white text-balance">
@@ -135,10 +135,10 @@ export function Trust() {
                 {TRUST_POINTS.map((p, i) => {
                   const Icon = TRUST_ICONS[i]
                   return (
-                    <li key={p.title} className="flex flex-col gap-2">
-                      <Icon className="h-5 w-5 text-[#7fa3ff]" aria-hidden="true" />
+                    <li key={p.title} className="grid grid-cols-[20px_1fr] gap-x-3 gap-y-1 sm:flex sm:flex-col sm:gap-2">
+                      <Icon className="mt-0.5 h-5 w-5 text-[#7fa3ff] sm:mt-0" aria-hidden="true" />
                       <span className="text-[16px] font-[550]">{p.title}</span>
-                      <span className="text-[14px] leading-[1.5] text-white/65">{p.text}</span>
+                      <span className="col-start-2 text-[14px] leading-[1.5] text-white/65">{p.text}</span>
                     </li>
                   )
                 })}
@@ -166,7 +166,7 @@ export function Trust() {
 /* ─── Tarifs ──────────────────────────────────────── */
 export function Pricing() {
   return (
-    <section id="tarifs" className="py-16 lg:py-24" aria-labelledby="tarifs-heading">
+    <section id="tarifs" className="py-12 sm:py-16 lg:py-24" aria-labelledby="tarifs-heading">
       <Container>
         <SectionHeading
           id="tarifs-heading"
@@ -175,11 +175,15 @@ export function Pricing() {
           text="Le diagnostic est gratuit. Ensuite, un pilote sur une seule tâche permet de vérifier le gain avant d'aller plus loin."
           align="center"
         />
-        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Mobile : cartes côte à côte qu'on fait glisser ; dès sm : grille */}
+        <ul className="scrollbar-none -mx-4 mt-10 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 py-2 sm:mx-0 sm:mt-12 sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:px-0 sm:py-0 lg:grid-cols-4">
           {PRICING.map((plan) => (
             <li
               key={plan.name}
-              className={cn("card-lift card-hover flex flex-col p-6", plan.featured && "ring-2 ring-blue")}
+              className={cn(
+                "card-lift card-hover flex w-[82%] shrink-0 snap-center flex-col p-6 sm:w-auto",
+                plan.featured && "ring-2 ring-blue"
+              )}
             >
               <h3 className="type-feature text-ink">{plan.name}</h3>
               <p className="mt-4 text-[28px] font-semibold leading-tight tracking-[-0.02em] text-ink">{plan.price}</p>
@@ -205,11 +209,12 @@ export function Pricing() {
             </li>
           ))}
         </ul>
-        <SourceCaption className="mt-6 text-center">
+        <SourceCaption className="mt-4 text-center sm:mt-6">
+          <span className="sm:hidden">Faites glisser pour voir les 4 formules. </span>
           Prix indicatifs hors taxes. Le devis final dépend du nombre de tâches et des outils à connecter.
         </SourceCaption>
         {/* Offre secondaire, volontairement discrète */}
-        <div className="mx-auto mt-10 flex max-w-[760px] flex-col items-start gap-3 rounded-[20px] border border-border px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mx-auto mt-8 flex max-w-[760px] sm:mt-10 flex-col items-start gap-3 rounded-[20px] border border-border px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
           <p className="flex items-center gap-3 text-[15px] text-charcoal">
             <Globe className="h-5 w-5 shrink-0 text-graphite" aria-hidden="true" />
             <span>
@@ -266,7 +271,7 @@ export function Founder() {
 /* ─── FAQ ─────────────────────────────────────────── */
 export function Faq() {
   return (
-    <section id="faq" className="py-16 lg:py-24" aria-labelledby="faq-heading">
+    <section id="faq" className="py-12 sm:py-16 lg:py-24" aria-labelledby="faq-heading">
       <Container className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
         <SectionHeading id="faq-heading" eyebrow="Questions fréquentes" title="Ce qu'on nous demande avant le diagnostic" />
         <FaqList items={FAQ} />

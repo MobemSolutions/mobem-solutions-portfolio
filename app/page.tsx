@@ -14,12 +14,13 @@ import { ClosingBand } from "@/components/home/closing-band"
 import { FiguresSection } from "@/components/home/figures"
 import { FAQ, PRICING } from "@/lib/automation-content"
 
-const TITLE = "Mobem Solutions — Vos tâches administratives tournent toutes seules"
+const TITLE = "Mobem Solutions"
+const SHARE_TITLE = "Mobem Solutions — Vos tâches administratives tournent toutes seules"
 const DESCRIPTION =
   "Relances, collecte de pièces, preuves d'audit, tri des mails : nous automatisons vos tâches administratives sur vos propres outils et mesurons les heures gagnées. Diagnostic gratuit de 45 min, Nantes."
 
 export const metadata: Metadata = {
-  title: TITLE,
+  title: { absolute: TITLE },
   description: DESCRIPTION,
   keywords: [
     "automatisation tâches administratives",
@@ -36,13 +37,13 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     url: "https://mobem-solutions.com",
     siteName: "Mobem Solutions",
-    title: TITLE,
+    title: SHARE_TITLE,
     description: DESCRIPTION,
     images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Mobem Solutions — studio d'automatisation" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: TITLE,
+    title: SHARE_TITLE,
     description: DESCRIPTION,
     images: ["/opengraph-image"],
   },

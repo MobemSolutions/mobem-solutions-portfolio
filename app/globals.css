@@ -794,3 +794,11 @@ a.card-lift, [data-ripple] { position: relative; overflow: hidden; }
   .hero-paper, .hero-bob, .hero-folder, .hero-check, .hero-trail { animation: none; }
   .hero-steam { animation: none; opacity: 0.6; }
 }
+
+/* Défilement horizontal sans barre visible (carrousels tactiles sur mobile) */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
