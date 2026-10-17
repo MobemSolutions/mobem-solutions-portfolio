@@ -78,7 +78,7 @@ export function TradeCarousel({ autoPlayInterval = 7000 }: TradeCarouselProps) {
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
-              <FlowDemo trigger={trade.trigger} steps={trade.steps} result={trade.beforeAfter} showResult={false} />
+              <FlowDemo nodes={trade.flow} />
             </article>
           )
         })}

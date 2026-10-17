@@ -6,16 +6,17 @@ export const CALENDLY_URL = "https://calendly.com/contact-mobem-solutions/15min"
 
 export const TRUST_LINE = "Installé sur vos propres comptes. Vos données restent chez vous."
 
-export interface WorkflowStep {
-  label: string
-  /** Moment ou fréquence, affiché discrètement à droite de l'étape */
-  when?: string
-}
+/** Icônes disponibles pour les schémas (associées aux composants lucide dans flow-demo.tsx) */
+export type FlowIcon =
+  | "user-plus" | "send" | "pen" | "clipboard" | "folder-check"
+  | "calendar" | "bell" | "file-up" | "shield"
+  | "mail" | "tags" | "receipt" | "check"
+  | "search" | "zap" | "gauge" | "wrench"
 
-export interface FlowTrigger {
-  icon: "inscription" | "echeance" | "mail"
-  title: string
-  detail: string
+/** Une étape du schéma : une icône, un ou deux mots. Le premier nœud est le déclencheur. */
+export interface FlowNode {
+  icon: FlowIcon
+  label: string
 }
 
 export interface BeforeAfter {
@@ -36,8 +37,7 @@ export interface Trade {
   eyebrow: string
   headline: string
   intro: string
-  trigger: FlowTrigger
-  steps: WorkflowStep[]
+  flow: FlowNode[]
   beforeAfter: BeforeAfter
   tasks: TradeTask[]
   faq: { question: string; answer: string }[]
@@ -55,12 +55,12 @@ export const TRADES: Trade[] = [
     headline: "Vos preuves Qualiopi se tiennent à jour toutes seules",
     intro:
       "Convocations, émargements, questionnaires à chaud et à froid, relances OPCO : chaque session laisse des traces à classer. On les fait partir et se ranger d'elles-mêmes, pour que l'audit se prépare sans courir après les documents.",
-    trigger: { icon: "inscription", title: "Nouvelle inscription", detail: "Julie Martin · Excel avancé, 12 mars" },
-    steps: [
-      { label: "Convocation envoyée", when: "J-7" },
-      { label: "Émargement collecté", when: "Jour J" },
-      { label: "Questionnaire à chaud", when: "J+1" },
-      { label: "Preuve d'audit rangée", when: "Auto" },
+    flow: [
+      { icon: "user-plus", label: "Inscription" },
+      { icon: "send", label: "Convocation" },
+      { icon: "pen", label: "Émargement" },
+      { icon: "clipboard", label: "Questionnaire" },
+      { icon: "folder-check", label: "Preuve rangée" },
     ],
     beforeAfter: { before: "6 h / mois", after: "45 min / mois" },
     tasks: [
@@ -106,12 +106,12 @@ export const TRADES: Trade[] = [
     headline: "Les pièces arrivent, les échéances se relancent",
     intro:
       "Collecte des pièces, relances avant échéance, traçabilité du devoir de conseil : votre cabinet passe des heures à courir après les justificatifs. On automatise la collecte et le suivi, et vos chargés de clientèle retrouvent du temps pour conseiller.",
-    trigger: { icon: "echeance", title: "Contrat bientôt à échéance", detail: "SARL Durand · habitation, 30 juin" },
-    steps: [
-      { label: "Relance envoyée", when: "J-30" },
-      { label: "Pièces demandées", when: "Auto" },
-      { label: "Pièces reçues et classées", when: "Auto" },
-      { label: "Devoir de conseil tracé", when: "Auto" },
+    flow: [
+      { icon: "calendar", label: "Échéance" },
+      { icon: "bell", label: "Relance" },
+      { icon: "file-up", label: "Pièces reçues" },
+      { icon: "folder-check", label: "Classement" },
+      { icon: "shield", label: "Conseil tracé" },
     ],
     beforeAfter: { before: "8 h / mois", after: "1 h / mois" },
     tasks: [
@@ -157,12 +157,12 @@ export const TRADES: Trade[] = [
     headline: "Les justificatifs manquants se réclament d'eux-mêmes",
     intro:
       "Relance des pièces manquantes, tri de la boîte mail, onboarding des nouveaux clients, factures reçues à classer : autant de tâches qui reviennent chaque mois. On les automatise pour que vos collaborateurs se concentrent sur la production et le conseil.",
-    trigger: { icon: "mail", title: "Nouveau mail reçu", detail: "Boulangerie Petit · facture fournisseur" },
-    steps: [
-      { label: "Rangé chez le bon client", when: "Auto" },
-      { label: "Facture classée", when: "Auto" },
-      { label: "Pièce manquante relancée", when: "Chaque nuit" },
-      { label: "Dossier complet", when: "Auto" },
+    flow: [
+      { icon: "mail", label: "Mail reçu" },
+      { icon: "tags", label: "Tri client" },
+      { icon: "receipt", label: "Facture classée" },
+      { icon: "bell", label: "Relance pièce" },
+      { icon: "check", label: "Dossier complet" },
     ],
     beforeAfter: { before: "10 h / mois", after: "1 h 30 / mois" },
     tasks: [
@@ -237,6 +237,13 @@ export const FIGURES = [
     label: "indicateurs à prouver pour la certification Qualiopi",
     source: "Référentiel national qualité — Ministère du Travail",
   },
+]
+
+export const METHOD_FLOW: FlowNode[] = [
+  { icon: "search", label: "Diagnostiquer" },
+  { icon: "zap", label: "Automatiser" },
+  { icon: "gauge", label: "Mesurer" },
+  { icon: "wrench", label: "Maintenir" },
 ]
 
 export const METHOD_STEPS = [

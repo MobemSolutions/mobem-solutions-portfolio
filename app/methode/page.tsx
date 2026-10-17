@@ -4,9 +4,9 @@ import { Footer } from "@/components/footer"
 import { Container, SectionHeading, FaqList } from "@/components/home/primitives"
 import { ClosingBand } from "@/components/home/closing-band"
 import { DiagnosticButton } from "@/components/diagnostic-button"
-import { FlowSteps } from "@/components/automation/flow-demo"
+import { FlowDiagram } from "@/components/automation/flow-demo"
 import { Trust, Pricing } from "@/components/home/sections"
-import { FAQ, METHOD_STEPS } from "@/lib/automation-content"
+import { FAQ, METHOD_FLOW, METHOD_STEPS } from "@/lib/automation-content"
 
 export const metadata: Metadata = {
   title: "Méthode — Diagnostiquer avant de prescrire | Mobem Solutions",
@@ -61,7 +61,7 @@ export default function MethodePage() {
           </Container>
           <Container className="relative mt-14">
             <div className="blue-field rounded-[20px] px-5 py-10 sm:px-12 sm:py-14">
-              <FlowSteps steps={METHOD_STEPS.map((s) => ({ label: s.title }))} orientation="horizontal" className="mx-auto max-w-[440px] lg:max-w-none" />
+              <FlowDiagram nodes={METHOD_FLOW} className="mx-auto max-w-[760px]" />
             </div>
           </Container>
         </section>

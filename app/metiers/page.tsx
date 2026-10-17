@@ -5,7 +5,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Container, SectionHeading } from "@/components/home/primitives"
 import { ClosingBand } from "@/components/home/closing-band"
-import { FlowSteps } from "@/components/automation/flow-demo"
+import { FlowDiagram } from "@/components/automation/flow-demo"
 import { TRADES, beforeAfterLine } from "@/lib/automation-content"
 
 export const metadata: Metadata = {
@@ -45,8 +45,8 @@ export default function MetiersPage() {
               {TRADES.map((trade) => (
                 <li key={trade.slug}>
                   <Link href={trade.href} className="card-lift group flex h-full flex-col p-4 transition-transform hover:-translate-y-0.5">
-                    <div className="blue-field rounded-[14px] px-4 py-8">
-                      <FlowSteps steps={trade.steps} />
+                    <div className="blue-field rounded-[14px] px-5 py-8">
+                      <FlowDiagram nodes={trade.flow} compact />
                     </div>
                     <div className="flex flex-1 flex-col px-2 pb-2 pt-5">
                       <p className="type-meta text-charcoal">{trade.audience}</p>

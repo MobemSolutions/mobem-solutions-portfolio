@@ -49,7 +49,7 @@ export function Hero() {
 
       {/* Démo : déclencheur → étapes → résultat */}
       <Container className="relative mt-16 sm:mt-24">
-        <FlowDemo trigger={qualiopi.trigger} steps={qualiopi.steps} result={qualiopi.beforeAfter} orientation="horizontal" />
+        <FlowDemo nodes={qualiopi.flow} result={qualiopi.beforeAfter} layout="wide" />
         <p className="mt-4 text-center type-caption text-charcoal">Organisme de formation Qualiopi : chaque inscription déclenche la suite, sans personne derrière.</p>
       </Container>
     </section>

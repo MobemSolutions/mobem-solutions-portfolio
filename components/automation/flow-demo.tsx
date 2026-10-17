@@ -1,11 +1,50 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Check, UserPlus, CalendarClock, Mail, Zap } from "lucide-react"
+import {
+  ArrowRight,
+  Bell,
+  CalendarClock,
+  CircleCheckBig,
+  ClipboardCheck,
+  Clock,
+  FileUp,
+  FolderCheck,
+  Gauge,
+  Mail,
+  PenLine,
+  Receipt,
+  Search,
+  Send,
+  ShieldCheck,
+  Tags,
+  UserPlus,
+  Wrench,
+  Zap,
+  type LucideIcon,
+} from "lucide-react"
 import { cn } from "@/lib/utils"
-import type { BeforeAfter, FlowTrigger, WorkflowStep } from "@/lib/automation-content"
+import type { BeforeAfter, FlowIcon, FlowNode } from "@/lib/automation-content"
 
-const TRIGGER_ICONS = { inscription: UserPlus, echeance: CalendarClock, mail: Mail }
+const ICONS: Record<FlowIcon, LucideIcon> = {
+  "user-plus": UserPlus,
+  send: Send,
+  pen: PenLine,
+  clipboard: ClipboardCheck,
+  "folder-check": FolderCheck,
+  calendar: CalendarClock,
+  bell: Bell,
+  "file-up": FileUp,
+  shield: ShieldCheck,
+  mail: Mail,
+  tags: Tags,
+  receipt: Receipt,
+  check: CircleCheckBig,
+  search: Search,
+  zap: Zap,
+  gauge: Gauge,
+  wrench: Wrench,
+}
 
 /** Fait avancer un index en boucle ; figé sur `still` si l'utilisateur préfère moins d'animations. */
 export function useCycle(length: number, interval = 1800, still = length - 1) {
@@ -18,147 +57,134 @@ export function useCycle(length: number, interval = 1800, still = length - 1) {
   return index
 }
 
-/* ─── Panneau sombre : une étape à la fois ─────────── */
-export function FlowSteps({
-  steps,
-  orientation = "vertical",
-  className,
-}: {
-  steps: WorkflowStep[]
-  orientation?: "vertical" | "horizontal"
+interface FlowDiagramProps {
+  nodes: FlowNode[]
+  /** Masque les libellés (lus par les lecteurs d'écran) et réduit les pastilles */
+  compact?: boolean
+  /** Toujours vertical (sinon vertical sur mobile, horizontal dès sm) */
+  vertical?: boolean
   className?: string
-}) {
-  // Un temps de pause en fin de cycle : toutes les étapes restent validées un instant.
-  const tick = useCycle(steps.length + 1, 1600, steps.length)
-  const horizontal = orientation === "horizontal"
+}
+
+/**
+ * Schéma explicatif : grosses pastilles d'icônes reliées par des traits épais
+ * qui se remplissent d'une étape à l'autre, comme une animation de présentation.
+ */
+export function FlowDiagram({ nodes, compact, vertical, className }: FlowDiagramProps) {
+  // Une pause en fin de boucle : tout le schéma reste allumé un instant.
+  const tick = useCycle(nodes.length + 1, 1300, nodes.length)
+  const row = !vertical
 
   return (
-    <div className={cn("rounded-[20px] bg-studio p-5 text-white shadow-float ring-1 ring-white/10 sm:p-6", className)}>
-      <div className="mb-5 flex items-center justify-between">
-        <span className="inline-flex items-center gap-2 type-meta text-white/90">
-          <Zap className="h-4 w-4 text-[#7fa3ff]" aria-hidden="true" />
-          Automatique
-        </span>
-        <span className="inline-flex items-center gap-1.5 type-caption text-white/55">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#42aef7]" aria-hidden="true" />
-          Actif
-        </span>
-      </div>
-      <ol className={cn("relative flex", horizontal ? "flex-col gap-4 lg:flex-row lg:gap-2" : "flex-col gap-1")}>
-        {steps.map((step, i) => {
-          const done = i < tick
-          const active = i === tick
-          return (
-            <li
-              key={step.label}
-              className={cn(
-                "flex items-center gap-3 rounded-[14px] px-3 py-3 transition-colors duration-500",
-                horizontal && "lg:flex-1 lg:flex-col lg:items-start lg:gap-4 lg:px-4 lg:py-4",
-                active ? "step-active" : "bg-transparent"
-              )}
-              aria-current={active ? "step" : undefined}
-            >
+    <ol
+      className={cn("relative flex flex-col", row && "sm:flex-row sm:items-start", className)}
+      aria-label={nodes.map((n) => n.label).join(", puis ")}
+    >
+      {nodes.map((node, i) => {
+        const Icon = ICONS[node.icon]
+        const reached = i <= tick
+        const active = i === tick
+        const last = i === nodes.length - 1
+        return (
+          <li
+            key={node.label}
+            className={cn(
+              "relative flex items-center gap-4",
+              compact ? "py-2" : "py-3",
+              row && "sm:flex-1 sm:flex-col sm:gap-4 sm:py-0"
+            )}
+          >
+            {/* Trait vers l'étape suivante */}
+            {!last && (
               <span
                 className={cn(
-                  "flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[12px] font-semibold transition-colors duration-500",
-                  active ? "bg-white text-blue" : done ? "bg-white text-studio" : "bg-white/10 text-white/50"
+                  "absolute h-full w-1 overflow-hidden rounded-full bg-white/20",
+                  compact ? "left-[22px] top-1/2" : "left-[30px] top-1/2",
+                  row && "sm:left-1/2 sm:h-1 sm:w-full",
+                  row && (compact ? "sm:top-[22px]" : "sm:top-[30px]")
                 )}
                 aria-hidden="true"
               >
-                {done ? <Check className="h-3.5 w-3.5" strokeWidth={3} /> : i + 1}
+                <span
+                  className={cn(
+                    "absolute inset-0 rounded-full bg-white transition-transform duration-700 ease-out",
+                    row ? "origin-top sm:origin-left" : "origin-top",
+                    i < tick ? "scale-x-100 scale-y-100" : row ? "scale-y-0 sm:scale-x-0 sm:scale-y-100" : "scale-y-0"
+                  )}
+                />
               </span>
-              <span className={cn("flex min-w-0 flex-1 items-center justify-between gap-3", horizontal && "lg:w-full lg:flex-col lg:items-start lg:gap-1")}>
-                <span className={cn("text-[15px] font-[550] leading-[1.3] transition-colors duration-500", done || active ? "text-white" : "text-white/50")}>
-                  {step.label}
-                </span>
-                {step.when && (
-                  <span className={cn("shrink-0 text-[12px] font-[550]", active ? "text-white/85" : "text-white/60")}>{step.when}</span>
-                )}
-              </span>
-            </li>
-          )
-        })}
-      </ol>
-    </div>
-  )
-}
+            )}
 
-/* ─── Cartes blanches : déclencheur et résultat ─────── */
-function TriggerCard({ trigger, className }: { trigger: FlowTrigger; className?: string }) {
-  const Icon = TRIGGER_ICONS[trigger.icon]
-  return (
-    <div className={cn("flex items-center gap-3 rounded-[20px] bg-white p-4 shadow-card", className)}>
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue/10 text-blue" aria-hidden="true">
-        <Icon className="h-5 w-5" />
-      </span>
-      <span className="min-w-0">
-        <span className="block text-[15px] font-[550] text-graphite">{trigger.title}</span>
-        <span className="block truncate text-[13px] text-charcoal">{trigger.detail}</span>
-      </span>
-    </div>
+            <span
+              className={cn(
+                "relative z-10 flex shrink-0 items-center justify-center rounded-full transition-all duration-500",
+                compact ? "h-12 w-12" : "h-16 w-16",
+                reached ? "bg-white text-blue" : "bg-white/15 text-white/85 ring-1 ring-white/30",
+                active && "scale-110 shadow-[0_0_0_8px_rgba(255,255,255,0.18),0_12px_32px_rgba(4,24,85,0.45)]"
+              )}
+              aria-hidden="true"
+            >
+              <Icon className={compact ? "h-5 w-5" : "h-7 w-7"} strokeWidth={2.25} />
+            </span>
+
+            <span
+              className={cn(
+                "text-[15px] font-[550] leading-[1.25] transition-colors duration-500",
+                row && "sm:max-w-[11ch] sm:text-center",
+                reached ? "text-white" : "text-white/85",
+                compact && "sr-only"
+              )}
+            >
+              {node.label}
+            </span>
+          </li>
+        )
+      })}
+    </ol>
   )
 }
 
 function ResultCard({ data, className }: { data: BeforeAfter; className?: string }) {
   return (
-    <div className={cn("rounded-[20px] bg-white p-5 shadow-card", className)}>
-      <p className="type-caption text-charcoal">Temps passé chaque mois</p>
-      <p className="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <span className="text-[18px] font-[550] text-charcoal line-through decoration-1">{data.before}</span>
-        <span className="text-[28px] font-semibold leading-none tracking-[-0.02em] text-ink">{data.after}</span>
-      </p>
-      <p className="mt-3 type-caption text-charcoal">Exemple type</p>
+    <div className={cn("flex items-center gap-4 rounded-[20px] bg-white p-5 shadow-card", className)}>
+      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-blue text-white shadow-blue" aria-hidden="true">
+        <Clock className="h-6 w-6" strokeWidth={2.25} />
+      </span>
+      <span>
+        <span className="block text-[30px] font-semibold leading-none tracking-[-0.02em] text-ink">{data.after}</span>
+        <span className="mt-1.5 block text-[15px] font-[550] text-graphite">au lieu de {data.before}</span>
+        <span className="mt-1 block type-caption text-charcoal">Exemple type</span>
+      </span>
     </div>
   )
 }
 
-function Connector({ horizontal }: { horizontal?: boolean }) {
-  return (
-    <span
-      className={cn(
-        "mx-auto block h-8 w-px bg-white/50",
-        horizontal && "lg:mx-0 lg:h-px lg:w-10 lg:self-center"
-      )}
-      aria-hidden="true"
-    />
-  )
-}
-
-/* ─── Démo complète : déclencheur → étapes → résultat ── */
+/** Démo complète dans son champ bleu : le schéma, puis le temps gagné. */
 export function FlowDemo({
-  trigger,
-  steps,
+  nodes,
   result,
-  orientation = "vertical",
-  showResult = true,
+  layout = "stacked",
   className,
 }: {
-  trigger: FlowTrigger
-  steps: WorkflowStep[]
-  result: BeforeAfter
-  showResult?: boolean
-  orientation?: "vertical" | "horizontal"
+  nodes: FlowNode[]
+  result?: BeforeAfter
+  /** "wide" : schéma et résultat côte à côte en grand écran (hero) */
+  layout?: "stacked" | "wide"
   className?: string
 }) {
-  const horizontal = orientation === "horizontal"
+  const wide = layout === "wide"
   return (
-    <figure
-      className={cn("blue-field relative overflow-hidden rounded-[20px] px-5 py-10 sm:px-10 sm:py-14", className)}
-      aria-label={`Exemple : ${trigger.title}, puis ${steps.map((s) => s.label.toLowerCase()).join(", ")}`}
-    >
-      <div
-        className={cn(
-          "relative mx-auto flex flex-col",
-          horizontal ? "max-w-[440px] lg:max-w-none lg:flex-row lg:items-center" : "max-w-[400px]"
-        )}
-      >
-        <TriggerCard trigger={trigger} className={cn(horizontal && "lg:w-[290px] lg:shrink-0")} />
-        <Connector horizontal={horizontal} />
-        <FlowSteps steps={steps} orientation={horizontal ? "horizontal" : "vertical"} className={cn(horizontal && "lg:flex-1")} />
-        {showResult && (
+    <figure className={cn("blue-field relative overflow-hidden rounded-[20px] px-6 py-10 sm:px-10 sm:py-14", className)}>
+      <div className={cn("flex flex-col gap-10", wide && "lg:flex-row lg:items-center lg:gap-8")}>
+        <FlowDiagram
+          nodes={nodes}
+          vertical={!wide}
+          className={cn(wide ? "lg:flex-1" : "mx-auto w-fit min-w-[220px]")}
+        />
+        {result && (
           <>
-            <Connector horizontal={horizontal} />
-            <ResultCard data={result} className={cn(horizontal && "lg:w-[220px] lg:shrink-0")} />
+            {wide && <ArrowRight className="hidden h-8 w-8 shrink-0 text-white/70 lg:block" strokeWidth={2.5} aria-hidden="true" />}
+            <ResultCard data={result} className={cn(wide ? "lg:w-[300px] lg:shrink-0" : "mx-auto w-full max-w-[320px]")} />
           </>
         )}
       </div>

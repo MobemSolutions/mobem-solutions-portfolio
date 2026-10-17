@@ -49,7 +49,7 @@ export function TradePage({ trade }: { trade: Trade }) {
               </div>
               <p className="mt-5 type-meta text-charcoal">45 min · Sans engagement · Vos données restent chez vous</p>
             </div>
-            <FlowDemo trigger={trade.trigger} steps={trade.steps} result={trade.beforeAfter} />
+            <FlowDemo nodes={trade.flow} result={trade.beforeAfter} />
           </Container>
         </section>
 
