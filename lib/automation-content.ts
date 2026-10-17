@@ -209,17 +209,6 @@ export function getTrade(slug: string) {
   return TRADES.find((t) => t.slug === slug)
 }
 
-export const TOOLS = [
-  "Gmail",
-  "Outlook",
-  "Google Sheets",
-  "Excel",
-  "Google Drive",
-  "Notion",
-  "Calendly",
-  "votre logiciel métier",
-]
-
 // Chiffres de marché — chacun avec sa source affichée.
 export const FIGURES: {
   value: string

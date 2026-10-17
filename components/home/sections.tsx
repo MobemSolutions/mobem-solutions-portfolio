@@ -4,7 +4,6 @@ import { ArrowRight, Check, Globe, Play, ShieldCheck, Server, FileLock2, BellRin
 import { cn } from "@/lib/utils"
 import {
   TRADES,
-  TOOLS,
   TRUST_POINTS,
   PRICING,
   FOUNDER,
@@ -17,6 +16,7 @@ import { DiagnosticButton } from "@/components/diagnostic-button"
 import { FlowDemo } from "@/components/automation/flow-demo"
 import { TradeCarousel } from "@/components/home/trade-carousel"
 import { MethodSteps } from "@/components/home/method-steps"
+import { TOOL_LOGOS, ToolLogo } from "@/components/home/tool-logos"
 
 /* ─── Hero ────────────────────────────────────────── */
 export function Hero() {
@@ -61,10 +61,18 @@ export function ToolsStrip() {
     <section className="py-14" aria-label="Outils compatibles">
       <Container className="flex flex-col items-center gap-5 text-center">
         <p className="type-meta text-charcoal">Fonctionne avec les outils que vous utilisez déjà</p>
-        <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-          {TOOLS.map((tool) => (
-            <li key={tool} className="cursor-default text-[17px] font-[550] tracking-[-0.01em] text-[#767677] transition-colors duration-200 hover:text-graphite">
-              {tool}
+        <ul className="flex flex-wrap items-center justify-center gap-x-9 gap-y-4">
+          {TOOL_LOGOS.map((tool) => (
+            <li
+              key={tool.name}
+              className="group flex cursor-default items-center gap-2 text-[16px] font-[550] tracking-[-0.01em] text-[#767677] transition-colors duration-200 hover:text-graphite"
+              style={{ "--brand": tool.color } as React.CSSProperties}
+            >
+              <ToolLogo
+                tool={tool}
+                className="transition-[color,transform] duration-300 group-hover:-translate-y-0.5 group-hover:scale-110 group-hover:text-[var(--brand)]"
+              />
+              {tool.name}
             </li>
           ))}
         </ul>
