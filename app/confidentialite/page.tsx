@@ -36,6 +36,7 @@ const SECTIONS: LegalSection[] = [
         <LegalTable
           head={["Source", "Données", "Obligatoire"]}
           rows={[
+            ["Formulaire de contact", "Nom, e-mail, entreprise, téléphone (facultatif), métier, tâches et outils concernés, message", "Nom, e-mail et métier"],
             ["Réservation du diagnostic (Calendly)", "Nom, e-mail, entreprise, créneau choisi, réponses éventuelles au questionnaire de réservation", "Oui"],
             ["Échanges par e-mail", "Contenu des échanges, pièces jointes éventuelles", "Selon votre message"],
             ["Mesure d'audience (Vercel Analytics)", "Pages vues, pays, type d'appareil, en données agrégées et sans cookie", "Non"],
@@ -111,6 +112,7 @@ const SECTIONS: LegalSection[] = [
           rows={[
             ["Vercel Inc.", "Hébergement du site", "États-Unis"],
             ["Calendly LLC", "Réservation du diagnostic", "États-Unis"],
+            ["Resend", "Envoi des e-mails du formulaire de contact", "États-Unis"],
             ["Zoho Corporation", "Messagerie électronique", "Union européenne / Inde"],
           ]}
         />

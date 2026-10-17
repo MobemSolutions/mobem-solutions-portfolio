@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils"
 import { TRADES } from "@/lib/automation-content"
 import { DiagnosticButton } from "@/components/diagnostic-button"
 import { MobemLogo } from "@/components/ui/mobem-logo"
+import { ContactButton } from "@/components/contact-form"
 
 const navigation = [
   { name: "Méthode", href: "/methode" },
@@ -169,9 +170,7 @@ export function Header() {
           </div>
 
           <div className="hidden lg:flex lg:items-center lg:gap-6">
-            <a href="mailto:contact@mobem-solutions.com" className="link-underline type-nav text-graphite">
-              Nous écrire
-            </a>
+            <ContactButton className="link-underline type-nav text-graphite">Nous écrire</ContactButton>
             <DiagnosticButton className="!py-1.5 !pl-4 !pr-1.5 gap-3">
               Diagnostic gratuit
               <span className="flex h-8 w-8 items-center justify-center rounded-[10px] bg-studio" aria-hidden="true">
@@ -227,6 +226,7 @@ export function Header() {
               </div>
             ))}
             <DiagnosticButton className="mt-3 w-full">Diagnostic gratuit</DiagnosticButton>
+            <ContactButton className="btn-outline w-full">Nous écrire</ContactButton>
           </div>
         </div>
       </nav>

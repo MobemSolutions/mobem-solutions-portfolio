@@ -70,7 +70,6 @@ export function FiguresSection() {
                   <CountUp from={f.countFrom} to={f.countTo} suffix={f.suffix} />
                 </p>
                 <p className="mt-3 max-w-[22ch] text-[17px] font-[550] leading-[1.4] text-graphite">{f.label}</p>
-                <p className="mt-2 text-[12px] text-charcoal">Source : {f.source}</p>
               </li>
             )
           })}

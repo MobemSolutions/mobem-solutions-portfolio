@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { MobemLogo } from "@/components/ui/mobem-logo"
+import { ContactButton } from "@/components/contact-form"
 import { ArrowUpRight } from "lucide-react"
 import { TRADES } from "@/lib/automation-content"
 
@@ -58,6 +59,7 @@ export function Footer() {
 
           <div className="flex flex-col gap-3">
             <span className={HEAD}>Contact</span>
+            <ContactButton className={`${LINK} text-left`}>Formulaire de contact</ContactButton>
             <a href="mailto:contact@mobem-solutions.com" className={LINK}>
               contact@mobem-solutions.com
             </a>

@@ -17,6 +17,7 @@ import { FlowDemo } from "@/components/automation/flow-demo"
 import { TradeCarousel } from "@/components/home/trade-carousel"
 import { MethodSteps } from "@/components/home/method-steps"
 import { TOOL_LOGOS, ToolLogo } from "@/components/home/tool-logos"
+import { ContactButton } from "@/components/contact-form"
 
 /* ─── Hero ────────────────────────────────────────── */
 export function Hero() {
@@ -218,10 +219,10 @@ export function Pricing() {
               vitrines sobres et rapides, reliés à vos automatisations. Sur devis.
             </span>
           </p>
-          <a href="mailto:contact@mobem-solutions.com?subject=Site%20internet" className="link-arrow link-underline inline-flex shrink-0 items-center gap-1.5 type-meta text-graphite">
+          <ContactButton className="link-arrow link-underline inline-flex shrink-0 items-center gap-1.5 type-meta text-graphite">
             Nous écrire
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </a>
+          </ContactButton>
         </div>
       </Container>
     </section>
