@@ -13,7 +13,7 @@ import {
 } from "@/lib/automation-content"
 import { Container, SectionHeading, SourceCaption, FaqList } from "@/components/home/primitives"
 import { DiagnosticButton } from "@/components/diagnostic-button"
-import { FlowDemo } from "@/components/automation/flow-demo"
+import { HeroWeek } from "@/components/home/hero-week"
 import { TradeCarousel } from "@/components/home/trade-carousel"
 import { MethodSteps } from "@/components/home/method-steps"
 import { TOOL_LOGOS, ToolLogo } from "@/components/home/tool-logos"
@@ -21,7 +21,6 @@ import { ContactButton } from "@/components/contact-form"
 
 /* ─── Hero ────────────────────────────────────────── */
 export function Hero() {
-  const qualiopi = TRADES[0]
   return (
     <section id="hero" className="relative overflow-hidden pt-28 sm:pt-36" aria-labelledby="hero-heading">
       <div className="blue-glow pointer-events-none absolute inset-x-0 top-0 h-[720px]" aria-hidden="true" />
@@ -49,8 +48,7 @@ export function Hero() {
 
       {/* Démo : déclencheur → étapes → résultat */}
       <Container className="animate-in fade-in-0 slide-in-from-bottom-4 duration-700 fill-mode-both delay-500 relative mt-16 sm:mt-24">
-        <FlowDemo nodes={qualiopi.flow} result={qualiopi.beforeAfter} layout="wide" />
-        <p className="mt-4 text-center type-caption text-charcoal">Organisme de formation Qualiopi : chaque inscription déclenche la suite, sans personne derrière.</p>
+        <HeroWeek />
       </Container>
     </section>
   )
