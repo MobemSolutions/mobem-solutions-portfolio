@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, DM_Serif_Display } from 'next/font/google'
+import { Google_Sans_Flex } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { ThemeProvider } from '@/components/theme-provider'
@@ -7,26 +7,21 @@ import { ClientOnlyUI } from '@/components/client-only-ui'
 import { ScrollReveal } from '@/components/scroll-reveal'
 import './globals.css'
 
-const inter = Inter({
+const googleSansFlex = Google_Sans_Flex({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-google-sans-flex',
   display: 'swap',
-})
-
-const dmSerif = DM_Serif_Display({
-  subsets: ['latin'],
-  weight: '400',
-  style: ['italic'],
-  variable: '--font-dm-serif',
-  display: 'swap',
+  axes: ['ROND'],
+  fallback: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+  adjustFontFallback: false,
 })
 
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://mobem-solutions.com'),
-  title: 'Mobem Solutions - Conseil en Digitalisation | Nantes',
-  description: 'Mobem Solutions accompagne les PME et ETI dans leur transformation digitale. Conseil, stratégie et solutions sur-mesure. Agence basée à Nantes.',
-  keywords: ['conseil digital', 'digitalisation', 'Nantes', 'transformation digitale', 'stratégie digitale', 'PME', 'ETI', 'agence conseil', 'solutions digitales'],
+  title: 'Mobem Solutions — Automatisation des tâches administratives | Nantes',
+  description: 'Mobem Solutions automatise les tâches administratives des TPE-PME, organismes de formation, courtiers et cabinets comptables. Sur vos propres outils, heures gagnées mesurées. Basé à Nantes.',
+  keywords: ['automatisation tâches administratives', 'automatisation PME', 'Qualiopi automatisation', 'courtier assurance automatisation', 'cabinet comptable relance pièces', 'Nantes', 'TPE', 'PME'],
   authors: [{ name: 'Mobem Solutions' }],
   creator: 'Mobem Solutions',
   verification: {
@@ -37,22 +32,22 @@ export const metadata: Metadata = {
     locale: 'fr_FR',
     url: 'https://mobem-solutions.com',
     siteName: 'Mobem Solutions',
-    title: 'Mobem Solutions - Conseil en Digitalisation | Nantes',
-    description: 'Conseil et accompagnement dans la transformation digitale pour PME et ETI. Basée à Nantes.',
+    title: 'Mobem Solutions — Automatisation des tâches administratives | Nantes',
+    description: 'Vos tâches administratives tournent toutes seules. Vous récupérez vos heures.',
     images: [
       {
-        url: '/opengraph/og-image.png',
+        url: '/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'Mobem Solutions — Agence Web Nantes',
+        alt: 'Mobem Solutions — Automatisation des tâches administratives',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mobem Solutions - Conseil en Digitalisation | Nantes',
-    description: 'Conseil et accompagnement dans la transformation digitale pour PME et ETI. Basée à Nantes.',
-    images: ['/opengraph/og-image.png'],
+    title: 'Mobem Solutions — Automatisation des tâches administratives | Nantes',
+    description: 'Vos tâches administratives tournent toutes seules. Vous récupérez vos heures.',
+    images: ['/opengraph-image'],
   },
   icons: {
     icon: [
@@ -76,10 +71,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#F7F7F5' },
-    { media: '(prefers-color-scheme: dark)', color: '#1C1813' },
-  ],
+  themeColor: '#ffffff',
   width: 'device-width',
   initialScale: 1,
 }
@@ -91,10 +83,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" suppressHydrationWarning className="bg-background" data-scroll-behavior="smooth">
-      <body className={`${inter.variable} ${dmSerif.variable} font-sans antialiased`}>
+      <body className={`${googleSansFlex.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
+          forcedTheme="light"
           enableSystem={false}
           disableTransitionOnChange
         >

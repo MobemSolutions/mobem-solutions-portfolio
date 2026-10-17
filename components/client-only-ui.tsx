@@ -1,15 +1,7 @@
 "use client"
 
-import dynamic from "next/dynamic"
-
-const Cursor = dynamic(() => import("@/components/cursor").then(m => ({ default: m.Cursor })), { ssr: false })
-const ReadProgress = dynamic(() => import("@/components/read-progress").then(m => ({ default: m.ReadProgress })), { ssr: false })
+import { PressEffects } from "@/components/press-effects"
 
 export function ClientOnlyUI() {
-  return (
-    <>
-      <Cursor />
-      <ReadProgress />
-    </>
-  )
+  return <PressEffects />
 }

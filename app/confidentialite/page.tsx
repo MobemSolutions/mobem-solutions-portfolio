@@ -1,519 +1,192 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { CopyEmail } from "@/components/ui/copy-email"
+import { LegalLayout, LegalCard, LegalList, LegalTable, type LegalSection } from "@/components/legal/legal-layout"
 
 export const metadata: Metadata = {
-  title: "Politique de Confidentialité | Mobem Solutions",
-  description: "Politique de confidentialité et gestion des données personnelles de Mobem Solutions, conforme au RGPD.",
-  robots: { index: false, follow: false },
+  title: "Politique de confidentialité | Mobem Solutions",
+  description: "Politique de confidentialité de Mobem Solutions : données collectées, finalités, durées de conservation, sous-traitants et droits RGPD.",
+  alternates: { canonical: "https://mobem-solutions.com/confidentialite" },
 }
 
-const sections = [
-  { id: "responsable", label: "Responsable du traitement" },
-  { id: "donnees", label: "Données collectées" },
-  { id: "finalites", label: "Finalités du traitement" },
-  { id: "bases", label: "Bases légales" },
-  { id: "conservation", label: "Durée de conservation" },
-  { id: "partage", label: "Partage & sous-traitants" },
-  { id: "cookies", label: "Cookies & traceurs" },
-  { id: "securite", label: "Sécurité des données" },
-  { id: "droits", label: "Vos droits RGPD" },
-  { id: "mineurs", label: "Mineurs" },
-  { id: "modifications", label: "Modifications de la politique" },
-  { id: "contact", label: "Nous contacter" },
+const MAIL = <a href="mailto:contact@mobem-solutions.com">contact@mobem-solutions.com</a>
+
+const SECTIONS: LegalSection[] = [
+  {
+    id: "responsable",
+    title: "Responsable du traitement",
+    content: (
+      <>
+        <p>
+          Les données personnelles collectées via le site mobem-solutions.com et dans le cadre de nos échanges commerciaux sont
+          traitées par <strong>Arnaud Clavier</strong>, entrepreneur individuel exerçant sous le nom Mobem Solutions.
+        </p>
+        <LegalCard>
+          <p><strong>Contact RGPD</strong></p>
+          <p>{MAIL}</p>
+        </LegalCard>
+      </>
+    ),
+  },
+  {
+    id: "collecte",
+    title: "Données collectées sur le site",
+    content: (
+      <>
+        <p>Nous ne collectons que ce qui est nécessaire pour vous répondre et organiser le diagnostic.</p>
+        <LegalTable
+          head={["Source", "Données", "Obligatoire"]}
+          rows={[
+            ["Formulaire de contact", "Nom, e-mail, entreprise, téléphone (facultatif), métier, tâches et outils concernés, message", "Nom, e-mail et métier"],
+            ["Réservation du diagnostic (Calendly)", "Nom, e-mail, entreprise, créneau choisi, réponses éventuelles au questionnaire de réservation", "Oui"],
+            ["Échanges par e-mail", "Contenu des échanges, pièces jointes éventuelles", "Selon votre message"],
+            ["Mesure d'audience (Vercel Analytics)", "Pages vues, pays, type d'appareil, en données agrégées et sans cookie", "Non"],
+          ]}
+        />
+        <p>Nous ne collectons aucune donnée sensible au sens de l&apos;article 9 du RGPD.</p>
+      </>
+    ),
+  },
+  {
+    id: "clients",
+    title: "Données traitées pour nos clients",
+    content: (
+      <>
+        <p>
+          Les automatisations que nous mettons en place sont installées <strong>sur les propres comptes de nos clients</strong>.
+          Les données qu&apos;elles traitent (mails, documents, fichiers de suivi) restent chez eux.
+        </p>
+        <p>
+          Pour ces traitements, le client est responsable de traitement et Mobem Solutions intervient comme sous-traitant au
+          sens de l&apos;article 28 du RGPD, dans le cadre d&apos;un accord de traitement des données signé avec chaque mission.
+          Nous n&apos;accédons à ces données que dans la mesure nécessaire à la mise en place, au contrôle et à la maintenance des
+          automatisations.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: "finalites",
+    title: "Finalités et bases légales",
+    content: (
+      <LegalTable
+        head={["Finalité", "Base légale (art. 6 RGPD)"]}
+        rows={[
+          ["Répondre à vos demandes et organiser le diagnostic", "Intérêt légitime, mesures précontractuelles"],
+          ["Exécuter les missions et facturer", "Exécution du contrat"],
+          ["Mesurer l'audience du site de façon anonyme", "Intérêt légitime"],
+          ["Conserver les pièces comptables", "Obligation légale"],
+        ]}
+      />
+    ),
+  },
+  {
+    id: "conservation",
+    title: "Durées de conservation",
+    content: (
+      <>
+        <LegalTable
+          head={["Données", "Durée"]}
+          rows={[
+            ["Prospects sans suite commerciale", "3 ans après le dernier contact"],
+            ["Clients (données contractuelles)", "5 ans après la fin du contrat"],
+            ["Factures et pièces comptables", "10 ans (art. L123-22 du Code de commerce)"],
+            ["Statistiques d'audience agrégées", "13 mois maximum"],
+          ]}
+        />
+        <p>À l&apos;issue de ces délais, les données sont supprimées ou anonymisées de façon irréversible.</p>
+      </>
+    ),
+  },
+  {
+    id: "sous-traitants",
+    title: "Destinataires et sous-traitants",
+    content: (
+      <>
+        <p>
+          Vos données sont réservées à l&apos;usage de Mobem Solutions. Elles ne sont jamais vendues, louées ni cédées. Nous
+          faisons appel aux sous-traitants suivants, encadrés par des clauses contractuelles types de la Commission européenne
+          lorsque des données sont traitées hors de l&apos;Union européenne :
+        </p>
+        <LegalTable
+          head={["Prestataire", "Rôle", "Localisation"]}
+          rows={[
+            ["Vercel Inc.", "Hébergement du site", "États-Unis"],
+            ["Calendly LLC", "Réservation du diagnostic", "États-Unis"],
+            ["Resend", "Envoi des e-mails du formulaire de contact", "États-Unis"],
+            ["Zoho Corporation", "Messagerie électronique", "Union européenne / Inde"],
+          ]}
+        />
+      </>
+    ),
+  },
+  {
+    id: "cookies",
+    title: "Cookies",
+    content: (
+      <>
+        <p>
+          <strong>Mesure d&apos;audience.</strong> Vercel Analytics ne dépose aucun cookie et ne produit que des statistiques
+          agrégées : cet usage est exempté de consentement selon les recommandations de la CNIL.
+        </p>
+        <p>
+          <strong>Réservation.</strong> L&apos;agenda Calendly n&apos;est chargé que lorsque vous cliquez sur un bouton de
+          réservation. Calendly peut alors déposer des cookies nécessaires à son fonctionnement.
+        </p>
+        <p>Vous pouvez gérer les cookies à tout moment depuis les paramètres de votre navigateur.</p>
+      </>
+    ),
+  },
+  {
+    id: "securite",
+    title: "Sécurité",
+    content: (
+      <LegalList
+        items={[
+          "Connexions chiffrées en HTTPS sur l'ensemble du site",
+          "Accès aux données réservé au seul prestataire",
+          "Authentification à deux facteurs sur nos outils internes",
+          "Accès aux comptes clients limités à la mission, révocables à tout moment par le client",
+          "Aucun stockage de données de paiement",
+        ]}
+      />
+    ),
+  },
+  {
+    id: "droits",
+    title: "Vos droits",
+    content: (
+      <>
+        <p>
+          Vous disposez d&apos;un droit d&apos;accès, de rectification, d&apos;effacement, de limitation, de portabilité et
+          d&apos;opposition, ainsi que du droit de retirer votre consentement à tout moment (articles 15 à 22 du RGPD).
+        </p>
+        <p>
+          Pour les exercer, écrivez à {MAIL}. Nous répondons sous un mois. Vous pouvez également adresser une réclamation à la
+          CNIL (cnil.fr).
+        </p>
+      </>
+    ),
+  },
+  {
+    id: "modifications",
+    title: "Modifications",
+    content: (
+      <p>
+        Cette politique peut évoluer pour suivre la réglementation ou nos pratiques. La version en vigueur est celle publiée sur
+        cette page. Voir aussi les <Link href="/mentions-legales">mentions légales</Link> et les <Link href="/cgv">CGV</Link>.
+      </p>
+    ),
+  },
 ]
 
 export default function ConfidentialitePage() {
   return (
-    <>
-      <Header />
-      <main className="min-h-screen">
-        <section className="pt-14 lg:pt-16 border-t border-border">
-          <div className="px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 pb-16 border-b border-border">
-            <nav className="flex items-center gap-2.5 mb-10 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground" aria-label="Fil d'Ariane">
-              <Link href="/" className="hover:text-accent transition-colors">Accueil</Link>
-              <span>/</span>
-              <span className="text-foreground">Confidentialité</span>
-            </nav>
-            <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-foreground mb-4">Informations légales</div>
-            <h1 className="font-extrabold leading-[0.92] tracking-[-0.04em] text-[clamp(36px,5vw,72px)] mb-4">
-              Politique de <em className="font-serif font-normal italic text-accent">confidentialité.</em>
-            </h1>
-            <p className="text-[16px] leading-[1.55] text-muted-foreground max-w-[640px]">
-              Mobem Solutions s&apos;engage à protéger la vie privée de ses visiteurs et clients,<br />
-              conformément au RGPD (UE 2016/679).<br />
-              <span className="font-mono text-[11px] mt-3 inline-block">Mise à jour : janvier 2026.</span>
-            </p>
-          </div>
-        </section>
-        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] border-b border-border">
-          <aside className="border-b lg:border-b-0 lg:border-r border-border px-4 sm:px-6 lg:px-8 py-8">
-            <div className="lg:sticky lg:top-24 max-h-[80vh] overflow-y-auto">
-              <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground mb-4">Sommaire</p>
-              <nav className="flex flex-col gap-1">
-                {sections.map((s, i) => (
-                  <a key={s.id} href={`#${s.id}`}
-                    data-cursor="hover"
-                    className="flex items-start gap-2 font-mono text-[11px] text-muted-foreground hover:text-accent transition-colors py-1.5 pl-3 border-l border-border hover:border-accent">
-                    <span className="text-accent shrink-0">{String(i + 1).padStart(2, "0")}</span>
-                    <span className="uppercase tracking-[0.04em]">{s.label}</span>
-                  </a>
-                ))}
-              </nav>
-              <div className="mt-6 pt-6 border-t border-border">
-                <p className="font-mono text-[10px] uppercase tracking-[0.06em] text-muted-foreground">
-                  Voir aussi :{" "}
-                  <Link href="/mentions-legales" className="text-accent hover:underline">Mentions légales</Link>
-                  {" "}—{" "}
-                  <Link href="/cgv" className="text-accent hover:underline">CGV</Link>
-                </p>
-              </div>
-            </div>
-          </aside>
-          <div className="px-4 sm:px-6 lg:px-8 py-16 space-y-14 max-w-[780px]">
-
-              <section id="responsable" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">1. Responsable du traitement</h2>
-                <div className="prose-legal space-y-3">
-                  <p>
-                    Le traitement des données personnelles collectées via le site mobem-solutions.com est géré par
-                    le GME <strong>Mobem Solutions</strong>, représenté conjointement par ses mandataires :
-                  </p>
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    <div className="border border-border bg-card p-4">
-                      <p className="font-semibold text-foreground text-sm">Nathan Portier</p>
-                      <p className="text-xs text-muted-foreground mt-1">Mandataire administratif & commercial</p>
-                      <p className="text-xs font-mono text-muted-foreground mt-1">SIRET : 91514447100017</p>
-                    </div>
-                    <div className="border border-border bg-card p-4">
-                      <p className="font-semibold text-foreground text-sm">Arnaud Clavier</p>
-                      <p className="text-xs text-muted-foreground mt-1">Co-Mandataire technique</p>
-                      <p className="text-xs font-mono text-muted-foreground mt-1">SIRET : 99285845600013</p>
-                    </div>
-                  </div>
-                  <p>
-                    Contact DPO / RGPD :{" "}
-                    <CopyEmail email="contact@mobem-solutions.com" />
-                  </p>
-                </div>
-              </section>
-
-              <section id="donnees" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">2. Données collectées</h2>
-                <div className="prose-legal space-y-4">
-                  <p>
-                    Nous appliquons le principe de <strong>minimisation des données</strong> : nous ne collectons
-                    que ce qui est strictement nécessaire à la gestion de nos relations commerciales.
-                  </p>
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-sm border-collapse">
-                      <thead>
-                        <tr className="border-b border-border">
-                          <th className="text-left py-3 pr-4 font-medium text-foreground">Source</th>
-                          <th className="text-left py-3 pr-4 font-medium text-foreground">Données collectées</th>
-                          <th className="text-left py-3 font-medium text-foreground">Obligatoire</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-border">
-                        {[
-                          {
-                            source: "Formulaire de contact",
-                            data: "Nom, prénom, adresse email, téléphone, message",
-                            required: "Oui",
-                          },
-                          {
-                            source: "Calendly (prise de RDV)",
-                            data: "Nom, email, téléphone, sujet de l'appel, disponibilités",
-                            required: "Oui",
-                          },
-                          {
-                            source: "Vercel Analytics (sans cookies)",
-                            data: "Pages visitées, durée de session, pays, type d'appareil (données agrégées et anonymisées — aucune donnée personnelle)",
-                            required: "Non",
-                          },
-                          {
-                            source: "Emails (Zoho Mail)",
-                            data: "Contenu des échanges commerciaux, pièces jointes éventuelles",
-                            required: "Contextuel",
-                          },
-                        ].map((row) => (
-                          <tr key={row.source}>
-                            <td className="py-3 pr-4 text-foreground font-medium align-top">{row.source}</td>
-                            <td className="py-3 pr-4 text-muted-foreground align-top">{row.data}</td>
-                            <td className="py-3 text-muted-foreground align-top">{row.required}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    Nous ne collectons <strong>jamais</strong> de données sensibles (santé, opinions politiques,
-                    origines ethniques, données biométriques) au sens de l'article 9 du RGPD.
-                  </p>
-                </div>
-              </section>
-
-              <section id="finalites" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">3. Finalités du traitement</h2>
-                <div className="space-y-3">
-                  {[
-                    {
-                      title: "Gestion des demandes commerciales",
-                      desc: "Répondre à vos demandes de devis, d'information ou de contact via le formulaire du site.",
-                    },
-                    {
-                      title: "Organisation des rendez-vous",
-                      desc: "Gérer et confirmer les rendez-vous téléphoniques ou visio via Calendly.",
-                    },
-                    {
-                      title: "Exécution des contrats",
-                      desc: "Assurer la bonne réalisation des prestations commandées et la facturation associée.",
-                    },
-                    {
-                      title: "Amélioration du site",
-                      desc: "Analyser l'usage du site (pages visitées, performances) pour améliorer l'expérience utilisateur via des données agrégées anonymisées.",
-                    },
-                    {
-                      title: "Obligations légales",
-                      desc: "Conserver certaines données comptables et contractuelles conformément aux obligations légales françaises.",
-                    },
-                  ].map((item) => (
-                    <div key={item.title} className="flex gap-3 border border-border bg-card p-4">
-                      <span className="text-accent mt-0.5 shrink-0">→</span>
-                      <div>
-                        <p className="text-sm font-semibold text-foreground">{item.title}</p>
-                        <p className="text-sm text-muted-foreground mt-1">{item.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </section>
-
-              <section id="bases" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">4. Bases légales des traitements</h2>
-                <div className="prose-legal space-y-4">
-                  <p>
-                    Chaque traitement repose sur une base légale au sens de l'article 6 du RGPD :
-                  </p>
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    {[
-                      {
-                        base: "Consentement (art. 6.1.a)",
-                        desc: "Pour les cookies tiers déposés par Calendly lors de la prise de rendez-vous, un consentement préalable est recueilli avant le chargement du widget.",
-                      },
-                      {
-                        base: "Exécution d'un contrat (art. 6.1.b)",
-                        desc: "Pour le traitement des données nécessaires à la réalisation des prestations commandées.",
-                      },
-                      {
-                        base: "Intérêt légitime (art. 6.1.f)",
-                        desc: "Pour la gestion des demandes commerciales entrantes et l'amélioration de nos services.",
-                      },
-                      {
-                        base: "Obligation légale (art. 6.1.c)",
-                        desc: "Pour la conservation des documents comptables et contractuels imposée par la loi.",
-                      },
-                    ].map((b) => (
-                      <div key={b.base} className="border border-border bg-card p-4">
-                        <p className="text-sm font-semibold text-foreground">{b.base}</p>
-                        <p className="text-sm text-muted-foreground mt-2">{b.desc}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </section>
-
-              <section id="conservation" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">5. Durée de conservation</h2>
-                <div className="prose-legal">
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-sm border-collapse">
-                      <thead>
-                        <tr className="border-b border-border">
-                          <th className="text-left py-3 pr-4 font-medium text-foreground">Type de données</th>
-                          <th className="text-left py-3 font-medium text-foreground">Durée de conservation</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-border">
-                        {[
-                          { type: "Prospects (formulaire de contact, sans suite commerciale)", duration: "3 ans après le dernier contact" },
-                          { type: "Clients (données contractuelles)", duration: "5 ans après la fin du contrat (prescription commerciale)" },
-                          { type: "Documents comptables et factures", duration: "10 ans (obligation légale, art. L123-22 C. com.)" },
-                          { type: "Données analytiques agrégées (Vercel Analytics — sans cookies)", duration: "13 mois maximum" },
-                          { type: "Échanges emails", duration: "3 ans après le dernier contact commercial" },
-                        ].map((row) => (
-                          <tr key={row.type}>
-                            <td className="py-3 pr-4 text-muted-foreground align-top">{row.type}</td>
-                            <td className="py-3 text-foreground font-medium align-top">{row.duration}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                  <p className="mt-4 text-sm text-muted-foreground">
-                    À l'issue de ces délais, les données sont supprimées ou anonymisées de façon irréversible.
-                  </p>
-                </div>
-              </section>
-
-              <section id="partage" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">6. Partage et sous-traitants</h2>
-                <div className="prose-legal space-y-4">
-                  <p>
-                    Vos données sont strictement réservées à l'usage des membres de Mobem Solutions (Nathan
-                    Portier, Arnaud Clavier, Antoine Clavier). <strong>Elles ne sont jamais vendues,
-                    louées ou cédées à des tiers à des fins commerciales.</strong>
-                  </p>
-                  <p>
-                    Nous faisons appel aux sous-traitants suivants, tous conformes au RGPD et ayant signé les
-                    clauses contractuelles types de la Commission européenne lorsqu'ils traitent des données hors UE :
-                  </p>
-                  <div className="grid gap-3 sm:grid-cols-3">
-                    {[
-                      {
-                        name: "Vercel Inc.",
-                        role: "Hébergement du site web",
-                        location: "États-Unis (Privacy Shield / SCCs)",
-                        link: "vercel.com/legal/privacy-policy",
-                      },
-                      {
-                        name: "Zoho Corporation",
-                        role: "Messagerie électronique",
-                        location: "Inde / UE (GDPR compliant)",
-                        link: "zoho.com/privacy.html",
-                      },
-                      {
-                        name: "Calendly LLC",
-                        role: "Prise de rendez-vous en ligne",
-                        location: "États-Unis (SCCs)",
-                        link: "calendly.com/privacy",
-                      },
-                    ].map((st) => (
-                      <div key={st.name} className="border border-border bg-card p-4">
-                        <p className="font-semibold text-foreground text-sm">{st.name}</p>
-                        <p className="text-xs text-muted-foreground mt-1">{st.role}</p>
-                        <p className="text-xs text-muted-foreground mt-1">{st.location}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    En dehors de ces sous-traitants et des cas imposés par la loi (réquisitions judiciaires,
-                    autorités compétentes), aucun transfert de données n'est effectué.
-                  </p>
-                </div>
-              </section>
-
-              <section id="cookies" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">7. Cookies et traceurs</h2>
-                <div className="prose-legal space-y-4">
-                  <p>
-                    Conformément à la directive ePrivacy et aux recommandations de la CNIL, voici les cookies
-                    utilisés sur ce site :
-                  </p>
-                  <div className="space-y-3">
-                    <div className="border border-border bg-card p-4">
-                      <div className="flex items-center justify-between mb-2">
-                        <p className="font-semibold text-foreground text-sm">Cookies essentiels</p>
-                        <span className="text-xs px-2 py-0.5 bg-accent/10 text-accent font-medium">Toujours actifs</span>
-                      </div>
-                      <p className="text-sm text-muted-foreground">
-                        Nécessaires au bon fonctionnement du site (préférences de thème clair/sombre). Aucun
-                        consentement requis (exemptés par la CNIL).
-                      </p>
-                    </div>
-                    <div className="border border-border bg-card p-4">
-                      <div className="flex items-center justify-between mb-2">
-                        <p className="font-semibold text-foreground text-sm">Mesure d&apos;audience (Vercel Analytics)</p>
-                        <span className="text-xs px-2 py-0.5 bg-accent/10 text-accent font-medium">Exempté CNIL</span>
-                      </div>
-                      <p className="text-sm text-muted-foreground">
-                        Vercel Analytics ne dépose <strong>aucun cookie</strong> et ne collecte aucune donnée personnelle
-                        identifiable. Seules des données agrégées sont produites (pages vues, pays, type d'appareil).
-                        Cet outil satisfait les critères d'exemption de la CNIL pour la mesure d'audience strictement
-                        anonymisée — aucun consentement n'est requis. Conservation des données agrégées : 13 mois maximum.
-                      </p>
-                    </div>
-                    <div className="border border-border bg-card p-4">
-                      <div className="flex items-center justify-between mb-2">
-                        <p className="font-semibold text-foreground text-sm">Cookies tiers (Calendly)</p>
-                        <span className="text-xs px-2 py-0.5 bg-muted text-muted-foreground font-medium">Consentement requis</span>
-                      </div>
-                      <p className="text-sm text-muted-foreground">
-                        Lors du chargement du widget Calendly, des cookies tiers peuvent être déposés par
-                        Calendly LLC pour assurer le fonctionnement de la prise de rendez-vous.
-                      </p>
-                    </div>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    Vous pouvez à tout moment modifier vos préférences cookies via les paramètres de votre
-                    navigateur ou en nous contactant à{" "}
-                    <CopyEmail email="contact@mobem-solutions.com" />
-                    .
-                  </p>
-                </div>
-              </section>
-
-              <section id="securite" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">8. Sécurité des données</h2>
-                <div className="prose-legal space-y-4">
-                  <p>
-                    Mobem Solutions met en œuvre les mesures techniques et organisationnelles appropriées pour
-                    protéger vos données personnelles contre tout accès non autorisé, perte, altération ou
-                    divulgation :
-                  </p>
-                  <ul className="space-y-2">
-                    {[
-                      "Connexions chiffrées en HTTPS/TLS sur l'ensemble du site (certificat géré par Vercel)",
-                      "Accès aux données limité aux seuls membres du GME selon le principe du moindre privilège",
-                      "Messagerie professionnelle sécurisée via Zoho Mail avec authentification à deux facteurs",
-                      "Hébergement sur infrastructure Vercel certifiée SOC 2 Type II",
-                      "Aucun stockage de données de paiement (les paiements sont traités par des prestataires tiers sécurisés)",
-                      "Revue régulière des accès et des autorisations",
-                    ].map((item) => (
-                      <li key={item} className="flex gap-2 text-sm">
-                        <span className="text-accent mt-0.5 shrink-0">→</span>
-                        <span className="text-muted-foreground">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="text-sm text-muted-foreground">
-                    En cas de violation de données susceptible d'engendrer un risque élevé pour vos droits et
-                    libertés, nous vous en informerons dans les meilleurs délais conformément à l'article 34 du
-                    RGPD.
-                  </p>
-                </div>
-              </section>
-
-              <section id="droits" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">9. Vos droits RGPD</h2>
-                <div className="prose-legal space-y-4">
-                  <p>
-                    Conformément aux articles 15 à 22 du RGPD, vous disposez des droits suivants concernant vos
-                    données personnelles :
-                  </p>
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    {[
-                      {
-                        right: "Droit d'accès (art. 15)",
-                        desc: "Obtenir la confirmation que des données vous concernant sont traitées et en recevoir une copie.",
-                      },
-                      {
-                        right: "Droit de rectification (art. 16)",
-                        desc: "Corriger des données inexactes ou incomplètes vous concernant.",
-                      },
-                      {
-                        right: "Droit à l'effacement (art. 17)",
-                        desc: "Demander la suppression de vos données sous certaines conditions (\"droit à l'oubli\").",
-                      },
-                      {
-                        right: "Droit à la limitation (art. 18)",
-                        desc: "Restreindre temporairement le traitement de vos données pendant une contestation.",
-                      },
-                      {
-                        right: "Droit à la portabilité (art. 20)",
-                        desc: "Recevoir vos données dans un format structuré et lisible par machine.",
-                      },
-                      {
-                        right: "Droit d'opposition (art. 21)",
-                        desc: "Vous opposer à tout moment au traitement fondé sur l'intérêt légitime.",
-                      },
-                      {
-                        right: "Droit de retrait du consentement",
-                        desc: "Retirer votre consentement à tout moment pour les traitements qui en dépendent.",
-                      },
-                      {
-                        right: "Droit de réclamation",
-                        desc: "Introduire une réclamation auprès de la CNIL (cnil.fr) si vous estimez que vos droits ne sont pas respectés.",
-                      },
-                    ].map((r) => (
-                      <div key={r.right} className="border border-border bg-card p-4">
-                        <p className="text-sm font-semibold text-foreground">{r.right}</p>
-                        <p className="text-sm text-muted-foreground mt-1">{r.desc}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="border border-accent/30 bg-accent/5 p-5">
-                    <p className="font-semibold text-foreground text-sm mb-2">Exercer vos droits</p>
-                    <p className="text-sm text-muted-foreground">
-                      Pour exercer l'un de ces droits, adressez votre demande par email à{" "}
-                      <CopyEmail email="contact@mobem-solutions.com" />{" "}
-                      en précisant votre identité. Nous traiterons votre demande dans un délai d'un (1) mois
-                      maximum. En cas de demande complexe, ce délai peut être prolongé de deux (2) mois
-                      supplémentaires, avec information préalable.
-                    </p>
-                  </div>
-                </div>
-              </section>
-
-              <section id="mineurs" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">10. Mineurs</h2>
-                <div className="prose-legal">
-                  <p>
-                    Le site mobem-solutions.com est destiné à des professionnels et entreprises. Nous ne collectons
-                    pas sciemment de données personnelles concernant des personnes de moins de 18 ans. Si vous
-                    pensez qu'un mineur nous a fourni des données personnelles, contactez-nous immédiatement à{" "}
-                    <CopyEmail email="contact@mobem-solutions.com" />{" "}
-                    afin que nous puissions les supprimer.
-                  </p>
-                </div>
-              </section>
-
-              <section id="modifications" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">11. Modifications de la politique</h2>
-                <div className="prose-legal space-y-3">
-                  <p>
-                    Mobem Solutions se réserve le droit de modifier la présente politique de confidentialité à
-                    tout moment, notamment pour se conformer à l'évolution de la réglementation ou de nos pratiques.
-                  </p>
-                  <p>
-                    La version en vigueur est celle publiée sur cette page, avec la date de dernière mise à jour
-                    indiquée en en-tête. Pour les modifications substantielles affectant vos droits, nous vous en
-                    informerons par email ou par une notification visible sur le site.
-                  </p>
-                </div>
-              </section>
-
-              <section id="contact" className="scroll-mt-28">
-                <h2 className="text-xl font-semibold text-foreground mb-4">12. Nous contacter</h2>
-                <div className="border border-border bg-card p-6">
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Pour toute question relative à cette politique ou à l'exercice de vos droits :
-                  </p>
-                  <div className="space-y-3">
-                    <div className="flex gap-3">
-                      <span className="text-accent shrink-0">→</span>
-                      <div>
-                        <p className="text-sm font-medium text-foreground">Email</p>
-                        <CopyEmail email="contact@mobem-solutions.com" />
-                      </div>
-                    </div>
-                    <div className="flex gap-3">
-                      <span className="text-accent shrink-0">→</span>
-                      <div>
-                        <p className="text-sm font-medium text-foreground">Autorité de contrôle</p>
-                        <p className="text-sm text-muted-foreground">
-                          CNIL — 3 Place de Fontenoy, TSA 80715, 75334 Paris Cedex 07 — cnil.fr
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              <div className="pt-8 border-t border-border">
-                <p className="text-xs text-muted-foreground">
-                  Mobem Solutions — Politique de confidentialité en vigueur au 1er janvier 2026
-                </p>
-                <p className="text-xs text-muted-foreground mt-1">
-                  GME | Nathan Portier & Arnaud Clavier — Nantes, France
-                </p>
-              </div>
-            </div>
-          </div>
-        </main>
-      <Footer />
-    </>
+    <LegalLayout
+      current="/confidentialite"
+      title="Politique de confidentialité"
+      intro={<p>Quelles données nous collectons, pourquoi, combien de temps, et comment exercer vos droits.</p>}
+      updated="Mise à jour : octobre 2026"
+      sections={SECTIONS}
+    />
   )
 }

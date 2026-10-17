@@ -1,45 +1,57 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import Image from "next/image"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { Menu, X, Moon, Sun, ArrowRight } from "lucide-react"
-import { useTheme } from "next-themes"
+import { Menu, X, ArrowDown, ArrowRight, ArrowUpRight } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { TRADES } from "@/lib/automation-content"
+import { DiagnosticButton } from "@/components/diagnostic-button"
+import { MobemLogo } from "@/components/ui/mobem-logo"
+import { ContactButton } from "@/components/contact-form"
 
 const navigation = [
-  { num: "01", name: "Accueil", href: "/" },
-  { num: "02", name: "Réalisations", href: "/realisations", external: true },
-  { num: "03", name: "Services", href: "/#services", external: true },
-  { num: "05", name: "Blog", href: "/blog", external: true },  
-  { num: "06", name: "À propos", href: "/a-propos", external: true },
+  { name: "Méthode", href: "/methode" },
+  { name: "Métiers", href: "/metiers", children: TRADES.map((t) => ({ name: t.navLabel, href: t.href })) },
+  { name: "Exemples", href: "/#exemples" },
+  { name: "Tarifs", href: "/#tarifs" },
+  { name: "À propos", href: "/a-propos" },
 ]
-
-function triggerRipple(e: React.PointerEvent<HTMLElement>) {
-  const btn = e.currentTarget
-  const ripple = document.createElement("span")
-  const size = Math.max(btn.offsetWidth, btn.offsetHeight)
-  const rect = btn.getBoundingClientRect()
-  ripple.className = "nav-ripple"
-  ripple.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX - rect.left - size / 2}px;top:${e.clientY - rect.top - size / 2}px`
-  btn.appendChild(ripple)
-  ripple.addEventListener("animationend", () => ripple.remove())
-}
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const { resolvedTheme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
+  const [isTradesOpen, setIsTradesOpen] = useState(false)
+  const tradesRef = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
   const router = useRouter()
+
   useEffect(() => {
-    setMounted(true)
-    const handleScroll = () => setIsScrolled(window.scrollY > 20)
+    const handleScroll = () => setIsScrolled(window.scrollY > 8)
+    handleScroll()
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  useEffect(() => {
+    if (!isTradesOpen) return
+    const close = (e: MouseEvent | KeyboardEvent) => {
+      if (e instanceof KeyboardEvent ? e.key === "Escape" : !tradesRef.current?.contains(e.target as Node)) {
+        setIsTradesOpen(false)
+      }
+    }
+    document.addEventListener("mousedown", close)
+    document.addEventListener("keydown", close)
+    return () => {
+      document.removeEventListener("mousedown", close)
+      document.removeEventListener("keydown", close)
+    }
+  }, [isTradesOpen])
+
+  useEffect(() => {
+    setIsTradesOpen(false)
+    setIsMobileMenuOpen(false)
+  }, [pathname])
 
   useEffect(() => {
     if (pathname !== "/") return
@@ -79,149 +91,142 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-[background-color,border-color] duration-200",
-        isScrolled
-          ? "bg-background/95 backdrop-blur-md border-b border-border"
-          : "bg-background/95 border-b border-border lg:bg-transparent lg:border-transparent"
+        "fixed top-0 left-0 right-0 z-50 transition-[background-color,box-shadow] duration-200",
+        isScrolled || isMobileMenuOpen
+          ? "bg-white/85 backdrop-blur-xl shadow-[0_1px_0_rgba(22,22,24,0.08)]"
+          : "bg-white/0"
       )}
       role="banner"
     >
-      <nav
-        className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
-        role="navigation"
-        aria-label="Navigation principale"
-      >
-        <div className="flex h-14 items-center justify-between lg:h-16">
-          {/* Logo */}
+      <nav className="mx-auto max-w-[1200px] px-4 sm:px-6" aria-label="Navigation principale">
+        <div className="flex h-16 items-center justify-between gap-6">
+          <div className="flex items-center gap-10">
           <Link
-            href={pathname === "/" ? "#hero" : "/"}
-            onClick={pathname === "/" ? (e) => handleNavClick(e, "#hero") : undefined}
-            className="group flex items-center gap-3 transition-opacity hover:opacity-70"
+            href="/"
+            className="flex items-center text-ink"
             aria-label="Mobem Solutions - Retour à l'accueil"
           >
-            {/* Light theme mark */}
-            <Image
-              src="/logos/mobem-mark-black.png"
-              alt="Mobem Solutions"
-              width={120}
-              height={80}
-              className="block dark:hidden h-8 w-auto"
-              priority
-            />
-            {/* Dark theme mark */}
-            <Image
-              src="/logos/mobem-mark-white.png"
-              alt="Mobem Solutions"
-              width={120}
-              height={80}
-              className="hidden dark:block h-8 w-auto"
-              priority
-            />
+            <MobemLogo />
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex lg:items-center lg:gap-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                onPointerDown={triggerRipple}
-                className="relative overflow-hidden inline-flex items-baseline gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-                data-cursor="hover"
-              >
-                {item.name}
-              </Link>
-            ))}
-
+          {/* Desktop */}
+          <div className="hidden lg:flex lg:items-center lg:gap-7">
+            {navigation.map((item) =>
+              item.children ? (
+                <div key={item.name} ref={tradesRef} className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setIsTradesOpen((o) => !o)}
+                    aria-expanded={isTradesOpen}
+                    aria-controls="trades-menu"
+                    className={cn(
+                      "link-underline inline-flex items-center gap-1.5 py-1.5 type-nav transition-colors hover:text-graphite",
+                      isTradesOpen || pathname.startsWith("/metiers") ? "text-graphite" : "text-charcoal"
+                    )}
+                  >
+                    {item.name}
+                    <ArrowDown className={cn("h-3.5 w-3.5 transition-transform", isTradesOpen && "rotate-180")} strokeWidth={2.25} aria-hidden="true" />
+                  </button>
+                  {isTradesOpen && (
+                    <div
+                      id="trades-menu"
+                      className="absolute left-0 top-[calc(100%+14px)] w-[300px] origin-top-left rounded-[20px] bg-white p-2 shadow-card animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-200"
+                    >
+                      {item.children.map((child) => (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          className="group flex items-center justify-between rounded-[14px] px-3 py-2.5 type-nav text-graphite transition-colors hover:bg-black/[0.04] hover:text-blue"
+                        >
+                          {child.name}
+                          <ArrowRight className="h-4 w-4 text-charcoal transition-transform duration-200 group-hover:translate-x-1 group-hover:text-blue" aria-hidden="true" />
+                        </Link>
+                      ))}
+                      <Link
+                        href={item.href}
+                        className="mt-1 flex rounded-[14px] px-3 py-2.5 type-meta text-charcoal hover:bg-black/[0.04]"
+                      >
+                        Tous les métiers
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  aria-current={pathname === item.href ? "page" : undefined}
+                  className={cn(
+                    "link-underline py-1.5 type-nav transition-colors hover:text-graphite",
+                    pathname === item.href ? "text-graphite" : "text-charcoal"
+                  )}
+                >
+                  {item.name}
+                </Link>
+              )
+            )}
+          </div>
           </div>
 
-          {/* Desktop CTA + thème */}
-          <div className="hidden lg:flex lg:items-center lg:gap-3">
-            <button
-              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-              aria-label={mounted && resolvedTheme === "dark" ? "Activer le mode clair" : "Activer le mode sombre"}
-              className="w-9 h-9 border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {mounted && resolvedTheme === "dark" ? (
-                <Sun className="h-4 w-4" aria-hidden="true" />
-              ) : (
-                <Moon className="h-4 w-4" aria-hidden="true" />
-              )}
-            </button>
-            <Link
-              href="#contact"
-              onClick={(e) => handleNavClick(e, "#contact")}
-              onPointerDown={triggerRipple}
-              className="relative overflow-hidden inline-flex items-center gap-2 px-4 py-2.5 bg-accent text-accent-foreground text-sm font-medium transition-colors cta-hover"
-              data-cursor="hover"
-            >
+          <div className="hidden lg:flex lg:items-center lg:gap-6">
+            <ContactButton className="link-underline type-nav text-graphite">Nous écrire</ContactButton>
+            <DiagnosticButton className="!py-1.5 !pl-4 !pr-1.5 gap-3">
               Diagnostic gratuit
-              <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
-            </Link>
+              <span className="flex h-8 w-8 items-center justify-center rounded-[10px] bg-studio" aria-hidden="true">
+                <ArrowUpRight className="h-4 w-4" strokeWidth={2.25} />
+              </span>
+            </DiagnosticButton>
           </div>
 
-          {/* Mobile — thème + burger */}
-          <div className="flex items-center gap-2 lg:hidden">
-            <button
-              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-              aria-label={mounted && resolvedTheme === "dark" ? "Activer le mode clair" : "Activer le mode sombre"}
-              className="w-9 h-9 border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {mounted && resolvedTheme === "dark" ? (
-                <Sun className="h-4 w-4" aria-hidden="true" />
-              ) : (
-                <Moon className="h-4 w-4" aria-hidden="true" />
-              )}
-            </button>
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-expanded={isMobileMenuOpen}
-              aria-controls="mobile-menu"
-              aria-label={isMobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-              className="w-9 h-9 border border-border flex items-center justify-center text-foreground"
-            >
-              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
-          </div>
+          {/* Mobile */}
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen((o) => !o)}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
+            aria-label={isMobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+            className="icon-control lg:hidden"
+          >
+            {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
 
-        {/* Mobile Menu */}
         <div
           id="mobile-menu"
           className={cn(
             "lg:hidden transition-[max-height,opacity] duration-200",
-            isMobileMenuOpen ? "max-h-[80vh] overflow-y-auto opacity-100" : "max-h-0 overflow-hidden opacity-0"
+            isMobileMenuOpen ? "max-h-[85vh] overflow-y-auto opacity-100" : "max-h-0 overflow-hidden opacity-0"
           )}
-          aria-hidden={!isMobileMenuOpen}
+          hidden={!isMobileMenuOpen}
         >
-          <div className="pb-6 pt-2 border-t border-border">
-
+          <div className="flex flex-col gap-1 pb-6 pt-2">
             {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className="flex items-baseline gap-3 px-4 py-3 text-base font-medium text-muted-foreground transition-colors hover:text-foreground border-b border-border"
-                tabIndex={isMobileMenuOpen ? 0 : -1}
-              >
-                {item.name}
-              </Link>
+              <div key={item.name}>
+                <Link
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  className="block rounded-[14px] px-3 py-3 text-[17px] font-[550] text-graphite hover:bg-black/[0.04]"
+                >
+                  {item.name}
+                </Link>
+                {item.children && (
+                  <div className="ml-3 flex flex-col border-l border-border pl-3">
+                    {item.children.map((child) => (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        className="rounded-[12px] px-3 py-2 type-nav text-charcoal hover:bg-black/[0.04]"
+                      >
+                        {child.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
-
-            {/* CTA */}
-            <div className="pt-4 px-4">
-              <Link
-                href="#contact"
-                onClick={(e) => handleNavClick(e, "#contact")}
-                onPointerDown={triggerRipple as unknown as React.PointerEventHandler<HTMLAnchorElement>}
-                className="relative overflow-hidden w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-accent text-accent-foreground text-sm font-medium transition-colors cta-hover"
-                tabIndex={isMobileMenuOpen ? 0 : -1}
-              >
-                Diagnostic gratuit
-                <ArrowRight className="w-4 h-4" aria-hidden="true" />
-              </Link>
-            </div>
+            <DiagnosticButton className="mt-3 w-full">Diagnostic gratuit</DiagnosticButton>
+            <ContactButton className="btn-outline w-full">Nous écrire</ContactButton>
           </div>
         </div>
       </nav>
