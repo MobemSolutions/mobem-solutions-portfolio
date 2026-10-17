@@ -51,7 +51,7 @@ export default function AProposPage() {
           </Container>
         </section>
 
-        <section className="py-16 lg:py-24" aria-labelledby="valeurs-heading">
+        <section className="py-12 sm:py-16 lg:py-24" aria-labelledby="valeurs-heading">
           <Container>
             <SectionHeading id="valeurs-heading" eyebrow="Ce qui nous guide" title="Diagnostiquer avant de prescrire." />
             <ul className="mt-12 grid gap-4 md:grid-cols-3">

@@ -11,7 +11,7 @@ export function ClosingBand() {
   const [open, setOpen] = useState(false)
 
   return (
-    <section id="diagnostic" className="py-16 lg:py-24" aria-labelledby="diagnostic-heading">
+    <section id="diagnostic" className="py-12 sm:py-16 lg:py-24" aria-labelledby="diagnostic-heading">
       <Container>
         <div className="relative overflow-hidden rounded-[20px] bg-studio px-6 py-14 text-white sm:px-12 lg:py-20">
           <div className="pointer-events-none absolute inset-0 opacity-90" style={{ background: "var(--gradient-electric-blue-sweep)" }} aria-hidden="true" />

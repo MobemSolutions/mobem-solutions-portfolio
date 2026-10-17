@@ -25,7 +25,7 @@ export function MethodSteps() {
   const current = hovered ?? active
 
   return (
-    <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <ol className="mt-8 grid sm:mt-12 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {METHOD_STEPS.map((step, i) => {
         const on = i === current
         const Icon = ICONS[i]
@@ -42,21 +42,25 @@ export function MethodSteps() {
             onBlur={() => setHovered(null)}
             aria-current={on ? "step" : undefined}
             className={cn(
-              "card-lift method-step relative flex flex-col gap-2 p-6 outline-none",
+              "card-lift method-step relative flex flex-col gap-2 p-5 outline-none sm:p-6",
               on && "method-step-on"
             )}
           >
-            <span
-              className={cn(
-                "method-icon flex h-12 w-12 items-center justify-center rounded-[14px]",
-                on ? "bg-blue text-white shadow-blue" : "bg-black/[0.05] text-graphite"
-              )}
-              aria-hidden="true"
-            >
-              <Icon className="h-6 w-6" strokeWidth={2} />
-            </span>
-            <p className="mt-1 type-caption text-charcoal">Étape {i + 1}</p>
-            <h3 className="type-feature text-ink">{step.title}</h3>
+            <div className="flex items-center gap-4 sm:flex-col sm:items-start sm:gap-2">
+              <span
+                className={cn(
+                  "method-icon flex h-12 w-12 shrink-0 items-center justify-center rounded-[14px]",
+                  on ? "bg-blue text-white shadow-blue" : "bg-black/[0.05] text-graphite"
+                )}
+                aria-hidden="true"
+              >
+                <Icon className="h-6 w-6" strokeWidth={2} />
+              </span>
+              <div>
+                <p className="type-caption text-charcoal sm:mt-1">Étape {i + 1}</p>
+                <h3 className="type-feature text-ink">{step.title}</h3>
+              </div>
+            </div>
             <p className="text-[15px] leading-[1.6] text-charcoal">{step.text}</p>
           </li>
         )

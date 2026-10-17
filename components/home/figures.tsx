@@ -49,27 +49,27 @@ const ICONS = { building: Building2, receipt: ReceiptText, badge: BadgeCheck }
 
 export function FiguresSection() {
   return (
-    <section className="relative py-16 lg:py-24" aria-labelledby="figures-heading">
+    <section className="relative py-12 sm:py-16 lg:py-24" aria-labelledby="figures-heading">
       <div className="blue-glow pointer-events-none absolute inset-0 opacity-70" aria-hidden="true" />
       <div className="relative mx-auto w-full max-w-[1100px] px-4 sm:px-6">
         <p id="figures-heading" className="text-center type-meta text-charcoal">
           Pourquoi s&apos;y mettre maintenant
         </p>
-        <ul className="mt-12 grid gap-14 md:grid-cols-3 md:gap-10">
+        <ul className="mx-auto mt-8 grid max-w-[420px] gap-6 md:mt-12 md:max-w-none md:grid-cols-3 md:gap-10">
           {FIGURES.map((f) => {
             const Icon = ICONS[f.icon]
             return (
-              <li key={f.value} className="group flex flex-col items-center text-center">
+              <li key={f.value} className="group flex items-center gap-5 md:flex-col md:gap-0 md:text-center">
                 <span
-                  className="flex h-12 w-12 items-center justify-center rounded-full bg-blue/10 text-blue transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-110"
+                  className="hidden h-12 w-12 items-center md:flex justify-center rounded-full bg-blue/10 text-blue transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-110"
                   aria-hidden="true"
                 >
                   <Icon className="h-6 w-6" strokeWidth={2} />
                 </span>
-                <p className="figure-number mt-5 inline-block px-[0.06em] text-[76px] font-semibold leading-[1.05] tracking-[-0.04em] sm:text-[92px]">
+                <p className="figure-number inline-block w-[2.6em] shrink-0 px-[0.06em] text-[48px] md:mt-5 md:w-auto md:text-[76px] font-semibold leading-[1.05] tracking-[-0.04em] lg:text-[92px]">
                   <CountUp from={f.countFrom} to={f.countTo} suffix={f.suffix} />
                 </p>
-                <p className="mt-3 max-w-[22ch] text-[17px] font-[550] leading-[1.4] text-graphite">{f.label}</p>
+                <p className="max-w-[22ch] text-[16px] md:mt-3 md:text-[17px] font-[550] leading-[1.4] text-graphite">{f.label}</p>
               </li>
             )
           })}
