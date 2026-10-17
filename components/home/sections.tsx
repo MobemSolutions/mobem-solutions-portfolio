@@ -17,6 +17,7 @@ import {
 import { Container, SectionHeading, SourceCaption, FaqList } from "@/components/home/primitives"
 import { DiagnosticButton } from "@/components/diagnostic-button"
 import { FlowDemo } from "@/components/automation/flow-demo"
+import { TradeCarousel } from "@/components/home/trade-carousel"
 
 /* ─── Hero ────────────────────────────────────────── */
 export function Hero() {
@@ -104,31 +105,11 @@ export function TradeRows() {
           id="exemples-heading"
           eyebrow="Exemples par métier"
           title="Ce qui tourne tout seul, métier par métier"
-          text="Trois métiers où les mêmes tâches reviennent chaque semaine. Voici ce qu'on automatise, et le temps que ça représente."
+          text="Trois métiers où les mêmes tâches reviennent chaque semaine. Voici ce qui se déclenche tout seul, et le temps que ça représente."
           align="center"
         />
-        <div className="mt-20 flex flex-col gap-24 lg:mt-28 lg:gap-36">
-          {TRADES.map((trade, i) => (
-            <article key={trade.slug} className="grid items-center gap-10 lg:grid-cols-2 lg:gap-20" aria-labelledby={`${trade.slug}-title`}>
-              <div className={cn("flex flex-col", i % 2 === 1 && "lg:order-2")}>
-                <p className="type-meta text-charcoal">{trade.eyebrow}</p>
-                <h3 id={`${trade.slug}-title`} className="type-section mt-3 text-ink text-balance">
-                  {trade.headline}
-                </h3>
-                <p className="type-body mt-5 text-charcoal">{trade.intro}</p>
-                <Link href={trade.href} className="mt-8 inline-flex items-center gap-2 self-start type-nav text-graphite underline-offset-4 hover:underline">
-                  Voir la page {trade.navLabel.toLowerCase()}
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
-              </div>
-              <FlowDemo
-                trigger={trade.trigger}
-                steps={trade.steps}
-                result={trade.beforeAfter}
-                className={cn(i % 2 === 1 && "lg:order-1")}
-              />
-            </article>
-          ))}
+        <div className="mt-14 lg:mt-20">
+          <TradeCarousel />
         </div>
       </Container>
     </section>

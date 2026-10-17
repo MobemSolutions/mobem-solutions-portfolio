@@ -525,3 +525,15 @@
 .bento-grid > * {
   background-color: var(--card);
 }
+
+/* ─── Carrousel métiers : barre de progression de l'onglet actif ─── */
+@keyframes carousel-progress {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+.carousel-progress {
+  width: 0%;
+  animation-name: carousel-progress;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}

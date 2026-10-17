@@ -130,11 +130,13 @@ export function FlowDemo({
   steps,
   result,
   orientation = "vertical",
+  showResult = true,
   className,
 }: {
   trigger: FlowTrigger
   steps: WorkflowStep[]
   result: BeforeAfter
+  showResult?: boolean
   orientation?: "vertical" | "horizontal"
   className?: string
 }) {
@@ -153,8 +155,12 @@ export function FlowDemo({
         <TriggerCard trigger={trigger} className={cn(horizontal && "lg:w-[290px] lg:shrink-0")} />
         <Connector horizontal={horizontal} />
         <FlowSteps steps={steps} orientation={horizontal ? "horizontal" : "vertical"} className={cn(horizontal && "lg:flex-1")} />
-        <Connector horizontal={horizontal} />
-        <ResultCard data={result} className={cn(horizontal && "lg:w-[220px] lg:shrink-0")} />
+        {showResult && (
+          <>
+            <Connector horizontal={horizontal} />
+            <ResultCard data={result} className={cn(horizontal && "lg:w-[220px] lg:shrink-0")} />
+          </>
+        )}
       </div>
     </figure>
   )
