@@ -5,7 +5,7 @@ import { Footer } from "@/components/footer"
 import { Container, SectionHeading, FaqList } from "@/components/home/primitives"
 import { ClosingBand } from "@/components/home/closing-band"
 import { DiagnosticButton } from "@/components/diagnostic-button"
-import { FlowDemo } from "@/components/automation/flow-demo"
+import { TradeVisual } from "@/components/automation/trade-visual"
 import { Method, Trust, ToolsStrip } from "@/components/home/sections"
 import { FAQ, TRADES, type Trade } from "@/lib/automation-content"
 
@@ -41,6 +41,10 @@ export function TradePage({ trade }: { trade: Trade }) {
                 {trade.headline}
               </h1>
               <p className="type-body mt-6 text-charcoal">{trade.intro}</p>
+              <p className="mt-6 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-t border-border pt-5">
+                <span className="text-[34px] font-semibold leading-none tracking-[-0.03em] text-blue">{trade.beforeAfter.after}</span>
+                <span className="text-[15px] font-[550] text-charcoal">au lieu de {trade.beforeAfter.before} · exemple type</span>
+              </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <DiagnosticButton>Voir si c&apos;est automatisable chez moi</DiagnosticButton>
                 <Link href="#taches" className="btn-outline">
@@ -49,7 +53,7 @@ export function TradePage({ trade }: { trade: Trade }) {
               </div>
               <p className="mt-5 type-meta text-charcoal">45 min · Sans engagement · Vos données restent chez vous</p>
             </div>
-            <FlowDemo nodes={trade.flow} result={trade.beforeAfter} />
+            <TradeVisual trade={trade} />
           </Container>
         </section>
 

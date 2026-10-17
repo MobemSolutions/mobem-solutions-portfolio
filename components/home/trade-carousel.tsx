@@ -5,7 +5,7 @@ import Link from "next/link"
 import { ArrowRight, ChevronLeft, ChevronRight, Pause, Play } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { TRADES } from "@/lib/automation-content"
-import { FlowDemo } from "@/components/automation/flow-demo"
+import { TradeVisual } from "@/components/automation/trade-visual"
 
 interface TradeCarouselProps {
   autoPlayInterval?: number
@@ -15,6 +15,12 @@ interface TradeCarouselProps {
  * Carrousel des métiers : défilement automatique piloté par la barre de progression
  * de l'onglet actif (fin d'animation = slide suivante), flèches et onglets cliquables.
  */
+/** Position d'une slide par rapport à la slide active : 0 au centre, -1 à gauche, +1 à droite. */
+function relativePosition(i: number, index: number, count: number) {
+  const rel = (i - index + count) % count
+  return rel > count / 2 ? rel - count : rel
+}
+
 export function TradeCarousel({ autoPlayInterval = 7000 }: TradeCarouselProps) {
   // Index affiché, index précédent et sens du passage (1 = vers la gauche, -1 = vers la droite)
   const [{ index, prev, dir }, setSlide] = useState({ index: 0, prev: -1, dir: 1 })
@@ -49,37 +55,40 @@ export function TradeCarousel({ autoPlayInterval = 7000 }: TradeCarouselProps) {
         if (e.key === "ArrowLeft") go(index - 1, -1)
       }}
     >
-      {/* Slides empilées dans la même cellule de grille : glissement horizontal selon le sens, sans saut de hauteur */}
-      <div className="card-lift grid overflow-hidden">
+      {/* Rotation pleine largeur : chaque métier est une carte ; les voisines attendent de part et d'autre,
+          réduites et estompées, au-delà du conteneur. Les slides restent toujours en position -1, 0 ou +1. */}
+      <div className="grid">
         {TRADES.map((trade, i) => {
           const active = i === index
-          // La slide sortante part du côté opposé au sens ; les autres attendent du côté d'arrivée.
-          const offset = active ? 0 : i === prev ? -dir : dir
+          const pos = relativePosition(i, index, count)
+          // La carte qui passe d'un bord à l'autre (bouclage) se téléporte sans traverser l'écran, puis réapparaît en fondu.
+          const jumping = prev >= 0 && Math.abs(pos - relativePosition(i, prev, count)) > 1
           return (
             <article
               key={trade.slug}
               className={cn(
-                "carousel-slide col-start-1 row-start-1 grid items-center gap-8 p-5 sm:p-7 lg:grid-cols-[1fr_1fr] lg:gap-10 lg:p-8",
+                "carousel-slide card-lift col-start-1 row-start-1 grid items-start gap-8 p-5 sm:p-7 lg:grid-cols-[1fr_1.1fr] lg:gap-10 lg:p-8",
+                jumping && "carousel-slide-jump",
                 !active && "pointer-events-none"
               )}
-              data-active={active}
-              style={{ opacity: active ? 1 : 0, transform: `translateX(${offset * 72}px)` }}
+              style={{
+                opacity: active ? 1 : 0.35,
+                zIndex: active ? 2 : 1,
+                transform: `translateX(calc(${pos} * (100% + 40px))) scale(${active ? 1 : 0.9})`,
+              }}
               aria-roledescription="diapositive"
               aria-label={`${i + 1} sur ${count} : ${trade.audience}`}
               aria-hidden={!active}
               inert={!active}
             >
-              <div className="flex flex-col">
+              <div className="flex flex-col lg:pt-2">
                 <p className="chip-dark self-start">{trade.audience}</p>
-                <p className="mt-6 type-caption text-charcoal">Temps passé chaque mois — exemple type</p>
-                <p className="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                  <span className="text-[38px] font-semibold leading-none tracking-[-0.03em] text-ink sm:text-[46px]">
-                    {trade.beforeAfter.after}
-                  </span>
-                  <span className="text-[16px] font-[550] text-charcoal">au lieu de {trade.beforeAfter.before}</span>
-                </p>
-                <h3 className="mt-6 type-feature text-ink">{trade.headline}</h3>
-                <p className="mt-2 max-w-[52ch] text-[15px] leading-[1.65] text-charcoal">{trade.intro}</p>
+                <h3 className="mt-5 type-section text-ink text-balance">{trade.headline}</h3>
+                <p className="mt-3 max-w-[52ch] text-[15px] leading-[1.65] text-charcoal">{trade.intro}</p>
+                <div className="mt-6 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-t border-border pt-5">
+                  <span className="whitespace-nowrap text-[28px] font-semibold leading-none tracking-[-0.03em] text-blue sm:text-[34px]">{trade.beforeAfter.after}</span>
+                  <span className="text-[15px] font-[550] text-charcoal">au lieu de {trade.beforeAfter.before} · exemple type</span>
+                </div>
                 <Link
                   href={trade.href}
                   className="link-arrow link-underline mt-6 inline-flex items-center gap-2 self-start type-nav text-graphite"
@@ -88,7 +97,7 @@ export function TradeCarousel({ autoPlayInterval = 7000 }: TradeCarouselProps) {
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
-              <FlowDemo nodes={trade.flow} />
+              <TradeVisual trade={trade} />
             </article>
           )
         })}

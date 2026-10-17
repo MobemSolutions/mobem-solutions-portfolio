@@ -63,6 +63,8 @@ interface FlowDiagramProps {
   compact?: boolean
   /** Toujours vertical (sinon vertical sur mobile, horizontal dès sm) */
   vertical?: boolean
+  /** Petite frise horizontale, à toutes les tailles d'écran (posée sur une illustration) */
+  mini?: boolean
   className?: string
 }
 
@@ -70,10 +72,47 @@ interface FlowDiagramProps {
  * Schéma explicatif : pastilles d'icônes reliées par des traits épais qui s'arrêtent
  * avant chaque pastille et se remplissent d'une étape à l'autre, comme une animation de présentation.
  */
-export function FlowDiagram({ nodes, compact, vertical, className }: FlowDiagramProps) {
+export function FlowDiagram({ nodes, compact, vertical, mini, className }: FlowDiagramProps) {
   // Une pause en fin de boucle : tout le schéma reste allumé un instant.
   const tick = useCycle(nodes.length + 1, 1150, nodes.length)
   const row = !vertical
+
+  if (mini) {
+    return (
+      <ol className={cn("flex items-start", className)} aria-label={nodes.map((n) => n.label).join(", puis ")}>
+        {nodes.map((node, i) => {
+          const Icon = ICONS[node.icon]
+          const reached = i <= tick
+          const active = i === tick
+          return (
+            <li key={node.label} className="relative flex min-w-0 flex-1 flex-col items-center gap-2">
+              {i < nodes.length - 1 && (
+                <span
+                  className="absolute left-[calc(50%+26px)] top-[16.5px] h-[3px] w-[calc(100%-52px)] overflow-hidden rounded-full bg-white/25"
+                  aria-hidden="true"
+                >
+                  <span className={cn("flow-fill absolute inset-0 origin-left rounded-full bg-white", i < tick ? "scale-x-100" : "scale-x-0")} />
+                </span>
+              )}
+              <span
+                className={cn(
+                  "flow-node relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full",
+                  reached ? "bg-white text-blue" : "bg-white/15 text-white/85 ring-1 ring-white/30",
+                  active && "scale-[1.06] shadow-[0_0_0_4px_rgba(255,255,255,0.18),0_8px_20px_rgba(4,24,85,0.45)]"
+                )}
+                aria-hidden="true"
+              >
+                <Icon className="h-4 w-4" strokeWidth={2.25} />
+              </span>
+              <span className={cn("flow-label max-w-[11ch] text-center text-[11.5px] font-[550] leading-[1.2] max-sm:sr-only", reached ? "text-white" : "text-white/85")}>
+                {node.label}
+              </span>
+            </li>
+          )
+        })}
+      </ol>
+    )
+  }
 
   return (
     <ol

@@ -1,12 +1,10 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, Check, Play, ShieldCheck, Server, FileLock2, BellRing, Linkedin, Mail } from "lucide-react"
+import { ArrowRight, Check, Globe, Play, ShieldCheck, Server, FileLock2, BellRing, Linkedin, Mail } from "lucide-react"
 import { cn } from "@/lib/utils"
 import {
   TRADES,
   TOOLS,
-  FIGURES,
-  METHOD_STEPS,
   TRUST_POINTS,
   PRICING,
   FOUNDER,
@@ -18,6 +16,7 @@ import { Container, SectionHeading, SourceCaption, FaqList } from "@/components/
 import { DiagnosticButton } from "@/components/diagnostic-button"
 import { FlowDemo } from "@/components/automation/flow-demo"
 import { TradeCarousel } from "@/components/home/trade-carousel"
+import { MethodSteps } from "@/components/home/method-steps"
 
 /* ─── Hero ────────────────────────────────────────── */
 export function Hero() {
@@ -74,28 +73,6 @@ export function ToolsStrip() {
   )
 }
 
-/* ─── Chiffres sourcés ───────────────────────────── */
-export function Figures() {
-  return (
-    <section className="pb-16 lg:pb-24" aria-label="Chiffres clés">
-      <Container>
-        <dl className="grid gap-4 md:grid-cols-3">
-          {FIGURES.map((f) => (
-            <div key={f.value} className="card-lift card-hover flex flex-col p-6">
-              <dt className="sr-only">{f.label}</dt>
-              <dd className="text-[44px] font-semibold leading-none tracking-[-0.03em] text-ink">{f.value}</dd>
-              <dd className="mt-3 text-[16px] leading-[1.5] text-graphite">{f.label}</dd>
-              <dd className="mt-auto pt-5">
-                <SourceCaption>Source : {f.source}</SourceCaption>
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </Container>
-    </section>
-  )
-}
-
 /* ─── Lignes métiers (exemples) ──────────────────── */
 export function TradeRows() {
   return (
@@ -127,23 +104,7 @@ export function Method() {
           title="Diagnostiquer avant de prescrire."
           text="Nous ne vendons pas un logiciel. Nous regardons comment vous travaillez, automatisons ce qui vaut la peine de l'être, puis mesurons."
         />
-        <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {METHOD_STEPS.map((step, i) => (
-            <li key={step.num} className="card-lift card-hover flex flex-col gap-3 p-6">
-              <span
-                className={cn(
-                  "flex h-10 w-10 items-center justify-center rounded-full type-meta",
-                  i === 0 ? "bg-blue text-white shadow-blue" : "bg-black/[0.05] text-graphite"
-                )}
-                aria-hidden="true"
-              >
-                {step.num}
-              </span>
-              <h3 className="type-feature text-ink">{step.title}</h3>
-              <p className="text-[15px] leading-[1.6] text-charcoal">{step.text}</p>
-            </li>
-          ))}
-        </ol>
+        <MethodSteps />
       </Container>
     </section>
   )
@@ -176,7 +137,7 @@ export function Trust() {
                 })}
               </ul>
             </div>
-            <div className="rounded-[20px] bg-white/[0.06] p-6 ring-1 ring-white/10" aria-labelledby="hood-heading">
+            <div className="rounded-[20px] bg-white/[0.06] p-6 ring-1 ring-white/10 lg:self-center" aria-labelledby="hood-heading">
               <p className="chip-light">Sous le capot</p>
               <h3 id="hood-heading" className="mt-4 type-feature">Pour ceux qui veulent savoir comment ça marche</h3>
               <ul className="mt-5 flex flex-col gap-4">
@@ -240,6 +201,20 @@ export function Pricing() {
         <SourceCaption className="mt-6 text-center">
           Prix indicatifs hors taxes. Le devis final dépend du nombre de tâches et des outils à connecter.
         </SourceCaption>
+        {/* Offre secondaire, volontairement discrète */}
+        <div className="mx-auto mt-10 flex max-w-[760px] flex-col items-start gap-3 rounded-[20px] border border-border px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+          <p className="flex items-center gap-3 text-[15px] text-charcoal">
+            <Globe className="h-5 w-5 shrink-0 text-graphite" aria-hidden="true" />
+            <span>
+              <span className="font-[550] text-graphite">Besoin aussi d&apos;un site internet ?</span> Nous réalisons des sites
+              vitrines sobres et rapides, reliés à vos automatisations. Sur devis.
+            </span>
+          </p>
+          <a href="mailto:contact@mobem-solutions.com?subject=Site%20internet" className="link-arrow link-underline inline-flex shrink-0 items-center gap-1.5 type-meta text-graphite">
+            Nous écrire
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </a>
+        </div>
       </Container>
     </section>
   )

@@ -4,7 +4,6 @@ import { Footer } from "@/components/footer"
 import {
   Hero,
   ToolsStrip,
-  Figures,
   TradeRows,
   Method,
   Trust,
@@ -12,6 +11,7 @@ import {
   Faq,
 } from "@/components/home/sections"
 import { ClosingBand } from "@/components/home/closing-band"
+import { FiguresSection } from "@/components/home/figures"
 import { FAQ, PRICING } from "@/lib/automation-content"
 
 const TITLE = "Mobem Solutions — Vos tâches administratives tournent toutes seules"
@@ -107,11 +107,11 @@ export default function HomePage() {
       <main id="main-content">
         <Hero />
         <ToolsStrip />
-        <Figures />
+        <FiguresSection />
         <TradeRows />
+        <Pricing />
         <Method />
         <Trust />
-        <Pricing />
         <Faq />
         <ClosingBand />
       </main>

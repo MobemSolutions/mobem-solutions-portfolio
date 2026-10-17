@@ -224,16 +224,25 @@ export const TOOLS = [
 export const FIGURES = [
   {
     value: "40 %",
+    countFrom: 0,
+    countTo: 40,
+    suffix: " %",
     label: "des TPE-PME utilisent déjà une solution d'IA",
     source: "Baromètre France Num 2026",
   },
   {
     value: "2027",
+    countFrom: 2000,
+    countTo: 2027,
+    suffix: "",
     label: "toutes les PME et TPE devront émettre leurs factures en format électronique",
     source: "Réforme de la facturation électronique — economie.gouv.fr",
   },
   {
     value: "32",
+    countFrom: 0,
+    countTo: 32,
+    suffix: "",
     label: "indicateurs à prouver pour la certification Qualiopi",
     source: "Référentiel national qualité — Ministère du Travail",
   },
