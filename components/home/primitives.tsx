@@ -16,7 +16,7 @@ interface SectionHeadingProps {
 
 export function SectionHeading({ id, eyebrow, title, text, align = "left", as: Tag = "h2", className }: SectionHeadingProps) {
   return (
-    <div className={cn("flex flex-col gap-4", align === "center" && "mx-auto items-center text-center", className)}>
+    <div data-animate="" className={cn("flex flex-col gap-4", align === "center" && "mx-auto items-center text-center", className)}>
       {eyebrow && <p className="type-meta text-charcoal">{eyebrow}</p>}
       <Tag id={id} className={cn("type-section max-w-[22ch] text-ink text-balance", align === "center" && "mx-auto")}>
         {title}

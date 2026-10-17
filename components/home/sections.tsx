@@ -26,18 +26,18 @@ export function Hero() {
     <section id="hero" className="relative overflow-hidden pt-28 sm:pt-36" aria-labelledby="hero-heading">
       <div className="blue-glow pointer-events-none absolute inset-x-0 top-0 h-[720px]" aria-hidden="true" />
       <Container className="relative flex flex-col items-center text-center">
-        <p className="chip-dark">
+        <p className="chip-dark animate-in fade-in-0 slide-in-from-bottom-4 duration-700 fill-mode-both">
           <span className="rounded-[10px] bg-blue px-2 py-0.5 text-[12px]">Nouveau</span>
           Facture électronique : on prépare vos flux pour 2027
         </p>
-        <h1 id="hero-heading" className="type-display mt-8 max-w-[22ch] text-ink text-balance">
+        <h1 id="hero-heading" className="animate-in fade-in-0 slide-in-from-bottom-4 duration-700 fill-mode-both delay-100 type-display mt-8 max-w-[22ch] text-ink text-balance">
           Vos tâches administratives tournent toutes seules. Vous récupérez vos <span className="text-sweep">heures.</span>
         </h1>
-        <p className="type-body mt-6 max-w-[62ch] text-charcoal">
+        <p className="animate-in fade-in-0 slide-in-from-bottom-4 duration-700 fill-mode-both delay-200 type-body mt-6 max-w-[62ch] text-charcoal">
           Relances, collecte de pièces, preuves d&apos;audit, tri des mails : on repère ce qui vous fait perdre du temps,
           on l&apos;automatise sur vos propres outils, et on mesure les heures gagnées.
         </p>
-        <div className="mt-8 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row">
+        <div className="animate-in fade-in-0 slide-in-from-bottom-4 duration-700 fill-mode-both delay-300 mt-8 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row">
           <DiagnosticButton className="w-full sm:w-auto" />
           <Link href="#exemples" className="btn-outline w-full sm:w-auto">
             <Play className="h-4 w-4" aria-hidden="true" />
@@ -48,7 +48,7 @@ export function Hero() {
       </Container>
 
       {/* Démo : déclencheur → étapes → résultat */}
-      <Container className="relative mt-16 sm:mt-24">
+      <Container className="animate-in fade-in-0 slide-in-from-bottom-4 duration-700 fill-mode-both delay-500 relative mt-16 sm:mt-24">
         <FlowDemo nodes={qualiopi.flow} result={qualiopi.beforeAfter} layout="wide" />
         <p className="mt-4 text-center type-caption text-charcoal">Organisme de formation Qualiopi : chaque inscription déclenche la suite, sans personne derrière.</p>
       </Container>
@@ -64,7 +64,7 @@ export function ToolsStrip() {
         <p className="type-meta text-charcoal">Fonctionne avec les outils que vous utilisez déjà</p>
         <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
           {TOOLS.map((tool) => (
-            <li key={tool} className="text-[17px] font-[550] tracking-[-0.01em] text-[#767677]">
+            <li key={tool} className="cursor-default text-[17px] font-[550] tracking-[-0.01em] text-[#767677] transition-colors duration-200 hover:text-graphite">
               {tool}
             </li>
           ))}
@@ -81,7 +81,7 @@ export function Figures() {
       <Container>
         <dl className="grid gap-4 md:grid-cols-3">
           {FIGURES.map((f) => (
-            <div key={f.value} className="card-lift flex flex-col p-6">
+            <div key={f.value} className="card-lift card-hover flex flex-col p-6">
               <dt className="sr-only">{f.label}</dt>
               <dd className="text-[44px] font-semibold leading-none tracking-[-0.03em] text-ink">{f.value}</dd>
               <dd className="mt-3 text-[16px] leading-[1.5] text-graphite">{f.label}</dd>
@@ -129,7 +129,7 @@ export function Method() {
         />
         <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {METHOD_STEPS.map((step, i) => (
-            <li key={step.num} className="card-lift flex flex-col gap-3 p-6">
+            <li key={step.num} className="card-lift card-hover flex flex-col gap-3 p-6">
               <span
                 className={cn(
                   "flex h-10 w-10 items-center justify-center rounded-full type-meta",
@@ -211,7 +211,7 @@ export function Pricing() {
           {PRICING.map((plan) => (
             <li
               key={plan.name}
-              className={cn("card-lift flex flex-col p-6", plan.featured && "ring-2 ring-blue")}
+              className={cn("card-lift card-hover flex flex-col p-6", plan.featured && "ring-2 ring-blue")}
             >
               <h3 className="type-feature text-ink">{plan.name}</h3>
               <p className="mt-4 text-[28px] font-semibold leading-tight tracking-[-0.02em] text-ink">{plan.price}</p>
@@ -258,14 +258,14 @@ export function Team() {
         />
         <ul className="mt-12 grid gap-4 md:grid-cols-3">
           {TEAM.map((m) => (
-            <li key={m.name} className="card-lift flex flex-col p-4">
+            <li key={m.name} className="card-lift card-hover group flex flex-col p-4">
               <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] bg-secondary">
                 <Image
                   src={m.photo}
                   alt={`Portrait de ${m.name}`}
                   fill
                   sizes="(max-width: 768px) 100vw, 380px"
-                  className="object-cover object-[50%_25%]"
+                  className="object-cover object-[50%_25%] transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
               <div className="flex flex-1 flex-col px-2 pb-2 pt-5">

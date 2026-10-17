@@ -65,7 +65,7 @@ export function TradePage({ trade }: { trade: Trade }) {
             />
             <ul className="mt-12 grid gap-4 sm:grid-cols-2">
               {trade.tasks.map((task) => (
-                <li key={task.title} className="card-lift flex gap-4 p-6">
+                <li key={task.title} className="card-lift card-hover flex gap-4 p-6">
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-black/[0.05]" aria-hidden="true">
                     <Check className="h-4 w-4 text-blue" strokeWidth={2.5} />
                   </span>
@@ -95,7 +95,7 @@ export function TradePage({ trade }: { trade: Trade }) {
             <ul className="mt-4 grid gap-4 sm:grid-cols-2">
               {others.map((t) => (
                 <li key={t.slug}>
-                  <Link href={t.href} className="card-lift flex flex-col gap-1 p-5 transition-transform hover:-translate-y-0.5">
+                  <Link href={t.href} className="card-lift flex flex-col gap-1 p-5">
                     <span className="type-meta text-charcoal">{t.eyebrow}</span>
                     <span className="type-feature text-ink">{t.headline}</span>
                   </Link>

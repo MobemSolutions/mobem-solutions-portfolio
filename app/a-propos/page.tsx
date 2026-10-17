@@ -56,7 +56,7 @@ export default function AProposPage() {
             <SectionHeading id="valeurs-heading" eyebrow="Ce qui nous guide" title="Diagnostiquer avant de prescrire." />
             <ul className="mt-12 grid gap-4 md:grid-cols-3">
               {VALUES.map((v) => (
-                <li key={v.title} className="card-lift p-6">
+                <li key={v.title} className="card-lift card-hover p-6">
                   <h3 className="type-feature text-ink">{v.title}</h3>
                   <p className="mt-3 text-[15px] leading-[1.6] text-charcoal">{v.text}</p>
                 </li>

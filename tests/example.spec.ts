@@ -13,7 +13,7 @@ test('opengraph-image returns a valid image', async ({ request }) => {
 })
 
 test('logo navigates correctly from inner page', async ({ page }) => {
-  await page.goto('/realisations')
+  await page.goto('/methode')
   await page.click('a[aria-label*="Mobem Solutions"]')
   await expect(page).toHaveURL('/')
 })

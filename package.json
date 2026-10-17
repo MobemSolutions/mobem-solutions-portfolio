@@ -12,7 +12,6 @@
     "test:a11y": "playwright test tests/a11y.spec.ts",
     "audit:deps": "pnpm audit --audit-level=high",
     "ci": "pnpm run type-check && pnpm run lint && pnpm run audit:deps",
-    "seed:realisations": "tsx --env-file=.env.local scripts/seed-realisations.ts",
     "fix:cover-image": "tsx --env-file=.env.local scripts/fix-cover-image.ts",
     "perf": "tsx --env-file=.env.local scripts/perf-check.ts"
   },

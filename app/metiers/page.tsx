@@ -44,7 +44,7 @@ export default function MetiersPage() {
             <ul className="grid gap-4 lg:grid-cols-3">
               {TRADES.map((trade) => (
                 <li key={trade.slug}>
-                  <Link href={trade.href} className="card-lift group flex h-full flex-col p-4 transition-transform hover:-translate-y-0.5">
+                  <Link href={trade.href} className="card-lift group flex h-full flex-col p-4">
                     <div className="blue-field rounded-[14px] px-5 py-8">
                       <FlowDiagram nodes={trade.flow} compact />
                     </div>

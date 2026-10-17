@@ -32,12 +32,12 @@ export default function NotFound() {
           <ul className="mt-12 grid w-full max-w-[760px] gap-4 text-left sm:grid-cols-2">
             {LINKS.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="card-lift group flex items-center justify-between gap-4 p-5 transition-transform hover:-translate-y-0.5">
+                <Link href={item.href} className="card-lift group flex items-center justify-between gap-4 p-5">
                   <span>
                     <span className="block type-feature text-ink">{item.label}</span>
                     <span className="mt-1 block text-[14px] text-charcoal">{item.desc}</span>
                   </span>
-                  <ArrowRight className="h-4 w-4 shrink-0 text-graphite transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                  <ArrowRight className="h-4 w-4 shrink-0 text-graphite" aria-hidden="true" />
                 </Link>
               </li>
             ))}

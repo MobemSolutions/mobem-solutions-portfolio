@@ -18,6 +18,8 @@ const nextConfig = {
       { source: `/metiers/:slug((?!${trades})[^/]+)/:ville*`, destination: '/metiers', permanent: true },
       { source: '/villes/:path*', destination: '/', permanent: true },
       { source: '/plan-du-site', destination: '/', permanent: true },
+      // Ancien portfolio de sites web
+      { source: '/realisations/:path*', destination: '/#exemples', permanent: true },
     ]
   },
   async headers() {

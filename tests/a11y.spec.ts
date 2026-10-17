@@ -3,7 +3,6 @@ import AxeBuilder from '@axe-core/playwright'
 
 const routes = [
   { label: 'Accueil', path: '/' },
-  { label: 'Réalisations', path: '/realisations' },
   { label: 'À propos', path: '/a-propos' },
   { label: 'Méthode', path: '/methode' },
   { label: 'Métiers', path: '/metiers' },

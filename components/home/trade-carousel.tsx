@@ -72,7 +72,7 @@ export function TradeCarousel({ autoPlayInterval = 7000 }: TradeCarouselProps) {
                 <p className="mt-3 max-w-[52ch] text-[16px] leading-[1.65] text-charcoal">{trade.intro}</p>
                 <Link
                   href={trade.href}
-                  className="mt-8 inline-flex items-center gap-2 self-start type-nav text-graphite underline-offset-4 hover:underline"
+                  className="link-arrow link-underline mt-8 inline-flex items-center gap-2 self-start type-nav text-graphite"
                 >
                   Voir la page {trade.navLabel.toLowerCase()}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -94,14 +94,15 @@ export function TradeCarousel({ autoPlayInterval = 7000 }: TradeCarouselProps) {
                 key={trade.slug}
                 type="button"
                 role="tab"
+                data-ripple
                 aria-selected={active}
                 onClick={() => go(i)}
                 className={cn(
-                  "group flex flex-col gap-2.5 rounded-[14px] px-3 py-3 text-left transition-colors hover:bg-black/[0.03]",
+                  "group flex flex-col gap-2.5 rounded-[14px] px-3 py-3 text-left transition-colors hover:bg-black/[0.04] hover:text-graphite",
                   active ? "text-graphite" : "text-charcoal"
                 )}
               >
-                <span className="h-[3px] w-full overflow-hidden rounded-full bg-black/[0.08]" aria-hidden="true">
+                <span className="h-[3px] w-full overflow-hidden rounded-full bg-black/[0.08] transition-[height] duration-200 group-hover:h-[5px]" aria-hidden="true">
                   <span
                     key={active ? `${index}-${autoplay}` : "idle"}
                     className={cn("block h-full rounded-full bg-blue", active ? (autoplay ? "carousel-progress" : "w-full") : "w-0")}

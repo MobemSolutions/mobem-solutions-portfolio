@@ -102,10 +102,10 @@ export function Header() {
           <div className="flex items-center gap-10">
           <Link
             href="/"
-            className="flex items-center gap-2 text-graphite transition-opacity hover:opacity-75"
+            className="flex items-center gap-2 text-graphite"
             aria-label="Mobem Solutions - Retour à l'accueil"
           >
-            <Image src="/logos/mobem-mark-black.png" alt="" width={120} height={80} className="h-6 w-auto" priority />
+            <Image src="/logos/mobem-mark-black.png" alt="" width={120} height={80} className="logo-mark h-6 w-auto" priority />
             <span className="text-[16px] font-semibold tracking-[-0.01em]">Mobem Solutions</span>
           </Link>
 
@@ -120,7 +120,7 @@ export function Header() {
                     aria-expanded={isTradesOpen}
                     aria-controls="trades-menu"
                     className={cn(
-                      "inline-flex items-center gap-1.5 py-1.5 type-nav transition-colors hover:text-graphite",
+                      "link-underline inline-flex items-center gap-1.5 py-1.5 type-nav transition-colors hover:text-graphite",
                       isTradesOpen || pathname.startsWith("/metiers") ? "text-graphite" : "text-charcoal"
                     )}
                   >
@@ -130,16 +130,16 @@ export function Header() {
                   {isTradesOpen && (
                     <div
                       id="trades-menu"
-                      className="absolute left-0 top-[calc(100%+14px)] w-[300px] rounded-[20px] bg-white p-2 shadow-card"
+                      className="absolute left-0 top-[calc(100%+14px)] w-[300px] origin-top-left rounded-[20px] bg-white p-2 shadow-card animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-200"
                     >
                       {item.children.map((child) => (
                         <Link
                           key={child.href}
                           href={child.href}
-                          className="flex items-center justify-between rounded-[14px] px-3 py-2.5 type-nav text-graphite hover:bg-black/[0.04]"
+                          className="group flex items-center justify-between rounded-[14px] px-3 py-2.5 type-nav text-graphite transition-colors hover:bg-black/[0.04] hover:text-blue"
                         >
                           {child.name}
-                          <ArrowRight className="h-4 w-4 text-charcoal" aria-hidden="true" />
+                          <ArrowRight className="h-4 w-4 text-charcoal transition-transform duration-200 group-hover:translate-x-1 group-hover:text-blue" aria-hidden="true" />
                         </Link>
                       ))}
                       <Link
@@ -158,7 +158,7 @@ export function Header() {
                   onClick={(e) => handleNavClick(e, item.href)}
                   aria-current={pathname === item.href ? "page" : undefined}
                   className={cn(
-                    "py-1.5 type-nav transition-colors hover:text-graphite",
+                    "link-underline py-1.5 type-nav transition-colors hover:text-graphite",
                     pathname === item.href ? "text-graphite" : "text-charcoal"
                   )}
                 >
@@ -170,7 +170,7 @@ export function Header() {
           </div>
 
           <div className="hidden lg:flex lg:items-center lg:gap-6">
-            <a href="mailto:contact@mobem-solutions.com" className="type-nav text-graphite transition-colors hover:text-charcoal">
+            <a href="mailto:contact@mobem-solutions.com" className="link-underline type-nav text-graphite">
               Nous écrire
             </a>
             <DiagnosticButton className="!py-1.5 !pl-4 !pr-1.5 gap-3">

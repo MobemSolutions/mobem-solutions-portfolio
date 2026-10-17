@@ -71,7 +71,7 @@ export default function MethodePage() {
             <SectionHeading id="etapes-heading" eyebrow="Étape par étape" title="Ce qui se passe, et ce que vous obtenez" />
             <ol className="mt-12 flex flex-col gap-4">
               {METHOD_STEPS.map((step, i) => (
-                <li key={step.num} className="card-lift grid gap-6 p-6 sm:p-8 lg:grid-cols-[220px_1fr_1fr]">
+                <li key={step.num} className="card-lift card-hover grid gap-6 p-6 sm:p-8 lg:grid-cols-[220px_1fr_1fr]">
                   <div className="flex items-center gap-3 lg:flex-col lg:items-start">
                     <span className="flex h-10 w-10 items-center justify-center rounded-full bg-black/[0.05] type-meta text-graphite" aria-hidden="true">
                       {step.num}

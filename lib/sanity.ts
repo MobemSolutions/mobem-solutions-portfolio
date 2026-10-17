@@ -147,58 +147,6 @@ export async function getRelatedPosts(currentSlug: string, categoryIds: string[]
   )
 }
 
-// ── Réalisations ───────────────────────────────────────────────────────────
-
-const REALISATION_FIELDS = `
-  _id,
-  idx,
-  client,
-  "slug": slug.current,
-  cat,
-  sector,
-  tag,
-  year,
-  kpi,
-  desc,
-  featured,
-  publishedAt,
-  stats[] { v, l },
-  kpis[] { v, l, d },
-  body[] { title, content },
-  stack,
-  quote { text, author, role },
-  coverImage { "asset": asset->{ _id, url }, alt },
-  ficheImage { "asset": asset->{ _id, url }, alt },
-  performance { performance, accessibility, seo, bestPractices }
-`
-
-export async function getAllRealisations() {
-  if (!client) return []
-  return client.fetch(
-    `*[_type == "realisation" && defined(slug.current)] | order(idx asc) { ${REALISATION_FIELDS} }`,
-    {},
-    { next: { revalidate: 60 } }
-  )
-}
-
-export async function getRealisationBySlug(slug: string) {
-  if (!client) return null
-  return client.fetch(
-    `*[_type == "realisation" && slug.current == $slug][0] { ${REALISATION_FIELDS} }`,
-    { slug },
-    { next: { revalidate: 60 } }
-  )
-}
-
-export async function getAllRealisationSlugs() {
-  if (!client) return []
-  return client.fetch(
-    `*[_type == "realisation" && defined(slug.current)]{ "slug": slug.current } | order(idx asc)`,
-    {},
-    { next: { revalidate: 60 } }
-  )
-}
-
 // ── Utilities ──────────────────────────────────────────────────────────────
 
 export function estimateReadingTime(body: unknown[]): number {

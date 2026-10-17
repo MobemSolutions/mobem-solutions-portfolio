@@ -222,9 +222,26 @@
   font-weight: 550;
   line-height: 1.3;
   box-shadow: var(--shadow-blue);
-  transition: background-color 180ms ease, transform 180ms ease;
-  &:hover { background: #0a3bd0; }
-  &:active { transform: translateY(1px); }
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition: background-color 200ms ease, transform 200ms cubic-bezier(.2,.7,.2,1), box-shadow 200ms ease;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.35) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform 650ms cubic-bezier(.2,.7,.2,1);
+  }
+  &:hover {
+    background: #0a3bd0;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-blue), 0 10px 24px -8px rgba(13, 68, 232, 0.55);
+  }
+  &:hover::before { transform: translateX(120%); }
+  &:active { transform: translateY(0) scale(0.97); transition-duration: 80ms; }
 }
 @utility btn-outline {
   display: inline-flex;
@@ -240,8 +257,15 @@
   font-size: 15px;
   font-weight: 550;
   line-height: 1.3;
-  transition: background-color 180ms ease;
-  &:hover { background: #f4f4f5; }
+  position: relative;
+  overflow: hidden;
+  transition: background-color 200ms ease, transform 200ms cubic-bezier(.2,.7,.2,1), box-shadow 200ms ease;
+  &:hover {
+    background: #f4f4f5;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px -10px rgba(22, 22, 24, 0.35);
+  }
+  &:active { transform: translateY(0) scale(0.97); transition-duration: 80ms; }
 }
 @utility chip-dark {
   display: inline-flex;
@@ -283,8 +307,11 @@
   border-radius: 9999px;
   background: rgba(22, 22, 24, 0.05);
   color: var(--color-graphite);
-  transition: background-color 180ms ease;
-  &:hover { background: rgba(22, 22, 24, 0.1); }
+  position: relative;
+  overflow: hidden;
+  transition: background-color 200ms ease, transform 200ms cubic-bezier(.2,.7,.2,1);
+  &:hover { background: rgba(22, 22, 24, 0.1); transform: scale(1.06); }
+  &:active { transform: scale(0.9); transition-duration: 80ms; }
 }
 @utility text-sweep {
   background: linear-gradient(90deg, #161618 0%, #161618 25%, #174ef2 100%);
@@ -539,3 +566,83 @@
   animation-timing-function: linear;
   animation-fill-mode: forwards;
 }
+
+/* ─── Micro-interactions ──────────────────────────────── */
+
+/* Flèches qui glissent au survol de leur bouton / lien */
+.btn-blue .lucide-arrow-right, .btn-outline .lucide-arrow-right,
+.link-arrow .lucide-arrow-right, a.card-lift .lucide-arrow-right {
+  transition: transform 250ms cubic-bezier(.2,.7,.2,1);
+}
+.btn-blue:hover .lucide-arrow-right, .btn-outline:hover .lucide-arrow-right,
+.link-arrow:hover .lucide-arrow-right, a.card-lift:hover .lucide-arrow-right { transform: translateX(4px); }
+.btn-blue .lucide-arrow-up-right { transition: transform 250ms cubic-bezier(.2,.7,.2,1); }
+.btn-blue:hover .lucide-arrow-up-right { transform: translate(2px, -2px) rotate(45deg); }
+.btn-outline .lucide-play { transition: transform 250ms ease; }
+.btn-outline:hover .lucide-play { transform: scale(1.2); }
+
+/* Cartes : légère élévation au survol */
+.card-hover, a.card-lift {
+  transition: transform 300ms cubic-bezier(.2,.7,.2,1), box-shadow 300ms ease;
+}
+.card-hover:hover, a.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card), 0 24px 40px -18px rgba(13, 68, 232, 0.22);
+}
+a.card-lift:active { transform: translateY(-1px) scale(0.99); transition-duration: 100ms; }
+
+/* Soulignement qui se dessine depuis la gauche */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 300ms cubic-bezier(.2,.7,.2,1);
+}
+.link-underline:hover::after, .link-underline[aria-current="page"]::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Effet d'onde au clic (créé par components/press-effects.tsx) */
+.press-ripple {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  background: currentColor;
+  opacity: 0.25;
+  transform: scale(0);
+  animation: press-ripple 600ms cubic-bezier(.2,.7,.2,1) forwards;
+}
+@keyframes press-ripple {
+  to { transform: scale(2.6); opacity: 0; }
+}
+
+/* FAQ : ouverture fluide (navigateurs récents, sinon ouverture instantanée) */
+:root { interpolate-size: allow-keywords; }
+.faq-details::details-content {
+  height: 0;
+  overflow: clip;
+  transition: height 320ms cubic-bezier(.2,.7,.2,1), content-visibility 320ms allow-discrete;
+}
+.faq-details[open]::details-content { height: auto; }
+.faq-details summary { transition: color 200ms ease; }
+.faq-details summary:hover { color: var(--color-electric-capture-blue); }
+
+/* Pastilles du schéma : réagissent au survol */
+.flow-node { transition: transform 300ms cubic-bezier(.2,.7,.2,1), background-color 500ms ease, box-shadow 500ms ease; }
+.flow-node:hover { transform: scale(1.12) rotate(-4deg); }
+
+/* Logo */
+.logo-mark { transition: transform 400ms cubic-bezier(.2,.7,.2,1); }
+a:hover > .logo-mark { transform: rotate(-8deg) scale(1.08); }
+a.card-lift, [data-ripple] { position: relative; overflow: hidden; }

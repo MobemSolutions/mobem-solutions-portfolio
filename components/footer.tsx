@@ -18,7 +18,7 @@ const navLegal = [
   { name: "Confidentialité", href: "/confidentialite" },
 ]
 
-const LINK = "text-[14px] text-white/65 transition-colors hover:text-white"
+const LINK = "link-underline self-start text-[14px] text-white/65 transition-colors hover:text-white"
 const HEAD = "type-meta text-white"
 
 export function Footer() {

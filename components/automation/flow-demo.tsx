@@ -117,7 +117,7 @@ export function FlowDiagram({ nodes, compact, vertical, className }: FlowDiagram
 
             <span
               className={cn(
-                "relative z-10 flex shrink-0 items-center justify-center rounded-full transition-all duration-500",
+                "flow-node relative z-10 flex shrink-0 items-center justify-center rounded-full",
                 compact ? "h-12 w-12" : "h-16 w-16",
                 reached ? "bg-white text-blue" : "bg-white/15 text-white/85 ring-1 ring-white/30",
                 active && "scale-110 shadow-[0_0_0_8px_rgba(255,255,255,0.18),0_12px_32px_rgba(4,24,85,0.45)]"
