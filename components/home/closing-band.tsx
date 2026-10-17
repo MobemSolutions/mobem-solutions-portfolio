@@ -24,7 +24,7 @@ export function ClosingBand() {
               Combien d&apos;heures pourriez-vous récupérer ?
             </h2>
             <p className="type-body mt-4 text-white/75">
-              En 45 minutes, on liste vos tâches répétitives et on estime le temps qu&apos;elles vous coûtent. Sans engagement.
+              En 45 minutes, je liste vos tâches répétitives et j&apos;estime le temps qu&apos;elles vous coûtent. Sans engagement.
             </p>
             <form
               className="mt-8 flex flex-col gap-3 sm:flex-row"

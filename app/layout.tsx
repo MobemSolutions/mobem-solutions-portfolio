@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description: 'Vos tâches administratives tournent toutes seules. Vous récupérez vos heures.',
     images: [
       {
-        url: '/opengraph/og-image.png',
+        url: '/opengraph-image',
         width: 1200,
         height: 630,
         alt: 'Mobem Solutions — Automatisation des tâches administratives',
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Mobem Solutions — Automatisation des tâches administratives | Nantes',
     description: 'Vos tâches administratives tournent toutes seules. Vous récupérez vos heures.',
-    images: ['/opengraph/og-image.png'],
+    images: ['/opengraph-image'],
   },
   icons: {
     icon: [

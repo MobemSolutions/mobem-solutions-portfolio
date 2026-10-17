@@ -1,5 +1,5 @@
 import Link from "next/link"
-import Image from "next/image"
+import { MobemLogo } from "@/components/ui/mobem-logo"
 import { ArrowUpRight } from "lucide-react"
 import { TRADES } from "@/lib/automation-content"
 
@@ -9,7 +9,6 @@ const navStudio = [
   { name: "Tarifs", href: "/#tarifs" },
   { name: "À propos", href: "/a-propos" },
   { name: "Questions fréquentes", href: "/#faq" },
-  { name: "Blog", href: "/blog" },
 ]
 
 const navLegal = [
@@ -27,12 +26,11 @@ export function Footer() {
       <div className="mx-auto max-w-[1200px] px-4 pb-10 pt-16 sm:px-6 lg:pt-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            <Link href="/" className="inline-flex items-center gap-2" aria-label="Mobem Solutions — Retour à l'accueil">
-              <Image src="/logos/mobem-mark-white.png" alt="" width={120} height={80} className="h-6 w-auto" />
-              <span className="text-[16px] font-semibold">Mobem Solutions</span>
+            <Link href="/" className="inline-flex items-center" aria-label="Mobem Solutions — Retour à l'accueil">
+              <MobemLogo />
             </Link>
             <p className="mt-5 max-w-[34ch] text-[15px] leading-[1.6] text-white/65">
-              Studio d&apos;automatisation des tâches administratives pour TPE et PME. Trois associés, basés à Nantes.
+              Automatisation des tâches administratives pour TPE et PME, par Arnaud Clavier, concepteur-développeur en automatisation près de Nantes.
             </p>
             <p className="mt-6 text-[20px] font-semibold tracking-[-0.01em]">« Diagnostiquer avant de prescrire. »</p>
           </div>

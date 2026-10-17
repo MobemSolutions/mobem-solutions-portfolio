@@ -44,7 +44,7 @@ export function TradePage({ trade }: { trade: Trade }) {
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <DiagnosticButton>Voir si c&apos;est automatisable chez moi</DiagnosticButton>
                 <Link href="#taches" className="btn-outline">
-                  Ce qu&apos;on automatise
+                  Ce que j&apos;automatise
                 </Link>
               </div>
               <p className="mt-5 type-meta text-charcoal">45 min · Sans engagement · Vos données restent chez vous</p>
@@ -59,9 +59,9 @@ export function TradePage({ trade }: { trade: Trade }) {
           <Container>
             <SectionHeading
               id="taches-heading"
-              eyebrow="Ce qu'on automatise"
+              eyebrow="Ce que j'automatise"
               title="Les tâches qui reviennent chaque semaine"
-              text="On part de vos mots et de vos outils. Chaque tâche est installée sur vos comptes, puis mesurée."
+              text="Je pars de vos mots et de vos outils. Chaque tâche est installée sur vos comptes, puis mesurée."
             />
             <ul className="mt-12 grid gap-4 sm:grid-cols-2">
               {trade.tasks.map((task) => (

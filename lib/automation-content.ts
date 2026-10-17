@@ -54,7 +54,7 @@ export const TRADES: Trade[] = [
     eyebrow: "Organismes de formation",
     headline: "Vos preuves Qualiopi se tiennent à jour toutes seules",
     intro:
-      "Convocations, émargements, questionnaires à chaud et à froid, relances OPCO : chaque session laisse des traces à classer. On les fait partir et se ranger d'elles-mêmes, pour que l'audit se prépare sans courir après les documents.",
+      "Convocations, émargements, questionnaires à chaud et à froid, relances OPCO : chaque session laisse des traces à classer. Je les fais partir et se ranger d'elles-mêmes, pour que l'audit se prépare sans courir après les documents.",
     flow: [
       { icon: "user-plus", label: "Inscription" },
       { icon: "send", label: "Convocation" },
@@ -85,7 +85,7 @@ export const TRADES: Trade[] = [
       {
         question: "Faut-il changer de logiciel de gestion de formation ?",
         answer:
-          "Non. On part de vos outils actuels : votre tableur, votre messagerie, votre logiciel de gestion s'il en a un. L'automatisation se branche dessus.",
+          "Non. Je pars de vos outils actuels : votre tableur, votre messagerie, votre logiciel de gestion s'il en a un. L'automatisation se branche dessus.",
       },
       {
         question: "Les preuves sont-elles utilisables le jour de l'audit ?",
@@ -105,7 +105,7 @@ export const TRADES: Trade[] = [
     eyebrow: "Courtiers en assurance",
     headline: "Les pièces arrivent, les échéances se relancent",
     intro:
-      "Collecte des pièces, relances avant échéance, traçabilité du devoir de conseil : votre cabinet passe des heures à courir après les justificatifs. On automatise la collecte et le suivi, et vos chargés de clientèle retrouvent du temps pour conseiller.",
+      "Collecte des pièces, relances avant échéance, traçabilité du devoir de conseil : votre cabinet passe des heures à courir après les justificatifs. J'automatise la collecte et le suivi, et vos chargés de clientèle retrouvent du temps pour conseiller.",
     flow: [
       { icon: "calendar", label: "Échéance" },
       { icon: "bell", label: "Relance" },
@@ -141,7 +141,7 @@ export const TRADES: Trade[] = [
       {
         question: "Fonctionne-t-il avec mon outil de gestion de cabinet ?",
         answer:
-          "On le vérifie pendant le diagnostic. Dans la plupart des cas, on se branche sur votre messagerie, votre stockage de documents et votre outil métier.",
+          "Je le vérifie pendant le diagnostic. Dans la plupart des cas, je me branche sur votre messagerie, votre stockage de documents et votre outil métier.",
       },
     ],
     metaTitle: "Automatisation pour courtiers en assurance | Mobem Solutions",
@@ -156,7 +156,7 @@ export const TRADES: Trade[] = [
     eyebrow: "Cabinets d'expertise comptable",
     headline: "Les justificatifs manquants se réclament d'eux-mêmes",
     intro:
-      "Relance des pièces manquantes, tri de la boîte mail, onboarding des nouveaux clients, factures reçues à classer : autant de tâches qui reviennent chaque mois. On les automatise pour que vos collaborateurs se concentrent sur la production et le conseil.",
+      "Relance des pièces manquantes, tri de la boîte mail, onboarding des nouveaux clients, factures reçues à classer : autant de tâches qui reviennent chaque mois. Je les automatise pour que vos collaborateurs se concentrent sur la production et le conseil.",
     flow: [
       { icon: "mail", label: "Mail reçu" },
       { icon: "tags", label: "Tri client" },
@@ -187,7 +187,7 @@ export const TRADES: Trade[] = [
       {
         question: "Est-ce compatible avec la facture électronique ?",
         answer:
-          "Oui, c'est même un bon moment pour s'y préparer : on organise vos flux de factures reçues pour qu'ils soient prêts à basculer vers votre plateforme agréée.",
+          "Oui, c'est même un bon moment pour s'y préparer : j'organise vos flux de factures reçues pour qu'ils soient prêts à basculer vers votre plateforme agréée.",
       },
       {
         question: "Mes collaborateurs devront-ils apprendre un nouvel outil ?",
@@ -255,25 +255,25 @@ export const METHOD_STEPS = [
   {
     num: "02",
     title: "Automatiser",
-    text: "On installe l'automatisation sur vos propres comptes, avec vos outils actuels. Vous validez chaque étape avant la mise en route.",
+    text: "J'installe l'automatisation sur vos propres comptes, avec vos outils actuels. Vous validez chaque étape avant la mise en route.",
   },
   {
     num: "03",
     title: "Mesurer",
-    text: "On compare le temps passé avant et après. Vous savez combien d'heures vous récupérez chaque mois, chiffres à l'appui.",
+    text: "Je compare le temps passé avant et après. Vous savez combien d'heures vous récupérez chaque mois, chiffres à l'appui.",
   },
   {
     num: "04",
     title: "Maintenir",
-    text: "On surveille, on ajuste quand vos outils changent, et vous êtes alerté si une automatisation échoue.",
+    text: "Je surveille, j'ajuste quand vos outils changent, et vous êtes alerté si une automatisation échoue.",
   },
 ]
 
 export const TRUST_POINTS = [
-  { title: "Installé sur vos comptes", text: "Rien ne tourne chez nous. Vous gardez la main sur chaque accès." },
+  { title: "Installé sur vos comptes", text: "Rien ne tourne chez moi. Vous gardez la main sur chaque accès." },
   { title: "Contrat RGPD", text: "Un accord de traitement des données encadre chaque intervention." },
-  { title: "Hébergement européen privilégié", text: "Quand un service tiers est nécessaire, on choisit d'abord une option hébergée en Europe." },
-  { title: "Alerte si une automatisation échoue", text: "Vous êtes prévenu immédiatement, et nous aussi." },
+  { title: "Hébergement européen privilégié", text: "Quand un service tiers est nécessaire, je choisis d'abord une option hébergée en Europe." },
+  { title: "Alerte si une automatisation échoue", text: "Vous êtes prévenu immédiatement, et moi aussi." },
 ]
 
 export const PRICING = [
@@ -281,7 +281,7 @@ export const PRICING = [
     name: "Diagnostic gratuit",
     price: "0 €",
     unit: "45 min",
-    text: "On liste vos tâches répétitives et on estime les heures récupérables. Sans engagement.",
+    text: "Je liste vos tâches répétitives et j'estime les heures récupérables. Sans engagement.",
     items: ["Inventaire des tâches", "Estimation des heures gagnées", "Recommandations écrites"],
     featured: true,
   },
@@ -308,58 +308,43 @@ export const PRICING = [
   },
 ]
 
-export const TEAM = [
-  {
-    name: "Nathan Portier",
-    role: "Diagnostic & relation client",
-    description: "Nathan mène les diagnostics : il écoute comment vous travaillez, chiffre le temps perdu et priorise ce qui vaut la peine d'être automatisé.",
-    linkedin: "https://www.linkedin.com/in/nathan-portier/",
-    email: "nathan.portier@mobem-solutions.com",
-    photo: "/team/nathan.jpg",
-  },
-  {
-    name: "Arnaud Clavier",
-    role: "Automatisation & fiabilité",
-    description: "Arnaud construit les automatisations sur vos comptes, s'assure qu'elles tiennent dans la durée et qu'une alerte part si quelque chose coince.",
-    linkedin: "https://www.linkedin.com/in/arnaud-clvr/",
-    email: "arnaud.clavier@mobem-solutions.com",
-    photo: "/team/arnaud.jpg",
-  },
-  {
-    name: "Antoine Clavier",
-    role: "Parcours & prise en main",
-    description: "Antoine conçoit ce que vos clients et vos équipes voient : mails, formulaires, tableaux de suivi. Simple à lire, simple à utiliser.",
-    linkedin: "https://www.linkedin.com/in/antoine-clavier-561750204/",
-    email: "antoine.clavier@mobem-solutions.com",
-    photo: "/team/antoine.jpg",
-  },
-]
+export const FOUNDER = {
+  name: "Arnaud Clavier",
+  role: "Concepteur-développeur en automatisation",
+  bio: [
+    "Je repère les tâches administratives qui font perdre du temps aux petites entreprises, je les automatise sur leurs propres outils, puis je mesure les heures gagnées.",
+    "Développeur de formation, je conçois chaque automatisation de bout en bout : le diagnostic, la construction, la mise en service et le suivi. Vous avez un seul interlocuteur, du premier appel à la maintenance.",
+  ],
+  linkedin: "https://www.linkedin.com/in/arnaud-clvr/",
+  email: "arnaud.clavier@mobem-solutions.com",
+  photo: "/team/arnaud.jpg",
+}
 
 export const FAQ = [
   {
     question: "Faut-il changer nos outils ?",
     answer:
-      "Non. On automatise sur ce que vous utilisez déjà : votre messagerie, vos tableurs, votre stockage de documents, votre logiciel métier. Si un outil manque vraiment, on vous le dit pendant le diagnostic.",
+      "Non. J'automatise sur ce que vous utilisez déjà : votre messagerie, vos tableurs, votre stockage de documents, votre logiciel métier. Si un outil manque vraiment, je vous le dis pendant le diagnostic.",
   },
   {
     question: "Où sont nos données ?",
     answer:
-      "Chez vous. Les automatisations sont installées sur vos propres comptes, et un contrat RGPD encadre notre intervention. Quand un service tiers est nécessaire, on privilégie un hébergement européen.",
+      "Chez vous. Les automatisations sont installées sur vos propres comptes, et un contrat RGPD encadre mon intervention. Quand un service tiers est nécessaire, je privilégie un hébergement européen.",
   },
   {
     question: "Que se passe-t-il si une automatisation échoue ?",
     answer:
-      "Vous êtes alerté, et nous aussi. Avec la maintenance, on corrige et on relance le traitement. Sans maintenance, vous gardez une documentation claire de ce qui a été installé.",
+      "Vous êtes alerté, et moi aussi. Avec la maintenance, je corrige et je relance le traitement. Sans maintenance, vous gardez une documentation claire de ce qui a été installé.",
   },
   {
     question: "Combien d'heures peut-on vraiment récupérer ?",
     answer:
-      "Ça dépend de vos tâches, c'est tout l'objet du diagnostic. Les volumes affichés sur ce site sont des exemples types : pour vous, on mesure le temps passé avant et après, et on vous donne le vrai chiffre.",
+      "Ça dépend de vos tâches, c'est tout l'objet du diagnostic. Les volumes affichés sur ce site sont des exemples types : pour vous, je mesure le temps passé avant et après, et je vous donne le vrai chiffre.",
   },
   {
     question: "Quels outils techniques utilisez-vous ?",
     answer:
-      "Sous le capot, on s'appuie principalement sur n8n, un outil d'automatisation open source qu'on peut installer sur vos comptes ou chez un hébergeur européen, et sur les API de vos logiciels. Quand c'est utile, un agent IA lit et trie des documents ou des mails — toujours avec une validation humaine sur ce qui compte.",
+      "Sous le capot, je m'appuie principalement sur n8n, un outil d'automatisation open source que je peux installer sur vos comptes ou chez un hébergeur européen, et sur les API de vos logiciels. Quand c'est utile, un agent IA lit et trie des documents ou des mails — toujours avec une validation humaine sur ce qui compte.",
   },
   {
     question: "Utilisez-vous l'intelligence artificielle ?",

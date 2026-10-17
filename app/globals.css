@@ -639,12 +639,21 @@ a.card-lift:active { transform: translateY(-1px) scale(0.99); transition-duratio
 .faq-details summary:hover { color: var(--color-electric-capture-blue); }
 
 /* Pastilles du schéma : réagissent au survol */
-.flow-node { transition: transform 250ms cubic-bezier(.2,.7,.2,1), background-color 300ms ease, box-shadow 300ms ease; }
+/* Rythme des schémas : transitions longues et douces (ease-in-out), pour un rendu « présentation » */
+.flow-node {
+  transition:
+    transform 700ms cubic-bezier(.65,0,.35,1),
+    background-color 700ms cubic-bezier(.65,0,.35,1),
+    color 700ms cubic-bezier(.65,0,.35,1),
+    box-shadow 700ms cubic-bezier(.65,0,.35,1);
+}
+.flow-fill { transition: transform 900ms cubic-bezier(.65,0,.35,1); }
+.flow-label { transition: color 700ms cubic-bezier(.65,0,.35,1); }
 .flow-node:hover { transform: scale(1.12) rotate(-4deg); }
 
 /* Logo */
 .logo-mark { transition: transform 400ms cubic-bezier(.2,.7,.2,1); }
-a:hover > .logo-mark { transform: rotate(-8deg) scale(1.08); }
+a:hover .logo-mark { transform: rotate(-12deg) scale(1.06); }
 a.card-lift, [data-ripple] { position: relative; overflow: hidden; }
 
 /* Contrôles du carrousel : boutons ronds discrets, retour tactile doux */
@@ -660,3 +669,18 @@ a.card-lift, [data-ripple] { position: relative; overflow: hidden; }
 }
 .carousel-chevron:hover { background-color: rgba(22, 22, 24, 0.08); }
 .carousel-chevron:active { transform: scale(0.88); transition-duration: 80ms; }
+
+/* Passage de slide : glissement horizontal long et amorti (style Apple) */
+.carousel-slide {
+  /* Slide sortante : s'efface vite pour ne pas se superposer à l'entrante */
+  transition:
+    transform 900ms cubic-bezier(.22,1,.36,1),
+    opacity 320ms cubic-bezier(.4,0,1,1);
+  will-change: transform, opacity;
+}
+.carousel-slide[data-active="true"] {
+  /* Slide entrante : apparaît après un court temps, en douceur */
+  transition:
+    transform 900ms cubic-bezier(.22,1,.36,1),
+    opacity 650ms cubic-bezier(0,0,.2,1) 180ms;
+}

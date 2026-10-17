@@ -18,7 +18,7 @@ const SECTIONS: LegalSection[] = [
       <>
         <p>
           Les données personnelles collectées via le site mobem-solutions.com et dans le cadre de nos échanges commerciaux sont
-          traitées par <strong>Mobem Solutions</strong>, groupement momentané d&apos;entreprises représenté par son mandataire.
+          traitées par <strong>Arnaud Clavier</strong>, entrepreneur individuel exerçant sous le nom Mobem Solutions.
         </p>
         <LegalCard>
           <p><strong>Contact RGPD</strong></p>
@@ -32,33 +32,32 @@ const SECTIONS: LegalSection[] = [
     title: "Données collectées sur le site",
     content: (
       <>
-        <p>Nous ne collectons que ce qui est nécessaire pour vous répondre et organiser le diagnostic.</p>
+        <p>Je ne collecte que ce qui est nécessaire pour vous répondre et organiser le diagnostic.</p>
         <LegalTable
           head={["Source", "Données", "Obligatoire"]}
           rows={[
             ["Réservation du diagnostic (Calendly)", "Nom, e-mail, entreprise, créneau choisi, réponses éventuelles au questionnaire de réservation", "Oui"],
             ["Échanges par e-mail", "Contenu des échanges, pièces jointes éventuelles", "Selon votre message"],
-            ["Newsletter", "Adresse e-mail", "Oui, si vous vous inscrivez"],
             ["Mesure d'audience (Vercel Analytics)", "Pages vues, pays, type d'appareil, en données agrégées et sans cookie", "Non"],
           ]}
         />
-        <p>Nous ne collectons aucune donnée sensible au sens de l&apos;article 9 du RGPD.</p>
+        <p>Je ne collecte aucune donnée sensible au sens de l&apos;article 9 du RGPD.</p>
       </>
     ),
   },
   {
     id: "clients",
-    title: "Données traitées pour nos clients",
+    title: "Données traitées pour mes clients",
     content: (
       <>
         <p>
-          Les automatisations que nous mettons en place sont installées <strong>sur les propres comptes de nos clients</strong>.
+          Les automatisations que je mets en place sont installées <strong>sur les propres comptes de mes clients</strong>.
           Les données qu&apos;elles traitent (mails, documents, fichiers de suivi) restent chez eux.
         </p>
         <p>
-          Pour ces traitements, notre client est responsable de traitement et Mobem Solutions intervient comme sous-traitant au
-          sens de l&apos;article 28 du RGPD, dans le cadre d&apos;un accord de traitement des données signé avec chaque mission. Nous
-          n&apos;accédons à ces données que dans la mesure nécessaire à la mise en place, au contrôle et à la maintenance des
+          Pour ces traitements, le client est responsable de traitement et j&apos;interviens comme sous-traitant au sens de
+          l&apos;article 28 du RGPD, dans le cadre d&apos;un accord de traitement des données signé avec chaque mission. Je
+          n&apos;accède à ces données que dans la mesure nécessaire à la mise en place, au contrôle et à la maintenance des
           automatisations.
         </p>
       </>
@@ -73,7 +72,6 @@ const SECTIONS: LegalSection[] = [
         rows={[
           ["Répondre à vos demandes et organiser le diagnostic", "Intérêt légitime, mesures précontractuelles"],
           ["Exécuter les missions et facturer", "Exécution du contrat"],
-          ["Envoyer la newsletter", "Consentement"],
           ["Mesurer l'audience du site de façon anonyme", "Intérêt légitime"],
           ["Conserver les pièces comptables", "Obligation légale"],
         ]}
@@ -91,7 +89,6 @@ const SECTIONS: LegalSection[] = [
             ["Prospects sans suite commerciale", "3 ans après le dernier contact"],
             ["Clients (données contractuelles)", "5 ans après la fin du contrat"],
             ["Factures et pièces comptables", "10 ans (art. L123-22 du Code de commerce)"],
-            ["Newsletter", "Jusqu'à la désinscription"],
             ["Statistiques d'audience agrégées", "13 mois maximum"],
           ]}
         />
@@ -105,8 +102,8 @@ const SECTIONS: LegalSection[] = [
     content: (
       <>
         <p>
-          Vos données sont réservées à l&apos;équipe de Mobem Solutions. Elles ne sont jamais vendues, louées ni cédées. Nous
-          faisons appel aux sous-traitants suivants, encadrés par des clauses contractuelles types de la Commission européenne
+          Vos données sont réservées à mon usage. Elles ne sont jamais vendues, louées ni cédées. Je fais appel aux
+          sous-traitants suivants, encadrés par des clauses contractuelles types de la Commission européenne
           lorsque des données sont traitées hors de l&apos;Union européenne :
         </p>
         <LegalTable
@@ -115,7 +112,6 @@ const SECTIONS: LegalSection[] = [
             ["Vercel Inc.", "Hébergement du site", "États-Unis"],
             ["Calendly LLC", "Réservation du diagnostic", "États-Unis"],
             ["Zoho Corporation", "Messagerie électronique", "Union européenne / Inde"],
-            ["Resend", "Envoi des e-mails de la newsletter", "États-Unis"],
           ]}
         />
       </>
@@ -145,8 +141,8 @@ const SECTIONS: LegalSection[] = [
       <LegalList
         items={[
           "Connexions chiffrées en HTTPS sur l'ensemble du site",
-          "Accès aux données limité aux personnes qui en ont besoin",
-          "Authentification à deux facteurs sur nos outils internes",
+          "Accès aux données réservé au seul prestataire",
+          "Authentification à deux facteurs sur mes outils internes",
           "Accès aux comptes clients limités à la mission, révocables à tout moment par le client",
           "Aucun stockage de données de paiement",
         ]}
@@ -163,7 +159,7 @@ const SECTIONS: LegalSection[] = [
           d&apos;opposition, ainsi que du droit de retirer votre consentement à tout moment (articles 15 à 22 du RGPD).
         </p>
         <p>
-          Pour les exercer, écrivez à {MAIL}. Nous répondons sous un mois. Vous pouvez également adresser une réclamation à la
+          Pour les exercer, écrivez à {MAIL}. Je réponds sous un mois. Vous pouvez également adresser une réclamation à la
           CNIL (cnil.fr).
         </p>
       </>
@@ -174,7 +170,7 @@ const SECTIONS: LegalSection[] = [
     title: "Modifications",
     content: (
       <p>
-        Cette politique peut évoluer pour suivre la réglementation ou nos pratiques. La version en vigueur est celle publiée sur
+        Cette politique peut évoluer pour suivre la réglementation ou mes pratiques. La version en vigueur est celle publiée sur
         cette page. Voir aussi les <Link href="/mentions-legales">mentions légales</Link> et les <Link href="/cgv">CGV</Link>.
       </p>
     ),
@@ -186,7 +182,7 @@ export default function ConfidentialitePage() {
     <LegalLayout
       current="/confidentialite"
       title="Politique de confidentialité"
-      intro={<p>Quelles données nous collectons, pourquoi, combien de temps, et comment exercer vos droits.</p>}
+      intro={<p>Quelles données je collecte, pourquoi, combien de temps, et comment exercer vos droits.</p>}
       updated="Mise à jour : octobre 2026"
       sections={SECTIONS}
     />

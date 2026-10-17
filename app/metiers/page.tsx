@@ -11,11 +11,11 @@ import { TRADES, beforeAfterLine } from "@/lib/automation-content"
 export const metadata: Metadata = {
   title: "Automatisation par métier — Formation, courtage, expertise comptable | Mobem Solutions",
   description:
-    "Organismes de formation Qualiopi, courtiers en assurance, cabinets d'expertise comptable, TPE et PME : les tâches administratives qu'on automatise pour chaque métier.",
+    "Organismes de formation Qualiopi, courtiers en assurance, cabinets d'expertise comptable, TPE et PME : les tâches administratives que j'automatise pour chaque métier.",
   alternates: { canonical: "https://mobem-solutions.com/metiers" },
   openGraph: {
     title: "Automatisation par métier | Mobem Solutions",
-    description: "Les tâches administratives qu'on automatise pour chaque métier, sur vos propres outils.",
+    description: "Les tâches administratives que j'automatise pour chaque métier, sur vos propres outils.",
     url: "https://mobem-solutions.com/metiers",
   },
 }
@@ -33,7 +33,7 @@ export default function MetiersPage() {
               id="metiers-heading"
               eyebrow="Métiers"
               title="Vos tâches, dans les mots de votre métier"
-              text="On a choisi trois métiers où les mêmes tâches administratives reviennent chaque semaine. Et pour toutes les TPE et PME de 2 à 50 personnes, le diagnostic fonctionne de la même façon."
+              text="J'ai choisi trois métiers où les mêmes tâches administratives reviennent chaque semaine. Et pour toutes les TPE et PME de 2 à 50 personnes, le diagnostic fonctionne de la même façon."
               align="center"
             />
           </Container>

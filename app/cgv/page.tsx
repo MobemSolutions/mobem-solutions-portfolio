@@ -27,20 +27,14 @@ const SECTIONS: LegalSection[] = [
     ),
   },
   {
-    id: "structure",
-    title: "Structure juridique du Prestataire",
+    id: "prestataire",
+    title: "Identité du Prestataire",
     content: (
-      <>
-        <p>
-          Mobem Solutions est un groupement momentané d&apos;entreprises (GME) constitué pour l&apos;exécution de chaque mission. Le
-          groupement est représenté par son mandataire, désigné dans le devis, qui émet les factures, encaisse les règlements et
-          constitue l&apos;interlocuteur unique du Client.
-        </p>
-        <p>
-          Pendant l&apos;exécution de la mission, les membres du groupement sont solidaires vis-à-vis du Client. Cette solidarité
-          cesse au paiement intégral de la facture finale de la mission concernée.
-        </p>
-      </>
+      <p>
+        Le Prestataire est <strong>Arnaud Clavier</strong>, entrepreneur individuel exerçant sous le nom commercial Mobem
+        Solutions (SIRET 992 858 456 00013, Pornic, Loire-Atlantique). Il réalise lui-même les prestations et constitue
+        l&apos;interlocuteur unique du Client, du diagnostic à la maintenance.
+      </p>
     ),
   },
   {
@@ -107,7 +101,7 @@ const SECTIONS: LegalSection[] = [
         <p>
           Tout retard entraîne de plein droit, sans mise en demeure préalable, des pénalités au taux d&apos;intérêt légal majoré de
           cinq (5) points, ainsi qu&apos;une indemnité forfaitaire de recouvrement de 40 €. Les paiements s&apos;effectuent par
-          virement bancaire sur le compte du mandataire.
+          virement bancaire sur le compte du Prestataire.
         </p>
       </>
     ),
@@ -260,7 +254,7 @@ const SECTIONS: LegalSection[] = [
     content: (
       <p>
         Les parties s&apos;engagent à garder confidentielles les informations échangées dans le cadre de la mission, pendant toute
-        sa durée et deux (2) ans après son terme. Voir aussi notre <Link href="/confidentialite">politique de confidentialité</Link>.
+        sa durée et deux (2) ans après son terme. Voir aussi la <Link href="/confidentialite">politique de confidentialité</Link>.
       </p>
     ),
   },
@@ -281,7 +275,7 @@ const SECTIONS: LegalSection[] = [
     content: (
       <p>
         Les présentes CGV sont soumises au droit français. À défaut de résolution amiable, tout litige relève de la compétence
-        exclusive du tribunal de commerce d&apos;Angers.
+        exclusive des tribunaux compétents de Nantes.
       </p>
     ),
   },
@@ -292,7 +286,7 @@ export default function CgvPage() {
     <LegalLayout
       current="/cgv"
       title="Conditions générales de vente"
-      intro={<p>Comment se déroulent nos missions d&apos;automatisation, du diagnostic gratuit à la maintenance.</p>}
+      intro={<p>Comment se déroulent mes missions d&apos;automatisation, du diagnostic gratuit à la maintenance.</p>}
       updated="En vigueur au 17 octobre 2026"
       sections={SECTIONS}
     />

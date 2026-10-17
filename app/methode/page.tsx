@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 const DETAILS = [
   {
     what: "Un échange de 45 minutes, en visio ou à Nantes.",
-    out: "La liste de vos tâches répétitives, le temps estimé pour chacune, et nos recommandations écrites.",
+    out: "La liste de vos tâches répétitives, le temps estimé pour chacune, et mes recommandations écrites.",
   },
   {
     what: "L'installation sur vos propres comptes, avec vos outils actuels.",
@@ -47,13 +47,13 @@ export default function MethodePage() {
         <section className="relative overflow-hidden pt-28 sm:pt-36" aria-labelledby="methode-page-heading">
           <div className="blue-glow pointer-events-none absolute inset-x-0 top-0 h-[600px]" aria-hidden="true" />
           <Container className="relative flex flex-col items-center text-center">
-            <p className="chip-dark">Notre méthode</p>
+            <p className="chip-dark">La méthode</p>
             <h1 id="methode-page-heading" className="type-display mt-8 max-w-[16ch] text-ink text-balance">
               Diagnostiquer avant de prescrire.
             </h1>
             <p className="type-body mt-6 max-w-[60ch] text-charcoal">
-              On ne vous vend pas un logiciel. On regarde comment vous travaillez, on automatise ce qui vaut la peine de l&apos;être,
-              puis on mesure les heures que vous récupérez.
+              Je ne vous vends pas un logiciel. Je regarde comment vous travaillez, j&apos;automatise ce qui vaut la peine de l&apos;être,
+              puis je mesure les heures que vous récupérez.
             </p>
             <div className="mt-8">
               <DiagnosticButton />

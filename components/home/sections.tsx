@@ -9,7 +9,7 @@ import {
   METHOD_STEPS,
   TRUST_POINTS,
   PRICING,
-  TEAM,
+  FOUNDER,
   FAQ,
   UNDER_THE_HOOD,
   TRUST_LINE,
@@ -28,14 +28,14 @@ export function Hero() {
       <Container className="relative flex flex-col items-center text-center">
         <p className="chip-dark animate-in fade-in-0 slide-in-from-bottom-4 duration-700 fill-mode-both">
           <span className="rounded-[10px] bg-blue px-2 py-0.5 text-[12px]">Nouveau</span>
-          Facture électronique : on prépare vos flux pour 2027
+          Facture électronique : je prépare vos flux pour 2027
         </p>
         <h1 id="hero-heading" className="animate-in fade-in-0 slide-in-from-bottom-4 duration-700 fill-mode-both delay-100 type-display mt-8 max-w-[22ch] text-ink text-balance">
           Vos tâches administratives tournent toutes seules. Vous récupérez vos <span className="text-sweep">heures.</span>
         </h1>
         <p className="animate-in fade-in-0 slide-in-from-bottom-4 duration-700 fill-mode-both delay-200 type-body mt-6 max-w-[62ch] text-charcoal">
-          Relances, collecte de pièces, preuves d&apos;audit, tri des mails : on repère ce qui vous fait perdre du temps,
-          on l&apos;automatise sur vos propres outils, et on mesure les heures gagnées.
+          Relances, collecte de pièces, preuves d&apos;audit, tri des mails : je repère ce qui vous fait perdre du temps,
+          je l&apos;automatise sur vos propres outils, et je mesure les heures gagnées.
         </p>
         <div className="animate-in fade-in-0 slide-in-from-bottom-4 duration-700 fill-mode-both delay-300 mt-8 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row">
           <DiagnosticButton className="w-full sm:w-auto" />
@@ -123,9 +123,9 @@ export function Method() {
       <Container>
         <SectionHeading
           id="methode-heading"
-          eyebrow="Notre méthode"
+          eyebrow="La méthode"
           title="Diagnostiquer avant de prescrire."
-          text="On ne vend pas un logiciel. On regarde comment vous travaillez, on automatise ce qui vaut la peine de l'être, puis on mesure."
+          text="Je ne vends pas un logiciel. Je regarde comment vous travaillez, j'automatise ce qui vaut la peine de l'être, puis je mesure."
         />
         <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {METHOD_STEPS.map((step, i) => (
@@ -203,7 +203,7 @@ export function Pricing() {
         <SectionHeading
           id="tarifs-heading"
           eyebrow="Tarifs"
-          title="On commence petit, on mesure, puis on décide"
+          title="On commence petit, on mesure, puis vous décidez"
           text="Le diagnostic est gratuit. Ensuite, un pilote sur une seule tâche permet de vérifier le gain avant d'aller plus loin."
           align="center"
         />
@@ -245,45 +245,38 @@ export function Pricing() {
   )
 }
 
-/* ─── Équipe ──────────────────────────────────────── */
-export function Team() {
+/* ─── Fondateur ──────────────────────────────────── */
+export function Founder() {
   return (
-    <section id="equipe" className="py-16 lg:py-24" aria-labelledby="equipe-heading">
+    <section id="fondateur" className="py-16 lg:py-24" aria-labelledby="fondateur-heading">
       <Container>
-        <SectionHeading
-          id="equipe-heading"
-          eyebrow="Qui sommes-nous"
-          title="Trois associés, basés à Nantes"
-          text="Un collectif qui parle votre langue : on préfère comprendre votre journée de travail avant de toucher à un outil."
-        />
-        <ul className="mt-12 grid gap-4 md:grid-cols-3">
-          {TEAM.map((m) => (
-            <li key={m.name} className="card-lift card-hover group flex flex-col p-4">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] bg-secondary">
-                <Image
-                  src={m.photo}
-                  alt={`Portrait de ${m.name}`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 380px"
-                  className="object-cover object-[50%_25%] transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-              <div className="flex flex-1 flex-col px-2 pb-2 pt-5">
-                <h3 className="type-feature text-ink">{m.name}</h3>
-                <p className="type-meta text-graphite">{m.role}</p>
-                <p className="mt-3 text-[15px] leading-[1.6] text-charcoal">{m.description}</p>
-                <div className="mt-auto flex gap-2 pt-5">
-                  <a href={m.linkedin} target="_blank" rel="noopener noreferrer" className="icon-control" aria-label={`LinkedIn de ${m.name}`}>
-                    <Linkedin className="h-4 w-4" aria-hidden="true" />
-                  </a>
-                  <a href={`mailto:${m.email}`} className="icon-control" aria-label={`Écrire à ${m.name}`}>
-                    <Mail className="h-4 w-4" aria-hidden="true" />
-                  </a>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <div className="card-lift grid items-center gap-8 p-4 sm:p-6 md:grid-cols-[280px_1fr] lg:gap-12 lg:p-8">
+          <div className="group relative aspect-[4/5] overflow-hidden rounded-[14px] bg-secondary">
+            <Image
+              src={FOUNDER.photo}
+              alt={`Portrait de ${FOUNDER.name}`}
+              fill
+              sizes="(max-width: 768px) 100vw, 280px"
+              className="object-cover object-[50%_25%] transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+          <div className="flex flex-col">
+            <p className="type-meta text-charcoal">Votre interlocuteur</p>
+            <h2 id="fondateur-heading" className="type-section mt-3 text-ink">{FOUNDER.name}</h2>
+            <p className="mt-1 type-feature text-graphite">{FOUNDER.role}</p>
+            {FOUNDER.bio.map((p) => (
+              <p key={p} className="mt-4 max-w-[60ch] text-[16px] leading-[1.7] text-charcoal">{p}</p>
+            ))}
+            <div className="mt-6 flex gap-2">
+              <a href={FOUNDER.linkedin} target="_blank" rel="noopener noreferrer" className="icon-control" aria-label={`LinkedIn de ${FOUNDER.name}`}>
+                <Linkedin className="h-4 w-4" aria-hidden="true" />
+              </a>
+              <a href={`mailto:${FOUNDER.email}`} className="icon-control" aria-label={`Écrire à ${FOUNDER.name}`}>
+                <Mail className="h-4 w-4" aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+        </div>
       </Container>
     </section>
   )
@@ -294,7 +287,7 @@ export function Faq() {
   return (
     <section id="faq" className="py-16 lg:py-24" aria-labelledby="faq-heading">
       <Container className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-        <SectionHeading id="faq-heading" eyebrow="Questions fréquentes" title="Ce qu'on nous demande avant le diagnostic" />
+        <SectionHeading id="faq-heading" eyebrow="Questions fréquentes" title="Ce qu'on me demande avant le diagnostic" />
         <FaqList items={FAQ} />
       </Container>
     </section>

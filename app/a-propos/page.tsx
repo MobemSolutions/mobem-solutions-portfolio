@@ -3,16 +3,16 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Container, SectionHeading } from "@/components/home/primitives"
 import { ClosingBand } from "@/components/home/closing-band"
-import { Team, Trust } from "@/components/home/sections"
+import { Founder, Trust } from "@/components/home/sections"
 
 export const metadata: Metadata = {
-  title: "À propos — Trois associés basés à Nantes | Mobem Solutions",
+  title: "À propos — Arnaud Clavier, concepteur-développeur en automatisation | Mobem Solutions",
   description:
-    "Mobem Solutions est un collectif de trois associés basés à Nantes. On repère les tâches administratives qui font perdre du temps aux TPE et PME, on les automatise et on mesure les heures gagnées.",
+    "Mobem Solutions, c'est Arnaud Clavier, concepteur-développeur en automatisation près de Nantes. Je repère les tâches administratives qui font perdre du temps aux TPE et PME, je les automatise et je mesure les heures gagnées.",
   alternates: { canonical: "https://mobem-solutions.com/a-propos" },
   openGraph: {
     title: "À propos — Mobem Solutions",
-    description: "Trois associés basés à Nantes. On vend des heures récupérées, pas du logiciel.",
+    description: "Un seul interlocuteur, du diagnostic à la maintenance. Je vends des heures récupérées, pas du logiciel.",
     url: "https://mobem-solutions.com/a-propos",
   },
 }
@@ -20,15 +20,15 @@ export const metadata: Metadata = {
 const VALUES = [
   {
     title: "Des heures, pas du logiciel",
-    text: "Ce qu'on vous livre, c'est du temps. Chaque automatisation est jugée sur les heures qu'elle vous rend chaque mois.",
+    text: "Ce que je vous livre, c'est du temps. Chaque automatisation est jugée sur les heures qu'elle vous rend chaque mois.",
   },
   {
     title: "Vos outils, vos comptes",
-    text: "On travaille avec ce que vous utilisez déjà, installé chez vous. Vous gardez la main, même si on arrête de travailler ensemble.",
+    text: "Je travaille avec ce que vous utilisez déjà, installé chez vous. Vous gardez la main, même si nous arrêtons de travailler ensemble.",
   },
   {
     title: "Des chiffres honnêtes",
-    text: "Pas de témoignage inventé, pas de promesse en l'air. On mesure avant, on mesure après, et on vous montre l'écart.",
+    text: "Pas de témoignage inventé, pas de promesse en l'air. Je mesure avant, je mesure après, et je vous montre l'écart.",
   },
 ]
 
@@ -42,18 +42,20 @@ export default function AProposPage() {
           <Container className="relative flex flex-col items-center text-center">
             <p className="chip-dark">À propos</p>
             <h1 id="apropos-heading" className="type-display mt-8 max-w-[18ch] text-ink text-balance">
-              On rend leurs heures aux petites entreprises.
+              Je rends leurs heures aux petites entreprises.
             </h1>
             <p className="type-body mt-6 max-w-[62ch] text-charcoal">
-              Mobem Solutions est un collectif de trois associés basés à Nantes. On repère les tâches administratives qui vous font
-              perdre du temps, on les automatise sur vos propres outils, puis on mesure les heures gagnées.
+              Mobem Solutions, c&apos;est moi, Arnaud Clavier. Je repère les tâches administratives qui vous font perdre du temps,
+              je les automatise sur vos propres outils, puis je mesure les heures gagnées.
             </p>
           </Container>
         </section>
 
+        <Founder />
+
         <section className="py-16 lg:py-24" aria-labelledby="valeurs-heading">
           <Container>
-            <SectionHeading id="valeurs-heading" eyebrow="Ce qui nous guide" title="Diagnostiquer avant de prescrire." />
+            <SectionHeading id="valeurs-heading" eyebrow="Ce qui me guide" title="Diagnostiquer avant de prescrire." />
             <ul className="mt-12 grid gap-4 md:grid-cols-3">
               {VALUES.map((v) => (
                 <li key={v.title} className="card-lift card-hover p-6">
@@ -65,7 +67,6 @@ export default function AProposPage() {
           </Container>
         </section>
 
-        <Team />
         <Trust />
         <ClosingBand />
       </main>

@@ -15,13 +15,13 @@ const SECTIONS: LegalSection[] = [
     content: (
       <>
         <p>
-          Le site <strong>mobem-solutions.com</strong> est édité par <strong>Mobem Solutions</strong>, groupement momentané
-          d&apos;entreprises (GME) proposant l&apos;automatisation des tâches administratives des TPE et PME.
+          Le site <strong>mobem-solutions.com</strong> est édité par <strong>Arnaud Clavier</strong>, entrepreneur individuel
+          exerçant sous le nom commercial <strong>Mobem Solutions</strong> (automatisation des tâches administratives des TPE et PME).
         </p>
         <LegalCard>
-          <p><strong>Mobem Solutions</strong></p>
-          <p>Mandataire du groupement : Nathan Portier, entrepreneur individuel</p>
-          <p>SIRET : 915 144 471 00017 · Cholet (49)</p>
+          <p><strong>Arnaud Clavier — Mobem Solutions</strong></p>
+          <p>Entrepreneur individuel</p>
+          <p>SIRET : 992 858 456 00013 · Pornic (44)</p>
           <p>
             Contact : <a href="mailto:contact@mobem-solutions.com">contact@mobem-solutions.com</a>
           </p>
@@ -34,8 +34,7 @@ const SECTIONS: LegalSection[] = [
     title: "Directeur de la publication",
     content: (
       <p>
-        Le directeur de la publication est <strong>Nathan Portier</strong>, mandataire du groupement Mobem Solutions. Il peut être
-        joint à l&apos;adresse <a href="mailto:contact@mobem-solutions.com">contact@mobem-solutions.com</a>.
+        Le directeur de la publication est <strong>Arnaud Clavier</strong>. Il peut être joint à l&apos;adresse <a href="mailto:contact@mobem-solutions.com">contact@mobem-solutions.com</a>.
       </p>
     ),
   },
@@ -51,7 +50,7 @@ const SECTIONS: LegalSection[] = [
           <p>vercel.com</p>
         </LegalCard>
         <p>
-          Cet hébergement concerne uniquement le présent site. Les automatisations réalisées pour nos clients sont installées
+          Cet hébergement concerne uniquement le présent site. Les automatisations réalisées pour les clients sont installées
           sur leurs propres comptes et outils, et non sur cette infrastructure.
         </p>
       </>
@@ -84,7 +83,7 @@ const SECTIONS: LegalSection[] = [
     content: (
       <p>
         Mobem Solutions traite les données personnelles conformément au RGPD (UE 2016/679) et à la loi Informatique et
-        Libertés. Le détail des traitements, des durées de conservation et de vos droits figure dans notre{" "}
+        Libertés. Le détail des traitements, des durées de conservation et de vos droits figure dans la{" "}
         <Link href="/confidentialite">politique de confidentialité</Link>.
       </p>
     ),
@@ -95,7 +94,7 @@ const SECTIONS: LegalSection[] = [
     content: (
       <p>
         Le présent site et ses mentions légales sont soumis au droit français. Tout litige relatif à son utilisation relève de la
-        compétence exclusive des tribunaux d&apos;Angers.
+        compétence exclusive des tribunaux de Nantes.
       </p>
     ),
   },

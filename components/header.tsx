@@ -1,13 +1,13 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import Image from "next/image"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { Menu, X, ArrowDown, ArrowRight, ArrowUpRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { TRADES } from "@/lib/automation-content"
 import { DiagnosticButton } from "@/components/diagnostic-button"
+import { MobemLogo } from "@/components/ui/mobem-logo"
 
 const navigation = [
   { name: "Méthode", href: "/methode" },
@@ -102,11 +102,10 @@ export function Header() {
           <div className="flex items-center gap-10">
           <Link
             href="/"
-            className="flex items-center gap-2 text-graphite"
+            className="flex items-center text-ink"
             aria-label="Mobem Solutions - Retour à l'accueil"
           >
-            <Image src="/logos/mobem-mark-black.png" alt="" width={120} height={80} className="logo-mark h-6 w-auto" priority />
-            <span className="text-[16px] font-semibold tracking-[-0.01em]">Mobem Solutions</span>
+            <MobemLogo />
           </Link>
 
           {/* Desktop */}
@@ -171,7 +170,7 @@ export function Header() {
 
           <div className="hidden lg:flex lg:items-center lg:gap-6">
             <a href="mailto:contact@mobem-solutions.com" className="link-underline type-nav text-graphite">
-              Nous écrire
+              Me contacter
             </a>
             <DiagnosticButton className="!py-1.5 !pl-4 !pr-1.5 gap-3">
               Diagnostic gratuit

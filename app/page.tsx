@@ -16,7 +16,7 @@ import { FAQ, PRICING } from "@/lib/automation-content"
 
 const TITLE = "Mobem Solutions — Vos tâches administratives tournent toutes seules"
 const DESCRIPTION =
-  "Relances, collecte de pièces, preuves d'audit, tri des mails : on automatise vos tâches administratives sur vos propres outils et on mesure les heures gagnées. Diagnostic gratuit de 45 min, Nantes."
+  "Relances, collecte de pièces, preuves d'audit, tri des mails : j'automatise vos tâches administratives sur vos propres outils et je mesure les heures gagnées. Diagnostic gratuit de 45 min, Nantes."
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -56,15 +56,16 @@ const jsonLd = {
       "@id": "https://mobem-solutions.com/#organization",
       name: "Mobem Solutions",
       url: "https://mobem-solutions.com",
-      logo: { "@type": "ImageObject", url: "https://mobem-solutions.com/logos/mobem-logo-black.png" },
+      logo: { "@type": "ImageObject", url: "https://mobem-solutions.com/logo.png" },
       sameAs: ["https://www.linkedin.com/company/mobem-solutions"],
-      description: "Studio d'automatisation des tâches administratives pour TPE et PME, basé à Nantes.",
+      description: "Automatisation des tâches administratives pour TPE et PME, par Arnaud Clavier, près de Nantes.",
+      founder: { "@type": "Person", name: "Arnaud Clavier", jobTitle: "Concepteur-développeur en automatisation" },
     },
     {
       "@type": "ProfessionalService",
       "@id": "https://mobem-solutions.com/#localbusiness",
       name: "Mobem Solutions",
-      image: "https://mobem-solutions.com/logos/mobem-logo-black.png",
+      image: "https://mobem-solutions.com/logo.png",
       url: "https://mobem-solutions.com",
       email: "contact@mobem-solutions.com",
       address: {

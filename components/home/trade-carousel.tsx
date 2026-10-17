@@ -16,7 +16,8 @@ interface TradeCarouselProps {
  * de l'onglet actif (fin d'animation = slide suivante), flèches et onglets cliquables.
  */
 export function TradeCarousel({ autoPlayInterval = 7000 }: TradeCarouselProps) {
-  const [index, setIndex] = useState(0)
+  // Index affiché, index précédent et sens du passage (1 = vers la gauche, -1 = vers la droite)
+  const [{ index, prev, dir }, setSlide] = useState({ index: 0, prev: -1, dir: 1 })
   const [paused, setPaused] = useState(false)
   const [reducedMotion, setReducedMotion] = useState(false)
   const count = TRADES.length
@@ -30,7 +31,12 @@ export function TradeCarousel({ autoPlayInterval = 7000 }: TradeCarouselProps) {
   }, [])
 
   const autoplay = !paused && !reducedMotion
-  const go = (i: number) => setIndex((i + count) % count)
+  const go = (i: number, direction?: number) =>
+    setSlide((s) => {
+      const next = (i + count) % count
+      if (next === s.index) return s
+      return { index: next, prev: s.index, dir: direction ?? (i > s.index ? 1 : -1) }
+    })
 
   return (
     <div
@@ -39,21 +45,25 @@ export function TradeCarousel({ autoPlayInterval = 7000 }: TradeCarouselProps) {
       aria-roledescription="carrousel"
       aria-label="Exemples d'automatisation par métier"
       onKeyDown={(e) => {
-        if (e.key === "ArrowRight") go(index + 1)
-        if (e.key === "ArrowLeft") go(index - 1)
+        if (e.key === "ArrowRight") go(index + 1, 1)
+        if (e.key === "ArrowLeft") go(index - 1, -1)
       }}
     >
-      {/* Slides empilées dans la même cellule de grille : fondu sans saut de hauteur */}
+      {/* Slides empilées dans la même cellule de grille : glissement horizontal selon le sens, sans saut de hauteur */}
       <div className="card-lift grid overflow-hidden">
         {TRADES.map((trade, i) => {
           const active = i === index
+          // La slide sortante part du côté opposé au sens ; les autres attendent du côté d'arrivée.
+          const offset = active ? 0 : i === prev ? -dir : dir
           return (
             <article
               key={trade.slug}
               className={cn(
-                "col-start-1 row-start-1 grid items-center gap-10 p-5 transition-[opacity,transform] duration-500 ease-out sm:p-8 lg:grid-cols-[1fr_1.05fr] lg:gap-14 lg:p-10",
-                active ? "opacity-100" : "pointer-events-none translate-y-2 opacity-0"
+                "carousel-slide col-start-1 row-start-1 grid items-center gap-8 p-5 sm:p-7 lg:grid-cols-[1fr_1fr] lg:gap-10 lg:p-8",
+                !active && "pointer-events-none"
               )}
+              data-active={active}
+              style={{ opacity: active ? 1 : 0, transform: `translateX(${offset * 72}px)` }}
               aria-roledescription="diapositive"
               aria-label={`${i + 1} sur ${count} : ${trade.audience}`}
               aria-hidden={!active}
@@ -61,18 +71,18 @@ export function TradeCarousel({ autoPlayInterval = 7000 }: TradeCarouselProps) {
             >
               <div className="flex flex-col">
                 <p className="chip-dark self-start">{trade.audience}</p>
-                <p className="mt-8 type-caption text-charcoal">Temps passé chaque mois — exemple type</p>
+                <p className="mt-6 type-caption text-charcoal">Temps passé chaque mois — exemple type</p>
                 <p className="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                  <span className="text-[44px] font-semibold leading-none tracking-[-0.03em] text-ink sm:text-[56px]">
+                  <span className="text-[38px] font-semibold leading-none tracking-[-0.03em] text-ink sm:text-[46px]">
                     {trade.beforeAfter.after}
                   </span>
-                  <span className="text-[18px] font-[550] text-charcoal">au lieu de {trade.beforeAfter.before}</span>
+                  <span className="text-[16px] font-[550] text-charcoal">au lieu de {trade.beforeAfter.before}</span>
                 </p>
-                <h3 className="mt-8 type-feature text-ink sm:text-[24px] sm:leading-[1.3]">{trade.headline}</h3>
-                <p className="mt-3 max-w-[52ch] text-[16px] leading-[1.65] text-charcoal">{trade.intro}</p>
+                <h3 className="mt-6 type-feature text-ink">{trade.headline}</h3>
+                <p className="mt-2 max-w-[52ch] text-[15px] leading-[1.65] text-charcoal">{trade.intro}</p>
                 <Link
                   href={trade.href}
-                  className="link-arrow link-underline mt-8 inline-flex items-center gap-2 self-start type-nav text-graphite"
+                  className="link-arrow link-underline mt-6 inline-flex items-center gap-2 self-start type-nav text-graphite"
                 >
                   Voir la page {trade.navLabel.toLowerCase()}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -87,7 +97,7 @@ export function TradeCarousel({ autoPlayInterval = 7000 }: TradeCarouselProps) {
       {/* Contrôles façon apple.com : pilule givrée (chevrons + points), bouton lecture/pause rond */}
       <div className="flex items-center justify-center gap-3">
         <div className="flex items-center gap-1 rounded-full bg-black/[0.05] p-1 backdrop-blur-xl">
-          <button type="button" onClick={() => go(index - 1)} className="carousel-chevron" aria-label="Métier précédent">
+          <button type="button" onClick={() => go(index - 1, -1)} className="carousel-chevron" aria-label="Métier précédent">
             <ChevronLeft className="h-4 w-4" strokeWidth={2.5} aria-hidden="true" />
           </button>
           <div className="flex items-center gap-0.5 px-1" role="tablist" aria-label="Choisir un métier">
@@ -116,7 +126,7 @@ export function TradeCarousel({ autoPlayInterval = 7000 }: TradeCarouselProps) {
                         key={`${index}-${autoplay}`}
                         className={cn("absolute inset-y-0 left-0 block rounded-full bg-graphite", autoplay ? "carousel-progress" : "w-full")}
                         style={autoplay ? { animationDuration: `${autoPlayInterval}ms` } : undefined}
-                        onAnimationEnd={() => go(index + 1)}
+                        onAnimationEnd={() => go(index + 1, 1)}
                       />
                     )}
                   </span>
@@ -124,7 +134,7 @@ export function TradeCarousel({ autoPlayInterval = 7000 }: TradeCarouselProps) {
               )
             })}
           </div>
-          <button type="button" onClick={() => go(index + 1)} className="carousel-chevron" aria-label="Métier suivant">
+          <button type="button" onClick={() => go(index + 1, 1)} className="carousel-chevron" aria-label="Métier suivant">
             <ChevronRight className="h-4 w-4" strokeWidth={2.5} aria-hidden="true" />
           </button>
         </div>

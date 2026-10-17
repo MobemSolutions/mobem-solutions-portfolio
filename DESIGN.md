@@ -5,7 +5,7 @@
 **Theme:** light only (`forcedTheme="light"`).
 
 ## Positioning
-- Mobem sells **recovered hours, not software**: three associates in Nantes who find the admin tasks wasting a small business's time, automate them on the client's own tools, then measure the hours saved.
+- Mobem sells **recovered hours, not software**. Mobem Solutions is Arnaud Clavier, solo concepteur-développeur en automatisation near Nantes: he finds the admin tasks wasting a small business's time, automates them on the client's own tools, then measures the hours saved. Copy is written in the first person (« je »); never mention a team, associates or a GME.
 - Signature: « Diagnostiquer avant de prescrire. »
 - Priority audiences, one page each (`/metiers/...`): organismes de formation Qualiopi, courtiers en assurance, cabinets d'expertise comptable. Wider: TPE-PME de 2 à 50 personnes.
 - French, vouvoiement, short concrete sentences in the trade's own words.
@@ -24,6 +24,8 @@
 | Studio Black | `#0f0f12` | `bg-studio` |
 | Electric Capture Blue | `#0d44e8` | `bg-blue`, `bg-accent` |
 | Electric Blue Sweep | `linear-gradient(90deg, #161618 0%, #161618 60%, #174ef2 100%)` | `var(--gradient-electric-blue-sweep)`, `text-sweep` |
+
+Logo: `components/ui/mobem-logo.tsx` (three linked nodes + « Mobem / Solutions »), pure black on transparent (white on dark surfaces). Favicon: `app/icon.svg`.
 
 Font: Google Sans Flex (next/font, variable — weights 400/450/550/600), fallback Inter.
 
@@ -49,5 +51,5 @@ Shadows: `shadow-card` (graphite multi-layer), `shadow-blue` (button inset), `sh
 - Blue only for booking/exploration controls and the active workflow step — never as a page background or text color.
 - Supporting copy in Soft Charcoal 18/30, not Ink.
 - No 700–800 display weights; no heavy black shadows; no colorful semantic badge palettes.
-- No robots, brains, glowing circuits. Photos only for the three associates.
+- No robots, brains, glowing circuits. The only photo is Arnaud's portrait.
 - Screenshots/panes always cropped inside 20px media cards.

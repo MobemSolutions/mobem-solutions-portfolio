@@ -3,10 +3,6 @@ const isDev = process.env.NODE_ENV === 'development'
 
 const nextConfig = {
   images: {
-    remotePatterns: [
-      { protocol: 'https', hostname: 'cdn.sanity.io' },
-      { protocol: 'https', hostname: 'images.unsplash.com' },
-    ],
     qualities: [75, 90],
   },
   // Anciennes pages SEO de l'offre « création de sites » (métiers × villes, plan du site) :
@@ -20,6 +16,10 @@ const nextConfig = {
       { source: '/plan-du-site', destination: '/', permanent: true },
       // Ancien portfolio de sites web
       { source: '/realisations/:path*', destination: '/#exemples', permanent: true },
+      // Ancien blog et newsletter
+      { source: '/blog/:path*', destination: '/', permanent: true },
+      { source: '/newsletter/:path*', destination: '/', permanent: true },
+      { source: '/studio/:path*', destination: '/', permanent: true },
     ]
   },
   async headers() {
@@ -35,9 +35,9 @@ const nextConfig = {
       "default-src 'self';",
       `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://assets.calendly.com https://va.vercel-scripts.com https://vercel.live;`,
       "style-src 'self' 'unsafe-inline' https://assets.calendly.com;",
-      "img-src 'self' blob: data: cdn.sanity.io https://assets.calendly.com https://images.unsplash.com;",
+      "img-src 'self' blob: data: https://assets.calendly.com;",
       "font-src 'self' data:;",
-      "connect-src 'self' *.sanity.io *.vercel-analytics.com https://va.vercel-scripts.com https://api.resend.com https://calendly.com https://api.unsplash.com https://vercel.live wss://ws-us3.pusher.com;",
+      "connect-src 'self' *.vercel-analytics.com https://va.vercel-scripts.com https://calendly.com https://vercel.live wss://ws-us3.pusher.com;",
       "frame-src 'self' https://calendly.com https://vercel.live;",
       "worker-src 'self' blob:;",
     ].join(' ')
@@ -49,14 +49,6 @@ const nextConfig = {
         headers: [
           ...securityHeaders,
           { key: 'Content-Security-Policy', value: appCsp },
-        ],
-      },
-      // Sanity Studio — override CSP with permissive policy
-      // (Studio pings npm registry, Sanity CDN, and various external services)
-      {
-        source: '/studio(.*)',
-        headers: [
-          { key: 'Content-Security-Policy', value: "default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;" },
         ],
       },
     ]
