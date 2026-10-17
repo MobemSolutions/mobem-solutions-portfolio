@@ -438,10 +438,12 @@
 }
 
 /* ─── Legal pages ─────────────────────────────────── */
-.prose-legal p       { @apply text-sm text-muted-foreground leading-relaxed; }
-.prose-legal strong  { @apply font-semibold text-foreground; }
-.prose-legal a       { @apply text-accent hover:underline; }
-.prose-legal ul      { @apply space-y-2 list-none; }
+@layer base {
+  .legal-prose p, .legal-prose li { font-size: 16px; line-height: 1.7; color: var(--color-soft-charcoal); }
+  .legal-prose strong { font-weight: 550; color: var(--color-graphite); }
+  .legal-prose a:not([class]) { color: var(--color-electric-capture-blue); text-decoration: underline; text-underline-offset: 3px; }
+  .legal-prose h3 { font-size: 17px; font-weight: 600; color: var(--color-graphite); margin-top: 8px; }
+}
 
 /* ─── Bento cell hover ────────────────────────────── */
 .bento-hover {

@@ -9,6 +9,17 @@ const nextConfig = {
     ],
     qualities: [75, 90],
   },
+  // Anciennes pages SEO de l'offre « création de sites » (métiers × villes, plan du site) :
+  // redirigées pour conserver le référencement acquis sans publier de contenu hors sujet.
+  async redirects() {
+    const trades = 'organismes-de-formation|courtiers-assurance|cabinets-comptables'
+    return [
+      { source: '/metiers/comptable/:ville*', destination: '/metiers/cabinets-comptables', permanent: true },
+      { source: `/metiers/:slug((?!${trades})[^/]+)/:ville*`, destination: '/metiers', permanent: true },
+      { source: '/villes/:path*', destination: '/', permanent: true },
+      { source: '/plan-du-site', destination: '/', permanent: true },
+    ]
+  },
   async headers() {
     const securityHeaders = [
       { key: 'X-Frame-Options', value: 'SAMEORIGIN' },

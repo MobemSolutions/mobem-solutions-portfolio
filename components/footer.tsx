@@ -16,7 +16,6 @@ const navLegal = [
   { name: "Mentions légales", href: "/mentions-legales" },
   { name: "CGV", href: "/cgv" },
   { name: "Confidentialité", href: "/confidentialite" },
-  { name: "Plan du site", href: "/plan-du-site" },
 ]
 
 const LINK = "text-[14px] text-white/65 transition-colors hover:text-white"
