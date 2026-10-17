@@ -5,8 +5,7 @@ import { Footer } from "@/components/footer"
 import { Container, SectionHeading, FaqList } from "@/components/home/primitives"
 import { ClosingBand } from "@/components/home/closing-band"
 import { DiagnosticButton } from "@/components/diagnostic-button"
-import { TradeVisual } from "@/components/automation/trade-visual"
-import { BeforeAfterCard } from "@/components/automation/panes"
+import { FlowDemo } from "@/components/automation/flow-demo"
 import { Method, Trust, ToolsStrip } from "@/components/home/sections"
 import { FAQ, TRADES, type Trade } from "@/lib/automation-content"
 
@@ -50,7 +49,7 @@ export function TradePage({ trade }: { trade: Trade }) {
               </div>
               <p className="mt-5 type-meta text-charcoal">45 min · Sans engagement · Vos données restent chez vous</p>
             </div>
-            <TradeVisual trade={trade} />
+            <FlowDemo trigger={trade.trigger} steps={trade.steps} result={trade.beforeAfter} />
           </Container>
         </section>
 
@@ -58,15 +57,12 @@ export function TradePage({ trade }: { trade: Trade }) {
 
         <section id="taches" className="py-16 lg:py-24" aria-labelledby="taches-heading">
           <Container>
-            <div className="grid gap-10 lg:grid-cols-[1fr_360px] lg:items-end">
-              <SectionHeading
-                id="taches-heading"
-                eyebrow="Ce qu'on automatise"
-                title="Les tâches qui reviennent chaque semaine"
-                text="On part de vos mots et de vos outils. Chaque tâche est installée sur vos comptes, puis mesurée."
-              />
-              <BeforeAfterCard data={trade.beforeAfter} />
-            </div>
+            <SectionHeading
+              id="taches-heading"
+              eyebrow="Ce qu'on automatise"
+              title="Les tâches qui reviennent chaque semaine"
+              text="On part de vos mots et de vos outils. Chaque tâche est installée sur vos comptes, puis mesurée."
+            />
             <ul className="mt-12 grid gap-4 sm:grid-cols-2">
               {trade.tasks.map((task) => (
                 <li key={task.title} className="card-lift flex gap-4 p-6">

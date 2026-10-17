@@ -4,7 +4,7 @@ import { Footer } from "@/components/footer"
 import { Container, SectionHeading, FaqList } from "@/components/home/primitives"
 import { ClosingBand } from "@/components/home/closing-band"
 import { DiagnosticButton } from "@/components/diagnostic-button"
-import { WorkflowPanel } from "@/components/automation/workflow-panel"
+import { FlowSteps } from "@/components/automation/flow-demo"
 import { Trust, Pricing } from "@/components/home/sections"
 import { FAQ, METHOD_STEPS } from "@/lib/automation-content"
 
@@ -60,8 +60,8 @@ export default function MethodePage() {
             </div>
           </Container>
           <Container className="relative mt-14">
-            <div className="blue-field rounded-[20px] p-3 sm:p-8">
-              <WorkflowPanel steps={METHOD_STEPS.map((s) => ({ label: s.title }))} title="Votre accompagnement" />
+            <div className="blue-field rounded-[20px] px-5 py-10 sm:px-12 sm:py-14">
+              <FlowSteps steps={METHOD_STEPS.map((s) => ({ label: s.title }))} orientation="horizontal" className="mx-auto max-w-[440px] lg:max-w-none" />
             </div>
           </Container>
         </section>

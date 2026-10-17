@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { Menu, X, ChevronDown, ArrowRight } from "lucide-react"
+import { Menu, X, ArrowDown, ArrowRight, ArrowUpRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { TRADES } from "@/lib/automation-content"
 import { DiagnosticButton } from "@/components/diagnostic-button"
@@ -99,6 +99,7 @@ export function Header() {
     >
       <nav className="mx-auto max-w-[1200px] px-4 sm:px-6" aria-label="Navigation principale">
         <div className="flex h-16 items-center justify-between gap-6">
+          <div className="flex items-center gap-10">
           <Link
             href="/"
             className="flex items-center gap-2 text-graphite transition-opacity hover:opacity-75"
@@ -109,7 +110,7 @@ export function Header() {
           </Link>
 
           {/* Desktop */}
-          <div className="hidden lg:flex lg:items-center lg:gap-1">
+          <div className="hidden lg:flex lg:items-center lg:gap-7">
             {navigation.map((item) =>
               item.children ? (
                 <div key={item.name} ref={tradesRef} className="relative">
@@ -119,17 +120,17 @@ export function Header() {
                     aria-expanded={isTradesOpen}
                     aria-controls="trades-menu"
                     className={cn(
-                      "inline-flex items-center gap-1 rounded-[12px] px-3 py-1.5 type-nav text-graphite transition-colors hover:bg-black/[0.04]",
-                      pathname.startsWith("/metiers") && "bg-black/[0.04]"
+                      "inline-flex items-center gap-1.5 py-1.5 type-nav transition-colors hover:text-graphite",
+                      isTradesOpen || pathname.startsWith("/metiers") ? "text-graphite" : "text-charcoal"
                     )}
                   >
                     {item.name}
-                    <ChevronDown className={cn("h-4 w-4 transition-transform", isTradesOpen && "rotate-180")} aria-hidden="true" />
+                    <ArrowDown className={cn("h-3.5 w-3.5 transition-transform", isTradesOpen && "rotate-180")} strokeWidth={2.25} aria-hidden="true" />
                   </button>
                   {isTradesOpen && (
                     <div
                       id="trades-menu"
-                      className="absolute left-1/2 top-[calc(100%+8px)] w-[300px] -translate-x-1/2 rounded-[20px] bg-white/95 p-2 shadow-card backdrop-blur-xl"
+                      className="absolute left-0 top-[calc(100%+14px)] w-[300px] rounded-[20px] bg-white p-2 shadow-card"
                     >
                       {item.children.map((child) => (
                         <Link
@@ -157,8 +158,8 @@ export function Header() {
                   onClick={(e) => handleNavClick(e, item.href)}
                   aria-current={pathname === item.href ? "page" : undefined}
                   className={cn(
-                    "rounded-[12px] px-3 py-1.5 type-nav text-graphite transition-colors hover:bg-black/[0.04]",
-                    pathname === item.href && "bg-black/[0.04]"
+                    "py-1.5 type-nav transition-colors hover:text-graphite",
+                    pathname === item.href ? "text-graphite" : "text-charcoal"
                   )}
                 >
                   {item.name}
@@ -166,9 +167,18 @@ export function Header() {
               )
             )}
           </div>
+          </div>
 
-          <div className="hidden lg:block">
-            <DiagnosticButton>Diagnostic gratuit</DiagnosticButton>
+          <div className="hidden lg:flex lg:items-center lg:gap-6">
+            <a href="mailto:contact@mobem-solutions.com" className="type-nav text-graphite transition-colors hover:text-charcoal">
+              Nous écrire
+            </a>
+            <DiagnosticButton className="!py-1.5 !pl-4 !pr-1.5 gap-3">
+              Diagnostic gratuit
+              <span className="flex h-8 w-8 items-center justify-center rounded-[10px] bg-studio" aria-hidden="true">
+                <ArrowUpRight className="h-4 w-4" strokeWidth={2.25} />
+              </span>
+            </DiagnosticButton>
           </div>
 
           {/* Mobile */}

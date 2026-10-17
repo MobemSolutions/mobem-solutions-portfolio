@@ -8,7 +8,14 @@ export const TRUST_LINE = "Installé sur vos propres comptes. Vos données reste
 
 export interface WorkflowStep {
   label: string
-  badge?: string
+  /** Moment ou fréquence, affiché discrètement à droite de l'étape */
+  when?: string
+}
+
+export interface FlowTrigger {
+  icon: "inscription" | "echeance" | "mail"
+  title: string
+  detail: string
 }
 
 export interface BeforeAfter {
@@ -29,9 +36,9 @@ export interface Trade {
   eyebrow: string
   headline: string
   intro: string
+  trigger: FlowTrigger
   steps: WorkflowStep[]
   beforeAfter: BeforeAfter
-  pane: "proof" | "reminders" | "inbox"
   tasks: TradeTask[]
   faq: { question: string; answer: string }[]
   metaTitle: string
@@ -48,15 +55,14 @@ export const TRADES: Trade[] = [
     headline: "Vos preuves Qualiopi se tiennent à jour toutes seules",
     intro:
       "Convocations, émargements, questionnaires à chaud et à froid, relances OPCO : chaque session laisse des traces à classer. On les fait partir et se ranger d'elles-mêmes, pour que l'audit se prépare sans courir après les documents.",
+    trigger: { icon: "inscription", title: "Nouvelle inscription", detail: "Julie Martin · Excel avancé, 12 mars" },
     steps: [
-      { label: "Nouvelle inscription" },
-      { label: "Convocation J-7", badge: "Automatique" },
-      { label: "Questionnaire à chaud" },
-      { label: "Relance", badge: "Relance J+5" },
-      { label: "Preuve d'audit à jour" },
+      { label: "Convocation envoyée", when: "J-7" },
+      { label: "Émargement collecté", when: "Jour J" },
+      { label: "Questionnaire à chaud", when: "J+1" },
+      { label: "Preuve d'audit rangée", when: "Auto" },
     ],
     beforeAfter: { before: "6 h / mois", after: "45 min / mois" },
-    pane: "proof",
     tasks: [
       {
         title: "Convocations et rappels",
@@ -100,15 +106,14 @@ export const TRADES: Trade[] = [
     headline: "Les pièces arrivent, les échéances se relancent",
     intro:
       "Collecte des pièces, relances avant échéance, traçabilité du devoir de conseil : votre cabinet passe des heures à courir après les justificatifs. On automatise la collecte et le suivi, et vos chargés de clientèle retrouvent du temps pour conseiller.",
+    trigger: { icon: "echeance", title: "Contrat bientôt à échéance", detail: "SARL Durand · habitation, 30 juin" },
     steps: [
-      { label: "Nouveau dossier" },
-      { label: "Demande de pièces", badge: "Automatique" },
-      { label: "Pièce reçue et classée" },
-      { label: "Relance échéance", badge: "J-30" },
-      { label: "Devoir de conseil tracé" },
+      { label: "Relance envoyée", when: "J-30" },
+      { label: "Pièces demandées", when: "Auto" },
+      { label: "Pièces reçues et classées", when: "Auto" },
+      { label: "Devoir de conseil tracé", when: "Auto" },
     ],
     beforeAfter: { before: "8 h / mois", after: "1 h / mois" },
-    pane: "reminders",
     tasks: [
       {
         title: "Collecte des pièces",
@@ -152,15 +157,14 @@ export const TRADES: Trade[] = [
     headline: "Les justificatifs manquants se réclament d'eux-mêmes",
     intro:
       "Relance des pièces manquantes, tri de la boîte mail, onboarding des nouveaux clients, factures reçues à classer : autant de tâches qui reviennent chaque mois. On les automatise pour que vos collaborateurs se concentrent sur la production et le conseil.",
+    trigger: { icon: "mail", title: "Nouveau mail reçu", detail: "Boulangerie Petit · facture fournisseur" },
     steps: [
-      { label: "Mail reçu" },
-      { label: "Tri par client", badge: "Automatique" },
-      { label: "Facture classée" },
-      { label: "Pièce manquante relancée", badge: "Toutes les nuits" },
-      { label: "Dossier complet" },
+      { label: "Rangé chez le bon client", when: "Auto" },
+      { label: "Facture classée", when: "Auto" },
+      { label: "Pièce manquante relancée", when: "Chaque nuit" },
+      { label: "Dossier complet", when: "Auto" },
     ],
     beforeAfter: { before: "10 h / mois", after: "1 h 30 / mois" },
-    pane: "inbox",
     tasks: [
       {
         title: "Relance des pièces manquantes",

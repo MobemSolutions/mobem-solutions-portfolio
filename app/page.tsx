@@ -9,8 +9,6 @@ import {
   Method,
   Trust,
   Pricing,
-  Team,
-  Testimonials,
   Faq,
 } from "@/components/home/sections"
 import { ClosingBand } from "@/components/home/closing-band"
@@ -113,8 +111,6 @@ export default function HomePage() {
         <Method />
         <Trust />
         <Pricing />
-        <Team />
-        <Testimonials />
         <Faq />
         <ClosingBand />
       </main>

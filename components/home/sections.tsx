@@ -13,13 +13,10 @@ import {
   FAQ,
   UNDER_THE_HOOD,
   TRUST_LINE,
-  beforeAfterLine,
 } from "@/lib/automation-content"
 import { Container, SectionHeading, SourceCaption, FaqList } from "@/components/home/primitives"
 import { DiagnosticButton } from "@/components/diagnostic-button"
-import { WorkflowPanel } from "@/components/automation/workflow-panel"
-import { BeforeAfterCard, ProofPane } from "@/components/automation/panes"
-import { TradeVisual } from "@/components/automation/trade-visual"
+import { FlowDemo } from "@/components/automation/flow-demo"
 
 /* ─── Hero ────────────────────────────────────────── */
 export function Hero() {
@@ -49,23 +46,10 @@ export function Hero() {
         <p className="mt-5 type-meta text-charcoal">45 min · Sans engagement · Vos données restent chez vous</p>
       </Container>
 
-      {/* Démo workflow */}
-      <Container className="relative mt-14 sm:mt-20">
-        <div className="blue-field relative overflow-hidden rounded-[20px] p-3 sm:p-8 lg:p-10">
-          <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:items-end">
-            <ProofPane />
-            <div className="flex flex-col gap-4">
-              <BeforeAfterCard data={qualiopi.beforeAfter} />
-              <div className="rounded-[20px] bg-black/40 p-4 text-left text-white backdrop-blur-md">
-                <p className="type-meta">Organisme de formation · Qualiopi</p>
-                <p className="mt-1 text-[14px] leading-[1.5] text-white/80">
-                  Chaque inscription déclenche la suite : convocation, questionnaire, relance, preuve rangée.
-                </p>
-              </div>
-            </div>
-          </div>
-          <WorkflowPanel steps={qualiopi.steps} title="Parcours stagiaire" className="mt-4" />
-        </div>
+      {/* Démo : déclencheur → étapes → résultat */}
+      <Container className="relative mt-16 sm:mt-24">
+        <FlowDemo trigger={qualiopi.trigger} steps={qualiopi.steps} result={qualiopi.beforeAfter} orientation="horizontal" />
+        <p className="mt-4 text-center type-caption text-charcoal">Organisme de formation Qualiopi : chaque inscription déclenche la suite, sans personne derrière.</p>
       </Container>
     </section>
   )
@@ -123,30 +107,26 @@ export function TradeRows() {
           text="Trois métiers où les mêmes tâches reviennent chaque semaine. Voici ce qu'on automatise, et le temps que ça représente."
           align="center"
         />
-        <div className="mt-16 flex flex-col gap-20 lg:gap-28">
+        <div className="mt-20 flex flex-col gap-24 lg:mt-28 lg:gap-36">
           {TRADES.map((trade, i) => (
-            <article key={trade.slug} className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16" aria-labelledby={`${trade.slug}-title`}>
+            <article key={trade.slug} className="grid items-center gap-10 lg:grid-cols-2 lg:gap-20" aria-labelledby={`${trade.slug}-title`}>
               <div className={cn("flex flex-col", i % 2 === 1 && "lg:order-2")}>
                 <p className="type-meta text-charcoal">{trade.eyebrow}</p>
                 <h3 id={`${trade.slug}-title`} className="type-section mt-3 text-ink text-balance">
                   {trade.headline}
                 </h3>
                 <p className="type-body mt-5 text-charcoal">{trade.intro}</p>
-                <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-                  {trade.tasks.map((task) => (
-                    <li key={task.title} className="flex items-start gap-2 text-[15px] font-[550] text-graphite">
-                      <Check className="mt-1 h-4 w-4 shrink-0 text-blue" strokeWidth={2.5} aria-hidden="true" />
-                      {task.title}
-                    </li>
-                  ))}
-                </ul>
-                <p className="mt-6 type-meta text-graphite">{beforeAfterLine(trade.beforeAfter)}</p>
-                <Link href={trade.href} className="mt-6 inline-flex items-center gap-2 self-start type-nav text-graphite underline-offset-4 hover:underline">
+                <Link href={trade.href} className="mt-8 inline-flex items-center gap-2 self-start type-nav text-graphite underline-offset-4 hover:underline">
                   Voir la page {trade.navLabel.toLowerCase()}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
-              <TradeVisual trade={trade} className={cn(i % 2 === 1 && "lg:order-1")} />
+              <FlowDemo
+                trigger={trade.trigger}
+                steps={trade.steps}
+                result={trade.beforeAfter}
+                className={cn(i % 2 === 1 && "lg:order-1")}
+              />
             </article>
           ))}
         </div>
@@ -323,26 +303,6 @@ export function Team() {
             </li>
           ))}
         </ul>
-      </Container>
-    </section>
-  )
-}
-
-/* ─── Témoignages (pilotes en cours) ──────────────── */
-export function Testimonials() {
-  return (
-    <section className="py-16 lg:py-24" aria-labelledby="temoignages-heading">
-      <Container>
-        <SectionHeading id="temoignages-heading" eyebrow="Résultats clients" title="Des heures mesurées, pas promises" align="center" />
-        <div className="card-lift mx-auto mt-10 max-w-[640px] p-6 text-center sm:p-8">
-          <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-black/[0.05]" aria-hidden="true">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-blue" />
-          </span>
-          <p className="mt-5 type-feature text-ink">Premiers pilotes en cours — résultats publiés dès qu&apos;ils sont mesurés.</p>
-          <p className="mt-3 text-[15px] leading-[1.6] text-charcoal">
-            Pas de témoignage inventé ni de logo emprunté : chaque résultat affiché ici sera un chiffre mesuré chez un client, avec son accord.
-          </p>
-        </div>
       </Container>
     </section>
   )
