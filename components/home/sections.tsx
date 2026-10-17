@@ -25,9 +25,11 @@ export function Hero() {
     <section id="hero" className="relative overflow-hidden pt-28 sm:pt-36" aria-labelledby="hero-heading">
       <div className="blue-glow pointer-events-none absolute inset-x-0 top-0 h-[720px]" aria-hidden="true" />
       <Container className="relative flex flex-col items-center text-center">
-        <p className="chip-dark animate-in fade-in-0 slide-in-from-bottom-4 duration-700 fill-mode-both">
-          <span className="rounded-[10px] bg-blue px-2 py-0.5 text-[12px]">Nouveau</span>
-          Facture électronique : nous préparons vos flux pour 2027
+        <p className="chip-dark animate-in fade-in-0 slide-in-from-bottom-4 duration-700 fill-mode-both max-w-full whitespace-nowrap">
+          <span className="shrink-0 rounded-[10px] bg-blue px-2 py-0.5 text-[12px]">Nouveau</span>
+          {/* Version courte sur mobile pour tenir sur une ligne */}
+          <span className="sm:hidden">Facture électronique 2027</span>
+          <span className="max-sm:hidden">Facture électronique : nous préparons vos flux pour 2027</span>
         </p>
         <h1 id="hero-heading" className="animate-in fade-in-0 slide-in-from-bottom-4 duration-700 fill-mode-both delay-100 type-display mt-8 max-w-[22ch] text-ink text-balance">
           Vos tâches administratives tournent toutes seules. Vous récupérez vos <span className="text-sweep">heures.</span>
