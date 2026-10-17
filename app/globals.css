@@ -705,20 +705,45 @@ a.card-lift, [data-ripple] { position: relative; overflow: hidden; }
   animation: loading-shimmer 1.6s ease-in-out infinite;
 }
 
-/* Méthode : étape active mise en avant, relais automatique entre les cartes */
+/* Méthode : étape active mise en avant par un contour lumineux qui tourne autour de la carte */
+@property --method-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
 .method-step {
   transition: transform 700ms cubic-bezier(.65,0,.35,1), box-shadow 700ms cubic-bezier(.65,0,.35,1);
 }
+.method-step::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: conic-gradient(from var(--method-angle), transparent 0deg, transparent 220deg, #42aef7 290deg, #0d44e8 340deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 600ms ease;
+  pointer-events: none;
+}
 .method-step-on {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-card), 0 0 0 1.5px rgba(13, 68, 232, 0.35), 0 24px 40px -18px rgba(13, 68, 232, 0.3);
+  box-shadow: var(--shadow-card), 0 24px 40px -18px rgba(13, 68, 232, 0.3);
 }
+.method-step-on::before {
+  opacity: 1;
+  animation: method-orbit 2600ms linear infinite;
+}
+@keyframes method-orbit {
+  to { --method-angle: 360deg; }
+}
+.method-icon {
+  transition: background-color 600ms cubic-bezier(.65,0,.35,1), color 600ms cubic-bezier(.65,0,.35,1), transform 600ms cubic-bezier(.34,1.56,.64,1);
+}
+.method-step-on .method-icon { transform: scale(1.08) rotate(-6deg); }
 .method-step:focus-visible { box-shadow: var(--shadow-card), 0 0 0 2px var(--color-electric-capture-blue); }
-@keyframes method-progress {
-  from { width: 0%; }
-  to   { width: 100%; }
-}
-.method-progress { animation: method-progress 2600ms linear forwards; }
 
 /* Chiffres clés : dégradé bleu */
 .figure-number {

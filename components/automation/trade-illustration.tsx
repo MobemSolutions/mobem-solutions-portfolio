@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils"
 
 /**
  * Illustrations vectorielles par métier, pensées pour être posées sur le champ bleu (.blue-field) :
- * cartes blanches flottantes, accents bleus, puces noires. Aucun texte essentiel (décoratif).
+ * cartes blanches flottantes, accents bleus. Seuls quelques repères (date, €, compteur) : purement décoratives.
  */
 
 const BLUE = "#0d44e8"
@@ -17,19 +17,6 @@ function Defs({ id }: { id: string }) {
         <feDropShadow dx="0" dy="14" stdDeviation="14" floodColor="#041855" floodOpacity="0.28" />
       </filter>
     </defs>
-  )
-}
-
-function Chip({ x, y, w, label, dark = true }: { x: number; y: number; w: number; label: string; dark?: boolean }) {
-  return (
-    <g>
-      <rect x={x} y={y} width={w} height={34} rx={14} fill={dark ? INK : "#fff"} />
-      <circle cx={x + 17} cy={y + 17} r={7} fill={BLUE} />
-      <path d={`M${x + 13.5} ${y + 17}l2.5 2.5 4.5-5`} stroke="#fff" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-      <text x={x + 31} y={y + 22} fontSize="13" fontWeight="600" fill={dark ? "#fff" : INK} fontFamily="inherit">
-        {label}
-      </text>
-    </g>
   )
 }
 
@@ -73,7 +60,6 @@ function Formation() {
           </g>
         ))}
       </g>
-      <Chip x={250} y={40} w={128} label="Qualiopi à jour" />
     </>
   )
 }
@@ -105,7 +91,6 @@ function Courtier() {
         <text x="375" y="112" textAnchor="middle" fontSize="34" fontWeight="700" fill={BLUE} fontFamily="inherit">30</text>
         <text x="375" y="131" textAnchor="middle" fontSize="12" fontWeight="600" fill={INK} fontFamily="inherit">JUIN</text>
       </g>
-      <Chip x={60} y={278} w={136} label="Relance envoyée" />
     </>
   )
 }
@@ -141,7 +126,6 @@ function Comptable() {
         <circle cx="414" cy="40" r="13" fill={INK} />
         <text x="414" y="45" textAnchor="middle" fontSize="13" fontWeight="700" fill="#fff" fontFamily="inherit">3</text>
       </g>
-      <Chip x={52} y={286} w={140} label="Dossier complet" />
     </>
   )
 }

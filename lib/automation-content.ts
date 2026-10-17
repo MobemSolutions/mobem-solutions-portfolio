@@ -221,30 +221,41 @@ export const TOOLS = [
 ]
 
 // Chiffres de marché — chacun avec sa source affichée.
-export const FIGURES = [
+export const FIGURES: {
+  value: string
+  countFrom: number
+  countTo: number
+  suffix: string
+  label: string
+  source: string
+  icon: "building" | "receipt" | "badge"
+}[] = [
   {
     value: "40 %",
     countFrom: 0,
     countTo: 40,
     suffix: " %",
-    label: "des TPE-PME utilisent déjà une solution d'IA",
+    label: "des TPE-PME utilisent déjà l'IA",
     source: "Baromètre France Num 2026",
+    icon: "building",
   },
   {
     value: "2027",
     countFrom: 2000,
     countTo: 2027,
     suffix: "",
-    label: "toutes les PME et TPE devront émettre leurs factures en format électronique",
-    source: "Réforme de la facturation électronique — economie.gouv.fr",
+    label: "facture électronique obligatoire pour toutes les PME",
+    source: "economie.gouv.fr",
+    icon: "receipt",
   },
   {
     value: "32",
     countFrom: 0,
     countTo: 32,
     suffix: "",
-    label: "indicateurs à prouver pour la certification Qualiopi",
-    source: "Référentiel national qualité — Ministère du Travail",
+    label: "indicateurs à prouver pour Qualiopi",
+    source: "Ministère du Travail",
+    icon: "badge",
   },
 ]
 
