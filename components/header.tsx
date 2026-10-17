@@ -170,7 +170,7 @@ export function Header() {
 
           <div className="hidden lg:flex lg:items-center lg:gap-6">
             <a href="mailto:contact@mobem-solutions.com" className="link-underline type-nav text-graphite">
-              Me contacter
+              Nous écrire
             </a>
             <DiagnosticButton className="!py-1.5 !pl-4 !pr-1.5 gap-3">
               Diagnostic gratuit

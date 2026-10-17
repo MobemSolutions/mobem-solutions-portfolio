@@ -5,7 +5,7 @@
 **Theme:** light only (`forcedTheme="light"`).
 
 ## Positioning
-- Mobem sells **recovered hours, not software**. Mobem Solutions is Arnaud Clavier, solo concepteur-développeur en automatisation near Nantes: he finds the admin tasks wasting a small business's time, automates them on the client's own tools, then measures the hours saved. Copy is written in the first person (« je »); never mention a team, associates or a GME.
+- Mobem sells **recovered hours, not software**. Mobem Solutions (founded by Arnaud Clavier, solo, near Nantes) finds the admin tasks wasting a small business's time, automates them on the client's own tools, then measures the hours saved. Copy speaks for the company (« nous », « Mobem Solutions »), never in the founder's first person; never mention associates or a GME. The founder appears only once, discreetly (small black-and-white portrait on À propos).
 - Signature: « Diagnostiquer avant de prescrire. »
 - Priority audiences, one page each (`/metiers/...`): organismes de formation Qualiopi, courtiers en assurance, cabinets d'expertise comptable. Wider: TPE-PME de 2 à 50 personnes.
 - French, vouvoiement, short concrete sentences in the trade's own words.
@@ -51,5 +51,5 @@ Shadows: `shadow-card` (graphite multi-layer), `shadow-blue` (button inset), `sh
 - Blue only for booking/exploration controls and the active workflow step — never as a page background or text color.
 - Supporting copy in Soft Charcoal 18/30, not Ink.
 - No 700–800 display weights; no heavy black shadows; no colorful semantic badge palettes.
-- No robots, brains, glowing circuits. The only photo is Arnaud's portrait.
+- No robots, brains, glowing circuits. The only photo is the founder's small black-and-white portrait.
 - Screenshots/panes always cropped inside 20px media cards.

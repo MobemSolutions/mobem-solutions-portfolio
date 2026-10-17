@@ -30,7 +30,7 @@ export function Footer() {
               <MobemLogo />
             </Link>
             <p className="mt-5 max-w-[34ch] text-[15px] leading-[1.6] text-white/65">
-              Automatisation des tâches administratives pour TPE et PME, par Arnaud Clavier, concepteur-développeur en automatisation près de Nantes.
+              Automatisation des tâches administratives pour les TPE et PME, sur leurs propres outils. Basée près de Nantes.
             </p>
             <p className="mt-6 text-[20px] font-semibold tracking-[-0.01em]">« Diagnostiquer avant de prescrire. »</p>
           </div>

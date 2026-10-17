@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 const DETAILS = [
   {
     what: "Un échange de 45 minutes, en visio ou à Nantes.",
-    out: "La liste de vos tâches répétitives, le temps estimé pour chacune, et mes recommandations écrites.",
+    out: "La liste de vos tâches répétitives, le temps estimé pour chacune, et nos recommandations écrites.",
   },
   {
     what: "L'installation sur vos propres comptes, avec vos outils actuels.",
@@ -52,8 +52,8 @@ export default function MethodePage() {
               Diagnostiquer avant de prescrire.
             </h1>
             <p className="type-body mt-6 max-w-[60ch] text-charcoal">
-              Je ne vous vends pas un logiciel. Je regarde comment vous travaillez, j&apos;automatise ce qui vaut la peine de l&apos;être,
-              puis je mesure les heures que vous récupérez.
+              Mobem Solutions ne vous vend pas un logiciel. Nous regardons comment vous travaillez, automatisons ce qui vaut la
+              peine de l&apos;être, puis mesurons les heures que vous récupérez.
             </p>
             <div className="mt-8">
               <DiagnosticButton />

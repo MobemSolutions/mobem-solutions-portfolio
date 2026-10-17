@@ -90,7 +90,7 @@ export function FlowDiagram({ nodes, compact, vertical, className }: FlowDiagram
             key={node.label}
             className={cn(
               "relative flex items-center gap-4",
-              compact ? "py-3" : "py-4",
+              compact ? "py-4" : "py-5",
               row && "sm:flex-1 sm:flex-col sm:gap-3 sm:py-0"
             )}
           >
@@ -98,14 +98,14 @@ export function FlowDiagram({ nodes, compact, vertical, className }: FlowDiagram
             {!last && (
               <span
                 className={cn(
-                  "absolute w-1 overflow-hidden rounded-full bg-white/25",
+                  "absolute w-[3px] overflow-hidden rounded-full bg-white/25",
                   compact
-                    ? "left-[20px] top-[calc(50%+28px)] h-[calc(100%-56px)]"
-                    : "left-[26px] top-[calc(50%+34px)] h-[calc(100%-68px)]",
+                    ? "left-[20.5px] top-[calc(50%+31px)] h-[calc(100%-62px)]"
+                    : "left-[26.5px] top-[calc(50%+38px)] h-[calc(100%-76px)]",
                   row &&
                     (compact
-                      ? "sm:left-[calc(50%+28px)] sm:top-[20px] sm:h-1 sm:w-[calc(100%-56px)]"
-                      : "sm:left-[calc(50%+34px)] sm:top-[26px] sm:h-1 sm:w-[calc(100%-68px)]")
+                      ? "sm:left-[calc(50%+31px)] sm:top-[20.5px] sm:h-[3px] sm:w-[calc(100%-62px)]"
+                      : "sm:left-[calc(50%+38px)] sm:top-[26.5px] sm:h-[3px] sm:w-[calc(100%-76px)]")
                 )}
                 aria-hidden="true"
               >
@@ -124,7 +124,7 @@ export function FlowDiagram({ nodes, compact, vertical, className }: FlowDiagram
                 "flow-node relative z-10 flex shrink-0 items-center justify-center rounded-full",
                 compact ? "h-11 w-11" : "h-14 w-14",
                 reached ? "bg-white text-blue" : "bg-white/15 text-white/85 ring-1 ring-white/30",
-                active && "scale-110 shadow-[0_0_0_6px_rgba(255,255,255,0.16),0_10px_28px_rgba(4,24,85,0.45)]"
+                active && "scale-[1.06] shadow-[0_0_0_4px_rgba(255,255,255,0.18),0_10px_28px_rgba(4,24,85,0.45)]"
               )}
               aria-hidden="true"
             >

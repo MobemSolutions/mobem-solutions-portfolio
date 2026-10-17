@@ -6,13 +6,13 @@ import { ClosingBand } from "@/components/home/closing-band"
 import { Founder, Trust } from "@/components/home/sections"
 
 export const metadata: Metadata = {
-  title: "À propos — Arnaud Clavier, concepteur-développeur en automatisation | Mobem Solutions",
+  title: "À propos | Mobem Solutions — Automatisation des tâches administratives",
   description:
-    "Mobem Solutions, c'est Arnaud Clavier, concepteur-développeur en automatisation près de Nantes. Je repère les tâches administratives qui font perdre du temps aux TPE et PME, je les automatise et je mesure les heures gagnées.",
+    "Mobem Solutions repère les tâches administratives qui font perdre du temps aux TPE et PME, les automatise sur leurs propres outils et mesure les heures gagnées. Basée près de Nantes.",
   alternates: { canonical: "https://mobem-solutions.com/a-propos" },
   openGraph: {
     title: "À propos — Mobem Solutions",
-    description: "Un seul interlocuteur, du diagnostic à la maintenance. Je vends des heures récupérées, pas du logiciel.",
+    description: "Un seul interlocuteur, du diagnostic à la maintenance. Des heures récupérées, pas du logiciel.",
     url: "https://mobem-solutions.com/a-propos",
   },
 }
@@ -20,15 +20,15 @@ export const metadata: Metadata = {
 const VALUES = [
   {
     title: "Des heures, pas du logiciel",
-    text: "Ce que je vous livre, c'est du temps. Chaque automatisation est jugée sur les heures qu'elle vous rend chaque mois.",
+    text: "Ce que nous livrons, c'est du temps. Chaque automatisation est jugée sur les heures qu'elle vous rend chaque mois.",
   },
   {
     title: "Vos outils, vos comptes",
-    text: "Je travaille avec ce que vous utilisez déjà, installé chez vous. Vous gardez la main, même si nous arrêtons de travailler ensemble.",
+    text: "Nous travaillons avec ce que vous utilisez déjà, installé chez vous. Vous gardez la main, même si nous arrêtons de travailler ensemble.",
   },
   {
     title: "Des chiffres honnêtes",
-    text: "Pas de témoignage inventé, pas de promesse en l'air. Je mesure avant, je mesure après, et je vous montre l'écart.",
+    text: "Pas de témoignage inventé, pas de promesse en l'air. Nous mesurons avant, puis après, et vous montrons l'écart.",
   },
 ]
 
@@ -42,20 +42,18 @@ export default function AProposPage() {
           <Container className="relative flex flex-col items-center text-center">
             <p className="chip-dark">À propos</p>
             <h1 id="apropos-heading" className="type-display mt-8 max-w-[18ch] text-ink text-balance">
-              Je rends leurs heures aux petites entreprises.
+              Rendre leurs heures aux petites entreprises.
             </h1>
             <p className="type-body mt-6 max-w-[62ch] text-charcoal">
-              Mobem Solutions, c&apos;est moi, Arnaud Clavier. Je repère les tâches administratives qui vous font perdre du temps,
-              je les automatise sur vos propres outils, puis je mesure les heures gagnées.
+              Mobem Solutions repère les tâches administratives qui vous font perdre du temps, les automatise sur vos propres
+              outils, puis mesure les heures gagnées.
             </p>
           </Container>
         </section>
 
-        <Founder />
-
         <section className="py-16 lg:py-24" aria-labelledby="valeurs-heading">
           <Container>
-            <SectionHeading id="valeurs-heading" eyebrow="Ce qui me guide" title="Diagnostiquer avant de prescrire." />
+            <SectionHeading id="valeurs-heading" eyebrow="Ce qui nous guide" title="Diagnostiquer avant de prescrire." />
             <ul className="mt-12 grid gap-4 md:grid-cols-3">
               {VALUES.map((v) => (
                 <li key={v.title} className="card-lift card-hover p-6">
@@ -67,6 +65,7 @@ export default function AProposPage() {
           </Container>
         </section>
 
+        <Founder />
         <Trust />
         <ClosingBand />
       </main>

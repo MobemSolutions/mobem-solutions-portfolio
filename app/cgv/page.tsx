@@ -286,7 +286,7 @@ export default function CgvPage() {
     <LegalLayout
       current="/cgv"
       title="Conditions générales de vente"
-      intro={<p>Comment se déroulent mes missions d&apos;automatisation, du diagnostic gratuit à la maintenance.</p>}
+      intro={<p>Comment se déroulent nos missions d&apos;automatisation, du diagnostic gratuit à la maintenance.</p>}
       updated="En vigueur au 17 octobre 2026"
       sections={SECTIONS}
     />
