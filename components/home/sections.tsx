@@ -13,7 +13,7 @@ import {
 } from "@/lib/automation-content"
 import { Container, SectionHeading, SourceCaption, FaqList } from "@/components/home/primitives"
 import { DiagnosticButton } from "@/components/diagnostic-button"
-import { HeroWeek } from "@/components/home/hero-week"
+import { HeroIllustration } from "@/components/home/hero-illustration"
 import { TradeCarousel } from "@/components/home/trade-carousel"
 import { MethodSteps } from "@/components/home/method-steps"
 import { TOOL_LOGOS, ToolLogo } from "@/components/home/tool-logos"
@@ -48,7 +48,7 @@ export function Hero() {
 
       {/* Démo : déclencheur → étapes → résultat */}
       <Container className="animate-in fade-in-0 slide-in-from-bottom-4 duration-700 fill-mode-both delay-500 relative mt-16 sm:mt-24">
-        <HeroWeek />
+        <HeroIllustration />
       </Container>
     </section>
   )
