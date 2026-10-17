@@ -639,10 +639,24 @@ a.card-lift:active { transform: translateY(-1px) scale(0.99); transition-duratio
 .faq-details summary:hover { color: var(--color-electric-capture-blue); }
 
 /* Pastilles du schéma : réagissent au survol */
-.flow-node { transition: transform 300ms cubic-bezier(.2,.7,.2,1), background-color 500ms ease, box-shadow 500ms ease; }
+.flow-node { transition: transform 250ms cubic-bezier(.2,.7,.2,1), background-color 300ms ease, box-shadow 300ms ease; }
 .flow-node:hover { transform: scale(1.12) rotate(-4deg); }
 
 /* Logo */
 .logo-mark { transition: transform 400ms cubic-bezier(.2,.7,.2,1); }
 a:hover > .logo-mark { transform: rotate(-8deg) scale(1.08); }
 a.card-lift, [data-ripple] { position: relative; overflow: hidden; }
+
+/* Contrôles du carrousel : boutons ronds discrets, retour tactile doux */
+.carousel-chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 9999px;
+  color: var(--color-graphite);
+  transition: background-color 200ms ease, transform 200ms cubic-bezier(.2,.7,.2,1);
+}
+.carousel-chevron:hover { background-color: rgba(22, 22, 24, 0.08); }
+.carousel-chevron:active { transform: scale(0.88); transition-duration: 80ms; }

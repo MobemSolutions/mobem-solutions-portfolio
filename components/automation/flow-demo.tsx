@@ -72,7 +72,7 @@ interface FlowDiagramProps {
  */
 export function FlowDiagram({ nodes, compact, vertical, className }: FlowDiagramProps) {
   // Une pause en fin de boucle : tout le schéma reste allumé un instant.
-  const tick = useCycle(nodes.length + 1, 1300, nodes.length)
+  const tick = useCycle(nodes.length + 1, 750, nodes.length)
   const row = !vertical
 
   return (
@@ -107,7 +107,7 @@ export function FlowDiagram({ nodes, compact, vertical, className }: FlowDiagram
               >
                 <span
                   className={cn(
-                    "absolute inset-0 rounded-full bg-white transition-transform duration-700 ease-out",
+                    "absolute inset-0 rounded-full bg-white transition-transform duration-[400ms] ease-out",
                     row ? "origin-top sm:origin-left" : "origin-top",
                     i < tick ? "scale-x-100 scale-y-100" : row ? "scale-y-0 sm:scale-x-0 sm:scale-y-100" : "scale-y-0"
                   )}
@@ -129,7 +129,7 @@ export function FlowDiagram({ nodes, compact, vertical, className }: FlowDiagram
 
             <span
               className={cn(
-                "text-[15px] font-[550] leading-[1.25] transition-colors duration-500",
+                "text-[15px] font-[550] leading-[1.25] transition-colors duration-300",
                 row && "sm:max-w-[11ch] sm:text-center",
                 reached ? "text-white" : "text-white/85",
                 compact && "sr-only"

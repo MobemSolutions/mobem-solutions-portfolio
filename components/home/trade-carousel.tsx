@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { ArrowLeft, ArrowRight, Pause, Play } from "lucide-react"
+import { ArrowRight, ChevronLeft, ChevronRight, Pause, Play } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { TRADES } from "@/lib/automation-content"
 import { FlowDemo } from "@/components/automation/flow-demo"
@@ -84,55 +84,64 @@ export function TradeCarousel({ autoPlayInterval = 7000 }: TradeCarouselProps) {
         })}
       </div>
 
-      {/* Onglets reliés + contrôles */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-        <div className="grid flex-1 grid-cols-3 gap-2" role="tablist" aria-label="Choisir un métier">
-          {TRADES.map((trade, i) => {
-            const active = i === index
-            return (
-              <button
-                key={trade.slug}
-                type="button"
-                role="tab"
-                data-ripple
-                aria-selected={active}
-                onClick={() => go(i)}
-                className={cn(
-                  "group flex flex-col gap-2.5 rounded-[14px] px-3 py-3 text-left transition-colors hover:bg-black/[0.04] hover:text-graphite",
-                  active ? "text-graphite" : "text-charcoal"
-                )}
-              >
-                <span className="h-[3px] w-full overflow-hidden rounded-full bg-black/[0.08] transition-[height] duration-200 group-hover:h-[5px]" aria-hidden="true">
+      {/* Contrôles façon apple.com : pilule givrée (chevrons + points), bouton lecture/pause rond */}
+      <div className="flex items-center justify-center gap-3">
+        <div className="flex items-center gap-1 rounded-full bg-black/[0.05] p-1 backdrop-blur-xl">
+          <button type="button" onClick={() => go(index - 1)} className="carousel-chevron" aria-label="Métier précédent">
+            <ChevronLeft className="h-4 w-4" strokeWidth={2.5} aria-hidden="true" />
+          </button>
+          <div className="flex items-center gap-0.5 px-1" role="tablist" aria-label="Choisir un métier">
+            {TRADES.map((trade, i) => {
+              const active = i === index
+              return (
+                <button
+                  key={trade.slug}
+                  type="button"
+                  role="tab"
+                  aria-selected={active}
+                  aria-label={trade.navLabel}
+                  title={trade.navLabel}
+                  onClick={() => go(i)}
+                  className="group flex h-6 min-w-6 items-center justify-center"
+                >
                   <span
-                    key={active ? `${index}-${autoplay}` : "idle"}
-                    className={cn("block h-full rounded-full bg-blue", active ? (autoplay ? "carousel-progress" : "w-full") : "w-0")}
-                    style={active && autoplay ? { animationDuration: `${autoPlayInterval}ms` } : undefined}
-                    onAnimationEnd={() => go(index + 1)}
-                  />
-                </span>
-                <span className="truncate text-[14px] font-[550] sm:text-[15px]">{trade.navLabel}</span>
-              </button>
-            )
-          })}
-        </div>
-        <div className="flex items-center gap-2 self-end sm:self-auto">
-          {!reducedMotion && (
-            <button
-              type="button"
-              onClick={() => setPaused((p) => !p)}
-              className="icon-control"
-              aria-label={paused ? "Reprendre le défilement" : "Mettre en pause le défilement"}
-            >
-              {paused ? <Play className="h-4 w-4" aria-hidden="true" /> : <Pause className="h-4 w-4" aria-hidden="true" />}
-            </button>
-          )}
-          <button type="button" onClick={() => go(index - 1)} className="icon-control" aria-label="Métier précédent">
-            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-          </button>
-          <button type="button" onClick={() => go(index + 1)} className="icon-control" aria-label="Métier suivant">
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                    className={cn(
+                      "relative block h-2 overflow-hidden rounded-full transition-[width,background-color] duration-500 ease-[cubic-bezier(.2,.7,.2,1)]",
+                      active ? "w-12 bg-black/[0.14]" : "w-2 bg-black/25 group-hover:bg-black/45"
+                    )}
+                    aria-hidden="true"
+                  >
+                    {active && (
+                      <span
+                        key={`${index}-${autoplay}`}
+                        className={cn("absolute inset-y-0 left-0 block rounded-full bg-graphite", autoplay ? "carousel-progress" : "w-full")}
+                        style={autoplay ? { animationDuration: `${autoPlayInterval}ms` } : undefined}
+                        onAnimationEnd={() => go(index + 1)}
+                      />
+                    )}
+                  </span>
+                </button>
+              )
+            })}
+          </div>
+          <button type="button" onClick={() => go(index + 1)} className="carousel-chevron" aria-label="Métier suivant">
+            <ChevronRight className="h-4 w-4" strokeWidth={2.5} aria-hidden="true" />
           </button>
         </div>
+        {!reducedMotion && (
+          <button
+            type="button"
+            onClick={() => setPaused((p) => !p)}
+            className="carousel-chevron h-10 w-10 bg-black/[0.05] backdrop-blur-xl"
+            aria-label={paused ? "Reprendre le défilement" : "Mettre en pause le défilement"}
+          >
+            {paused ? (
+              <Play className="ml-0.5 h-3.5 w-3.5 fill-current" aria-hidden="true" />
+            ) : (
+              <Pause className="h-3.5 w-3.5 fill-current" aria-hidden="true" />
+            )}
+          </button>
+        )}
       </div>
     </div>
   )
