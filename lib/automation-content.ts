@@ -1,0 +1,364 @@
+// Contenu éditorial du site Mobem Solutions — studio d'automatisation.
+// Règle : aucun jargon (n8n, API, workflow, agent IA) dans les titres, boutons ou le hero.
+// Tous les volumes horaires présentés sont des « exemples types », jamais des résultats clients.
+
+export const CALENDLY_URL = "https://calendly.com/contact-mobem-solutions/15min"
+
+export const TRUST_LINE = "Installé sur vos propres comptes. Vos données restent chez vous."
+
+export interface WorkflowStep {
+  label: string
+  badge?: string
+}
+
+export interface BeforeAfter {
+  before: string
+  after: string
+}
+
+export interface TradeTask {
+  title: string
+  text: string
+}
+
+export interface Trade {
+  slug: string
+  href: string
+  navLabel: string
+  audience: string
+  eyebrow: string
+  headline: string
+  intro: string
+  steps: WorkflowStep[]
+  beforeAfter: BeforeAfter
+  pane: "proof" | "reminders" | "inbox"
+  tasks: TradeTask[]
+  faq: { question: string; answer: string }[]
+  metaTitle: string
+  metaDescription: string
+}
+
+export const TRADES: Trade[] = [
+  {
+    slug: "organismes-de-formation",
+    href: "/metiers/organismes-de-formation",
+    navLabel: "Organismes de formation",
+    audience: "Organismes de formation certifiés Qualiopi",
+    eyebrow: "Organismes de formation",
+    headline: "Vos preuves Qualiopi se tiennent à jour toutes seules",
+    intro:
+      "Convocations, émargements, questionnaires à chaud et à froid, relances OPCO : chaque session laisse des traces à classer. On les fait partir et se ranger d'elles-mêmes, pour que l'audit se prépare sans courir après les documents.",
+    steps: [
+      { label: "Nouvelle inscription" },
+      { label: "Convocation J-7", badge: "Automatique" },
+      { label: "Questionnaire à chaud" },
+      { label: "Relance", badge: "Relance J+5" },
+      { label: "Preuve d'audit à jour" },
+    ],
+    beforeAfter: { before: "6 h / mois", after: "45 min / mois" },
+    pane: "proof",
+    tasks: [
+      {
+        title: "Convocations et rappels",
+        text: "Dès qu'un stagiaire est inscrit, la convocation part avec le programme, le lieu et les horaires. Un rappel suit la veille.",
+      },
+      {
+        title: "Émargements et attestations",
+        text: "Les feuilles d'émargement sont collectées et rangées par session. Les attestations de fin de formation sont générées et envoyées.",
+      },
+      {
+        title: "Questionnaires de satisfaction",
+        text: "Questionnaire à chaud le dernier jour, à froid quelques semaines après. Les retardataires sont relancés, les réponses consolidées.",
+      },
+      {
+        title: "Dossiers OPCO",
+        text: "Les pièces attendues par l'OPCO sont rassemblées dans le bon dossier et les relances partent à la bonne date.",
+      },
+    ],
+    faq: [
+      {
+        question: "Faut-il changer de logiciel de gestion de formation ?",
+        answer:
+          "Non. On part de vos outils actuels : votre tableur, votre messagerie, votre logiciel de gestion s'il en a un. L'automatisation se branche dessus.",
+      },
+      {
+        question: "Les preuves sont-elles utilisables le jour de l'audit ?",
+        answer:
+          "C'est l'objectif : chaque preuve est rangée par session et par indicateur dans votre propre espace de stockage, avec un tableau de suivi qui montre ce qui manque.",
+      },
+    ],
+    metaTitle: "Automatisation pour organismes de formation Qualiopi | Mobem Solutions",
+    metaDescription:
+      "Convocations, émargements, questionnaires, preuves d'audit, relances OPCO : vos tâches Qualiopi tournent toutes seules, sur vos propres outils. Diagnostic gratuit.",
+  },
+  {
+    slug: "courtiers-assurance",
+    href: "/metiers/courtiers-assurance",
+    navLabel: "Courtiers",
+    audience: "Courtiers en assurance",
+    eyebrow: "Courtiers en assurance",
+    headline: "Les pièces arrivent, les échéances se relancent",
+    intro:
+      "Collecte des pièces, relances avant échéance, traçabilité du devoir de conseil : votre cabinet passe des heures à courir après les justificatifs. On automatise la collecte et le suivi, et vos chargés de clientèle retrouvent du temps pour conseiller.",
+    steps: [
+      { label: "Nouveau dossier" },
+      { label: "Demande de pièces", badge: "Automatique" },
+      { label: "Pièce reçue et classée" },
+      { label: "Relance échéance", badge: "J-30" },
+      { label: "Devoir de conseil tracé" },
+    ],
+    beforeAfter: { before: "8 h / mois", after: "1 h / mois" },
+    pane: "reminders",
+    tasks: [
+      {
+        title: "Collecte des pièces",
+        text: "Le client reçoit la liste exacte des justificatifs à fournir. Chaque pièce reçue est renommée et rangée dans son dossier.",
+      },
+      {
+        title: "Relances d'échéances",
+        text: "Les contrats qui arrivent à échéance sont repérés à l'avance et la relance part au bon moment, avec le bon interlocuteur en copie.",
+      },
+      {
+        title: "Devoir de conseil",
+        text: "Les recueils de besoins et les documents remis sont horodatés et archivés : la trace existe sans saisie supplémentaire.",
+      },
+      {
+        title: "Pièces manquantes",
+        text: "Un tableau montre en un coup d'œil les dossiers incomplets. Les relances partent seules, jusqu'à réception.",
+      },
+    ],
+    faq: [
+      {
+        question: "Et si mon client répond à côté ou envoie la mauvaise pièce ?",
+        answer:
+          "Le dossier reste marqué incomplet et vous êtes prévenu. L'automatisation ne remplace pas votre jugement : elle vous évite de chercher où en est chaque dossier.",
+      },
+      {
+        question: "Fonctionne-t-il avec mon outil de gestion de cabinet ?",
+        answer:
+          "On le vérifie pendant le diagnostic. Dans la plupart des cas, on se branche sur votre messagerie, votre stockage de documents et votre outil métier.",
+      },
+    ],
+    metaTitle: "Automatisation pour courtiers en assurance | Mobem Solutions",
+    metaDescription:
+      "Collecte de pièces, relances d'échéances, traçabilité du devoir de conseil : automatisées sur vos propres outils. Diagnostic gratuit de 45 min.",
+  },
+  {
+    slug: "cabinets-comptables",
+    href: "/metiers/cabinets-comptables",
+    navLabel: "Cabinets comptables",
+    audience: "Cabinets d'expertise comptable",
+    eyebrow: "Cabinets d'expertise comptable",
+    headline: "Les justificatifs manquants se réclament d'eux-mêmes",
+    intro:
+      "Relance des pièces manquantes, tri de la boîte mail, onboarding des nouveaux clients, factures reçues à classer : autant de tâches qui reviennent chaque mois. On les automatise pour que vos collaborateurs se concentrent sur la production et le conseil.",
+    steps: [
+      { label: "Mail reçu" },
+      { label: "Tri par client", badge: "Automatique" },
+      { label: "Facture classée" },
+      { label: "Pièce manquante relancée", badge: "Toutes les nuits" },
+      { label: "Dossier complet" },
+    ],
+    beforeAfter: { before: "10 h / mois", after: "1 h 30 / mois" },
+    pane: "inbox",
+    tasks: [
+      {
+        title: "Relance des pièces manquantes",
+        text: "Chaque client reçoit la liste de ce qui manque pour sa période, puis une relance tant que ce n'est pas arrivé.",
+      },
+      {
+        title: "Tri de la boîte mail",
+        text: "Les mails entrants sont classés par client et par nature : facture, relevé, question, urgence. Plus rien ne se perd.",
+      },
+      {
+        title: "Onboarding client",
+        text: "Lettre de mission, liste des documents, accès : le nouveau client reçoit tout dans l'ordre, sans que personne n'ait à y penser.",
+      },
+      {
+        title: "Factures reçues",
+        text: "Les factures sont extraites des mails, renommées et déposées dans le bon dossier. Utile aussi pour préparer la facture électronique.",
+      },
+    ],
+    faq: [
+      {
+        question: "Est-ce compatible avec la facture électronique ?",
+        answer:
+          "Oui, c'est même un bon moment pour s'y préparer : on organise vos flux de factures reçues pour qu'ils soient prêts à basculer vers votre plateforme agréée.",
+      },
+      {
+        question: "Mes collaborateurs devront-ils apprendre un nouvel outil ?",
+        answer:
+          "Non. Ils continuent à travailler dans leur messagerie et leurs dossiers habituels. Ce qui change, c'est ce qu'ils n'ont plus à faire.",
+      },
+    ],
+    metaTitle: "Automatisation pour cabinets d'expertise comptable | Mobem Solutions",
+    metaDescription:
+      "Relance des pièces manquantes, tri de la boîte mail, onboarding client, factures reçues : automatisés sur vos propres outils. Diagnostic gratuit.",
+  },
+]
+
+export function beforeAfterLine(data: BeforeAfter) {
+  return `Avant : ${data.before} · Après : ${data.after} — exemple type`
+}
+
+export function getTrade(slug: string) {
+  return TRADES.find((t) => t.slug === slug)
+}
+
+export const TOOLS = [
+  "Gmail",
+  "Outlook",
+  "Google Sheets",
+  "Excel",
+  "Google Drive",
+  "Notion",
+  "Calendly",
+  "votre logiciel métier",
+]
+
+// Chiffres de marché — chacun avec sa source affichée.
+export const FIGURES = [
+  {
+    value: "40 %",
+    label: "des TPE-PME utilisent déjà une solution d'IA",
+    source: "Baromètre France Num 2026",
+  },
+  {
+    value: "2027",
+    label: "toutes les PME et TPE devront émettre leurs factures en format électronique",
+    source: "Réforme de la facturation électronique — economie.gouv.fr",
+  },
+  {
+    value: "32",
+    label: "indicateurs à prouver pour la certification Qualiopi",
+    source: "Référentiel national qualité — Ministère du Travail",
+  },
+]
+
+export const METHOD_STEPS = [
+  {
+    num: "01",
+    title: "Diagnostiquer",
+    text: "45 minutes pour lister vos tâches répétitives, estimer le temps qu'elles prennent et repérer celles qui valent la peine d'être automatisées.",
+  },
+  {
+    num: "02",
+    title: "Automatiser",
+    text: "On installe l'automatisation sur vos propres comptes, avec vos outils actuels. Vous validez chaque étape avant la mise en route.",
+  },
+  {
+    num: "03",
+    title: "Mesurer",
+    text: "On compare le temps passé avant et après. Vous savez combien d'heures vous récupérez chaque mois, chiffres à l'appui.",
+  },
+  {
+    num: "04",
+    title: "Maintenir",
+    text: "On surveille, on ajuste quand vos outils changent, et vous êtes alerté si une automatisation échoue.",
+  },
+]
+
+export const TRUST_POINTS = [
+  { title: "Installé sur vos comptes", text: "Rien ne tourne chez nous. Vous gardez la main sur chaque accès." },
+  { title: "Contrat RGPD", text: "Un accord de traitement des données encadre chaque intervention." },
+  { title: "Hébergement européen privilégié", text: "Quand un service tiers est nécessaire, on choisit d'abord une option hébergée en Europe." },
+  { title: "Alerte si une automatisation échoue", text: "Vous êtes prévenu immédiatement, et nous aussi." },
+]
+
+export const PRICING = [
+  {
+    name: "Diagnostic gratuit",
+    price: "0 €",
+    unit: "45 min",
+    text: "On liste vos tâches répétitives et on estime les heures récupérables. Sans engagement.",
+    items: ["Inventaire des tâches", "Estimation des heures gagnées", "Recommandations écrites"],
+    featured: true,
+  },
+  {
+    name: "Pilote",
+    price: "dès 900 € HT",
+    unit: "une tâche",
+    text: "Une première automatisation sur une tâche précise, pour mesurer le gain avant d'aller plus loin.",
+    items: ["Une automatisation installée", "Mesure avant / après", "Prise en main de votre équipe"],
+  },
+  {
+    name: "Pack métier",
+    price: "dès 2 500 € HT",
+    unit: "plusieurs tâches",
+    text: "Les automatisations clés de votre métier, pensées ensemble pour couvrir un processus complet.",
+    items: ["Plusieurs automatisations reliées", "Tableau de suivi", "Documentation de vos flux"],
+  },
+  {
+    name: "Maintenance",
+    price: "dès 90 € HT",
+    unit: "/ mois",
+    text: "Surveillance, ajustements quand vos outils évoluent, et alerte si quelque chose échoue.",
+    items: ["Surveillance continue", "Alerte en cas d'échec", "Ajustements inclus"],
+  },
+]
+
+export const TEAM = [
+  {
+    name: "Nathan Portier",
+    role: "Diagnostic & relation client",
+    description: "Nathan mène les diagnostics : il écoute comment vous travaillez, chiffre le temps perdu et priorise ce qui vaut la peine d'être automatisé.",
+    linkedin: "https://www.linkedin.com/in/nathan-portier/",
+    email: "nathan.portier@mobem-solutions.com",
+    photo: "/team/nathan.jpg",
+  },
+  {
+    name: "Arnaud Clavier",
+    role: "Automatisation & fiabilité",
+    description: "Arnaud construit les automatisations sur vos comptes, s'assure qu'elles tiennent dans la durée et qu'une alerte part si quelque chose coince.",
+    linkedin: "https://www.linkedin.com/in/arnaud-clvr/",
+    email: "arnaud.clavier@mobem-solutions.com",
+    photo: "/team/arnaud.jpg",
+  },
+  {
+    name: "Antoine Clavier",
+    role: "Parcours & prise en main",
+    description: "Antoine conçoit ce que vos clients et vos équipes voient : mails, formulaires, tableaux de suivi. Simple à lire, simple à utiliser.",
+    linkedin: "https://www.linkedin.com/in/antoine-clavier-561750204/",
+    email: "antoine.clavier@mobem-solutions.com",
+    photo: "/team/antoine.jpg",
+  },
+]
+
+export const FAQ = [
+  {
+    question: "Faut-il changer nos outils ?",
+    answer:
+      "Non. On automatise sur ce que vous utilisez déjà : votre messagerie, vos tableurs, votre stockage de documents, votre logiciel métier. Si un outil manque vraiment, on vous le dit pendant le diagnostic.",
+  },
+  {
+    question: "Où sont nos données ?",
+    answer:
+      "Chez vous. Les automatisations sont installées sur vos propres comptes, et un contrat RGPD encadre notre intervention. Quand un service tiers est nécessaire, on privilégie un hébergement européen.",
+  },
+  {
+    question: "Que se passe-t-il si une automatisation échoue ?",
+    answer:
+      "Vous êtes alerté, et nous aussi. Avec la maintenance, on corrige et on relance le traitement. Sans maintenance, vous gardez une documentation claire de ce qui a été installé.",
+  },
+  {
+    question: "Combien d'heures peut-on vraiment récupérer ?",
+    answer:
+      "Ça dépend de vos tâches, c'est tout l'objet du diagnostic. Les volumes affichés sur ce site sont des exemples types : pour vous, on mesure le temps passé avant et après, et on vous donne le vrai chiffre.",
+  },
+  {
+    question: "Quels outils techniques utilisez-vous ?",
+    answer:
+      "Sous le capot, on s'appuie principalement sur n8n, un outil d'automatisation open source qu'on peut installer sur vos comptes ou chez un hébergeur européen, et sur les API de vos logiciels. Quand c'est utile, un agent IA lit et trie des documents ou des mails — toujours avec une validation humaine sur ce qui compte.",
+  },
+  {
+    question: "Utilisez-vous l'intelligence artificielle ?",
+    answer:
+      "Seulement quand elle fait gagner du temps sans prendre de risque : classer un mail, lire une facture, résumer une pièce. Le reste est de l'automatisation classique, prévisible et vérifiable.",
+  },
+]
+
+export const UNDER_THE_HOOD = [
+  { name: "n8n", text: "Moteur d'automatisation open source, installé sur vos comptes ou chez un hébergeur européen." },
+  { name: "API de vos outils", text: "Les connexions officielles de Gmail, Outlook, Google Sheets, Excel, Notion ou de votre logiciel métier." },
+  { name: "Agent IA, si utile", text: "Pour lire, classer ou résumer un document. Toujours encadré, jamais seul sur une décision." },
+]

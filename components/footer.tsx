@@ -1,120 +1,86 @@
-"use client"
-
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowUpRight } from "lucide-react"
+import { TRADES } from "@/lib/automation-content"
 
-const navCabinet = [
-  { name: "Accueil", href: "/" },
-  { name: "Méthodes", href: "/methode" },
-  { name: "Réalisations", href: "/realisations" },
+const navStudio = [
+  { name: "Méthode", href: "/methode" },
+  { name: "Exemples", href: "/#exemples" },
+  { name: "Tarifs", href: "/#tarifs" },
   { name: "À propos", href: "/a-propos" },
+  { name: "Questions fréquentes", href: "/#faq" },
   { name: "Blog", href: "/blog" },
-  { name: "Contact", href: "/#contact" },
-]
-
-const navSeo = [
-  { name: "Sites par métier", href: "/metiers" },
-  { name: "Sites par ville", href: "/villes" },
-  { name: "Plan du site", href: "/plan-du-site" },
 ]
 
 const navLegal = [
   { name: "Mentions légales", href: "/mentions-legales" },
   { name: "CGV", href: "/cgv" },
   { name: "Confidentialité", href: "/confidentialite" },
+  { name: "Plan du site", href: "/plan-du-site" },
 ]
 
-const LINK = "inline-block text-[13px] text-inverted-foreground/65 hover:text-accent hover:translate-x-1 transition-[color,transform] duration-150"
-const HEAD = "text-[11px] font-semibold text-inverted-foreground/55 mb-2"
+const LINK = "text-[14px] text-white/65 transition-colors hover:text-white"
+const HEAD = "type-meta text-white"
 
 export function Footer() {
   return (
-    <footer className="bg-inverted text-inverted-foreground" role="contentinfo" aria-label="Pied de page">
-
-      {/* Top section */}
-      <div className="px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 lg:pt-32 pb-16 mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-0">
-
-          {/* Manifeste — grand titre */}
-          <div className="lg:col-span-6 lg:pr-12">
-
-            <h2 className="font-extrabold text-[clamp(40px,6vw,88px)] leading-[0.90] tracking-[-0.04em]">
-              Diagnostiquer<br />
-              <em className="font-serif font-normal italic tracking-[-0.02em] text-accent not-italic" style={{ fontStyle: "italic" }}>avant</em><br />
-              de prescrire.
-            </h2>
-
-            <p className="mt-6 text-[14px] text-inverted-foreground/55 leading-relaxed max-w-sm">
-              Agence digitale nantaise. Ingénierie, design et stratégie pour PME et ETI ambitieuses.
+    <footer className="bg-studio text-white" aria-label="Pied de page">
+      <div className="mx-auto max-w-[1200px] px-4 pb-10 pt-16 sm:px-6 lg:pt-20">
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+          <div>
+            <Link href="/" className="inline-flex items-center gap-2" aria-label="Mobem Solutions — Retour à l'accueil">
+              <Image src="/logos/mobem-mark-white.png" alt="" width={120} height={80} className="h-6 w-auto" />
+              <span className="text-[16px] font-semibold">Mobem Solutions</span>
+            </Link>
+            <p className="mt-5 max-w-[34ch] text-[15px] leading-[1.6] text-white/65">
+              Studio d&apos;automatisation des tâches administratives pour TPE et PME. Trois associés, basés à Nantes.
             </p>
+            <p className="mt-6 text-[20px] font-semibold tracking-[-0.01em]">« Diagnostiquer avant de prescrire. »</p>
           </div>
 
-          {/* Nav columns — 2-col sur mobile, transparent sur desktop */}
-          <div className="grid grid-cols-2 gap-x-6 gap-y-8 lg:contents">
+          <nav aria-label="Métiers" className="flex flex-col gap-3">
+            <span className={HEAD}>Métiers</span>
+            {TRADES.map((t) => (
+              <Link key={t.href} href={t.href} className={LINK}>
+                {t.navLabel}
+              </Link>
+            ))}
+            <Link href="/metiers" className={LINK}>
+              Tous les métiers
+            </Link>
+          </nav>
 
-            {/* Cabinet */}
-            <div className="lg:col-span-2 flex flex-col gap-2">
-              <span className={HEAD}>Cabinet</span>
-              {navCabinet.map((item) => (
-                <Link key={item.name} href={item.href} className={LINK}>
-                  {item.name}
-                </Link>
-              ))}
-            </div>
+          <nav aria-label="Studio" className="flex flex-col gap-3">
+            <span className={HEAD}>Studio</span>
+            {navStudio.map((item) => (
+              <Link key={item.name} href={item.href} className={LINK}>
+                {item.name}
+              </Link>
+            ))}
+          </nav>
 
-            {/* Référencement + Légal */}
-            <div className="lg:col-span-2 flex flex-col gap-2">
-              <span className={HEAD}>Référencement</span>
-              {navSeo.map((item) => (
-                <Link key={item.name} href={item.href} className={LINK}>
-                  {item.name}
-                </Link>
-              ))}
-              <span className={`${HEAD} mt-5`}>Légal</span>
-              {navLegal.map((item) => (
-                <Link key={item.name} href={item.href} className={LINK}>
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-
-            {/* Liens */}
-            <div className="lg:col-span-2 flex flex-col gap-2">
-              <span className={HEAD}>Liens</span>
-              <a
-                href="https://www.linkedin.com/in/mobem-solutions-136816404/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={LINK}
-              >
-                LinkedIn <ArrowUpRight className="inline w-3 h-3 mb-0.5" aria-hidden="true" />
-              </a>
-            </div>
-
+          <div className="flex flex-col gap-3">
+            <span className={HEAD}>Contact</span>
+            <a href="mailto:contact@mobem-solutions.com" className={LINK}>
+              contact@mobem-solutions.com
+            </a>
+            <a href="https://www.linkedin.com/in/mobem-solutions-136816404/" target="_blank" rel="noopener noreferrer" className={LINK}>
+              LinkedIn <ArrowUpRight className="inline h-3 w-3" aria-hidden="true" />
+            </a>
+            <span className={`${HEAD} mt-4`}>Légal</span>
+            {navLegal.map((item) => (
+              <Link key={item.name} href={item.href} className={LINK}>
+                {item.name}
+              </Link>
+            ))}
           </div>
+        </div>
 
+        <div className="mt-14 flex flex-col justify-between gap-2 border-t border-white/10 pt-6 type-caption text-white/60 sm:flex-row">
+          <span>© Mobem Solutions · {new Date().getFullYear()} · Nantes</span>
+          <span>Installé sur vos propres comptes. Vos données restent chez vous.</span>
         </div>
       </div>
-
-      {/* Bottom bar */}
-      <div className="border-t border-inverted-foreground/10 px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
-        <div className="py-5 flex flex-col sm:flex-row justify-between items-center gap-2 text-[11px] uppercase tracking-[0.06em] text-inverted-foreground/60 font-medium">
-          <span>© Mobem Solutions · {new Date().getFullYear()} · Tous droits réservés</span>
-          {/* <span className="whitespace-nowrap">SIRET&nbsp;: 91514447100017</span> */}
-          {/* Logo — bas droite */}
-          <Link href="/" className="group transition-opacity hover:opacity-70" aria-label="Mobem Solutions — Retour à l'accueil">
-            <Image
-              src="/logos/mobem-mark-white.png"
-              alt="Mobem Solutions"
-              width={120}
-              height={80}
-              className="h-7 w-auto opacity-60 group-hover:opacity-100 transition-opacity"
-            />
-          </Link>
-        </div>
-      </div>
-
     </footer>
   )
 }

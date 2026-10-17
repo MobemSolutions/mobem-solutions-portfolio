@@ -1,0 +1,361 @@
+import Image from "next/image"
+import Link from "next/link"
+import { ArrowRight, Check, Play, ShieldCheck, Server, FileLock2, BellRing, Linkedin, Mail } from "lucide-react"
+import { cn } from "@/lib/utils"
+import {
+  TRADES,
+  TOOLS,
+  FIGURES,
+  METHOD_STEPS,
+  TRUST_POINTS,
+  PRICING,
+  TEAM,
+  FAQ,
+  UNDER_THE_HOOD,
+  TRUST_LINE,
+  beforeAfterLine,
+} from "@/lib/automation-content"
+import { Container, SectionHeading, SourceCaption, FaqList } from "@/components/home/primitives"
+import { DiagnosticButton } from "@/components/diagnostic-button"
+import { WorkflowPanel } from "@/components/automation/workflow-panel"
+import { BeforeAfterCard, ProofPane } from "@/components/automation/panes"
+import { TradeVisual } from "@/components/automation/trade-visual"
+
+/* ─── Hero ────────────────────────────────────────── */
+export function Hero() {
+  const qualiopi = TRADES[0]
+  return (
+    <section id="hero" className="relative overflow-hidden pt-28 sm:pt-36" aria-labelledby="hero-heading">
+      <div className="blue-glow pointer-events-none absolute inset-x-0 top-0 h-[720px]" aria-hidden="true" />
+      <Container className="relative flex flex-col items-center text-center">
+        <p className="chip-dark">
+          <span className="rounded-[10px] bg-blue px-2 py-0.5 text-[12px]">Nouveau</span>
+          Facture électronique : on prépare vos flux pour 2027
+        </p>
+        <h1 id="hero-heading" className="type-display mt-8 max-w-[22ch] text-ink text-balance">
+          Vos tâches administratives tournent toutes seules. Vous récupérez vos <span className="text-sweep">heures.</span>
+        </h1>
+        <p className="type-body mt-6 max-w-[62ch] text-charcoal">
+          Relances, collecte de pièces, preuves d&apos;audit, tri des mails : on repère ce qui vous fait perdre du temps,
+          on l&apos;automatise sur vos propres outils, et on mesure les heures gagnées.
+        </p>
+        <div className="mt-8 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row">
+          <DiagnosticButton className="w-full sm:w-auto" />
+          <Link href="#exemples" className="btn-outline w-full sm:w-auto">
+            <Play className="h-4 w-4" aria-hidden="true" />
+            Voir un exemple en 2 min
+          </Link>
+        </div>
+        <p className="mt-5 type-meta text-charcoal">45 min · Sans engagement · Vos données restent chez vous</p>
+      </Container>
+
+      {/* Démo workflow */}
+      <Container className="relative mt-14 sm:mt-20">
+        <div className="blue-field relative overflow-hidden rounded-[20px] p-3 sm:p-8 lg:p-10">
+          <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:items-end">
+            <ProofPane />
+            <div className="flex flex-col gap-4">
+              <BeforeAfterCard data={qualiopi.beforeAfter} />
+              <div className="rounded-[20px] bg-black/40 p-4 text-left text-white backdrop-blur-md">
+                <p className="type-meta">Organisme de formation · Qualiopi</p>
+                <p className="mt-1 text-[14px] leading-[1.5] text-white/80">
+                  Chaque inscription déclenche la suite : convocation, questionnaire, relance, preuve rangée.
+                </p>
+              </div>
+            </div>
+          </div>
+          <WorkflowPanel steps={qualiopi.steps} title="Parcours stagiaire" className="mt-4" />
+        </div>
+      </Container>
+    </section>
+  )
+}
+
+/* ─── Outils compatibles ─────────────────────────── */
+export function ToolsStrip() {
+  return (
+    <section className="py-14" aria-label="Outils compatibles">
+      <Container className="flex flex-col items-center gap-5 text-center">
+        <p className="type-meta text-charcoal">Fonctionne avec les outils que vous utilisez déjà</p>
+        <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+          {TOOLS.map((tool) => (
+            <li key={tool} className="text-[17px] font-[550] tracking-[-0.01em] text-[#767677]">
+              {tool}
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </section>
+  )
+}
+
+/* ─── Chiffres sourcés ───────────────────────────── */
+export function Figures() {
+  return (
+    <section className="pb-16 lg:pb-24" aria-label="Chiffres clés">
+      <Container>
+        <dl className="grid gap-4 md:grid-cols-3">
+          {FIGURES.map((f) => (
+            <div key={f.value} className="card-lift flex flex-col p-6">
+              <dt className="sr-only">{f.label}</dt>
+              <dd className="text-[44px] font-semibold leading-none tracking-[-0.03em] text-ink">{f.value}</dd>
+              <dd className="mt-3 text-[16px] leading-[1.5] text-graphite">{f.label}</dd>
+              <dd className="mt-auto pt-5">
+                <SourceCaption>Source : {f.source}</SourceCaption>
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </Container>
+    </section>
+  )
+}
+
+/* ─── Lignes métiers (exemples) ──────────────────── */
+export function TradeRows() {
+  return (
+    <section id="exemples" className="py-16 lg:py-24" aria-labelledby="exemples-heading">
+      <Container>
+        <SectionHeading
+          id="exemples-heading"
+          eyebrow="Exemples par métier"
+          title="Ce qui tourne tout seul, métier par métier"
+          text="Trois métiers où les mêmes tâches reviennent chaque semaine. Voici ce qu'on automatise, et le temps que ça représente."
+          align="center"
+        />
+        <div className="mt-16 flex flex-col gap-20 lg:gap-28">
+          {TRADES.map((trade, i) => (
+            <article key={trade.slug} className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16" aria-labelledby={`${trade.slug}-title`}>
+              <div className={cn("flex flex-col", i % 2 === 1 && "lg:order-2")}>
+                <p className="type-meta text-charcoal">{trade.eyebrow}</p>
+                <h3 id={`${trade.slug}-title`} className="type-section mt-3 text-ink text-balance">
+                  {trade.headline}
+                </h3>
+                <p className="type-body mt-5 text-charcoal">{trade.intro}</p>
+                <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+                  {trade.tasks.map((task) => (
+                    <li key={task.title} className="flex items-start gap-2 text-[15px] font-[550] text-graphite">
+                      <Check className="mt-1 h-4 w-4 shrink-0 text-blue" strokeWidth={2.5} aria-hidden="true" />
+                      {task.title}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-6 type-meta text-graphite">{beforeAfterLine(trade.beforeAfter)}</p>
+                <Link href={trade.href} className="mt-6 inline-flex items-center gap-2 self-start type-nav text-graphite underline-offset-4 hover:underline">
+                  Voir la page {trade.navLabel.toLowerCase()}
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </div>
+              <TradeVisual trade={trade} className={cn(i % 2 === 1 && "lg:order-1")} />
+            </article>
+          ))}
+        </div>
+      </Container>
+    </section>
+  )
+}
+
+/* ─── Méthode ─────────────────────────────────────── */
+export function Method() {
+  return (
+    <section id="methode" className="py-16 lg:py-24" aria-labelledby="methode-heading">
+      <Container>
+        <SectionHeading
+          id="methode-heading"
+          eyebrow="Notre méthode"
+          title="Diagnostiquer avant de prescrire."
+          text="On ne vend pas un logiciel. On regarde comment vous travaillez, on automatise ce qui vaut la peine de l'être, puis on mesure."
+        />
+        <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {METHOD_STEPS.map((step, i) => (
+            <li key={step.num} className="card-lift flex flex-col gap-3 p-6">
+              <span
+                className={cn(
+                  "flex h-10 w-10 items-center justify-center rounded-full type-meta",
+                  i === 0 ? "bg-blue text-white shadow-blue" : "bg-black/[0.05] text-graphite"
+                )}
+                aria-hidden="true"
+              >
+                {step.num}
+              </span>
+              <h3 className="type-feature text-ink">{step.title}</h3>
+              <p className="text-[15px] leading-[1.6] text-charcoal">{step.text}</p>
+            </li>
+          ))}
+        </ol>
+      </Container>
+    </section>
+  )
+}
+
+/* ─── Confiance ───────────────────────────────────── */
+const TRUST_ICONS = [ShieldCheck, FileLock2, Server, BellRing]
+
+export function Trust() {
+  return (
+    <section className="py-16 lg:py-24" aria-labelledby="trust-heading">
+      <Container>
+        <div className="overflow-hidden rounded-[20px] bg-studio text-white">
+          <div className="grid gap-10 p-6 sm:p-10 lg:grid-cols-[1fr_1.1fr] lg:p-14">
+            <div>
+              <p className="type-meta text-white/60">Confiance</p>
+              <h2 id="trust-heading" className="type-section mt-3 max-w-[18ch] text-white text-balance">
+                {TRUST_LINE}
+              </h2>
+              <ul className="mt-8 grid gap-5 sm:grid-cols-2">
+                {TRUST_POINTS.map((p, i) => {
+                  const Icon = TRUST_ICONS[i]
+                  return (
+                    <li key={p.title} className="flex flex-col gap-2">
+                      <Icon className="h-5 w-5 text-[#7fa3ff]" aria-hidden="true" />
+                      <span className="text-[16px] font-[550]">{p.title}</span>
+                      <span className="text-[14px] leading-[1.5] text-white/65">{p.text}</span>
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+            <div className="rounded-[20px] bg-white/[0.06] p-6 ring-1 ring-white/10" aria-labelledby="hood-heading">
+              <p className="chip-light">Sous le capot</p>
+              <h3 id="hood-heading" className="mt-4 type-feature">Pour ceux qui veulent savoir comment ça marche</h3>
+              <ul className="mt-5 flex flex-col gap-4">
+                {UNDER_THE_HOOD.map((item) => (
+                  <li key={item.name} className="border-t border-white/10 pt-4">
+                    <span className="text-[15px] font-[550]">{item.name}</span>
+                    <p className="mt-1 text-[14px] leading-[1.55] text-white/65">{item.text}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  )
+}
+
+/* ─── Tarifs ──────────────────────────────────────── */
+export function Pricing() {
+  return (
+    <section id="tarifs" className="py-16 lg:py-24" aria-labelledby="tarifs-heading">
+      <Container>
+        <SectionHeading
+          id="tarifs-heading"
+          eyebrow="Tarifs"
+          title="On commence petit, on mesure, puis on décide"
+          text="Le diagnostic est gratuit. Ensuite, un pilote sur une seule tâche permet de vérifier le gain avant d'aller plus loin."
+          align="center"
+        />
+        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {PRICING.map((plan) => (
+            <li
+              key={plan.name}
+              className={cn("card-lift flex flex-col p-6", plan.featured && "ring-2 ring-blue")}
+            >
+              <h3 className="type-feature text-ink">{plan.name}</h3>
+              <p className="mt-4 text-[28px] font-semibold leading-tight tracking-[-0.02em] text-ink">{plan.price}</p>
+              <p className="type-meta text-charcoal">{plan.unit}</p>
+              <p className="mt-4 text-[15px] leading-[1.6] text-charcoal">{plan.text}</p>
+              <ul className="mt-5 flex flex-col gap-2 border-t border-border pt-5">
+                {plan.items.map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-[14px] text-graphite">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-blue" strokeWidth={2.5} aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-auto pt-6">
+                {plan.featured ? (
+                  <DiagnosticButton className="w-full">Réserver mon diagnostic</DiagnosticButton>
+                ) : (
+                  <Link href="#diagnostic" className="btn-outline w-full">
+                    En parler au diagnostic
+                  </Link>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+        <SourceCaption className="mt-6 text-center">
+          Prix indicatifs hors taxes. Le devis final dépend du nombre de tâches et des outils à connecter.
+        </SourceCaption>
+      </Container>
+    </section>
+  )
+}
+
+/* ─── Équipe ──────────────────────────────────────── */
+export function Team() {
+  return (
+    <section id="equipe" className="py-16 lg:py-24" aria-labelledby="equipe-heading">
+      <Container>
+        <SectionHeading
+          id="equipe-heading"
+          eyebrow="Qui sommes-nous"
+          title="Trois associés, basés à Nantes"
+          text="Un collectif qui parle votre langue : on préfère comprendre votre journée de travail avant de toucher à un outil."
+        />
+        <ul className="mt-12 grid gap-4 md:grid-cols-3">
+          {TEAM.map((m) => (
+            <li key={m.name} className="card-lift flex flex-col p-4">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] bg-secondary">
+                <Image
+                  src={m.photo}
+                  alt={`Portrait de ${m.name}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 380px"
+                  className="object-cover object-[50%_25%]"
+                />
+              </div>
+              <div className="flex flex-1 flex-col px-2 pb-2 pt-5">
+                <h3 className="type-feature text-ink">{m.name}</h3>
+                <p className="type-meta text-graphite">{m.role}</p>
+                <p className="mt-3 text-[15px] leading-[1.6] text-charcoal">{m.description}</p>
+                <div className="mt-auto flex gap-2 pt-5">
+                  <a href={m.linkedin} target="_blank" rel="noopener noreferrer" className="icon-control" aria-label={`LinkedIn de ${m.name}`}>
+                    <Linkedin className="h-4 w-4" aria-hidden="true" />
+                  </a>
+                  <a href={`mailto:${m.email}`} className="icon-control" aria-label={`Écrire à ${m.name}`}>
+                    <Mail className="h-4 w-4" aria-hidden="true" />
+                  </a>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </section>
+  )
+}
+
+/* ─── Témoignages (pilotes en cours) ──────────────── */
+export function Testimonials() {
+  return (
+    <section className="py-16 lg:py-24" aria-labelledby="temoignages-heading">
+      <Container>
+        <SectionHeading id="temoignages-heading" eyebrow="Résultats clients" title="Des heures mesurées, pas promises" align="center" />
+        <div className="card-lift mx-auto mt-10 max-w-[640px] p-6 text-center sm:p-8">
+          <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-black/[0.05]" aria-hidden="true">
+            <span className="h-2 w-2 animate-pulse rounded-full bg-blue" />
+          </span>
+          <p className="mt-5 type-feature text-ink">Premiers pilotes en cours — résultats publiés dès qu&apos;ils sont mesurés.</p>
+          <p className="mt-3 text-[15px] leading-[1.6] text-charcoal">
+            Pas de témoignage inventé ni de logo emprunté : chaque résultat affiché ici sera un chiffre mesuré chez un client, avec son accord.
+          </p>
+        </div>
+      </Container>
+    </section>
+  )
+}
+
+/* ─── FAQ ─────────────────────────────────────────── */
+export function Faq() {
+  return (
+    <section id="faq" className="py-16 lg:py-24" aria-labelledby="faq-heading">
+      <Container className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+        <SectionHeading id="faq-heading" eyebrow="Questions fréquentes" title="Ce qu'on nous demande avant le diagnostic" />
+        <FaqList items={FAQ} />
+      </Container>
+    </section>
+  )
+}

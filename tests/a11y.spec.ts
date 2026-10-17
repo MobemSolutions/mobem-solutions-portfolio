@@ -6,6 +6,8 @@ const routes = [
   { label: 'Réalisations', path: '/realisations' },
   { label: 'À propos', path: '/a-propos' },
   { label: 'Méthode', path: '/methode' },
+  { label: 'Métiers', path: '/metiers' },
+  { label: 'Organismes de formation', path: '/metiers/organismes-de-formation' },
 ]
 
 for (const { label, path } of routes) {
