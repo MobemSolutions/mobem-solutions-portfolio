@@ -175,49 +175,58 @@ export function Pricing() {
           text="Le diagnostic est gratuit. Ensuite, un pilote sur une seule tâche permet de vérifier le gain avant d'aller plus loin."
           align="center"
         />
-        {/* Mobile : cartes côte à côte qu'on fait glisser ; dès sm : grille */}
-        <ul className="scrollbar-none -mx-4 mt-10 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 py-2 sm:mx-0 sm:mt-12 sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:px-0 sm:py-0 lg:grid-cols-4">
-          {PRICING.map((plan) => (
-            <li
-              key={plan.name}
-              className={cn(
-                "hairline flex w-[82%] shrink-0 snap-center flex-col p-6 hover:bg-white sm:w-auto sm:p-7",
-                plan.featured ? "border-blue shadow-[0_20px_25px_-5px_rgba(13,68,232,0.08),0_8px_10px_-6px_rgba(13,68,232,0.08)]" : "hover:border-[#cfcfd4]"
-              )}
-            >
-              <div className="flex items-center justify-between gap-3">
-                <h3 className="text-[16px] font-[600] text-ink">{plan.name}</h3>
-                {plan.featured && (
-                  <span className="whitespace-nowrap rounded-full bg-[#e6edff] px-2.5 py-0.5 text-[12px] font-[550] text-blue">Gratuit</span>
+        {/* Un parcours en 4 étapes plutôt que 4 offres concurrentes : on avance une marche à la fois */}
+        <ol className="hairline mt-12 grid overflow-hidden lg:mt-16 lg:grid-cols-4">
+          {PRICING.map((plan, i) => {
+            const last = i === PRICING.length - 1
+            return (
+              <li
+                key={plan.name}
+                className={cn(
+                  "flex flex-col p-6 sm:p-7",
+                  i > 0 && "border-t border-[#e5e5e8] lg:border-l lg:border-t-0",
+                  plan.featured && "bg-[#f3f6ff]"
                 )}
-              </div>
-              <p className="mt-5 whitespace-nowrap text-[30px] font-bold leading-none tracking-[-0.03em] text-ink">{plan.price}</p>
-              <p className="mt-2 text-[14px] text-[#838385]">{plan.unit}</p>
-              <p className="mt-5 text-[15px] leading-[1.6] text-charcoal">{plan.text}</p>
-              <ul className="mt-6 flex flex-col gap-2.5 border-t border-[#ececef] pt-6">
-                {plan.items.map((item) => (
-                  <li key={item} className="flex items-start gap-2.5 text-[14px] text-graphite">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-blue" strokeWidth={2.5} aria-hidden="true" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-auto pt-7">
-                {plan.featured ? (
-                  <DiagnosticButton className="w-full">Réserver mon diagnostic</DiagnosticButton>
-                ) : (
-                  <Link href="#diagnostic" className="btn-outline w-full">
-                    En parler au diagnostic
-                  </Link>
-                )}
-              </div>
-            </li>
-          ))}
-        </ul>
-        <SourceCaption className="mt-4 text-center sm:mt-6">
-          <span className="sm:hidden">Faites glisser pour voir les 4 formules. </span>
-          Prix indicatifs hors taxes. Le devis final dépend du nombre de tâches et des outils à connecter.
-        </SourceCaption>
+              >
+                {/* Marche du parcours : numéro, puis trait vers l'étape suivante */}
+                <div className="flex items-center gap-3" aria-hidden="true">
+                  <span
+                    className={cn(
+                      "flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[13px] font-[650]",
+                      plan.featured ? "bg-blue text-white" : "bg-white text-ink ring-[1.5px] ring-inset ring-[#161618]"
+                    )}
+                  >
+                    {i + 1}
+                  </span>
+                  {!last && <span className="hidden h-px flex-1 bg-[#d6d6db] lg:block" />}
+                  {!last && <ArrowRight className="hidden h-4 w-4 shrink-0 text-[#b4b4ba] lg:block" />}
+                </div>
+                <h3 className="mt-6 text-[16px] font-[600] text-ink">{plan.name}</h3>
+                <p className="mt-3 flex flex-wrap items-baseline gap-x-2">
+                  <span className="whitespace-nowrap text-[30px] font-bold leading-none tracking-[-0.03em] text-ink">{plan.price}</span>
+                  <span className="text-[14px] text-[#838385]">{plan.unit}</span>
+                </p>
+                <p className="mt-4 text-[15px] leading-[1.6] text-charcoal">{plan.text}</p>
+                <ul className="mt-5 flex flex-col gap-2">
+                  {plan.items.map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 text-[14px] text-graphite">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-blue" strokeWidth={2.5} aria-hidden="true" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            )
+          })}
+        </ol>
+
+        {/* Une seule action : tout commence par le diagnostic */}
+        <div className="mt-8 flex flex-col items-center gap-4 text-center">
+          <DiagnosticButton>Commencer par le diagnostic gratuit</DiagnosticButton>
+          <SourceCaption>
+            Prix indicatifs hors taxes. Le devis final dépend du nombre de tâches et des outils à connecter.
+          </SourceCaption>
+        </div>
         {/* Offre secondaire, volontairement discrète */}
         <div className="hairline mx-auto mt-8 flex max-w-[760px] sm:mt-10 flex-col items-start gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
           <p className="flex items-center gap-3 text-[15px] text-charcoal">
