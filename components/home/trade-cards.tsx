@@ -3,11 +3,17 @@ import { ArrowRight } from "lucide-react"
 import { TRADES } from "@/lib/automation-content"
 import { TradeIllustration } from "@/components/automation/trade-illustration"
 import { Eyebrow } from "@/components/home/primitives"
+import { TradeCarousel } from "@/components/home/trade-carousel"
 
 /** Exemples par métier : trois cartes à trait fin, illustration en haut, texte en dessous. */
 export function TradeCards() {
   return (
-    <ul className="mt-12 grid gap-4 md:grid-cols-3 lg:mt-16">
+    <>
+      {/* Mobile : le carrousel en rotation, une carte à la fois */}
+      <div className="mt-10 md:hidden">
+        <TradeCarousel />
+      </div>
+    <ul className="mt-12 hidden gap-4 md:grid md:grid-cols-3 lg:mt-16">
       {TRADES.map((trade) => (
         <li key={trade.slug}>
           <Link href={trade.href} className="hairline group flex h-full flex-col p-3 hover:border-[#cfcfd4] hover:bg-white">
@@ -33,5 +39,6 @@ export function TradeCards() {
         </li>
       ))}
     </ul>
+    </>
   )
 }
