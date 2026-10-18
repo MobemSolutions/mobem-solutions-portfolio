@@ -3,6 +3,8 @@
 // Tous les volumes horaires présentés sont des « exemples types », jamais des résultats clients.
 
 export const CALENDLY_URL = "https://calendly.com/contact-mobem-solutions/15min"
+/** Démo de 20 minutes : une automatisation montrée en direct, sur un des métiers ou un autre cas */
+export const DEMO_URL = "https://calendly.com/arnaud-clavier-mobem-solutions/demo-vos-relances-et-suivis-administratifs-en-auto"
 
 export const TRUST_LINE = "Vos outils restent les vôtres. Hébergé en Europe, chez nous ou chez vous."
 
@@ -305,12 +307,14 @@ export const HOSTING_OPTIONS = [
     badge: "Par défaut",
     text: "Votre automatisation tourne sur notre serveur, dans un espace dédié à votre entreprise. Rien à installer de votre côté.",
     items: ["Une automatisation dédiée à votre entreprise", "Serveur situé en Europe", "Mises à jour gérées par nous"],
+    note: "Vous n'avez rien à installer ni à surveiller : le serveur, les mises à jour et le suivi sont pour nous.",
   },
   {
     name: "Chez vous",
     badge: "Si vous préférez",
     text: "Nous installons l'automatisation sur vos propres comptes ou votre serveur. Vous gardez la main sur tout.",
     items: ["Installée sur vos comptes", "Vous détenez tous les accès", "Documentation complète remise"],
+    note: "Tout tourne sur vos comptes : vous gardez la main sur chaque accès, et nous vous remettons la documentation complète.",
   },
 ]
 

@@ -1,24 +1,24 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, ArrowUpRight, BellRing, Building2, Check, FileLock2, FileText, Globe, KeyRound, Linkedin, Mail, Play, Server } from "lucide-react"
+import { ArrowRight, ArrowUpRight, ChevronRight, Check, Globe, Linkedin, Mail } from "lucide-react"
 import { cn } from "@/lib/utils"
 import {
   TRADES,
-  TRUST_POINTS,
   PRICING,
   type Plan,
   FOUNDER,
   FAQ,
-  HOSTING_OPTIONS,
 } from "@/lib/automation-content"
 import { Container, SectionHeading, SourceCaption, FaqList, Eyebrow } from "@/components/home/primitives"
-import { DiagnosticButton } from "@/components/diagnostic-button"
+import { DemoButton, DiagnosticButton } from "@/components/diagnostic-button"
 import { PricingIcon } from "@/components/home/pricing-icons"
 import { HeroArtwork } from "@/components/home/hero-artwork"
+import { TrustHosting } from "@/components/home/trust-hosting"
 import { TradeCards } from "@/components/home/trade-cards"
 import { MethodSteps } from "@/components/home/method-steps"
 import { TOOL_LOGOS, ToolLogo } from "@/components/home/tool-logos"
 import { ContactButton } from "@/components/contact-form"
+import { MobemMark } from "@/components/ui/mobem-logo"
 
 /* ─── Hero ────────────────────────────────────────── */
 export function Hero() {
@@ -40,10 +40,7 @@ export function Hero() {
             l&apos;automatisons sur vos propres outils, et mesurons les heures que vous récupérez.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link href="#exemples" className="btn-dark">
-              <Play className="h-3.5 w-3.5 fill-current" aria-hidden="true" />
-              Voir un exemple
-            </Link>
+            <DemoButton variant="dark">Voir une démo · 20 min</DemoButton>
             <DiagnosticButton />
           </div>
           <p className="mt-5 text-[14px] text-[#838385]">45 min · Sans engagement · Hébergé en Europe</p>
@@ -101,6 +98,103 @@ export function TradeRows() {
   )
 }
 
+/* ─── Démo ────────────────────────────────────────── */
+const DEMO_NICHES = ["Organismes de formation", "Courtiers en assurance", "Cabinets comptables", "Votre cas"]
+
+/** Lignes de l'écran de démo : chacune passe de « En attente » à fait, l'une après l'autre (exemples fictifs). */
+const DEMO_ROWS = [
+  { who: "Cabinet Martin", what: "Pièce manquante", done: "Relance envoyée", initials: "CM", delay: "0.6s" },
+  { who: "Session du 14 mars", what: "8 stagiaires", done: "Convoqués", initials: "SF", delay: "1.8s" },
+  { who: "Contrat habitation", what: "Échéance le 30 juin", done: "Rappel prêt", initials: "CH", delay: "3s" },
+  { who: "Facture fournisseur", what: "Reçue ce matin", done: "Classée", initials: "FF", delay: "4.2s" },
+]
+
+/** Écran d'ordinateur sobre, façon fiche produit : bord sombre, écran net, pied fin. */
+function DemoDevice() {
+  return (
+    <div className="mx-auto w-full max-w-[720px] transition-[translate] duration-700 ease-[cubic-bezier(.22,1,.36,1)] group-hover:-translate-y-3">
+      <div className="rounded-[24px] bg-studio p-2.5 shadow-card transition-shadow duration-700 group-hover:shadow-[var(--shadow-card),0_40px_70px_-30px_rgba(22,22,24,0.35)] sm:p-3">
+        <div className="overflow-hidden rounded-[16px] bg-white text-left">
+          {/* Barre de l'application */}
+          <div className="flex items-center justify-between border-b border-[#ececef] px-4 py-3 sm:px-6">
+            <span className="flex items-center gap-2 text-[13px] font-[650] text-ink sm:text-[14px]">
+              <MobemMark className="h-4 w-4" />
+              Relances et suivis
+            </span>
+            <span className="flex items-center gap-1.5 text-[12px] font-[600] text-blue">
+              <span className="live-dot h-2 w-2 rounded-full bg-blue" aria-hidden="true" />
+              En direct
+            </span>
+          </div>
+          <ul>
+            {DEMO_ROWS.map((row) => (
+              <li key={row.who} className="flex items-center gap-3 border-b border-[#f2f2f4] px-4 py-3 last:border-b-0 sm:gap-4 sm:px-6 sm:py-3.5">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#f2f3f5] text-[12px] font-[650] text-graphite">
+                  {row.initials}
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate text-[15px] font-[550] text-ink">{row.who}</span>
+                  <span className="block truncate type-caption text-charcoal">{row.what}</span>
+                </span>
+                {/* Les deux états occupent la même case : la place réservée est celle du plus large */}
+                <span className="grid shrink-0 justify-items-end">
+                  <span className="col-start-1 row-start-1 inline-flex items-center rounded-full bg-[#f2f2f4] px-3 py-1 text-[12px] font-[600] text-charcoal">
+                    En attente
+                  </span>
+                  <span
+                    className="hero-pop col-start-1 row-start-1 inline-flex items-center gap-1 whitespace-nowrap rounded-full bg-blue px-3 py-1 text-[12px] font-[600] text-white"
+                    style={{ animationDuration: "8s", animationDelay: row.delay }}
+                  >
+                    <Check className="h-3 w-3 max-sm:hidden" strokeWidth={3.5} aria-hidden="true" />
+                    {row.done}
+                  </span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+/** Encart « démo gratuite » : composition centrée façon apple.com, aux styles de titre du site. */
+export function DemoBand() {
+  return (
+    <section className="group py-12 sm:py-16 lg:py-24" aria-labelledby="demo-heading">
+      <Container>
+        <SectionHeading
+          id="demo-heading"
+          eyebrow="Démo gratuite · 20 minutes"
+          title="Voyez-le tourner, avant de décider."
+          text="En visio, nous faisons tourner devant vous des relances et des suivis automatisés, sur votre métier. Vous posez toutes vos questions."
+          align="center"
+        />
+        <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-7">
+          <DemoButton>Réserver ma démo</DemoButton>
+          <a href="#exemples" className="group/link link-underline inline-flex items-center gap-0.5 type-nav text-blue">
+            Voir les exemples
+            <ChevronRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-0.5" aria-hidden="true" />
+          </a>
+        </div>
+        <ul className="mx-auto mt-6 flex max-w-[560px] flex-wrap justify-center gap-2" aria-label="Démos possibles">
+          {DEMO_NICHES.map((niche) => (
+            <li
+              key={niche}
+              className="cursor-default rounded-full border border-border bg-white px-3.5 py-1.5 type-meta text-graphite transition-[background-color,color,border-color,translate] duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-0.5 hover:border-ink hover:bg-ink hover:text-white"
+            >
+              {niche}
+            </li>
+          ))}
+        </ul>
+        <div className="mt-12 sm:mt-16" aria-hidden="true">
+          <DemoDevice />
+        </div>
+      </Container>
+    </section>
+  )
+}
+
 /* ─── Méthode ─────────────────────────────────────── */
 export function Method() {
   return (
@@ -119,8 +213,6 @@ export function Method() {
 }
 
 /* ─── Confiance ───────────────────────────────────── */
-const TRUST_ICONS = [FileText, FileLock2, KeyRound, BellRing]
-const HOSTING_ICONS = [Server, Building2]
 
 export function Trust() {
   return (
@@ -134,54 +226,7 @@ export function Trust() {
           align="center"
         />
 
-        {/* Les deux façons d'héberger */}
-        <ul className="mx-auto mt-12 grid max-w-[960px] gap-4 md:grid-cols-2 lg:mt-14">
-          {HOSTING_OPTIONS.map((option, i) => {
-            const Icon = HOSTING_ICONS[i]
-            const main = i === 0
-            return (
-              <li key={option.name} className={cn("hairline flex flex-col p-6 sm:p-7", main ? "border-blue bg-white" : "hover:border-[#cfcfd4]")}>
-                <div className="flex items-center justify-between gap-3">
-                  <span className="icon-tile" aria-hidden="true">
-                    <Icon className="h-5 w-5" strokeWidth={2} />
-                  </span>
-                  <span
-                    className={cn(
-                      "rounded-full px-2.5 py-0.5 text-[12px] font-[550]",
-                      main ? "bg-[#e6edff] text-blue" : "bg-[#f0f0f2] text-graphite"
-                    )}
-                  >
-                    {option.badge}
-                  </span>
-                </div>
-                <h3 className="mt-5 text-[20px] font-[600] tracking-[-0.01em] text-ink">{option.name}</h3>
-                <p className="mt-2 text-[15px] leading-[1.6] text-charcoal">{option.text}</p>
-                <ul className="mt-5 flex flex-col gap-2 border-t border-[#ececef] pt-5">
-                  {option.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2.5 text-[14px] text-graphite">
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-blue" strokeWidth={2.5} aria-hidden="true" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            )
-          })}
-        </ul>
-
-        {/* Ce qui vaut dans les deux cas */}
-        <ul className="mx-auto mt-12 grid max-w-[960px] gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-          {TRUST_POINTS.map((p, i) => {
-            const Icon = TRUST_ICONS[i]
-            return (
-              <li key={p.title} className="flex flex-col gap-2">
-                <Icon className="h-5 w-5 text-blue" strokeWidth={2} aria-hidden="true" />
-                <span className="mt-1 text-[15px] font-[600] text-ink">{p.title}</span>
-                <span className="text-[14px] leading-[1.55] text-charcoal">{p.text}</span>
-              </li>
-            )
-          })}
-        </ul>
+        <TrustHosting />
       </Container>
     </section>
   )

@@ -876,6 +876,13 @@ a.card-lift, [data-ripple] { position: relative; overflow: hidden; }
   animation: hero-pop 12s cubic-bezier(.2,.7,.2,1) infinite both;
 }
 .hero-fade { opacity: 0; animation: hero-fade 12s ease-in-out infinite both; }
+
+/* Point « en direct » de l'écran de démo */
+@keyframes live-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+.live-dot { animation: live-dot 1.6s ease-in-out infinite; }
 .hero-sweep { stroke-dashoffset: 94.25; animation: hero-sweep 12s cubic-bezier(.45,0,.2,1) infinite both; }
 
 /* Curseur du calendrier : glisse vers chaque case juste avant qu'elle se coche */
@@ -912,7 +919,7 @@ a.card-lift, [data-ripple] { position: relative; overflow: hidden; }
 .env-send { transform-box: fill-box; transform-origin: center; animation: env-send 12s cubic-bezier(.45,0,.2,1) infinite both; }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-pop, .hero-fade, .hero-sweep, .cal-cursor, .clock-hand, .receipt-print, .env-send { animation: none; }
+  .live-dot, .hero-pop, .hero-fade, .hero-sweep, .cal-cursor, .clock-hand, .receipt-print, .env-send { animation: none; }
   .cal-cursor { opacity: 0; }
   .hero-pop, .hero-fade { opacity: 1; }
   .hero-sweep { stroke-dashoffset: 56; }

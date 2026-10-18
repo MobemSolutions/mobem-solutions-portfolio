@@ -5,7 +5,7 @@ import { Footer } from "@/components/footer"
 import { Container, SectionHeading, FaqList, Eyebrow } from "@/components/home/primitives"
 import { FLOW_ICONS } from "@/components/automation/flow-icons"
 import { ClosingBand } from "@/components/home/closing-band"
-import { DiagnosticButton } from "@/components/diagnostic-button"
+import { DemoButton, DiagnosticButton } from "@/components/diagnostic-button"
 import { TradeVisual } from "@/components/automation/trade-visual"
 import { Method, Trust, ToolsStrip } from "@/components/home/sections"
 import { FAQ, TRADES, type Trade } from "@/lib/automation-content"
@@ -60,12 +60,10 @@ export function TradePage({ trade }: { trade: Trade }) {
                 au lieu de {trade.beforeAfter.before} · exemple type
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link href="#taches" className="btn-dark">
-                  Ce que nous automatisons
-                </Link>
-                <DiagnosticButton>Voir si c&apos;est automatisable chez moi</DiagnosticButton>
+                <DemoButton>Voir une démo gratuite</DemoButton>
+                <DiagnosticButton variant="dark">Réserver le diagnostic</DiagnosticButton>
               </div>
-              <p className="mt-5 type-meta text-charcoal">45 min · Sans engagement · Hébergé en Europe</p>
+              <p className="mt-5 type-meta text-charcoal">Démo de 20 min · Diagnostic de 45 min · Sans engagement</p>
             </div>
             <TradeVisual trade={trade} className="rounded-[16px]" />
           </Container>

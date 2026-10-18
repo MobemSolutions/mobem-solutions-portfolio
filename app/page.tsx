@@ -5,6 +5,7 @@ import {
   Hero,
   ToolsStrip,
   TradeRows,
+  DemoBand,
   Method,
   Trust,
   Pricing,
@@ -124,6 +125,7 @@ export default function HomePage() {
         <ToolsStrip />
         <FiguresSection />
         <TradeRows />
+        <DemoBand />
         <Pricing />
         <Method />
         <Trust />
