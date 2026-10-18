@@ -123,10 +123,21 @@ const SECTIONS: LegalSection[] = [
     content: (
       <>
         <p>
-          Les automatisations sont installées <strong>sur les propres comptes et outils du Client</strong> (messagerie, tableurs,
-          stockage de documents, logiciel métier, outil d&apos;automatisation). Le Client reste titulaire de ces comptes et des
-          abonnements associés, dont il assume le coût.
+          Les automatisations sont reliées aux comptes et outils du Client (messagerie, tableurs, stockage de documents,
+          logiciel métier), dont il reste titulaire et dont il assume les abonnements. Elles sont hébergées, au choix du Client :
         </p>
+        <LegalList
+          items={[
+            <>
+              <strong>par le Prestataire</strong>, sur un serveur situé dans l&apos;Union européenne, dans un espace dédié au
+              Client (option par défaut) ;
+            </>,
+            <>
+              <strong>par le Client</strong>, sur ses propres comptes ou son serveur, l&apos;outil d&apos;automatisation restant
+              alors à sa charge.
+            </>,
+          ]}
+        />
         <p>
           Le Client fournit au Prestataire les accès strictement nécessaires à la mission et peut les retirer à tout moment. Le
           Prestataire s&apos;engage à ne les utiliser que pour la mission confiée.

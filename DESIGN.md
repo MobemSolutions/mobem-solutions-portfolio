@@ -10,7 +10,7 @@
 - Priority audiences, one page each (`/metiers/...`): organismes de formation Qualiopi, courtiers en assurance, cabinets d'expertise comptable. Wider: TPE-PME de 2 à 50 personnes.
 - French, vouvoiement, short concrete sentences in the trade's own words.
 - Every promise is expressed in hours per month; every market figure shows its source (13px Soft Charcoal caption). Hours shown on the site are labelled « exemple type ».
-- Trust line: « Installé sur vos propres comptes. Vos données restent chez vous. »
+- Trust line: « Vos outils restent les vôtres. Hébergé en Europe, chez nous ou chez vous. » (hébergement chez Mobem par défaut, dans un espace dédié à chaque client ; chez le client s'il le souhaite)
 - Jargon (n8n, API, workflow, agent IA) only in « Sous le capot » and the FAQ — never in headlines, buttons or hero.
 - No invented testimonials, client logos or unmeasured results. No mention of the former web-agency offer on main pages.
 

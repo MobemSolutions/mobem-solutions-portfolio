@@ -851,47 +851,25 @@ a.card-lift, [data-ripple] { position: relative; overflow: hidden; }
   &:active { transform: translateY(0) scale(0.97); transition-duration: 80ms; }
 }
 
-/* Liste de tâches du hero : chaque ligne se coche à son tour, reste cochée, puis la boucle recommence.
-   Même animation de 12 s pour toutes les lignes, décalée par animation-delay. */
-@keyframes task-box {
-  0%, 6% { background: #fff; box-shadow: inset 0 0 0 1.5px #161618; transform: scale(1); }
-  9% { background: #0d44e8; box-shadow: inset 0 0 0 1.5px #0d44e8; transform: scale(1.12); }
-  12%, 80% { background: #0d44e8; box-shadow: inset 0 0 0 1.5px #0d44e8; transform: scale(1); }
-  86%, 100% { background: #fff; box-shadow: inset 0 0 0 1.5px #161618; transform: scale(1); }
+/* Hero : nœuds de la marque, allumés au passage du point bleu */
+@keyframes mark-node {
+  0% { background: #0d44e8; color: #fff; box-shadow: inset 0 0 0 2.5px #0d44e8; transform: scale(1.08); }
+  6% { transform: scale(1); }
+  22% { background: #0d44e8; color: #fff; box-shadow: inset 0 0 0 2.5px #0d44e8; }
+  30%, 100% { background: #fff; color: #161618; box-shadow: inset 0 0 0 2.5px #161618; transform: scale(1); }
 }
-@keyframes task-tick {
-  0%, 7% { opacity: 0; transform: scale(0.6); }
-  11%, 80% { opacity: 1; transform: scale(1); }
-  86%, 100% { opacity: 0; transform: scale(0.6); }
+.mark-node {
+  background: #fff;
+  color: #161618;
+  box-shadow: inset 0 0 0 2.5px #161618;
+  animation-name: mark-node;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
 }
-@keyframes task-title {
-  0%, 8% { color: #161618; }
-  12%, 80% { color: #9a9a9e; }
-  86%, 100% { color: #161618; }
-}
-@keyframes task-todo {
-  0%, 8% { opacity: 1; }
-  11%, 80% { opacity: 0; }
-  86%, 100% { opacity: 1; }
-}
-.task-row, .task-row * { animation-delay: inherit; }
-.task-box { box-shadow: inset 0 0 0 1.5px #161618; animation: task-box 12s ease-in-out infinite both; animation-delay: inherit; }
-.task-tick { opacity: 0; animation: task-tick 12s ease-in-out infinite both; animation-delay: inherit; }
-.task-title { color: #161618; animation: task-title 12s ease-in-out infinite both; animation-delay: inherit; }
-.task-todo { color: #838385; animation: task-todo 12s ease-in-out infinite both; animation-delay: inherit; }
-@keyframes task-done {
-  0%, 8% { opacity: 0; }
-  11%, 80% { opacity: 1; }
-  86%, 100% { opacity: 0; }
-}
-.task-done { opacity: 0; animation: task-done 12s ease-in-out infinite both; animation-delay: inherit; }
 
 @media (prefers-reduced-motion: reduce) {
-  .task-box, .task-tick, .task-title, .task-todo, .task-done { animation: none; }
-  .task-box { background: #0d44e8; box-shadow: none; }
-  .task-tick, .task-done { opacity: 1; }
-  .task-todo { opacity: 0; }
-  .task-title { color: #9a9a9e; }
+  .mark-node { animation: none; }
+  .mark-runner { display: none; }
 }
 
 /* Fond des illustrations : gris très clair, à plat */

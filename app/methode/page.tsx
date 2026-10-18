@@ -26,7 +26,7 @@ const DETAILS = [
     out: "La liste de vos tâches répétitives, le temps estimé pour chacune, et nos recommandations écrites.",
   },
   {
-    what: "L'installation sur vos propres comptes, avec vos outils actuels.",
+    what: "La mise en service, reliée à vos outils actuels, hébergée chez nous ou chez vous.",
     out: "Une automatisation testée avec vous, documentée, et une équipe qui sait s'en servir.",
   },
   {

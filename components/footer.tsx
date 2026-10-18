@@ -2,7 +2,7 @@ import Link from "next/link"
 import { MobemLogo } from "@/components/ui/mobem-logo"
 import { ContactButton } from "@/components/contact-form"
 import { ArrowUpRight } from "lucide-react"
-import { TRADES } from "@/lib/automation-content"
+import { TRADES, TRUST_LINE } from "@/lib/automation-content"
 
 const navStudio = [
   { name: "Méthode", href: "/methode" },
@@ -77,7 +77,7 @@ export function Footer() {
 
         <div className="mt-14 flex flex-col justify-between gap-2 border-t border-white/10 pt-6 type-caption text-white/60 sm:flex-row">
           <span>© Mobem Solutions · {new Date().getFullYear()} · Nantes</span>
-          <span>Installé sur vos propres comptes. Vos données restent chez vous.</span>
+          <span>{TRUST_LINE}</span>
         </div>
       </div>
     </footer>

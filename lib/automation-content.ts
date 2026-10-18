@@ -4,7 +4,7 @@
 
 export const CALENDLY_URL = "https://calendly.com/contact-mobem-solutions/15min"
 
-export const TRUST_LINE = "Installé sur vos propres comptes. Vos données restent chez vous."
+export const TRUST_LINE = "Vos outils restent les vôtres. Hébergé en Europe, chez nous ou chez vous."
 
 /** Icônes disponibles pour les schémas (associées aux composants lucide dans flow-demo.tsx) */
 export type FlowIcon =
@@ -277,7 +277,7 @@ export const METHOD_STEPS = [
   {
     num: "02",
     title: "Automatiser",
-    text: "Nous installons l'automatisation sur vos propres comptes, avec vos outils actuels. Vous validez chaque étape avant la mise en route.",
+    text: "Nous mettons l'automatisation en service, reliée à vos outils actuels, hébergée chez nous ou chez vous. Vous validez chaque étape avant la mise en route.",
   },
   {
     num: "03",
@@ -292,10 +292,26 @@ export const METHOD_STEPS = [
 ]
 
 export const TRUST_POINTS = [
-  { title: "Installé sur vos comptes", text: "Rien ne tourne chez nous. Vous gardez la main sur chaque accès." },
+  { title: "Vos fichiers restent dans vos outils", text: "Mails, documents et tableaux restent dans Gmail, Drive ou votre logiciel métier." },
   { title: "Contrat RGPD", text: "Un accord de traitement des données encadre chaque intervention." },
-  { title: "Hébergement européen privilégié", text: "Quand un service tiers est nécessaire, nous choisissons d'abord une option hébergée en Europe." },
+  { title: "Accès révocables", text: "Vous pouvez retirer nos accès à vos outils à tout moment." },
   { title: "Alerte si une automatisation échoue", text: "Vous êtes prévenu immédiatement, et nous aussi." },
+]
+
+/** Les deux façons d'héberger une automatisation : chez Mobem Solutions (par défaut) ou chez le client. */
+export const HOSTING_OPTIONS = [
+  {
+    name: "Chez Mobem Solutions",
+    badge: "Par défaut",
+    text: "Votre automatisation tourne sur notre serveur, dans un espace dédié à votre entreprise. Rien à installer de votre côté.",
+    items: ["Une automatisation dédiée à votre entreprise", "Serveur situé en Europe", "Mises à jour gérées par nous"],
+  },
+  {
+    name: "Chez vous",
+    badge: "Si vous préférez",
+    text: "Nous installons l'automatisation sur vos propres comptes ou votre serveur. Vous gardez la main sur tout.",
+    items: ["Installée sur vos comptes", "Vous détenez tous les accès", "Documentation complète remise"],
+  },
 ]
 
 export const PRICING = [
@@ -350,7 +366,7 @@ export const FAQ = [
   {
     question: "Où sont nos données ?",
     answer:
-      "Chez vous. Les automatisations sont installées sur vos propres comptes, et un contrat RGPD encadre notre intervention. Quand un service tiers est nécessaire, nous privilégions un hébergement européen.",
+      "Vos fichiers restent dans vos outils habituels. L'automatisation, elle, tourne par défaut sur notre serveur en Europe, dans un espace dédié à votre entreprise ; si vous préférez, nous l'installons sur vos propres comptes. Dans les deux cas, un contrat RGPD encadre notre intervention.",
   },
   {
     question: "Que se passe-t-il si une automatisation échoue ?",
@@ -365,17 +381,11 @@ export const FAQ = [
   {
     question: "Quels outils techniques utilisez-vous ?",
     answer:
-      "Sous le capot, nous nous appuyons principalement sur n8n, un outil d'automatisation open source que nous pouvons installer sur vos comptes ou chez un hébergeur européen, et sur les API de vos logiciels. Quand c'est utile, un agent IA lit et trie des documents ou des mails — toujours avec une validation humaine sur ce qui compte.",
+      "Sous le capot, nous nous appuyons principalement sur n8n, un outil d'automatisation open source que nous hébergeons pour vous en Europe, ou installons chez vous, et sur les API de vos logiciels. Quand c'est utile, un agent IA lit et trie des documents ou des mails — toujours avec une validation humaine sur ce qui compte.",
   },
   {
     question: "Utilisez-vous l'intelligence artificielle ?",
     answer:
       "Seulement quand elle fait gagner du temps sans prendre de risque : classer un mail, lire une facture, résumer une pièce. Le reste est de l'automatisation classique, prévisible et vérifiable.",
   },
-]
-
-export const UNDER_THE_HOOD = [
-  { name: "n8n", text: "Moteur d'automatisation open source, installé sur vos comptes ou chez un hébergeur européen." },
-  { name: "API de vos outils", text: "Les connexions officielles de Gmail, Outlook, Google Sheets, Excel, Notion ou de votre logiciel métier." },
-  { name: "Agent IA, si utile", text: "Pour lire, classer ou résumer un document. Toujours encadré, jamais seul sur une décision." },
 ]

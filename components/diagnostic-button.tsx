@@ -58,7 +58,7 @@ export function DiagnosticModal({ open, onClose, email }: DiagnosticModalProps) 
             {[
               { Icon: Clock, text: "45 minutes, en visio" },
               { Icon: CircleCheck, text: "Sans engagement" },
-              { Icon: ShieldCheck, text: "Vos données restent chez vous" },
+              { Icon: ShieldCheck, text: "Hébergé en Europe, chez nous ou chez vous" },
             ].map(({ Icon, text }) => (
               <li key={text} className="flex items-center gap-3">
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/15" aria-hidden="true">

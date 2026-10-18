@@ -65,7 +65,7 @@ export function TradePage({ trade }: { trade: Trade }) {
                 </Link>
                 <DiagnosticButton>Voir si c&apos;est automatisable chez moi</DiagnosticButton>
               </div>
-              <p className="mt-5 type-meta text-charcoal">45 min · Sans engagement · Vos données restent chez vous</p>
+              <p className="mt-5 type-meta text-charcoal">45 min · Sans engagement · Hébergé en Europe</p>
             </div>
             <TradeVisual trade={trade} className="rounded-[16px]" />
           </Container>
@@ -79,7 +79,7 @@ export function TradePage({ trade }: { trade: Trade }) {
               id="taches-heading"
               eyebrow="Ce que nous automatisons"
               title="Les tâches qui reviennent chaque semaine"
-              text="Nous partons de vos mots et de vos outils. Chaque tâche est installée sur vos comptes, puis mesurée."
+              text="Nous partons de vos mots et de vos outils. Chaque tâche est reliée à ce que vous utilisez déjà, puis mesurée."
             />
             <ul className="mt-12 grid gap-4 sm:grid-cols-2">
               {trade.tasks.map((task) => {

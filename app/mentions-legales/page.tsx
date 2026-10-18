@@ -50,8 +50,9 @@ const SECTIONS: LegalSection[] = [
           <p>vercel.com</p>
         </LegalCard>
         <p>
-          Cet hébergement concerne uniquement le présent site. Les automatisations réalisées pour les clients sont installées
-          sur leurs propres comptes et outils, et non sur cette infrastructure.
+          Cet hébergement concerne uniquement le présent site. Les automatisations réalisées pour les clients sont hébergées
+          séparément : sur le serveur de Mobem Solutions, situé dans l&apos;Union européenne, ou sur les comptes du client selon son
+          choix.
         </p>
       </>
     ),

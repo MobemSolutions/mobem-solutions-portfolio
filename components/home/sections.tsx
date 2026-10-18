@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, Check, Globe, Play, ShieldCheck, Server, FileLock2, BellRing, Linkedin, Mail } from "lucide-react"
+import { ArrowRight, BellRing, Building2, Check, FileLock2, FileText, Globe, KeyRound, Linkedin, Mail, Play, Server } from "lucide-react"
 import { cn } from "@/lib/utils"
 import {
   TRADES,
@@ -8,8 +8,7 @@ import {
   PRICING,
   FOUNDER,
   FAQ,
-  UNDER_THE_HOOD,
-  TRUST_LINE,
+  HOSTING_OPTIONS,
 } from "@/lib/automation-content"
 import { Container, SectionHeading, SourceCaption, FaqList, Eyebrow } from "@/components/home/primitives"
 import { DiagnosticButton } from "@/components/diagnostic-button"
@@ -45,7 +44,7 @@ export function Hero() {
             </Link>
             <DiagnosticButton />
           </div>
-          <p className="mt-5 text-[14px] text-[#838385]">45 min · Sans engagement · Vos données restent chez vous</p>
+          <p className="mt-5 text-[14px] text-[#838385]">45 min · Sans engagement · Hébergé en Europe</p>
         </div>
 
         <div className="animate-in fade-in-0 slide-in-from-bottom-4 duration-1000 fill-mode-both delay-200">
@@ -118,46 +117,69 @@ export function Method() {
 }
 
 /* ─── Confiance ───────────────────────────────────── */
-const TRUST_ICONS = [ShieldCheck, FileLock2, Server, BellRing]
+const TRUST_ICONS = [FileText, FileLock2, KeyRound, BellRing]
+const HOSTING_ICONS = [Server, Building2]
 
 export function Trust() {
   return (
     <section className="py-12 sm:py-16 lg:py-24" aria-labelledby="trust-heading">
       <Container>
-        <div className="overflow-hidden rounded-[20px] bg-studio text-white">
-          <div className="grid gap-8 p-6 sm:gap-10 sm:p-10 lg:grid-cols-[1fr_1.1fr] lg:p-14">
-            <div>
-              <p className="type-meta text-white/60">Confiance</p>
-              <h2 id="trust-heading" className="type-section mt-3 max-w-[18ch] text-white text-balance">
-                {TRUST_LINE}
-              </h2>
-              <ul className="mt-8 grid gap-5 sm:grid-cols-2">
-                {TRUST_POINTS.map((p, i) => {
-                  const Icon = TRUST_ICONS[i]
-                  return (
-                    <li key={p.title} className="grid grid-cols-[20px_1fr] gap-x-3 gap-y-1 sm:flex sm:flex-col sm:gap-2">
-                      <Icon className="mt-0.5 h-5 w-5 text-[#7fa3ff] sm:mt-0" aria-hidden="true" />
-                      <span className="text-[16px] font-[550]">{p.title}</span>
-                      <span className="col-start-2 text-[14px] leading-[1.5] text-white/65">{p.text}</span>
+        <SectionHeading
+          id="trust-heading"
+          eyebrow="Confiance"
+          title="Vos outils restent les vôtres."
+          text="Votre automatisation est hébergée en Europe, chez nous ou chez vous : c'est vous qui choisissez."
+          align="center"
+        />
+
+        {/* Les deux façons d'héberger */}
+        <ul className="mx-auto mt-12 grid max-w-[960px] gap-4 md:grid-cols-2 lg:mt-14">
+          {HOSTING_OPTIONS.map((option, i) => {
+            const Icon = HOSTING_ICONS[i]
+            const main = i === 0
+            return (
+              <li key={option.name} className={cn("hairline flex flex-col p-6 sm:p-7", main ? "border-blue bg-white" : "hover:border-[#cfcfd4]")}>
+                <div className="flex items-center justify-between gap-3">
+                  <span className="icon-tile" aria-hidden="true">
+                    <Icon className="h-5 w-5" strokeWidth={2} />
+                  </span>
+                  <span
+                    className={cn(
+                      "rounded-full px-2.5 py-0.5 text-[12px] font-[550]",
+                      main ? "bg-[#e6edff] text-blue" : "bg-[#f0f0f2] text-graphite"
+                    )}
+                  >
+                    {option.badge}
+                  </span>
+                </div>
+                <h3 className="mt-5 text-[20px] font-[600] tracking-[-0.01em] text-ink">{option.name}</h3>
+                <p className="mt-2 text-[15px] leading-[1.6] text-charcoal">{option.text}</p>
+                <ul className="mt-5 flex flex-col gap-2 border-t border-[#ececef] pt-5">
+                  {option.items.map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 text-[14px] text-graphite">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-blue" strokeWidth={2.5} aria-hidden="true" />
+                      {item}
                     </li>
-                  )
-                })}
-              </ul>
-            </div>
-            <div className="rounded-[20px] bg-white/[0.06] p-6 ring-1 ring-white/10 lg:self-center" aria-labelledby="hood-heading">
-              <p className="chip-light">Sous le capot</p>
-              <h3 id="hood-heading" className="mt-4 type-feature">Pour ceux qui veulent savoir comment ça marche</h3>
-              <ul className="mt-5 flex flex-col gap-4">
-                {UNDER_THE_HOOD.map((item) => (
-                  <li key={item.name} className="border-t border-white/10 pt-4">
-                    <span className="text-[15px] font-[550]">{item.name}</span>
-                    <p className="mt-1 text-[14px] leading-[1.55] text-white/65">{item.text}</p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
+                  ))}
+                </ul>
+              </li>
+            )
+          })}
+        </ul>
+
+        {/* Ce qui vaut dans les deux cas */}
+        <ul className="mx-auto mt-12 grid max-w-[960px] gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+          {TRUST_POINTS.map((p, i) => {
+            const Icon = TRUST_ICONS[i]
+            return (
+              <li key={p.title} className="flex flex-col gap-2">
+                <Icon className="h-5 w-5 text-blue" strokeWidth={2} aria-hidden="true" />
+                <span className="mt-1 text-[15px] font-[600] text-ink">{p.title}</span>
+                <span className="text-[14px] leading-[1.55] text-charcoal">{p.text}</span>
+              </li>
+            )
+          })}
+        </ul>
       </Container>
     </section>
   )
