@@ -314,41 +314,152 @@ export const HOSTING_OPTIONS = [
   },
 ]
 
-export const PRICING = [
+export interface Plan {
+  slug: string
+  href: string
+  name: string
+  icon: "diagnostic" | "pilote" | "pack" | "maintenance"
+  price: string
+  unit: string
+  text: string
+  items: string[]
+  featured?: boolean
+  /** Page dédiée */
+  tagline: string
+  forWho: string
+  steps: { title: string; text: string }[]
+  deliverables: string[]
+  faq: { question: string; answer: string }[]
+}
+
+export const PRICING: Plan[] = [
   {
+    slug: "diagnostic",
+    href: "/tarifs/diagnostic",
     name: "Diagnostic gratuit",
-    icon: "diagnostic" as const,
+    icon: "diagnostic",
     price: "0 €",
     unit: "45 min",
     text: "Nous listons vos tâches répétitives et estimons les heures récupérables. Sans engagement.",
     items: ["Inventaire des tâches", "Estimation des heures gagnées", "Recommandations écrites"],
     featured: true,
+    tagline: "45 minutes pour savoir ce qui peut tourner tout seul chez vous.",
+    forWho:
+      "Vous sentez que des tâches répétitives vous prennent du temps chaque semaine, sans savoir lesquelles automatiser ni par où commencer.",
+    steps: [
+      { title: "Vous réservez un créneau", text: "En visio, ou à Nantes, au moment qui vous arrange." },
+      { title: "Nous passons votre semaine en revue", text: "Relances, pièces, mails, factures : vous décrivez, nous posons les bonnes questions." },
+      { title: "Vous recevez nos recommandations", text: "Par écrit : les tâches automatisables, le temps estimé pour chacune, et par quoi commencer." },
+    ],
+    deliverables: [
+      "La liste de vos tâches répétitives",
+      "Le temps qu'elles vous coûtent, estimé tâche par tâche",
+      "Nos recommandations écrites, par ordre de priorité",
+      "Aucun engagement, aucun devis imposé",
+    ],
+    faq: [
+      { question: "Faut-il préparer quelque chose ?", answer: "Non. Pensez simplement aux tâches qui reviennent chaque semaine, nous ferons le reste ensemble." },
+      {
+        question: "Est-ce vraiment gratuit ?",
+        answer: "Oui. Le diagnostic sert à vérifier qu'il y a des heures à gagner chez vous. S'il n'y en a pas, nous vous le disons.",
+      },
+    ],
   },
   {
+    slug: "pilote",
+    href: "/tarifs/pilote",
     name: "Pilote",
-    icon: "pilote" as const,
+    icon: "pilote",
     price: "dès 900 € HT",
     unit: "une tâche",
     text: "Une première automatisation sur une tâche précise, pour mesurer le gain avant d'aller plus loin.",
     items: ["Une automatisation installée", "Mesure avant / après", "Prise en main de votre équipe"],
+    tagline: "Une première automatisation, pour mesurer le gain avant d'aller plus loin.",
+    forWho: "Vous voulez essayer sur une tâche précise, et voir le résultat en heures, avant d'engager davantage.",
+    steps: [
+      { title: "Nous choisissons la tâche", text: "Celle qui rend le plus d'heures pour le moins d'effort, repérée pendant le diagnostic." },
+      { title: "Nous la construisons avec vous", text: "Reliée à vos outils, testée sur vos vrais cas. Vous validez chaque étape avant la mise en route." },
+      { title: "Nous mesurons le gain", text: "Le temps passé avant et après, pour décider de la suite en connaissance de cause." },
+    ],
+    deliverables: [
+      "Une automatisation en service, reliée à vos outils",
+      "La mesure du temps gagné, avant / après",
+      "Une prise en main pour votre équipe",
+      "Hébergement en Europe, chez nous ou chez vous",
+    ],
+    faq: [
+      {
+        question: "Et si le gain n'est pas au rendez-vous ?",
+        answer: "Vous le voyez dans la mesure, et vous décidez librement de la suite. Le pilote sert justement à vérifier avant d'aller plus loin.",
+      },
+      {
+        question: "Comment le prix est-il fixé ?",
+        answer: "Le devis est établi après le diagnostic, selon la tâche et les outils à connecter. Vous le validez avant que nous commencions.",
+      },
+    ],
   },
   {
+    slug: "pack-metier",
+    href: "/tarifs/pack-metier",
     name: "Pack métier",
-    icon: "pack" as const,
+    icon: "pack",
     price: "dès 2 500 € HT",
     unit: "plusieurs tâches",
     text: "Les automatisations clés de votre métier, pensées ensemble pour couvrir un processus complet.",
     items: ["Plusieurs automatisations reliées", "Tableau de suivi", "Documentation de vos flux"],
+    tagline: "Les automatisations clés de votre métier, pensées ensemble.",
+    forWho:
+      "Plusieurs tâches d'un même processus vous prennent du temps : de l'inscription au bilan de formation, de la pièce reçue au dossier complet, de l'échéance à la relance.",
+    steps: [
+      { title: "Nous cartographions le processus", text: "Toutes les étapes, qui fait quoi, et où se perd le temps." },
+      { title: "Nous automatisons étape par étape", text: "Chaque automatisation est reliée aux autres et validée avec vous avant la suivante." },
+      { title: "Nous vous remettons le suivi", text: "Un tableau pour voir ce qui tourne, et une documentation claire de vos flux." },
+    ],
+    deliverables: [
+      "Plusieurs automatisations reliées entre elles",
+      "Un tableau de suivi de ce qui tourne",
+      "La documentation de vos flux",
+      "La mesure des heures gagnées sur tout le processus",
+    ],
+    faq: [
+      {
+        question: "Peut-on commencer directement par un pack ?",
+        answer: "Oui, si le diagnostic montre un processus complet à automatiser. Sinon, nous recommandons de commencer par un pilote.",
+      },
+      { question: "Combien de tâches dans un pack ?", answer: "Cela dépend de votre métier : le devis détaille chaque automatisation prévue." },
+    ],
   },
   {
+    slug: "maintenance",
+    href: "/tarifs/maintenance",
     name: "Maintenance",
-    icon: "maintenance" as const,
+    icon: "maintenance",
     price: "dès 90 € HT",
     unit: "/ mois",
     text: "Surveillance, ajustements quand vos outils évoluent, et alerte si quelque chose échoue.",
     items: ["Surveillance continue", "Alerte en cas d'échec", "Ajustements inclus"],
+    tagline: "Vos automatisations continuent de tourner, même quand vos outils changent.",
+    forWho: "Vos automatisations sont en place et vous voulez qu'elles restent fiables, sans avoir à y penser.",
+    steps: [
+      { title: "Nous surveillons", text: "Chaque automatisation est suivie en continu." },
+      { title: "Vous êtes alerté, nous corrigeons", text: "Si quelque chose échoue, vous êtes prévenu, et nous relançons le traitement." },
+      { title: "Nous ajustons", text: "Quand un de vos outils évolue, nous adaptons l'automatisation." },
+    ],
+    deliverables: ["Une surveillance continue", "Une alerte en cas d'échec", "Les ajustements inclus", "Un interlocuteur unique"],
+    faq: [
+      {
+        question: "La maintenance est-elle obligatoire ?",
+        answer: "Non. Sans maintenance, vous gardez une documentation claire de ce qui a été installé.",
+      },
+      {
+        question: "Que se passe-t-il quand un outil change ?",
+        answer: "Nous adaptons l'automatisation dans le cadre de la maintenance, sans surcoût pour les ajustements courants.",
+      },
+    ],
   },
 ]
+
+export const getPlan = (slug: string) => PRICING.find((p) => p.slug === slug)
 
 export const FOUNDER = {
   name: "Arnaud Clavier",

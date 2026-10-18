@@ -1,11 +1,12 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, BellRing, Building2, Check, FileLock2, FileText, Globe, KeyRound, Linkedin, Mail, Play, Server } from "lucide-react"
+import { ArrowRight, ArrowUpRight, BellRing, Building2, Check, FileLock2, FileText, Globe, KeyRound, Linkedin, Mail, Play, Server } from "lucide-react"
 import { cn } from "@/lib/utils"
 import {
   TRADES,
   TRUST_POINTS,
   PRICING,
+  type Plan,
   FOUNDER,
   FAQ,
   HOSTING_OPTIONS,
@@ -187,6 +188,62 @@ export function Trust() {
 }
 
 /* ─── Tarifs ──────────────────────────────────────── */
+/**
+ * Carte d'une formule : contour noir franc, bandeau en tête (bleu pour le diagnostic).
+ * Au survol, la carte se soulève avec une ombre nette décalée, l'icône bascule et le bandeau s'éclaire.
+ */
+export function PlanCard({ plan }: { plan: Plan }) {
+  return (
+    <div className="group relative flex w-full flex-col overflow-hidden rounded-[14px] border-2 border-ink bg-white transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(.2,.7,.2,1)] hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_#161618]">
+      <div
+        className={cn(
+          "flex items-center justify-between border-b-2 border-ink px-6 py-3 transition-colors duration-300",
+          plan.featured ? "bg-blue text-white" : "bg-[#f3f4f6] text-ink group-hover:bg-[#e6edff]"
+        )}
+      >
+        <h3 className="text-[15px] font-[650]">{plan.name}</h3>
+        <ArrowUpRight
+          className="h-4 w-4 opacity-0 transition-[opacity,transform] duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100"
+          aria-hidden="true"
+        />
+      </div>
+
+      <div className="flex flex-1 flex-col p-6">
+        <PricingIcon
+          name={plan.icon}
+          className="h-14 w-14 origin-bottom-left transition-transform duration-500 ease-[cubic-bezier(.2,.7,.2,1)] group-hover:-rotate-6 group-hover:scale-110"
+        />
+        <p className="mt-5 whitespace-nowrap text-[32px] font-bold leading-none tracking-[-0.03em] text-ink">{plan.price}</p>
+        <p className="mt-2 text-[14px] text-[#838385]">{plan.unit}</p>
+        <p className="mt-4 text-[15px] leading-[1.6] text-charcoal">{plan.text}</p>
+        <ul className="mt-5 flex flex-col gap-2.5 border-t-2 border-dashed border-[#d9dbe0] pt-5">
+          {plan.items.map((item) => (
+            <li key={item} className="flex items-start gap-2.5 text-[14px] text-graphite">
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-blue" strokeWidth={3} aria-hidden="true" />
+              {item}
+            </li>
+          ))}
+        </ul>
+        <div className="mt-auto flex flex-col gap-3 pt-7">
+          {plan.featured && <DiagnosticButton className="w-full">Réserver mon diagnostic</DiagnosticButton>}
+          <Link
+            href={plan.href}
+            className={cn(
+              "inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full px-5 text-[15px] font-[600] transition-colors duration-200",
+              plan.featured
+                ? "text-ink hover:text-blue"
+                : "border-2 border-ink bg-white text-ink hover:bg-ink hover:text-white"
+            )}
+          >
+            Voir le détail
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+          </Link>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export function Pricing() {
   return (
     <section id="tarifs" className="py-12 sm:py-16 lg:py-24" aria-labelledby="tarifs-heading">
@@ -201,40 +258,8 @@ export function Pricing() {
         {/* Mobile : cartes côte à côte qu'on fait glisser ; dès sm : grille */}
         <ul className="scrollbar-none -mx-4 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3 pt-2 sm:mx-0 sm:mt-14 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-4">
           {PRICING.map((plan) => (
-            <li key={plan.name} className="price-card flex w-[84%] shrink-0 snap-center flex-col overflow-hidden sm:w-auto">
-              {/* Bandeau : bleu pour le premier pas, comme le calendrier du visuel d'accueil */}
-              <div
-                className={cn(
-                  "flex items-center justify-between border-b-2 border-ink px-6 py-3",
-                  plan.featured ? "bg-blue text-white" : "bg-[#f3f4f6] text-graphite"
-                )}
-              >
-                <h3 className="text-[15px] font-[650]">{plan.name}</h3>
-              </div>
-
-              <div className="flex flex-1 flex-col p-6">
-                <PricingIcon name={plan.icon} className="h-14 w-14" />
-                <p className="mt-5 whitespace-nowrap text-[32px] font-bold leading-none tracking-[-0.03em] text-ink">{plan.price}</p>
-                <p className="mt-2 text-[14px] text-[#838385]">{plan.unit}</p>
-                <p className="mt-4 text-[15px] leading-[1.6] text-charcoal">{plan.text}</p>
-                <ul className="mt-5 flex flex-col gap-2.5 border-t-2 border-dashed border-[#d9dbe0] pt-5">
-                  {plan.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2.5 text-[14px] text-graphite">
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-blue" strokeWidth={3} aria-hidden="true" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-auto pt-7">
-                  {plan.featured ? (
-                    <DiagnosticButton className="w-full">Réserver mon diagnostic</DiagnosticButton>
-                  ) : (
-                    <Link href="#diagnostic" className="btn-ink-outline w-full">
-                      En parler au diagnostic
-                    </Link>
-                  )}
-                </div>
-              </div>
+            <li key={plan.name} className="flex w-[84%] shrink-0 snap-center sm:w-auto">
+              <PlanCard plan={plan} />
             </li>
           ))}
         </ul>
