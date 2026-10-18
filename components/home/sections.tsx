@@ -128,8 +128,8 @@ function DemoDevice() {
           </div>
           <ul>
             {DEMO_ROWS.map((row) => (
-              <li key={row.who} className="flex items-center gap-3 border-b border-[#f2f2f4] px-4 py-3 last:border-b-0 sm:gap-4 sm:px-6 sm:py-3.5">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#f2f3f5] text-[12px] font-[650] text-graphite">
+              <li key={row.who} className="flex items-center gap-3 border-b border-[#f2f2f4] px-4 py-3 last:border-b-0 max-sm:last:hidden max-sm:[&:nth-child(3)]:border-b-0 sm:gap-4 sm:px-6 sm:py-3.5">
+                <span className="flex h-9 w-9 shrink-0 max-sm:hidden items-center justify-center rounded-full bg-[#f2f3f5] text-[12px] font-[650] text-graphite">
                   {row.initials}
                 </span>
                 <span className="min-w-0 flex-1">
@@ -171,23 +171,27 @@ export function DemoBand() {
           align="center"
         />
         <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-7">
-          <DemoButton>Réserver ma démo</DemoButton>
+          <DemoButton className="max-sm:w-full">Réserver ma démo</DemoButton>
           <a href="#exemples" className="group/link link-underline inline-flex items-center gap-0.5 type-nav text-blue">
             Voir les exemples
             <ChevronRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-0.5" aria-hidden="true" />
           </a>
         </div>
-        <ul className="mx-auto mt-6 flex max-w-[560px] flex-wrap justify-center gap-2" aria-label="Démos possibles">
+        {/* Mobile : une seule ligne qu'on fait glisser ; dès sm : pastilles centrées */}
+        <ul
+          className="scrollbar-none -mx-4 mt-6 flex gap-2 overflow-x-auto px-4 sm:mx-auto sm:max-w-[560px] sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0"
+          aria-label="Démos possibles"
+        >
           {DEMO_NICHES.map((niche) => (
             <li
               key={niche}
-              className="cursor-default rounded-full border border-border bg-white px-3.5 py-1.5 type-meta text-graphite transition-[background-color,color,border-color,translate] duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-0.5 hover:border-ink hover:bg-ink hover:text-white"
+              className="shrink-0 cursor-default rounded-full border border-border bg-white px-3.5 py-1.5 type-meta text-graphite transition-[background-color,color,border-color,translate] duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-0.5 hover:border-ink hover:bg-ink hover:text-white"
             >
               {niche}
             </li>
           ))}
         </ul>
-        <div className="mt-12 sm:mt-16" aria-hidden="true">
+        <div className="mt-10 sm:mt-16" aria-hidden="true">
           <DemoDevice />
         </div>
       </Container>
