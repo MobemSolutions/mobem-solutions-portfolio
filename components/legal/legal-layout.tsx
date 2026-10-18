@@ -40,7 +40,7 @@ export function LegalLayout({ current, title, intro, updated, sections }: LegalL
           </Container>
         </section>
 
-        <Container className="grid gap-12 py-16 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-16 lg:py-24">
+        <Container className="grid grid-cols-[minmax(0,1fr)] gap-12 py-16 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-16 lg:py-24">
           <aside className="lg:sticky lg:top-24 lg:self-start">
             <nav aria-label="Sommaire" className="flex flex-col gap-1">
               <p className="mb-2 type-meta text-graphite">Sommaire</p>
@@ -59,7 +59,7 @@ export function LegalLayout({ current, title, intro, updated, sections }: LegalL
             </nav>
           </aside>
 
-          <div className="legal-prose flex max-w-[72ch] flex-col gap-14">
+          <div className="legal-prose flex min-w-0 max-w-[72ch] flex-col gap-14">
             {sections.map((s, i) => (
               <section key={s.id} id={s.id} className="scroll-mt-28" aria-labelledby={`${s.id}-title`}>
                 <h2 id={`${s.id}-title`} className="type-feature text-ink sm:text-[24px] sm:leading-[1.3]">
@@ -97,25 +97,43 @@ export function LegalList({ items }: { items: React.ReactNode[] }) {
 
 export function LegalTable({ head, rows }: { head: string[]; rows: React.ReactNode[][] }) {
   return (
-    <div className="overflow-x-auto rounded-[20px] shadow-card">
-      <table className="w-full min-w-[520px] text-left text-[14px]">
-        <thead className="bg-black/[0.03] text-graphite">
-          <tr>
-            {head.map((h) => (
-              <th key={h} scope="col" className="px-4 py-3 font-[550]">{h}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-border">
-          {rows.map((r, i) => (
-            <tr key={i}>
+    <>
+      {/* Mobile : une carte par ligne, chaque valeur précédée du nom de sa colonne */}
+      <ul className="flex flex-col gap-3 sm:hidden">
+        {rows.map((r, i) => (
+          <li key={i} className="rounded-[16px] p-4 shadow-card">
+            <dl className="flex flex-col gap-2.5">
               {r.map((c, j) => (
-                <td key={j} className={cn("px-4 py-3 align-top", j === 0 ? "text-graphite" : "text-charcoal")}>{c}</td>
+                <div key={j}>
+                  <dt className="text-[12px] font-[550] uppercase tracking-[0.08em] text-[#838385]">{head[j]}</dt>
+                  <dd className={cn("mt-0.5 text-[15px] leading-[1.5]", j === 0 ? "font-[550] text-ink" : "text-charcoal")}>{c}</dd>
+                </div>
+              ))}
+            </dl>
+          </li>
+        ))}
+      </ul>
+
+      <div className="hidden overflow-x-auto rounded-[20px] shadow-card sm:block">
+        <table className="w-full text-left text-[14px]">
+          <thead className="bg-black/[0.03] text-graphite">
+            <tr>
+              {head.map((h) => (
+                <th key={h} scope="col" className="px-4 py-3 font-[550]">{h}</th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody className="divide-y divide-border">
+            {rows.map((r, i) => (
+              <tr key={i}>
+                {r.map((c, j) => (
+                  <td key={j} className={cn("px-4 py-3 align-top", j === 0 ? "text-graphite" : "text-charcoal")}>{c}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   )
 }
