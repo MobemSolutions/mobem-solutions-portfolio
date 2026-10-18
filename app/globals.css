@@ -851,25 +851,22 @@ a.card-lift, [data-ripple] { position: relative; overflow: hidden; }
   &:active { transform: translateY(0) scale(0.97); transition-duration: 80ms; }
 }
 
-/* Hero : nœuds de la marque, allumés au passage du point bleu */
-@keyframes mark-node {
-  0% { background: #0d44e8; color: #fff; box-shadow: inset 0 0 0 2.5px #0d44e8; transform: scale(1.08); }
-  6% { transform: scale(1); }
-  22% { background: #0d44e8; color: #fff; box-shadow: inset 0 0 0 2.5px #0d44e8; }
-  30%, 100% { background: #fff; color: #161618; box-shadow: inset 0 0 0 2.5px #161618; transform: scale(1); }
+/* Hero : les trois points de la marque s'allument tour à tour (boucle de 6 s, décalée d'un tiers par point) */
+@keyframes mark-dot {
+  0%, 28% { fill: #0d44e8; }
+  36%, 100% { fill: #161618; }
 }
-.mark-node {
-  background: #fff;
-  color: #161618;
-  box-shadow: inset 0 0 0 2.5px #161618;
-  animation-name: mark-node;
-  animation-timing-function: ease-out;
-  animation-iteration-count: infinite;
+@keyframes mark-chip {
+  0% { opacity: 0; transform: translateY(6px); }
+  5%, 28% { opacity: 1; transform: translateY(0); }
+  36%, 100% { opacity: 0; transform: translateY(-4px); }
 }
+.mark-dot { fill: #161618; animation: mark-dot 6s ease-in-out infinite both; }
+.mark-chip { opacity: 0; animation: mark-chip 6s cubic-bezier(.2,.7,.2,1) infinite both; }
 
 @media (prefers-reduced-motion: reduce) {
-  .mark-node { animation: none; }
-  .mark-runner { display: none; }
+  .mark-dot, .mark-chip { animation: none; }
+  .mark-chip { opacity: 1; }
 }
 
 /* Fond des illustrations : gris très clair, à plat */

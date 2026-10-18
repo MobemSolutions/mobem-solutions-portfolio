@@ -1,59 +1,58 @@
-import { FileCheck2, FolderCheck, Mail } from "lucide-react"
-
 /*
- * Visuel du hero : la marque Mobem (trois nœuds reliés) dessinée en grand devient le schéma d'une automatisation.
- * Un point bleu parcourt les traits ; chaque nœud s'allume à son passage. À plat, trait noir, une touche de bleu.
- * Coordonnées dans un carré 480 × 480 (la marque d'origine, 48 × 48, agrandie dix fois et recentrée).
+ * Visuel du hero : la marque Mobem, en grand et fidèle au logo (traits épais, trois points pleins).
+ * Les trois points s'allument en bleu tour à tour, et une étiquette apparaît à côté de chacun :
+ * une automatisation qui fait son travail. Tout en SVG, animé en CSS (figé si moins d'animations).
+ * Repère : marque d'origine 48 × 48, agrandie 5,5 fois et centrée dans un cadre 480 × 400.
  */
 
-const DURATION = 6 // secondes pour un tour complet
-const A = { x: 72, y: 243 } // le mail arrive
-const B = { x: 267, y: 378 } // la pièce est rangée
-const C = { x: 312, y: 103 } // le dossier est à jour (le gros nœud de la marque)
-const PATH = `M${A.x} ${A.y}L${B.x} ${B.y}L${C.x} ${C.y}Z`
+const K = 5.5
+const at = (x: number, y: number) => ({ x: 118 + x * K, y: 62 + y * K })
+const A = at(9, 26.5) // petit point gauche
+const B = at(28.5, 40) // petit point bas
+const C = at(33, 12.5) // gros point haut
 
-// Moment d'arrivée du point sur chaque nœud (fraction du tour, proportionnelle à la longueur des traits)
-const NODES = [
-  { ...A, at: 0, size: 64, Icon: Mail, label: "Un mail arrive", labelClass: "left-1/2 top-full mt-3 -translate-x-1/2" },
-  { ...B, at: 0.3, size: 64, Icon: FileCheck2, label: "La pièce est rangée", labelClass: "left-full top-1/2 ml-3 -translate-y-1/2 max-sm:left-1/2 max-sm:top-full max-sm:ml-0 max-sm:mt-3 max-sm:-translate-x-1/2 max-sm:translate-y-0" },
-  { ...C, at: 0.65, size: 84, Icon: FolderCheck, label: "Le dossier est à jour", labelClass: "right-full top-1/2 mr-3 -translate-y-1/2" },
+/** Étapes dans l'ordre d'allumage ; `delay` décale chacune d'un tiers de la boucle de 6 s. */
+const STEPS = [
+  { dot: A, r: 6.5 * K, label: "Un mail arrive", chip: { x: 28, y: 262, w: 158 }, delay: "0s" },
+  { dot: B, r: 6.5 * K, label: "Pièce rangée", chip: { x: 322, y: 300, w: 140 }, delay: "-4s" },
+  { dot: C, r: 9 * K, label: "Client relancé", chip: { x: 66, y: 52, w: 156 }, delay: "-2s" },
 ]
-
-const pct = (v: number) => `${(v / 480) * 100}%`
 
 export function HeroArtwork() {
   return (
-    <div className="art-panel relative aspect-square w-full overflow-hidden" aria-hidden="true">
-      <svg viewBox="0 0 480 480" className="absolute inset-0 h-full w-full" focusable="false">
-        <path d={PATH} fill="none" stroke="#161618" strokeWidth="2.5" strokeLinejoin="round" />
-        <circle r="7" fill="#0d44e8" className="mark-runner">
-          <animateMotion dur={`${DURATION}s`} repeatCount="indefinite" path={PATH} />
-        </circle>
-      </svg>
+    <div className="art-panel w-full overflow-hidden" aria-hidden="true">
+      <svg viewBox="0 0 480 400" className="block h-auto w-full" focusable="false">
+        {/* Traits de la marque */}
+        <path
+          d={`M${C.x} ${C.y}L${A.x} ${A.y}L${B.x} ${B.y}Z`}
+          fill="none"
+          stroke="#161618"
+          strokeWidth={5 * K}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
 
-      {NODES.map(({ x, y, at, size, Icon, label, labelClass }) => (
-        <div
-          key={label}
-          className="absolute -translate-x-1/2 -translate-y-1/2"
-          style={{ left: pct(x), top: pct(y) }}
-        >
-          <span
-            className="mark-node flex items-center justify-center rounded-full"
-            style={{
-              width: `clamp(${size * 0.7}px, ${(size / 480) * 100 * 1.6}vw, ${size}px)`,
-              aspectRatio: "1",
-              // Décalage négatif : le nœud s'allume pile quand le point arrive
-              animationDelay: `${-(1 - at) * DURATION}s`,
-              animationDuration: `${DURATION}s`,
-            }}
-          >
-            <Icon className="h-[40%] w-[40%]" strokeWidth={2} />
-          </span>
-          <span className={`absolute whitespace-nowrap rounded-full bg-white px-3 py-1.5 text-[13px] font-[550] text-ink ring-1 ring-[#e5e5e8] ${labelClass}`}>
-            {label}
-          </span>
-        </div>
-      ))}
+        {STEPS.map(({ dot, r, label, chip, delay }) => (
+          <g key={label}>
+            <circle cx={dot.x} cy={dot.y} r={r} className="mark-dot" style={{ animationDelay: delay }} />
+            <g className="mark-chip" style={{ animationDelay: delay }}>
+              <rect x={chip.x} y={chip.y} width={chip.w} height={40} rx={20} fill="#ffffff" stroke="#e5e5e8" />
+              <circle cx={chip.x + 20} cy={chip.y + 20} r={10} fill="#0d44e8" />
+              <path
+                d={`M${chip.x + 15.5} ${chip.y + 20.5}l3 3 6-6.5`}
+                fill="none"
+                stroke="#ffffff"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <text x={chip.x + 38} y={chip.y + 25.5} fontSize="15" fontWeight="550" fill="#161618" fontFamily="inherit">
+                {label}
+              </text>
+            </g>
+          </g>
+        ))}
+      </svg>
     </div>
   )
 }
