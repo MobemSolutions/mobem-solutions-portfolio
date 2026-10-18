@@ -9,9 +9,9 @@ import { TradeVisual } from "@/components/automation/trade-visual"
 import { TRADES, beforeAfterLine } from "@/lib/automation-content"
 
 export const metadata: Metadata = {
-  title: "Automatisation par métier — Formation, courtage, expertise comptable | Mobem Solutions",
+  title: "Automatisation par métier : formation, courtage, comptabilité | Mobem Solutions",
   description:
-    "Organismes de formation Qualiopi, courtiers en assurance, cabinets d'expertise comptable, TPE et PME : les tâches administratives que nous automatisons pour chaque métier.",
+    "Organismes de formation, courtiers en assurance, cabinets comptables : les tâches administratives que nous automatisons pour chaque métier.",
   alternates: { canonical: "https://mobem-solutions.com/metiers" },
   openGraph: {
     title: "Automatisation par métier | Mobem Solutions",

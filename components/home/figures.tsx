@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { BadgeCheck, Building2, ReceiptText } from "lucide-react"
+import { Building2, Clock, ReceiptText } from "lucide-react"
 import { FIGURES } from "@/lib/automation-content"
 
 /** Compte jusqu'à `to` quand l'élément entre à l'écran (valeur finale directe si moins d'animations). */
@@ -45,7 +45,7 @@ function CountUp({ from, to, suffix = "" }: { from: number; to: number; suffix?:
   )
 }
 
-const ICONS = { building: Building2, receipt: ReceiptText, badge: BadgeCheck }
+const ICONS = { building: Building2, receipt: ReceiptText, clock: Clock }
 
 export function FiguresSection() {
   return (

@@ -95,7 +95,7 @@ export const TRADES: Trade[] = [
     ],
     metaTitle: "Automatisation pour organismes de formation Qualiopi | Mobem Solutions",
     metaDescription:
-      "Convocations, émargements, questionnaires, preuves d'audit, relances OPCO : vos tâches Qualiopi tournent toutes seules, sur vos propres outils. Diagnostic gratuit.",
+      "Convocations, émargements, preuves d'audit, relances OPCO : vos tâches Qualiopi tournent toutes seules, sur vos propres outils. Diagnostic gratuit.",
   },
   {
     slug: "courtiers-assurance",
@@ -217,7 +217,7 @@ export const FIGURES: {
   suffix: string
   label: string
   source: string
-  icon: "building" | "receipt" | "badge"
+  icon: "building" | "receipt" | "clock"
 }[] = [
   {
     value: "40 %",
@@ -238,13 +238,13 @@ export const FIGURES: {
     icon: "receipt",
   },
   {
-    value: "32",
+    value: "8 h",
     countFrom: 0,
-    countTo: 32,
-    suffix: "",
-    label: "indicateurs à prouver pour Qualiopi",
-    source: "Ministère du Travail",
-    icon: "badge",
+    countTo: 8,
+    suffix: " h",
+    label: "par semaine d'administratif pour un dirigeant de TPE",
+    source: "Enquête SDI auprès de 2 140 dirigeants de TPE",
+    icon: "clock",
   },
 ]
 

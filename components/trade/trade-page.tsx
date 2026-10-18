@@ -11,14 +11,28 @@ import { FAQ, TRADES, type Trade } from "@/lib/automation-content"
 
 export function TradePage({ trade }: { trade: Trade }) {
   const others = TRADES.filter((t) => t.slug !== trade.slug)
+  const url = `https://mobem-solutions.com${trade.href}`
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    name: trade.metaTitle,
-    description: trade.metaDescription,
-    audience: { "@type": "BusinessAudience", name: trade.audience },
-    provider: { "@id": "https://mobem-solutions.com/#organization" },
-    areaServed: "FR",
+    "@graph": [
+      {
+        "@type": "Service",
+        name: trade.metaTitle.replace(" | Mobem Solutions", ""),
+        description: trade.metaDescription,
+        url,
+        audience: { "@type": "BusinessAudience", name: trade.audience },
+        provider: { "@id": "https://mobem-solutions.com/#organization" },
+        areaServed: "FR",
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Accueil", item: "https://mobem-solutions.com" },
+          { "@type": "ListItem", position: 2, name: "Métiers", item: "https://mobem-solutions.com/metiers" },
+          { "@type": "ListItem", position: 3, name: trade.navLabel, item: url },
+        ],
+      },
+    ],
   }
 
   return (

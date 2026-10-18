@@ -6,9 +6,9 @@ import { ClosingBand } from "@/components/home/closing-band"
 import { Founder, Trust } from "@/components/home/sections"
 
 export const metadata: Metadata = {
-  title: "À propos | Mobem Solutions — Automatisation des tâches administratives",
+  title: "À propos | Mobem Solutions",
   description:
-    "Mobem Solutions repère les tâches administratives qui font perdre du temps aux TPE et PME, les automatise sur leurs propres outils et mesure les heures gagnées. Basée près de Nantes.",
+    "Mobem Solutions automatise les tâches administratives des TPE et PME sur leurs propres outils, et mesure les heures gagnées. Basée près de Nantes.",
   alternates: { canonical: "https://mobem-solutions.com/a-propos" },
   openGraph: {
     title: "À propos — Mobem Solutions",
