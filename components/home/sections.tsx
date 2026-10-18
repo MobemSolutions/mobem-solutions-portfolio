@@ -114,8 +114,8 @@ const DEMO_ROWS = [
 function DemoDevice() {
   return (
     <div className="mx-auto w-full max-w-[720px] transition-[translate] duration-700 ease-[cubic-bezier(.22,1,.36,1)] group-hover:-translate-y-3">
-      <div className="rounded-t-[22px] bg-[#1d1d1f] p-2.5 pb-0 shadow-[0_30px_60px_-20px_rgba(22,22,24,0.35)] sm:p-3 sm:pb-0">
-        <div className="overflow-hidden rounded-t-[14px] bg-white text-left">
+      <div className="rounded-[24px] bg-studio p-2.5 shadow-card transition-shadow duration-700 group-hover:shadow-[var(--shadow-card),0_40px_70px_-30px_rgba(22,22,24,0.35)] sm:p-3">
+        <div className="overflow-hidden rounded-[16px] bg-white text-left">
           {/* Barre de l'application */}
           <div className="flex items-center justify-between border-b border-[#ececef] px-4 py-3 sm:px-6">
             <span className="flex items-center gap-2 text-[13px] font-[650] text-ink sm:text-[14px]">
@@ -134,12 +134,12 @@ function DemoDevice() {
                   {row.initials}
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate text-[14px] font-[600] text-ink">{row.who}</span>
-                  <span className="block truncate text-[12.5px] text-[#86868b]">{row.what}</span>
+                  <span className="block truncate text-[15px] font-[550] text-ink">{row.who}</span>
+                  <span className="block truncate type-caption text-charcoal">{row.what}</span>
                 </span>
                 {/* Les deux états occupent la même case : la place réservée est celle du plus large */}
                 <span className="grid shrink-0 justify-items-end">
-                  <span className="col-start-1 row-start-1 inline-flex items-center rounded-full bg-[#f2f2f4] px-3 py-1 text-[12px] font-[600] text-[#86868b]">
+                  <span className="col-start-1 row-start-1 inline-flex items-center rounded-full bg-[#f2f2f4] px-3 py-1 text-[12px] font-[600] text-charcoal">
                     En attente
                   </span>
                   <span
@@ -159,39 +159,37 @@ function DemoDevice() {
   )
 }
 
-/** Encart « démo gratuite », façon tuile produit d'apple.com : texte centré, appareil qui sort du bas. */
+/** Encart « démo gratuite » : composition centrée façon apple.com, aux styles de titre du site. */
 export function DemoBand() {
   return (
-    <section className="py-6 sm:py-8" aria-labelledby="demo-heading">
+    <section className="group py-12 sm:py-16 lg:py-24" aria-labelledby="demo-heading">
       <Container>
-        <div className="group overflow-hidden rounded-[28px] bg-[#f5f5f7] px-5 pt-14 text-center sm:px-10 sm:pt-20">
-          <p className="text-[15px] font-[600] text-blue sm:text-[17px]">Démo gratuite · 20 minutes</p>
-          <h2 id="demo-heading" className="mx-auto mt-3 max-w-[16ch] text-[38px] font-bold leading-[1.05] tracking-[-0.035em] text-ink text-balance sm:text-[56px]">
-            Voyez-le tourner. Avant de décider.
-          </h2>
-          <p className="mx-auto mt-5 max-w-[40ch] text-[17px] leading-[1.5] text-[#6e6e73] sm:text-[19px]">
-            En visio, nous faisons tourner devant vous des relances et des suivis automatisés, sur votre métier.
-          </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-7">
-            <DemoButton>Réserver ma démo</DemoButton>
-            <a href="#exemples" className="group/link inline-flex items-center gap-0.5 text-[17px] font-[500] text-blue hover:underline hover:underline-offset-4">
-              Voir les exemples
-              <ChevronRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-0.5" aria-hidden="true" />
-            </a>
-          </div>
-          <ul className="mx-auto mt-7 flex max-w-[560px] flex-wrap justify-center gap-2" aria-label="Démos possibles">
-            {DEMO_NICHES.map((niche) => (
-              <li
-                key={niche}
-                className="cursor-default rounded-full bg-white px-3.5 py-1.5 text-[13px] font-[550] text-[#424245] transition-[background-color,color,translate] duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-0.5 hover:bg-ink hover:text-white"
-              >
-                {niche}
-              </li>
-            ))}
-          </ul>
-          <div className="mt-12 sm:mt-16" aria-hidden="true">
-            <DemoDevice />
-          </div>
+        <SectionHeading
+          id="demo-heading"
+          eyebrow="Démo gratuite · 20 minutes"
+          title="Voyez-le tourner, avant de décider."
+          text="En visio, nous faisons tourner devant vous des relances et des suivis automatisés, sur votre métier. Vous posez toutes vos questions."
+          align="center"
+        />
+        <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-7">
+          <DemoButton>Réserver ma démo</DemoButton>
+          <a href="#exemples" className="group/link link-underline inline-flex items-center gap-0.5 type-nav text-blue">
+            Voir les exemples
+            <ChevronRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-0.5" aria-hidden="true" />
+          </a>
+        </div>
+        <ul className="mx-auto mt-6 flex max-w-[560px] flex-wrap justify-center gap-2" aria-label="Démos possibles">
+          {DEMO_NICHES.map((niche) => (
+            <li
+              key={niche}
+              className="cursor-default rounded-full border border-border bg-white px-3.5 py-1.5 type-meta text-graphite transition-[background-color,color,border-color,translate] duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-0.5 hover:border-ink hover:bg-ink hover:text-white"
+            >
+              {niche}
+            </li>
+          ))}
+        </ul>
+        <div className="mt-12 sm:mt-16" aria-hidden="true">
+          <DemoDevice />
         </div>
       </Container>
     </section>
