@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, ArrowUpRight, BellRing, Building2, Check, FileLock2, FileText, Globe, KeyRound, Linkedin, Mail, Play, Server } from "lucide-react"
+import { ArrowRight, ArrowUpRight, BellRing, Building2, Calculator, Check, FileLock2, FileText, Globe, GraduationCap, KeyRound, Linkedin, Mail, MonitorPlay, Plus, Server, Umbrella } from "lucide-react"
 import { cn } from "@/lib/utils"
 import {
   TRADES,
@@ -12,7 +12,7 @@ import {
   HOSTING_OPTIONS,
 } from "@/lib/automation-content"
 import { Container, SectionHeading, SourceCaption, FaqList, Eyebrow } from "@/components/home/primitives"
-import { DiagnosticButton } from "@/components/diagnostic-button"
+import { DemoButton, DiagnosticButton } from "@/components/diagnostic-button"
 import { PricingIcon } from "@/components/home/pricing-icons"
 import { HeroArtwork } from "@/components/home/hero-artwork"
 import { TradeCards } from "@/components/home/trade-cards"
@@ -40,10 +40,7 @@ export function Hero() {
             l&apos;automatisons sur vos propres outils, et mesurons les heures que vous récupérez.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link href="#exemples" className="btn-dark">
-              <Play className="h-3.5 w-3.5 fill-current" aria-hidden="true" />
-              Voir un exemple
-            </Link>
+            <DemoButton variant="dark">Voir une démo · 20 min</DemoButton>
             <DiagnosticButton />
           </div>
           <p className="mt-5 text-[14px] text-[#838385]">45 min · Sans engagement · Hébergé en Europe</p>
@@ -96,6 +93,60 @@ export function TradeRows() {
           align="center"
         />
         <TradeCards />
+      </Container>
+    </section>
+  )
+}
+
+/* ─── Démo ────────────────────────────────────────── */
+const DEMO_NICHES = [
+  { Icon: GraduationCap, label: "Organismes de formation" },
+  { Icon: Umbrella, label: "Courtiers en assurance" },
+  { Icon: Calculator, label: "Cabinets comptables" },
+  { Icon: Plus, label: "Ou votre propre cas" },
+]
+
+/** Encart « démo gratuite » : voir une automatisation tourner avant de se décider. */
+export function DemoBand() {
+  return (
+    <section className="py-6 sm:py-8" aria-labelledby="demo-heading">
+      <Container>
+        <div className="grid overflow-hidden rounded-[14px] border-2 border-ink bg-white lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="p-6 sm:p-10">
+            <p className="inline-flex items-center gap-2 rounded-full bg-[#e6edff] px-3 py-1 text-[13px] font-[600] text-blue">
+              <MonitorPlay className="h-4 w-4" aria-hidden="true" />
+              Démo gratuite · 20 min
+            </p>
+            <h2 id="demo-heading" className="type-section mt-5 max-w-[18ch] text-ink text-balance">
+              Plutôt voir que lire&nbsp;? On vous montre.
+            </h2>
+            <p className="type-body mt-4 max-w-[48ch] text-charcoal">
+              En 20 minutes de visio, nous faisons tourner devant vous des relances et des suivis administratifs automatisés,
+              sur votre métier. Vous posez toutes vos questions.
+            </p>
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <DemoButton>Réserver ma démo gratuite</DemoButton>
+              <span className="text-[14px] text-[#838385]">En visio · Sans engagement</span>
+            </div>
+          </div>
+          <ul className="grid grid-cols-2 border-t-2 border-ink bg-[#f3f4f6] lg:border-l-2 lg:border-t-0">
+            {DEMO_NICHES.map(({ Icon, label }, i) => (
+              <li
+                key={label}
+                className={cn(
+                  "group flex flex-col justify-between gap-6 p-5 transition-colors duration-300 hover:bg-white sm:p-6",
+                  i % 2 === 0 && "border-r-2 border-ink",
+                  i < 2 && "border-b-2 border-ink"
+                )}
+              >
+                <span className="icon-tile transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:-rotate-6 group-hover:scale-110" aria-hidden="true">
+                  <Icon className="h-5 w-5" strokeWidth={2} />
+                </span>
+                <span className="text-[15px] font-[600] leading-[1.3] text-ink">{label}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </Container>
     </section>
   )

@@ -2,18 +2,50 @@
 
 import { useState, useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
-import { CircleCheck, Clock, ShieldCheck, X } from "lucide-react"
+import { CircleCheck, Clock, MonitorPlay, ShieldCheck, X } from "lucide-react"
 import { InlineWidget } from "react-calendly"
 import { cn } from "@/lib/utils"
-import { CALENDLY_URL } from "@/lib/automation-content"
+import { CALENDLY_URL, DEMO_URL } from "@/lib/automation-content"
+
+/** Les deux rendez-vous réservables : le diagnostic (45 min) et la démo (20 min). */
+const BOOKINGS = {
+  diagnostic: {
+    url: CALENDLY_URL,
+    chip: "Diagnostic gratuit",
+    title: "Réservez vos 45 minutes",
+    points: [
+      { Icon: Clock, text: "45 minutes, en visio" },
+      { Icon: CircleCheck, text: "Sans engagement" },
+      { Icon: ShieldCheck, text: "Hébergé en Europe, chez nous ou chez vous" },
+    ],
+    next: ["Vous recevez l'invitation par e-mail", "On liste ensemble vos tâches répétitives", "Vous repartez avec les heures récupérables"],
+    iframeTitle: "Agenda de réservation du diagnostic gratuit",
+  },
+  demo: {
+    url: DEMO_URL,
+    chip: "Démo gratuite",
+    title: "Voyez une automatisation tourner, en 20 minutes",
+    points: [
+      { Icon: Clock, text: "20 minutes, en visio" },
+      { Icon: MonitorPlay, text: "Une démo en direct, sur votre métier" },
+      { Icon: CircleCheck, text: "Sans engagement" },
+    ],
+    next: ["Vous recevez l'invitation par e-mail", "Nous vous montrons des relances et suivis en action", "Vous posez toutes vos questions"],
+    iframeTitle: "Agenda de réservation de la démo gratuite",
+  },
+} as const
+
+export type BookingKind = keyof typeof BOOKINGS
 
 interface DiagnosticModalProps {
   open: boolean
   onClose: () => void
   email?: string
+  kind?: BookingKind
 }
 
-export function DiagnosticModal({ open, onClose, email }: DiagnosticModalProps) {
+export function DiagnosticModal({ open, onClose, email, kind = "diagnostic" }: DiagnosticModalProps) {
+  const booking = BOOKINGS[kind]
   const [mounted, setMounted] = useState(false)
   const closeRef = useRef<HTMLButtonElement>(null)
   const onCloseRef = useRef(onClose)
@@ -50,16 +82,12 @@ export function DiagnosticModal({ open, onClose, email }: DiagnosticModalProps) 
 
         {/* Récapitulatif : ce que la personne réserve et ce qui se passe ensuite */}
         <aside className="blue-field flex flex-col gap-5 p-5 text-white sm:p-7">
-          <span className="chip-light self-start">Diagnostic gratuit</span>
+          <span className="chip-light self-start">{booking.chip}</span>
           <h2 id="diagnostic-modal-title" className="text-[24px] font-semibold leading-[1.2] tracking-[-0.02em]">
-            Réservez vos 45 minutes
+            {booking.title}
           </h2>
           <ul className="hidden flex-col gap-3 text-[15px] md:flex">
-            {[
-              { Icon: Clock, text: "45 minutes, en visio" },
-              { Icon: CircleCheck, text: "Sans engagement" },
-              { Icon: ShieldCheck, text: "Hébergé en Europe, chez nous ou chez vous" },
-            ].map(({ Icon, text }) => (
+            {booking.points.map(({ Icon, text }) => (
               <li key={text} className="flex items-center gap-3">
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/15" aria-hidden="true">
                   <Icon className="h-4 w-4" strokeWidth={2.25} />
@@ -71,9 +99,11 @@ export function DiagnosticModal({ open, onClose, email }: DiagnosticModalProps) 
           <div className="mt-auto hidden rounded-[14px] bg-black/25 p-4 md:block">
             <p className="text-[13px] font-[550] text-white/70">Ensuite</p>
             <ol className="mt-2 flex flex-col gap-1.5 text-[14px] leading-[1.45] text-white/90">
-              <li>1. Vous recevez l&apos;invitation par e-mail</li>
-              <li>2. On liste ensemble vos tâches répétitives</li>
-              <li>3. Vous repartez avec les heures récupérables</li>
+              {booking.next.map((step, i) => (
+                <li key={step}>
+                  {i + 1}. {step}
+                </li>
+              ))}
             </ol>
           </div>
         </aside>
@@ -81,11 +111,11 @@ export function DiagnosticModal({ open, onClose, email }: DiagnosticModalProps) 
         {/* Agenda Calendly, avec un écran d'attente tant qu'il charge */}
         <div className="relative min-h-[560px] overflow-y-auto">
           <InlineWidget
-            url={CALENDLY_URL}
+            url={booking.url}
             prefill={email ? { email } : undefined}
             styles={{ height: "650px", minWidth: "300px" }}
             pageSettings={{ hideGdprBanner: true, primaryColor: "0d44e8" }}
-            iframeTitle="Agenda de réservation du diagnostic gratuit"
+            iframeTitle={booking.iframeTitle}
             LoadingSpinner={CalendarLoading}
           />
         </div>
@@ -129,25 +159,35 @@ function CalendarLoading() {
 interface DiagnosticButtonProps {
   children?: React.ReactNode
   className?: string
-  variant?: "blue" | "outline"
+  variant?: "blue" | "outline" | "dark"
+  kind?: BookingKind
 }
+
+const VARIANTS = { blue: "btn-blue", outline: "btn-outline", dark: "btn-dark" }
 
 export function DiagnosticButton({
   children = "Réserver mon diagnostic gratuit",
   className,
   variant = "blue",
+  kind = "diagnostic",
 }: DiagnosticButtonProps) {
   const [open, setOpen] = useState(false)
   return (
     <>
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        className={cn(variant === "blue" ? "btn-blue" : "btn-outline", className)}
-      >
+      <button type="button" onClick={() => setOpen(true)} className={cn(VARIANTS[variant], className)}>
         {children}
       </button>
-      <DiagnosticModal open={open} onClose={() => setOpen(false)} />
+      <DiagnosticModal open={open} onClose={() => setOpen(false)} kind={kind} />
     </>
+  )
+}
+
+/** Bouton « Démo gratuite » : ouvre l'agenda de la démo de 20 minutes. */
+export function DemoButton({ children = "Voir une démo gratuite", className, variant = "blue" }: Omit<DiagnosticButtonProps, "kind">) {
+  return (
+    <DiagnosticButton kind="demo" variant={variant} className={className}>
+      <MonitorPlay className="h-4 w-4" aria-hidden="true" />
+      {children}
+    </DiagnosticButton>
   )
 }

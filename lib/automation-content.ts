@@ -3,6 +3,8 @@
 // Tous les volumes horaires présentés sont des « exemples types », jamais des résultats clients.
 
 export const CALENDLY_URL = "https://calendly.com/contact-mobem-solutions/15min"
+/** Démo de 20 minutes : une automatisation montrée en direct, sur un des métiers ou un autre cas */
+export const DEMO_URL = "https://calendly.com/arnaud-clavier-mobem-solutions/demo-vos-relances-et-suivis-administratifs-en-auto"
 
 export const TRUST_LINE = "Vos outils restent les vôtres. Hébergé en Europe, chez nous ou chez vous."
 
