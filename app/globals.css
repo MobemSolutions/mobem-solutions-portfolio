@@ -802,3 +802,115 @@ a.card-lift, [data-ripple] { position: relative; overflow: hidden; }
     display: none;
   }
 }
+
+/* ── Langage « studio calme » : traits fins, fenêtres d'app, contrôle segmenté ── */
+
+/* Sur-titre en capitales, très espacé : le seul accent typographique */
+@utility eyebrow {
+  font-size: 12px;
+  font-weight: 550;
+  line-height: 1.5;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Carte à trait fin, sans ombre : la séparation vient de la bordure */
+@utility hairline {
+  background: #fcfcfc;
+  border: 1px solid #e6e6e8;
+  border-radius: 16px;
+}
+
+/* Rail du contrôle segmenté */
+@utility segmented {
+  display: inline-flex;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 9999px;
+  background: #f0f0f2;
+  box-shadow: inset 0 0 0 1px rgba(22, 22, 24, 0.04);
+}
+
+.segment {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 550;
+  color: #838385;
+  transition: color 300ms ease, background-color 300ms ease, box-shadow 300ms ease;
+}
+.segment:hover { color: #161618; }
+.segment[aria-selected="true"] {
+  color: #161618;
+  background: #fcfcfc;
+  box-shadow: 0 0 0 1px #e0e0e2, rgba(0, 0, 0, 0.05) 0px 4px 10px 0px;
+}
+.segment[aria-selected="true"] svg { color: var(--color-electric-capture-blue); }
+/* Fine barre de progression du défilement automatique, sous le segment actif */
+.segment-progress {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 3px;
+  height: 2px;
+  border-radius: 9999px;
+  background: rgba(13, 68, 232, 0.12);
+  overflow: hidden;
+}
+.segment-progress > span {
+  display: block;
+  height: 100%;
+  background: var(--color-electric-capture-blue);
+  transform-origin: left;
+  animation: segment-fill linear forwards;
+}
+@keyframes segment-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Fenêtre d'application (maquette) */
+.app-window {
+  overflow: hidden;
+  border-radius: 16px;
+  background: #fcfcfc;
+  border: 1px solid #e3e3e6;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 20px 25px -5px, rgba(0, 0, 0, 0.05) 0px 8px 10px -6px;
+}
+.app-window-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 40px;
+  padding: 0 14px;
+  border-bottom: 1px solid #ececef;
+  background: linear-gradient(#fdfdfd, #f6f6f7);
+}
+.traffic-lights { display: flex; gap: 7px; }
+.traffic-lights > span { width: 11px; height: 11px; border-radius: 9999px; }
+
+/* Barre de suivi de la maquette du hero : se remplit, marque une pause, recommence */
+@keyframes timeline-fill {
+  0% { transform: scaleX(0.04); }
+  70%, 100% { transform: scaleX(1); }
+}
+.timeline-fill {
+  transform-origin: left;
+  animation: timeline-fill 8s cubic-bezier(.45, 0, .2, 1) infinite;
+}
+
+/* Pastille bleue de la maquette, cerclée d'un halo doux */
+@keyframes halo-breathe {
+  0%, 100% { box-shadow: 0 0 0 8px rgba(224, 234, 255, 0.55), 0 8px 28px rgba(13, 68, 232, 0.45); }
+  50% { box-shadow: 0 0 0 14px rgba(224, 234, 255, 0.35), 0 8px 36px rgba(13, 68, 232, 0.55); }
+}
+.halo-dot { animation: halo-breathe 3.2s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .segment-progress > span, .timeline-fill, .halo-dot { animation: none; }
+  .timeline-fill { transform: scaleX(0.82); }
+}

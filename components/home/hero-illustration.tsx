@@ -3,6 +3,7 @@
  * flottent puis s'envolent un à un vers un dossier qui se range tout seul ; une tasse fume à côté,
  * pour le temps retrouvé. Purement décorative, animée en CSS (figée si moins d'animations).
  */
+import { cn } from "@/lib/utils"
 
 const BLUE = "#0d44e8"
 const TINT = "#dbe5ff"
@@ -77,9 +78,9 @@ const PAPERS: Paper[] = [
   },
 ]
 
-export function HeroIllustration() {
+export function HeroIllustration({ className }: { className?: string }) {
   return (
-    <figure className="blue-field relative overflow-hidden rounded-[20px]" aria-hidden="true">
+    <figure className={cn("blue-field relative overflow-hidden rounded-[20px]", className)} aria-hidden="true">
       <svg viewBox="0 0 1100 380" className="block h-auto w-full" focusable="false">
         <defs>
           <filter id="hero-shadow" x="-30%" y="-30%" width="160%" height="170%">

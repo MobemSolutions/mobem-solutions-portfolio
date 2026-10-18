@@ -53,3 +53,15 @@ Shadows: `shadow-card` (graphite multi-layer), `shadow-blue` (button inset), `sh
 - No 700–800 display weights; no heavy black shadows; no colorful semantic badge palettes.
 - No robots, brains, glowing circuits. The only photo is the founder's small black-and-white portrait.
 - Screenshots/panes always cropped inside 20px media cards.
+
+## Langage « studio calme » (inspiré de Cap)
+
+Ajouté par-dessus la charte : même bleu unique (#0d44e8), mais plus de traits fins et moins d'ombres.
+
+- **Sur-titres** : composant `Eyebrow` (capitales 12 px, interlettrage 0,2 em, point bleu devant).
+- **Cartes à trait fin** : utilitaire `hairline` (fond #fcfcfc, bordure 1 px, rayon 16 px, sans ombre).
+  Les grilles de contenu (tâches métier, valeurs) partagent leurs bordures comme un tableau, numérotées 01, 02…
+- **Fenêtres d'application** : composant `AppWindow` (pastilles macOS, titre centré). Toute illustration sur champ
+  bleu s'affiche dans une fenêtre. Les couleurs des pastilles n'apparaissent que là.
+- **Contrôle segmenté** : utilitaires `segmented` / `.segment`, pour choisir un métier dans « Exemples ».
+EOF_MARK=1

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Building2, Clock, ReceiptText } from "lucide-react"
 import { FIGURES } from "@/lib/automation-content"
+import { Eyebrow } from "@/components/home/primitives"
 
 /** Compte jusqu'à `to` quand l'élément entre à l'écran (valeur finale directe si moins d'animations). */
 function CountUp({ from, to, suffix = "" }: { from: number; to: number; suffix?: string }) {
@@ -52,9 +53,9 @@ export function FiguresSection() {
     <section className="relative py-12 sm:py-16 lg:py-24" aria-labelledby="figures-heading">
       <div className="blue-glow pointer-events-none absolute inset-0 opacity-70" aria-hidden="true" />
       <div className="relative mx-auto w-full max-w-[1100px] px-4 sm:px-6">
-        <p id="figures-heading" className="text-center type-meta text-charcoal">
-          Pourquoi s&apos;y mettre maintenant
-        </p>
+        <div className="flex justify-center">
+          <Eyebrow id="figures-heading">Pourquoi s&apos;y mettre maintenant</Eyebrow>
+        </div>
         <ul className="mx-auto mt-8 grid max-w-[420px] gap-6 md:mt-12 md:max-w-none md:grid-cols-3 md:gap-10">
           {FIGURES.map((f) => {
             const Icon = ICONS[f.icon]

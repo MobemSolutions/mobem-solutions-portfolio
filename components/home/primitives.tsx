@@ -17,7 +17,7 @@ interface SectionHeadingProps {
 export function SectionHeading({ id, eyebrow, title, text, align = "left", as: Tag = "h2", className }: SectionHeadingProps) {
   return (
     <div data-animate="" className={cn("flex flex-col gap-4", align === "center" && "mx-auto items-center text-center", className)}>
-      {eyebrow && <p className="type-meta text-charcoal">{eyebrow}</p>}
+      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       <Tag id={id} className={cn("type-section max-w-[22ch] text-ink text-balance", align === "center" && "mx-auto")}>
         {title}
       </Tag>
@@ -41,6 +41,53 @@ export function FaqList({ items }: { items: { question: string; answer: string }
           <p className="max-w-[68ch] pb-6 text-[16px] leading-[1.65] text-charcoal">{item.answer}</p>
         </details>
       ))}
+    </div>
+  )
+}
+
+/** Sur-titre en capitales espacées, précédé d'un point bleu. */
+export function Eyebrow({
+  children,
+  className,
+  id,
+  as: Tag = "p",
+}: {
+  children: React.ReactNode
+  className?: string
+  id?: string
+  as?: "p" | "h2" | "span"
+}) {
+  return (
+    <Tag id={id} className={cn("eyebrow inline-flex items-start gap-2 text-charcoal", className)}>
+      <span className="mt-[6px] h-1.5 w-1.5 shrink-0 rounded-full bg-blue" aria-hidden="true" />
+      {children}
+    </Tag>
+  )
+}
+
+/** Maquette de fenêtre d'application : pastilles, titre centré, contenu libre. */
+export function AppWindow({
+  title,
+  children,
+  className,
+  bodyClassName,
+}: {
+  title?: string
+  children: React.ReactNode
+  className?: string
+  bodyClassName?: string
+}) {
+  return (
+    <div className={cn("app-window", className)}>
+      <div className="app-window-bar" aria-hidden="true">
+        <span className="traffic-lights">
+          <span className="bg-[#ff5f57]" />
+          <span className="bg-[#ffbd2e]" />
+          <span className="bg-[#28c840]" />
+        </span>
+        {title && <span className="flex-1 truncate pr-12 text-center text-[12px] font-[550] text-[#838385]">{title}</span>}
+      </div>
+      <div className={bodyClassName}>{children}</div>
     </div>
   )
 }

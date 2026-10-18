@@ -11,10 +11,10 @@ import {
   UNDER_THE_HOOD,
   TRUST_LINE,
 } from "@/lib/automation-content"
-import { Container, SectionHeading, SourceCaption, FaqList } from "@/components/home/primitives"
+import { Container, SectionHeading, SourceCaption, FaqList, AppWindow, Eyebrow } from "@/components/home/primitives"
 import { DiagnosticButton } from "@/components/diagnostic-button"
 import { HeroIllustration } from "@/components/home/hero-illustration"
-import { TradeCarousel } from "@/components/home/trade-carousel"
+import { TradeTabs } from "@/components/home/trade-tabs"
 import { MethodSteps } from "@/components/home/method-steps"
 import { TOOL_LOGOS, ToolLogo } from "@/components/home/tool-logos"
 import { ContactButton } from "@/components/contact-form"
@@ -48,9 +48,22 @@ export function Hero() {
         <p className="mt-5 type-meta text-charcoal">45 min · Sans engagement · Vos données restent chez vous</p>
       </Container>
 
-      {/* Démo : déclencheur → étapes → résultat */}
+      {/* Maquette : la semaine administrative qui se range toute seule */}
       <Container className="animate-in fade-in-0 slide-in-from-bottom-4 duration-700 fill-mode-both delay-500 relative mt-16 sm:mt-24">
-        <HeroIllustration />
+        <AppWindow title="Votre semaine · Mobem Solutions" className="mx-auto max-w-[1080px]" bodyClassName="p-2 sm:p-3">
+          <HeroIllustration className="rounded-[10px]" />
+          {/* Barre de suivi, façon frise de lecture */}
+          <div className="flex items-center gap-3 px-2 pb-1 pt-3 sm:gap-4 sm:px-3 sm:pt-4" aria-hidden="true">
+            <span className="halo-dot flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue text-white">
+              <Check className="h-3.5 w-3.5" strokeWidth={3} />
+            </span>
+            <span className="hidden text-[13px] font-[550] text-graphite sm:inline">Relances, pièces, mails</span>
+            <span className="relative h-1.5 flex-1 overflow-hidden rounded-full bg-[#ececef]">
+              <span className="timeline-fill absolute inset-0 rounded-full bg-blue" />
+            </span>
+            <span className="text-[13px] font-[550] tabular-nums text-charcoal">rangés tout seuls</span>
+          </div>
+        </AppWindow>
       </Container>
     </section>
   )
@@ -61,7 +74,7 @@ export function ToolsStrip() {
   return (
     <section className="py-14" aria-label="Outils compatibles">
       <Container className="flex flex-col items-center gap-5 text-center">
-        <p className="type-meta text-charcoal">Fonctionne avec les outils que vous utilisez déjà</p>
+        <Eyebrow>Fonctionne avec vos outils actuels</Eyebrow>
         <ul className="flex flex-wrap items-center justify-center gap-x-9 gap-y-4">
           {TOOL_LOGOS.map((tool) => (
             <li
@@ -94,8 +107,8 @@ export function TradeRows() {
           text="Trois métiers où les mêmes tâches reviennent chaque semaine. Voici ce qui se déclenche tout seul, et le temps que ça représente."
           align="center"
         />
-        <div className="mt-14 lg:mt-20">
-          <TradeCarousel />
+        <div className="mt-10 lg:mt-14">
+          <TradeTabs />
         </div>
       </Container>
     </section>
