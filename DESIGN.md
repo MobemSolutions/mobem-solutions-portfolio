@@ -10,7 +10,7 @@
 - Priority audiences, one page each (`/metiers/...`): organismes de formation Qualiopi, courtiers en assurance, cabinets d'expertise comptable. Wider: TPE-PME de 2 à 50 personnes.
 - French, vouvoiement, short concrete sentences in the trade's own words.
 - Every promise is expressed in hours per month; every market figure shows its source (13px Soft Charcoal caption). Hours shown on the site are labelled « exemple type ».
-- Trust line: « Installé sur vos propres comptes. Vos données restent chez vous. »
+- Trust line: « Vos outils restent les vôtres. Hébergé en Europe, chez nous ou chez vous. » (hébergement chez Mobem par défaut, dans un espace dédié à chaque client ; chez le client s'il le souhaite)
 - Jargon (n8n, API, workflow, agent IA) only in « Sous le capot » and the FAQ — never in headlines, buttons or hero.
 - No invented testimonials, client logos or unmeasured results. No mention of the former web-agency offer on main pages.
 
@@ -53,3 +53,16 @@ Shadows: `shadow-card` (graphite multi-layer), `shadow-blue` (button inset), `sh
 - No 700–800 display weights; no heavy black shadows; no colorful semantic badge palettes.
 - No robots, brains, glowing circuits. The only photo is the founder's small black-and-white portrait.
 - Screenshots/panes always cropped inside 20px media cards.
+
+## Langage « studio calme » (inspiré de Cap)
+
+Un canevas blanc et calme, des traits fins, une seule touche de bleu (#0d44e8). Ni halo, ni dégradé, ni ombre lourde.
+
+- **Boutons** : pilules. Noir (`btn-dark`) pour l'action secondaire à gauche, bleu (`btn-blue`) pour réserver à droite.
+  Bouton discret : `btn-outline` (trait fin gris).
+- **Sur-titres** : composant `Eyebrow` (capitales 12 px, interlettrage 0,2 em, gris), sans pastille.
+- **Cartes** : utilitaire `hairline` (fond #fcfcfc, bordure 1 px, rayon 12 px, sans ombre). Icône dans un `icon-tile`
+  (carré 40 px, fond bleu très pâle, icône bleue).
+- **Illustrations** : à plat sur `art-panel` (gris très clair). Formes blanches cernées d'un trait noir de 2 px,
+  accents en bleu plein. Aucun dégradé, aucune ombre portée.
+- **Hero** : deux colonnes, texte à gauche, liste « Cette semaine » qui se coche toute seule à droite.

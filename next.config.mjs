@@ -16,6 +16,7 @@ const nextConfig = {
       { source: '/plan-du-site', destination: '/', permanent: true },
       // Ancien portfolio de sites web
       { source: '/realisations/:path*', destination: '/#exemples', permanent: true },
+      { source: '/tarifs', destination: '/#tarifs', permanent: false },
       // Ancien blog et newsletter
       { source: '/blog/:path*', destination: '/', permanent: true },
       { source: '/newsletter/:path*', destination: '/', permanent: true },

@@ -30,7 +30,6 @@ export function LegalLayout({ current, title, intro, updated, sections }: LegalL
       <Header />
       <main id="main-content">
         <section className="relative overflow-hidden pt-28 sm:pt-36" aria-labelledby="legal-heading">
-          <div className="blue-glow pointer-events-none absolute inset-x-0 top-0 h-[480px]" aria-hidden="true" />
           <Container className="relative">
             <p className="chip-dark">Informations légales</p>
             <h1 id="legal-heading" className="type-display mt-6 text-ink">

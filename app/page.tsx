@@ -17,7 +17,7 @@ import { FAQ, PRICING } from "@/lib/automation-content"
 const TITLE = "Mobem Solutions"
 const SHARE_TITLE = "Mobem Solutions — Vos tâches administratives tournent toutes seules"
 const DESCRIPTION =
-  "Relances, collecte de pièces, preuves d'audit, tri des mails : nous automatisons vos tâches administratives sur vos propres outils et mesurons les heures gagnées. Diagnostic gratuit de 45 min, Nantes."
+  "Mobem Solutions automatise vos tâches administratives (relances, pièces, mails) sur vos propres outils et mesure les heures gagnées. Diagnostic gratuit."
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -53,6 +53,16 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
+      // Nom du site affiché par Google au-dessus du lien
+      "@type": "WebSite",
+      "@id": "https://mobem-solutions.com/#website",
+      name: "Mobem Solutions",
+      alternateName: ["Mobem", "mobem-solutions.com"],
+      url: "https://mobem-solutions.com",
+      inLanguage: "fr-FR",
+      publisher: { "@id": "https://mobem-solutions.com/#organization" },
+    },
+    {
       "@type": "Organization",
       "@id": "https://mobem-solutions.com/#organization",
       name: "Mobem Solutions",
@@ -67,7 +77,11 @@ const jsonLd = {
       "@id": "https://mobem-solutions.com/#localbusiness",
       name: "Mobem Solutions",
       image: "https://mobem-solutions.com/logo.png",
+      logo: "https://mobem-solutions.com/logo.png",
       url: "https://mobem-solutions.com",
+      description: DESCRIPTION,
+      priceRange: "€€",
+      parentOrganization: { "@id": "https://mobem-solutions.com/#organization" },
       email: "contact@mobem-solutions.com",
       address: {
         "@type": "PostalAddress",

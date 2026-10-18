@@ -173,7 +173,7 @@ export function Header() {
             <ContactButton className="link-underline type-nav text-graphite">Nous écrire</ContactButton>
             <DiagnosticButton className="!py-1.5 !pl-4 !pr-1.5 gap-3">
               Diagnostic gratuit
-              <span className="flex h-8 w-8 items-center justify-center rounded-[10px] bg-studio" aria-hidden="true">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15" aria-hidden="true">
                 <ArrowUpRight className="h-4 w-4" strokeWidth={2.25} />
               </span>
             </DiagnosticButton>

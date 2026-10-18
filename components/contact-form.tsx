@@ -2,8 +2,9 @@
 
 import { useEffect, useRef, useState } from "react"
 import { createPortal } from "react-dom"
-import { ArrowLeft, ArrowRight, Check, Loader2, Mail, X } from "lucide-react"
+import { ArrowLeft, ArrowRight, Check, Loader2, Mail, X, Info } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { SentIllustration } from "@/components/ui/sent-illustration"
 import { DiagnosticModal } from "@/components/diagnostic-button"
 import {
   HOURS,
@@ -209,7 +210,7 @@ export function ContactModal({ open, onClose, onBook }: { open: boolean; onClose
                 Nous écrire
               </p>
               <h2 id="contact-title" className="mt-2 text-[24px] font-semibold leading-tight tracking-[-0.02em] text-ink sm:text-[28px]">
-                {status === "sent" ? "Merci, c'est envoyé !" : STEPS[step].title}
+                {status === "sent" ? "C'est bien reçu." : STEPS[step].title}
               </h2>
               {status !== "sent" && <p className="mt-1 text-[15px] text-charcoal">{STEPS[step].hint}</p>}
             </div>
@@ -239,18 +240,34 @@ export function ContactModal({ open, onClose, onBook }: { open: boolean; onClose
         {/* Contenu */}
         <div className="flex-1 overflow-y-auto px-5 py-6 sm:px-8">
           {status === "sent" ? (
-            <div className="flex flex-col items-center py-6 text-center">
-              <span className="flex h-16 w-16 items-center justify-center rounded-full bg-blue text-white shadow-blue animate-in zoom-in-50 duration-500" aria-hidden="true">
-                <Check className="h-8 w-8" strokeWidth={3} />
-              </span>
-              <p className="mt-6 max-w-[44ch] text-[16px] leading-[1.65] text-charcoal">
-                Nous étudions vos réponses et revenons vers vous <strong className="text-graphite">sous 24 heures ouvrées</strong>.
-                Un e-mail de confirmation vient de partir à <strong className="text-graphite">{data.email}</strong>.
+            <div className="flex flex-col items-center py-2 text-center">
+              <SentIllustration className="h-36 w-44 animate-in fade-in-0 zoom-in-90 duration-700" />
+              <p className="mt-4 max-w-[46ch] text-[16px] leading-[1.65] text-charcoal">
+                Nous étudions vos réponses et revenons vers vous <strong className="text-ink">sous 24 heures ouvrées</strong>.
+                Un e-mail de confirmation vient de partir à <strong className="text-ink">{data.email}</strong>.
               </p>
-              <button type="button" onClick={() => { onClose(); onBook?.(data.email) }} className="btn-blue mt-8">
-                Réserver tout de suite mon diagnostic
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </button>
+              {/* Encadré : aller plus vite, comme dans l'e-mail de confirmation */}
+              <div className="hairline mt-7 w-full max-w-[520px] p-5 text-left">
+                <p className="flex items-center gap-2.5 text-[15px] font-[650] text-ink">
+                  <Info className="h-5 w-5" strokeWidth={2.25} aria-hidden="true" />
+                  Envie d&apos;aller plus vite ?
+                </p>
+                <p className="mt-2 text-[14px] leading-[1.6] text-charcoal">
+                  Choisissez directement un créneau pour votre diagnostic gratuit de 45 minutes.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => { onClose(); onBook?.(data.email) }}
+                  className="mt-4 inline-flex items-center gap-2 rounded-full bg-[#e6edff] px-4 py-2 text-[14px] font-[600] text-blue transition-colors hover:bg-[#d8e3ff]"
+                >
+                  Réserver mon diagnostic
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </button>
+              </div>
+              <p className="mt-6 text-[14px] text-charcoal">
+                Pas d&apos;e-mail reçu ? Regardez dans vos spams, ou écrivez-nous à{" "}
+                <a href="mailto:contact@mobem-solutions.com" className="font-[600] text-blue">contact@mobem-solutions.com</a>
+              </p>
             </div>
           ) : (
             <form

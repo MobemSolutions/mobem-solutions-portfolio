@@ -52,8 +52,9 @@ const SECTIONS: LegalSection[] = [
     content: (
       <>
         <p>
-          Les automatisations que nous mettons en place sont installées <strong>sur les propres comptes de nos clients</strong>.
-          Les données qu&apos;elles traitent (mails, documents, fichiers de suivi) restent chez eux.
+          Les automatisations que nous mettons en place sont reliées aux outils de nos clients (messagerie, documents, tableurs,
+          logiciel métier), où leurs fichiers restent stockés. Elles sont hébergées, au choix du client, sur notre serveur, dans
+          un espace dédié à chaque client et situé dans l&apos;Union européenne, ou sur les propres comptes du client.
         </p>
         <p>
           Pour ces traitements, le client est responsable de traitement et Mobem Solutions intervient comme sous-traitant au

@@ -17,7 +17,7 @@ interface SectionHeadingProps {
 export function SectionHeading({ id, eyebrow, title, text, align = "left", as: Tag = "h2", className }: SectionHeadingProps) {
   return (
     <div data-animate="" className={cn("flex flex-col gap-4", align === "center" && "mx-auto items-center text-center", className)}>
-      {eyebrow && <p className="type-meta text-charcoal">{eyebrow}</p>}
+      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       <Tag id={id} className={cn("type-section max-w-[22ch] text-ink text-balance", align === "center" && "mx-auto")}>
         {title}
       </Tag>
@@ -42,5 +42,24 @@ export function FaqList({ items }: { items: { question: string; answer: string }
         </details>
       ))}
     </div>
+  )
+}
+
+/** Sur-titre en capitales espacées. */
+export function Eyebrow({
+  children,
+  className,
+  id,
+  as: Tag = "p",
+}: {
+  children: React.ReactNode
+  className?: string
+  id?: string
+  as?: "p" | "h2" | "span"
+}) {
+  return (
+    <Tag id={id} className={cn("eyebrow text-[#838385]", className)}>
+      {children}
+    </Tag>
   )
 }
