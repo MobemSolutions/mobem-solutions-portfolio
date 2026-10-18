@@ -1,58 +1,108 @@
 /*
- * Visuel du hero : la marque Mobem, en grand et fidèle au logo (traits épais, trois points pleins).
- * Les trois points s'allument en bleu tour à tour, et une étiquette apparaît à côté de chacun :
- * une automatisation qui fait son travail. Tout en SVG, animé en CSS (figé si moins d'animations).
- * Repère : marque d'origine 48 × 48, agrandie 5,5 fois et centrée dans un cadre 480 × 400.
+ * Visuel du hero : « le bureau qui s'organise ». Illustration éditoriale à plat (contours noirs épais,
+ * aplats bleus, bleu très pâle) : un calendrier dont les échéances se cochent, une facture classée,
+ * une relance qui part, et un réveil dont le cadran se remplit de temps retrouvé. Le logo Mobem signe
+ * le bandeau du calendrier. Boucle lente de 12 s : les tâches se terminent une à une, puis tout reste
+ * en place quelques secondes. Figé sur l'état final si l'utilisateur préfère moins d'animations.
  */
 
-const K = 5.5
-const at = (x: number, y: number) => ({ x: 118 + x * K, y: 62 + y * K })
-const A = at(9, 26.5) // petit point gauche
-const B = at(28.5, 40) // petit point bas
-const C = at(33, 12.5) // gros point haut
+const INK = "#161618"
+const BLUE = "#0d44e8"
+const PALE = "#e6edff"
 
-/** Étapes dans l'ordre d'allumage ; `delay` décale chacune d'un tiers de la boucle de 6 s. */
-const STEPS = [
-  { dot: A, r: 6.5 * K, label: "Un mail arrive", chip: { x: 28, y: 262, w: 158 }, delay: "0s" },
-  { dot: B, r: 6.5 * K, label: "Pièce rangée", chip: { x: 322, y: 300, w: 140 }, delay: "-4s" },
-  { dot: C, r: 9 * K, label: "Client relancé", chip: { x: 66, y: 52, w: 156 }, delay: "-2s" },
-]
+// Grille du calendrier : 4 colonnes, la dernière ligne n'a que 2 cases
+const COLS = [52, 122, 192, 262]
+const ROWS = [150, 202, 254, 306]
+const CELL = { w: 54, h: 34 }
+const CELLS = ROWS.flatMap((y, r) => COLS.slice(0, r === 3 ? 2 : 4).map((x, c) => ({ x, y, key: `${c}-${r}` })))
+
+// Cases qui se « terminent », dans l'ordre, avec leur moment d'apparition (secondes)
+const DONE: Record<string, number> = { "1-0": 0.4, "0-1": 2.4, "3-0": 4.4, "2-2": 5.4, "1-1": 6.2 }
+
+// Ticket de caisse : bord inférieur en dents de scie
+const RECEIPT = { x: 384, y: 50, w: 110, h: 186 }
+const TEETH = Array.from({ length: 21 }, (_, i) => `${RECEIPT.x + RECEIPT.w - i * 5.5} ${RECEIPT.y + RECEIPT.h + (i % 2 ? 11 : 0)}`)
+
+const delay = (s: number) => ({ animationDelay: `${s}s` }) as React.CSSProperties
 
 export function HeroArtwork() {
   return (
-    <div className="art-panel w-full overflow-hidden" aria-hidden="true">
-      <svg viewBox="0 0 480 400" className="block h-auto w-full" focusable="false">
-        {/* Traits de la marque */}
-        <path
-          d={`M${C.x} ${C.y}L${A.x} ${A.y}L${B.x} ${B.y}Z`}
-          fill="none"
-          stroke="#161618"
-          strokeWidth={5 * K}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+    <svg viewBox="0 0 520 400" className="block h-auto w-full" aria-hidden="true" focusable="false">
+      {/* ── Calendrier ── */}
+      <rect x="22" y="78" width="318" height="292" fill="#fff" />
+      <rect x="22" y="78" width="318" height="50" fill={BLUE} />
+      {/* Logo Mobem en signature, dans le bandeau */}
+      <g transform="translate(34 89) scale(0.6)" fill="#fff">
+        <path d="M33 12.5L9 26.5M9 26.5L28.5 40M28.5 40L33 12.5" stroke="#fff" strokeWidth="5" strokeLinecap="round" />
+        <circle cx="33" cy="12.5" r="9" />
+        <circle cx="9" cy="26.5" r="6.5" />
+        <circle cx="28.5" cy="40" r="6.5" />
+      </g>
+      <rect x="22" y="78" width="318" height="292" fill="none" stroke={INK} strokeWidth="5" />
+      {[110, 170, 230, 290].map((x) => (
+        <rect key={x} x={x - 7} y="56" width="14" height="44" rx="7" fill={INK} />
+      ))}
 
-        {STEPS.map(({ dot, r, label, chip, delay }) => (
-          <g key={label}>
-            <circle cx={dot.x} cy={dot.y} r={r} className="mark-dot" style={{ animationDelay: delay }} />
-            <g className="mark-chip" style={{ animationDelay: delay }}>
-              <rect x={chip.x} y={chip.y} width={chip.w} height={40} rx={20} fill="#ffffff" stroke="#e5e5e8" />
-              <circle cx={chip.x + 20} cy={chip.y + 20} r={10} fill="#0d44e8" />
-              <path
-                d={`M${chip.x + 15.5} ${chip.y + 20.5}l3 3 6-6.5`}
-                fill="none"
-                stroke="#ffffff"
-                strokeWidth="2.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <text x={chip.x + 38} y={chip.y + 25.5} fontSize="15" fontWeight="550" fill="#161618" fontFamily="inherit">
-                {label}
-              </text>
-            </g>
-          </g>
-        ))}
-      </svg>
-    </div>
+      {/* Une case déjà réglée, en aplat pâle */}
+      <rect x={COLS[3]} y={ROWS[2]} width={CELL.w} height={CELL.h} fill={PALE} />
+      {CELLS.filter((c) => c.key !== "3-2").map(({ x, y, key }) => (
+        <g key={key}>
+          {key in DONE && (
+            <rect x={x} y={y} width={CELL.w} height={CELL.h} fill={PALE} className="hero-fade" style={delay(DONE[key])} />
+          )}
+          <rect x={x} y={y} width={CELL.w} height={CELL.h} fill="none" stroke={INK} strokeWidth="4" />
+          {key in DONE && (
+            <circle cx={x + CELL.w} cy={y + CELL.h} r="10" fill={BLUE} className="hero-pop" style={delay(DONE[key])} />
+          )}
+        </g>
+      ))}
+
+      {/* ── Réveil : le cadran se remplit de temps retrouvé ── */}
+      <rect x="289" y="296" width="14" height="10" rx="3" fill={INK} />
+      <circle cx="296" cy="342" r="36" fill="#fff" stroke={INK} strokeWidth="5" />
+      <circle
+        cx="296"
+        cy="342"
+        r="15"
+        fill="none"
+        stroke={BLUE}
+        strokeWidth="30"
+        strokeDasharray="94.25"
+        className="hero-sweep"
+        transform="rotate(-90 296 342)"
+      />
+      <path d="M296 342V318M296 342h16" stroke={INK} strokeWidth="4" strokeLinecap="round" />
+      <circle cx="296" cy="342" r="4" fill={INK} />
+
+      {/* ── Facture classée ── */}
+      <path
+        d={`M${RECEIPT.x} ${RECEIPT.y}H${RECEIPT.x + RECEIPT.w}V${RECEIPT.y + RECEIPT.h}L${TEETH.join("L")}Z`}
+        fill={PALE}
+      />
+      <rect x="374" y="38" width="130" height="18" rx="9" fill={INK} />
+      {[
+        [400, 82, 70],
+        [400, 102, 34],
+        [446, 102, 30],
+        [400, 122, 76],
+        [400, 142, 44],
+        [452, 142, 24],
+        [400, 162, 56],
+      ].map(([x, y, w]) => (
+        <rect key={`${x}-${y}`} x={x} y={y} width={w} height="4" rx="2" fill={BLUE} />
+      ))}
+      <g className="hero-pop" style={delay(3.4)}>
+        <circle cx="472" cy="210" r="24" fill={BLUE} />
+        <path d="M461 210l9 11 20-30" fill="none" stroke={INK} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+      </g>
+
+      {/* ── Relance envoyée ── */}
+      <g className="hero-pop" style={delay(1.4)}>
+        <path d="M346 300h22M340 316h28M350 332h18" stroke={BLUE} strokeWidth="4" strokeLinecap="round" />
+      </g>
+      <rect x="384" y="280" width="120" height="84" fill="#fff" stroke={INK} strokeWidth="5" />
+      <path d="M394 292l50 36 50-36" fill="none" stroke={INK} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="504" cy="280" r="10" fill={BLUE} className="hero-pop" style={delay(1.4)} />
+    </svg>
   )
 }

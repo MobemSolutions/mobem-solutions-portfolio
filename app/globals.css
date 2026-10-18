@@ -851,22 +851,37 @@ a.card-lift, [data-ripple] { position: relative; overflow: hidden; }
   &:active { transform: translateY(0) scale(0.97); transition-duration: 80ms; }
 }
 
-/* Hero : les trois points de la marque s'allument tour à tour (boucle de 6 s, décalée d'un tiers par point) */
-@keyframes mark-dot {
-  0%, 28% { fill: #0d44e8; }
-  36%, 100% { fill: #161618; }
+/* Hero « le bureau qui s'organise » : boucle de 12 s. Chaque élément apparaît à son tour (animation-delay),
+   tout reste en place quelques secondes, puis la boucle recommence. */
+@keyframes hero-pop {
+  0% { opacity: 0; transform: scale(0.5); }
+  4% { opacity: 1; transform: scale(1.12); }
+  6%, 85% { opacity: 1; transform: scale(1); }
+  92%, 100% { opacity: 0; transform: scale(0.5); }
 }
-@keyframes mark-chip {
-  0% { opacity: 0; transform: translateY(6px); }
-  5%, 28% { opacity: 1; transform: translateY(0); }
-  36%, 100% { opacity: 0; transform: translateY(-4px); }
+@keyframes hero-fade {
+  0% { opacity: 0; }
+  5%, 85% { opacity: 1; }
+  92%, 100% { opacity: 0; }
 }
-.mark-dot { fill: #161618; animation: mark-dot 6s ease-in-out infinite both; }
-.mark-chip { opacity: 0; animation: mark-chip 6s cubic-bezier(.2,.7,.2,1) infinite both; }
+@keyframes hero-sweep {
+  0%, 8% { stroke-dashoffset: 94.25; }
+  60%, 85% { stroke-dashoffset: 56; }
+  95%, 100% { stroke-dashoffset: 94.25; }
+}
+.hero-pop {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hero-pop 12s cubic-bezier(.2,.7,.2,1) infinite both;
+}
+.hero-fade { opacity: 0; animation: hero-fade 12s ease-in-out infinite both; }
+.hero-sweep { stroke-dashoffset: 94.25; animation: hero-sweep 12s cubic-bezier(.45,0,.2,1) infinite both; }
 
 @media (prefers-reduced-motion: reduce) {
-  .mark-dot, .mark-chip { animation: none; }
-  .mark-chip { opacity: 1; }
+  .hero-pop, .hero-fade, .hero-sweep { animation: none; }
+  .hero-pop, .hero-fade { opacity: 1; }
+  .hero-sweep { stroke-dashoffset: 56; }
 }
 
 /* Fond des illustrations : gris très clair, à plat */
