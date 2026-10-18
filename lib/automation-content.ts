@@ -317,6 +317,7 @@ export const HOSTING_OPTIONS = [
 export const PRICING = [
   {
     name: "Diagnostic gratuit",
+    icon: "diagnostic" as const,
     price: "0 €",
     unit: "45 min",
     text: "Nous listons vos tâches répétitives et estimons les heures récupérables. Sans engagement.",
@@ -325,6 +326,7 @@ export const PRICING = [
   },
   {
     name: "Pilote",
+    icon: "pilote" as const,
     price: "dès 900 € HT",
     unit: "une tâche",
     text: "Une première automatisation sur une tâche précise, pour mesurer le gain avant d'aller plus loin.",
@@ -332,6 +334,7 @@ export const PRICING = [
   },
   {
     name: "Pack métier",
+    icon: "pack" as const,
     price: "dès 2 500 € HT",
     unit: "plusieurs tâches",
     text: "Les automatisations clés de votre métier, pensées ensemble pour couvrir un processus complet.",
@@ -339,6 +342,7 @@ export const PRICING = [
   },
   {
     name: "Maintenance",
+    icon: "maintenance" as const,
     price: "dès 90 € HT",
     unit: "/ mois",
     text: "Surveillance, ajustements quand vos outils évoluent, et alerte si quelque chose échoue.",
