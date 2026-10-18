@@ -88,7 +88,7 @@ export default async function PlanPage({ params }: { params: Promise<{ slug: str
               {plan.steps.map((step, i) => (
                 <li
                   key={step.title}
-                  className="group rounded-[14px] border-2 border-ink bg-white p-6 transition-[transform,box-shadow] duration-300 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_#161618] sm:p-7"
+                  className="group rounded-[14px] border-2 border-ink bg-white p-6 transition-[translate,box-shadow] duration-500 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_#161618] sm:p-7"
                 >
                   <span
                     className={cn(

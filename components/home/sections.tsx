@@ -194,7 +194,7 @@ export function Trust() {
  */
 export function PlanCard({ plan }: { plan: Plan }) {
   return (
-    <div className="group relative flex w-full flex-col overflow-hidden rounded-[14px] border-2 border-ink bg-white transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(.2,.7,.2,1)] hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_#161618]">
+    <div className="group relative flex w-full flex-col overflow-hidden rounded-[14px] border-2 border-ink bg-white transition-[translate,box-shadow] duration-500 ease-[cubic-bezier(.22,1,.36,1)] will-change-[translate] hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_#161618]">
       <div
         className={cn(
           "flex items-center justify-between border-b-2 border-ink px-6 py-3 transition-colors duration-300",
