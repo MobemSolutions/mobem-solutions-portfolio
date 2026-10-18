@@ -64,4 +64,3 @@ Ajouté par-dessus la charte : même bleu unique (#0d44e8), mais plus de traits 
 - **Fenêtres d'application** : composant `AppWindow` (pastilles macOS, titre centré). Toute illustration sur champ
   bleu s'affiche dans une fenêtre. Les couleurs des pastilles n'apparaissent que là.
 - **Contrôle segmenté** : utilitaires `segmented` / `.segment`, pour choisir un métier dans « Exemples ».
-EOF_MARK=1
