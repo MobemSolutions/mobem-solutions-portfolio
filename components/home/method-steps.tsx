@@ -42,19 +42,19 @@ export function MethodSteps() {
             onBlur={() => setHovered(null)}
             aria-current={on ? "step" : undefined}
             className={cn(
-              "card-lift method-step relative flex flex-col gap-2 p-5 outline-none sm:p-6",
-              on && "method-step-on"
+              "hairline relative flex flex-col gap-2 p-5 outline-none transition-colors duration-500 focus-visible:border-blue sm:p-6",
+              on && "border-blue bg-white"
             )}
           >
             <div className="flex items-center gap-4 sm:flex-col sm:items-start sm:gap-2">
               <span
                 className={cn(
-                  "method-icon flex h-12 w-12 shrink-0 items-center justify-center rounded-[14px]",
-                  on ? "bg-blue text-white shadow-blue" : "bg-black/[0.05] text-graphite"
+                  "flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] transition-colors duration-500",
+                  on ? "bg-blue text-white" : "bg-[#e6edff] text-blue"
                 )}
                 aria-hidden="true"
               >
-                <Icon className="h-6 w-6" strokeWidth={2} />
+                <Icon className="h-5 w-5" strokeWidth={2} />
               </span>
               <div>
                 <p className="type-caption text-charcoal sm:mt-1">Étape {i + 1}</p>

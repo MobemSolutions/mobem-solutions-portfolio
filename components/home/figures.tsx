@@ -51,7 +51,6 @@ const ICONS = { building: Building2, receipt: ReceiptText, clock: Clock }
 export function FiguresSection() {
   return (
     <section className="relative py-12 sm:py-16 lg:py-24" aria-labelledby="figures-heading">
-      <div className="blue-glow pointer-events-none absolute inset-0 opacity-70" aria-hidden="true" />
       <div className="relative mx-auto w-full max-w-[1100px] px-4 sm:px-6">
         <div className="flex justify-center">
           <Eyebrow id="figures-heading">Pourquoi s&apos;y mettre maintenant</Eyebrow>
@@ -62,7 +61,7 @@ export function FiguresSection() {
             return (
               <li key={f.value} className="group flex items-center gap-5 md:flex-col md:gap-0 md:text-center">
                 <span
-                  className="hidden h-12 w-12 items-center md:flex justify-center rounded-full bg-blue/10 text-blue transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-110"
+                  className="icon-tile hidden md:flex"
                   aria-hidden="true"
                 >
                   <Icon className="h-6 w-6" strokeWidth={2} />

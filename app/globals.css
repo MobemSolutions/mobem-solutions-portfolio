@@ -213,15 +213,15 @@
   justify-content: center;
   gap: 8px;
   min-height: 44px;
-  padding: 10px 16px;
-  border-radius: 14px;
-  border: 1px solid #ffffff;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  border: 0;
   background: var(--color-electric-capture-blue);
   color: #ffffff;
   font-size: 15px;
   font-weight: 550;
   line-height: 1.3;
-  box-shadow: var(--shadow-blue);
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 4px 10px 0px, rgba(255, 255, 255, 0.2) 0px 1.5px 0px 0px inset;
   position: relative;
   overflow: hidden;
   isolation: isolate;
@@ -237,8 +237,7 @@
   }
   &:hover {
     background: #0a3bd0;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-blue), 0 10px 24px -8px rgba(13, 68, 232, 0.55);
+    transform: translateY(-1px);
   }
   &:hover::before { transform: translateX(120%); }
   &:active { transform: translateY(0) scale(0.97); transition-duration: 80ms; }
@@ -250,9 +249,9 @@
   gap: 8px;
   min-height: 44px;
   padding: 10px 20px;
-  border-radius: 14px;
-  border: 1px solid var(--color-graphite);
-  background: #ffffff;
+  border-radius: 9999px;
+  border: 1px solid #dcdce0;
+  background: #fcfcfc;
   color: var(--color-graphite);
   font-size: 15px;
   font-weight: 550;
@@ -747,10 +746,7 @@ a.card-lift, [data-ripple] { position: relative; overflow: hidden; }
 
 /* Chiffres clés : dégradé bleu */
 .figure-number {
-  background: linear-gradient(135deg, #0d44e8 0%, #2f6bff 55%, #42aef7 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--color-electric-capture-blue);
   font-variant-numeric: tabular-nums;
 }
 
@@ -803,9 +799,9 @@ a.card-lift, [data-ripple] { position: relative; overflow: hidden; }
   }
 }
 
-/* ── Langage « studio calme » : traits fins, fenêtres d'app, contrôle segmenté ── */
+/* ── Langage « studio calme » (inspiré de Cap) : traits fins, boutons pilule, une seule touche de bleu ── */
 
-/* Sur-titre en capitales, très espacé : le seul accent typographique */
+/* Sur-titre en capitales espacées */
 @utility eyebrow {
   font-size: 12px;
   font-weight: 550;
@@ -817,100 +813,89 @@ a.card-lift, [data-ripple] { position: relative; overflow: hidden; }
 /* Carte à trait fin, sans ombre : la séparation vient de la bordure */
 @utility hairline {
   background: #fcfcfc;
-  border: 1px solid #e6e6e8;
-  border-radius: 16px;
+  border: 1px solid #e5e5e8;
+  border-radius: 12px;
+  transition: border-color 250ms ease, background-color 250ms ease;
 }
 
-/* Rail du contrôle segmenté */
-@utility segmented {
-  display: inline-flex;
-  gap: 2px;
-  padding: 4px;
-  border-radius: 9999px;
-  background: #f0f0f2;
-  box-shadow: inset 0 0 0 1px rgba(22, 22, 24, 0.04);
-}
-
-.segment {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  border-radius: 9999px;
-  font-size: 14px;
-  font-weight: 550;
-  color: #838385;
-  transition: color 300ms ease, background-color 300ms ease, box-shadow 300ms ease;
-}
-.segment:hover { color: #161618; }
-.segment[aria-selected="true"] {
-  color: #161618;
-  background: #fcfcfc;
-  box-shadow: 0 0 0 1px #e0e0e2, rgba(0, 0, 0, 0.05) 0px 4px 10px 0px;
-}
-.segment[aria-selected="true"] svg { color: var(--color-electric-capture-blue); }
-/* Fine barre de progression du défilement automatique, sous le segment actif */
-.segment-progress {
-  position: absolute;
-  left: 18px;
-  right: 18px;
-  bottom: 3px;
-  height: 2px;
-  border-radius: 9999px;
-  background: rgba(13, 68, 232, 0.12);
-  overflow: hidden;
-}
-.segment-progress > span {
-  display: block;
-  height: 100%;
-  background: var(--color-electric-capture-blue);
-  transform-origin: left;
-  animation: segment-fill linear forwards;
-}
-@keyframes segment-fill {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
-}
-
-/* Fenêtre d'application (maquette) */
-.app-window {
-  overflow: hidden;
-  border-radius: 16px;
-  background: #fcfcfc;
-  border: 1px solid #e3e3e6;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 20px 25px -5px, rgba(0, 0, 0, 0.05) 0px 8px 10px -6px;
-}
-.app-window-bar {
+/* Carré d'icône : fond bleu très pâle, icône bleue */
+@utility icon-tile {
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  width: 40px;
   height: 40px;
-  padding: 0 14px;
-  border-bottom: 1px solid #ececef;
-  background: linear-gradient(#fdfdfd, #f6f6f7);
-}
-.traffic-lights { display: flex; gap: 7px; }
-.traffic-lights > span { width: 11px; height: 11px; border-radius: 9999px; }
-
-/* Barre de suivi de la maquette du hero : se remplit, marque une pause, recommence */
-@keyframes timeline-fill {
-  0% { transform: scaleX(0.04); }
-  70%, 100% { transform: scaleX(1); }
-}
-.timeline-fill {
-  transform-origin: left;
-  animation: timeline-fill 8s cubic-bezier(.45, 0, .2, 1) infinite;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #e6edff;
+  color: var(--color-electric-capture-blue);
 }
 
-/* Pastille bleue de la maquette, cerclée d'un halo doux */
-@keyframes halo-breathe {
-  0%, 100% { box-shadow: 0 0 0 8px rgba(224, 234, 255, 0.55), 0 8px 28px rgba(13, 68, 232, 0.45); }
-  50% { box-shadow: 0 0 0 14px rgba(224, 234, 255, 0.35), 0 8px 36px rgba(13, 68, 232, 0.55); }
+/* Bouton noir (le pendant du bouton bleu) */
+@utility btn-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  background: #161618;
+  color: #fcfcfc;
+  font-size: 15px;
+  font-weight: 550;
+  line-height: 1.3;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 4px 10px 0px, rgba(255, 255, 255, 0.2) 0px 1.5px 0px 0px inset;
+  transition: background-color 200ms ease, transform 200ms cubic-bezier(.2,.7,.2,1);
+  &:hover { background: #2a2a2e; transform: translateY(-1px); }
+  &:active { transform: translateY(0) scale(0.97); transition-duration: 80ms; }
 }
-.halo-dot { animation: halo-breathe 3.2s ease-in-out infinite; }
+
+/* Liste de tâches du hero : chaque ligne se coche à son tour, reste cochée, puis la boucle recommence.
+   Même animation de 12 s pour toutes les lignes, décalée par animation-delay. */
+@keyframes task-box {
+  0%, 6% { background: #fff; box-shadow: inset 0 0 0 1.5px #161618; transform: scale(1); }
+  9% { background: #0d44e8; box-shadow: inset 0 0 0 1.5px #0d44e8; transform: scale(1.12); }
+  12%, 80% { background: #0d44e8; box-shadow: inset 0 0 0 1.5px #0d44e8; transform: scale(1); }
+  86%, 100% { background: #fff; box-shadow: inset 0 0 0 1.5px #161618; transform: scale(1); }
+}
+@keyframes task-tick {
+  0%, 7% { opacity: 0; transform: scale(0.6); }
+  11%, 80% { opacity: 1; transform: scale(1); }
+  86%, 100% { opacity: 0; transform: scale(0.6); }
+}
+@keyframes task-title {
+  0%, 8% { color: #161618; }
+  12%, 80% { color: #9a9a9e; }
+  86%, 100% { color: #161618; }
+}
+@keyframes task-todo {
+  0%, 8% { opacity: 1; }
+  11%, 80% { opacity: 0; }
+  86%, 100% { opacity: 1; }
+}
+.task-row, .task-row * { animation-delay: inherit; }
+.task-box { box-shadow: inset 0 0 0 1.5px #161618; animation: task-box 12s ease-in-out infinite both; animation-delay: inherit; }
+.task-tick { opacity: 0; animation: task-tick 12s ease-in-out infinite both; animation-delay: inherit; }
+.task-title { color: #161618; animation: task-title 12s ease-in-out infinite both; animation-delay: inherit; }
+.task-todo { color: #838385; animation: task-todo 12s ease-in-out infinite both; animation-delay: inherit; }
+@keyframes task-done {
+  0%, 8% { opacity: 0; }
+  11%, 80% { opacity: 1; }
+  86%, 100% { opacity: 0; }
+}
+.task-done { opacity: 0; animation: task-done 12s ease-in-out infinite both; animation-delay: inherit; }
 
 @media (prefers-reduced-motion: reduce) {
-  .segment-progress > span, .timeline-fill, .halo-dot { animation: none; }
-  .timeline-fill { transform: scaleX(0.82); }
+  .task-box, .task-tick, .task-title, .task-todo, .task-done { animation: none; }
+  .task-box { background: #0d44e8; box-shadow: none; }
+  .task-tick, .task-done { opacity: 1; }
+  .task-todo { opacity: 0; }
+  .task-title { color: #9a9a9e; }
+}
+
+/* Fond des illustrations : gris très clair, à plat */
+@utility art-panel {
+  background: #f2f3f5;
+  border-radius: 16px;
 }

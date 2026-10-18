@@ -1,0 +1,42 @@
+import {
+  Bell,
+  CalendarClock,
+  CircleCheckBig,
+  ClipboardCheck,
+  FileUp,
+  FolderCheck,
+  Gauge,
+  Mail,
+  PenLine,
+  Receipt,
+  Search,
+  Send,
+  ShieldCheck,
+  Tags,
+  UserPlus,
+  Wrench,
+  Zap,
+  type LucideIcon,
+} from "lucide-react"
+import type { FlowIcon } from "@/lib/automation-content"
+
+/** Icône lucide de chaque étape de schéma ou tâche (utilisable côté serveur comme côté client). */
+export const FLOW_ICONS: Record<FlowIcon, LucideIcon> = {
+  "user-plus": UserPlus,
+  send: Send,
+  pen: PenLine,
+  clipboard: ClipboardCheck,
+  "folder-check": FolderCheck,
+  calendar: CalendarClock,
+  bell: Bell,
+  "file-up": FileUp,
+  shield: ShieldCheck,
+  mail: Mail,
+  tags: Tags,
+  receipt: Receipt,
+  check: CircleCheckBig,
+  search: Search,
+  zap: Zap,
+  gauge: Gauge,
+  wrench: Wrench,
+}

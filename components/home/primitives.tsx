@@ -45,7 +45,7 @@ export function FaqList({ items }: { items: { question: string; answer: string }
   )
 }
 
-/** Sur-titre en capitales espacées, précédé d'un point bleu. */
+/** Sur-titre en capitales espacées. */
 export function Eyebrow({
   children,
   className,
@@ -58,36 +58,8 @@ export function Eyebrow({
   as?: "p" | "h2" | "span"
 }) {
   return (
-    <Tag id={id} className={cn("eyebrow inline-flex items-start gap-2 text-charcoal", className)}>
-      <span className="mt-[6px] h-1.5 w-1.5 shrink-0 rounded-full bg-blue" aria-hidden="true" />
+    <Tag id={id} className={cn("eyebrow text-[#838385]", className)}>
       {children}
     </Tag>
-  )
-}
-
-/** Maquette de fenêtre d'application : pastilles, titre centré, contenu libre. */
-export function AppWindow({
-  title,
-  children,
-  className,
-  bodyClassName,
-}: {
-  title?: string
-  children: React.ReactNode
-  className?: string
-  bodyClassName?: string
-}) {
-  return (
-    <div className={cn("app-window", className)}>
-      <div className="app-window-bar" aria-hidden="true">
-        <span className="traffic-lights">
-          <span className="bg-[#ff5f57]" />
-          <span className="bg-[#ffbd2e]" />
-          <span className="bg-[#28c840]" />
-        </span>
-        {title && <span className="flex-1 truncate pr-12 text-center text-[12px] font-[550] text-[#838385]">{title}</span>}
-      </div>
-      <div className={bodyClassName}>{children}</div>
-    </div>
   )
 }

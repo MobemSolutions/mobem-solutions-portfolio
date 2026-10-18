@@ -25,6 +25,7 @@ export interface BeforeAfter {
 }
 
 export interface TradeTask {
+  icon: FlowIcon
   title: string
   text: string
 }
@@ -65,18 +66,22 @@ export const TRADES: Trade[] = [
     beforeAfter: { before: "6 h / mois", after: "45 min / mois" },
     tasks: [
       {
+        icon: "send",
         title: "Convocations et rappels",
         text: "Dès qu'un stagiaire est inscrit, la convocation part avec le programme, le lieu et les horaires. Un rappel suit la veille.",
       },
       {
+        icon: "pen",
         title: "Émargements et attestations",
         text: "Les feuilles d'émargement sont collectées et rangées par session. Les attestations de fin de formation sont générées et envoyées.",
       },
       {
+        icon: "clipboard",
         title: "Questionnaires de satisfaction",
         text: "Questionnaire à chaud le dernier jour, à froid quelques semaines après. Les retardataires sont relancés, les réponses consolidées.",
       },
       {
+        icon: "file-up",
         title: "Dossiers OPCO",
         text: "Les pièces attendues par l'OPCO sont rassemblées dans le bon dossier et les relances partent à la bonne date.",
       },
@@ -116,18 +121,22 @@ export const TRADES: Trade[] = [
     beforeAfter: { before: "8 h / mois", after: "1 h / mois" },
     tasks: [
       {
+        icon: "file-up",
         title: "Collecte des pièces",
         text: "Le client reçoit la liste exacte des justificatifs à fournir. Chaque pièce reçue est renommée et rangée dans son dossier.",
       },
       {
+        icon: "calendar",
         title: "Relances d'échéances",
         text: "Les contrats qui arrivent à échéance sont repérés à l'avance et la relance part au bon moment, avec le bon interlocuteur en copie.",
       },
       {
+        icon: "shield",
         title: "Devoir de conseil",
         text: "Les recueils de besoins et les documents remis sont horodatés et archivés : la trace existe sans saisie supplémentaire.",
       },
       {
+        icon: "bell",
         title: "Pièces manquantes",
         text: "Un tableau montre en un coup d'œil les dossiers incomplets. Les relances partent seules, jusqu'à réception.",
       },
@@ -167,18 +176,22 @@ export const TRADES: Trade[] = [
     beforeAfter: { before: "10 h / mois", after: "1 h 30 / mois" },
     tasks: [
       {
+        icon: "bell",
         title: "Relance des pièces manquantes",
         text: "Chaque client reçoit la liste de ce qui manque pour sa période, puis une relance tant que ce n'est pas arrivé.",
       },
       {
+        icon: "mail",
         title: "Tri de la boîte mail",
         text: "Les mails entrants sont classés par client et par nature : facture, relevé, question, urgence. Plus rien ne se perd.",
       },
       {
+        icon: "user-plus",
         title: "Onboarding client",
         text: "Lettre de mission, liste des documents, accès : le nouveau client reçoit tout dans l'ordre, sans que personne n'ait à y penser.",
       },
       {
+        icon: "receipt",
         title: "Factures reçues",
         text: "Les factures sont extraites des mails, renommées et déposées dans le bon dossier. Utile aussi pour préparer la facture électronique.",
       },

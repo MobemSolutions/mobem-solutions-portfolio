@@ -11,10 +11,10 @@ import {
   UNDER_THE_HOOD,
   TRUST_LINE,
 } from "@/lib/automation-content"
-import { Container, SectionHeading, SourceCaption, FaqList, AppWindow, Eyebrow } from "@/components/home/primitives"
+import { Container, SectionHeading, SourceCaption, FaqList, Eyebrow } from "@/components/home/primitives"
 import { DiagnosticButton } from "@/components/diagnostic-button"
-import { HeroIllustration } from "@/components/home/hero-illustration"
-import { TradeTabs } from "@/components/home/trade-tabs"
+import { HeroArtwork } from "@/components/home/hero-artwork"
+import { TradeCards } from "@/components/home/trade-cards"
 import { MethodSteps } from "@/components/home/method-steps"
 import { TOOL_LOGOS, ToolLogo } from "@/components/home/tool-logos"
 import { ContactButton } from "@/components/contact-form"
@@ -23,47 +23,34 @@ import { ContactButton } from "@/components/contact-form"
 export function Hero() {
   return (
     <section id="hero" className="relative overflow-hidden pt-28 sm:pt-36" aria-labelledby="hero-heading">
-      <div className="blue-glow pointer-events-none absolute inset-x-0 top-0 h-[720px]" aria-hidden="true" />
-      <Container className="relative flex flex-col items-center text-center">
-        <p className="chip-dark animate-in fade-in-0 slide-in-from-bottom-4 duration-700 fill-mode-both max-w-full whitespace-nowrap">
-          <span className="shrink-0 rounded-[10px] bg-blue px-2 py-0.5 text-[12px]">Nouveau</span>
-          {/* Version courte sur mobile pour tenir sur une ligne */}
-          <span className="sm:hidden">Facture électronique 2027</span>
-          <span className="max-sm:hidden">Facture électronique : nous préparons vos flux pour 2027</span>
-        </p>
-        <h1 id="hero-heading" className="animate-in fade-in-0 slide-in-from-bottom-4 duration-700 fill-mode-both delay-100 type-display mt-8 max-w-[22ch] text-ink text-balance">
-          Vos tâches administratives tournent toutes seules. Vous récupérez vos <span className="text-sweep">heures.</span>
-        </h1>
-        <p className="animate-in fade-in-0 slide-in-from-bottom-4 duration-700 fill-mode-both delay-200 type-body mt-6 max-w-[62ch] text-charcoal">
-          Relances, collecte de pièces, preuves d&apos;audit, tri des mails : nous repérons ce qui vous fait perdre du temps,
-          l&apos;automatisons sur vos propres outils, et mesurons les heures gagnées.
-        </p>
-        <div className="animate-in fade-in-0 slide-in-from-bottom-4 duration-700 fill-mode-both delay-300 mt-8 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row">
-          <DiagnosticButton className="w-full sm:w-auto" />
-          <Link href="#exemples" className="btn-outline w-full sm:w-auto">
-            <Play className="h-4 w-4" aria-hidden="true" />
-            Voir un exemple en 2 min
-          </Link>
-        </div>
-        <p className="mt-5 type-meta text-charcoal">45 min · Sans engagement · Vos données restent chez vous</p>
-      </Container>
-
-      {/* Maquette : la semaine administrative qui se range toute seule */}
-      <Container className="animate-in fade-in-0 slide-in-from-bottom-4 duration-700 fill-mode-both delay-500 relative mt-16 sm:mt-24">
-        <AppWindow title="Votre semaine · Mobem Solutions" className="mx-auto max-w-[1080px]" bodyClassName="p-2 sm:p-3">
-          <HeroIllustration className="rounded-[10px]" />
-          {/* Barre de suivi, façon frise de lecture */}
-          <div className="flex items-center gap-3 px-2 pb-1 pt-3 sm:gap-4 sm:px-3 sm:pt-4" aria-hidden="true">
-            <span className="halo-dot flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue text-white">
-              <Check className="h-3.5 w-3.5" strokeWidth={3} />
-            </span>
-            <span className="hidden text-[13px] font-[550] text-graphite sm:inline">Relances, pièces, mails</span>
-            <span className="relative h-1.5 flex-1 overflow-hidden rounded-full bg-[#ececef]">
-              <span className="timeline-fill absolute inset-0 rounded-full bg-blue" />
-            </span>
-            <span className="text-[13px] font-[550] tabular-nums text-charcoal">rangés tout seuls</span>
+      <Container className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+        <div className="animate-in fade-in-0 slide-in-from-bottom-4 duration-700 fill-mode-both">
+          <p className="inline-flex max-w-full items-center gap-2 whitespace-nowrap rounded-full border border-[#e5e5e8] bg-[#fcfcfc] py-1.5 pl-1.5 pr-3.5 text-[13px] font-[550] text-graphite">
+            <span className="rounded-full bg-[#e6edff] px-2.5 py-0.5 text-blue">Nouveau</span>
+            {/* Version courte sur mobile pour tenir sur une ligne */}
+            <span className="sm:hidden">Facture électronique 2027</span>
+            <span className="max-sm:hidden">Facture électronique : nous préparons vos flux pour 2027</span>
+          </p>
+          <h1 id="hero-heading" className="type-display mt-7 max-w-[16ch] text-ink text-balance">
+            Vos tâches administratives tournent toutes seules.
+          </h1>
+          <p className="type-body mt-6 max-w-[50ch] text-charcoal">
+            Relances, collecte de pièces, preuves d&apos;audit, tri des mails : nous repérons ce qui vous fait perdre du temps,
+            l&apos;automatisons sur vos propres outils, et mesurons les heures que vous récupérez.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Link href="#exemples" className="btn-dark">
+              <Play className="h-3.5 w-3.5 fill-current" aria-hidden="true" />
+              Voir un exemple
+            </Link>
+            <DiagnosticButton />
           </div>
-        </AppWindow>
+          <p className="mt-5 text-[14px] text-[#838385]">45 min · Sans engagement · Vos données restent chez vous</p>
+        </div>
+
+        <div className="animate-in fade-in-0 slide-in-from-bottom-4 duration-1000 fill-mode-both delay-200">
+          <HeroArtwork />
+        </div>
       </Container>
     </section>
   )
@@ -107,9 +94,7 @@ export function TradeRows() {
           text="Trois métiers où les mêmes tâches reviennent chaque semaine. Voici ce qui se déclenche tout seul, et le temps que ça représente."
           align="center"
         />
-        <div className="mt-10 lg:mt-14">
-          <TradeTabs />
-        </div>
+        <TradeCards />
       </Container>
     </section>
   )
@@ -196,23 +181,28 @@ export function Pricing() {
             <li
               key={plan.name}
               className={cn(
-                "card-lift card-hover flex w-[82%] shrink-0 snap-center flex-col p-6 sm:w-auto",
-                plan.featured && "ring-2 ring-blue"
+                "hairline flex w-[82%] shrink-0 snap-center flex-col p-6 hover:bg-white sm:w-auto sm:p-7",
+                plan.featured ? "border-blue shadow-[0_20px_25px_-5px_rgba(13,68,232,0.08),0_8px_10px_-6px_rgba(13,68,232,0.08)]" : "hover:border-[#cfcfd4]"
               )}
             >
-              <h3 className="type-feature text-ink">{plan.name}</h3>
-              <p className="mt-4 text-[28px] font-semibold leading-tight tracking-[-0.02em] text-ink">{plan.price}</p>
-              <p className="type-meta text-charcoal">{plan.unit}</p>
-              <p className="mt-4 text-[15px] leading-[1.6] text-charcoal">{plan.text}</p>
-              <ul className="mt-5 flex flex-col gap-2 border-t border-border pt-5">
+              <div className="flex items-center justify-between gap-3">
+                <h3 className="text-[16px] font-[600] text-ink">{plan.name}</h3>
+                {plan.featured && (
+                  <span className="whitespace-nowrap rounded-full bg-[#e6edff] px-2.5 py-0.5 text-[12px] font-[550] text-blue">Gratuit</span>
+                )}
+              </div>
+              <p className="mt-5 whitespace-nowrap text-[30px] font-bold leading-none tracking-[-0.03em] text-ink">{plan.price}</p>
+              <p className="mt-2 text-[14px] text-[#838385]">{plan.unit}</p>
+              <p className="mt-5 text-[15px] leading-[1.6] text-charcoal">{plan.text}</p>
+              <ul className="mt-6 flex flex-col gap-2.5 border-t border-[#ececef] pt-6">
                 {plan.items.map((item) => (
-                  <li key={item} className="flex items-start gap-2 text-[14px] text-graphite">
+                  <li key={item} className="flex items-start gap-2.5 text-[14px] text-graphite">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-blue" strokeWidth={2.5} aria-hidden="true" />
                     {item}
                   </li>
                 ))}
               </ul>
-              <div className="mt-auto pt-6">
+              <div className="mt-auto pt-7">
                 {plan.featured ? (
                   <DiagnosticButton className="w-full">Réserver mon diagnostic</DiagnosticButton>
                 ) : (
@@ -229,7 +219,7 @@ export function Pricing() {
           Prix indicatifs hors taxes. Le devis final dépend du nombre de tâches et des outils à connecter.
         </SourceCaption>
         {/* Offre secondaire, volontairement discrète */}
-        <div className="mx-auto mt-8 flex max-w-[760px] sm:mt-10 flex-col items-start gap-3 rounded-[20px] border border-border px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="hairline mx-auto mt-8 flex max-w-[760px] sm:mt-10 flex-col items-start gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
           <p className="flex items-center gap-3 text-[15px] text-charcoal">
             <Globe className="h-5 w-5 shrink-0 text-graphite" aria-hidden="true" />
             <span>

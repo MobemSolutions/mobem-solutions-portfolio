@@ -26,7 +26,6 @@ export default function MetiersPage() {
       <Header />
       <main id="main-content">
         <section className="relative overflow-hidden pt-28 sm:pt-36" aria-labelledby="metiers-heading">
-          <div className="blue-glow pointer-events-none absolute inset-x-0 top-0 h-[560px]" aria-hidden="true" />
           <Container className="relative">
             <SectionHeading
               as="h1"

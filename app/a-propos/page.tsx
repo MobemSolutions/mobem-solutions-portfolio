@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { CalendarCheck, Gauge, KeyRound, MapPin, UserRound } from "lucide-react"
-import { Container, SectionHeading, AppWindow, Eyebrow } from "@/components/home/primitives"
+import { Clock, Gauge, KeyRound } from "lucide-react"
+import { Container, SectionHeading, Eyebrow } from "@/components/home/primitives"
 import { DiagnosticButton } from "@/components/diagnostic-button"
 import { ContactButton } from "@/components/contact-form"
 import { ClosingBand } from "@/components/home/closing-band"
@@ -20,24 +20,19 @@ export const metadata: Metadata = {
   },
 }
 
-const FACTS = [
-  { Icon: MapPin, label: "Basée", value: "Près de Nantes, partout en France" },
-  { Icon: UserRound, label: "Interlocuteur", value: "Un seul, du diagnostic à la maintenance" },
-  { Icon: KeyRound, label: "Vos données", value: "Sur vos comptes, jamais chez nous" },
-  { Icon: CalendarCheck, label: "Premier pas", value: "Diagnostic gratuit de 45 min" },
-  { Icon: Gauge, label: "Résultat", value: "Heures mesurées avant et après" },
-]
-
 const VALUES = [
   {
+    Icon: Clock,
     title: "Des heures, pas du logiciel",
     text: "Ce que nous livrons, c'est du temps. Chaque automatisation est jugée sur les heures qu'elle vous rend chaque mois.",
   },
   {
+    Icon: KeyRound,
     title: "Vos outils, vos comptes",
     text: "Nous travaillons avec ce que vous utilisez déjà, installé chez vous. Vous gardez la main, même si nous arrêtons de travailler ensemble.",
   },
   {
+    Icon: Gauge,
     title: "Des chiffres honnêtes",
     text: "Pas de témoignage inventé, pas de promesse en l'air. Nous mesurons avant, puis après, et vous montrons l'écart.",
   },
@@ -48,59 +43,46 @@ export default function AProposPage() {
     <>
       <Header />
       <main id="main-content">
-        <section className="relative overflow-hidden pt-28 sm:pt-36" aria-labelledby="apropos-heading">
-          <div className="blue-glow pointer-events-none absolute inset-x-0 top-0 h-[560px]" aria-hidden="true" />
-          <Container className="relative grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
-            <div>
-              <Eyebrow>À propos</Eyebrow>
-              <h1 id="apropos-heading" className="type-display mt-4 max-w-[16ch] text-ink text-balance">
-                Rendre leurs heures aux petites entreprises.
-              </h1>
-              <p className="type-body mt-6 max-w-[54ch] text-charcoal">
-                Mobem Solutions repère les tâches administratives qui vous font perdre du temps, les automatise sur vos propres
-                outils, puis mesure les heures gagnées.
-              </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <DiagnosticButton />
-                <ContactButton className="btn-outline">Nous écrire</ContactButton>
-              </div>
+        <section className="pt-28 sm:pt-36" aria-labelledby="apropos-heading">
+          <Container className="flex flex-col items-center text-center">
+            <Eyebrow>À propos</Eyebrow>
+            <h1 id="apropos-heading" className="type-display mt-4 max-w-[18ch] text-ink text-balance">
+              Rendre leurs heures aux petites entreprises.
+            </h1>
+            <p className="type-body mt-6 max-w-[58ch] text-charcoal">
+              Mobem Solutions repère les tâches administratives qui vous font perdre du temps, les automatise sur vos propres
+              outils, puis mesure les heures gagnées.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <ContactButton className="btn-dark">Nous écrire</ContactButton>
+              <DiagnosticButton />
             </div>
+          </Container>
 
-            {/* Fiche d'identité du studio, en maquette de fenêtre */}
-            <AppWindow title="Mobem Solutions · en bref">
-              <dl className="divide-y divide-[#ececef]">
-                {FACTS.map(({ Icon, label, value }) => (
-                  <div key={label} className="flex items-center gap-4 px-5 py-4 sm:px-6">
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#f0f0f2] text-graphite" aria-hidden="true">
-                      <Icon className="h-4 w-4" strokeWidth={2} />
-                    </span>
-                    <div className="flex flex-col gap-0.5 sm:flex-row sm:items-center sm:gap-4">
-                      <dt className="shrink-0 text-[13px] text-charcoal sm:w-32">{label}</dt>
-                      <dd className="text-[15px] font-[550] text-ink">{value}</dd>
-                    </div>
-                  </div>
-                ))}
-              </dl>
-              <div className="flex items-center gap-3 border-t border-[#ececef] bg-[#f7f7f8] px-5 py-3 sm:px-6">
-                <span className="halo-dot h-2.5 w-2.5 rounded-full bg-blue" aria-hidden="true" />
-                <span className="text-[13px] font-[550] text-graphite">Disponible pour de nouveaux diagnostics</span>
-              </div>
-            </AppWindow>
+          {/* La devise du studio, en grand et à plat */}
+          <Container className="mt-14 sm:mt-20">
+            <div className="art-panel flex flex-col items-center px-6 py-16 text-center sm:py-24">
+              <p className="eyebrow text-[#838385]">Notre méthode</p>
+              <p className="mt-4 max-w-[18ch] text-[34px] font-bold leading-[1.08] tracking-[-0.03em] text-ink text-balance sm:text-[52px]">
+                Diagnostiquer avant de prescrire<span className="text-blue">.</span>
+              </p>
+            </div>
           </Container>
         </section>
 
         <section className="py-12 sm:py-16 lg:py-24" aria-labelledby="valeurs-heading">
           <Container>
-            <SectionHeading id="valeurs-heading" eyebrow="Ce qui nous guide" title="Diagnostiquer avant de prescrire." />
-            <ul className="hairline mt-12 grid overflow-hidden md:grid-cols-3">
-              {VALUES.map((v, i) => (
-                <li
-                  key={v.title}
-                  className="flex flex-col gap-3 border-[#e6e6e8] p-6 transition-colors duration-300 hover:bg-white max-md:[&:not(:first-child)]:border-t sm:p-8 md:[&:not(:first-child)]:border-l"
-                >
-                  <span className="eyebrow text-blue">{String(i + 1).padStart(2, "0")}</span>
-                  <h3 className="type-feature text-ink">{v.title}</h3>
-                  <p className="text-[15px] leading-[1.6] text-charcoal">{v.text}</p>
+            <SectionHeading id="valeurs-heading" eyebrow="Ce qui nous guide" title="Trois principes, sur chaque mission." />
+            <ul className="mt-12 grid gap-4 md:grid-cols-3">
+              {VALUES.map(({ Icon, title, text }) => (
+                <li key={title} className="hairline flex flex-col gap-4 p-6 hover:border-[#cfcfd4] hover:bg-white sm:p-7">
+                  <span className="icon-tile" aria-hidden="true">
+                    <Icon className="h-5 w-5" strokeWidth={2} />
+                  </span>
+                  <div>
+                    <h3 className="text-[18px] font-[550] leading-[1.4] text-ink">{title}</h3>
+                    <p className="mt-2 text-[15px] leading-[1.6] text-charcoal">{text}</p>
+                  </div>
                 </li>
               ))}
             </ul>

@@ -1,50 +1,11 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import {
-  ArrowRight,
-  Bell,
-  CalendarClock,
-  CircleCheckBig,
-  ClipboardCheck,
-  Clock,
-  FileUp,
-  FolderCheck,
-  Gauge,
-  Mail,
-  PenLine,
-  Receipt,
-  Search,
-  Send,
-  ShieldCheck,
-  Tags,
-  UserPlus,
-  Wrench,
-  Zap,
-  type LucideIcon,
-} from "lucide-react"
+import { ArrowRight, Clock } from "lucide-react"
 import { cn } from "@/lib/utils"
-import type { BeforeAfter, FlowIcon, FlowNode } from "@/lib/automation-content"
+import type { BeforeAfter, FlowNode } from "@/lib/automation-content"
+import { FLOW_ICONS } from "@/components/automation/flow-icons"
 
-const ICONS: Record<FlowIcon, LucideIcon> = {
-  "user-plus": UserPlus,
-  send: Send,
-  pen: PenLine,
-  clipboard: ClipboardCheck,
-  "folder-check": FolderCheck,
-  calendar: CalendarClock,
-  bell: Bell,
-  "file-up": FileUp,
-  shield: ShieldCheck,
-  mail: Mail,
-  tags: Tags,
-  receipt: Receipt,
-  check: CircleCheckBig,
-  search: Search,
-  zap: Zap,
-  gauge: Gauge,
-  wrench: Wrench,
-}
 
 /** Fait avancer un index en boucle ; figé sur `still` si l'utilisateur préfère moins d'animations. */
 export function useCycle(length: number, interval = 1800, still = length - 1) {
@@ -81,30 +42,30 @@ export function FlowDiagram({ nodes, compact, vertical, mini, className }: FlowD
     return (
       <ol className={cn("flex items-start", className)} aria-label={nodes.map((n) => n.label).join(", puis ")}>
         {nodes.map((node, i) => {
-          const Icon = ICONS[node.icon]
+          const Icon = FLOW_ICONS[node.icon]
           const reached = i <= tick
           const active = i === tick
           return (
             <li key={node.label} className="relative flex min-w-0 flex-1 flex-col items-center gap-2">
               {i < nodes.length - 1 && (
                 <span
-                  className="absolute left-[calc(50%+26px)] top-[16.5px] h-[3px] w-[calc(100%-52px)] overflow-hidden rounded-full bg-white/25"
+                  className="absolute left-[calc(50%+26px)] top-[16.5px] h-[3px] w-[calc(100%-52px)] overflow-hidden rounded-full bg-[#dcdee3]"
                   aria-hidden="true"
                 >
-                  <span className={cn("flow-fill absolute inset-0 origin-left rounded-full bg-white", i < tick ? "scale-x-100" : "scale-x-0")} />
+                  <span className={cn("flow-fill absolute inset-0 origin-left rounded-full bg-blue", i < tick ? "scale-x-100" : "scale-x-0")} />
                 </span>
               )}
               <span
                 className={cn(
                   "flow-node relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full",
-                  reached ? "bg-white text-blue" : "bg-white/15 text-white/85 ring-1 ring-white/30",
-                  active && "scale-[1.06] shadow-[0_0_0_4px_rgba(255,255,255,0.18),0_8px_20px_rgba(4,24,85,0.45)]"
+                  reached ? "bg-blue text-white" : "bg-white text-graphite ring-[1.5px] ring-inset ring-[#161618]",
+                  active && "scale-[1.08]"
                 )}
                 aria-hidden="true"
               >
                 <Icon className="h-4 w-4" strokeWidth={2.25} />
               </span>
-              <span className={cn("flow-label max-w-[11ch] text-center text-[11.5px] font-[550] leading-[1.2] max-sm:sr-only", reached ? "text-white" : "text-white/85")}>
+              <span className={cn("flow-label max-w-[11ch] text-center text-[11.5px] font-[550] leading-[1.2] max-sm:sr-only", reached ? "text-ink" : "text-[#838385]")}>
                 {node.label}
               </span>
             </li>
@@ -120,7 +81,7 @@ export function FlowDiagram({ nodes, compact, vertical, mini, className }: FlowD
       aria-label={nodes.map((n) => n.label).join(", puis ")}
     >
       {nodes.map((node, i) => {
-        const Icon = ICONS[node.icon]
+        const Icon = FLOW_ICONS[node.icon]
         const reached = i <= tick
         const active = i === tick
         const last = i === nodes.length - 1
@@ -137,7 +98,7 @@ export function FlowDiagram({ nodes, compact, vertical, mini, className }: FlowD
             {!last && (
               <span
                 className={cn(
-                  "absolute w-[3px] overflow-hidden rounded-full bg-white/25",
+                  "absolute w-[3px] overflow-hidden rounded-full bg-[#dcdee3]",
                   compact
                     ? "left-[20.5px] top-[calc(50%+31px)] h-[calc(100%-62px)]"
                     : "left-[26.5px] top-[calc(50%+38px)] h-[calc(100%-76px)]",
@@ -150,7 +111,7 @@ export function FlowDiagram({ nodes, compact, vertical, mini, className }: FlowD
               >
                 <span
                   className={cn(
-                    "flow-fill absolute inset-0 rounded-full bg-white",
+                    "flow-fill absolute inset-0 rounded-full bg-blue",
                     row ? "origin-top sm:origin-left" : "origin-top",
                     i < tick ? "scale-x-100 scale-y-100" : row ? "scale-y-0 sm:scale-x-0 sm:scale-y-100" : "scale-y-0"
                   )}
@@ -162,8 +123,8 @@ export function FlowDiagram({ nodes, compact, vertical, mini, className }: FlowD
               className={cn(
                 "flow-node relative z-10 flex shrink-0 items-center justify-center rounded-full",
                 compact ? "h-11 w-11" : "h-14 w-14",
-                reached ? "bg-white text-blue" : "bg-white/15 text-white/85 ring-1 ring-white/30",
-                active && "scale-[1.06] shadow-[0_0_0_4px_rgba(255,255,255,0.18),0_10px_28px_rgba(4,24,85,0.45)]"
+                reached ? "bg-blue text-white" : "bg-white text-graphite ring-[1.5px] ring-inset ring-[#161618]",
+                active && "scale-[1.08]"
               )}
               aria-hidden="true"
             >
@@ -174,7 +135,7 @@ export function FlowDiagram({ nodes, compact, vertical, mini, className }: FlowD
               className={cn(
                 "flow-label text-[14px] font-[550] leading-[1.25]",
                 row && "sm:max-w-[12ch] sm:text-center",
-                reached ? "text-white" : "text-white/85",
+                reached ? "text-ink" : "text-[#838385]",
                 compact && "sr-only"
               )}
             >

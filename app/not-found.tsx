@@ -22,7 +22,6 @@ export default function NotFound() {
     <>
       <Header />
       <main id="main-content" className="relative overflow-hidden pb-24 pt-32 sm:pt-40">
-        <div className="blue-glow pointer-events-none absolute inset-x-0 top-0 h-[560px]" aria-hidden="true" />
         <Container className="relative flex flex-col items-center text-center">
           <p className="chip-dark">Erreur 404</p>
           <h1 className="type-display mt-8 max-w-[18ch] text-ink text-balance">Cette page n&apos;existe pas, ou plus.</h1>

@@ -56,11 +56,13 @@ Shadows: `shadow-card` (graphite multi-layer), `shadow-blue` (button inset), `sh
 
 ## Langage « studio calme » (inspiré de Cap)
 
-Ajouté par-dessus la charte : même bleu unique (#0d44e8), mais plus de traits fins et moins d'ombres.
+Un canevas blanc et calme, des traits fins, une seule touche de bleu (#0d44e8). Ni halo, ni dégradé, ni ombre lourde.
 
-- **Sur-titres** : composant `Eyebrow` (capitales 12 px, interlettrage 0,2 em, point bleu devant).
-- **Cartes à trait fin** : utilitaire `hairline` (fond #fcfcfc, bordure 1 px, rayon 16 px, sans ombre).
-  Les grilles de contenu (tâches métier, valeurs) partagent leurs bordures comme un tableau, numérotées 01, 02…
-- **Fenêtres d'application** : composant `AppWindow` (pastilles macOS, titre centré). Toute illustration sur champ
-  bleu s'affiche dans une fenêtre. Les couleurs des pastilles n'apparaissent que là.
-- **Contrôle segmenté** : utilitaires `segmented` / `.segment`, pour choisir un métier dans « Exemples ».
+- **Boutons** : pilules. Noir (`btn-dark`) pour l'action secondaire à gauche, bleu (`btn-blue`) pour réserver à droite.
+  Bouton discret : `btn-outline` (trait fin gris).
+- **Sur-titres** : composant `Eyebrow` (capitales 12 px, interlettrage 0,2 em, gris), sans pastille.
+- **Cartes** : utilitaire `hairline` (fond #fcfcfc, bordure 1 px, rayon 12 px, sans ombre). Icône dans un `icon-tile`
+  (carré 40 px, fond bleu très pâle, icône bleue).
+- **Illustrations** : à plat sur `art-panel` (gris très clair). Formes blanches cernées d'un trait noir de 2 px,
+  accents en bleu plein. Aucun dégradé, aucune ombre portée.
+- **Hero** : deux colonnes, texte à gauche, liste « Cette semaine » qui se coche toute seule à droite.

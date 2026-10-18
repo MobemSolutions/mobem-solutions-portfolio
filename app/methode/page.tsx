@@ -45,7 +45,6 @@ export default function MethodePage() {
       <Header />
       <main id="main-content">
         <section className="relative overflow-hidden pt-28 sm:pt-36" aria-labelledby="methode-page-heading">
-          <div className="blue-glow pointer-events-none absolute inset-x-0 top-0 h-[600px]" aria-hidden="true" />
           <Container className="relative flex flex-col items-center text-center">
             <p className="chip-dark">La méthode</p>
             <h1 id="methode-page-heading" className="type-display mt-8 max-w-[16ch] text-ink text-balance">
@@ -60,7 +59,7 @@ export default function MethodePage() {
             </div>
           </Container>
           <Container className="relative mt-14">
-            <div className="blue-field rounded-[20px] px-5 py-10 sm:px-12 sm:py-14">
+            <div className="art-panel px-5 py-10 sm:px-12 sm:py-14">
               <FlowDiagram nodes={METHOD_FLOW} className="mx-auto max-w-[760px]" />
             </div>
           </Container>

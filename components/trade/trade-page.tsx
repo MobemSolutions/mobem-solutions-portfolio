@@ -1,8 +1,9 @@
 import Link from "next/link"
-import { ArrowLeft, ArrowRight, Check } from "lucide-react"
+import { ArrowLeft, ArrowRight } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { Container, SectionHeading, FaqList, AppWindow, Eyebrow } from "@/components/home/primitives"
+import { Container, SectionHeading, FaqList, Eyebrow } from "@/components/home/primitives"
+import { FLOW_ICONS } from "@/components/automation/flow-icons"
 import { ClosingBand } from "@/components/home/closing-band"
 import { DiagnosticButton } from "@/components/diagnostic-button"
 import { TradeVisual } from "@/components/automation/trade-visual"
@@ -41,7 +42,6 @@ export function TradePage({ trade }: { trade: Trade }) {
       <Header />
       <main id="main-content">
         <section className="relative overflow-hidden pt-28 sm:pt-36" aria-labelledby="trade-heading">
-          <div className="blue-glow pointer-events-none absolute inset-x-0 top-0 h-[640px]" aria-hidden="true" />
           <Container className="relative grid items-center gap-12 lg:grid-cols-2">
             <div>
               <nav aria-label="Fil d'Ariane" className="type-meta text-charcoal">
@@ -55,25 +55,19 @@ export function TradePage({ trade }: { trade: Trade }) {
                 {trade.headline}
               </h1>
               <p className="type-body mt-6 text-charcoal">{trade.intro}</p>
-              <div className="hairline mt-7 flex max-w-[460px] items-center justify-between gap-4 px-5 py-4">
-                <div>
-                  <p className="text-[13px] text-charcoal">Exemple type, chaque mois</p>
-                  <p className="mt-1 text-[15px] font-[550] text-charcoal line-through decoration-[#c2c2c4]">{trade.beforeAfter.before}</p>
-                </div>
-                <ArrowRight className="h-4 w-4 shrink-0 text-[#c2c2c4]" aria-hidden="true" />
-                <p className="whitespace-nowrap text-[32px] font-semibold leading-none tracking-[-0.03em] text-blue">{trade.beforeAfter.after}</p>
-              </div>
+              <p className="mt-6 flex items-baseline gap-2 text-[15px] text-[#838385]">
+                <span className="text-[30px] font-semibold leading-none tracking-[-0.03em] text-blue">{trade.beforeAfter.after}</span>
+                au lieu de {trade.beforeAfter.before} · exemple type
+              </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <DiagnosticButton>Voir si c&apos;est automatisable chez moi</DiagnosticButton>
-                <Link href="#taches" className="btn-outline">
+                <Link href="#taches" className="btn-dark">
                   Ce que nous automatisons
                 </Link>
+                <DiagnosticButton>Voir si c&apos;est automatisable chez moi</DiagnosticButton>
               </div>
               <p className="mt-5 type-meta text-charcoal">45 min · Sans engagement · Vos données restent chez vous</p>
             </div>
-            <AppWindow title={`${trade.navLabel} · automatisations`} bodyClassName="p-2 sm:p-3">
-              <TradeVisual trade={trade} className="rounded-[10px]" />
-            </AppWindow>
+            <TradeVisual trade={trade} className="rounded-[16px]" />
           </Container>
         </section>
 
@@ -87,26 +81,21 @@ export function TradePage({ trade }: { trade: Trade }) {
               title="Les tâches qui reviennent chaque semaine"
               text="Nous partons de vos mots et de vos outils. Chaque tâche est installée sur vos comptes, puis mesurée."
             />
-            {/* Grille à traits fins : les cases partagent leurs bordures, comme un tableau */}
-            <ul className="hairline mt-12 grid overflow-hidden sm:grid-cols-2">
-              {trade.tasks.map((task, i) => (
-                <li
-                  key={task.title}
-                  className="group relative flex flex-col gap-3 border-[#e6e6e8] p-6 transition-colors duration-300 hover:bg-white max-sm:[&:not(:first-child)]:border-t sm:p-8 sm:[&:nth-child(even)]:border-l sm:[&:nth-child(n+3)]:border-t"
-                >
-                  <span className="flex items-center justify-between">
-                    <span className="eyebrow text-blue">{String(i + 1).padStart(2, "0")}</span>
-                    <span
-                      className="flex h-8 w-8 items-center justify-center rounded-full bg-[#f0f0f2] text-graphite transition-colors duration-300 group-hover:bg-blue group-hover:text-white"
-                      aria-hidden="true"
-                    >
-                      <Check className="h-4 w-4" strokeWidth={2.5} />
+            <ul className="mt-12 grid gap-4 sm:grid-cols-2">
+              {trade.tasks.map((task) => {
+                const Icon = FLOW_ICONS[task.icon]
+                return (
+                  <li key={task.title} className="hairline flex flex-col gap-4 p-6 hover:border-[#cfcfd4] hover:bg-white sm:p-7">
+                    <span className="icon-tile" aria-hidden="true">
+                      <Icon className="h-5 w-5" strokeWidth={2} />
                     </span>
-                  </span>
-                  <h3 className="type-feature text-ink">{task.title}</h3>
-                  <p className="text-[15px] leading-[1.6] text-charcoal">{task.text}</p>
-                </li>
-              ))}
+                    <div>
+                      <h3 className="text-[18px] font-[550] leading-[1.4] text-ink">{task.title}</h3>
+                      <p className="mt-2 text-[15px] leading-[1.6] text-charcoal">{task.text}</p>
+                    </div>
+                  </li>
+                )
+              })}
             </ul>
           </Container>
         </section>
