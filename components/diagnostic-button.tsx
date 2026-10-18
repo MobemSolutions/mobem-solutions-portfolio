@@ -159,11 +159,11 @@ function CalendarLoading() {
 interface DiagnosticButtonProps {
   children?: React.ReactNode
   className?: string
-  variant?: "blue" | "outline" | "dark"
+  variant?: "blue" | "outline" | "dark" | "bare"
   kind?: BookingKind
 }
 
-const VARIANTS = { blue: "btn-blue", outline: "btn-outline", dark: "btn-dark" }
+const VARIANTS = { blue: "btn-blue", outline: "btn-outline", dark: "btn-dark", bare: "" }
 
 export function DiagnosticButton({
   children = "Réserver mon diagnostic gratuit",
@@ -183,7 +183,11 @@ export function DiagnosticButton({
 }
 
 /** Bouton « Démo gratuite » : ouvre l'agenda de la démo de 20 minutes. */
-export function DemoButton({ children = "Voir une démo gratuite", className, variant = "blue" }: Omit<DiagnosticButtonProps, "kind">) {
+export function DemoButton({
+  children = "Voir une démo gratuite",
+  className,
+  variant = "blue",
+}: Omit<DiagnosticButtonProps, "kind" | "variant"> & { variant?: "blue" | "outline" | "dark" }) {
   return (
     <DiagnosticButton kind="demo" variant={variant} className={className}>
       <MonitorPlay className="h-4 w-4" aria-hidden="true" />

@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, ArrowUpRight, BellRing, Building2, Calculator, Check, FileLock2, FileText, Globe, GraduationCap, KeyRound, Linkedin, Mail, MonitorPlay, Plus, Server, Umbrella } from "lucide-react"
+import { ArrowRight, ArrowUpRight, BellRing, Building2, Check, FileLock2, FileText, Globe, KeyRound, Linkedin, Mail, Play, Server } from "lucide-react"
 import { cn } from "@/lib/utils"
 import {
   TRADES,
@@ -99,53 +99,50 @@ export function TradeRows() {
 }
 
 /* ─── Démo ────────────────────────────────────────── */
-const DEMO_NICHES = [
-  { Icon: GraduationCap, label: "Organismes de formation" },
-  { Icon: Umbrella, label: "Courtiers en assurance" },
-  { Icon: Calculator, label: "Cabinets comptables" },
-  { Icon: Plus, label: "Ou votre propre cas" },
-]
+const DEMO_NICHES = ["Organismes de formation", "Courtiers en assurance", "Cabinets comptables", "Votre cas"]
 
 /** Encart « démo gratuite » : voir une automatisation tourner avant de se décider. */
 export function DemoBand() {
   return (
     <section className="py-6 sm:py-8" aria-labelledby="demo-heading">
       <Container>
-        <div className="grid overflow-hidden rounded-[14px] border-2 border-ink bg-white lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="p-6 sm:p-10">
-            <p className="inline-flex items-center gap-2 rounded-full bg-[#e6edff] px-3 py-1 text-[13px] font-[600] text-blue">
-              <MonitorPlay className="h-4 w-4" aria-hidden="true" />
-              Démo gratuite · 20 min
+        <div className="card-lift grid items-stretch gap-6 p-3 sm:p-4 lg:grid-cols-[1fr_1fr] lg:gap-10">
+          <div className="flex flex-col justify-center px-3 py-5 sm:px-6 sm:py-8 lg:pl-8">
+            <p className="chip-dark self-start">
+              <span className="rounded-[10px] bg-blue px-2 py-0.5 text-[12px]">Gratuit</span>
+              Démo de 20 minutes
             </p>
-            <h2 id="demo-heading" className="type-section mt-5 max-w-[18ch] text-ink text-balance">
+            <h2 id="demo-heading" className="type-section mt-6 max-w-[16ch] text-ink text-balance">
               Plutôt voir que lire&nbsp;? On vous montre.
             </h2>
-            <p className="type-body mt-4 max-w-[48ch] text-charcoal">
-              En 20 minutes de visio, nous faisons tourner devant vous des relances et des suivis administratifs automatisés,
-              sur votre métier. Vous posez toutes vos questions.
+            <p className="type-body mt-4 max-w-[46ch] text-charcoal">
+              En visio, nous faisons tourner devant vous des relances et des suivis administratifs automatisés, sur votre
+              métier. Vous posez toutes vos questions.
             </p>
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <DemoButton>Réserver ma démo gratuite</DemoButton>
-              <span className="text-[14px] text-[#838385]">En visio · Sans engagement</span>
+              <span className="type-meta text-charcoal">En visio · Sans engagement</span>
             </div>
           </div>
-          <ul className="grid grid-cols-2 border-t-2 border-ink bg-[#f3f4f6] lg:border-l-2 lg:border-t-0">
-            {DEMO_NICHES.map(({ Icon, label }, i) => (
-              <li
-                key={label}
-                className={cn(
-                  "group flex flex-col justify-between gap-6 p-5 transition-colors duration-300 hover:bg-white sm:p-6",
-                  i % 2 === 0 && "border-r-2 border-ink",
-                  i < 2 && "border-b-2 border-ink"
-                )}
-              >
-                <span className="icon-tile transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:-rotate-6 group-hover:scale-110" aria-hidden="true">
-                  <Icon className="h-5 w-5" strokeWidth={2} />
-                </span>
-                <span className="text-[15px] font-[600] leading-[1.3] text-ink">{label}</span>
-              </li>
-            ))}
-          </ul>
+
+          {/* Vignette façon vidéo : le bouton lecture ouvre directement l'agenda de la démo */}
+          <div className="blue-field relative flex min-h-[300px] flex-col items-center justify-center gap-8 overflow-hidden rounded-[16px] px-5 py-10">
+            <DiagnosticButton
+              kind="demo"
+              variant="bare"
+              className="group relative flex h-24 w-24 items-center justify-center rounded-full bg-white text-blue shadow-[0_0_0_10px_rgba(255,255,255,0.18),0_0_0_22px_rgba(255,255,255,0.08),0_16px_40px_rgba(4,24,85,0.45)] transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] hover:scale-105 active:scale-95"
+            >
+              <Play className="ml-1 h-9 w-9 fill-current transition-transform duration-500 group-hover:scale-110" aria-hidden="true" />
+              <span className="sr-only">Réserver ma démo gratuite</span>
+            </DiagnosticButton>
+            <ul className="flex max-w-[420px] flex-wrap justify-center gap-2" aria-label="Démos possibles">
+              {DEMO_NICHES.map((niche, i) => (
+                <li key={niche} className={cn("chip-light !px-3.5", i === DEMO_NICHES.length - 1 && "bg-white/85")}>
+                  {niche}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </Container>
     </section>
