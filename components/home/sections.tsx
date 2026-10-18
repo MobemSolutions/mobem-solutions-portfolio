@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, ArrowUpRight, BellRing, Building2, Check, FileLock2, FileText, Globe, KeyRound, Linkedin, Mail, Play, Server } from "lucide-react"
+import { ArrowRight, ArrowUpRight, ChevronRight, BellRing, Building2, Check, FileLock2, FileText, Globe, KeyRound, Linkedin, Mail, Play, Server } from "lucide-react"
 import { cn } from "@/lib/utils"
 import {
   TRADES,
@@ -19,6 +19,7 @@ import { TradeCards } from "@/components/home/trade-cards"
 import { MethodSteps } from "@/components/home/method-steps"
 import { TOOL_LOGOS, ToolLogo } from "@/components/home/tool-logos"
 import { ContactButton } from "@/components/contact-form"
+import { MobemMark } from "@/components/ui/mobem-logo"
 
 /* ─── Hero ────────────────────────────────────────── */
 export function Hero() {
@@ -101,94 +102,95 @@ export function TradeRows() {
 /* ─── Démo ────────────────────────────────────────── */
 const DEMO_NICHES = ["Organismes de formation", "Courtiers en assurance", "Cabinets comptables", "Votre cas"]
 
-/** Écran de démo dessiné à plat (contours noirs, aplats), dans le style du visuel d'accueil. */
-function DemoScreen() {
-  const rows = [
-    { y: 74, w: 128, delay: "0.4s" },
-    { y: 112, w: 104, delay: "1.4s" },
-    { y: 150, w: 118, delay: "2.4s" },
-  ]
+/** Lignes de l'écran de démo : chacune passe de « En attente » à fait, l'une après l'autre (exemples fictifs). */
+const DEMO_ROWS = [
+  { who: "Cabinet Martin", what: "Pièce manquante", done: "Relance envoyée", initials: "CM", delay: "0.6s" },
+  { who: "Session du 14 mars", what: "8 stagiaires", done: "Convoqués", initials: "SF", delay: "1.8s" },
+  { who: "Contrat habitation", what: "Échéance le 30 juin", done: "Rappel prêt", initials: "CH", delay: "3s" },
+  { who: "Facture fournisseur", what: "Reçue ce matin", done: "Classée", initials: "FF", delay: "4.2s" },
+]
+
+/** Écran d'ordinateur sobre, façon fiche produit : bord sombre, écran net, pied fin. */
+function DemoDevice() {
   return (
-    <svg
-      viewBox="0 0 360 240"
-      className="block h-auto w-full transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:-translate-y-1.5 group-hover:-rotate-1"
-      aria-hidden="true"
-      focusable="false"
-    >
-      {/* Écran */}
-      <rect x="40" y="16" width="280" height="180" rx="12" fill="#fff" stroke="#161618" strokeWidth="4" />
-      {/* Bandeau « en direct » */}
-      <rect x="60" y="34" width="104" height="22" rx="11" fill="#e6edff" />
-      <circle cx="74" cy="45" r="4.5" fill="#0d44e8" className="live-dot" />
-      <text x="85" y="49.5" fontSize="12" fontWeight="650" fill="#0d44e8" fontFamily="inherit">
-        Démo en direct
-      </text>
-      {rows.map(({ y, w, delay }) => (
-        <g key={y}>
-          <rect x="60" y={y} width="26" height="26" rx="7" fill="#e6edff" />
-          <rect x="98" y={y + 5} width={w} height="7" rx="3.5" fill="#d9dbe0" />
-          <rect x="98" y={y + 16} width={w - 44} height="6" rx="3" fill="#ececef" />
-          <circle cx="292" cy={y + 13} r="11" fill="none" stroke="#d9dbe0" strokeWidth="2.5" />
-          <g className="hero-pop" style={{ animationDuration: "6s", animationDelay: delay }}>
-            <circle cx="292" cy={y + 13} r="11" fill="#0d44e8" />
-            <path d={`M286.5 ${y + 13.5}l3.8 3.8 7-7.6`} fill="none" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
-          </g>
-        </g>
-      ))}
-      {/* Pied de l'ordinateur */}
-      <path d="M16 200h328l-14 20H30z" fill="#fff" stroke="#161618" strokeWidth="4" strokeLinejoin="round" />
-      <rect x="156" y="200" width="48" height="6" rx="3" fill="#161618" />
-    </svg>
+    <div className="mx-auto w-full max-w-[720px] transition-[translate] duration-700 ease-[cubic-bezier(.22,1,.36,1)] group-hover:-translate-y-3">
+      <div className="rounded-t-[22px] bg-[#1d1d1f] p-2.5 pb-0 shadow-[0_30px_60px_-20px_rgba(22,22,24,0.35)] sm:p-3 sm:pb-0">
+        <div className="overflow-hidden rounded-t-[14px] bg-white text-left">
+          {/* Barre de l'application */}
+          <div className="flex items-center justify-between border-b border-[#ececef] px-4 py-3 sm:px-6">
+            <span className="flex items-center gap-2 text-[13px] font-[650] text-ink sm:text-[14px]">
+              <MobemMark className="h-4 w-4" />
+              Relances et suivis
+            </span>
+            <span className="flex items-center gap-1.5 text-[12px] font-[600] text-blue">
+              <span className="live-dot h-2 w-2 rounded-full bg-blue" aria-hidden="true" />
+              En direct
+            </span>
+          </div>
+          <ul>
+            {DEMO_ROWS.map((row) => (
+              <li key={row.who} className="flex items-center gap-3 border-b border-[#f2f2f4] px-4 py-3 last:border-b-0 sm:gap-4 sm:px-6 sm:py-3.5">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#f2f3f5] text-[12px] font-[650] text-graphite">
+                  {row.initials}
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate text-[14px] font-[600] text-ink">{row.who}</span>
+                  <span className="block truncate text-[12.5px] text-[#86868b]">{row.what}</span>
+                </span>
+                {/* Les deux états occupent la même case : la place réservée est celle du plus large */}
+                <span className="grid shrink-0 justify-items-end">
+                  <span className="col-start-1 row-start-1 inline-flex items-center rounded-full bg-[#f2f2f4] px-3 py-1 text-[12px] font-[600] text-[#86868b]">
+                    En attente
+                  </span>
+                  <span
+                    className="hero-pop col-start-1 row-start-1 inline-flex items-center gap-1 whitespace-nowrap rounded-full bg-blue px-3 py-1 text-[12px] font-[600] text-white"
+                    style={{ animationDuration: "8s", animationDelay: row.delay }}
+                  >
+                    <Check className="h-3 w-3 max-sm:hidden" strokeWidth={3.5} aria-hidden="true" />
+                    {row.done}
+                  </span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
   )
 }
 
-/** Encart « démo gratuite » : voir une automatisation tourner avant de se décider. */
+/** Encart « démo gratuite », façon tuile produit d'apple.com : texte centré, appareil qui sort du bas. */
 export function DemoBand() {
   return (
     <section className="py-6 sm:py-8" aria-labelledby="demo-heading">
       <Container>
-        <div className="card-lift grid items-stretch gap-6 p-3 transition-shadow duration-500 hover:shadow-[var(--shadow-card),0_30px_60px_-30px_rgba(22,22,24,0.25)] sm:p-4 lg:grid-cols-[1fr_1fr] lg:gap-10">
-          <div className="flex flex-col justify-center px-3 py-5 sm:px-6 sm:py-8 lg:pl-8">
-            <p className="chip-dark self-start">
-              <span className="rounded-[10px] bg-blue px-2 py-0.5 text-[12px]">Gratuit</span>
-              Démo de 20 minutes
-            </p>
-            <h2 id="demo-heading" className="type-section mt-6 max-w-[16ch] text-ink text-balance">
-              Plutôt voir que lire&nbsp;? On vous montre.
-            </h2>
-            <p className="type-body mt-4 max-w-[46ch] text-charcoal">
-              En visio, nous faisons tourner devant vous des relances et des suivis administratifs automatisés, sur votre
-              métier. Vous posez toutes vos questions.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <DemoButton className="group">
-                Réserver ma démo gratuite
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
-              </DemoButton>
-              <span className="type-meta text-charcoal">En visio · Sans engagement</span>
-            </div>
+        <div className="group overflow-hidden rounded-[28px] bg-[#f5f5f7] px-5 pt-14 text-center sm:px-10 sm:pt-20">
+          <p className="text-[15px] font-[600] text-blue sm:text-[17px]">Démo gratuite · 20 minutes</p>
+          <h2 id="demo-heading" className="mx-auto mt-3 max-w-[16ch] text-[38px] font-bold leading-[1.05] tracking-[-0.035em] text-ink text-balance sm:text-[56px]">
+            Voyez-le tourner. Avant de décider.
+          </h2>
+          <p className="mx-auto mt-5 max-w-[40ch] text-[17px] leading-[1.5] text-[#6e6e73] sm:text-[19px]">
+            En visio, nous faisons tourner devant vous des relances et des suivis automatisés, sur votre métier.
+          </p>
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-7">
+            <DemoButton>Réserver ma démo</DemoButton>
+            <a href="#exemples" className="group/link inline-flex items-center gap-0.5 text-[17px] font-[500] text-blue hover:underline hover:underline-offset-4">
+              Voir les exemples
+              <ChevronRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-0.5" aria-hidden="true" />
+            </a>
           </div>
-
-          {/* Écran de démo, à plat : les tâches se cochent en direct. Cliquer ouvre l'agenda de la démo. */}
-          <div className="flex flex-col items-center justify-center gap-6 rounded-[16px] bg-blue px-5 py-9 sm:px-8">
-            <DiagnosticButton kind="demo" variant="bare" className="group relative w-full max-w-[400px] cursor-pointer">
-              <span className="sr-only">Réserver ma démo gratuite</span>
-              <DemoScreen />
-              <span className="pointer-events-none absolute left-1/2 top-[42%] inline-flex -translate-x-1/2 -translate-y-1/2 translate-y-2 items-center gap-2 rounded-full bg-ink px-4 py-2 text-[14px] font-[600] text-white opacity-0 transition-[opacity,translate] duration-300 ease-[cubic-bezier(.22,1,.36,1)] group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:opacity-100">
-                <Play className="h-3.5 w-3.5 fill-current" aria-hidden="true" />
-                Réserver la démo
-              </span>
-            </DiagnosticButton>
-            <ul className="flex max-w-[420px] flex-wrap justify-center gap-2" aria-label="Démos possibles">
-              {DEMO_NICHES.map((niche) => (
-                <li
-                  key={niche}
-                  className="cursor-default rounded-full bg-white px-3.5 py-1.5 text-[13px] font-[550] text-ink transition-[background-color,color,translate] duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-0.5 hover:bg-ink hover:text-white"
-                >
-                  {niche}
-                </li>
-              ))}
-            </ul>
+          <ul className="mx-auto mt-7 flex max-w-[560px] flex-wrap justify-center gap-2" aria-label="Démos possibles">
+            {DEMO_NICHES.map((niche) => (
+              <li
+                key={niche}
+                className="cursor-default rounded-full bg-white px-3.5 py-1.5 text-[13px] font-[550] text-[#424245] transition-[background-color,color,translate] duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-0.5 hover:bg-ink hover:text-white"
+              >
+                {niche}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-12 sm:mt-16" aria-hidden="true">
+            <DemoDevice />
           </div>
         </div>
       </Container>
