@@ -878,8 +878,42 @@ a.card-lift, [data-ripple] { position: relative; overflow: hidden; }
 .hero-fade { opacity: 0; animation: hero-fade 12s ease-in-out infinite both; }
 .hero-sweep { stroke-dashoffset: 94.25; animation: hero-sweep 12s cubic-bezier(.45,0,.2,1) infinite both; }
 
+/* Curseur du calendrier : glisse vers chaque case juste avant qu'elle se coche */
+@keyframes cal-cursor {
+  0%, 2% { opacity: 0; transform: translate(0, 0); }
+  4%, 14% { opacity: 1; transform: translate(0, 0); }
+  18%, 32% { transform: translate(-70px, 52px); }
+  35%, 43% { transform: translate(140px, 0); }
+  45%, 49% { transform: translate(70px, 104px); }
+  51%, 62% { opacity: 1; transform: translate(0, 52px); }
+  68%, 100% { opacity: 0; transform: translate(0, 52px); }
+}
+.cal-cursor { opacity: 0; animation: cal-cursor 12s cubic-bezier(.65,0,.35,1) infinite both; }
+
+/* Aiguille du réveil : tour complet toutes les 4 s */
+@keyframes clock-spin { to { transform: rotate(360deg); } }
+.clock-hand { transform-box: view-box; transform-origin: 296px 342px; animation: clock-spin 4s linear infinite; }
+
+/* Facture : sort du rouleau, reste, puis se ré-enroule en fin de boucle */
+@keyframes receipt-print {
+  0%, 18% { transform: scaleY(0.08); }
+  30%, 86% { transform: scaleY(1); }
+  95%, 100% { transform: scaleY(0.08); }
+}
+.receipt-print { transform-box: fill-box; transform-origin: top; animation: receipt-print 12s cubic-bezier(.45,0,.2,1) infinite both; }
+
+/* Relance : l'enveloppe s'envole, une nouvelle revient se poser */
+@keyframes env-send {
+  0%, 7% { opacity: 1; transform: translate(0, 0) rotate(0); }
+  15% { opacity: 0; transform: translate(40px, -46px) rotate(-10deg); }
+  16% { opacity: 0; transform: translate(0, 24px); }
+  24%, 100% { opacity: 1; transform: translate(0, 0); }
+}
+.env-send { transform-box: fill-box; transform-origin: center; animation: env-send 12s cubic-bezier(.45,0,.2,1) infinite both; }
+
 @media (prefers-reduced-motion: reduce) {
-  .hero-pop, .hero-fade, .hero-sweep { animation: none; }
+  .hero-pop, .hero-fade, .hero-sweep, .cal-cursor, .clock-hand, .receipt-print, .env-send { animation: none; }
+  .cal-cursor { opacity: 0; }
   .hero-pop, .hero-fade { opacity: 1; }
   .hero-sweep { stroke-dashoffset: 56; }
 }

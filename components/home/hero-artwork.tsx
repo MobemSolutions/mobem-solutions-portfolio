@@ -2,7 +2,8 @@
  * Visuel du hero : « le bureau qui s'organise ». Illustration éditoriale à plat (contours noirs épais,
  * aplats bleus, bleu très pâle) : un calendrier dont les échéances se cochent, une facture classée,
  * une relance qui part, et un réveil dont le cadran se remplit de temps retrouvé. Le logo Mobem signe
- * le bandeau du calendrier. Boucle lente de 12 s : les tâches se terminent une à une, puis tout reste
+ * le bandeau du calendrier. Boucle de 12 s : un curseur parcourt le calendrier et coche les cases, la facture
+ * s'imprime, la relance s'envole, l'aiguille tourne. Les tâches se terminent une à une, puis tout reste
  * en place quelques secondes. Figé sur l'état final si l'utilisateur préfère moins d'animations.
  */
 
@@ -17,7 +18,7 @@ const CELL = { w: 54, h: 34 }
 const CELLS = ROWS.flatMap((y, r) => COLS.slice(0, r === 3 ? 2 : 4).map((x, c) => ({ x, y, key: `${c}-${r}` })))
 
 // Cases qui se « terminent », dans l'ordre, avec leur moment d'apparition (secondes)
-const DONE: Record<string, number> = { "1-0": 0.4, "0-1": 2.4, "3-0": 4.4, "2-2": 5.4, "1-1": 6.2 }
+const DONE: Record<string, number> = { "1-0": 0.5, "0-1": 2.3, "3-0": 4.4, "2-2": 5.4, "1-1": 6.2 }
 
 // Ticket de caisse : bord inférieur en dents de scie
 const RECEIPT = { x: 384, y: 50, w: 110, h: 186 }
@@ -57,6 +58,9 @@ export function HeroArtwork() {
         </g>
       ))}
 
+      {/* Curseur : glisse de case en case, juste avant que chacune se coche */}
+      <rect x={COLS[1] - 5} y={ROWS[0] - 5} width={CELL.w + 10} height={CELL.h + 10} rx="4" fill="none" stroke={BLUE} strokeWidth="4" className="cal-cursor" />
+
       {/* ── Réveil : le cadran se remplit de temps retrouvé ── */}
       <rect x="289" y="296" width="14" height="10" rx="3" fill={INK} />
       <circle cx="296" cy="342" r="36" fill="#fff" stroke={INK} strokeWidth="5" />
@@ -71,15 +75,16 @@ export function HeroArtwork() {
         className="hero-sweep"
         transform="rotate(-90 296 342)"
       />
-      <path d="M296 342V318M296 342h16" stroke={INK} strokeWidth="4" strokeLinecap="round" />
+      <path d="M296 342h16" stroke={INK} strokeWidth="4" strokeLinecap="round" />
+      <path d="M296 342V316" stroke={INK} strokeWidth="4" strokeLinecap="round" className="clock-hand" />
       <circle cx="296" cy="342" r="4" fill={INK} />
 
       {/* ── Facture classée ── */}
+      <g className="receipt-print">
       <path
         d={`M${RECEIPT.x} ${RECEIPT.y}H${RECEIPT.x + RECEIPT.w}V${RECEIPT.y + RECEIPT.h}L${TEETH.join("L")}Z`}
         fill={PALE}
       />
-      <rect x="374" y="38" width="130" height="18" rx="9" fill={INK} />
       {[
         [400, 82, 70],
         [400, 102, 34],
@@ -91,18 +96,22 @@ export function HeroArtwork() {
       ].map(([x, y, w]) => (
         <rect key={`${x}-${y}`} x={x} y={y} width={w} height="4" rx="2" fill={BLUE} />
       ))}
-      <g className="hero-pop" style={delay(3.4)}>
+      </g>
+      <rect x="374" y="38" width="130" height="18" rx="9" fill={INK} />
+      <g className="hero-pop" style={delay(4)}>
         <circle cx="472" cy="210" r="24" fill={BLUE} />
         <path d="M461 210l9 11 20-30" fill="none" stroke={INK} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
       </g>
 
       {/* ── Relance envoyée ── */}
-      <g className="hero-pop" style={delay(1.4)}>
+      <g className="hero-pop" style={delay(1.2)}>
         <path d="M346 300h22M340 316h28M350 332h18" stroke={BLUE} strokeWidth="4" strokeLinecap="round" />
       </g>
-      <rect x="384" y="280" width="120" height="84" fill="#fff" stroke={INK} strokeWidth="5" />
-      <path d="M394 292l50 36 50-36" fill="none" stroke={INK} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="504" cy="280" r="10" fill={BLUE} className="hero-pop" style={delay(1.4)} />
+      <g className="env-send">
+        <rect x="384" y="280" width="120" height="84" fill="#fff" stroke={INK} strokeWidth="5" />
+        <path d="M394 292l50 36 50-36" fill="none" stroke={INK} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+      </g>
+      <circle cx="504" cy="280" r="10" fill={BLUE} className="hero-pop" style={delay(3)} />
     </svg>
   )
 }
