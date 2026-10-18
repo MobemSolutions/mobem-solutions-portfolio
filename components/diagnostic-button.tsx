@@ -189,8 +189,8 @@ export function DemoButton({
   variant = "blue",
 }: Omit<DiagnosticButtonProps, "kind" | "variant"> & { variant?: "blue" | "outline" | "dark" }) {
   return (
-    <DiagnosticButton kind="demo" variant={variant} className={className}>
-      <MonitorPlay className="h-4 w-4" aria-hidden="true" />
+    <DiagnosticButton kind="demo" variant={variant} className={cn("group", className)}>
+      <MonitorPlay className="h-4 w-4 transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110" aria-hidden="true" />
       {children}
     </DiagnosticButton>
   )
