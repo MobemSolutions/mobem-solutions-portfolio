@@ -163,8 +163,9 @@ const SECTIONS: LegalSection[] = [
               et d’automatisations distinctes. Sur demande, les automatisations peuvent être installées sur les comptes du client.
             </>,
             <>
-              <strong>Aucune conservation des données traitées.</strong> L’historique des exécutions est désactivé : la plateforme
-              conserve les automatisations et les connexions, pas le contenu des données qui y transitent.
+              <strong>Conservation minimale des données traitées.</strong> Seules les exécutions en erreur sont conservées, le
+              temps d’en diagnostiquer la cause, puis supprimées automatiquement. Les exécutions réussies ne sont pas enregistrées :
+              la plateforme conserve les automatisations et les connexions, pas le contenu des données qui y transitent.
             </>,
             <>
               <strong>Accès.</strong> Mobem Solutions n’accède aux comptes du client que pour l’installation, la surveillance et la
