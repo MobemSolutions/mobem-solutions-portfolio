@@ -32,7 +32,7 @@ const SECTIONS: LegalSection[] = [
     title: "Prestataire",
     content: (
       <p>
-        <strong>Arnaud Clavier</strong>, entrepreneur individuel (EI), exerçant sous le nom commercial Mobem Solutions, Pornic.
+        <strong>Arnaud Clavier</strong>, entrepreneur individuel (EI), exerçant sous le nom commercial Mobem Solutions, 10 rue Mondésir, 44210 Pornic.
         SIRET 992 858 456 00013. Il réalise personnellement les prestations et reste l’interlocuteur unique du client.
       </p>
     ),

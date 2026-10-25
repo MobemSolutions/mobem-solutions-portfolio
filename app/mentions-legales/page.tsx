@@ -20,7 +20,7 @@ const SECTIONS: LegalSection[] = [
         </p>
         <LegalList
           items={[
-            "Adresse : Pornic (44210), France",
+            "Adresse : 10 rue Mondésir, 44210 Pornic, France",
             "SIRET : 992 858 456 00013",
             "Immatriculation : Registre national des entreprises (RNE)",
             "TVA : TVA non applicable, article 293 B du Code général des impôts",

@@ -40,7 +40,7 @@ const SECTIONS: LegalSection[] = [
     title: "Responsable du traitement",
     content: (
       <p>
-        <strong>Arnaud Clavier</strong>, entrepreneur individuel (EI), Mobem Solutions, Pornic. Contact pour toute question sur vos
+        <strong>Arnaud Clavier</strong>, entrepreneur individuel (EI), Mobem Solutions, 10 rue Mondésir, 44210 Pornic. Contact pour toute question sur vos
         données : {MAIL}.
       </p>
     ),

@@ -86,9 +86,10 @@ const jsonLd = {
       email: "contact@mobem-solutions.com",
       address: {
         "@type": "PostalAddress",
-        addressLocality: "Nantes",
+        streetAddress: "10 rue Mondésir",
+        addressLocality: "Pornic",
         addressRegion: "Pays de la Loire",
-        postalCode: "44000",
+        postalCode: "44210",
         addressCountry: "FR",
       },
       areaServed: "FR",
