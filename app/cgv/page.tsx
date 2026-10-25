@@ -1,78 +1,80 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { LegalLayout, LegalCard, LegalList, type LegalSection } from "@/components/legal/legal-layout"
+import { LegalLayout, LegalList, type LegalSection } from "@/components/legal/legal-layout"
 
 export const metadata: Metadata = {
   title: "Conditions générales de vente | Mobem Solutions",
   description:
-    "CGV de Mobem Solutions : diagnostic, automatisation des tâches administratives, mesure des heures gagnées et maintenance, sur les propres outils du client.",
+    "CGV de Mobem Solutions : diagnostic, pilote, pack métier, maintenance et hébergement des automatisations pour les clients professionnels.",
   alternates: { canonical: "https://mobem-solutions.com/cgv" },
 }
 
 const SECTIONS: LegalSection[] = [
   {
     id: "objet",
-    title: "Objet et acceptation",
+    title: "Objet et champ d’application",
     content: (
       <>
         <p>
-          Les présentes conditions générales de vente (CGV) régissent les relations contractuelles entre Mobem Solutions
-          (le « Prestataire ») et tout client professionnel (le « Client ») ayant commandé ses prestations.
+          Les présentes conditions générales de vente (CGV) s’appliquent aux prestations réalisées par Mobem Solutions pour des
+          clients professionnels : entreprises, associations, organismes de formation et autres structures agissant pour les
+          besoins de leur activité. Elles ne s’appliquent pas aux consommateurs.
         </p>
         <p>
-          Toute commande implique l&apos;acceptation pleine et entière des présentes CGV, qui prévalent sur tout autre document du
-          Client, sauf convention particulière acceptée par écrit par le Prestataire.
+          Toute commande vaut acceptation des CGV. Elles prévalent sur les conditions du client, sauf accord écrit contraire. En
+          cas de contradiction, le devis signé prévaut sur les CGV.
         </p>
       </>
     ),
   },
   {
     id: "prestataire",
-    title: "Identité du Prestataire",
+    title: "Prestataire",
     content: (
       <p>
-        Le Prestataire est <strong>Arnaud Clavier</strong>, entrepreneur individuel exerçant sous le nom commercial Mobem
-        Solutions (SIRET 992 858 456 00013, Pornic, Loire-Atlantique). Il réalise lui-même les prestations et constitue
-        l&apos;interlocuteur unique du Client, du diagnostic à la maintenance.
+        <strong>Arnaud Clavier</strong>, entrepreneur individuel (EI), exerçant sous le nom commercial Mobem Solutions, Pornic.
+        SIRET 992 858 456 00013. Il réalise personnellement les prestations et reste l’interlocuteur unique du client.
       </p>
     ),
   },
   {
     id: "prestations",
-    title: "Prestations proposées",
+    title: "Prestations",
     content: (
       <>
-        <div className="grid gap-4 sm:grid-cols-2">
-          {[
-            { t: "Diagnostic", d: "Entretien gratuit et sans engagement (45 min environ) pour recenser les tâches répétitives et estimer le temps récupérable." },
-            { t: "Pilote", d: "Mise en place d'une première automatisation sur une tâche précise, avec mesure avant / après." },
-            { t: "Pack métier", d: "Ensemble d'automatisations reliées couvrant un processus complet du Client." },
-            { t: "Maintenance", d: "Abonnement mensuel de surveillance, d'alerte en cas d'échec et d'ajustements (article 10)." },
-          ].map((p) => (
-            <LegalCard key={p.t}>
-              <p><strong>{p.t}</strong></p>
-              <p className="mt-1">{p.d}</p>
-            </LegalCard>
-          ))}
-        </div>
-        <p>
-          Le périmètre, les livrables, les outils concernés, les délais et le prix de chaque mission sont précisés dans le devis
-          signé, qui fait partie intégrante du contrat.
-        </p>
+        <LegalList
+          items={[
+            <>
+              <strong>Diagnostic</strong> : échange gratuit d’environ 45 minutes, sans engagement.
+            </>,
+            <>
+              <strong>Pilote</strong> : mise en place d’une automatisation sur une tâche, avec mesure avant et après.
+            </>,
+            <>
+              <strong>Pack métier</strong> : plusieurs automatisations reliées couvrant un processus métier.
+            </>,
+            <>
+              <strong>Maintenance</strong> : abonnement mensuel de surveillance, correction et ajustement des automatisations
+              (article 9).
+            </>,
+            <>
+              <strong>Site vitrine</strong> : sur devis.
+            </>,
+          ]}
+        />
+        <p>Le périmètre, les livrables, les outils connectés, les délais et le prix de chaque prestation sont fixés dans le devis.</p>
       </>
     ),
   },
   {
     id: "commande",
-    title: "Formation du contrat",
+    title: "Devis et commande",
     content: (
-      <>
-        <p>
-          Le contrat est formé à la réception par le Prestataire du devis signé, accompagné du paiement de l&apos;acompte prévu.
-          Aucun travail n&apos;est engagé avant ce paiement. Le diagnostic gratuit n&apos;engage ni le Client ni le Prestataire.
-        </p>
-        <p>Les devis sont valables trente (30) jours à compter de leur date d&apos;émission.</p>
-      </>
+      <p>
+        Les devis sont valables 30 jours. Le contrat est formé à la réception du devis signé et de l’acompte. Aucun travail ne
+        commence avant ce paiement. Le contrat de sous-traitance des données personnelles (article 13) est signé en même temps que
+        le devis.
+      </p>
     ),
   },
   {
@@ -80,109 +82,85 @@ const SECTIONS: LegalSection[] = [
     title: "Prix et paiement",
     content: (
       <>
-        <p>Les prix sont exprimés en euros hors taxes. La TVA applicable est ajoutée au taux en vigueur à la date de facturation.</p>
-        <h3>Pilote et pack métier</h3>
-        <div className="grid gap-4 sm:grid-cols-3">
-          {[
-            { pct: "30 %", label: "À la commande", detail: "Acompte" },
-            { pct: "40 %", label: "À la recette", detail: "Automatisation testée et validée" },
-            { pct: "30 %", label: "À la mise en service", detail: "Solde" },
-          ].map((e) => (
-            <LegalCard key={e.label}>
-              <p className="text-[28px] font-semibold leading-none tracking-[-0.02em] text-ink">{e.pct}</p>
-              <p className="mt-2"><strong>{e.label}</strong></p>
-              <p>{e.detail}</p>
-            </LegalCard>
-          ))}
-        </div>
-        <h3>Maintenance</h3>
-        <p>L&apos;abonnement de maintenance est facturé mensuellement, à terme à échoir.</p>
-        <h3>Retard de paiement</h3>
         <p>
-          Tout retard entraîne de plein droit, sans mise en demeure préalable, des pénalités au taux d&apos;intérêt légal majoré de
-          cinq (5) points, ainsi qu&apos;une indemnité forfaitaire de recouvrement de 40 €. Les paiements s&apos;effectuent par
-          virement bancaire sur le compte du Prestataire.
+          <strong>Prix.</strong> Les prix sont exprimés en euros. Mobem Solutions bénéficie de la franchise en base de TVA : aucune
+          TVA n’est facturée (« TVA non applicable, art. 293 B du CGI »). Si Mobem Solutions devient redevable de la TVA, le
+          montant total à payer des devis signés et des abonnements en cours reste inchangé jusqu’à leur terme ou, pour la
+          maintenance, jusqu’à la date anniversaire suivante.
+        </p>
+        <p>
+          <strong>Échéancier du pilote et du pack métier.</strong> Un acompte de 50 % à la commande, puis le solde de 50 % à la
+          mise en service. Pour le pack métier, la mise en service s’entend de la dernière automatisation prévue au devis.
+        </p>
+        <p>
+          <strong>Maintenance.</strong> Facturée mensuellement, d’avance.
+        </p>
+        <p>
+          <strong>Délai de paiement.</strong> 30 jours à compter de la date d’émission de la facture, par virement. Aucun escompte
+          n’est accordé pour paiement anticipé.
+        </p>
+        <p>
+          <strong>Retard de paiement.</strong> Toute somme non payée à l’échéance entraîne de plein droit, sans rappel préalable,
+          des pénalités au taux de refinancement de la Banque centrale européenne majoré de 10 points, et une indemnité forfaitaire
+          pour frais de recouvrement de 40 € (article L441-10 du Code de commerce).
         </p>
       </>
     ),
   },
   {
-    id: "suspension",
-    title: "Suspension pour non-paiement",
-    content: (
-      <p>
-        En cas de facture impayée quinze (15) jours après son échéance, le Prestataire peut suspendre les prestations en cours,
-        y compris la maintenance, jusqu&apos;au règlement intégral des sommes dues et des pénalités. Les automatisations déjà
-        installées sur les comptes du Client restent sa propriété et ne sont ni supprimées ni désactivées par le Prestataire.
-      </p>
-    ),
-  },
-  {
-    id: "comptes",
-    title: "Comptes, outils et accès du Client",
+    id: "outils",
+    title: "Outils et coûts tiers",
     content: (
       <>
         <p>
-          Les automatisations sont reliées aux comptes et outils du Client (messagerie, tableurs, stockage de documents,
-          logiciel métier), dont il reste titulaire et dont il assume les abonnements. Elles sont hébergées, au choix du Client :
+          Les automatisations se connectent aux outils du client (Google Workspace, Gmail, messagerie, logiciels métier…). Ces
+          outils restent la propriété du client, sous ses propres abonnements, et à sa charge.
         </p>
+        <p>
+          Lorsque Mobem Solutions héberge les automatisations, le coût de la plateforme d’automatisation est compris dans
+          l’abonnement de maintenance. Lorsque le client les héberge sur ses propres comptes, l’abonnement à la plateforme est à sa
+          charge.
+        </p>
+        <p>
+          Mobem Solutions n’est pas responsable des changements de fonctionnement, de prix ou de conditions décidés par les éditeurs
+          de ces outils. Une adaptation rendue nécessaire par un tel changement est couverte par la maintenance lorsqu’elle reste
+          limitée ; à défaut, elle fait l’objet d’un devis.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: "hebergement",
+    title: "Hébergement des automatisations",
+    content: (
+      <>
+        <p>Le client choisit entre deux modes, indiqués dans le devis :</p>
         <LegalList
           items={[
             <>
-              <strong>par le Prestataire</strong>, sur un serveur situé dans l&apos;Union européenne, dans un espace dédié au
-              Client (option par défaut) ;
+              <strong>Hébergement par Mobem Solutions (par défaut)</strong> : les automatisations fonctionnent dans un espace géré
+              par Mobem Solutions, sur la plateforme n8n Cloud, avec des serveurs situés dans l’Union européenne. Chaque client
+              dispose d’automatisations et de connexions distinctes. La conception et la modification des automatisations sont
+              réservées à Mobem Solutions. Cet hébergement est lié à l’abonnement de maintenance.
             </>,
             <>
-              <strong>par le Client</strong>, sur ses propres comptes ou son serveur, l&apos;outil d&apos;automatisation restant
-              alors à sa charge.
+              <strong>Hébergement par le client</strong> : les automatisations sont installées sur les comptes ou le serveur du
+              client, qui en assure l’abonnement.
             </>,
           ]}
         />
-        <p>
-          Le Client fournit au Prestataire les accès strictement nécessaires à la mission et peut les retirer à tout moment. Le
-          Prestataire s&apos;engage à ne les utiliser que pour la mission confiée.
-        </p>
-        <p>
-          Le Prestataire ne peut être tenu responsable des interruptions, changements de fonctionnement ou évolutions tarifaires
-          des services tiers utilisés par le Client. Leur impact sur une automatisation est traité dans le cadre de la
-          maintenance ou fait l&apos;objet d&apos;un devis.
-        </p>
       </>
     ),
   },
   {
-    id: "donnees",
-    title: "Données personnelles et sous-traitance",
+    id: "recette",
+    title: "Recette",
     content: (
-      <>
-        <p>
-          Lorsque les automatisations traitent des données personnelles pour le compte du Client, celui-ci agit en qualité de
-          responsable de traitement et le Prestataire en qualité de sous-traitant au sens de l&apos;article 28 du RGPD. Un accord
-          de traitement des données est signé avec le devis.
-        </p>
-        <p>
-          Le Prestataire privilégie des services hébergés dans l&apos;Union européenne lorsqu&apos;un service tiers est nécessaire,
-          et en informe le Client avant toute mise en place.
-        </p>
-      </>
-    ),
-  },
-  {
-    id: "propriete",
-    title: "Propriété intellectuelle",
-    content: (
-      <>
-        <p>
-          Après paiement intégral, le Client dispose des droits d&apos;utilisation et de modification des automatisations réalisées
-          spécifiquement pour lui (scénarios, paramétrages, modèles de messages, documentation), pour ses besoins propres, sans
-          limitation de durée.
-        </p>
-        <p>
-          Le Prestataire conserve la propriété de ses méthodes, savoir-faire, modèles et modules réutilisables, sur lesquels le
-          Client bénéficie d&apos;un droit d&apos;usage non exclusif et non cessible, limité au fonctionnement des automatisations
-          livrées.
-        </p>
-      </>
+      <p>
+        À la livraison de chaque automatisation, le client dispose de 7 jours ouvrés pour la tester et signaler par écrit les
+        anomalies constatées par rapport au devis. Sans retour écrit dans ce délai, ou dès sa mise en service, l’automatisation est
+        réputée acceptée.
+      </p>
     ),
   },
   {
@@ -191,44 +169,96 @@ const SECTIONS: LegalSection[] = [
     content: (
       <>
         <p>
-          La maintenance est une prestation distincte de la mise en place initiale, souscrite pour une durée d&apos;un mois
-          renouvelable tacitement et résiliable par chaque partie avec un préavis d&apos;un mois.
+          <strong>Durée.</strong> L’abonnement prend effet à la mise en service. Il comporte un engagement initial de 2 mois, puis
+          se renouvelle de mois en mois. Chaque partie peut le résilier par écrit avec un préavis d’un mois, effectif au plus tôt à
+          la fin de l’engagement initial.
         </p>
-        <LegalList
-          items={[
-            "Surveillance des exécutions des automatisations et alerte en cas d'échec",
-            "Correction des automatisations défaillantes et relance des traitements concernés",
-            "Ajustements rendus nécessaires par l'évolution des outils du Client, dans la limite prévue au contrat",
-            "Point régulier sur le fonctionnement et les heures gagnées",
-          ]}
-        />
         <p>
-          Les incidents bloquants sont pris en charge sous quarante-huit (48) heures ouvrées. Sont exclus : la création de
-          nouvelles automatisations, les interventions rendues nécessaires par une modification faite par un tiers, et les pannes
-          imputables aux services tiers.
+          <strong>Contenu.</strong> Surveillance et alertes en cas d’erreur, correction des pannes, relance des traitements
+          interrompus, ajustements courants (délais, textes, paramètres) dans la limite prévue au devis, mises à jour rendues
+          nécessaires par l’évolution des règles applicables au client lorsqu’elles restent limitées, assistance par e-mail.
+        </p>
+        <p>
+          <strong>Délai d’intervention.</strong> Les incidents bloquants sont pris en charge sous 48 heures ouvrées après leur
+          signalement ou leur détection.
+        </p>
+        <p>
+          <strong>Exclusions.</strong> Nouvelles automatisations, refonte d’une automatisation existante, pannes et changements
+          imputables à des services tiers, modifications faites par le client sur la structure de ses outils sans en avoir informé
+          Mobem Solutions. Ces interventions font l’objet d’un devis.
         </p>
       </>
     ),
   },
   {
-    id: "client",
-    title: "Obligations du Client",
+    id: "reversibilite",
+    title: "Fin de contrat et réversibilité",
     content: (
       <>
-        <p>
-          Le Client s&apos;engage à fournir en temps utile les accès, exemples de documents et informations nécessaires, et à
-          participer à la recette. Tout retard de sa part décale d&apos;autant les délais convenus.
-        </p>
-        <p>
-          Le Client dispose de sept (7) jours ouvrés après la présentation d&apos;une automatisation pour formuler ses
-          observations par écrit. Passé ce délai, l&apos;automatisation est réputée validée.
-        </p>
-        <p>
-          Le Client reste responsable de la licéité des données traitées et des décisions prises à partir des résultats des
-          automatisations. Les étapes faisant appel à l&apos;intelligence artificielle sont, sauf accord contraire, soumises à une
-          validation humaine.
-        </p>
+        <p>À la fin de l’abonnement de maintenance, pour quelque cause que ce soit :</p>
+        <LegalList
+          items={[
+            "lorsque Mobem Solutions héberge les automatisations, elle remet au client, dans un délai de 30 jours, les fichiers de ses automatisations et leur documentation, et l’accompagne lors d’une séance d’une heure pour les installer sur ses propres comptes ;",
+            "à l’issue de ce délai, Mobem Solutions supprime de son espace les automatisations et les connexions du client, et le confirme par écrit sur demande ;",
+            "les données du client n’ont jamais quitté ses propres outils et y restent disponibles.",
+          ]}
+        />
+        <p>Lorsque le client héberge les automatisations, elles restent sur ses comptes et Mobem Solutions supprime ses accès.</p>
       </>
+    ),
+  },
+  {
+    id: "suspension",
+    title: "Suspension",
+    content: (
+      <p>
+        Si une facture reste impayée 15 jours après son échéance, Mobem Solutions peut suspendre les prestations en cours, y
+        compris la maintenance, après en avoir informé le client par écrit. Les automatisations continuent de fonctionner pendant la
+        suspension. Si l’impayé dure plus de 60 jours, Mobem Solutions peut résilier le contrat ; l’article 10 s’applique alors.
+      </p>
+    ),
+  },
+  {
+    id: "client",
+    title: "Obligations du client",
+    content: (
+      <>
+        <p>Le client s’engage à :</p>
+        <LegalList
+          items={[
+            "fournir dans les délais convenus les accès, informations et documents nécessaires, tout retard décalant les délais d’autant ;",
+            "participer à la recette et valider le contenu des messages et documents envoyés par les automatisations ;",
+            "garantir l’exactitude des données saisies dans ses outils, dont dépendent les envois ;",
+            "informer Mobem Solutions avant toute modification de la structure de ses outils (colonnes, onglets, comptes) ;",
+            "respecter ses propres obligations envers les personnes dont il traite les données, notamment leur information et, si nécessaire, le recueil de leur consentement ;",
+            "valider humainement les résultats de toute étape faisant appel à l’intelligence artificielle, sauf accord contraire.",
+          ]}
+        />
+      </>
+    ),
+  },
+  {
+    id: "donnees",
+    title: "Données personnelles",
+    content: (
+      <p>
+        Pour les données traitées dans les automatisations, le client est responsable du traitement et Mobem Solutions sous-traitant
+        au sens de l’article 28 du RGPD. Un contrat de sous-traitance, signé avec le devis, précise les données concernées, les
+        mesures de sécurité, les sous-traitants ultérieurs et le sort des données en fin de contrat. Mobem Solutions privilégie des
+        services hébergés dans l’Union européenne et informe le client avant tout recours à un nouveau sous-traitant. Voir aussi la{" "}
+        <Link href="/confidentialite">politique de confidentialité</Link>.
+      </p>
+    ),
+  },
+  {
+    id: "propriete",
+    title: "Propriété intellectuelle",
+    content: (
+      <p>
+        Après paiement complet, le client peut utiliser et modifier librement les automatisations réalisées spécifiquement pour lui.
+        Mobem Solutions conserve la propriété de ses méthodes, modules réutilisables et modèles, que le client peut utiliser
+        uniquement pour faire fonctionner les automatisations livrées.
+      </p>
     ),
   },
   {
@@ -237,46 +267,58 @@ const SECTIONS: LegalSection[] = [
     content: (
       <>
         <p>
-          Le Prestataire est tenu à une obligation de moyens. Les estimations d&apos;heures gagnées communiquées lors du diagnostic
-          ou présentées sur le site sont indicatives ; seul le gain mesuré après mise en service fait foi, sans constituer un
-          engagement de résultat.
+          Mobem Solutions est tenue d’une obligation de moyens. Les gains de temps annoncés sont des estimations ; seuls les gains
+          mesurés après mise en service font foi.
         </p>
         <p>
-          La responsabilité du Prestataire est limitée aux dommages directs et prévisibles, dans la limite des sommes
-          effectivement perçues au titre du contrat concerné. Elle ne couvre pas les dommages indirects (perte
-          d&apos;exploitation, perte de chiffre d&apos;affaires, atteinte à l&apos;image).
+          Les automatisations aident le client à produire et conserver des preuves de ses pratiques. Elles ne garantissent pas
+          l’obtention, le maintien ou le renouvellement d’une certification (notamment Qualiopi), qui dépendent de l’ensemble des
+          pratiques du client et de l’appréciation de l’auditeur.
+        </p>
+        <p>
+          Mobem Solutions n’est pas responsable des conséquences de données inexactes saisies par le client, de contenus validés par
+          lui, ni des interruptions de services tiers.
+        </p>
+        <p>
+          La responsabilité de Mobem Solutions est limitée aux sommes perçues au titre du contrat concerné au cours des 12 derniers
+          mois et exclut les préjudices indirects (perte de chiffre d’affaires, de clientèle ou d’image).
         </p>
       </>
     ),
   },
   {
     id: "references",
-    title: "Références clients",
+    title: "Références",
     content: (
       <p>
-        Le Prestataire ne cite le nom, le logo ou les résultats d&apos;un Client qu&apos;avec son accord écrit préalable. Cet accord
-        peut être retiré à tout moment sur simple demande.
+        Mobem Solutions ne cite le nom, le logo ou les résultats d’un client qu’avec son accord écrit préalable, révocable à tout
+        moment.
       </p>
     ),
   },
   {
     id: "confidentialite",
     title: "Confidentialité",
+    content: <p>Chaque partie garde confidentielles les informations échangées pendant la mission et pendant 2 ans après sa fin.</p>,
+  },
+  {
+    id: "force-majeure",
+    title: "Force majeure",
     content: (
       <p>
-        Les parties s&apos;engagent à garder confidentielles les informations échangées dans le cadre de la mission, pendant toute
-        sa durée et deux (2) ans après son terme. Voir aussi la <Link href="/confidentialite">politique de confidentialité</Link>.
+        Aucune partie n’est responsable d’un manquement causé par un événement de force majeure au sens de l’article 1218 du Code
+        civil. Si l’empêchement dure plus de 30 jours, chaque partie peut résilier le contrat par écrit.
       </p>
     ),
   },
   {
     id: "resiliation",
-    title: "Résiliation",
+    title: "Résiliation pour manquement",
     content: (
       <p>
-        En cas de manquement grave, l&apos;autre partie peut résilier le contrat par lettre recommandée avec accusé de réception,
-        après mise en demeure restée sans effet pendant quinze (15) jours. En cas de résiliation par le Client sans faute du
-        Prestataire, les sommes facturées restent dues et les travaux réalisés sont facturés au prorata.
+        En cas de manquement grave d’une partie, l’autre peut résilier le contrat par lettre recommandée avec avis de réception, 15
+        jours après une mise en demeure restée sans effet. Si le client résilie sans faute de Mobem Solutions, les sommes facturées
+        restent dues et le travail réalisé est facturé au prorata.
       </p>
     ),
   },
@@ -285,8 +327,8 @@ const SECTIONS: LegalSection[] = [
     title: "Droit applicable et litiges",
     content: (
       <p>
-        Les présentes CGV sont soumises au droit français. À défaut de résolution amiable, tout litige relève de la compétence
-        exclusive des tribunaux compétents de Nantes.
+        Les CGV sont soumises au droit français. Les parties recherchent d’abord une solution amiable. À défaut, les tribunaux de
+        Nantes sont seuls compétents. Voir aussi les <Link href="/mentions-legales">mentions légales</Link>.
       </p>
     ),
   },
@@ -297,8 +339,8 @@ export default function CgvPage() {
     <LegalLayout
       current="/cgv"
       title="Conditions générales de vente"
-      intro={<p>Comment se déroulent nos missions d&apos;automatisation, du diagnostic gratuit à la maintenance.</p>}
-      updated="En vigueur au 17 octobre 2026"
+      intro={<p>Comment se déroulent nos missions d’automatisation, du diagnostic gratuit à la maintenance.</p>}
+      updated="En vigueur au 26 octobre 2026"
       sections={SECTIONS}
     />
   )

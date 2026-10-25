@@ -68,6 +68,7 @@ export default async function PlanPage({ params }: { params: Promise<{ slug: str
                 <PricingIcon name={plan.icon} className="h-16 w-16" />
                 <p className="mt-6 text-[40px] font-bold leading-none tracking-[-0.03em] text-ink">{plan.price}</p>
                 <p className="mt-2 text-[15px] text-[#838385]">{plan.unit}</p>
+                {!plan.featured && <p className="mt-1 text-[12px] text-[#838385]">TVA non applicable, art. 293 B du CGI</p>}
                 <ul className="mt-6 flex flex-col gap-2.5 border-t-2 border-dashed border-[#d9dbe0] pt-6">
                   {plan.items.map((item) => (
                     <li key={item} className="flex items-start gap-2.5 text-[15px] text-graphite">

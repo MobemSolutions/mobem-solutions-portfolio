@@ -314,7 +314,7 @@ export function Pricing() {
         </ul>
         <SourceCaption className="mt-4 text-center sm:mt-6">
           <span className="sm:hidden">Faites glisser pour voir les 4 formules. </span>
-          Prix indicatifs hors taxes. Le devis final dépend du nombre de tâches et des outils à connecter.
+          Prix indicatifs, TVA non applicable (art. 293 B du CGI). Le devis final dépend du nombre de tâches et des outils à connecter.
         </SourceCaption>
         {/* Offre secondaire, volontairement discrète */}
         <div className="hairline mx-auto mt-8 flex max-w-[760px] sm:mt-10 flex-col items-start gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
