@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!plan) return {}
   const url = `https://mobem-solutions.com${plan.href}`
   return {
-    title: `${plan.name} · ${plan.price} | Mobem Solutions`,
+    title: plan.featured ? `${plan.name} | Mobem Solutions` : `${plan.name} · ${plan.price} | Mobem Solutions`,
     description: `${plan.tagline} ${plan.text}`,
     alternates: { canonical: url },
     openGraph: { title: `${plan.name} | Mobem Solutions`, description: plan.tagline, url },
