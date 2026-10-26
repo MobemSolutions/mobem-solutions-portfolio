@@ -44,7 +44,7 @@ const SECTIONS: LegalSection[] = [
     content: (
       <>
         <p>
-          Le site est hébergé par <strong>Vercel Inc.</strong>, 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis. Téléphone : [TÉLÉPHONE VERCEL]. Site :
+          Le site est hébergé par <strong>Vercel Inc.</strong>, 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis. Site :
           vercel.com.
         </p>
         <p>
