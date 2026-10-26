@@ -8,8 +8,8 @@ const BLUE = "#0d44e8"
 const PALE = "#e6edff"
 const S = { stroke: INK, strokeWidth: 3, strokeLinecap: "round" as const, strokeLinejoin: "round" as const }
 
-/** Diagnostic : une liste passée à la loupe */
-function Diagnostic() {
+/** Échange découverte : une liste passée à la loupe */
+function Decouverte() {
   return (
     <>
       <rect x="8" y="6" width="32" height="40" rx="3" fill={PALE} />
@@ -53,7 +53,7 @@ function Maintenance() {
   )
 }
 
-const ICONS = { diagnostic: Diagnostic, pilote: Pilote, pack: Pack, maintenance: Maintenance }
+const ICONS = { decouverte: Decouverte, pilote: Pilote, pack: Pack, maintenance: Maintenance }
 
 export function PricingIcon({ name, className }: { name: keyof typeof ICONS; className?: string }) {
   const Icon = ICONS[name]

@@ -3,7 +3,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Clock, Gauge, KeyRound } from "lucide-react"
 import { Container, SectionHeading, Eyebrow } from "@/components/home/primitives"
-import { DiagnosticButton } from "@/components/diagnostic-button"
+import { BookingButton } from "@/components/booking-button"
 import { ContactButton } from "@/components/contact-form"
 import { ClosingBand } from "@/components/home/closing-band"
 import { Founder, Trust } from "@/components/home/sections"
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://mobem-solutions.com/a-propos" },
   openGraph: {
     title: "À propos — Mobem Solutions",
-    description: "Un seul interlocuteur, du diagnostic à la maintenance. Des heures récupérées, pas du logiciel.",
+    description: "Un seul interlocuteur, du premier échange à la maintenance. Des heures récupérées, pas du logiciel.",
     url: "https://mobem-solutions.com/a-propos",
   },
 }
@@ -55,7 +55,7 @@ export default function AProposPage() {
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <ContactButton className="btn-dark">Nous écrire</ContactButton>
-              <DiagnosticButton />
+              <BookingButton />
             </div>
           </Container>
 

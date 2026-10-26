@@ -18,7 +18,7 @@ import { FAQ, PRICING } from "@/lib/automation-content"
 const TITLE = "Mobem Solutions"
 const SHARE_TITLE = "Mobem Solutions — Vos tâches administratives tournent toutes seules"
 const DESCRIPTION =
-  "Mobem Solutions automatise vos tâches administratives (relances, pièces, mails) sur vos propres outils et mesure les heures gagnées. Diagnostic gratuit."
+  "Mobem Solutions automatise vos tâches administratives (relances, pièces, mails) sur vos propres outils et mesure les heures gagnées. Échange gratuit de 20 min."
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },

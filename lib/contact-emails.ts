@@ -1,6 +1,6 @@
 // Gabarits HTML des e-mails du formulaire de contact (notification interne et confirmation au prospect).
 // Tableaux et styles en ligne : seule mise en page fiable dans les clients mail.
-import { CALENDLY_URL } from "@/lib/automation-content"
+import { BOOKING_URL } from "@/lib/automation-content"
 import type { ContactPayload } from "@/lib/contact-options"
 
 export const MOBEM_EMAIL = "contact@mobem-solutions.com"
@@ -129,9 +129,9 @@ export function confirmationEmail(d: ContactPayload) {
               <td style="vertical-align:middle;font-size:15px;font-weight:700;color:${C.ink}">Envie d'aller plus vite ?</td>
             </tr></tbody></table>
             <p style="margin:10px 0 16px;font-size:14px;line-height:1.65;color:${C.charcoal}">
-              Choisissez directement un créneau pour votre diagnostic gratuit de 45 minutes. Nous listerons ensemble vos tâches répétitives et le temps qu'elles vous coûtent.
+              Choisissez directement un créneau pour un échange de 20 minutes en visio. Je vous montre l'automatisation adaptée à votre métier et nous voyons ensemble ce qui peut être automatisé chez vous.
             </p>
-            <a href="${CALENDLY_URL}" style="display:inline-block;background:${C.tint};color:${C.blue};text-decoration:none;font-size:14px;font-weight:600;padding:10px 18px;border-radius:999px">Réserver mon diagnostic</a>
+            <a href="${BOOKING_URL}" style="display:inline-block;background:${C.tint};color:${C.blue};text-decoration:none;font-size:14px;font-weight:600;padding:10px 18px;border-radius:999px">Réserver un échange</a>
           </td></tr></tbody></table>
         </td></tr>
 

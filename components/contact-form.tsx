@@ -5,7 +5,7 @@ import { createPortal } from "react-dom"
 import { ArrowLeft, ArrowRight, Check, Loader2, Mail, X, Info } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { SentIllustration } from "@/components/ui/sent-illustration"
-import { DiagnosticModal } from "@/components/diagnostic-button"
+import { BookingModal } from "@/components/booking-button"
 import {
   HOURS,
   SECTORS,
@@ -253,14 +253,14 @@ export function ContactModal({ open, onClose, onBook }: { open: boolean; onClose
                   Envie d&apos;aller plus vite ?
                 </p>
                 <p className="mt-2 text-[14px] leading-[1.6] text-charcoal">
-                  Choisissez directement un créneau pour votre diagnostic gratuit de 45 minutes.
+                  Choisissez directement un créneau pour un échange de 20 minutes, gratuit et sans engagement.
                 </p>
                 <button
                   type="button"
                   onClick={() => { onClose(); onBook?.(data.email) }}
                   className="mt-4 inline-flex items-center gap-2 rounded-full bg-[#e6edff] px-4 py-2 text-[14px] font-[600] text-blue transition-colors hover:bg-[#d8e3ff]"
                 >
-                  Réserver mon diagnostic
+                  Réserver un échange
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </button>
               </div>
@@ -413,7 +413,7 @@ export function ContactButton({ children = "Nous écrire", className }: { childr
         {children}
       </button>
       <ContactModal open={open} onClose={() => setOpen(false)} onBook={(email) => setBooking(email)} />
-      <DiagnosticModal open={booking !== null} onClose={() => setBooking(null)} email={booking || undefined} />
+      <BookingModal open={booking !== null} onClose={() => setBooking(null)} email={booking || undefined} />
     </>
   )
 }

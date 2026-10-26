@@ -32,7 +32,7 @@ export default function MetiersPage() {
               id="metiers-heading"
               eyebrow="Métiers"
               title="Vos tâches, dans les mots de votre métier"
-              text="Nous avons choisi trois métiers où les mêmes tâches administratives reviennent chaque semaine. Et pour toutes les TPE et PME de 2 à 50 personnes, le diagnostic fonctionne de la même façon."
+              text="Nous avons choisi trois métiers où les mêmes tâches administratives reviennent chaque semaine. Et pour toutes les TPE et PME de 2 à 50 personnes, le premier échange fonctionne de la même façon."
               align="center"
             />
           </Container>
@@ -66,7 +66,7 @@ export default function MetiersPage() {
                   Relances de factures, devis à suivre, mails à trier, documents à classer : votre métier n&apos;est pas listé, la méthode est la même.
                 </p>
               </div>
-              <Link href="/#diagnostic" className="btn-outline shrink-0">
+              <Link href="/#echange" className="btn-outline shrink-0">
                 Voir si c&apos;est automatisable chez moi
               </Link>
             </div>

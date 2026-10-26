@@ -37,7 +37,7 @@ Radii: cards & media 20px · buttons, badges, inputs 14px · icon controls 9999p
 Shadows: `shadow-card` (graphite multi-layer), `shadow-blue` (button inset), `shadow-chip`, `shadow-float`.
 
 ## Components
-- `btn-blue` — filled diagnostic / exploration button only (« Réserver mon diagnostic gratuit », « Voir si c'est automatisable chez moi »). Never « Acheter ».
+- `btn-blue` — filled booking / exploration button only (« Réserver un échange de 20 min », « Voir si c'est automatisable chez moi »). Never « Acheter ».
 - `btn-outline` — white, 1px graphite border (« Voir un exemple en 2 min »).
 - `chip-dark` / `chip-light` — Studio Black announcement badge / white step badge on dark panels.
 - `card-lift` — white 20px card with the graphite shadow stack.
@@ -45,7 +45,7 @@ Shadows: `shadow-card` (graphite multi-layer), `shadow-blue` (button inset), `sh
 - `WorkflowPanel` — dark panel of trade-verb step nodes; the active step glows blue (`step-active`).
 - `ProofPane`, `RemindersPane`, `InboxPane` — client-tool panes in action; `BeforeAfterCard` for hours.
 - `TradeVisual` — `blue-field` media container + pane + floating workflow panel.
-- `DiagnosticButton` / `DiagnosticModal` — Calendly booking (email prefill from the closing band).
+- `BookingButton` / `BookingModal` — the single Calendly booking (20-min échange, `BOOKING_URL` in `lib/automation-content.ts`; email prefill from the closing band).
 
 ## Do / Don't
 - Blue only for booking/exploration controls and the active workflow step — never as a page background or text color.

@@ -2,50 +2,32 @@
 
 import { useState, useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
-import { CircleCheck, Clock, MonitorPlay, ShieldCheck, X } from "lucide-react"
+import { CircleCheck, Clock, MonitorPlay, X } from "lucide-react"
 import { InlineWidget } from "react-calendly"
 import { cn } from "@/lib/utils"
-import { CALENDLY_URL, DEMO_URL } from "@/lib/automation-content"
+import { BOOKING_URL } from "@/lib/automation-content"
 
-/** Les deux rendez-vous réservables : le diagnostic (45 min) et la démo (20 min). */
-const BOOKINGS = {
-  diagnostic: {
-    url: CALENDLY_URL,
-    chip: "Diagnostic gratuit",
-    title: "Réservez vos 45 minutes",
-    points: [
-      { Icon: Clock, text: "45 minutes, en visio" },
-      { Icon: CircleCheck, text: "Sans engagement" },
-      { Icon: ShieldCheck, text: "Hébergé en Europe, chez nous ou chez vous" },
-    ],
-    next: ["Vous recevez l'invitation par e-mail", "On liste ensemble vos tâches répétitives", "Vous repartez avec les heures récupérables"],
-    iframeTitle: "Agenda de réservation du diagnostic gratuit",
-  },
-  demo: {
-    url: DEMO_URL,
-    chip: "Démo gratuite",
-    title: "Voyez une automatisation tourner, en 20 minutes",
-    points: [
-      { Icon: Clock, text: "20 minutes, en visio" },
-      { Icon: MonitorPlay, text: "Une démo en direct, sur votre métier" },
-      { Icon: CircleCheck, text: "Sans engagement" },
-    ],
-    next: ["Vous recevez l'invitation par e-mail", "Nous vous montrons des relances et suivis en action", "Vous posez toutes vos questions"],
-    iframeTitle: "Agenda de réservation de la démo gratuite",
-  },
-} as const
+/** Le seul rendez-vous réservable : un échange de 20 minutes, avec démo sur le métier du visiteur. */
+const BOOKING = {
+  chip: "Échange gratuit",
+  title: "Réservez votre échange de 20 minutes",
+  points: [
+    { Icon: Clock, text: "20 minutes, en visio" },
+    { Icon: MonitorPlay, text: "Une démo en direct, sur votre métier" },
+    { Icon: CircleCheck, text: "Gratuit et sans engagement" },
+  ],
+  next: ["Vous recevez l'invitation par e-mail", "Je vous montre l'automatisation adaptée à votre métier", "Une première estimation du temps récupérable"],
+  iframeTitle: "Agenda de réservation de l'échange de 20 minutes",
+}
 
-export type BookingKind = keyof typeof BOOKINGS
-
-interface DiagnosticModalProps {
+interface BookingModalProps {
   open: boolean
   onClose: () => void
   email?: string
-  kind?: BookingKind
 }
 
-export function DiagnosticModal({ open, onClose, email, kind = "diagnostic" }: DiagnosticModalProps) {
-  const booking = BOOKINGS[kind]
+export function BookingModal({ open, onClose, email }: BookingModalProps) {
+  const booking = BOOKING
   const [mounted, setMounted] = useState(false)
   const closeRef = useRef<HTMLButtonElement>(null)
   const onCloseRef = useRef(onClose)
@@ -72,7 +54,7 @@ export function DiagnosticModal({ open, onClose, email, kind = "diagnostic" }: D
       className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-6"
       role="dialog"
       aria-modal="true"
-      aria-labelledby="diagnostic-modal-title"
+      aria-labelledby="booking-modal-title"
     >
       <div className="absolute inset-0 bg-studio/70 backdrop-blur-md animate-in fade-in-0 duration-300" onClick={onClose} aria-hidden="true" />
       <div className="relative grid max-h-[94vh] w-full max-w-[1040px] overflow-hidden rounded-[20px] bg-white shadow-card animate-in fade-in-0 zoom-in-95 slide-in-from-bottom-4 duration-500 md:grid-cols-[300px_1fr]">
@@ -83,7 +65,7 @@ export function DiagnosticModal({ open, onClose, email, kind = "diagnostic" }: D
         {/* Récapitulatif : ce que la personne réserve et ce qui se passe ensuite */}
         <aside className="blue-field flex flex-col gap-5 p-5 text-white sm:p-7">
           <span className="chip-light self-start">{booking.chip}</span>
-          <h2 id="diagnostic-modal-title" className="text-[24px] font-semibold leading-[1.2] tracking-[-0.02em]">
+          <h2 id="booking-modal-title" className="text-[24px] font-semibold leading-[1.2] tracking-[-0.02em]">
             {booking.title}
           </h2>
           <ul className="hidden flex-col gap-3 text-[15px] md:flex">
@@ -111,7 +93,7 @@ export function DiagnosticModal({ open, onClose, email, kind = "diagnostic" }: D
         {/* Agenda Calendly, avec un écran d'attente tant qu'il charge */}
         <div className="relative min-h-[560px] overflow-y-auto">
           <InlineWidget
-            url={booking.url}
+            url={BOOKING_URL}
             prefill={email ? { email } : undefined}
             styles={{ height: "650px", minWidth: "300px" }}
             pageSettings={{ hideGdprBanner: true, primaryColor: "0d44e8" }}
@@ -156,42 +138,23 @@ function CalendarLoading() {
   )
 }
 
-interface DiagnosticButtonProps {
+interface BookingButtonProps {
   children?: React.ReactNode
   className?: string
   variant?: "blue" | "outline" | "dark" | "bare"
-  kind?: BookingKind
 }
 
 const VARIANTS = { blue: "btn-blue", outline: "btn-outline", dark: "btn-dark", bare: "" }
 
-export function DiagnosticButton({
-  children = "Réserver mon diagnostic gratuit",
-  className,
-  variant = "blue",
-  kind = "diagnostic",
-}: DiagnosticButtonProps) {
+/** Bouton de prise de rendez-vous : ouvre l'agenda de l'échange de 20 minutes. */
+export function BookingButton({ children = "Réserver un échange de 20 min", className, variant = "blue" }: BookingButtonProps) {
   const [open, setOpen] = useState(false)
   return (
     <>
       <button type="button" onClick={() => setOpen(true)} className={cn(VARIANTS[variant], className)}>
         {children}
       </button>
-      <DiagnosticModal open={open} onClose={() => setOpen(false)} kind={kind} />
+      <BookingModal open={open} onClose={() => setOpen(false)} />
     </>
-  )
-}
-
-/** Bouton « Démo gratuite » : ouvre l'agenda de la démo de 20 minutes. */
-export function DemoButton({
-  children = "Voir une démo gratuite",
-  className,
-  variant = "blue",
-}: Omit<DiagnosticButtonProps, "kind" | "variant"> & { variant?: "blue" | "outline" | "dark" }) {
-  return (
-    <DiagnosticButton kind="demo" variant={variant} className={cn("group", className)}>
-      <MonitorPlay className="h-4 w-4 transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110" aria-hidden="true" />
-      {children}
-    </DiagnosticButton>
   )
 }

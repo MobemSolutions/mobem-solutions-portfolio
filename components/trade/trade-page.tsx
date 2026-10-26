@@ -5,7 +5,7 @@ import { Footer } from "@/components/footer"
 import { Container, SectionHeading, FaqList, Eyebrow } from "@/components/home/primitives"
 import { FLOW_ICONS } from "@/components/automation/flow-icons"
 import { ClosingBand } from "@/components/home/closing-band"
-import { DemoButton, DiagnosticButton } from "@/components/diagnostic-button"
+import { BookingButton } from "@/components/booking-button"
 import { TradeVisual } from "@/components/automation/trade-visual"
 import { Method, Trust, ToolsStrip } from "@/components/home/sections"
 import { FAQ, TRADES, type Trade } from "@/lib/automation-content"
@@ -60,10 +60,9 @@ export function TradePage({ trade }: { trade: Trade }) {
                 au lieu de {trade.beforeAfter.before} · exemple type
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <DemoButton>Voir une démo gratuite</DemoButton>
-                <DiagnosticButton variant="dark">Réserver le diagnostic</DiagnosticButton>
+                <BookingButton />
               </div>
-              <p className="mt-5 type-meta text-charcoal">Démo de 20 min · Diagnostic de 45 min · Sans engagement</p>
+              <p className="mt-5 type-meta text-charcoal">20 min en visio · Gratuit et sans engagement</p>
             </div>
             <TradeVisual trade={trade} className="rounded-[16px]" />
           </Container>
@@ -103,7 +102,7 @@ export function TradePage({ trade }: { trade: Trade }) {
 
         <section className="py-12 sm:py-16 lg:py-24" aria-labelledby="trade-faq-heading">
           <Container className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-            <SectionHeading id="trade-faq-heading" eyebrow="Questions fréquentes" title="Vos questions, avant le diagnostic" />
+            <SectionHeading id="trade-faq-heading" eyebrow="Questions fréquentes" title="Vos questions, avant un premier échange" />
             <FaqList items={[...trade.faq, ...FAQ.slice(0, 3)]} />
           </Container>
         </section>

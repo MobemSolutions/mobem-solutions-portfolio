@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation"
 import { Menu, X, ArrowDown, ArrowRight, ArrowUpRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { TRADES } from "@/lib/automation-content"
-import { DiagnosticButton } from "@/components/diagnostic-button"
+import { BookingButton } from "@/components/booking-button"
 import { MobemLogo } from "@/components/ui/mobem-logo"
 import { ContactButton } from "@/components/contact-form"
 
@@ -171,12 +171,12 @@ export function Header() {
 
           <div className="hidden lg:flex lg:items-center lg:gap-6">
             <ContactButton className="link-underline type-nav text-graphite">Nous écrire</ContactButton>
-            <DiagnosticButton className="!py-1.5 !pl-4 !pr-1.5 gap-3">
-              Diagnostic gratuit
+            <BookingButton className="!py-1.5 !pl-4 !pr-1.5 gap-3">
+              Réserver un échange
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15" aria-hidden="true">
                 <ArrowUpRight className="h-4 w-4" strokeWidth={2.25} />
               </span>
-            </DiagnosticButton>
+            </BookingButton>
           </div>
 
           {/* Mobile */}
@@ -225,7 +225,7 @@ export function Header() {
                 )}
               </div>
             ))}
-            <DiagnosticButton className="mt-3 w-full">Diagnostic gratuit</DiagnosticButton>
+            <BookingButton className="mt-3 w-full">Réserver un échange</BookingButton>
             <ContactButton className="btn-outline w-full">Nous écrire</ContactButton>
           </div>
         </div>

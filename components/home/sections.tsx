@@ -10,7 +10,7 @@ import {
   FAQ,
 } from "@/lib/automation-content"
 import { Container, SectionHeading, SourceCaption, FaqList, Eyebrow } from "@/components/home/primitives"
-import { DemoButton, DiagnosticButton } from "@/components/diagnostic-button"
+import { BookingButton } from "@/components/booking-button"
 import { PricingIcon } from "@/components/home/pricing-icons"
 import { HeroArtwork } from "@/components/home/hero-artwork"
 import { TrustHosting } from "@/components/home/trust-hosting"
@@ -40,10 +40,12 @@ export function Hero() {
             l&apos;automatisons sur vos propres outils, et mesurons les heures que vous récupérez.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <DemoButton variant="dark">Voir une démo · 20 min</DemoButton>
-            <DiagnosticButton />
+            <BookingButton />
           </div>
-          <p className="mt-5 text-[14px] text-[#838385]">45 min · Sans engagement · Hébergé en Europe</p>
+          <p className="mt-5 max-w-[50ch] text-[14px] leading-[1.55] text-[#838385]">
+            20 minutes en visio, gratuit et sans engagement. Je vous montre l&apos;automatisation adaptée à votre métier et nous
+            voyons ensemble ce qui peut être automatisé chez vous.
+          </p>
         </div>
 
         <div className="animate-in fade-in-0 slide-in-from-bottom-4 duration-1000 fill-mode-both delay-200">
@@ -158,20 +160,20 @@ function DemoDevice() {
   )
 }
 
-/** Encart « démo gratuite » : composition centrée façon apple.com, aux styles de titre du site. */
+/** Encart « échange de 20 minutes », avec démo : composition centrée façon apple.com, aux styles de titre du site. */
 export function DemoBand() {
   return (
     <section className="group py-12 sm:py-16 lg:py-24" aria-labelledby="demo-heading">
       <Container>
         <SectionHeading
           id="demo-heading"
-          eyebrow="Démo gratuite · 20 minutes"
+          eyebrow="Échange gratuit · 20 minutes"
           title="Voyez-le tourner, avant de décider."
-          text="En visio, nous faisons tourner devant vous des relances et des suivis automatisés, sur votre métier. Vous posez toutes vos questions."
+          text="Un échange de 20 min, en visio, sur votre métier : je vous montre les relances et suivis automatisés en direct et je réponds à vos questions."
           align="center"
         />
         <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-7">
-          <DemoButton className="max-sm:w-full">Réserver ma démo</DemoButton>
+          <BookingButton className="max-sm:w-full" />
           <a href="#exemples" className="group/link link-underline inline-flex items-center gap-0.5 type-nav text-blue">
             Voir les exemples
             <ChevronRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-0.5" aria-hidden="true" />
@@ -238,7 +240,7 @@ export function Trust() {
 
 /* ─── Tarifs ──────────────────────────────────────── */
 /**
- * Carte d'une formule : contour noir franc, bandeau en tête (bleu pour le diagnostic).
+ * Carte d'une formule : contour noir franc, bandeau en tête (bleu pour l'échange découverte).
  * Au survol, la carte se soulève avec une ombre nette décalée, l'icône bascule et le bandeau s'éclaire.
  */
 export function PlanCard({ plan }: { plan: Plan }) {
@@ -274,7 +276,7 @@ export function PlanCard({ plan }: { plan: Plan }) {
           ))}
         </ul>
         <div className="mt-auto flex flex-col gap-3 pt-7">
-          {plan.featured && <DiagnosticButton className="w-full">Réserver mon diagnostic</DiagnosticButton>}
+          {plan.featured && <BookingButton className="w-full">Réserver un échange</BookingButton>}
           <Link
             href={plan.href}
             className={cn(
@@ -301,7 +303,7 @@ export function Pricing() {
           id="tarifs-heading"
           eyebrow="Tarifs"
           title="On commence petit, on mesure, puis vous décidez"
-          text="Le diagnostic est gratuit. Ensuite, un pilote sur une seule tâche permet de vérifier le gain avant d'aller plus loin."
+          text="Le premier échange est gratuit. Ensuite, un pilote sur une seule tâche permet de vérifier le gain avant d'aller plus loin."
           align="center"
         />
         {/* Mobile : cartes côte à côte qu'on fait glisser ; dès sm : grille */}
@@ -376,7 +378,7 @@ export function Faq() {
   return (
     <section id="faq" className="py-12 sm:py-16 lg:py-24" aria-labelledby="faq-heading">
       <Container className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-        <SectionHeading id="faq-heading" eyebrow="Questions fréquentes" title="Ce qu'on nous demande avant le diagnostic" />
+        <SectionHeading id="faq-heading" eyebrow="Questions fréquentes" title="Ce qu'on nous demande avant un premier échange" />
         <FaqList items={FAQ} />
       </Container>
     </section>

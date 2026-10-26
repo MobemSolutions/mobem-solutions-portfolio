@@ -17,6 +17,8 @@ const nextConfig = {
       // Ancien portfolio de sites web
       { source: '/realisations/:path*', destination: '/#exemples', permanent: true },
       { source: '/tarifs', destination: '/#tarifs', permanent: false },
+      // L'ancien « diagnostic gratuit » est devenu l'échange découverte de 20 minutes
+      { source: '/tarifs/diagnostic', destination: '/tarifs/echange-decouverte', permanent: true },
       // Ancien blog et newsletter
       { source: '/blog/:path*', destination: '/', permanent: true },
       { source: '/newsletter/:path*', destination: '/', permanent: true },

@@ -6,7 +6,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Container, SectionHeading, FaqList, Eyebrow } from "@/components/home/primitives"
 import { ClosingBand } from "@/components/home/closing-band"
-import { DemoButton, DiagnosticButton } from "@/components/diagnostic-button"
+import { BookingButton } from "@/components/booking-button"
 import { PricingIcon } from "@/components/home/pricing-icons"
 import { PlanCard } from "@/components/home/sections"
 import { PRICING, getPlan } from "@/lib/automation-content"
@@ -53,10 +53,9 @@ export default async function PlanPage({ params }: { params: Promise<{ slug: str
               </h1>
               <p className="type-body mt-6 max-w-[54ch] text-charcoal">{plan.forWho}</p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <DiagnosticButton>{plan.featured ? "Réserver mon diagnostic" : "En parler au diagnostic"}</DiagnosticButton>
-                <DemoButton variant="dark">Voir une démo de 20 min</DemoButton>
+                <BookingButton />
               </div>
-              <p className="mt-5 text-[14px] text-[#838385]">45 min · Sans engagement · Hébergé en Europe</p>
+              <p className="mt-5 text-[14px] text-[#838385]">20 min en visio · Gratuit et sans engagement · Hébergé en Europe</p>
             </div>
 
             {/* Fiche prix, dans le style des cartes de tarifs */}

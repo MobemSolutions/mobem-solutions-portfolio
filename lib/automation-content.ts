@@ -2,9 +2,8 @@
 // Règle : aucun jargon (n8n, API, workflow, agent IA) dans les titres, boutons ou le hero.
 // Tous les volumes horaires présentés sont des « exemples types », jamais des résultats clients.
 
-export const CALENDLY_URL = "https://calendly.com/contact-mobem-solutions/15min"
-/** Démo de 20 minutes : une automatisation montrée en direct, sur un des métiers ou un autre cas */
-export const DEMO_URL = "https://calendly.com/arnaud-clavier-mobem-solutions/demo-vos-relances-et-suivis-administratifs-en-auto"
+/** Seul rendez-vous public : un échange de 20 minutes en visio, avec démo sur le métier du visiteur. À changer ici uniquement. */
+export const BOOKING_URL = "https://calendly.com/arnaud-clavier-mobem-solutions/demo-vos-relances-et-suivis-administratifs-en-auto"
 
 export const TRUST_LINE = "Vos outils restent les vôtres. Hébergé en Europe, chez nous ou chez vous."
 
@@ -102,7 +101,7 @@ export const TRADES: Trade[] = [
     ],
     metaTitle: "Automatisation pour organismes de formation Qualiopi | Mobem Solutions",
     metaDescription:
-      "Convocations, émargements, preuves d'audit, relances OPCO : vos tâches Qualiopi tournent toutes seules, sur vos propres outils. Diagnostic gratuit.",
+      "Convocations, émargements, preuves d'audit, relances OPCO : vos tâches Qualiopi tournent toutes seules, sur vos propres outils. Échange gratuit de 20 min.",
   },
   {
     slug: "courtiers-assurance",
@@ -152,12 +151,12 @@ export const TRADES: Trade[] = [
       {
         question: "Fonctionne-t-il avec mon outil de gestion de cabinet ?",
         answer:
-          "Nous le vérifions pendant le diagnostic. Dans la plupart des cas, nous nous branchons sur votre messagerie, votre stockage de documents et votre outil métier.",
+          "Nous le vérifions pendant notre échange. Dans la plupart des cas, nous nous branchons sur votre messagerie, votre stockage de documents et votre outil métier.",
       },
     ],
     metaTitle: "Automatisation pour courtiers en assurance | Mobem Solutions",
     metaDescription:
-      "Collecte de pièces, relances d'échéances, traçabilité du devoir de conseil : automatisées sur vos propres outils. Diagnostic gratuit de 45 min.",
+      "Collecte de pièces, relances d'échéances, traçabilité du devoir de conseil : automatisées sur vos propres outils. Échange gratuit de 20 min.",
   },
   {
     slug: "cabinets-comptables",
@@ -212,7 +211,7 @@ export const TRADES: Trade[] = [
     ],
     metaTitle: "Automatisation pour cabinets d'expertise comptable | Mobem Solutions",
     metaDescription:
-      "Relance des pièces manquantes, tri de la boîte mail, onboarding client, factures reçues : automatisés sur vos propres outils. Diagnostic gratuit.",
+      "Relance des pièces manquantes, tri de la boîte mail, onboarding client, factures reçues : automatisés sur vos propres outils. Échange gratuit de 20 min.",
   },
 ]
 
@@ -274,7 +273,7 @@ export const METHOD_STEPS = [
   {
     num: "01",
     title: "Diagnostiquer",
-    text: "45 minutes pour lister vos tâches répétitives, estimer le temps qu'elles prennent et repérer celles qui valent la peine d'être automatisées.",
+    text: "Un premier échange de 20 minutes pour passer en revue vos tâches répétitives et vos outils, et estimer le temps récupérable. Ensuite, nous repérons celles qui valent la peine d'être automatisées.",
   },
   {
     num: "02",
@@ -322,7 +321,7 @@ export interface Plan {
   slug: string
   href: string
   name: string
-  icon: "diagnostic" | "pilote" | "pack" | "maintenance"
+  icon: "decouverte" | "pilote" | "pack" | "maintenance"
   price: string
   unit: string
   text: string
@@ -338,34 +337,38 @@ export interface Plan {
 
 export const PRICING: Plan[] = [
   {
-    slug: "diagnostic",
-    href: "/tarifs/diagnostic",
-    name: "Diagnostic gratuit",
-    icon: "diagnostic",
+    slug: "echange-decouverte",
+    href: "/tarifs/echange-decouverte",
+    name: "Échange découverte",
+    icon: "decouverte",
     price: "Gratuit",
-    unit: "45 min",
-    text: "Nous listons vos tâches répétitives et estimons les heures récupérables. Sans engagement.",
-    items: ["Inventaire des tâches", "Estimation des heures gagnées", "Recommandations écrites"],
+    unit: "20 min, gratuit, sans engagement",
+    text: "Je vous montre l'automatisation adaptée à votre métier et nous voyons ensemble ce qui peut être automatisé chez vous.",
+    items: [
+      "Démo de l'automatisation adaptée à votre métier",
+      "Vos tâches répétitives et vos outils passés en revue",
+      "Une première estimation du temps récupérable",
+    ],
     featured: true,
-    tagline: "45 minutes pour savoir ce qui peut tourner tout seul chez vous.",
+    tagline: "20 minutes pour voir ce qui peut tourner tout seul chez vous.",
     forWho:
       "Vous sentez que des tâches répétitives vous prennent du temps chaque semaine, sans savoir lesquelles automatiser ni par où commencer.",
     steps: [
-      { title: "Vous réservez un créneau", text: "En visio, ou à Nantes, au moment qui vous arrange." },
-      { title: "Nous passons votre semaine en revue", text: "Relances, pièces, mails, factures : vous décrivez, nous posons les bonnes questions." },
-      { title: "Vous recevez nos recommandations", text: "Par écrit : les tâches automatisables, le temps estimé pour chacune, et par quoi commencer." },
+      { title: "Vous réservez un créneau", text: "20 minutes en visio, au moment qui vous arrange." },
+      { title: "Je vous montre une automatisation", text: "Celle adaptée à votre métier, en direct : relances et suivis qui partent tout seuls." },
+      { title: "Nous passons vos tâches en revue", text: "Vos tâches répétitives et vos outils, pour une première estimation du temps récupérable." },
     ],
     deliverables: [
-      "La liste de vos tâches répétitives",
-      "Le temps qu'elles vous coûtent, estimé tâche par tâche",
-      "Nos recommandations écrites, par ordre de priorité",
+      "Une démo de l'automatisation adaptée à votre métier",
+      "Vos tâches répétitives et vos outils passés en revue",
+      "Une première estimation du temps récupérable",
       "Aucun engagement, aucun devis imposé",
     ],
     faq: [
       { question: "Faut-il préparer quelque chose ?", answer: "Non. Pensez simplement aux tâches qui reviennent chaque semaine, nous ferons le reste ensemble." },
       {
         question: "Est-ce vraiment gratuit ?",
-        answer: "Oui. Le diagnostic sert à vérifier qu'il y a des heures à gagner chez vous. S'il n'y en a pas, nous vous le disons.",
+        answer: "Oui. Cet échange sert à voir s'il y a des heures à gagner chez vous. S'il n'y en a pas, nous vous le disons.",
       },
     ],
   },
@@ -381,7 +384,7 @@ export const PRICING: Plan[] = [
     tagline: "Une première automatisation, pour mesurer le gain avant d'aller plus loin.",
     forWho: "Vous voulez essayer sur une tâche précise, et voir le résultat en heures, avant d'engager davantage.",
     steps: [
-      { title: "Nous choisissons la tâche", text: "Celle qui rend le plus d'heures pour le moins d'effort, repérée pendant le diagnostic." },
+      { title: "Nous choisissons la tâche", text: "Celle qui rend le plus d'heures pour le moins d'effort, repérée lors de notre échange." },
       { title: "Nous la construisons avec vous", text: "Reliée à vos outils, testée sur vos vrais cas. Vous validez chaque étape avant la mise en route." },
       { title: "Nous mesurons le gain", text: "Le temps passé avant et après, pour décider de la suite en connaissance de cause." },
     ],
@@ -398,7 +401,7 @@ export const PRICING: Plan[] = [
       },
       {
         question: "Comment le prix est-il fixé ?",
-        answer: "Le devis est établi après le diagnostic, selon la tâche et les outils à connecter. Vous le validez avant que nous commencions.",
+        answer: "Le devis est établi après notre échange, selon la tâche et les outils à connecter. Vous le validez avant que nous commencions.",
       },
     ],
   },
@@ -428,7 +431,7 @@ export const PRICING: Plan[] = [
     faq: [
       {
         question: "Peut-on commencer directement par un pack ?",
-        answer: "Oui, si le diagnostic montre un processus complet à automatiser. Sinon, nous recommandons de commencer par un pilote.",
+        answer: "Oui, si notre échange montre un processus complet à automatiser. Sinon, nous recommandons de commencer par un pilote.",
       },
       { question: "Combien de tâches dans un pack ?", answer: "Cela dépend de votre métier : le devis détaille chaque automatisation prévue." },
     ],
@@ -469,7 +472,7 @@ export const FOUNDER = {
   name: "Arnaud Clavier",
   role: "Fondateur · Concepteur-développeur en automatisation",
   bio: [
-    "Mobem Solutions conçoit chaque automatisation de bout en bout : diagnostic, construction, mise en service et suivi. Un seul interlocuteur, du premier appel à la maintenance.",
+    "Mobem Solutions conçoit chaque automatisation de bout en bout : analyse, construction, mise en service et suivi. Un seul interlocuteur, du premier appel à la maintenance.",
   ],
   linkedin: "https://www.linkedin.com/in/arnaud-clvr/",
   email: "arnaud.clavier@mobem-solutions.com",
@@ -480,7 +483,7 @@ export const FAQ = [
   {
     question: "Faut-il changer nos outils ?",
     answer:
-      "Non. Nous automatisons ce que vous utilisez déjà : votre messagerie, vos tableurs, votre stockage de documents, votre logiciel métier. Si un outil manque vraiment, nous vous le disons pendant le diagnostic.",
+      "Non. Nous automatisons ce que vous utilisez déjà : votre messagerie, vos tableurs, votre stockage de documents, votre logiciel métier. Si un outil manque vraiment, nous vous le disons pendant notre échange.",
   },
   {
     question: "Où sont nos données ?",
@@ -495,7 +498,7 @@ export const FAQ = [
   {
     question: "Combien d'heures peut-on vraiment récupérer ?",
     answer:
-      "Ça dépend de vos tâches, c'est tout l'objet du diagnostic. Les volumes affichés sur ce site sont des exemples types : pour vous, nous mesurons le temps passé avant et après, et vous donnons le vrai chiffre.",
+      "Ça dépend de vos tâches, c'est tout l'objet de notre premier échange. Les volumes affichés sur ce site sont des exemples types : pour vous, nous mesurons le temps passé avant et après, et vous donnons le vrai chiffre.",
   },
   {
     question: "Quels outils techniques utilisez-vous ?",

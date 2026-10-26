@@ -14,7 +14,7 @@ const LINKS = [
   { label: "Accueil", href: "/", desc: "Vos tâches administratives tournent toutes seules" },
   { label: "Métiers", href: "/metiers", desc: "Formation, courtage, expertise comptable" },
   { label: "Méthode", href: "/methode", desc: "Diagnostiquer avant de prescrire" },
-  { label: "Tarifs", href: "/#tarifs", desc: "Du diagnostic gratuit à la maintenance" },
+  { label: "Tarifs", href: "/#tarifs", desc: "De l'échange découverte à la maintenance" },
 ]
 
 export default function NotFound() {

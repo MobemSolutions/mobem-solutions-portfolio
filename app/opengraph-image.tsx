@@ -38,7 +38,7 @@ export default function OgImage() {
           <div style={{ fontSize: 66, fontWeight: 700, lineHeight: 1.08, letterSpacing: -2, maxWidth: 980 }}>
             Vos tâches administratives tournent toutes seules.
           </div>
-          <div style={{ fontSize: 30, opacity: 0.85 }}>Automatisation sur vos propres outils · Diagnostic gratuit</div>
+          <div style={{ fontSize: 30, opacity: 0.85 }}>Automatisation sur vos propres outils · Échange gratuit de 20 min</div>
         </div>
       </div>
     ),

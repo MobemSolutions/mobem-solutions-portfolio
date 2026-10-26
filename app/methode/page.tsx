@@ -3,7 +3,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Container, SectionHeading, FaqList } from "@/components/home/primitives"
 import { ClosingBand } from "@/components/home/closing-band"
-import { DiagnosticButton } from "@/components/diagnostic-button"
+import { BookingButton } from "@/components/booking-button"
 import { FlowDiagram } from "@/components/automation/flow-demo"
 import { Trust, Pricing } from "@/components/home/sections"
 import { FAQ, METHOD_FLOW, METHOD_STEPS } from "@/lib/automation-content"
@@ -22,8 +22,8 @@ export const metadata: Metadata = {
 
 const DETAILS = [
   {
-    what: "Un échange de 45 minutes, en visio ou à Nantes.",
-    out: "La liste de vos tâches répétitives, le temps estimé pour chacune, et nos recommandations écrites.",
+    what: "Un échange de 20 minutes, en visio.",
+    out: "Une démo de l'automatisation adaptée à votre métier, vos tâches répétitives passées en revue, et une première estimation du temps récupérable.",
   },
   {
     what: "La mise en service, reliée à vos outils actuels, hébergée chez nous ou chez vous.",
@@ -55,7 +55,7 @@ export default function MethodePage() {
               peine de l&apos;être, puis mesurons les heures que vous récupérez.
             </p>
             <div className="mt-8">
-              <DiagnosticButton />
+              <BookingButton />
             </div>
           </Container>
           <Container className="relative mt-14">
