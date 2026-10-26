@@ -3,7 +3,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Clock, Gauge, KeyRound } from "lucide-react"
 import { Container, SectionHeading, Eyebrow } from "@/components/home/primitives"
-import { BookingButton } from "@/components/booking-button"
+import { BookingButton, BookingNotice } from "@/components/booking-button"
 import { ContactButton } from "@/components/contact-form"
 import { ClosingBand } from "@/components/home/closing-band"
 import { Founder, Trust } from "@/components/home/sections"
@@ -57,6 +57,7 @@ export default function AProposPage() {
               <ContactButton className="btn-dark">Nous écrire</ContactButton>
               <BookingButton />
             </div>
+            <BookingNotice className="max-w-[56ch]" />
           </Container>
 
           {/* La devise du studio, en grand et à plat */}

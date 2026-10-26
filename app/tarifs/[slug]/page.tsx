@@ -6,7 +6,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Container, SectionHeading, FaqList, Eyebrow } from "@/components/home/primitives"
 import { ClosingBand } from "@/components/home/closing-band"
-import { BookingButton } from "@/components/booking-button"
+import { BookingButton, BookingNotice } from "@/components/booking-button"
 import { PricingIcon } from "@/components/home/pricing-icons"
 import { PlanCard } from "@/components/home/sections"
 import { PRICING, getPlan } from "@/lib/automation-content"
@@ -56,6 +56,7 @@ export default async function PlanPage({ params }: { params: Promise<{ slug: str
                 <BookingButton />
               </div>
               <p className="mt-5 text-[14px] text-[#838385]">20 min en visio · Gratuit et sans engagement · Hébergé en Europe</p>
+              <BookingNotice />
             </div>
 
             {/* Fiche prix, dans le style des cartes de tarifs */}

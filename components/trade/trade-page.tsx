@@ -5,7 +5,7 @@ import { Footer } from "@/components/footer"
 import { Container, SectionHeading, FaqList, Eyebrow } from "@/components/home/primitives"
 import { FLOW_ICONS } from "@/components/automation/flow-icons"
 import { ClosingBand } from "@/components/home/closing-band"
-import { BookingButton } from "@/components/booking-button"
+import { BookingButton, BookingNotice } from "@/components/booking-button"
 import { TradeVisual } from "@/components/automation/trade-visual"
 import { Method, Trust, ToolsStrip } from "@/components/home/sections"
 import { FAQ, TRADES, type Trade } from "@/lib/automation-content"
@@ -63,6 +63,7 @@ export function TradePage({ trade }: { trade: Trade }) {
                 <BookingButton />
               </div>
               <p className="mt-5 type-meta text-charcoal">20 min en visio · Gratuit et sans engagement</p>
+              <BookingNotice />
             </div>
             <TradeVisual trade={trade} className="rounded-[16px]" />
           </Container>

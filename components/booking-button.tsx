@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
+import Link from "next/link"
 import { CircleCheck, Clock, MonitorPlay, X } from "lucide-react"
 import { InlineWidget } from "react-calendly"
 import { cn } from "@/lib/utils"
@@ -16,7 +17,7 @@ const BOOKING = {
     { Icon: MonitorPlay, text: "Une démo en direct, sur votre métier" },
     { Icon: CircleCheck, text: "Gratuit et sans engagement" },
   ],
-  next: ["Vous recevez l'invitation par e-mail", "Je vous montre l'automatisation adaptée à votre métier", "Une première estimation du temps récupérable"],
+  next: ["Vous recevez l'invitation par e-mail", "Nous vous montrons l'automatisation adaptée à votre métier", "Une première estimation du temps récupérable"],
   iframeTitle: "Agenda de réservation de l'échange de 20 minutes",
 }
 
@@ -156,5 +157,17 @@ export function BookingButton({ children = "Réserver un échange de 20 min", cl
       </button>
       <BookingModal open={open} onClose={() => setOpen(false)} />
     </>
+  )
+}
+
+/** Mention discrète sous chaque bloc de prise de rendez-vous : Calendly et ses cookies. */
+export function BookingNotice({ className, tone = "light" }: { className?: string; tone?: "light" | "dark" }) {
+  return (
+    <p className={cn("mt-3 text-[12px] leading-[1.5]", tone === "dark" ? "text-white/55" : "text-[#838385]", className)}>
+      La prise de rendez-vous utilise Calendly, qui peut déposer des cookies nécessaires à son fonctionnement.{" "}
+      <Link href="/confidentialite#cookies" className={cn("underline underline-offset-2", tone === "dark" ? "hover:text-white" : "hover:text-graphite")}>
+        En savoir plus
+      </Link>
+    </p>
   )
 }

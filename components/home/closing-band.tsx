@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { ArrowRight } from "lucide-react"
-import { BookingModal } from "@/components/booking-button"
+import { BookingModal, BookingNotice } from "@/components/booking-button"
 import { Container } from "@/components/home/primitives"
 import { TRUST_LINE } from "@/lib/automation-content"
 
@@ -51,6 +51,7 @@ export function ClosingBand() {
               </button>
             </form>
             <p className="mt-4 type-caption text-white/60">{TRUST_LINE}</p>
+            <BookingNotice tone="dark" />
           </div>
         </div>
       </Container>

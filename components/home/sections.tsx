@@ -10,7 +10,7 @@ import {
   FAQ,
 } from "@/lib/automation-content"
 import { Container, SectionHeading, SourceCaption, FaqList, Eyebrow } from "@/components/home/primitives"
-import { BookingButton } from "@/components/booking-button"
+import { BookingButton, BookingNotice } from "@/components/booking-button"
 import { PricingIcon } from "@/components/home/pricing-icons"
 import { HeroArtwork } from "@/components/home/hero-artwork"
 import { TrustHosting } from "@/components/home/trust-hosting"
@@ -43,9 +43,10 @@ export function Hero() {
             <BookingButton />
           </div>
           <p className="mt-5 max-w-[50ch] text-[14px] leading-[1.55] text-[#838385]">
-            20 minutes en visio, gratuit et sans engagement. Je vous montre l&apos;automatisation adaptée à votre métier et nous
+            20 minutes en visio, gratuit et sans engagement. Nous vous montrons l&apos;automatisation adaptée à votre métier et nous
             voyons ensemble ce qui peut être automatisé chez vous.
           </p>
+          <BookingNotice className="max-w-[50ch]" />
         </div>
 
         <div className="animate-in fade-in-0 slide-in-from-bottom-4 duration-1000 fill-mode-both delay-200">
@@ -169,7 +170,7 @@ export function DemoBand() {
           id="demo-heading"
           eyebrow="Échange gratuit · 20 minutes"
           title="Voyez-le tourner, avant de décider."
-          text="Un échange de 20 min, en visio, sur votre métier : je vous montre les relances et suivis automatisés en direct et je réponds à vos questions."
+          text="Un échange de 20 min, en visio, sur votre métier : nous vous montrons les relances et suivis automatisés en direct et nous répondons à vos questions."
           align="center"
         />
         <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-7">
@@ -179,6 +180,7 @@ export function DemoBand() {
             <ChevronRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-0.5" aria-hidden="true" />
           </a>
         </div>
+        <BookingNotice className="mx-auto max-w-[56ch] text-center" />
         {/* Mobile : une seule ligne qu'on fait glisser ; dès sm : pastilles centrées */}
         <ul
           className="scrollbar-none -mx-4 mt-6 flex gap-2 overflow-x-auto px-4 sm:mx-auto sm:max-w-[560px] sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0"
@@ -318,6 +320,7 @@ export function Pricing() {
           <span className="sm:hidden">Faites glisser pour voir les 4 formules. </span>
           Prix indicatifs, TVA non applicable (art. 293 B du CGI). Le devis final dépend du nombre de tâches et des outils à connecter.
         </SourceCaption>
+        <BookingNotice className="mx-auto max-w-[56ch] text-center" />
         {/* Offre secondaire, volontairement discrète */}
         <div className="hairline mx-auto mt-8 flex max-w-[760px] sm:mt-10 flex-col items-start gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
           <p className="flex items-center gap-3 text-[15px] text-charcoal">

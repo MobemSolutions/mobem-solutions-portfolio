@@ -342,8 +342,8 @@ export const PRICING: Plan[] = [
     name: "Échange découverte",
     icon: "decouverte",
     price: "Gratuit",
-    unit: "20 min, gratuit, sans engagement",
-    text: "Je vous montre l'automatisation adaptée à votre métier et nous voyons ensemble ce qui peut être automatisé chez vous.",
+    unit: "20 min, sans engagement",
+    text: "Nous vous montrons l'automatisation adaptée à votre métier et nous voyons ensemble ce qui peut être automatisé chez vous.",
     items: [
       "Démo de l'automatisation adaptée à votre métier",
       "Vos tâches répétitives et vos outils passés en revue",
@@ -355,7 +355,7 @@ export const PRICING: Plan[] = [
       "Vous sentez que des tâches répétitives vous prennent du temps chaque semaine, sans savoir lesquelles automatiser ni par où commencer.",
     steps: [
       { title: "Vous réservez un créneau", text: "20 minutes en visio, au moment qui vous arrange." },
-      { title: "Je vous montre une automatisation", text: "Celle adaptée à votre métier, en direct : relances et suivis qui partent tout seuls." },
+      { title: "Nous vous montrons une automatisation", text: "Celle adaptée à votre métier, en direct : relances et suivis qui partent tout seuls." },
       { title: "Nous passons vos tâches en revue", text: "Vos tâches répétitives et vos outils, pour une première estimation du temps récupérable." },
     ],
     deliverables: [

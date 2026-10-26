@@ -22,12 +22,12 @@ const SECTIONS: LegalSection[] = [
           items={[
             <>
               <strong>Sur ce site et dans la relation commerciale</strong> (formulaire de contact, prise de rendez-vous, e-mails,
-              devis et factures), Mobem Solutions est responsable du traitement. Les sections 2 à 8 décrivent ces traitements.
+              devis et factures), Mobem Solutions est responsable du traitement. Les sections 2 à 9 décrivent ces traitements.
             </>,
             <>
               <strong>Dans les automatisations réalisées pour ses clients</strong>, Mobem Solutions agit pour le compte du client,
               qui reste responsable du traitement de ses propres données. Mobem Solutions est alors sous-traitant au sens de
-              l’article 28 du RGPD. La section 9 résume ce cadre, détaillé dans le contrat de sous-traitance signé avec chaque
+              l’article 28 du RGPD. La section 10 résume ce cadre, détaillé dans le contrat de sous-traitance signé avec chaque
               client.
             </>,
           ]}
@@ -68,6 +68,21 @@ const SECTIONS: LegalSection[] = [
     ),
   },
   {
+    id: "prospection",
+    title: "Prospection commerciale",
+    content: (
+      <p>
+        Mobem Solutions peut contacter des professionnels (organismes de formation, cabinets, courtiers) susceptibles d’être
+        intéressés par ses services. Les données utilisées sont exclusivement professionnelles : nom de la structure, nom et
+        fonction du contact, adresse e-mail et téléphone professionnels. Elles proviennent de sources publiques, notamment la liste
+        publique des organismes de formation et les sites internet des structures. Ce traitement repose sur l’intérêt légitime de
+        Mobem Solutions à faire connaître ses services. Vous pouvez vous y opposer à tout moment, sans justification, en répondant au
+        message reçu ou en écrivant à {MAIL} : vos coordonnées seront alors supprimées de notre fichier de prospection. Les données
+        des prospects sans suite sont conservées 3 ans au plus après le dernier contact.
+      </p>
+    ),
+  },
+  {
     id: "finalites",
     title: "Finalités et bases légales",
     content: (
@@ -76,6 +91,7 @@ const SECTIONS: LegalSection[] = [
         rows={[
           ["Répondre à vos demandes, organiser et réaliser le diagnostic", "Mesures précontractuelles et intérêt légitime"],
           ["Exécuter les missions, facturer, assurer le suivi", "Exécution du contrat"],
+          ["Prospection commerciale auprès de professionnels", "Intérêt légitime"],
           ["Mesurer l’audience du site de façon anonyme", "Intérêt légitime"],
           ["Tenir la comptabilité", "Obligation légale"],
         ]}
@@ -116,6 +132,9 @@ const SECTIONS: LegalSection[] = [
             ["Calendly LLC", "Prise de rendez-vous", "États-Unis"],
             ["Resend", "Envoi des e-mails du formulaire de contact", "États-Unis"],
             ["Zoho Corporation", "Messagerie professionnelle", "Union européenne et Inde"],
+            ["Abby", "Édition et envoi des devis et factures, suivi des paiements", "France"],
+            ["Notion Labs Inc.", "Suivi interne des prospects, des clients et des projets", "États-Unis"],
+            ["Google LLC", "Messagerie utilisée pour l’envoi des devis, factures et échanges", "États-Unis"],
           ]}
         />
         <p>

@@ -3,7 +3,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Container, SectionHeading, FaqList } from "@/components/home/primitives"
 import { ClosingBand } from "@/components/home/closing-band"
-import { BookingButton } from "@/components/booking-button"
+import { BookingButton, BookingNotice } from "@/components/booking-button"
 import { FlowDiagram } from "@/components/automation/flow-demo"
 import { Trust, Pricing } from "@/components/home/sections"
 import { FAQ, METHOD_FLOW, METHOD_STEPS } from "@/lib/automation-content"
@@ -57,6 +57,7 @@ export default function MethodePage() {
             <div className="mt-8">
               <BookingButton />
             </div>
+            <BookingNotice className="max-w-[56ch]" />
           </Container>
           <Container className="relative mt-14">
             <div className="art-panel px-5 py-10 sm:px-12 sm:py-14">

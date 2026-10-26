@@ -5,7 +5,7 @@ import { createPortal } from "react-dom"
 import { ArrowLeft, ArrowRight, Check, Loader2, Mail, X, Info } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { SentIllustration } from "@/components/ui/sent-illustration"
-import { BookingModal } from "@/components/booking-button"
+import { BookingModal, BookingNotice } from "@/components/booking-button"
 import {
   HOURS,
   SECTORS,
@@ -263,6 +263,7 @@ export function ContactModal({ open, onClose, onBook }: { open: boolean; onClose
                   Réserver un échange
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </button>
+                <BookingNotice />
               </div>
               <p className="mt-6 text-[14px] text-charcoal">
                 Pas d&apos;e-mail reçu ? Regardez dans vos spams, ou écrivez-nous à{" "}
